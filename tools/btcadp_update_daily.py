@@ -53,6 +53,9 @@ CSV_HEADERS = [
     "era", "data_source", "status", "spec_version",
 ]
 
+# CoinGecko API — requires a free demo key (set COINGECKO_API_KEY env var)
+# Get a free key at: https://www.coingecko.com/en/api/pricing (Demo plan)
+COINGECKO_API_KEY = os.environ.get("COINGECKO_API_KEY", "")
 COINGECKO_BASE = "https://api.coingecko.com/api/v3"
 COINGECKO_MARKET_CHART_RANGE = f"{COINGECKO_BASE}/coins/bitcoin/market_chart/range"
 API_DELAY = 6  # seconds between CoinGecko requests
@@ -98,6 +101,15 @@ def fetch_coingecko_prices(start_dt, end_dt):
     from_ts = int(start_dt.timestamp())
     to_ts = int(end_dt.timestamp()) + 86400  # include end date
 
+    if not COINGECKO_API_KEY:
+        print("  WARNING: No COINGECKO_API_KEY set. CoinGecko requires a free API key.")
+        print("  Get one at: https://www.coingecko.com/en/api/pricing (Demo plan, free)")
+        print("  Then set it as COINGECKO_API_KEY environment variable.")
+
+    headers = {}
+    if COINGECKO_API_KEY:
+        headers["x-cg-demo-api-key"] = COINGECKO_API_KEY
+
     # Fetch in 365-day chunks
     chunk_start = from_ts
     chunk_size = 365 * 86400
@@ -115,10 +127,12 @@ def fetch_coingecko_prices(start_dt, end_dt):
         end_str = datetime.fromtimestamp(chunk_end, tz=timezone.utc).strftime("%Y-%m-%d")
         print(f"  Fetching CoinGecko {start_str} to {end_str}...")
 
+        data = None
         retries = 0
         while retries < 3:
             try:
-                resp = requests.get(COINGECKO_MARKET_CHART_RANGE, params=params, timeout=30)
+                resp = requests.get(COINGECKO_MARKET_CHART_RANGE, params=params,
+                                    headers=headers, timeout=30)
                 if resp.status_code == 429:
                     wait = 60 * (retries + 1)
                     print(f"  Rate limited. Waiting {wait}s (attempt {retries + 1}/3)...")
@@ -132,11 +146,11 @@ def fetch_coingecko_prices(start_dt, end_dt):
                 retries += 1
                 if retries >= 3:
                     print(f"  ERROR: Failed after 3 attempts: {e}")
-                    chunk_start = chunk_end
                     break
                 print(f"  Retry {retries}/3 after error: {e}")
                 time.sleep(10)
-        else:
+
+        if data is None:
             chunk_start = chunk_end
             continue
 

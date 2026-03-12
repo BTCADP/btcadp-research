@@ -43,6 +43,8 @@ jobs:
 
       - name: Run daily update
         id: update
+        env:
+          COINGECKO_API_KEY: ${{ secrets.COINGECKO_API_KEY }}
         run: |
           if [ -n "${{ inputs.backfill_from }}" ]; then
             python tools/btcadp_update_daily.py \
