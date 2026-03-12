@@ -1,0 +1,76 @@
+# =============================================================================
+#  BTCADP Daily Update
+# =============================================================================
+#  Runs daily at 01:30 UTC to fetch the previous day's price from CoinGecko,
+#  append it to btcadp_historical.csv, generate the new day page, update the
+#  days/index.html, and commit the result.
+#
+#  Can also be triggered manually via workflow_dispatch.
+# =============================================================================
+
+name: Daily BTCADP Update
+
+on:
+  schedule:
+    # 01:30 UTC — gives CoinGecko time to finalize the previous day's data
+    - cron: "30 1 * * *"
+  workflow_dispatch:
+    inputs:
+      backfill_from:
+        description: "Backfill from date (YYYY-MM-DD). Fetches all missing days from this date to yesterday."
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run daily update
+        id: update
+        run: |
+          if [ -n "${{ inputs.backfill_from }}" ]; then
+            python tools/btcadp_update_daily.py \
+              --csv btcadp_historical.csv \
+              --days-dir days/ \
+              --backfill-from "${{ inputs.backfill_from }}"
+          else
+            python tools/btcadp_update_daily.py \
+              --csv btcadp_historical.csv \
+              --days-dir days/
+          fi
+
+      - name: Check for changes
+        id: changes
+        run: |
+          if git diff --quiet && git diff --cached --quiet; then
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit and push
+        if: steps.changes.outputs.has_changes == 'true'
+        run: |
+          git config user.name "btcadp-bot"
+          git config user.email "bot@btcadp.org"
+          # Determine the date range for the commit message
+          LAST_DATE=$(tail -1 btcadp_historical.csv | cut -d',' -f2)
+          git add btcadp_historical.csv days/
+          git commit -m "data: update BTCADP through ${LAST_DATE}"
+          git push

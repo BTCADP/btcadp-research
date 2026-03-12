@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BTCADP — 2011-02-15 — Bitcoin Average Daily Price</title>
+<meta name="description" content="BTCADP for February 15, 2011: $0.9700. Bitcoin Average Daily Price, Era 1 (Single-Exchange Market). Single-source confidence, provisional.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary: #0a0a0b;
+    --bg-secondary: #111114;
+    --bg-tertiary: #19191e;
+    --bg-hover: #222228;
+    --border: #2a2a32;
+    --text-primary: #e8e6e3;
+    --text-secondary: #8a8a95;
+    --text-muted: #555560;
+    --orange: #f7931a;
+    --orange-dim: rgba(247, 147, 26, 0.15);
+    --green: #2ecc71;
+    --yellow: #f1c40f;
+    --red: #e74c3c;
+    --era-color: #e74c3c;
+    --font-display: 'Source Serif 4', Georgia, serif;
+    --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+    --font-body: 'Source Serif 4', Georgia, serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(247,147,26,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(247,147,26,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Toolbar */
+  .toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10,10,11,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 0;
+  }
+
+  .toolbar-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .toolbar a {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: color 0.2s;
+  }
+
+  .toolbar a:hover { color: var(--orange); }
+
+  .day-nav {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .nav-link {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-link:hover { color: var(--orange); }
+  .nav-link.disabled { color: var(--text-muted); cursor: default; }
+
+  .nav-divider { color: var(--border); }
+
+  /* Header */
+  .day-header {
+    padding: 48px 0 32px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .day-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 8px;
+  }
+
+  .day-date {
+    font-family: var(--font-display);
+    font-size: 40px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 4px;
+  }
+
+  .day-weekday {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+  }
+
+  .day-number {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  /* Price display */
+  .price-section {
+    padding: 32px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .price-main {
+    font-family: var(--font-display);
+    font-size: 56px;
+    font-weight: 700;
+    color: var(--orange);
+    margin-bottom: 8px;
+  }
+
+  .price-change {
+    font-family: var(--font-mono);
+    font-size: 16px;
+    display: block;
+    margin-bottom: 24px;
+  }
+
+  .meta-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .meta-item {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px;
+  }
+
+  .meta-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+
+  .meta-value {
+    font-size: 14px;
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+
+  .era-badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 3px;
+    font-size: 12px;
+    background: rgba(247,147,26,0.1);
+    border: 1px solid var(--era-color);
+    color: var(--era-color);
+  }
+
+  .status-badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 3px;
+    font-size: 12px;
+  }
+
+  .status-provisional { background: rgba(241,196,15,0.1); color: var(--yellow); border: 1px solid var(--yellow); }
+  .status-definitive { background: rgba(46,204,113,0.1); color: var(--green); border: 1px solid var(--green); }
+
+  /* Provenance */
+  .provenance {
+    padding: 32px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+
+  .provenance-text {
+    font-family: var(--font-body);
+    font-size: 16px;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    max-width: 640px;
+  }
+
+  /* Research section */
+  .research {
+    padding: 32px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .research-empty {
+    background: var(--bg-secondary);
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    padding: 40px;
+    text-align: center;
+  }
+
+  .research-empty p {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .research-empty .cta {
+    color: var(--orange);
+    font-size: 13px;
+  }
+
+  /* Contribution format */
+  .contrib-format {
+    padding: 32px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .format-block {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    margin-top: 16px;
+  }
+
+  .format-block pre {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  .format-block .field {
+    color: var(--orange);
+  }
+
+  .format-block .comment {
+    color: var(--text-muted);
+  }
+
+  .copy-btn {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    padding: 6px 16px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s;
+    float: right;
+    margin-bottom: 12px;
+  }
+
+  .copy-btn:hover { border-color: var(--orange); color: var(--orange); }
+
+  /* Contribution entries */
+  .contribution {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+
+  .contrib-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .contrib-author {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 15px;
+  }
+
+  .contrib-date {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .contrib-proposed {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--orange);
+    margin-bottom: 12px;
+  }
+
+  .contrib-body {
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  .contrib-body h4 {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 16px;
+    margin-bottom: 8px;
+  }
+
+  .contrib-data {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 12px 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin: 8px 0;
+    overflow-x: auto;
+    white-space: pre;
+  }
+
+  /* Footer */
+  footer {
+    padding: 32px 0;
+    text-align: center;
+  }
+
+  footer p {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.8;
+  }
+
+  footer a { color: var(--orange); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 768px) {
+    .day-date { font-size: 28px; }
+    .price-main { font-size: 36px; }
+    .meta-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="toolbar-inner">
+    <a href="../index.html">&larr; BTCADP Data Explorer</a>
+    <div class="day-nav">
+      <a href="2011-02-14.html" class="nav-link">&larr; 2011-02-14</a>
+      <span class="nav-divider">|</span>
+      <a href="2011-02-16.html" class="nav-link">2011-02-16 &rarr;</a>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="day-header">
+    <div class="day-label">BTCADP &bull; Daily Record</div>
+    <div class="day-date">February 15, 2011</div>
+    <div class="day-weekday">Tuesday</div>
+    <div class="day-number">Day 774 of Bitcoin &bull; <a href="../specification.html" style="color:var(--orange);text-decoration:none;">Specification v1.0</a></div>
+  </div>
+
+  <div class="price-section">
+    <div class="price-main">$0.9700</div>
+    <span class="price-change" style="color:#e74c3c">&#x25BC; $0.03 (-3.00%)</span>
+    <div class="meta-grid">
+      <div class="meta-item">
+        <div class="meta-label">Era</div>
+        <div class="meta-value"><span class="era-badge">Era 1: Single-Exchange Market</span></div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Confidence</div>
+        <div class="meta-value">Single-source</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Status</div>
+        <div class="meta-value"><span class="status-badge status-provisional">provisional</span></div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Data Source</div>
+        <div class="meta-value" style="font-size:12px;">CoinGecko aggregated daily (provisional)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="provenance">
+    <h2 class="section-title">Provenance</h2>
+    <p class="provenance-text">Mt. Gox dominated global Bitcoin trading. Values are derived from Mt. Gox BTC/USD trade data.</p>
+    <p class="provenance-text" style="margin-top:12px;">
+      This value is <strong>provisional</strong> — derived from aggregated public data, not from trade-level exchange data per the full BTCADP methodology. It will be updated when independent research produces a verified value for this date.
+    </p>
+  </div>
+
+  <div class="research">
+    <h2 class="section-title">Research Contributions</h2>
+    <div id="contributions">
+      <div class="research-empty">
+        <p>No research contributions have been submitted for this date.</p>
+        <p class="cta">Researchers: see the submission format below to contribute a verified BTCADP value for February 15, 2011.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="contrib-format">
+    <h2 class="section-title">Submission Format</h2>
+    <p style="color:var(--text-secondary);font-size:14px;margin-bottom:16px;max-width:640px;">
+      To propose a refined BTCADP value for this date, submit the following information to
+      <a href="mailto:spec@btcadp.org" style="color:var(--orange);">spec@btcadp.org</a>.
+      All submissions must be reproducible per <a href="../specification.html#s7" style="color:var(--orange);">Section 7</a> of the specification.
+    </p>
+    <div class="format-block">
+      <button class="copy-btn" onclick="copyTemplate()">Copy template</button>
+      <pre id="template"><span class="comment"># BTCADP Research Submission</span>
+<span class="comment"># Date: 2011-02-15</span>
+
+<span class="field">researcher:</span>        <span class="comment"># Name or pseudonym, institutional affiliation</span>
+<span class="field">date_submitted:</span>    <span class="comment"># YYYY-MM-DD</span>
+<span class="field">proposed_btcadp:</span>   <span class="comment"># Your computed value, e.g. 13.45</span>
+
+<span class="field">data_sources:</span>      <span class="comment"># Complete list of data used</span>
+  <span class="comment"># - Source name, URL or archive location</span>
+  <span class="comment"># - Date range covered</span>
+  <span class="comment"># - Known limitations or gaps</span>
+
+<span class="field">exchanges_evaluated:</span>
+  <span class="comment"># For each exchange:</span>
+  <span class="comment"># - Exchange name</span>
+  <span class="comment"># - Trade count</span>
+  <span class="comment"># - Hours active (UTC)</span>
+  <span class="comment"># - Computed VWAP</span>
+  <span class="comment"># - Qualified? (yes/no, reason if no)</span>
+
+<span class="field">methodology:</span>
+  <span class="comment"># Step-by-step description of calculation</span>
+  <span class="comment"># Note any deviations from standard BTCADP spec</span>
+  <span class="comment"># Justify each deviation</span>
+
+<span class="field">computation:</span>
+  <span class="comment"># Show the math:</span>
+  <span class="comment"># - Individual exchange VWAPs</span>
+  <span class="comment"># - Trimming applied</span>
+  <span class="comment"># - Final mean calculation</span>
+  <span class="comment"># - Rounding</span>
+
+<span class="field">reproducibility:</span>
+  <span class="comment"># Link to code, scripts, or detailed procedure</span>
+  <span class="comment"># sufficient for independent verification</span>
+
+<span class="field">notes:</span>
+  <span class="comment"># Any additional context, caveats, or observations</span></pre>
+    </div>
+  </div>
+
+  <footer>
+    <p>BTCADP Specification v1.0 &bull; <a href="../specification.html">Read the Specification</a> &bull; <a href="../index.html">Data Explorer</a></p>
+    <p style="margin-top:8px;">The BTCADP belongs to no one and benefits everyone.</p>
+  </footer>
+
+</div>
+
+<script>
+function copyTemplate() {
+  const el = document.getElementById('template');
+  const text = el.innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.querySelector('.copy-btn');
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy template', 2000);
+  });
+}
+</script>
+</body>
+</html>

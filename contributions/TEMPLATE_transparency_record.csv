@@ -1,0 +1,4 @@
+date,exchange,trade_count,hours_active,vwap_usd,filter1_data_available,filter2_min_trades,filter3_time_coverage,filter4_spread,filter5_price_coherence,qualified,included_in_mean,notes
+2011-06-15,Mt. Gox,4582,24,17.84,pass,pass,pass,n/a,pass,yes,yes,
+2011-06-15,TradeHill,312,14,17.51,pass,fail,fail,n/a,n/a,no,no,Below 1000 trade minimum
+2011-06-15,Bitstamp,0,0,n/a,fail,n/a,n/a,n/a,n/a,no,no,Not operational on this date
