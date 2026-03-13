@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BTCC Technical Paper | btcadp.org</title>
+    <meta name="description" content="BTCC: A Denomination Protocol for Peer-to-Peer Electronic Cash. Full technical paper.">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --bg2: #111111;
+            --bg3: #1a1a1a;
+            --border: #2a2a2a;
+            --text: #e8e8e8;
+            --muted: #888888;
+            --orange: #f7931a;
+            --orange-dim: rgba(247, 147, 26, 0.12);
+            --font: 'Georgia', 'Times New Roman', serif;
+            --mono: 'Courier New', Courier, monospace;
+            --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font);
+            line-height: 1.7;
+            font-size: 17px;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(10,10,10,0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 56px;
+        }
+
+        .nav-brand {
+            font-family: var(--mono);
+            font-size: 1rem;
+            font-weight: bold;
+            color: var(--orange);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.25rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-family: var(--sans);
+            font-size: 0.85rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            transition: color 0.2s, background 0.2s;
+            letter-spacing: 0.03em;
+        }
+
+        .nav-links a:hover { color: var(--text); background: var(--bg3); }
+        .nav-links a.active { color: var(--orange); }
+
+        /* ── PAPER HEADER ── */
+        .paper-header {
+            border-bottom: 1px solid var(--border);
+            padding: 4rem 2rem 3rem;
+            text-align: center;
+            background: radial-gradient(ellipse at 50% 0%, rgba(247,147,26,0.06) 0%, transparent 60%);
+        }
+
+        .paper-label {
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            letter-spacing: 0.2em;
+            color: var(--orange);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .paper-header h1 {
+            font-size: clamp(1.6rem, 4vw, 2.4rem);
+            font-weight: normal;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .paper-header .subtitle {
+            font-family: var(--sans);
+            font-size: 0.95rem;
+            color: var(--muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .paper-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            font-family: var(--sans);
+            font-size: 0.8rem;
+            color: var(--muted);
+            margin-bottom: 2rem;
+        }
+
+        .paper-meta span { display: flex; align-items: center; gap: 0.4rem; }
+
+        .download-bar {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--orange);
+            color: #000;
+            font-family: var(--sans);
+            font-size: 0.88rem;
+            font-weight: 600;
+            padding: 0.65rem 1.4rem;
+            border-radius: 4px;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: opacity 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .btn-primary:hover { opacity: 0.85; }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--orange);
+            font-family: var(--sans);
+            font-size: 0.88rem;
+            font-weight: 600;
+            padding: 0.65rem 1.4rem;
+            border-radius: 4px;
+            border: 1px solid rgba(247,147,26,0.4);
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .btn-secondary:hover { background: var(--orange-dim); }
+
+        /* ── PAPER BODY ── */
+        .paper-body {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 4rem 2rem 5rem;
+        }
+
+        .abstract {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--orange);
+            border-radius: 4px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .abstract-label {
+            font-family: var(--sans);
+            font-size: 0.72rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--orange);
+            margin-bottom: 0.8rem;
+        }
+
+        .abstract p {
+            font-size: 0.95rem;
+            color: #c0c0c0;
+            line-height: 1.75;
+        }
+
+        .paper-section {
+            margin-bottom: 3rem;
+        }
+
+        .paper-section h2 {
+            font-size: 1.25rem;
+            font-weight: normal;
+            color: #fff;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+            font-family: var(--sans);
+        }
+
+        .paper-section h2 .sec-num {
+            color: var(--orange);
+            font-family: var(--mono);
+            font-size: 0.85rem;
+            margin-right: 0.5rem;
+        }
+
+        .paper-section p {
+            color: #c4c4c4;
+            margin-bottom: 1rem;
+            font-size: 0.97rem;
+        }
+
+        .formula {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 1rem 1.5rem;
+            margin: 1.2rem 0;
+            font-family: var(--mono);
+            font-size: 0.95rem;
+            color: var(--orange);
+            text-align: center;
+        }
+
+        .note {
+            background: rgba(247,147,26,0.07);
+            border-left: 2px solid rgba(247,147,26,0.3);
+            padding: 0.8rem 1.2rem;
+            margin: 1rem 0;
+            font-family: var(--sans);
+            font-size: 0.85rem;
+            color: #c4a46a;
+            line-height: 1.6;
+        }
+
+        .refs {
+            border-top: 1px solid var(--border);
+            padding-top: 2rem;
+            margin-top: 3rem;
+        }
+
+        .refs h2 {
+            font-family: var(--sans);
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+
+        .refs ol {
+            padding-left: 1.5rem;
+        }
+
+        .refs li {
+            font-family: var(--sans);
+            font-size: 0.85rem;
+            color: var(--muted);
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
+        }
+
+        .refs li a { color: var(--orange); text-decoration: none; }
+        .refs li a:hover { text-decoration: underline; }
+
+        /* ── DOWNLOAD ANCHOR ── */
+        #download {
+            scroll-margin-top: 80px;
+        }
+
+        .download-section {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-top: 2px solid var(--orange);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .download-section h3 {
+            font-size: 1.1rem;
+            font-weight: normal;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .download-section p {
+            font-family: var(--sans);
+            font-size: 0.85rem;
+            color: var(--muted);
+            margin-bottom: 1.5rem;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 2rem;
+            text-align: center;
+            font-family: var(--sans);
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        footer a { color: var(--muted); text-decoration: none; }
+        footer a:hover { color: var(--orange); }
+
+        @media (max-width: 600px) {
+            .nav-links a { padding: 0.4rem 0.5rem; font-size: 0.78rem; }
+            .paper-meta { gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a class="nav-brand" href="index.html">BTCADP</a>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="live.html">Live</a></li>
+        <li><a href="days/index.html">Days</a></li>
+        <li><a href="specification.html">Specification</a></li>
+        <li><a href="btcc.html" class="active">BTCC</a></li>
+    </ul>
+</nav>
+
+<!-- PAPER HEADER -->
+<div class="paper-header">
+    <div class="paper-label">Technical Paper</div>
+    <h1>BTCC: A Denomination Protocol for<br>Peer-to-Peer Electronic Cash</h1>
+    <div class="subtitle">Anonymous &nbsp;·&nbsp; btcadp.org &nbsp;·&nbsp; 2026</div>
+    <div class="paper-meta">
+        <span>📄 Technical Paper</span>
+        <span>🔓 CC0 Public Domain</span>
+        <span>🔗 btcadp.org</span>
+    </div>
+    <div class="download-bar" id="download">
+        <button class="btn-primary" onclick="downloadPaper()">⬇ Download PDF</button>
+        <a href="btcc.html" class="btn-secondary">← Summary Page</a>
+    </div>
+</div>
+
+<!-- PAPER BODY -->
+<div class="paper-body">
+
+    <!-- ABSTRACT -->
+    <div class="abstract">
+        <div class="abstract-label">Abstract</div>
+        <p>
+            This paper proposes a denomination protocol that enables Bitcoin to function as a stable
+            unit of account without modification to the underlying protocol. Transaction amounts are
+            expressed using a cumulative historical average of daily Bitcoin prices, producing a unit
+            whose purchasing power changes negligibly from day to day. Each calendar day constitutes
+            a timeblock whose price, once recorded, becomes progressively more permanent as subsequent
+            days are added to the average. The denomination requires no token, no issuer, no reserves,
+            and no trusted third party. It is computed from publicly available trade data using a
+            transparent methodology that any participant can independently verify and reproduce.
+            The result is a stable Bitcoin denomination whose resistance to disruption strengthens
+            over time through arithmetic alone.
+        </p>
+    </div>
+
+    <!-- SECTION 1 -->
+    <div class="paper-section">
+        <h2><span class="sec-num">1.</span> Introduction</h2>
+        <p>
+            Bitcoin [1] created a peer-to-peer electronic cash system that requires no trusted third
+            party. The network has operated continuously since January 2009, settling transactions
+            without reliance on financial institutions. Yet Bitcoin has not achieved widespread adoption
+            as a medium of everyday exchange. The barrier is not technical. The network works. Lightning
+            provides throughput. Settlement is secure and final. The barrier is that Bitcoin's
+            fiat-denominated price is volatile, and this volatility makes it impractical for the daily
+            commerce that constitutes the bulk of economic activity.
+        </p>
+        <p>
+            Stablecoins emerged to address this gap by pegging digital tokens to fiat currencies. In
+            doing so, they reintroduce the trust dependencies Bitcoin was designed to eliminate:
+            centralized issuers who can freeze accounts, reserves that must be audited, and continued
+            operation of entities subject to regulatory and counterparty risk. Algorithmic approaches
+            have demonstrated catastrophic failure modes [2]. Fiat-backed stablecoins function as
+            digital dollars routed through additional intermediaries.
+        </p>
+        <p>
+            What is needed is a way to express Bitcoin's value that is stable enough for daily use
+            while remaining entirely Bitcoin-native. This paper proposes a denomination protocol that
+            achieves this through a cumulative historical average of daily prices. No new token is
+            created. No reserves are held. No entity is trusted. The protocol is a standard for
+            expressing value — a unit of account that any wallet, merchant, or payment system can
+            adopt independently.
+        </p>
+    </div>
+
+    <!-- SECTION 2 -->
+    <div class="paper-section">
+        <h2><span class="sec-num">2.</span> The Price Reference</h2>
+        <p>
+            The system depends on a single daily input: a standardized Bitcoin price for each calendar
+            day, designated the Bitcoin Average Daily Price (BTCADP). The BTCADP is denominated in
+            United States Dollars and covers the 24-hour UTC window from 00:00:00.000 through
+            23:59:59.999. The full specification is published separately [3].
+        </p>
+        <p>
+            For each qualifying exchange, a volume-weighted average price (VWAP) is computed from all
+            BTC/USD trades during the window:
+        </p>
+        <div class="formula">VWAP = Σ(Pᵢ × Vᵢ) / Σ(Vᵢ)</div>
+        <p>
+            The daily BTCADP is the 25% trimmed mean of qualifying exchange VWAPs. Exchanges are sorted
+            by VWAP, the lowest and highest quartiles are removed, and the arithmetic mean of the
+            remaining values is taken:
+        </p>
+        <div class="formula">BTCADP(d) = mean( trimmed₂₅( {VWAP₁(d), VWAP₂(d), ..., VWAPₙ(d)} ) )</div>
+        <p>
+            Each exchange contributes exactly one VWAP regardless of its reported volume. Equal
+            weighting limits the maximum influence of any single exchange to 1/n of the untrimmed set,
+            and the trimmed mean ensures that outlier values are excluded entirely.
+        </p>
+    </div>
+
+    <!-- SECTION 3 -->
+    <div class="paper-section">
+        <h2><span class="sec-num">3.</span> The Denomination</h2>
+        <p>
+            BTCC (Bitcoin Currency) is defined as a denomination of Bitcoin whose fiat price on a given
+            day is the arithmetic mean of every historical BTCADP value from the genesis block to the
+            present:
+        </p>
+        <div class="formula">BTCC(d) = (1/N) Σ BTCADP(i), for i = 1 to N</div>
+        <p>
+            Where N is the total number of days in Bitcoin's history through the previous completed day.
+            At the start of each UTC day (00:00:00.000), the BTCC price is recalculated to incorporate
+            the just-completed day's BTCADP. This updated price is then locked for the following 24 hours.
+        </p>
+        <p>
+            The sensitivity of the BTCC price to each new BTCADP value is:
+        </p>
+        <div class="formula">ΔBTCC = (BTCADP(new) − BTCC(current)) / (N + 1)</div>
+        <p>
+            As N grows, this sensitivity approaches zero. As of early 2026, N exceeds 6,200. A day in
+            which Bitcoin's price moves 10% produces a change in the BTCC price of less than 0.01%.
+            A 40% single-day crash shifts the BTCC price by approximately 0.04%. These are mathematical
+            properties of cumulative averages. They do not depend on market conditions, assumptions
+            about future prices, or the continued operation of any institution.
+        </p>
+    </div>
+
+    <!-- SECTION 4 -->
+    <div class="paper-section">
+        <h2><span class="sec-num">4.</span> Timeblocks</h2>
+        <p>
+            Bitcoin's blockchain achieves immutability through proof-of-work. Each new block
+            cryptographically seals the one before it, making reversal exponentially more costly as
+            the chain grows. A transaction buried under six blocks is considered practically
+            irreversible. Under six hundred, it is a permanent fact of the ledger.
+        </p>
+        <p>
+            The BTCC denomination exhibits an analogous property. Each UTC day constitutes a timeblock:
+            a single day's BTCADP value that, once the day closes, is permanently recorded into the
+            cumulative average. Like a block on the chain, a timeblock becomes more immutable over
+            time — not because it is buried under computational work, but because it is buried under
+            subsequent timeblocks.
+        </p>
+        <p>
+            This produces an immutability gradient. Recent timeblocks have measurable influence on the
+            BTCC price. Older timeblocks have been so thoroughly absorbed into the average that no
+            plausible market event could meaningfully alter their contribution. Every new timeblock
+            simultaneously records a new day's price and reinforces the permanence of every day
+            that came before it.
+        </p>
+    </div>
+
+    <!-- SECTION 5 -->
+    <div class="paper-section">
+        <h2><span class="sec-num">5.</span> Three Dimensions</h2>
+        <p>
+            Bitcoin's blockchain can be understood through three physical dimensions. Blocks represent
+            Space: discrete digital structures in which transactions are recorded and preserved.
+            Proof-of-work represents Energy: the expenditure of computational energy that secures those
+            blocks and makes them irreversible. BTCC Timeblocks represent Time: the daily accumulation
+            of price across Bitcoin's entire history, each day's value permanently absorbed into the
+            cumulative average.
+        </p>
+        <p>
+            Blocks encode what happened. Proof-of-work ensures it cannot be undone. Timeblocks record
+            what Bitcoin was worth when it happened. Space, Energy, and Time — three dimensions of
+            the same network.
+        </p>
+    </div>
+
+    <!-- SECTION 6 -->
+    <div class="paper-section">
+        <h2><span class="sec-num">6.</span> Stability Properties</h2>
+        <p>Three properties govern the stability of the BTCC price:</p>
+        <p>
+            <em>Monotonically decreasing sensitivity.</em> The impact of each new BTCADP on the BTCC
+            price is exactly 1/(N+1) of the difference from the current average. As N grows, this
+            sensitivity approaches zero. The denomination becomes more stable with each passing day,
+            permanently and irreversibly.
+        </p>
+        <p>
+            <em>Bounded response to shocks.</em> With N exceeding 6,200, no single day can move the
+            BTCC price by more than approximately 0.016% of the shock's magnitude, regardless of how
+            extreme that shock is.
+        </p>
+        <p>
+            <em>Slow-moving trend.</em> A flash crash in which BTC drops 40% in a single day shifts the
+            BTCC price by approximately $6 — a change of 0.04%. A prolonged bear market in which BTC
+            remains at $20,000 for three years produces less than 5% total change in the BTCC price
+            over the entire period.
+        </p>
+    </div>
+
+    <!-- SECTION 7 -->
+    <div class="paper-section">
+        <h2><span class="sec-num">7.</span> Historical Eras</h2>
+        <p>
+            Bitcoin's price history spans multiple periods with different data characteristics. The
+            BTCADP specification [3] defines four eras. Era 0 (January 3, 2009 – July 17, 2010):
+            no market existed; the BTCADP is defined as $0.00 for all 561 days. Era 1 (July 18, 2010
+            – February 24, 2014): Mt. Gox was the dominant or sole exchange; single-source VWAP,
+            flagged accordingly. Era 2 (February 25, 2014 – December 31, 2017): multiple exchanges,
+            confidence transitions from reduced to full. Era 3 (January 1, 2018 – present): full
+            trimmed mean methodology with consistent qualifying exchanges.
+        </p>
+        <div class="note">
+            Eras 0 through 2 use provisional values. The specification invites researchers with access
+            to trade-level data to produce definitive historical valuations.
+        </div>
+    </div>
+
+    <!-- SECTION 8 -->
+    <div class="paper-section">
+        <h2><span class="sec-num">8.</span> Manipulation Resistance</h2>
+        <p>
+            The BTCADP derives its manipulation resistance from reinforcing design choices: the trimmed
+            mean discards the highest and lowest quartile of exchange VWAPs; equal weighting ensures
+            that fabricated volume confers no additional influence; the price coherence filter
+            iteratively removes any exchange whose VWAP deviates more than 5% from the median.
+        </p>
+        <p>
+            Even a successfully manipulated BTCADP has limited effect on the BTCC price. A single
+            manipulated day shifts the cumulative average by at most 1/(N+1) of the difference. With
+            N exceeding 6,200, an attacker would need to sustain manipulation across hundreds of
+            consecutive days to produce a meaningful shift — a cost that is, for practical purposes,
+            prohibitive.
+        </p>
+    </div>
+
+    <!-- SECTION 9 -->
+    <div class="paper-section">
+        <h2><span class="sec-num">9.</span> Implementation Neutrality</h2>
+        <p>
+            BTCC requires no changes to the Bitcoin protocol. No soft fork, no hard fork, no new
+            opcodes, no consensus rule modifications. The denomination operates entirely in the
+            calculation layer. It defines a unit of account — a way to express and agree upon value —
+            that is deterministic, publicly verifiable, and requires no real-time data beyond the
+            daily BTCADP update at midnight UTC.
+        </p>
+        <p>
+            Any existing wallet, payment processor, or settlement infrastructure can adopt BTCC by
+            implementing its own conversion logic against a single daily price. The BTCC standard
+            specifies what the unit is and how it is computed. It does not prescribe how transactions
+            are denominated, settled, or displayed.
+        </p>
+    </div>
+
+    <!-- SECTION 10 -->
+    <div class="paper-section">
+        <h2><span class="sec-num">10.</span> Known Limitations</h2>
+        <p>
+            The BTCC fiat price appreciates slowly over time as long as BTC spot exceeds the historical
+            average. In BTCC terms, this constitutes mild deflation. Merchants pricing in BTCC will
+            occasionally need to adjust prices downward.
+        </p>
+        <p>
+            If BTC spot were to fall below the BTCC fiat price for an extended period, the denomination
+            would price goods at a premium to current market value. In practice this would require a
+            decline of over 80% from current levels, sustained indefinitely — a scenario representing
+            a fundamental crisis for Bitcoin itself.
+        </p>
+        <p>
+            Because the BTCC price updates only once per day, implementations that convert between BTCC
+            and satoshis will experience intraday drift proportional to the day's BTC price movement.
+            Managing this drift is an implementation-specific concern outside the scope of this paper.
+        </p>
+    </div>
+
+    <!-- SECTION 11 -->
+    <div class="paper-section">
+        <h2><span class="sec-num">11.</span> Conclusion</h2>
+        <p>
+            This paper has described a denomination protocol for Bitcoin that produces a stable unit of
+            account without introducing trust, issuers, reserves, or protocol modifications. The
+            stability derives from a cumulative historical average that, by its mathematical nature,
+            becomes more resistant to disruption with every passing day.
+        </p>
+        <p>
+            Bitcoin's blockchain records transactions in Space, secures them with Energy, and the BTCC
+            denomination records their value across Time. The denomination asks nothing of the protocol
+            and changes nothing about it. It requires only that the price history be computed honestly —
+            and provides a transparent, reproducible methodology for doing so.
+        </p>
+    </div>
+
+    <!-- REFERENCES -->
+    <div class="refs">
+        <h2>References</h2>
+        <ol>
+            <li>S. Nakamoto, "Bitcoin: A Peer-to-Peer Electronic Cash System," 2008.</li>
+            <li>L.W. Cong, Y. Li, N. Wang, "Token-Based Platform Finance," <em>Journal of Financial Economics</em>, vol. 144, no. 3, 2022.</li>
+            <li>"BTCADP: Bitcoin Average Daily Price — Specification v1.0," <a href="specification.html">btcadp.org</a>, 2026.</li>
+            <li>N. Gandal, J.T. Hamrick, T. Moore, T. Oberman, "Price manipulation in the Bitcoin ecosystem," <em>Journal of Monetary Economics</em>, vol. 95, pp. 86–96, 2018.</li>
+            <li>I. Makarov, A. Schoar, "Trading and arbitrage in cryptocurrency markets," <em>Journal of Financial Economics</em>, vol. 135, no. 2, pp. 293–319, 2020.</li>
+            <li>J.M. Griffin, A. Shams, "Is Bitcoin Really Untethered?" <em>The Journal of Finance</em>, vol. 75, no. 4, pp. 1913–1964, 2020.</li>
+        </ol>
+    </div>
+
+    <!-- DOWNLOAD SECTION -->
+    <div class="download-section">
+        <h3>Download This Paper</h3>
+        <p>CC0 Public Domain — free to use, share, and build upon without restriction.</p>
+        <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+            <button class="btn-primary" onclick="downloadPaper()">⬇ Download PDF</button>
+            <a href="btcc.html" class="btn-secondary">← Back to Summary</a>
+        </div>
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <p>
+        <a href="index.html">Home</a> &nbsp;·&nbsp;
+        <a href="btcc.html">BTCC Summary</a> &nbsp;·&nbsp;
+        <a href="specification.html">BTCADP Specification</a> &nbsp;·&nbsp;
+        <a href="https://github.com/BTCADP/btcadp-research">GitHub</a>
+    </p>
+    <p style="margin-top:0.8rem;">CC0 Public Domain · btcadp.org · 2026</p>
+</footer>
+
+<script>
+function downloadPaper() {
+    // Look for a PDF in the specification folder (same pattern as BTCADP spec)
+    const link = document.createElement('a');
+    link.href = 'specification/BTCC_Technical_Paper.pdf';
+    link.download = 'BTCC_Technical_Paper.pdf';
+    link.click();
+}
+</script>
+
+</body>
+</html>
