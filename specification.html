@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BTCADP Specification v1.0 — Bitcoin Average Daily Price</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary: #0a0a0b;
+    --bg-secondary: #111114;
+    --bg-tertiary: #19191e;
+    --border: #2a2a32;
+    --text-primary: #e8e6e3;
+    --text-secondary: #8a8a95;
+    --text-muted: #555560;
+    --orange: #f7931a;
+    --orange-dim: rgba(247, 147, 26, 0.15);
+    --font-display: 'Source Serif 4', Georgia, serif;
+    --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+    --font-body: 'Source Serif 4', Georgia, serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(247,147,26,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(247,147,26,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ===== TOOLBAR ===== */
+  .toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10,10,11,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 0;
+  }
+
+  .toolbar-inner {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .toolbar a {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: color 0.2s;
+  }
+
+  .toolbar a:hover { color: var(--orange); }
+
+  .toolbar-actions {
+    display: flex;
+    gap: 10px;
+  }
+
+  .tool-btn {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    padding: 6px 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .tool-btn:hover { border-color: var(--text-muted); color: var(--text-primary); }
+
+  .tool-btn.primary {
+    background: var(--orange);
+    border-color: var(--orange);
+    color: #000;
+    font-weight: 600;
+  }
+
+  .tool-btn.primary:hover { background: #ffa940; border-color: #ffa940; }
+
+  /* ===== DOCUMENT ===== */
+  .document {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 60px 32px 100px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Title page */
+  .title-page {
+    text-align: center;
+    padding: 80px 0 60px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 48px;
+  }
+
+  .title-page h1 {
+    font-family: var(--font-display);
+    font-size: 52px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    color: var(--orange);
+    margin-bottom: 8px;
+  }
+
+  .title-page .doc-subtitle {
+    font-size: 24px;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+  }
+
+  .title-page .doc-version {
+    font-family: var(--font-mono);
+    font-size: 15px;
+    color: var(--text-secondary);
+    margin-bottom: 32px;
+  }
+
+  .title-page .doc-tagline {
+    font-style: italic;
+    font-size: 17px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 32px;
+  }
+
+  .title-page .doc-date {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  /* Headings */
+  h2 {
+    font-family: var(--font-display);
+    font-size: 30px;
+    font-weight: 700;
+    margin-top: 56px;
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-primary);
+  }
+
+  h3 {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 600;
+    margin-top: 40px;
+    margin-bottom: 16px;
+    color: var(--text-primary);
+  }
+
+  /* Body text */
+  p {
+    margin-bottom: 16px;
+    color: var(--text-primary);
+  }
+
+  strong { color: var(--text-primary); }
+
+  /* Blockquotes */
+  blockquote {
+    margin: 20px 0;
+    padding: 16px 24px;
+    border-left: 3px solid var(--orange);
+    background: var(--bg-secondary);
+    border-radius: 0 6px 6px 0;
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  blockquote strong {
+    color: var(--orange);
+  }
+
+  blockquote p { margin-bottom: 8px; color: var(--text-secondary); }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  /* Tables */
+  .spec-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-family: var(--font-mono);
+    font-size: 13px;
+  }
+
+  .spec-table th {
+    text-align: left;
+    padding: 10px 16px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+  }
+
+  .spec-table td {
+    padding: 10px 16px;
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    vertical-align: top;
+  }
+
+  /* Code / pseudocode */
+  .pseudocode {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 24px;
+    margin: 20px 0;
+    overflow-x: auto;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    white-space: pre;
+  }
+
+  .pseudocode .comment { color: var(--text-muted); }
+  .pseudocode .keyword { color: var(--orange); }
+
+  /* Formula */
+  .formula {
+    text-align: center;
+    padding: 16px;
+    margin: 16px 0;
+    font-family: var(--font-mono);
+    font-size: 15px;
+    font-style: italic;
+    color: var(--orange);
+    background: var(--bg-secondary);
+    border-radius: 6px;
+    border: 1px solid var(--border);
+  }
+
+  /* Section divider */
+  .section-end {
+    text-align: center;
+    padding: 40px 0;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-style: italic;
+    color: var(--text-muted);
+  }
+
+  /* TOC */
+  .toc {
+    margin: 32px 0 48px;
+    padding: 32px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+
+  .toc h2 {
+    font-size: 18px;
+    margin-top: 0;
+    margin-bottom: 16px;
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .toc ol {
+    list-style: none;
+    counter-reset: toc;
+    padding: 0;
+  }
+
+  .toc li {
+    counter-increment: toc;
+    margin-bottom: 6px;
+  }
+
+  .toc li a {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .toc li a:hover { color: var(--orange); }
+  .toc li a::before { content: counter(toc) ". "; color: var(--text-muted); }
+
+  /* ===== PRINT STYLES ===== */
+  @media print {
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+    body {
+      background: #fff !important;
+      color: #111 !important;
+      font-size: 11pt;
+      line-height: 1.6;
+    }
+
+    body::before { display: none; }
+
+    .toolbar { display: none !important; }
+
+    .document {
+      max-width: 100%;
+      padding: 0;
+      margin: 0;
+    }
+
+    .title-page {
+      page-break-after: always;
+      padding: 200px 0 0;
+      border-bottom: none;
+    }
+
+    .title-page h1 { color: #111; font-size: 42pt; }
+    .title-page .doc-subtitle { color: #333; }
+    .title-page .doc-version { color: #666; }
+    .title-page .doc-tagline { color: #444; }
+    .title-page .doc-date { color: #666; }
+
+    .toc { page-break-after: always; background: none; border: 1px solid #ccc; }
+    .toc li a { color: #333; }
+    .toc li a::before { color: #999; }
+
+    h2 {
+      color: #111;
+      border-bottom-color: #ccc;
+      page-break-after: avoid;
+      font-size: 18pt;
+      margin-top: 32px;
+    }
+
+    h3 {
+      color: #111;
+      page-break-after: avoid;
+      font-size: 14pt;
+    }
+
+    p { color: #222; orphans: 3; widows: 3; }
+
+    blockquote {
+      background: #f5f5f5;
+      border-left-color: #333;
+      color: #333;
+      page-break-inside: avoid;
+    }
+
+    blockquote strong { color: #111; }
+    blockquote p { color: #333; }
+
+    .spec-table th { background: #eee; border-color: #ccc; color: #333; }
+    .spec-table td { border-color: #ccc; color: #222; }
+
+    .pseudocode {
+      background: #f8f8f8;
+      border-color: #ccc;
+      color: #333;
+      page-break-inside: avoid;
+    }
+
+    .pseudocode .comment { color: #888; }
+    .pseudocode .keyword { color: #333; font-weight: bold; }
+
+    .formula { background: #f8f8f8; border-color: #ccc; color: #333; }
+
+    a { color: #111; text-decoration: none; }
+
+    @page {
+      size: letter;
+      margin: 1in;
+    }
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .document { padding: 32px 20px 60px; }
+    .title-page h1 { font-size: 36px; }
+    h2 { font-size: 24px; }
+    h3 { font-size: 19px; }
+    body { font-size: 16px; }
+  }
+</style>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">`n</head>
+<body>
+
+<div class="toolbar">
+  <div class="toolbar-inner">
+    <a href="/index.html">&larr; BTCADP Data Explorer</a>
+    <div class="toolbar-actions">
+      <a href="/index.html" style="font-family:var(--font-mono);font-size:12px;color:var(--orange);text-decoration:none;letter-spacing:1px;margin-right:12px;">Home</a>
+      <button class="tool-btn" onclick="toggleTheme()">&#x263C; Light Mode</button>
+      <button class="tool-btn primary" onclick="window.print()">&#x2399; Print / Save PDF</button>
+    </div>
+  </div>
+</div>
+
+<div class="document">
+
+  <!-- TITLE PAGE -->
+  <div class="title-page">
+    <h1>BTCADP</h1>
+    <div class="doc-subtitle">Bitcoin Average Daily Price</div>
+    <div class="doc-version">Specification Document &bull; Version 1.0</div>
+    <div class="doc-tagline">
+      A Universal, Reproducible, and Institution-Independent<br>
+      Standard for Daily Bitcoin Valuation
+    </div>
+    <div class="doc-date">March 2026<br>Draft for Public Review</div>
+  </div>
+
+  <!-- TABLE OF CONTENTS -->
+  <div class="toc">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#s1">Introduction</a></li>
+      <li><a href="#s2">Currency Denomination</a></li>
+      <li><a href="#s3">Daily Time Window</a></li>
+      <li><a href="#s4">Core Mathematical Framework</a></li>
+      <li><a href="#s5">Exchange Qualification Criteria</a></li>
+      <li><a href="#s6">Historical Eras and Methodology Transitions</a></li>
+      <li><a href="#s7">Community Research and Iterative Refinement</a></li>
+      <li><a href="#s8">Edge Cases and Special Conditions</a></li>
+      <li><a href="#s9">Transparency and Auditability</a></li>
+      <li><a href="#s10">Specification Versioning</a></li>
+      <li><a href="#s11">Reference Implementation</a></li>
+      <li><a href="#s12">Conclusion</a></li>
+    </ol>
+  </div>
+
+  <!-- SECTION 1 -->
+  <h2 id="s1">1. Introduction</h2>
+  <p>The BTCADP (Bitcoin Average Daily Price) establishes a universal reference point for Bitcoin's daily value. It aims to provide an answer that satisfies four core principles:</p>
+  <p><strong>Fairness.</strong> The price reflects actual market activity without favoring any particular exchange, geography, or participant.</p>
+  <p><strong>Reproducibility.</strong> Any competent individual with access to the same trade data and this specification should independently arrive at the same number, to within a trivial margin.</p>
+  <p><strong>Manipulation Resistance.</strong> The methodology is designed so that no single exchange, trader, or entity can materially distort the published price through wash trading, spoofing, or other manipulation.</p>
+  <p><strong>Institutional Independence.</strong> The BTCADP does not depend on any organization for its legitimacy. If the original publisher ceases to exist, any party can continue computing the BTCADP using this specification.</p>
+  <p>Every design decision in this specification flows from these four principles. Where trade-offs arise, they are documented and justified.</p>
+
+  <!-- SECTION 2 -->
+  <h2 id="s2">2. Currency Denomination</h2>
+  <p>The BTCADP is denominated in United States Dollars (USD). This is a pragmatic decision grounded in historical reality: the BTC/USD trading pair has consistently maintained the deepest liquidity throughout Bitcoin&rsquo;s entire market history. The US dollar has served as the world&rsquo;s reserve currency for the full duration of Bitcoin&rsquo;s existence, making it the natural unit of account for a universal price.</p>
+  <p>The BTCADP is expressly defined for the BTC/USD pair. Exchanges trading BTC against other fiat currencies (EUR, JPY, GBP, etc.) are excluded from the calculation to avoid introducing a dependency on foreign exchange rates, which would add complexity and an additional vector for error.</p>
+  <p>Converting the published BTCADP to other currencies is straightforward: multiply by the relevant day&rsquo;s USD exchange rate from any reputable forex source. A future extension of this specification may define BTCADP variants for other major fiat pairs using an equivalent methodology applied independently.</p>
+
+  <!-- SECTION 3 -->
+  <h2 id="s3">3. Daily Time Window</h2>
+  <p>A single BTCADP value is computed for each calendar day. The day is defined as the 24-hour period from 00:00:00.000 UTC through 23:59:59.999 UTC. Coordinated Universal Time (UTC) is the only defensible choice: it is the international scientific standard for timekeeping and does not privilege any geographic region.</p>
+  <p>All trade timestamps must be normalized to UTC before processing. A trade is assigned to the day on which its UTC timestamp falls. Trades occurring at exactly 00:00:00.000 UTC belong to the new day.</p>
+  <blockquote><p><strong>Precision:</strong> Timestamps should be recorded to millisecond precision where available. Sub-millisecond precision is not required.</p></blockquote>
+
+  <!-- SECTION 4 -->
+  <h2 id="s4">4. Core Mathematical Framework</h2>
+
+  <h3>4.1 Volume-Weighted Average Price (VWAP)</h3>
+  <p>The foundational building block of the BTCADP is the Volume-Weighted Average Price. For a set of N trades executed during a daily window, each with price P&#x1d62; and volume V&#x1d62;, the VWAP is defined as:</p>
+  <div class="formula">VWAP = &Sigma;(P&#x1d62; &times; V&#x1d62;) / &Sigma;(V&#x1d62;) &ensp; for i = 1 to N</div>
+  <p>This is calculated independently for each qualifying exchange on each day, producing a set of exchange-level VWAPs. The VWAP answers the question: &ldquo;At what average price did Bitcoin actually change hands on this exchange today?&rdquo; weighted by economic activity.</p>
+
+  <h3>4.2 Trimmed Mean Aggregation</h3>
+  <p>Given a set of exchange-level VWAPs for a given day, the BTCADP is computed as a trimmed mean. The procedure is as follows:</p>
+  <p><strong>Step 1.</strong> Collect the VWAP from each qualifying exchange for the day, producing an ordered set {VWAP&#x2081;, VWAP&#x2082;, &hellip;, VWAP&#x2099;}.</p>
+  <p><strong>Step 2.</strong> Sort the values in ascending order.</p>
+  <p><strong>Step 3.</strong> Remove the lowest k% and the highest k% of values, where k = 25. If the number of values to remove is not an integer, round down (i.e., use floor). This means the trimming is conservative, preferring to include more data.</p>
+  <p><strong>Step 4.</strong> Compute the arithmetic mean of the remaining values. This is the BTCADP for that day.</p>
+  <div class="formula">BTCADP(d) = mean( trimmed&#x2082;&#x2085;( {VWAP&#x2081;(d), VWAP&#x2082;(d), &hellip;, VWAP&#x2099;(d)} ) )</div>
+  <p>The trimmed mean at k = 25% removes the top and bottom quartiles, making the result robust against outlier exchanges. Even if up to 25% of qualifying exchanges report fraudulent data, the BTCADP remains accurate, provided the majority report honestly.</p>
+  <blockquote><p><strong>Rationale:</strong> The trimmed mean was chosen over the median because it uses more of the available data while still being highly robust. With 20 exchanges, a median uses only 1&ndash;2 data points; a 25% trimmed mean uses 10.</p></blockquote>
+
+  <h3>4.3 Equal Weighting of Exchanges</h3>
+  <p>Each qualifying exchange contributes exactly one VWAP to the trimmed mean, regardless of its volume. This is a deliberate design choice. Volume-weighting across exchanges would reintroduce the manipulation vector that the methodology is designed to eliminate: an exchange that fabricates volume would gain proportional influence over the final price. Equal weighting ensures that no single exchange, regardless of its reported size, can dominate the result.</p>
+  <p>The trade-off is that a small exchange with $2 million in daily volume receives the same weight as a large exchange with $500 million. This is acceptable because the trimmed mean already discards the most extreme values. If a small exchange&rsquo;s VWAP is an outlier, it is trimmed. If it falls within the middle 50%, its price is broadly consistent with the market and deserves inclusion.</p>
+  <blockquote><p><strong>Known attack vector:</strong> An adversary could theoretically create multiple small exchanges that each barely meet the qualification threshold, attempting to shift the trimmed mean. However, with 20+ legitimate qualifying exchanges in the modern era, an attacker would need to introduce and sustain more than 7 fraudulent exchanges to influence the result &mdash; each meeting all qualification criteria including price coherence. The cost and complexity of this attack is substantial, and the transparency record (Section 9) makes it detectable.</p></blockquote>
+
+  <h3>4.4 Rounding and Arithmetic Precision</h3>
+  <p>The final BTCADP value is rounded to two decimal places (cents) using the IEEE 754 round-half-to-even rule (banker&rsquo;s rounding). This eliminates rounding bias and is the standard in financial computation.</p>
+  <p>Intermediate calculations (VWAP computation, trimmed mean) should use at minimum 64-bit double-precision floating-point arithmetic (IEEE 754 binary64), which provides approximately 15&ndash;17 significant decimal digits. This is more than sufficient for Bitcoin price calculations. Two conforming implementations given identical trade data as input must produce BTCADP values that agree after rounding to two decimal places. In the unlikely event of a one-cent discrepancy due to floating-point ordering differences, neither value is considered incorrect.</p>
+
+  <h3>4.5 Minimum Exchange Threshold</h3>
+  <p>The trimmed mean requires a minimum number of inputs to be statistically meaningful. The minimum qualifying exchange count is defined as follows:</p>
+  <table class="spec-table">
+    <thead><tr><th>Exchanges (n)</th><th>Method</th><th>Confidence Flag</th></tr></thead>
+    <tbody>
+      <tr><td>n &ge; 5</td><td>Full trimmed mean (k = 25%)</td><td>Full confidence</td></tr>
+      <tr><td>n = 3 or 4</td><td>Median only (trimming not meaningful)</td><td>Reduced confidence</td></tr>
+      <tr><td>n = 2</td><td>Simple mean of two VWAPs</td><td>Low confidence</td></tr>
+      <tr><td>n = 1</td><td>Single exchange VWAP</td><td>Single-source &mdash; flagged</td></tr>
+      <tr><td>n = 0</td><td>BTCADP is undefined for this day</td><td>No data</td></tr>
+    </tbody>
+  </table>
+  <p>The confidence flag is published alongside the BTCADP value for full transparency. It does not change the number itself &mdash; it communicates the degree of statistical robustness behind it.</p>
+
+  <!-- SECTION 5 -->
+  <h2 id="s5">5. Exchange Qualification Criteria</h2>
+  <p>An exchange qualifies for inclusion in the BTCADP calculation for a given day if and only if it meets the following criteria. These criteria are purely algorithmic &mdash; no subjective judgment or editorial discretion is involved.</p>
+  <p>The criteria are applied in a specific order. This order matters for reproducibility and is considered part of the specification:</p>
+
+  <h3>5.1 The Exchange List</h3>
+  <p>The calculation begins with a list of known exchanges to evaluate. This is the one input to the BTCADP that requires human curation, and this specification acknowledges it directly. Any exchange that offers a BTC/USD trading pair and publishes publicly accessible trade-level data (via API or data feed) is a candidate for inclusion. The list should be as comprehensive as reasonably possible.</p>
+  <p>The transparency record (Section 9) must publish the full list of exchanges evaluated for each day, including those that were evaluated and excluded. This allows any observer to propose additions. If an exchange meets all algorithmic criteria below but was not included in the evaluated set, the BTCADP publisher should add it to subsequent calculations. Over time, the exchange list converges toward completeness through public scrutiny.</p>
+  <blockquote><p><strong>Principle:</strong> The exchange list is intentionally permissive. The algorithmic filters below are what protect the BTCADP from bad data &mdash; not the curation of the list. When in doubt, include an exchange and let the math decide.</p></blockquote>
+
+  <h3>5.2 Data Availability (Filter 1)</h3>
+  <p>The exchange must publish historical trade-level data for the BTC/USD pair, including at minimum: trade timestamp (UTC or convertible to UTC), trade price (USD), and trade volume (BTC). Exchanges that do not provide this data at the required granularity are excluded.</p>
+
+  <h3>5.3 Minimum Trade Count (Filter 2)</h3>
+  <p>The exchange must have recorded at least 1,000 individual trades in the BTC/USD pair during the 24-hour UTC window. This threshold filters out exchanges with negligible activity while being low enough to include any exchange with meaningful market participation.</p>
+  <blockquote><p><strong>Calibration note:</strong> The threshold of 1,000 trades was selected to exclude dead or near-dead venues while including any exchange with genuine retail or institutional activity. This parameter may be adjusted in future versions based on empirical analysis.</p></blockquote>
+
+  <h3>5.4 Minimum Time Coverage (Filter 3)</h3>
+  <p>The exchange must have recorded at least one trade in a minimum of 16 out of the 24 hourly UTC periods in the day (i.e., trades must span at least 16 distinct hours). This ensures that an exchange&rsquo;s VWAP reflects the full trading day rather than being skewed by activity during a narrow time window. An exchange that was online for only 4 hours during a price spike would produce a VWAP unrepresentative of the day as a whole.</p>
+  <blockquote><p><strong>Rationale:</strong> The 16-hour threshold is deliberately lenient. It accommodates scheduled maintenance windows while excluding exchanges that were substantively offline. An exchange active for 16+ hours captures the vast majority of daily price action.</p></blockquote>
+
+  <h3>5.5 Spread Threshold (Filter 4, where available)</h3>
+  <p>Where order book data is available for an exchange, the exchange&rsquo;s volume-weighted average bid-ask spread for the day must not exceed 1.0% of the mid-price. Exchanges with abnormally wide spreads are either illiquid or operating abnormally and should not influence the reference price.</p>
+  <p>This criterion is applied only when order book data is available. Many exchanges do not publish historical order book data, and requiring it would exclude otherwise legitimate venues. The trade count threshold and price coherence filter (below) provide sufficient quality assurance for exchanges without order book data. The spread threshold is an additional safeguard, not a prerequisite.</p>
+
+  <h3>5.6 Price Coherence (Filter 5, applied last)</h3>
+  <p>After all exchanges have passed the above filters and their VWAPs have been computed, the price coherence check is applied. An exchange&rsquo;s daily VWAP must fall within 5% of the median VWAP across all other exchanges that passed Filters 1&ndash;4. This is a sanity check that identifies exchanges whose prices have decoupled from the global market due to technical issues, capital controls, or fraud.</p>
+  <p>The price coherence check is applied iteratively: after removing outlier exchanges, the median is recalculated, and any newly-outlying exchanges are also removed, until the set stabilizes or a maximum of 5 iterations have been performed. In practice, this rarely requires more than one pass.</p>
+  <blockquote><p><strong>Order of operations:</strong> The explicit ordering &mdash; data availability, then trade count, then time coverage, then spread (where available), then price coherence &mdash; is essential for reproducibility. Two implementations must apply these filters in the same sequence to arrive at the same qualifying set.</p></blockquote>
+
+  <!-- SECTION 6 -->
+  <h2 id="s6">6. Historical Eras and Methodology Transitions</h2>
+  <p>Bitcoin&rsquo;s data landscape has evolved dramatically since its inception. A single methodology applied uniformly to all eras would produce either false precision (in early years) or unnecessary imprecision (in recent years). The BTCADP specification therefore defines distinct historical eras, each with an appropriate methodology. This is not a weakness &mdash; it is intellectual honesty formalized as policy.</p>
+
+  <h3>6.1 Era 0: Genesis (January 3, 2009 &ndash; July 17, 2010)</h3>
+  <p><strong>BTCADP value: $0.00 for all days.</strong></p>
+  <p>The BTCADP timeline begins on January 3, 2009, the date the Bitcoin genesis block was mined and the first bitcoin came into existence. No organized exchange existed during this period. The only data points are a handful of peer-to-peer transactions (most famously, the 10,000 BTC pizza purchase of May 22, 2010, implying approximately $0.004 per BTC). While these isolated transactions demonstrate that some participants ascribed value to Bitcoin, there was no functioning market from which a daily price could be derived.</p>
+  <p>The BTCADP for this entire era is defined as $0.00. This is not a claim that Bitcoin was worthless &mdash; it is a recognition that no market-based price discovery mechanism existed. A daily reference price requires a market, and no market existed. The $0.00 value provides a clean, unambiguous baseline from which Bitcoin&rsquo;s price history begins.</p>
+  <blockquote><p><strong>Note:</strong> Researchers investigating this era may produce more granular valuations based on documented peer-to-peer transactions, mining costs, or other methodologies. Such work is encouraged under Section 7 and may inform future revisions, but the default BTCADP for Era 0 remains $0.00.</p></blockquote>
+
+  <h3>6.2 Era 1: Single-Exchange Market (July 18, 2010 &ndash; February 24, 2014)</h3>
+  <p><strong>BTCADP status:</strong> Single-source, flagged.</p>
+  <p>Mt. Gox launched on July 18, 2010, and rapidly became the dominant exchange, handling over 70% of global Bitcoin volume for much of this period. While other exchanges existed (TradeHill, Bitcoinica, BTC-e, Bitstamp), their volumes were insufficient to form a statistically meaningful set for trimmed-mean aggregation.</p>
+  <p>The BTCADP for this era is defined as the Mt. Gox daily VWAP for the BTC/USD pair. Every value in this era carries a single-source confidence flag. For dates where other exchanges (particularly Bitstamp, from 2012 onward) have sufficient data to compute a VWAP, these values are published in the transparency record as secondary references for cross-validation, but do not alter the primary BTCADP value.</p>
+  <blockquote><p><strong>Known issue:</strong> It is now established that Mt. Gox was insolvent for much of 2013 and that automated trading bots (notably the &ldquo;Willy Bot&rdquo;) generated fraudulent volume. The BTCADP values from late 2013 should be treated with appropriate skepticism. This is an inherent limitation of the historical record, not a methodological failure &mdash; no methodology can produce trustworthy prices from untrustworthy data.</p></blockquote>
+
+  <h3>6.3 Era 2: Transition (February 25, 2014 &ndash; December 31, 2017)</h3>
+  <p><strong>BTCADP status:</strong> Multi-exchange, reduced confidence initially, improving over time.</p>
+  <p>Following the Mt. Gox collapse in February 2014, the market fragmented across multiple exchanges including Bitstamp, Bitfinex, BTC-e, Coinbase (GDAX), Kraken, and others. The full BTCADP methodology applies beginning on this date, but with the caveat that the exchange count is smaller (typically 5&ndash;10 qualifying venues) and the trimmed mean therefore has fewer inputs.</p>
+  <p>The confidence flag for each day in this era is determined by the actual number of qualifying exchanges on that day, per the thresholds in Section 4.5. Early days in this era may carry &ldquo;Reduced confidence&rdquo; or even &ldquo;Low confidence&rdquo; flags. By the 2017 bull run, the exchange ecosystem had matured substantially, with 15&ndash;30 qualifying venues on most days, providing the statistical depth needed for full-confidence BTCADP values.</p>
+
+  <h3>6.4 Era 3: Maturity (January 1, 2018 &ndash; Present)</h3>
+  <p><strong>BTCADP status:</strong> Full methodology, full confidence.</p>
+  <p>The modern era features abundant, high-quality data from regulated exchanges (Coinbase, Kraken, Gemini, Bitstamp), institutional reference rates (CME BRR), and spot Bitcoin ETFs (from January 2024 onward). The full BTCADP methodology applies with a robust set of qualifying exchanges, typically 15&ndash;40 per day.</p>
+  <p>This era serves as the benchmark for validation: BTCADP values can be compared against institutional reference rates to confirm methodological soundness. Convergence with independently-calculated prices from CME, Bloomberg, and ETF NAV calculations provides external validation.</p>
+
+  <table class="spec-table">
+    <thead><tr><th>Era</th><th>Date Range</th><th>Method</th><th>Confidence</th></tr></thead>
+    <tbody>
+      <tr><td>0</td><td>Jan 3, 2009 &ndash; Jul 17, 2010</td><td>$0.00 (no market)</td><td>Defined by specification</td></tr>
+      <tr><td>1</td><td>Jul 18, 2010 &ndash; Feb 24, 2014</td><td>Mt. Gox VWAP</td><td>Single-source</td></tr>
+      <tr><td>2</td><td>Feb 25, 2014 &ndash; Dec 31, 2017</td><td>Trimmed mean of VWAPs</td><td>Reduced &rarr; Full</td></tr>
+      <tr><td>3</td><td>Jan 1, 2018 &ndash; Present</td><td>Trimmed mean of VWAPs</td><td>Full</td></tr>
+    </tbody>
+  </table>
+
+  <!-- SECTION 7 (NEW) -->
+  <h2 id="s7">7. Community Research and Iterative Refinement</h2>
+  <p>The BTCADP specification is designed not as a finished product but as a living standard that improves through community participation. While the methodology described in this document is fully operational for Era 3 (2018&ndash;present), the historical eras present research challenges that no single organization should attempt to solve in isolation. This section formalizes the role of independent researchers in strengthening the BTCADP.</p>
+
+  <h3>7.1 Provisional Values and the Research Mandate</h3>
+  <p>For Eras 0, 1, and 2, the initial BTCADP publication uses provisional values: $0.00 for Era 0, Mt. Gox VWAP data for Era 1, and aggregated market data from available sources for Era 2. These values are directionally accurate but were not computed using the full methodology specified in Section 4, because the required trade-level data is either incomplete, difficult to obtain, or housed in sources of uncertain provenance.</p>
+  <p>Every provisional value is clearly marked as such. Provisional status is not a deficiency &mdash; it is an honest acknowledgment that rigorous historical computation requires dedicated research effort, and an explicit invitation for that effort to be undertaken.</p>
+  <p>The research community is encouraged to produce definitive BTCADP values for these historical eras using trade-level data and the methodology described herein. When published, these values supersede the provisional figures and become the accepted historical record.</p>
+
+  <h3>7.2 Methodological Adaptation</h3>
+  <p>The BTCADP methodology was designed for the modern exchange ecosystem. Researchers working with early historical data may encounter conditions where strict application of every filter and threshold is impractical or produces misleading results. For example, the minimum trade count of 1,000 (Section 5.3) may exclude the only active exchange on a given day in 2011, and the 16-hour time coverage requirement (Section 5.4) may be incompatible with the operating patterns of early venues.</p>
+  <p>In such cases, researchers are encouraged to adapt the methodology to fit the available data, provided they adhere to the four core principles established in Section 1: fairness, reproducibility, manipulation resistance, and institutional independence. The specification defines what correct looks like; researchers determine how to get there given the constraints of the historical record.</p>
+
+  <h3>7.3 Publication Standards for Research Contributions</h3>
+  <p>To ensure that community research contributions are verifiable and useful, any published refinement of historical BTCADP values should include the following:</p>
+  <p><strong>Data sources.</strong> A complete description of the trade-level data used, including its origin, format, and any known limitations or gaps. Where data was obtained from archived, leaked, or reconstructed sources, the provenance should be documented with sufficient detail for others to locate and evaluate the same data.</p>
+  <p><strong>Methodology.</strong> A precise description of the calculation performed, including any deviations from the standard BTCADP methodology and the rationale for each deviation. This should be detailed enough for independent replication.</p>
+  <p><strong>Transparency records.</strong> The same transparency data described in Section 9, adapted as necessary for the era in question. At minimum: the exchanges evaluated, the qualifying exchanges and their individual VWAPs, and any exchanges excluded with the reason for exclusion.</p>
+  <p><strong>Reproducible results.</strong> The computed BTCADP values, along with code or sufficiently detailed procedures to allow independent verification.</p>
+  <p>These standards align with established academic publishing norms and ensure that research contributions can be peer-reviewed, challenged, and improved upon.</p>
+
+  <h3>7.4 Strengthening the Specification Through Research</h3>
+  <p>Research contributions serve a dual purpose. First, they produce better historical BTCADP values. Second, and equally important, they stress-test the specification itself. When a researcher finds that a particular filter does not work well for a specific era or dataset, that finding informs future versions of the specification. A methodology that survives independent scrutiny across diverse data conditions is more trustworthy than one that has only been applied by its authors.</p>
+  <p>Researchers who identify ambiguities, edge cases, or limitations in this specification are encouraged to document them alongside their findings. Such feedback is the mechanism by which the BTCADP evolves from a proposal into a robust, community-validated standard.</p>
+  <blockquote><p><strong>Principle:</strong> The BTCADP belongs to no one and benefits everyone. Its credibility is established through transparent methodology, open data, and the collective rigor of independent researchers who test, refine, and ultimately validate the standard.</p></blockquote>
+
+  <!-- SECTION 8 -->
+  <h2 id="s8">8. Edge Cases and Special Conditions</h2>
+
+  <h3>8.1 Exchange Outages</h3>
+  <p>If an exchange is offline or not reporting data for part of a day but meets the minimum trade count and time coverage thresholds (Sections 5.3 and 5.4) for the portion of the day it was active, its VWAP is included. If it fails either threshold, it is simply excluded for that day. No interpolation or estimation is performed for missing data.</p>
+
+  <h3>8.2 Chain Splits and Hard Forks</h3>
+  <p>When Bitcoin undergoes a chain split (as occurred with Bitcoin Cash on August 1, 2017), the BTCADP continues to track the chain that retains the BTC ticker on the majority of qualifying exchanges. The forked asset is a separate instrument and is not included. No retroactive adjustments are made to pre-fork BTCADP values.</p>
+
+  <h3>8.3 Stablecoin Pairs</h3>
+  <p>BTC/USDT, BTC/USDC, and other stablecoin pairs are excluded from the BTCADP. While these pairs are highly liquid, they introduce a dependency on the stablecoin&rsquo;s peg to the US dollar, which is an additional assumption. The BTCADP is computed exclusively from BTC/USD fiat pairs where the USD side represents actual US dollars.</p>
+
+  <h3>8.4 Extreme Market Events</h3>
+  <p>The BTCADP makes no special accommodation for flash crashes, exchange-specific anomalies, or extraordinary volatility. The qualification criteria and trimmed mean are designed to be robust against such events. If multiple exchanges experience simultaneous extreme price moves, this is genuine market activity and should be reflected in the BTCADP.</p>
+
+  <!-- SECTION 9 -->
+  <h2 id="s9">9. Transparency and Auditability</h2>
+  <p>Each daily BTCADP publication should be accompanied by a transparency record containing the following data, enabling full independent verification:</p>
+  <p><strong>Date:</strong> The UTC calendar date.</p>
+  <p><strong>BTCADP Value:</strong> The computed price, rounded to two decimal places.</p>
+  <p><strong>Confidence Flag:</strong> Full, Reduced, Low, Single-source, or No data.</p>
+  <p><strong>Exchanges Evaluated:</strong> The complete list of exchanges that were considered, enabling observers to identify any exchanges that should have been included but were not.</p>
+  <p><strong>Qualifying Exchanges:</strong> Each exchange that passed all filters, along with its individual VWAP, trade count, time coverage (hours active), and whether its VWAP was trimmed or included in the final mean.</p>
+  <p><strong>Excluded Exchanges:</strong> Any exchanges that were evaluated but failed qualification, with the specific filter they failed (trade count, time coverage, spread, or price coherence).</p>
+  <p><strong>Specification Version:</strong> The version of the BTCADP specification used.</p>
+  <p>This transparency record allows anyone to audit not just the final number but every input that contributed to it. It also enables detection of systematic changes in exchange qualification over time, and ensures that the exchange evaluation list can grow through public feedback without requiring changes to the specification itself.</p>
+
+  <!-- SECTION 10 -->
+  <h2 id="s10">10. Specification Versioning</h2>
+  <p>This document is version 1.0 of the BTCADP specification. Future versions may adjust parameters (trim percentage, minimum trade count, time coverage threshold, spread threshold) based on empirical analysis, or may introduce enhancements such as additional currency pairs.</p>
+  <p>Any changes to the specification will be versioned and documented. Retroactive recalculation using a new version is permitted and encouraged, but previously published values under prior versions remain valid under their respective versions. Both the value and the specification version under which it was computed should always be cited together.</p>
+  <p>The goal is that version changes are rare and justified by significant changes in the data landscape, not by editorial preference.</p>
+
+  <!-- SECTION 11 -->
+  <h2 id="s11">11. Reference Implementation</h2>
+  <p>A reference implementation in Python (or equivalent open-source language) should accompany this specification. The reference implementation serves two purposes: it resolves any ambiguity in the written specification by providing an executable definition, and it allows independent parties to compute BTCADP values directly.</p>
+  <p>The pseudocode for the core calculation is as follows:</p>
+
+  <div class="pseudocode"><span class="keyword">function</span> BTCADP(date):
+    exchange_vwaps = []
+    <span class="keyword">for each</span> exchange <span class="keyword">in</span> evaluated_exchanges:
+
+        <span class="comment"># --- Filter 1: Data Availability ---</span>
+        trades = fetch_trades(exchange, date, 'BTC/USD')
+        <span class="keyword">if</span> trades is unavailable: skip
+
+        <span class="comment"># --- Filter 2: Minimum Trade Count ---</span>
+        <span class="keyword">if</span> count(trades) &lt; 1000: skip
+
+        <span class="comment"># --- Filter 3: Minimum Time Coverage ---</span>
+        hours_active = count(distinct_utc_hours(trades))
+        <span class="keyword">if</span> hours_active &lt; 16: skip
+
+        <span class="comment"># --- Filter 4: Spread Threshold (where available) ---</span>
+        <span class="keyword">if</span> orderbook_data_available(exchange, date):
+            <span class="keyword">if</span> avg_spread(exchange, date) &gt; 0.01: skip
+
+        <span class="comment"># --- Compute exchange VWAP ---</span>
+        vwap = sum(p * v <span class="keyword">for</span> p, v <span class="keyword">in</span> trades) / sum(v <span class="keyword">for</span> _, v <span class="keyword">in</span> trades)
+        add (exchange, vwap) to exchange_vwaps
+
+    <span class="comment"># --- Filter 5: Price Coherence (iterative, max 5 passes) ---</span>
+    <span class="keyword">for</span> iteration <span class="keyword">in</span> 1 to 5:
+        median_vwap = median(vwap <span class="keyword">for</span> _, vwap <span class="keyword">in</span> exchange_vwaps)
+        prev_count = count(exchange_vwaps)
+        remove any (ex, vwap) <span class="keyword">where</span> |vwap - median_vwap| / median_vwap &gt; 0.05
+        <span class="keyword">if</span> count(exchange_vwaps) == prev_count: break  <span class="comment"># stable</span>
+
+    <span class="comment"># --- Compute BTCADP based on remaining count ---</span>
+    n = count(exchange_vwaps)
+    vwaps = [vwap <span class="keyword">for</span> _, vwap <span class="keyword">in</span> exchange_vwaps]
+
+    <span class="keyword">if</span> n == 0: <span class="keyword">return</span> UNDEFINED
+    <span class="keyword">if</span> n &lt;= 2: <span class="keyword">return</span> round(mean(vwaps), 2)
+    <span class="keyword">if</span> n &lt;= 4: <span class="keyword">return</span> round(median(vwaps), 2)
+
+    <span class="comment"># --- Trimmed mean (k = 25%) ---</span>
+    sorted_vwaps = sort(vwaps)
+    trim_count = floor(n * 0.25)
+    trimmed = sorted_vwaps[trim_count : n - trim_count]
+    <span class="keyword">return</span> round(mean(trimmed), 2)</div>
+
+  <p>Two independent implementations of this pseudocode, given identical trade data as input, must produce BTCADP values that agree after rounding to two decimal places. If they do not, the specification contains an ambiguity that must be resolved.</p>
+
+  <!-- SECTION 12 -->
+  <h2 id="s12">12. Conclusion</h2>
+  <p>The BTCADP is designed to be the simplest number that can honestly and fairly answer the question of what Bitcoin was worth on any given day. It makes no claim to perfection in the early years of Bitcoin&rsquo;s history, where data is sparse and unreliable. It makes a strong claim to accuracy and robustness from 2018 onward, where the methodology can be fully applied.</p>
+  <p>The strength of the BTCADP lies not in the authority of its publisher but in the transparency of its methodology. Anyone can verify it. Anyone can reproduce it. Trust comes from the math, not an individual publisher or institution.</p>
+
+  <div class="section-end">End of Specification &bull; BTCADP v1.0</div>
+
+</div>
+
+<script>
+let lightMode = false;
+
+function toggleTheme() {
+  lightMode = !lightMode;
+  const btn = document.querySelector('.tool-btn:not(.primary)');
+
+  if (lightMode) {
+    document.documentElement.style.setProperty('--bg-primary', '#faf9f7');
+    document.documentElement.style.setProperty('--bg-secondary', '#f0efec');
+    document.documentElement.style.setProperty('--bg-tertiary', '#e8e7e3');
+    document.documentElement.style.setProperty('--border', '#d4d3cf');
+    document.documentElement.style.setProperty('--text-primary', '#1a1a1a');
+    document.documentElement.style.setProperty('--text-secondary', '#555550');
+    document.documentElement.style.setProperty('--text-muted', '#888883');
+    btn.innerHTML = '&#x263D; Dark Mode';
+  } else {
+    document.documentElement.style.setProperty('--bg-primary', '#0a0a0b');
+    document.documentElement.style.setProperty('--bg-secondary', '#111114');
+    document.documentElement.style.setProperty('--bg-tertiary', '#19191e');
+    document.documentElement.style.setProperty('--border', '#2a2a32');
+    document.documentElement.style.setProperty('--text-primary', '#e8e6e3');
+    document.documentElement.style.setProperty('--text-secondary', '#8a8a95');
+    document.documentElement.style.setProperty('--text-muted', '#555560');
+    btn.innerHTML = '&#x263C; Light Mode';
+  }
+}
+</script>
+</body>
+</html>
+

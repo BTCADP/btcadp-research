@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BTCADP Live — Bitcoin Average Daily Price</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary: #0a0a0b;
+    --bg-secondary: #111114;
+    --bg-tertiary: #19191e;
+    --bg-hover: #222228;
+    --border: #2a2a32;
+    --text-primary: #e8e6e3;
+    --text-secondary: #8a8a95;
+    --text-muted: #555560;
+    --orange: #f7931a;
+    --orange-dim: rgba(247, 147, 26, 0.15);
+    --green: #2ecc71;
+    --red: #e74c3c;
+    --font-display: 'Source Serif 4', Georgia, serif;
+    --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(247,147,26,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(247,147,26,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Toolbar */
+  .toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10,10,11,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 0;
+  }
+
+  .toolbar-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .toolbar a {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: color 0.2s;
+  }
+
+  .toolbar a:hover { color: var(--orange); }
+
+  .toolbar-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--text-muted);
+  }
+
+  .status-dot.connected {
+    background: var(--green);
+    box-shadow: 0 0 6px rgba(46,204,113,0.6);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+
+  /* Header */
+  header {
+    padding: 48px 0 32px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+
+  h1 .accent { color: var(--orange); }
+
+  .subtitle {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-top: 8px;
+    max-width: 640px;
+  }
+
+  /* Indicative price */
+  .indicative-section {
+    padding: 40px 0;
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+  }
+
+  .indicative-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+  }
+
+  .indicative-price {
+    font-family: var(--font-display);
+    font-size: 72px;
+    font-weight: 700;
+    color: var(--orange);
+    transition: all 0.3s;
+  }
+
+  .indicative-method {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 12px;
+  }
+
+  .indicative-method .method-name {
+    color: var(--text-secondary);
+  }
+
+  .indicative-note {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-top: 8px;
+  }
+
+  /* Exchange grid */
+  .exchanges-section {
+    padding: 32px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  .exchange-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+  }
+
+  .exchange-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    transition: border-color 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .exchange-card.connected { border-color: rgba(46,204,113,0.3); }
+  .exchange-card.updated { border-color: var(--orange); }
+  .exchange-card.disconnected { opacity: 0.5; }
+
+  .exchange-card .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .exchange-card .ex-name {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    font-weight: 600;
+  }
+
+  .exchange-card .ex-status {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--text-muted);
+  }
+
+  .exchange-card .ex-status.on { background: var(--green); }
+
+  .exchange-card .ex-price {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+  }
+
+  .exchange-card .ex-meta {
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  .exchange-card .ex-trades {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+
+  .exchange-card .ex-deviation {
+    font-size: 11px;
+    margin-top: 8px;
+    padding: 3px 8px;
+    border-radius: 3px;
+    display: inline-block;
+  }
+
+  .ex-deviation.within { background: rgba(46,204,113,0.1); color: var(--green); }
+  .ex-deviation.outside { background: rgba(231,76,60,0.1); color: var(--red); }
+
+  /* Methodology */
+  .method-section {
+    padding: 32px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .method-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .method-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+  }
+
+  .method-card h3 {
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 8px;
+  }
+
+  .method-card p {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  /* Computation log */
+  .log-section {
+    padding: 32px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .log-box {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    max-height: 300px;
+    overflow-y: auto;
+    font-size: 12px;
+    line-height: 1.8;
+  }
+
+  .log-entry {
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border);
+    padding: 4px 0;
+  }
+
+  .log-entry .log-time { color: var(--text-muted); }
+  .log-entry .log-exchange { color: var(--orange); }
+  .log-entry .log-price { color: var(--text-primary); font-weight: 600; }
+  .log-entry .log-result { color: var(--green); }
+
+  /* Footer */
+  footer {
+    padding: 32px 0;
+    text-align: center;
+  }
+
+  footer p { font-size: 12px; color: var(--text-muted); line-height: 1.8; }
+  footer a { color: var(--orange); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 768px) {
+    .indicative-price { font-size: 42px; }
+    .exchange-card .ex-price { font-size: 22px; }
+    h1 { font-size: 28px; }
+  }
+</style>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">`n</head>
+<body>
+
+<div class="toolbar">
+  <div class="toolbar-inner">
+    <a href="/index.html">&larr; BTCADP Data Explorer</a>
+    <div style="display:flex;align-items:center;gap:16px;">
+      <a href="/index.html" style="color:var(--orange);font-family:var(--font-mono);font-size:12px;text-decoration:none;">Home</a>
+      <div class="toolbar-status">
+        <span class="status-dot" id="globalDot"></span>
+        <span id="connectionStatus">Connecting...</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <header>
+    <div class="header-label">Live Feed &bull; Indicative Pricing</div>
+    <h1><span class="accent">BTCADP</span> Live</h1>
+    <p class="subtitle">Real-time indicative Bitcoin price computed from multiple exchange feeds using the BTCADP trimmed mean methodology. This is not the official daily BTCADP — that is computed once per day at 00:00 UTC from a full 24-hour data set.</p>
+  </header>
+
+  <section class="indicative-section">
+    <div class="indicative-label">Indicative BTCADP</div>
+    <div class="indicative-price" id="indicativePrice">—</div>
+    <div class="indicative-method">
+      Method: <span class="method-name" id="methodName">Waiting for data...</span>
+    </div>
+    <div class="indicative-note">Updates in real-time from live exchange WebSocket feeds</div>
+  </section>
+
+  <section class="exchanges-section">
+    <h2 class="section-title">Exchange Feeds</h2>
+    <div class="exchange-grid" id="exchangeGrid">
+      <div class="exchange-card" id="card-Coinbase">
+        <div class="card-header"><span class="ex-name">Coinbase</span><span class="ex-status" id="status-Coinbase"></span></div>
+        <div class="ex-price" id="price-Coinbase">—</div>
+        <div class="ex-meta" id="meta-Coinbase">Connecting...</div>
+        <div class="ex-trades" id="trades-Coinbase"></div>
+      </div>
+      <div class="exchange-card" id="card-Kraken">
+        <div class="card-header"><span class="ex-name">Kraken</span><span class="ex-status" id="status-Kraken"></span></div>
+        <div class="ex-price" id="price-Kraken">—</div>
+        <div class="ex-meta" id="meta-Kraken">Connecting...</div>
+        <div class="ex-trades" id="trades-Kraken"></div>
+      </div>
+      <div class="exchange-card" id="card-Bitstamp">
+        <div class="card-header"><span class="ex-name">Bitstamp</span><span class="ex-status" id="status-Bitstamp"></span></div>
+        <div class="ex-price" id="price-Bitstamp">—</div>
+        <div class="ex-meta" id="meta-Bitstamp">Connecting...</div>
+        <div class="ex-trades" id="trades-Bitstamp"></div>
+      </div>
+      <div class="exchange-card" id="card-Bitfinex">
+        <div class="card-header"><span class="ex-name">Bitfinex</span><span class="ex-status" id="status-Bitfinex"></span></div>
+        <div class="ex-price" id="price-Bitfinex">—</div>
+        <div class="ex-meta" id="meta-Bitfinex">Connecting...</div>
+        <div class="ex-trades" id="trades-Bitfinex"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="method-section">
+    <h2 class="section-title">How This Works</h2>
+    <div class="method-grid">
+      <div class="method-card">
+        <h3>Live Feeds</h3>
+        <p>Your browser connects directly to exchange WebSocket APIs. No intermediary server processes the data — you see exactly what each exchange reports in real-time.</p>
+      </div>
+      <div class="method-card">
+        <h3>Computation</h3>
+        <p>The indicative price uses the same aggregation logic as the daily BTCADP: with 5+ feeds, a 25% trimmed mean; with 3–4, the median; with 2, the simple mean. All math runs in your browser.</p>
+      </div>
+      <div class="method-card">
+        <h3>Limitations</h3>
+        <p>This shows only 4 exchanges (vs 15–40 in the daily calculation), uses last-trade price (not VWAP), and cannot apply trade count or time coverage filters in real-time. It is indicative only.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="log-section">
+    <h2 class="section-title">Live Computation Log</h2>
+    <div class="log-box" id="logBox"></div>
+  </section>
+
+  <footer>
+    <p><a href="/index.html">Home</a> &bull; <a href="/specification.html">Specification</a> &bull; <a href="/days/index.html">Daily Records</a></p>
+    <p style="margin-top:8px;">The BTCADP belongs to no one and benefits everyone.</p>
+  </footer>
+
+</div>
+
+<script>
+const exchangeData = {};
+const tradeCounts = {};
+let connectedCount = 0;
+
+function fmt(price) {
+  return '$' + price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function timeStr() {
+  return new Date().toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
+}
+
+function addLog(msg) {
+  const box = document.getElementById('logBox');
+  const entry = document.createElement('div');
+  entry.className = 'log-entry';
+  entry.innerHTML = `<span class="log-time">${timeStr()}</span> ${msg}`;
+  box.insertBefore(entry, box.firstChild);
+  // Keep log manageable
+  while (box.children.length > 100) box.removeChild(box.lastChild);
+}
+
+function updateExchangeCard(name, price) {
+  exchangeData[name] = price;
+  tradeCounts[name] = (tradeCounts[name] || 0) + 1;
+
+  document.getElementById('price-' + name).textContent = fmt(price);
+  document.getElementById('meta-' + name).textContent = 'Last update: ' + timeStr();
+  document.getElementById('trades-' + name).textContent = 'Updates received: ' + tradeCounts[name];
+
+  // Flash
+  const card = document.getElementById('card-' + name);
+  card.classList.add('updated');
+  setTimeout(() => card.classList.remove('updated'), 400);
+
+  computeIndicative();
+}
+
+function setExchangeConnected(name, connected) {
+  const status = document.getElementById('status-' + name);
+  const card = document.getElementById('card-' + name);
+  if (connected) {
+    status.classList.add('on');
+    card.classList.add('connected');
+    card.classList.remove('disconnected');
+    document.getElementById('meta-' + name).textContent = 'Connected — waiting for data...';
+    addLog(`<span class="log-exchange">${name}</span> connected`);
+  } else {
+    status.classList.remove('on');
+    card.classList.remove('connected');
+    card.classList.add('disconnected');
+    document.getElementById('meta-' + name).textContent = 'Disconnected — reconnecting...';
+    addLog(`<span class="log-exchange">${name}</span> disconnected`);
+  }
+  updateGlobalStatus();
+}
+
+function updateGlobalStatus() {
+  const connected = document.querySelectorAll('.ex-status.on').length;
+  const dot = document.getElementById('globalDot');
+  const label = document.getElementById('connectionStatus');
+  if (connected > 0) {
+    dot.classList.add('connected');
+    label.textContent = connected + '/4 exchanges connected';
+  } else {
+    dot.classList.remove('connected');
+    label.textContent = 'Connecting...';
+  }
+}
+
+function computeIndicative() {
+  const prices = Object.entries(exchangeData).filter(([_, v]) => v > 0);
+  if (prices.length === 0) return;
+
+  const vals = prices.map(([_, p]) => p).sort((a, b) => a - b);
+  const n = vals.length;
+  let indicative, method;
+
+  if (n >= 5) {
+    const trim = Math.floor(n * 0.25);
+    const trimmed = vals.slice(trim, n - trim);
+    indicative = trimmed.reduce((a, b) => a + b, 0) / trimmed.length;
+    method = `25% Trimmed Mean of ${n} exchanges (${n - trim * 2} used)`;
+  } else if (n >= 3) {
+    indicative = vals[Math.floor(n / 2)];
+    method = `Median of ${n} exchanges`;
+  } else {
+    indicative = vals.reduce((a, b) => a + b, 0) / n;
+    method = `Mean of ${n} exchanges`;
+  }
+
+  document.getElementById('indicativePrice').textContent = fmt(indicative);
+  document.getElementById('methodName').textContent = method;
+
+  // Add deviations to cards
+  prices.forEach(([name, price]) => {
+    const pct = ((price - indicative) / indicative * 100);
+    const sign = pct >= 0 ? '+' : '';
+    let existing = document.getElementById('dev-' + name);
+    if (!existing) {
+      existing = document.createElement('div');
+      existing.id = 'dev-' + name;
+      document.getElementById('card-' + name).appendChild(existing);
+    }
+    const within = Math.abs(pct) < 5;
+    existing.className = 'ex-deviation ' + (within ? 'within' : 'outside');
+    existing.textContent = sign + pct.toFixed(3) + '% from indicative';
+  });
+
+  addLog(`Computed: <span class="log-result">${fmt(indicative)}</span> (${method})`);
+}
+
+// === EXCHANGE CONNECTIONS ===
+
+function connectCoinbase() {
+  try {
+    const ws = new WebSocket('wss://ws-feed.exchange.coinbase.com');
+    ws.onopen = () => {
+      ws.send(JSON.stringify({ type: 'subscribe', product_ids: ['BTC-USD'], channels: ['ticker'] }));
+      setExchangeConnected('Coinbase', true);
+    };
+    ws.onmessage = (e) => {
+      const data = JSON.parse(e.data);
+      if (data.type === 'ticker' && data.price) {
+        const price = parseFloat(data.price);
+        updateExchangeCard('Coinbase', price);
+        addLog(`<span class="log-exchange">Coinbase</span> trade: <span class="log-price">${fmt(price)}</span>`);
+      }
+    };
+    ws.onclose = () => { setExchangeConnected('Coinbase', false); setTimeout(connectCoinbase, 5000); };
+    ws.onerror = () => ws.close();
+  } catch (e) { setTimeout(connectCoinbase, 5000); }
+}
+
+function connectKraken() {
+  try {
+    const ws = new WebSocket('wss://ws.kraken.com');
+    ws.onopen = () => {
+      ws.send(JSON.stringify({ event: 'subscribe', pair: ['XBT/USD'], subscription: { name: 'ticker' } }));
+      setExchangeConnected('Kraken', true);
+    };
+    ws.onmessage = (e) => {
+      const data = JSON.parse(e.data);
+      if (Array.isArray(data) && data[2] === 'ticker') {
+        const price = parseFloat(data[1].c[0]);
+        if (price > 0) {
+          updateExchangeCard('Kraken', price);
+          addLog(`<span class="log-exchange">Kraken</span> trade: <span class="log-price">${fmt(price)}</span>`);
+        }
+      }
+    };
+    ws.onclose = () => { setExchangeConnected('Kraken', false); setTimeout(connectKraken, 5000); };
+    ws.onerror = () => ws.close();
+  } catch (e) { setTimeout(connectKraken, 5000); }
+}
+
+function connectBitstamp() {
+  try {
+    const ws = new WebSocket('wss://ws.bitstamp.net');
+    ws.onopen = () => {
+      ws.send(JSON.stringify({ event: 'bts:subscribe', data: { channel: 'live_trades_btcusd' } }));
+      setExchangeConnected('Bitstamp', true);
+    };
+    ws.onmessage = (e) => {
+      const data = JSON.parse(e.data);
+      if (data.event === 'trade' && data.data && data.data.price) {
+        const price = parseFloat(data.data.price);
+        updateExchangeCard('Bitstamp', price);
+        addLog(`<span class="log-exchange">Bitstamp</span> trade: <span class="log-price">${fmt(price)}</span>`);
+      }
+    };
+    ws.onclose = () => { setExchangeConnected('Bitstamp', false); setTimeout(connectBitstamp, 5000); };
+    ws.onerror = () => ws.close();
+  } catch (e) { setTimeout(connectBitstamp, 5000); }
+}
+
+function connectBitfinex() {
+  try {
+    const ws = new WebSocket('wss://api-pub.bitfinex.com/ws/2');
+    let chanId = null;
+    ws.onopen = () => {
+      ws.send(JSON.stringify({ event: 'subscribe', channel: 'ticker', symbol: 'tBTCUSD' }));
+      setExchangeConnected('Bitfinex', true);
+    };
+    ws.onmessage = (e) => {
+      const data = JSON.parse(e.data);
+      if (data.event === 'subscribed') { chanId = data.chanId; return; }
+      if (Array.isArray(data) && data[0] === chanId && Array.isArray(data[1]) && data[1].length > 6) {
+        const price = parseFloat(data[1][6]);
+        if (price > 0) {
+          updateExchangeCard('Bitfinex', price);
+          addLog(`<span class="log-exchange">Bitfinex</span> ticker: <span class="log-price">${fmt(price)}</span>`);
+        }
+      }
+    };
+    ws.onclose = () => { setExchangeConnected('Bitfinex', false); setTimeout(connectBitfinex, 5000); };
+    ws.onerror = () => ws.close();
+  } catch (e) { setTimeout(connectBitfinex, 5000); }
+}
+
+// Start
+addLog('Initializing BTCADP Live...');
+connectCoinbase();
+connectKraken();
+connectBitstamp();
+connectBitfinex();
+</script>
+</body>
+</html>
+

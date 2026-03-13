@@ -92,8 +92,8 @@ def generate_page(row, prev_date, next_date, prev_price, day_number):
         price_display = f"${price:,.2f}"
 
     # Prev/next links
-    prev_link = f'<a href="{prev_date}.html" class="nav-link">&larr; {prev_date}</a>' if prev_date else '<span class="nav-link disabled">&larr; Start of record</span>'
-    next_link = f'<a href="{next_date}.html" class="nav-link">{next_date} &rarr;</a>' if next_date else '<span class="nav-link disabled">Latest &rarr;</span>'
+    prev_link = f'<a href="/days/{prev_date}.html" class="nav-link">&larr; {prev_date}</a>' if prev_date else '<span class="nav-link disabled">&larr; Start of record</span>'
+    next_link = f'<a href="/days/{next_date}.html" class="nav-link">{next_date} &rarr;</a>' if next_date else '<span class="nav-link disabled">Latest &rarr;</span>'
 
     return f'''<!DOCTYPE html>
 <html lang="en">
@@ -494,9 +494,11 @@ def generate_page(row, prev_date, next_date, prev_price, day_number):
 
 <div class="toolbar">
   <div class="toolbar-inner">
-    <a href="../index.html">&larr; BTCADP Data Explorer</a>
+    <a href="/index.html">&larr; BTCADP Data Explorer</a>
     <div class="day-nav">
       {prev_link}
+      <span class="nav-divider">|</span>
+      <a href="/index.html" style="color:var(--orange);text-decoration:none;">Home</a>
       <span class="nav-divider">|</span>
       {next_link}
     </div>
@@ -509,7 +511,7 @@ def generate_page(row, prev_date, next_date, prev_price, day_number):
     <div class="day-label">BTCADP &bull; Daily Record</div>
     <div class="day-date">{date_display}</div>
     <div class="day-weekday">{day_of_week}</div>
-    <div class="day-number">Day {day_number:,} of Bitcoin &bull; <a href="../specification.html" style="color:var(--orange);text-decoration:none;">Specification v{spec_version}</a></div>
+    <div class="day-number">Day {day_number:,} of Bitcoin &bull; <a href="/specification.html" style="color:var(--orange);text-decoration:none;">Specification v{spec_version}</a></div>
   </div>
 
   <div class="price-section">
@@ -558,7 +560,7 @@ def generate_page(row, prev_date, next_date, prev_price, day_number):
     <p style="color:var(--text-secondary);font-size:14px;margin-bottom:16px;max-width:640px;">
       To propose a refined BTCADP value for this date, submit the following information to
       <a href="mailto:spec@btcadp.org" style="color:var(--orange);">spec@btcadp.org</a>.
-      All submissions must be reproducible per <a href="../specification.html#s7" style="color:var(--orange);">Section 7</a> of the specification.
+      All submissions must be reproducible per <a href="/specification.html#s7" style="color:var(--orange);">Section 7</a> of the specification.
     </p>
     <div class="format-block">
       <button class="copy-btn" onclick="copyTemplate()">Copy template</button>
@@ -604,7 +606,7 @@ def generate_page(row, prev_date, next_date, prev_price, day_number):
   </div>
 
   <footer>
-    <p>BTCADP Specification v1.0 &bull; <a href="../specification.html">Read the Specification</a> &bull; <a href="../index.html">Data Explorer</a></p>
+    <p><a href="/index.html">Home</a> &bull; <a href="/specification.html">Specification</a> &bull; <a href="/live.html">Live</a> &bull; <a href="/days/index.html">Daily Records</a></p>
     <p style="margin-top:8px;">The BTCADP belongs to no one and benefits everyone.</p>
   </footer>
 
@@ -771,7 +773,7 @@ def main():
 </head>
 <body>
 <div class="container">
-  <a href="../index.html" class="back">&larr; BTCADP Data Explorer</a>
+  <a href="/index.html" class="back">&larr; BTCADP Data Explorer</a>
   <h1><span class="accent">BTCADP</span> Daily Records</h1>
   <p class="subtitle">Every day in Bitcoin's history. Select a year to browse individual daily records.</p>
   <div class="year-grid">

@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BTCADP — Daily Records</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary: #0a0a0b;
+    --bg-secondary: #111114;
+    --bg-tertiary: #19191e;
+    --bg-hover: #222228;
+    --border: #2a2a32;
+    --text-primary: #e8e6e3;
+    --text-secondary: #8a8a95;
+    --text-muted: #555560;
+    --orange: #f7931a;
+    --orange-dim: rgba(247, 147, 26, 0.15);
+    --green: #2ecc71;
+    --red: #e74c3c;
+    --era0: #555560;
+    --era1: #e74c3c;
+    --era2: #f1c40f;
+    --era3: #2ecc71;
+    --font-display: 'Source Serif 4', Georgia, serif;
+    --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(247,147,26,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(247,147,26,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10,10,11,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 0;
+  }
+
+  .toolbar-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .toolbar a {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: color 0.2s;
+  }
+
+  .toolbar a:hover { color: var(--orange); }
+
+  header {
+    padding: 48px 0 32px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 8px;
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-size: 36px;
+    font-weight: 700;
+  }
+
+  h1 .accent { color: var(--orange); }
+
+  .subtitle { font-size: 14px; color: var(--text-secondary); margin-top: 8px; }
+
+  /* Search */
+  .search-section {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .search-row {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .date-input {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    padding: 10px 16px;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    border-radius: 6px;
+    width: 200px;
+    transition: border-color 0.2s;
+    color-scheme: dark;
+  }
+
+  .date-input:focus { outline: none; border-color: var(--orange); }
+
+  .go-btn {
+    background: var(--orange);
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 0.2s;
+  }
+
+  .go-btn:hover { background: #ffa940; }
+
+  .search-hint { font-size: 12px; color: var(--text-muted); }
+
+  /* Slider */
+  .slider-section {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .slider-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+  }
+
+  .slider-display {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .slider-date {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  .slider-price {
+    font-size: 18px;
+    color: var(--orange);
+    font-weight: 600;
+  }
+
+  .slider-era {
+    font-size: 12px;
+    padding: 2px 10px;
+    border-radius: 3px;
+    border: 1px solid;
+  }
+
+  input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 6px;
+    background: var(--bg-tertiary);
+    border-radius: 3px;
+    outline: none;
+    border: 1px solid var(--border);
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: var(--orange);
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid var(--bg-primary);
+    box-shadow: 0 0 8px rgba(247,147,26,0.4);
+  }
+
+  input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: var(--orange);
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid var(--bg-primary);
+    box-shadow: 0 0 8px rgba(247,147,26,0.4);
+  }
+
+  .slider-endpoints {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 6px;
+  }
+
+  .slider-go {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    padding: 8px 18px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-top: 12px;
+    transition: all 0.2s;
+  }
+
+  .slider-go:hover { border-color: var(--orange); color: var(--orange); }
+
+  /* Year grid */
+  .years-section {
+    padding: 32px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  .year-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 10px;
+  }
+
+  .year-btn {
+    padding: 16px 8px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+  }
+
+  .year-btn:hover { border-color: var(--orange); }
+  .year-btn.active { border-color: var(--orange); background: var(--orange-dim); }
+
+  .year-btn .yr {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .year-btn .cnt { font-size: 10px; color: var(--text-muted); }
+
+  /* Calendar */
+  .calendar-section {
+    padding: 32px 0;
+    border-bottom: 1px solid var(--border);
+    display: none;
+  }
+
+  .calendar-section.visible { display: block; }
+
+  .calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .calendar-nav {
+    display: flex;
+    gap: 8px;
+  }
+
+  .cal-nav-btn {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    padding: 6px 14px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .cal-nav-btn:hover { border-color: var(--orange); color: var(--orange); }
+  .cal-nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+  .month-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .month-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+  }
+
+  .month-name {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+    text-align: center;
+  }
+
+  .dow-row {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+    margin-bottom: 4px;
+  }
+
+  .dow-cell {
+    text-align: center;
+    font-size: 10px;
+    color: var(--text-muted);
+    padding: 4px 0;
+    letter-spacing: 1px;
+  }
+
+  .days-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+  }
+
+  .day-cell {
+    text-align: center;
+    padding: 6px 2px;
+    font-size: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.15s;
+    position: relative;
+  }
+
+  .day-cell:hover { background: var(--bg-hover); }
+  .day-cell.empty { cursor: default; }
+  .day-cell.empty:hover { background: none; }
+  .day-cell.has-data { color: var(--text-primary); }
+  .day-cell.no-data { color: var(--text-muted); cursor: default; }
+  .day-cell.no-data:hover { background: none; }
+
+  .day-cell.era0 { border-bottom: 2px solid var(--era0); }
+  .day-cell.era1 { border-bottom: 2px solid var(--era1); }
+  .day-cell.era2 { border-bottom: 2px solid var(--era2); }
+  .day-cell.era3 { border-bottom: 2px solid var(--era3); }
+
+  .day-cell:hover .day-tooltip { display: block; }
+
+  .day-tooltip {
+    display: none;
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 6px 10px;
+    font-size: 11px;
+    white-space: nowrap;
+    z-index: 10;
+    color: var(--orange);
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  }
+
+  .era-legend {
+    display: flex;
+    gap: 16px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+
+  .era-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  .era-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+  footer {
+    padding: 32px 0;
+    text-align: center;
+  }
+
+  footer p { font-size: 12px; color: var(--text-muted); line-height: 1.8; }
+  footer a { color: var(--orange); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 768px) {
+    h1 { font-size: 28px; }
+    .month-grid { grid-template-columns: 1fr; }
+    .date-input { width: 160px; }
+    .slider-date { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="toolbar-inner">
+    <a href="/index.html">&larr; BTCADP Data Explorer</a>
+    <a href="/index.html" style="color:var(--orange);">Home</a>
+  </div>
+</div>
+
+<div class="container">
+
+  <header>
+    <div class="header-label">Daily Records</div>
+    <h1><span class="accent">BTCADP</span> Daily Records</h1>
+    <p class="subtitle">Every day in Bitcoin's history. Search, browse, or scrub through time.</p>
+  </header>
+
+  <section class="search-section">
+    <div class="search-row">
+      <input type="date" class="date-input" id="dateSearch" min="2009-01-03" value="">
+      <button class="go-btn" onclick="goToDate()">Go to date</button>
+      <span class="search-hint">Jump directly to any day</span>
+    </div>
+  </section>
+
+  <section class="slider-section">
+    <div class="slider-label">Timeline</div>
+    <div class="slider-display">
+      <span class="slider-date" id="sliderDate">January 3, 2009</span>
+      <span>
+        <span class="slider-price" id="sliderPrice">$0.00</span>
+        <span class="slider-era" id="sliderEra" style="margin-left:8px;">Era 0</span>
+      </span>
+    </div>
+    <input type="range" id="timelineSlider" min="0" max="100" value="0">
+    <div class="slider-endpoints">
+      <span>Jan 3, 2009 (Day 1)</span>
+      <span id="sliderEndLabel">Loading...</span>
+    </div>
+    <button class="slider-go" onclick="goToSliderDate()">View this day &rarr;</button>
+  </section>
+
+  <section class="years-section">
+    <h2 class="section-title">Browse by Year</h2>
+    <div class="year-grid" id="yearGrid"></div>
+  </section>
+
+  <section class="calendar-section" id="calendarSection">
+    <div class="calendar-header">
+      <h2 class="section-title" id="calendarTitle">2009</h2>
+      <div class="calendar-nav">
+        <button class="cal-nav-btn" id="prevYear" onclick="changeYear(-1)">&larr; Prev Year</button>
+        <button class="cal-nav-btn" id="nextYear" onclick="changeYear(1)">Next Year &rarr;</button>
+      </div>
+    </div>
+    <div class="month-grid" id="monthGrid"></div>
+    <div class="era-legend">
+      <div class="era-item"><div class="era-dot" style="background:var(--era0)"></div> Era 0: Genesis</div>
+      <div class="era-item"><div class="era-dot" style="background:var(--era1)"></div> Era 1: Mt. Gox</div>
+      <div class="era-item"><div class="era-dot" style="background:var(--era2)"></div> Era 2: Transition</div>
+      <div class="era-item"><div class="era-dot" style="background:var(--era3)"></div> Era 3: Maturity</div>
+    </div>
+  </section>
+
+  <footer>
+    <p><a href="/index.html">Home</a> &bull; <a href="/live.html">Live</a> &bull; <a href="/specification.html">Specification</a> &bull; <a href="/days/index.html">Daily Records</a></p>
+    <p style="margin-top:8px;">The BTCADP belongs to no one and benefits everyone.</p>
+  </footer>
+
+</div>
+
+<script>
+let allData = [];
+let dataByDate = {};
+let currentYear = null;
+let sliderDateStr = '';
+
+async function loadData() {
+  try {
+    const resp = await fetch('/btcadp_historical.csv');
+    const text = await resp.text();
+    const lines = text.trim().split('\n');
+    const headers = lines[0].split(',').map(h => h.trim());
+
+    for (let i = 1; i < lines.length; i++) {
+      const vals = lines[i].split(',');
+      if (vals.length < headers.length) continue;
+      const row = {};
+      headers.forEach((h, idx) => { row[h] = vals[idx] ? vals[idx].trim() : ''; });
+      row.price_num = parseFloat(row.btcadp_usd) || 0;
+      allData.push(row);
+      dataByDate[row.date] = row;
+    }
+
+    allData.sort((a, b) => a.date.localeCompare(b.date));
+    initSlider();
+    buildYearGrid();
+  } catch (e) {
+    console.error('Failed to load CSV:', e);
+  }
+}
+
+// Date search
+function goToDate() {
+  const input = document.getElementById('dateSearch').value;
+  if (input && dataByDate[input]) {
+    window.location.href = '/days/' + input + '.html';
+  } else if (input) {
+    alert('No BTCADP data for ' + input);
+  }
+}
+
+document.getElementById('dateSearch').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') goToDate();
+});
+
+// Slider
+function initSlider() {
+  const slider = document.getElementById('timelineSlider');
+  slider.max = allData.length - 1;
+  const last = allData[allData.length - 1];
+  document.getElementById('sliderEndLabel').textContent =
+    last.date + ' (Day ' + last.day + ')';
+  slider.addEventListener('input', updateSlider);
+  updateSlider();
+}
+
+function updateSlider() {
+  const idx = parseInt(document.getElementById('timelineSlider').value);
+  const row = allData[idx];
+  if (!row) return;
+
+  sliderDateStr = row.date;
+  const dt = new Date(row.date + 'T00:00:00');
+  const dateDisplay = dt.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+  document.getElementById('sliderDate').textContent = dateDisplay + ' (Day ' + row.day + ')';
+
+  const price = row.price_num;
+  document.getElementById('sliderPrice').textContent =
+    price === 0 ? '$0.00' : '$' + price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+  const eraColors = { '0': 'var(--era0)', '1': 'var(--era1)', '2': 'var(--era2)', '3': 'var(--era3)' };
+  const eraNames = { '0': 'Era 0', '1': 'Era 1', '2': 'Era 2', '3': 'Era 3' };
+  const el = document.getElementById('sliderEra');
+  el.textContent = eraNames[row.era] || '';
+  el.style.borderColor = eraColors[row.era] || 'var(--border)';
+  el.style.color = eraColors[row.era] || 'var(--text-muted)';
+}
+
+function goToSliderDate() {
+  if (sliderDateStr) window.location.href = '/days/' + sliderDateStr + '.html';
+}
+
+// Year grid
+function buildYearGrid() {
+  const years = {};
+  allData.forEach(row => {
+    const yr = row.date.substring(0, 4);
+    if (!years[yr]) years[yr] = 0;
+    years[yr]++;
+  });
+
+  const grid = document.getElementById('yearGrid');
+  grid.innerHTML = Object.keys(years).sort().map(yr =>
+    `<div class="year-btn" onclick="showYear(${yr})">` +
+    `<span class="yr">${yr}</span>` +
+    `<span class="cnt">${years[yr]} days</span></div>`
+  ).join('');
+}
+
+// Calendar
+function showYear(year) {
+  currentYear = year;
+
+  document.querySelectorAll('.year-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.year-btn').forEach(b => {
+    if (b.querySelector('.yr').textContent == year) b.classList.add('active');
+  });
+
+  const section = document.getElementById('calendarSection');
+  section.classList.add('visible');
+  document.getElementById('calendarTitle').textContent = year;
+
+  const months = ['January','February','March','April','May','June',
+                   'July','August','September','October','November','December'];
+  const grid = document.getElementById('monthGrid');
+  let html = '';
+
+  for (let m = 0; m < 12; m++) {
+    const daysInMonth = new Date(year, m + 1, 0).getDate();
+    const firstDow = new Date(year, m, 1).getDay();
+
+    html += `<div class="month-card"><div class="month-name">${months[m]}</div>`;
+    html += `<div class="dow-row">`;
+    ['Su','Mo','Tu','We','Th','Fr','Sa'].forEach(d => {
+      html += `<div class="dow-cell">${d}</div>`;
+    });
+    html += `</div><div class="days-grid">`;
+
+    for (let e = 0; e < firstDow; e++) {
+      html += `<div class="day-cell empty"></div>`;
+    }
+
+    for (let d = 1; d <= daysInMonth; d++) {
+      const dateStr = year + '-' + String(m + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
+      const row = dataByDate[dateStr];
+
+      if (row) {
+        const eraClass = 'era' + row.era;
+        const price = row.price_num === 0 ? '$0.00' :
+          '$' + row.price_num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        html += `<div class="day-cell has-data ${eraClass}" onclick="window.location.href='/days/${dateStr}.html'">` +
+          `${d}<div class="day-tooltip">${price}</div></div>`;
+      } else {
+        html += `<div class="day-cell no-data">${d}</div>`;
+      }
+    }
+
+    html += `</div></div>`;
+  }
+
+  grid.innerHTML = html;
+  section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  const minYear = parseInt(allData[0].date.substring(0, 4));
+  const maxYear = parseInt(allData[allData.length - 1].date.substring(0, 4));
+  document.getElementById('prevYear').disabled = year <= minYear;
+  document.getElementById('nextYear').disabled = year >= maxYear;
+}
+
+function changeYear(delta) {
+  if (currentYear) showYear(currentYear + delta);
+}
+
+loadData();
+</script>
+</body>
+</html>

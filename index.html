@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BTCADP — Bitcoin Average Daily Price</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/date-fns@3.6.0/cdn.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary: #0a0a0b;
+    --bg-secondary: #111114;
+    --bg-tertiary: #19191e;
+    --bg-hover: #222228;
+    --border: #2a2a32;
+    --text-primary: #e8e6e3;
+    --text-secondary: #8a8a95;
+    --text-muted: #555560;
+    --orange: #f7931a;
+    --orange-dim: rgba(247, 147, 26, 0.15);
+    --orange-glow: rgba(247, 147, 26, 0.4);
+    --green: #2ecc71;
+    --yellow: #f1c40f;
+    --red: #e74c3c;
+    --blue: #3498db;
+    --era0: #555560;
+    --era1: #e74c3c;
+    --era2: #f1c40f;
+    --era3: #2ecc71;
+    --font-display: 'Source Serif 4', Georgia, serif;
+    --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* Subtle grid background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(247,147,26,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(247,147,26,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ===== HEADER ===== */
+  header {
+    padding: 60px 0 40px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 12px;
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-size: 48px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+
+  h1 .accent { color: var(--orange); }
+
+  .subtitle {
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  .header-meta {
+    display: flex;
+    gap: 24px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+  }
+
+  .meta-tag {
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text-secondary);
+    cursor: default;
+    user-select: none;
+    opacity: 0.7;
+  }
+
+  .meta-tag.provisional {
+    border-color: var(--orange);
+    color: var(--orange);
+    background: var(--orange-dim);
+  }
+
+  /* ===== CURRENT PRICE BANNER ===== */
+  .price-banner {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+
+  .price-banner .label {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+  }
+
+  .price-banner .price {
+    font-family: var(--font-display);
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--orange);
+  }
+
+  .price-banner .date {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .live-banner-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 8px;
+  }
+
+  .live-banner-top > div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .live-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--text-muted);
+    display: inline-block;
+  }
+
+  .live-dot.connected {
+    background: #2ecc71;
+    box-shadow: 0 0 6px rgba(46,204,113,0.6);
+    animation: pulse-dot 2s infinite;
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+
+  .live-detail-link {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .live-detail-link:hover { color: var(--orange); }
+
+  .live-exchanges {
+    display: flex;
+    gap: 16px;
+    margin: 12px 0;
+    flex-wrap: wrap;
+    font-size: 12px;
+    color: var(--text-secondary);
+  }
+
+  .exchange-price {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 6px 12px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    transition: border-color 0.3s;
+  }
+
+  .exchange-price.updated { border-color: var(--orange); }
+
+  .exchange-price .ex-name {
+    color: var(--text-muted);
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .exchange-price .ex-price {
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 13px;
+  }
+
+  .live-meta {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .live-note {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  /* ===== CHART SECTION ===== */
+  .chart-section {
+    padding: 32px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .chart-title {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 600;
+  }
+
+  .chart-controls {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .chart-btn {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    padding: 6px 14px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .chart-btn:hover { border-color: var(--text-muted); color: var(--text-primary); }
+  .chart-btn.active { border-color: var(--orange); color: var(--orange); background: var(--orange-dim); }
+
+  .chart-wrapper {
+    position: relative;
+    height: 420px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+  }
+
+  .scale-toggle {
+    display: flex;
+    gap: 6px;
+  }
+
+  /* ===== ERA LEGEND ===== */
+  .era-legend {
+    display: flex;
+    gap: 20px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+
+  .era-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--text-secondary);
+  }
+
+  .era-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  /* ===== DATA TABLE ===== */
+  .table-section {
+    padding: 32px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .table-title {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 600;
+  }
+
+  .table-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .search-input {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    padding: 8px 14px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    border-radius: 4px;
+    width: 180px;
+    transition: border-color 0.2s;
+  }
+
+  .search-input:focus { outline: none; border-color: var(--orange); }
+  .search-input::placeholder { color: var(--text-muted); }
+
+  .download-btn {
+    background: var(--orange);
+    color: #000;
+    border: none;
+    padding: 8px 18px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .download-btn:hover { background: #ffa940; }
+
+  .data-table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  thead { background: var(--bg-tertiary); }
+
+  th {
+    text-align: left;
+    padding: 12px 16px;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  th:hover { color: var(--orange); }
+  th .sort-arrow { font-size: 10px; margin-left: 4px; }
+
+  td {
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+
+  tr:hover td { background: var(--bg-hover); }
+
+  .price-cell { font-weight: 600; color: var(--orange); }
+
+  .confidence-badge {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    letter-spacing: 0.5px;
+  }
+
+  .confidence-Defined { background: rgba(85,85,96,0.3); color: var(--era0); }
+  .confidence-Single-source { background: rgba(231,76,60,0.15); color: var(--era1); }
+  .confidence-Reduced { background: rgba(241,196,15,0.15); color: var(--era2); }
+  .confidence-Provisional { background: rgba(46,204,113,0.15); color: var(--era3); }
+  .confidence-Full { background: rgba(46,204,113,0.25); color: var(--era3); }
+
+  .status-provisional { color: var(--yellow); }
+  .status-definitive { color: var(--green); }
+
+  .pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .page-btn {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    padding: 6px 14px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .page-btn:hover:not(:disabled) { border-color: var(--orange); color: var(--orange); }
+  .page-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+  /* ===== METHODOLOGY SECTION ===== */
+  .info-section {
+    padding: 40px 0;
+  }
+
+  .info-title {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .info-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+  }
+
+  .info-card h3 {
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 10px;
+  }
+
+  .info-card p {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    padding: 32px 0;
+    border-top: 1px solid var(--border);
+    text-align: center;
+  }
+
+  footer p {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.8;
+  }
+
+  footer a { color: var(--orange); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  /* ===== LOADING ===== */
+  .loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+
+  .loading::after {
+    content: '';
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--border);
+    border-top-color: var(--orange);
+    border-radius: 50%;
+    margin-left: 10px;
+    animation: spin 0.8s linear infinite;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    h1 { font-size: 32px; }
+    .price-banner .price { font-size: 28px; }
+    .chart-wrapper { height: 300px; }
+    .search-input { width: 140px; }
+  }
+</style>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">`n</head>
+<body>
+
+<div class="container">
+  <header>
+    <div class="header-label">Open Standard &bull; Specification v1.0</div>
+    <h1><span class="accent">BTCADP</span> — Bitcoin Average Daily Price</h1>
+    <p class="subtitle">A universal, reproducible, and institution-independent standard for daily Bitcoin valuation.</p>
+    <div class="header-meta">
+      <span class="meta-tag provisional">Provisional Data — Pending Research Verification</span>
+      <a href="specification.html" class="meta-tag" style="text-decoration:none;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--orange)';this.style.color='var(--orange)'" onmouseout="this.style.borderColor='';this.style.color=''">Read the Specification →</a>
+      <a href="days/index.html" class="meta-tag" style="text-decoration:none;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--orange)';this.style.color='var(--orange)'" onmouseout="this.style.borderColor='';this.style.color=''">Browse Daily Records →</a>
+    </div>
+  </header>
+
+  <div class="price-banner">
+    <div class="live-banner-top">
+      <div>
+        <span class="label">BTCADP Indicative Price</span>
+        <span class="live-dot" id="liveDot"></span>
+      </div>
+      <a href="live.html" class="live-detail-link">Live Detail →</a>
+    </div>
+    <div class="price" id="livePrice">—</div>
+    <div class="live-exchanges" id="liveExchanges">Connecting to exchanges...</div>
+    <div class="live-meta">
+      <span class="date" id="latestDate">Loading historical...</span>
+      <span class="live-note">Indicative only — official BTCADP computed daily at 00:00 UTC</span>
+    </div>
+  </div>
+
+  <section class="chart-section">
+    <div class="chart-header">
+      <h2 class="chart-title">Price History</h2>
+      <div style="display:flex; gap:16px; flex-wrap:wrap;">
+        <div class="chart-controls" id="rangeButtons">
+          <button class="chart-btn" data-range="1Y">1Y</button>
+          <button class="chart-btn" data-range="5Y">5Y</button>
+          <button class="chart-btn" data-range="10Y">10Y</button>
+          <button class="chart-btn active" data-range="ALL">ALL</button>
+        </div>
+        <div class="scale-toggle">
+          <button class="chart-btn active" id="btnLinear" onclick="setScale('linear')">Linear</button>
+          <button class="chart-btn" id="btnLog" onclick="setScale('logarithmic')">Log</button>
+        </div>
+      </div>
+    </div>
+    <div class="chart-wrapper">
+      <canvas id="priceChart"></canvas>
+    </div>
+    <div class="era-legend">
+      <div class="era-item"><div class="era-dot" style="background:var(--era0)"></div> Era 0: Genesis (2009–2010)</div>
+      <div class="era-item"><div class="era-dot" style="background:var(--era1)"></div> Era 1: Mt. Gox (2010–2014)</div>
+      <div class="era-item"><div class="era-dot" style="background:var(--era2)"></div> Era 2: Transition (2014–2017)</div>
+      <div class="era-item"><div class="era-dot" style="background:var(--era3)"></div> Era 3: Maturity (2018–Present)</div>
+    </div>
+  </section>
+
+  <section class="table-section">
+    <div class="table-header">
+      <h2 class="table-title">Daily Data</h2>
+      <div class="table-actions">
+        <input type="text" class="search-input" id="searchInput" placeholder="Search date...">
+        <select class="chart-btn" id="eraFilter" style="padding:8px 12px;">
+          <option value="all">All Eras</option>
+          <option value="0">Era 0</option>
+          <option value="1">Era 1</option>
+          <option value="2">Era 2</option>
+          <option value="3">Era 3</option>
+        </select>
+        <button class="download-btn" onclick="downloadCSV()">&#x2913; Download CSV</button>
+      </div>
+    </div>
+    <div class="data-table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th onclick="sortTable('day')">Day <span class="sort-arrow"></span></th>
+            <th onclick="sortTable('date')">Date <span class="sort-arrow">&#x25BC;</span></th>
+            <th onclick="sortTable('btcadp_usd')">BTCADP (USD) <span class="sort-arrow"></span></th>
+            <th onclick="sortTable('confidence')">Confidence <span class="sort-arrow"></span></th>
+            <th onclick="sortTable('era')">Era <span class="sort-arrow"></span></th>
+            <th onclick="sortTable('status')">Status <span class="sort-arrow"></span></th>
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+          <tr><td colspan="6" class="loading">Loading data</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="pagination">
+      <span id="pageInfo">—</span>
+      <div style="display:flex;gap:8px;">
+        <button class="page-btn" id="btnFirst" onclick="goToPage(0)">&#x21E4; First</button>
+        <button class="page-btn" id="btnPrev" onclick="goToPage(currentPage-1)">&#x2190; Prev</button>
+        <button class="page-btn" id="btnNext" onclick="goToPage(currentPage+1)">Next &#x2192;</button>
+        <button class="page-btn" id="btnLast" onclick="goToPage(totalPages-1)">Last &#x21E5;</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="info-section">
+    <h2 class="info-title">About the BTCADP</h2>
+    <div class="info-grid">
+      <div class="info-card">
+        <h3>Methodology</h3>
+        <p>Volume-Weighted Average Prices (VWAP) computed independently for each qualifying exchange, then aggregated using a 25% trimmed mean. Equal weighting of exchanges prevents volume fabrication from influencing the result.</p>
+      </div>
+      <div class="info-card">
+        <h3>Provisional Data</h3>
+        <p>Current values are derived from aggregated public data sources, not from trade-level exchange data per the full specification. All values are flagged as provisional until verified through independent research.</p>
+      </div>
+      <div class="info-card">
+        <h3>Open Standard</h3>
+        <p>The BTCADP belongs to no one. The specification is publicly available, and anyone can compute, verify, or improve upon these values. <a href="specification.html" style="color:var(--orange);">Read the full specification.</a></p>
+      </div>
+      <div class="info-card">
+        <h3>Research Invitation</h3>
+        <p>The historical eras (2009–2017) are designated as open research problems. Academic researchers are invited to produce definitive values using trade-level data. Each day has <a href="https://github.com/BTCADP/btcadp-research/tree/main/contributions" style="color:var(--orange);">its own research page</a> for submitting verified values.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>BTCADP Specification v1.0 &bull; March 2026 &bull; Draft for Public Review &bull; <a href="live.html">Live</a> &bull; <a href="specification.html">Specification</a> &bull; <a href="days/index.html">Daily Records</a> &bull; <a href="https://github.com/BTCADP/btcadp-research">GitHub</a></p>
+    <p style="margin-top:8px;">The BTCADP belongs to no one and benefits everyone.</p>
+    <p style="margin-top:8px;">Its credibility is earned through transparent methodology, open data,</p>
+    <p>and the collective rigor of independent researchers.</p>
+  </footer>
+</div>
+
+<script>
+// ===========================================================================
+//  DATA LOADING
+// ===========================================================================
+
+let allData = [];
+let filteredData = [];
+let currentPage = 0;
+let totalPages = 0;
+const PAGE_SIZE = 50;
+let sortField = 'date';
+let sortDir = -1; // -1 = newest first
+let chart = null;
+let currentScale = 'linear';
+
+async function loadData() {
+  try {
+    // Try loading CSV from same directory
+    const resp = await fetch('https://raw.githubusercontent.com/BTCADP/btcadp-research/main/btcadp_historical.csv');
+    if (!resp.ok) throw new Error('CSV not found');
+    const text = await resp.text();
+    allData = parseCSV(text);
+  } catch (e) {
+    console.log('Could not load CSV file, using embedded sample data.');
+    // If no CSV file found, show an error message
+    document.getElementById('tableBody').innerHTML =
+      '<tr><td colspan="6" style="padding:40px;text-align:center;color:var(--text-muted);">' +
+      'No data file found. Place <code>btcadp_historical.csv</code> in the same directory as this page, ' +
+      'or generate it using <code>btcadp_generate.py</code>.</td></tr>';
+    return;
+  }
+
+  // Sort newest first by default
+  allData.sort((a, b) => b.date.localeCompare(a.date));
+  filteredData = [...allData];
+
+  updateLatestPrice();
+  renderChart();
+  renderTable();
+}
+
+function parseCSV(text) {
+  const lines = text.trim().split('\n');
+  const headers = lines[0].split(',').map(h => h.trim());
+  const data = [];
+  for (let i = 1; i < lines.length; i++) {
+    const vals = lines[i].split(',');
+    if (vals.length < headers.length) continue;
+    const row = {};
+    headers.forEach((h, idx) => { row[h] = vals[idx] ? vals[idx].trim() : ''; });
+    row.btcadp_usd_num = parseFloat(row.btcadp_usd) || 0;
+    data.push(row);
+  }
+  return data;
+}
+
+// ===========================================================================
+//  LATEST PRICE
+// ===========================================================================
+
+function updateLatestPrice() {
+  const sorted = [...allData].sort((a, b) => b.date.localeCompare(a.date));
+  const latest = sorted.find(r => r.btcadp_usd_num > 0) || sorted[0];
+  if (latest) {
+    document.getElementById('latestDate').textContent =
+      'Last daily BTCADP: $' + latest.btcadp_usd_num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) +
+      ' (' + latest.date + ' • Day ' + (latest.day || '') + ')';
+  }
+}
+
+// ===========================================================================
+//  LIVE EXCHANGE FEEDS
+// ===========================================================================
+
+const exchangePrices = {};
+let liveConnected = 0;
+
+function updateLiveDisplay() {
+  const prices = Object.entries(exchangePrices).filter(([_, v]) => v > 0);
+  if (prices.length === 0) return;
+
+  // Build exchange tags
+  const container = document.getElementById('liveExchanges');
+  container.innerHTML = prices.map(([name, price]) =>
+    `<div class="exchange-price" id="ex-${name}">` +
+    `<span class="ex-name">${name}</span>` +
+    `<span class="ex-price">$${price.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>` +
+    `</div>`
+  ).join('');
+
+  // Compute indicative BTCADP (trimmed mean if 5+, median if 3-4, mean if 2)
+  const vals = prices.map(([_, p]) => p).sort((a, b) => a - b);
+  const n = vals.length;
+  let indicative;
+  if (n >= 5) {
+    const trim = Math.floor(n * 0.25);
+    const trimmed = vals.slice(trim, n - trim);
+    indicative = trimmed.reduce((a, b) => a + b, 0) / trimmed.length;
+  } else if (n >= 3) {
+    indicative = vals[Math.floor(n / 2)];
+  } else {
+    indicative = vals.reduce((a, b) => a + b, 0) / n;
+  }
+
+  document.getElementById('livePrice').textContent =
+    '$' + indicative.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+  // Pulse the dot
+  const dot = document.getElementById('liveDot');
+  if (liveConnected > 0) dot.classList.add('connected');
+}
+
+function flashExchange(name) {
+  const el = document.getElementById('ex-' + name);
+  if (el) {
+    el.classList.add('updated');
+    setTimeout(() => el.classList.remove('updated'), 500);
+  }
+}
+
+// --- Coinbase WebSocket ---
+function connectCoinbase() {
+  try {
+    const ws = new WebSocket('wss://ws-feed.exchange.coinbase.com');
+    ws.onopen = () => {
+      ws.send(JSON.stringify({ type: 'subscribe', product_ids: ['BTC-USD'], channels: ['ticker'] }));
+      liveConnected++;
+    };
+    ws.onmessage = (e) => {
+      const data = JSON.parse(e.data);
+      if (data.type === 'ticker' && data.price) {
+        exchangePrices['Coinbase'] = parseFloat(data.price);
+        updateLiveDisplay();
+        flashExchange('Coinbase');
+      }
+    };
+    ws.onclose = () => { liveConnected--; setTimeout(connectCoinbase, 5000); };
+    ws.onerror = () => ws.close();
+  } catch (e) { setTimeout(connectCoinbase, 5000); }
+}
+
+// --- Kraken WebSocket ---
+function connectKraken() {
+  try {
+    const ws = new WebSocket('wss://ws.kraken.com');
+    ws.onopen = () => {
+      ws.send(JSON.stringify({ event: 'subscribe', pair: ['XBT/USD'], subscription: { name: 'ticker' } }));
+      liveConnected++;
+    };
+    ws.onmessage = (e) => {
+      const data = JSON.parse(e.data);
+      if (Array.isArray(data) && data[2] === 'ticker') {
+        const price = parseFloat(data[1].c[0]);
+        if (price > 0) {
+          exchangePrices['Kraken'] = price;
+          updateLiveDisplay();
+          flashExchange('Kraken');
+        }
+      }
+    };
+    ws.onclose = () => { liveConnected--; setTimeout(connectKraken, 5000); };
+    ws.onerror = () => ws.close();
+  } catch (e) { setTimeout(connectKraken, 5000); }
+}
+
+// --- Bitstamp WebSocket ---
+function connectBitstamp() {
+  try {
+    const ws = new WebSocket('wss://ws.bitstamp.net');
+    ws.onopen = () => {
+      ws.send(JSON.stringify({ event: 'bts:subscribe', data: { channel: 'live_trades_btcusd' } }));
+      liveConnected++;
+    };
+    ws.onmessage = (e) => {
+      const data = JSON.parse(e.data);
+      if (data.event === 'trade' && data.data && data.data.price) {
+        exchangePrices['Bitstamp'] = parseFloat(data.data.price);
+        updateLiveDisplay();
+        flashExchange('Bitstamp');
+      }
+    };
+    ws.onclose = () => { liveConnected--; setTimeout(connectBitstamp, 5000); };
+    ws.onerror = () => ws.close();
+  } catch (e) { setTimeout(connectBitstamp, 5000); }
+}
+
+// --- Bitfinex WebSocket ---
+function connectBitfinex() {
+  try {
+    const ws = new WebSocket('wss://api-pub.bitfinex.com/ws/2');
+    let chanId = null;
+    ws.onopen = () => {
+      ws.send(JSON.stringify({ event: 'subscribe', channel: 'ticker', symbol: 'tBTCUSD' }));
+      liveConnected++;
+    };
+    ws.onmessage = (e) => {
+      const data = JSON.parse(e.data);
+      if (data.event === 'subscribed') { chanId = data.chanId; return; }
+      if (Array.isArray(data) && data[0] === chanId && Array.isArray(data[1]) && data[1].length > 6) {
+        const price = parseFloat(data[1][6]);
+        if (price > 0) {
+          exchangePrices['Bitfinex'] = price;
+          updateLiveDisplay();
+          flashExchange('Bitfinex');
+        }
+      }
+    };
+    ws.onclose = () => { liveConnected--; setTimeout(connectBitfinex, 5000); };
+    ws.onerror = () => ws.close();
+  } catch (e) { setTimeout(connectBitfinex, 5000); }
+}
+
+function startLiveFeeds() {
+  connectCoinbase();
+  connectKraken();
+  connectBitstamp();
+  connectBitfinex();
+}
+
+// ===========================================================================
+//  CHART
+// ===========================================================================
+
+function renderChart(rangeFilter) {
+  const chartData = [...allData]
+    .sort((a, b) => a.date.localeCompare(b.date))
+    .filter(r => r.btcadp_usd_num > 0); // Skip Era 0 zeros on chart
+
+  let filtered = chartData;
+  if (rangeFilter) {
+    const now = new Date(chartData[chartData.length - 1].date);
+    let cutoff;
+    if (rangeFilter === '1Y') cutoff = new Date(now.getFullYear() - 1, now.getMonth(), now.getDate());
+    else if (rangeFilter === '5Y') cutoff = new Date(now.getFullYear() - 5, now.getMonth(), now.getDate());
+    else if (rangeFilter === '10Y') cutoff = new Date(now.getFullYear() - 10, now.getMonth(), now.getDate());
+    if (cutoff) {
+      const cutoffStr = cutoff.toISOString().slice(0, 10);
+      filtered = chartData.filter(r => r.date >= cutoffStr);
+    }
+  }
+
+  const eraColors = { '0': '#555560', '1': '#e74c3c', '2': '#f1c40f', '3': '#2ecc71' };
+
+  // Create segments with era-based colors
+  const labels = filtered.map(r => r.date);
+  const values = filtered.map(r => r.btcadp_usd_num);
+  const pointColors = filtered.map(r => eraColors[r.era] || '#f7931a');
+  const segmentColors = filtered.map((r, i) => eraColors[r.era] || '#f7931a');
+
+  const ctx = document.getElementById('priceChart').getContext('2d');
+
+  if (chart) chart.destroy();
+
+  chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [{
+        data: values,
+        borderWidth: 1.5,
+        pointRadius: 0,
+        pointHitRadius: 8,
+        tension: 0.1,
+        fill: true,
+        backgroundColor: 'rgba(247, 147, 26, 0.05)',
+        segment: {
+          borderColor: ctx2 => {
+            const idx = ctx2.p0DataIndex;
+            return segmentColors[idx] || '#f7931a';
+          }
+        }
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: {
+        mode: 'index',
+        intersect: false
+      },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#19191e',
+          borderColor: '#2a2a32',
+          borderWidth: 1,
+          titleFont: { family: "'JetBrains Mono'", size: 12 },
+          bodyFont: { family: "'JetBrains Mono'", size: 13 },
+          titleColor: '#8a8a95',
+          bodyColor: '#f7931a',
+          padding: 12,
+          callbacks: {
+            title: items => items[0].label,
+            label: item => {
+              const row = filtered[item.dataIndex];
+              return '$' + item.raw.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})
+                + '  [Era ' + row.era + ']';
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          type: 'time',
+          time: {
+            parser: 'yyyy-MM-dd',
+            tooltipFormat: 'MMM d, yyyy',
+            displayFormats: { month: 'MMM yyyy', year: 'yyyy' }
+          },
+          grid: { color: 'rgba(42,42,50,0.5)' },
+          ticks: { color: '#555560', font: { family: "'JetBrains Mono'", size: 11 }, maxTicksLimit: 12 }
+        },
+        y: {
+          type: currentScale,
+          grid: { color: 'rgba(42,42,50,0.5)' },
+          ticks: {
+            color: '#555560',
+            font: { family: "'JetBrains Mono'", size: 11 },
+            callback: val => {
+              if (val >= 1000) return '$' + (val / 1000).toFixed(val >= 10000 ? 0 : 1) + 'k';
+              return '$' + val;
+            }
+          }
+        }
+      }
+    }
+  });
+}
+
+function setScale(scale) {
+  currentScale = scale;
+  document.getElementById('btnLinear').classList.toggle('active', scale === 'linear');
+  document.getElementById('btnLog').classList.toggle('active', scale === 'logarithmic');
+  const activeRange = document.querySelector('.chart-controls .chart-btn.active');
+  renderChart(activeRange ? activeRange.dataset.range : 'ALL');
+}
+
+// Range buttons
+document.getElementById('rangeButtons').addEventListener('click', (e) => {
+  if (e.target.classList.contains('chart-btn')) {
+    document.querySelectorAll('#rangeButtons .chart-btn').forEach(b => b.classList.remove('active'));
+    e.target.classList.add('active');
+    renderChart(e.target.dataset.range);
+  }
+});
+
+// ===========================================================================
+//  TABLE
+// ===========================================================================
+
+function renderTable() {
+  const tbody = document.getElementById('tableBody');
+  totalPages = Math.ceil(filteredData.length / PAGE_SIZE);
+  if (currentPage >= totalPages) currentPage = Math.max(0, totalPages - 1);
+
+  const start = currentPage * PAGE_SIZE;
+  const page = filteredData.slice(start, start + PAGE_SIZE);
+
+  tbody.innerHTML = page.map(r => `
+    <tr style="cursor:pointer" onclick="window.location='/days/${r.date}.html'">
+      <td>${r.day || ''}</td>
+      <td><a href="/days/${r.date}.html" style="color:var(--text-primary);text-decoration:none;">${r.date}</a></td>
+      <td class="price-cell">$${parseFloat(r.btcadp_usd).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})}</td>
+      <td><span class="confidence-badge confidence-${r.confidence}">${r.confidence}</span></td>
+      <td>Era ${r.era}</td>
+      <td><span class="status-${r.status}">${r.status}</span></td>
+    </tr>
+  `).join('');
+
+  // Pagination info
+  const totalRows = filteredData.length;
+  document.getElementById('pageInfo').textContent =
+    `Showing ${start + 1}–${Math.min(start + PAGE_SIZE, totalRows)} of ${totalRows.toLocaleString()} days`;
+
+  document.getElementById('btnFirst').disabled = currentPage === 0;
+  document.getElementById('btnPrev').disabled = currentPage === 0;
+  document.getElementById('btnNext').disabled = currentPage >= totalPages - 1;
+  document.getElementById('btnLast').disabled = currentPage >= totalPages - 1;
+}
+
+function goToPage(p) {
+  currentPage = Math.max(0, Math.min(p, totalPages - 1));
+  renderTable();
+}
+
+function sortTable(field) {
+  if (sortField === field) {
+    sortDir *= -1;
+  } else {
+    sortField = field;
+    sortDir = field === 'date' ? -1 : 1;
+  }
+  filteredData.sort((a, b) => {
+    let va = a[field], vb = b[field];
+    if (field === 'btcadp_usd') { va = a.btcadp_usd_num; vb = b.btcadp_usd_num; }
+    if (field === 'day') { va = parseInt(a.day) || 0; vb = parseInt(b.day) || 0; }
+    if (va < vb) return -1 * sortDir;
+    if (va > vb) return 1 * sortDir;
+    return 0;
+  });
+  currentPage = 0;
+  renderTable();
+}
+
+// Search
+document.getElementById('searchInput').addEventListener('input', (e) => {
+  applyFilters();
+});
+
+document.getElementById('eraFilter').addEventListener('change', (e) => {
+  applyFilters();
+});
+
+function applyFilters() {
+  const query = document.getElementById('searchInput').value.trim().toLowerCase();
+  const eraVal = document.getElementById('eraFilter').value;
+
+  filteredData = allData.filter(r => {
+    const matchSearch = !query || r.date.includes(query);
+    const matchEra = eraVal === 'all' || r.era === eraVal;
+    return matchSearch && matchEra;
+  });
+
+  currentPage = 0;
+  renderTable();
+}
+
+// ===========================================================================
+//  DOWNLOAD
+// ===========================================================================
+
+function downloadCSV() {
+  const headers = ['day', 'date', 'btcadp_usd', 'confidence', 'era', 'data_source', 'status', 'spec_version'];
+  const sorted = [...allData].sort((a, b) => a.date.localeCompare(b.date));
+  let csv = headers.join(',') + '\n';
+  sorted.forEach(r => {
+    csv += headers.map(h => r[h] || '').join(',') + '\n';
+  });
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'btcadp_historical.csv';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// ===========================================================================
+//  INIT
+// ===========================================================================
+
+loadData();
+startLiveFeeds();
+</script>
+</body>
+</html>
+
+
+
+
