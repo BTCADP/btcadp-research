@@ -493,35 +493,39 @@
     </div>
   </header>
 
-  <!-- LIVE BTCADP PRICE BANNER -->
+  <!-- BTCC PRICE BANNER (primary) -->
   <div class="price-banner">
     <div class="live-banner-top">
       <div>
-        <span class="label">BTCADP Indicative Price</span>
-        <span class="live-dot" id="liveDot"></span>
+        <span class="label">Today's BTCC Price</span>
       </div>
-      <a href="live.html" class="live-detail-link">Live Detail &rArr;</a>
+      <a href="btcc.html" class="live-detail-link">What is BTCC? Learn More &rArr;</a>
     </div>
-    <div class="price" id="livePrice">&mdash;</div>
-    <div class="live-exchanges" id="liveExchanges">Connecting to exchanges...</div>
+    <div class="price" id="btccPrice">&mdash;</div>
     <div class="live-meta">
-      <span class="date" id="latestDate">Loading historical...</span>
-      <span class="live-note">Indicative only &mdash; official BTCADP computed daily at 00:00 UTC</span>
+      <span class="date" id="btccDays"></span>
+      <span class="live-note">Provisional &mdash; cumulative average of all BTCADP values since genesis</span>
+    </div>
+    <div style="width:100%;margin-top:4px;">
+      <span style="font-size:11px;color:var(--orange);letter-spacing:0.03em;">A transparent, institution-independent Bitcoin price standard</span>
     </div>
   </div>
 
-  <!-- BTCC PRICE BLOCK -->
+  <!-- LIVE BTCADP PRICE BLOCK (secondary) -->
   <div class="btcc-block">
     <div class="btcc-inner">
       <div>
-        <div class="btcc-label">Today's BTCC Price</div>
-        <div class="btcc-price-val" id="btccPrice">&mdash;</div>
-        <div class="btcc-provisional">Provisional &mdash; cumulative average of all BTCADP values since genesis</div>
-        <div style="font-size:11px;color:var(--orange);margin-top:8px;letter-spacing:0.03em;">A transparent, institution-independent Bitcoin price standard</div>
+        <div class="btcc-label">BTCADP Indicative Price</div>
+        <div class="btcc-price-val" id="livePrice">&mdash;</div>
+        <div class="btcc-provisional">Live indicative only &mdash; official BTCADP computed daily at 00:00 UTC</div>
       </div>
       <div>
-        <div class="btcc-obs" id="btccDays"></div>
-        <a href="btcc.html" class="btcc-learn">What is BTCC? Learn More &rarr;</a>
+        <div class="live-exchanges" id="liveExchanges" style="margin-bottom:8px;"></div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+          <span class="live-dot" id="liveDot"></span>
+          <span id="latestDate" style="font-size:11px;color:var(--text-muted);"></span>
+        </div>
+        <a href="live.html" class="btcc-learn">Live Detail &rarr;</a>
       </div>
     </div>
   </div>
