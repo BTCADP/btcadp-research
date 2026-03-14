@@ -510,19 +510,20 @@
   </div>
 
   <!-- LIVE BTCADP PRICE BANNER (secondary - moved below) -->
-  <div class="price-banner">
-    <div class="live-banner-top">
+  <div class="btcc-block">
+    <div class="btcc-inner">
       <div>
-        <span class="label">BTCADP Indicative Price</span>
-        <span class="live-dot" id="liveDot"></span>
+        <div class="btcc-label">BTCADP Indicative Price
+          <span class="live-dot" id="liveDot" style="margin-left:8px;display:inline-block;"></span>
+        </div>
+        <div class="btcc-price-val" id="livePrice">&mdash;</div>
+        <div class="btcc-provisional">Indicative only &mdash; official BTCADP computed daily at 00:00 UTC</div>
       </div>
-      <a href="live.html" class="live-detail-link">Live Detail &rArr;</a>
-    </div>
-    <div class="price" id="livePrice">&mdash;</div>
-    <div class="live-exchanges" id="liveExchanges">Connecting to exchanges...</div>
-    <div class="live-meta">
-      <span class="date" id="latestDate">Loading historical...</span>
-      <span class="live-note">Indicative only &mdash; official BTCADP computed daily at 00:00 UTC</span>
+      <div>
+        <div class="live-exchanges" id="liveExchanges" style="margin-bottom:8px;flex-wrap:wrap;display:flex;gap:8px;">Connecting to exchanges...</div>
+        <div style="font-size:11px;color:var(--text-muted);margin-bottom:10px;" id="latestDate"></div>
+        <a href="live.html" class="btcc-learn">Live Detail &rarr;</a>
+      </div>
     </div>
   </div>
 
@@ -539,6 +540,29 @@
       </div>
     </div>
   </div>
+
+  <!-- ABOUT THE BTCADP (moved up from bottom) -->
+  <section class="info-section" style="border-bottom:1px solid var(--border);padding-bottom:40px;">
+    <h2 class="info-title">About the BTCADP</h2>
+    <div class="info-grid">
+      <div class="info-card">
+        <h3>Methodology</h3>
+        <p>Volume-Weighted Average Prices (VWAP) computed independently for each qualifying exchange, then aggregated using a 25% trimmed mean. Equal weighting of exchanges prevents volume fabrication from influencing the result.</p>
+      </div>
+      <div class="info-card">
+        <h3>Provisional Data</h3>
+        <p>Current values are derived from aggregated public data sources, not from trade-level exchange data per the full specification. All values are flagged as provisional until verified through independent research.</p>
+      </div>
+      <div class="info-card">
+        <h3>Open Standard</h3>
+        <p>The BTCADP belongs to no one. The specification is publicly available, and anyone can compute, verify, or improve upon these values. <a href="specification.html" style="color:var(--orange);">Read the full specification.</a></p>
+      </div>
+      <div class="info-card">
+        <h3>Research Invitation</h3>
+        <p>The historical eras (2009&ndash;2017) are designated as open research problems. Academic researchers are invited to produce definitive values using trade-level data. Each day has <a href="https://github.com/BTCADP/btcadp-research/tree/main/contributions" style="color:var(--orange);">its own research page</a> for submitting verified values.</p>
+      </div>
+    </div>
+  </section>
 
   <section class="chart-section">
     <div class="chart-header">
@@ -606,28 +630,6 @@
         <button class="page-btn" id="btnPrev" onclick="goToPage(currentPage-1)">&#x2190; Prev</button>
         <button class="page-btn" id="btnNext" onclick="goToPage(currentPage+1)">Next &#x2192;</button>
         <button class="page-btn" id="btnLast" onclick="goToPage(totalPages-1)">Last &#x21E5;</button>
-      </div>
-    </div>
-  </section>
-
-  <section class="info-section">
-    <h2 class="info-title">About the BTCADP</h2>
-    <div class="info-grid">
-      <div class="info-card">
-        <h3>Methodology</h3>
-        <p>Volume-Weighted Average Prices (VWAP) computed independently for each qualifying exchange, then aggregated using a 25% trimmed mean. Equal weighting of exchanges prevents volume fabrication from influencing the result.</p>
-      </div>
-      <div class="info-card">
-        <h3>Provisional Data</h3>
-        <p>Current values are derived from aggregated public data sources, not from trade-level exchange data per the full specification. All values are flagged as provisional until verified through independent research.</p>
-      </div>
-      <div class="info-card">
-        <h3>Open Standard</h3>
-        <p>The BTCADP belongs to no one. The specification is publicly available, and anyone can compute, verify, or improve upon these values. <a href="specification.html" style="color:var(--orange);">Read the full specification.</a></p>
-      </div>
-      <div class="info-card">
-        <h3>Research Invitation</h3>
-        <p>The historical eras (2009&ndash;2017) are designated as open research problems. Academic researchers are invited to produce definitive values using trade-level data. Each day has <a href="https://github.com/BTCADP/btcadp-research/tree/main/contributions" style="color:var(--orange);">its own research page</a> for submitting verified values.</p>
       </div>
     </div>
   </section>
