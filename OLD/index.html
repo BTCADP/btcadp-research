@@ -489,7 +489,6 @@
       <a href="specification.html" class="meta-tag" style="text-decoration:none;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--orange)';this.style.color='var(--orange)';this.style.opacity='1'" onmouseout="this.style.borderColor='';this.style.color='';this.style.opacity=''">Read the Specification &rArr;</a>
       <a href="days/index.html" class="meta-tag" style="text-decoration:none;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--orange)';this.style.color='var(--orange)';this.style.opacity='1'" onmouseout="this.style.borderColor='';this.style.color='';this.style.opacity=''">Browse Daily Records &rArr;</a>
       <a href="btcc.html" class="meta-tag" style="text-decoration:none;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--orange)';this.style.color='var(--orange)';this.style.opacity='1'" onmouseout="this.style.borderColor='';this.style.color='';this.style.opacity=''">BTCC &rArr;</a>
-      <a href="bitcoin-timeblocks.html" class="meta-tag" style="text-decoration:none;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--orange)';this.style.color='var(--orange)';this.style.opacity='1'" onmouseout="this.style.borderColor='';this.style.color='';this.style.opacity=''">Timeblocks &rArr;</a>
     </div>
   </header>
 
@@ -517,25 +516,10 @@
         <div class="btcc-label">Today's BTCC Price</div>
         <div class="btcc-price-val" id="btccPrice">&mdash;</div>
         <div class="btcc-provisional">Provisional &mdash; cumulative average of all BTCADP values since genesis</div>
-        <div style="font-size:11px;color:var(--orange);margin-top:8px;letter-spacing:0.03em;">A transparent, institution-independent Bitcoin price standard</div>
       </div>
       <div>
         <div class="btcc-obs" id="btccDays"></div>
         <a href="btcc.html" class="btcc-learn">What is BTCC? Learn More &rarr;</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- BITCOIN TIMEBLOCKS BLOCK -->
-  <div style="padding:24px 0;border-bottom:1px solid var(--border);">
-    <div style="background:var(--bg-secondary);border:1px solid var(--border);border-top:2px solid var(--text-muted);border-radius:8px;padding:24px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
-      <div>
-        <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">Concept</div>
-        <div style="font-family:var(--font-display);font-size:22px;font-weight:600;color:var(--text-primary);margin-bottom:8px;">Bitcoin Timeblocks</div>
-        <div style="font-size:13px;color:var(--text-secondary);max-width:600px;line-height:1.7;">Each UTC day is a timeblock &mdash; a single day's price permanently absorbed into the cumulative average. Like blocks on the chain, timeblocks become more immutable over time, anchoring the BTCC denomination against disruption through arithmetic alone.</div>
-      </div>
-      <div>
-        <a href="bitcoin-timeblocks.html" style="display:inline-block;font-size:12px;color:var(--text-secondary);text-decoration:none;border:1px solid var(--border);padding:6px 14px;border-radius:4px;transition:all 0.2s;font-family:var(--font-mono);" onmouseover="this.style.borderColor='var(--orange)';this.style.color='var(--orange)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-secondary)'">Learn More &rarr;</a>
       </div>
     </div>
   </div>
@@ -649,7 +633,7 @@ let allData = [];
 let filteredData = [];
 let currentPage = 0;
 let totalPages = 0;
-const PAGE_SIZE = 20;
+const PAGE_SIZE = 50;
 let sortField = 'date';
 let sortDir = -1;
 let chart = null;

@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bitcoin Timeblocks | btcadp.org</title>
+<meta name="description" content="Bitcoin Timeblocks — each UTC day is a permanently recorded unit of price history, becoming more immutable over time through the mathematics of cumulative averages.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary: #0a0a0b;
+    --bg-secondary: #111114;
+    --bg-tertiary: #19191e;
+    --bg-hover: #222228;
+    --border: #2a2a32;
+    --text-primary: #e8e6e3;
+    --text-secondary: #8a8a95;
+    --text-muted: #555560;
+    --orange: #f7931a;
+    --orange-dim: rgba(247, 147, 26, 0.15);
+    --green: #2ecc71;
+    --font-display: 'Source Serif 4', Georgia, serif;
+    --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-display);
+    font-size: 17px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(247,147,26,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(247,147,26,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10,10,11,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+
+  .nav-brand {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--orange);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 0.25rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    transition: color 0.2s, background 0.2s;
+    letter-spacing: 0.03em;
+  }
+
+  .nav-links a:hover { color: var(--text-primary); background: var(--bg-tertiary); }
+  .nav-links a.active { color: var(--orange); }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 80px 0 60px;
+    border-bottom: 1px solid var(--border);
+    background: radial-gradient(ellipse at 50% 0%, rgba(247,147,26,0.05) 0%, transparent 60%);
+  }
+
+  .hero-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 16px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    font-weight: 700;
+    letter-spacing: -1px;
+    line-height: 1.1;
+    margin-bottom: 24px;
+    color: #fff;
+  }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 620px;
+    line-height: 1.75;
+  }
+
+  /* ── CONTENT ── */
+  .content {
+    padding: 60px 0 80px;
+  }
+
+  .section {
+    margin-bottom: 56px;
+  }
+
+  .section-num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 8px;
+  }
+
+  .section h2 {
+    font-size: 1.7rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 20px;
+    letter-spacing: -0.5px;
+  }
+
+  .section p {
+    color: #c4c4cc;
+    margin-bottom: 16px;
+    font-size: 1rem;
+  }
+
+  /* ── ANALOGY BLOCK ── */
+  .analogy {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 24px 0;
+  }
+
+  .analogy-side {
+    background: var(--bg-secondary);
+    padding: 28px;
+  }
+
+  .analogy-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+
+  .analogy-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--orange);
+    margin-bottom: 10px;
+  }
+
+  .analogy-side p {
+    font-family: var(--font-sans);
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  /* ── GRADIENT VIZ ── */
+  .gradient-viz {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 28px;
+    margin: 24px 0;
+  }
+
+  .gradient-viz-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+  }
+
+  .gradient-bar {
+    display: flex;
+    height: 32px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+
+  .gradient-bar-seg {
+    flex: 1;
+  }
+
+  .gradient-labels {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--text-muted);
+  }
+
+  /* ── THREE DIMENSIONS ── */
+  .dimensions {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 24px 0;
+  }
+
+  .dim {
+    background: var(--bg-secondary);
+    padding: 24px;
+    text-align: center;
+  }
+
+  .dim-icon { font-size: 2rem; margin-bottom: 10px; }
+
+  .dim-title {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--orange);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+  }
+
+  .dim-concept {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+
+  .dim p {
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* ── CALLOUT ── */
+  .callout {
+    background: rgba(247,147,26,0.07);
+    border-left: 3px solid var(--orange);
+    border-radius: 0 4px 4px 0;
+    padding: 16px 20px;
+    margin: 24px 0;
+    font-family: var(--font-sans);
+    font-size: 0.92rem;
+    color: #c4a46a;
+    line-height: 1.7;
+  }
+
+  .callout strong { color: var(--orange); }
+
+  /* ── MATH BOX ── */
+  .math-box {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--orange);
+    border-radius: 0 4px 4px 0;
+    padding: 16px 20px;
+    margin: 20px 0;
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    color: var(--orange);
+    text-align: center;
+  }
+
+  .math-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    text-align: left;
+  }
+
+  /* ── DIVIDER ── */
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 40px 0;
+  }
+
+  /* ── CTA ── */
+  .cta-block {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--orange);
+    border-radius: 8px;
+    padding: 32px;
+    text-align: center;
+    margin-top: 48px;
+  }
+
+  .cta-block h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+
+  .cta-block p {
+    font-family: var(--font-sans);
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--orange);
+    color: #000;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    font-weight: 700;
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: opacity 0.2s;
+    letter-spacing: 0.5px;
+  }
+  .btn-primary:hover { opacity: 0.85; }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    padding: 10px 20px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    text-decoration: none;
+    transition: all 0.2s;
+    letter-spacing: 0.5px;
+  }
+  .btn-secondary:hover { border-color: var(--orange); color: var(--orange); }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 24px;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+  footer a { color: var(--text-muted); text-decoration: none; }
+  footer a:hover { color: var(--orange); }
+
+  @media (max-width: 640px) {
+    .analogy { grid-template-columns: 1fr; }
+    .dimensions { grid-template-columns: 1fr; }
+    .nav-links a { padding: 0.4rem 0.5rem; font-size: 0.72rem; }
+  }
+</style>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="index.html">BTCADP</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="live.html">Live</a></li>
+    <li><a href="days/index.html">Days</a></li>
+    <li><a href="specification.html">Specification</a></li>
+    <li><a href="btcc.html">BTCC</a></li>
+    <li><a href="bitcoin-timeblocks.html" class="active">Timeblocks</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="container">
+  <div class="hero">
+    <div class="hero-label">Bitcoin &bull; Time &bull; Value</div>
+    <h1>Bitcoin Timeblocks</h1>
+    <p class="hero-sub">
+      Each UTC day is a timeblock — a single day's price permanently absorbed into the
+      cumulative average. Like blocks on the chain, timeblocks become more immutable
+      over time, anchoring value across Bitcoin's entire history through arithmetic alone.
+    </p>
+  </div>
+
+  <div class="content">
+
+    <!-- SECTION 1 -->
+    <div class="section">
+      <div class="section-num">01</div>
+      <h2>What is a Timeblock?</h2>
+      <p>
+        A Bitcoin Timeblock is a single UTC calendar day, defined by the 24-hour window
+        from 00:00:00.000 through 23:59:59.999 UTC. Each timeblock has one price — the
+        Bitcoin Average Daily Price (BTCADP) for that day — which, once the day closes,
+        is permanently recorded into the cumulative average that defines the BTCC denomination.
+      </p>
+      <p>
+        Once a timeblock enters the average, it cannot be meaningfully altered or removed.
+        It is not locked by cryptographic proof-of-work. It is locked by arithmetic: each
+        subsequent timeblock dilutes the influence of every previous one, making older
+        timeblocks progressively and permanently less susceptible to disruption.
+      </p>
+      <div class="math-box">
+        <div class="math-label">Timeblock influence on BTCC price</div>
+        &Delta;BTCC = (BTCADP<sub>new</sub> &minus; BTCC<sub>current</sub>) / (N + 1)
+      </div>
+      <p>
+        As N — the total number of timeblocks — grows, this sensitivity approaches zero.
+        With over 6,200 timeblocks recorded as of early 2026, no single day can move the
+        BTCC price by more than 0.016% of any price shock's magnitude.
+      </p>
+    </div>
+
+    <hr>
+
+    <!-- SECTION 2 -->
+    <div class="section">
+      <div class="section-num">02</div>
+      <h2>The Blockchain Analogy</h2>
+      <p>
+        Bitcoin's blockchain achieves immutability through proof-of-work. Each new block
+        cryptographically seals the one before it, making reversal exponentially more costly
+        as the chain grows. A transaction buried under six blocks is practically irreversible.
+        Under six hundred, it is a permanent fact of the ledger.
+      </p>
+      <p>
+        Bitcoin Timeblocks exhibit an analogous property — but through a different mechanism.
+      </p>
+
+      <div class="analogy">
+        <div class="analogy-side">
+          <div class="analogy-label">Blockchain</div>
+          <div class="analogy-title">Blocks</div>
+          <p>Each new block cryptographically seals all previous blocks. Reversal requires redoing all subsequent proof-of-work — exponentially costly. Immutability comes from computational energy.</p>
+        </div>
+        <div class="analogy-side">
+          <div class="analogy-label">BTCC Denomination</div>
+          <div class="analogy-title">Timeblocks</div>
+          <p>Each new timeblock dilutes the influence of all previous ones. Reversal requires shifting the cumulative average of thousands of days — mathematically intractable. Immutability comes from arithmetic weight.</p>
+        </div>
+      </div>
+
+      <p>
+        The oldest timeblocks — the 561 Era 0 days at $0.00, the early Mt. Gox trading days
+        — are now as permanent a feature of the BTCC price as the genesis block is of the
+        blockchain. No plausible price movement could meaningfully alter their contribution
+        to the cumulative average.
+      </p>
+    </div>
+
+    <hr>
+
+    <!-- SECTION 3 -->
+    <div class="section">
+      <div class="section-num">03</div>
+      <h2>The Immutability Gradient</h2>
+      <p>
+        Unlike blockchain blocks, where immutability is essentially binary (confirmed or not),
+        timeblocks exist on a continuous gradient of permanence. Every timeblock starts with
+        some influence on the BTCC price, and that influence diminishes with each subsequent day.
+      </p>
+
+      <div class="gradient-viz">
+        <div class="gradient-viz-label">Timeblock influence over time (schematic)</div>
+        <div class="gradient-bar">
+          <div class="gradient-bar-seg" style="background:rgba(247,147,26,0.9);"></div>
+          <div class="gradient-bar-seg" style="background:rgba(247,147,26,0.7);"></div>
+          <div class="gradient-bar-seg" style="background:rgba(247,147,26,0.5);"></div>
+          <div class="gradient-bar-seg" style="background:rgba(247,147,26,0.3);"></div>
+          <div class="gradient-bar-seg" style="background:rgba(247,147,26,0.15);"></div>
+          <div class="gradient-bar-seg" style="background:rgba(247,147,26,0.07);"></div>
+          <div class="gradient-bar-seg" style="background:rgba(247,147,26,0.03);"></div>
+          <div class="gradient-bar-seg" style="background:rgba(247,147,26,0.01);"></div>
+        </div>
+        <div class="gradient-labels">
+          <span>Today (high influence)</span>
+          <span>Older (diminishing)</span>
+          <span>Genesis (permanent)</span>
+        </div>
+      </div>
+
+      <p>
+        Recent timeblocks have measurable influence on the BTCC price and could, in theory,
+        be offset by subsequent extreme price movements. Timeblocks from five years ago have
+        been so thoroughly absorbed into the average that no realistic market event could
+        alter their contribution. Timeblocks from the genesis era are, for all practical
+        purposes, as immutable as the genesis block itself.
+      </p>
+
+      <div class="callout">
+        <strong>Every new timeblock does two things simultaneously:</strong> it records a new
+        day's price into the cumulative average, and it reinforces the permanence of every
+        timeblock that came before it. The act of adding a new day makes all previous days
+        more immutable.
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- SECTION 4 -->
+    <div class="section">
+      <div class="section-num">04</div>
+      <h2>Three Dimensions of Bitcoin</h2>
+      <p>
+        Bitcoin's network can be understood through three dimensions that together form a
+        complete record — what happened, why it cannot be undone, and what it was worth.
+      </p>
+
+      <div class="dimensions">
+        <div class="dim">
+          <div class="dim-icon">⬛</div>
+          <div class="dim-title">Space</div>
+          <div class="dim-concept">Blocks</div>
+          <p>Discrete structures recording transactions. Encode what happened.</p>
+        </div>
+        <div class="dim">
+          <div class="dim-icon">⚡</div>
+          <div class="dim-title">Energy</div>
+          <div class="dim-concept">Proof-of-Work</div>
+          <p>Computational expenditure securing blocks. Ensures it cannot be undone.</p>
+        </div>
+        <div class="dim">
+          <div class="dim-icon">🕐</div>
+          <div class="dim-title">Time</div>
+          <div class="dim-concept">Bitcoin Timeblocks</div>
+          <p>Daily price accumulation across Bitcoin's entire history. Records what it was worth.</p>
+        </div>
+      </div>
+
+      <p>
+        Blocks encode what happened. Proof-of-work ensures it cannot be undone. Bitcoin
+        Timeblocks record what Bitcoin was worth when it happened. Space, Energy, and Time
+        — three dimensions of the same network.
+      </p>
+    </div>
+
+    <hr>
+
+    <!-- SECTION 5 -->
+    <div class="section">
+      <div class="section-num">05</div>
+      <h2>Stability Through Accumulated Time</h2>
+      <p>
+        The stability of the BTCC denomination is not maintained by reserves, market makers,
+        or algorithmic mechanisms. It is a direct consequence of the accumulated weight of
+        thousands of timeblocks, each contributing its fraction to the cumulative average.
+      </p>
+      <p>
+        This stability improves permanently and irreversibly with every passing day. It cannot
+        be turned off. It cannot be inflated away. It does not depend on the continued
+        operation of any institution. The mathematics simply is what it is — and it gets
+        stronger every 24 hours.
+      </p>
+
+      <div class="callout">
+        <strong>To illustrate:</strong> a flash crash in which Bitcoin drops 40% in a single
+        day shifts the BTCC price by approximately $6 — a change of 0.04%. A prolonged bear
+        market at $20,000 for three years produces less than 5% total change in the BTCC
+        price over that entire period. These are not estimates — they are mathematical
+        certainties given the current number of timeblocks.
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-block">
+      <h3>Learn More</h3>
+      <p>Bitcoin Timeblocks are defined as part of the BTCC denomination protocol and the BTCADP specification.</p>
+      <div class="cta-buttons">
+        <a href="btcc.html" class="btn-primary">BTCC Denomination &rarr;</a>
+        <a href="specification.html" class="btn-secondary">BTCADP Specification &rarr;</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <p>
+    <a href="index.html">Home</a> &nbsp;&bull;&nbsp;
+    <a href="btcc.html">BTCC</a> &nbsp;&bull;&nbsp;
+    <a href="specification.html">Specification</a> &nbsp;&bull;&nbsp;
+    <a href="https://github.com/BTCADP/btcadp-research">GitHub</a>
+  </p>
+  <p style="margin-top:8px;">CC0 Public Domain &bull; btcadp.org &bull; 2026</p>
+</footer>
+
+</body>
+</html>
