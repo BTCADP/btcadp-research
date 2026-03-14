@@ -54,8 +54,10 @@ ERA_2_END   = datetime(2017, 12, 31, tzinfo=timezone.utc)
 ERA_3_START = datetime(2018, 1, 1, tzinfo=timezone.utc)
 
 # CoinGecko free API (no key required, rate limited to ~10-30 req/min)
+COINGECKO_API_KEY = "CG-J3JAeCZyNhrfWTUqpW1PDuPX"
 COINGECKO_BASE = "https://api.coingecko.com/api/v3"
 COINGECKO_MARKET_CHART_RANGE = f"{COINGECKO_BASE}/coins/bitcoin/market_chart/range"
+COINGECKO_HEADERS = {"x-cg-demo-api-key": COINGECKO_API_KEY}
 
 # CSV columns
 CSV_HEADERS = [
@@ -138,7 +140,7 @@ def fetch_coingecko_range(start_dt, end_dt):
         print(f"  Fetching {start_str} to {end_str}...")
         
         try:
-            resp = requests.get(COINGECKO_MARKET_CHART_RANGE, params=params, timeout=30)
+            resp = requests.get(COINGECKO_MARKET_CHART_RANGE, params=params, headers=COINGECKO_HEADERS, timeout=30)
             resp.raise_for_status()
             data = resp.json()
         except requests.exceptions.HTTPError as e:

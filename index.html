@@ -701,7 +701,7 @@ async function loadBTCCPrice() {
     let sum = 0, count = 0;
     for (const line of lines) {
       const parts = line.split(',');
-      const price = parseFloat(parts[1]);
+      const price = parseFloat(parts[2]);
       if (!isNaN(price)) { sum += price; count++; }
     }
     if (count > 0) {

@@ -5913,366 +5913,366 @@ day,date,btcadp_usd,confidence,era,data_source,status,spec_version
 5912,2025-03-11,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
 5913,2025-03-12,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
 5914,2025-03-13,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5915,2025-03-14,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5916,2025-03-15,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5917,2025-03-16,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5918,2025-03-17,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5919,2025-03-18,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5920,2025-03-19,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5921,2025-03-20,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5922,2025-03-21,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5923,2025-03-22,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5924,2025-03-23,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5925,2025-03-24,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5926,2025-03-25,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5927,2025-03-26,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5928,2025-03-27,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5929,2025-03-28,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5930,2025-03-29,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5931,2025-03-30,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5932,2025-03-31,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5933,2025-04-01,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5934,2025-04-02,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5935,2025-04-03,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5936,2025-04-04,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5937,2025-04-05,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5938,2025-04-06,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5939,2025-04-07,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5940,2025-04-08,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5941,2025-04-09,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5942,2025-04-10,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5943,2025-04-11,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5944,2025-04-12,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5945,2025-04-13,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5946,2025-04-14,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5947,2025-04-15,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5948,2025-04-16,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5949,2025-04-17,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5950,2025-04-18,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5951,2025-04-19,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5952,2025-04-20,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5953,2025-04-21,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5954,2025-04-22,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5955,2025-04-23,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5956,2025-04-24,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5957,2025-04-25,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5958,2025-04-26,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5959,2025-04-27,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5960,2025-04-28,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5961,2025-04-29,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5962,2025-04-30,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5963,2025-05-01,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5964,2025-05-02,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5965,2025-05-03,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5966,2025-05-04,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5967,2025-05-05,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5968,2025-05-06,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5969,2025-05-07,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5970,2025-05-08,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5971,2025-05-09,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5972,2025-05-10,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5973,2025-05-11,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5974,2025-05-12,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5975,2025-05-13,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5976,2025-05-14,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5977,2025-05-15,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5978,2025-05-16,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5979,2025-05-17,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5980,2025-05-18,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5981,2025-05-19,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5982,2025-05-20,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5983,2025-05-21,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5984,2025-05-22,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5985,2025-05-23,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5986,2025-05-24,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5987,2025-05-25,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5988,2025-05-26,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5989,2025-05-27,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5990,2025-05-28,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5991,2025-05-29,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5992,2025-05-30,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5993,2025-05-31,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5994,2025-06-01,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5995,2025-06-02,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5996,2025-06-03,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5997,2025-06-04,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5998,2025-06-05,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-5999,2025-06-06,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6000,2025-06-07,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6001,2025-06-08,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6002,2025-06-09,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6003,2025-06-10,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6004,2025-06-11,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6005,2025-06-12,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6006,2025-06-13,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6007,2025-06-14,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6008,2025-06-15,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6009,2025-06-16,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6010,2025-06-17,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6011,2025-06-18,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6012,2025-06-19,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6013,2025-06-20,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6014,2025-06-21,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6015,2025-06-22,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6016,2025-06-23,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6017,2025-06-24,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6018,2025-06-25,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6019,2025-06-26,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6020,2025-06-27,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6021,2025-06-28,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6022,2025-06-29,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6023,2025-06-30,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6024,2025-07-01,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6025,2025-07-02,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6026,2025-07-03,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6027,2025-07-04,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6028,2025-07-05,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6029,2025-07-06,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6030,2025-07-07,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6031,2025-07-08,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6032,2025-07-09,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6033,2025-07-10,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6034,2025-07-11,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6035,2025-07-12,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6036,2025-07-13,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6037,2025-07-14,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6038,2025-07-15,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6039,2025-07-16,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6040,2025-07-17,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6041,2025-07-18,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6042,2025-07-19,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6043,2025-07-20,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6044,2025-07-21,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6045,2025-07-22,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6046,2025-07-23,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6047,2025-07-24,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6048,2025-07-25,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6049,2025-07-26,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6050,2025-07-27,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6051,2025-07-28,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6052,2025-07-29,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6053,2025-07-30,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6054,2025-07-31,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6055,2025-08-01,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6056,2025-08-02,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6057,2025-08-03,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6058,2025-08-04,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6059,2025-08-05,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6060,2025-08-06,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6061,2025-08-07,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6062,2025-08-08,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6063,2025-08-09,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6064,2025-08-10,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6065,2025-08-11,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6066,2025-08-12,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6067,2025-08-13,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6068,2025-08-14,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6069,2025-08-15,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6070,2025-08-16,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6071,2025-08-17,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6072,2025-08-18,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6073,2025-08-19,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6074,2025-08-20,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6075,2025-08-21,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6076,2025-08-22,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6077,2025-08-23,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6078,2025-08-24,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6079,2025-08-25,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6080,2025-08-26,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6081,2025-08-27,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6082,2025-08-28,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6083,2025-08-29,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6084,2025-08-30,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6085,2025-08-31,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6086,2025-09-01,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6087,2025-09-02,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6088,2025-09-03,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6089,2025-09-04,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6090,2025-09-05,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6091,2025-09-06,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6092,2025-09-07,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6093,2025-09-08,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6094,2025-09-09,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6095,2025-09-10,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6096,2025-09-11,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6097,2025-09-12,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6098,2025-09-13,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6099,2025-09-14,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6100,2025-09-15,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6101,2025-09-16,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6102,2025-09-17,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6103,2025-09-18,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6104,2025-09-19,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6105,2025-09-20,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6106,2025-09-21,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6107,2025-09-22,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6108,2025-09-23,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6109,2025-09-24,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6110,2025-09-25,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6111,2025-09-26,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6112,2025-09-27,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6113,2025-09-28,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6114,2025-09-29,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6115,2025-09-30,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6116,2025-10-01,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6117,2025-10-02,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6118,2025-10-03,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6119,2025-10-04,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6120,2025-10-05,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6121,2025-10-06,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6122,2025-10-07,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6123,2025-10-08,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6124,2025-10-09,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6125,2025-10-10,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6126,2025-10-11,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6127,2025-10-12,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6128,2025-10-13,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6129,2025-10-14,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6130,2025-10-15,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6131,2025-10-16,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6132,2025-10-17,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6133,2025-10-18,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6134,2025-10-19,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6135,2025-10-20,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6136,2025-10-21,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6137,2025-10-22,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6138,2025-10-23,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6139,2025-10-24,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6140,2025-10-25,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6141,2025-10-26,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6142,2025-10-27,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6143,2025-10-28,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6144,2025-10-29,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6145,2025-10-30,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6146,2025-10-31,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6147,2025-11-01,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6148,2025-11-02,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6149,2025-11-03,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6150,2025-11-04,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6151,2025-11-05,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6152,2025-11-06,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6153,2025-11-07,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6154,2025-11-08,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6155,2025-11-09,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6156,2025-11-10,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6157,2025-11-11,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6158,2025-11-12,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6159,2025-11-13,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6160,2025-11-14,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6161,2025-11-15,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6162,2025-11-16,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6163,2025-11-17,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6164,2025-11-18,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6165,2025-11-19,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6166,2025-11-20,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6167,2025-11-21,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6168,2025-11-22,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6169,2025-11-23,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6170,2025-11-24,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6171,2025-11-25,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6172,2025-11-26,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6173,2025-11-27,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6174,2025-11-28,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6175,2025-11-29,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6176,2025-11-30,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6177,2025-12-01,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6178,2025-12-02,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6179,2025-12-03,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6180,2025-12-04,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6181,2025-12-05,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6182,2025-12-06,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6183,2025-12-07,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6184,2025-12-08,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6185,2025-12-09,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6186,2025-12-10,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6187,2025-12-11,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6188,2025-12-12,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6189,2025-12-13,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6190,2025-12-14,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6191,2025-12-15,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6192,2025-12-16,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6193,2025-12-17,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6194,2025-12-18,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6195,2025-12-19,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6196,2025-12-20,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6197,2025-12-21,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6198,2025-12-22,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6199,2025-12-23,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6200,2025-12-24,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6201,2025-12-25,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6202,2025-12-26,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6203,2025-12-27,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6204,2025-12-28,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6205,2025-12-29,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6206,2025-12-30,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6207,2025-12-31,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6208,2026-01-01,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6209,2026-01-02,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6210,2026-01-03,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6211,2026-01-04,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6212,2026-01-05,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6213,2026-01-06,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6214,2026-01-07,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6215,2026-01-08,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6216,2026-01-09,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6217,2026-01-10,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6218,2026-01-11,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6219,2026-01-12,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6220,2026-01-13,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6221,2026-01-14,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6222,2026-01-15,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6223,2026-01-16,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6224,2026-01-17,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6225,2026-01-18,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6226,2026-01-19,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6227,2026-01-20,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6228,2026-01-21,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6229,2026-01-22,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6230,2026-01-23,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6231,2026-01-24,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6232,2026-01-25,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6233,2026-01-26,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6234,2026-01-27,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6235,2026-01-28,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6236,2026-01-29,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6237,2026-01-30,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6238,2026-01-31,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6239,2026-02-01,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6240,2026-02-02,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6241,2026-02-03,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6242,2026-02-04,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6243,2026-02-05,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6244,2026-02-06,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6245,2026-02-07,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6246,2026-02-08,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6247,2026-02-09,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6248,2026-02-10,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6249,2026-02-11,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6250,2026-02-12,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6251,2026-02-13,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6252,2026-02-14,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6253,2026-02-15,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6254,2026-02-16,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6255,2026-02-17,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6256,2026-02-18,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6257,2026-02-19,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6258,2026-02-20,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6259,2026-02-21,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6260,2026-02-22,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6261,2026-02-23,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6262,2026-02-24,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6263,2026-02-25,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6264,2026-02-26,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6265,2026-02-27,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6266,2026-02-28,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6267,2026-03-01,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6268,2026-03-02,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6269,2026-03-03,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6270,2026-03-04,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6271,2026-03-05,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6272,2026-03-06,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6273,2026-03-07,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6274,2026-03-08,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
-6275,2026-03-09,86000.00,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
+5915,2025-03-14,81098.90,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5916,2025-03-15,83971.71,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5917,2025-03-16,84391.69,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5918,2025-03-17,82610.62,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5919,2025-03-18,84075.37,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5920,2025-03-19,82780.03,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5921,2025-03-20,86815.44,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5922,2025-03-21,84270.84,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5923,2025-03-22,84009.53,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5924,2025-03-23,83793.31,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5925,2025-03-24,85787.71,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5926,2025-03-25,87327.73,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5927,2025-03-26,87520.58,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5928,2025-03-27,86960.86,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5929,2025-03-28,87227.27,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5930,2025-03-29,84359.47,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5931,2025-03-30,82679.17,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5932,2025-03-31,82356.38,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5933,2025-04-01,82514.09,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5934,2025-04-02,85237.59,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5935,2025-04-03,82526.42,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5936,2025-04-04,83163.99,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5937,2025-04-05,83852.01,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5938,2025-04-06,83595.89,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5939,2025-04-07,78211.48,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5940,2025-04-08,79179.29,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5941,2025-04-09,76329.09,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5942,2025-04-10,82622.17,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5943,2025-04-11,79596.36,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5944,2025-04-12,83439.29,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5945,2025-04-13,85305.10,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5946,2025-04-14,83600.82,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5947,2025-04-15,84523.45,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5948,2025-04-16,83656.49,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5949,2025-04-17,84105.78,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5950,2025-04-18,84930.91,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5951,2025-04-19,84433.75,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5952,2025-04-20,85126.66,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5953,2025-04-21,85073.17,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5954,2025-04-22,87452.05,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5955,2025-04-23,93576.17,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5956,2025-04-24,93605.45,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5957,2025-04-25,93872.81,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5958,2025-04-26,94773.11,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5959,2025-04-27,94644.07,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5960,2025-04-28,93809.34,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5961,2025-04-29,95030.61,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5962,2025-04-30,94256.36,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5963,2025-05-01,94235.75,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5964,2025-05-02,96426.95,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5965,2025-05-03,96855.57,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5966,2025-05-04,95922.87,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5967,2025-05-05,94326.62,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5968,2025-05-06,94758.82,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5969,2025-05-07,96854.53,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5970,2025-05-08,97026.49,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5971,2025-05-09,103076.28,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5972,2025-05-10,102962.54,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5973,2025-05-11,104630.88,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5974,2025-05-12,103994.06,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5975,2025-05-13,102876.83,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5976,2025-05-14,104184.49,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5977,2025-05-15,103594.43,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5978,2025-05-16,103708.85,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5979,2025-05-17,103556.03,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5980,2025-05-18,103212.36,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5981,2025-05-19,106030.64,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5982,2025-05-20,105629.42,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5983,2025-05-21,106786.72,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5984,2025-05-22,109665.86,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5985,2025-05-23,111560.36,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5986,2025-05-24,107216.67,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5987,2025-05-25,107831.36,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5988,2025-05-26,108861.81,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5989,2025-05-27,109377.72,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5990,2025-05-28,109068.46,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5991,2025-05-29,107838.18,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5992,2025-05-30,105745.42,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5993,2025-05-31,104010.92,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5994,2025-06-01,104687.51,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5995,2025-06-02,105710.01,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5996,2025-06-03,105884.74,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5997,2025-06-04,105434.48,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5998,2025-06-05,104812.92,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+5999,2025-06-06,101650.74,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6000,2025-06-07,104409.75,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6001,2025-06-08,105681.45,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6002,2025-06-09,105692.25,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6003,2025-06-10,110261.57,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6004,2025-06-11,110212.73,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6005,2025-06-12,108679.98,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6006,2025-06-13,105979.23,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6007,2025-06-14,106045.56,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6008,2025-06-15,105482.91,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6009,2025-06-16,105554.49,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6010,2025-06-17,106951.27,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6011,2025-06-18,104683.42,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6012,2025-06-19,104722.70,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6013,2025-06-20,104690.65,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6014,2025-06-21,103290.11,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6015,2025-06-22,101532.57,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6016,2025-06-23,100852.58,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6017,2025-06-24,105511.62,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6018,2025-06-25,105976.07,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6019,2025-06-26,107238.53,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6020,2025-06-27,106984.01,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6021,2025-06-28,107078.92,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6022,2025-06-29,107331.59,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6023,2025-06-30,108396.62,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6024,2025-07-01,107132.80,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6025,2025-07-02,105613.40,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6026,2025-07-03,108824.44,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6027,2025-07-04,109602.20,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6028,2025-07-05,108040.89,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6029,2025-07-06,108217.47,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6030,2025-07-07,109215.20,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6031,2025-07-08,108300.72,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6032,2025-07-09,108953.19,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6033,2025-07-10,111327.53,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6034,2025-07-11,115879.65,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6035,2025-07-12,117571.03,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6036,2025-07-13,117418.96,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6037,2025-07-14,119117.56,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6038,2025-07-15,119833.67,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6039,2025-07-16,117678.19,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6040,2025-07-17,118748.16,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6041,2025-07-18,119445.37,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6042,2025-07-19,117988.95,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6043,2025-07-20,117901.63,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6044,2025-07-21,117256.92,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6045,2025-07-22,117482.47,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6046,2025-07-23,119955.80,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6047,2025-07-24,118629.06,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6048,2025-07-25,118354.44,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6049,2025-07-26,117540.81,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6050,2025-07-27,117959.54,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6051,2025-07-28,119418.91,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6052,2025-07-29,118003.30,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6053,2025-07-30,117853.31,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6054,2025-07-31,117833.24,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6055,2025-08-01,115700.00,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6056,2025-08-02,113234.61,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6057,2025-08-03,112554.90,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6058,2025-08-04,114199.11,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6059,2025-08-05,115138.69,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6060,2025-08-06,114128.35,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6061,2025-08-07,115022.10,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6062,2025-08-08,117463.47,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6063,2025-08-09,116688.37,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6064,2025-08-10,116510.08,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6065,2025-08-11,119266.93,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6066,2025-08-12,118773.80,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6067,2025-08-13,120202.53,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6068,2025-08-14,123560.99,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6069,2025-08-15,118405.60,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6070,2025-08-16,117339.79,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6071,2025-08-17,117501.22,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6072,2025-08-18,117542.84,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6073,2025-08-19,116256.41,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6074,2025-08-20,112778.34,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6075,2025-08-21,114252.40,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6076,2025-08-22,112414.40,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6077,2025-08-23,116834.25,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6078,2025-08-24,115359.98,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6079,2025-08-25,113399.55,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6080,2025-08-26,110185.35,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6081,2025-08-27,111842.71,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6082,2025-08-28,111216.08,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6083,2025-08-29,112525.60,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6084,2025-08-30,108480.31,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6085,2025-08-31,108781.96,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6086,2025-09-01,108253.36,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6087,2025-09-02,109162.69,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6088,2025-09-03,111190.18,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6089,2025-09-04,111711.52,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6090,2025-09-05,110724.74,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6091,2025-09-06,110662.18,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6092,2025-09-07,110209.19,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6093,2025-09-08,111131.99,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6094,2025-09-09,112025.13,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6095,2025-09-10,111547.44,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6096,2025-09-11,113975.32,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6097,2025-09-12,115503.17,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6098,2025-09-13,116160.14,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6099,2025-09-14,115970.58,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6100,2025-09-15,115373.56,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6101,2025-09-16,115397.25,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6102,2025-09-17,116762.85,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6103,2025-09-18,116455.95,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6104,2025-09-19,117145.50,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6105,2025-09-20,115655.81,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6106,2025-09-21,115715.52,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6107,2025-09-22,115304.48,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6108,2025-09-23,112696.74,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6109,2025-09-24,112022.17,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6110,2025-09-25,113320.57,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6111,2025-09-26,108963.53,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6112,2025-09-27,109710.21,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6113,2025-09-28,109654.81,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6114,2025-09-29,112142.57,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6115,2025-09-30,114309.15,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6116,2025-10-01,114024.23,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6117,2025-10-02,118503.24,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6118,2025-10-03,120611.72,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6119,2025-10-04,122250.15,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6120,2025-10-05,122380.94,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6121,2025-10-06,123506.19,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6122,2025-10-07,124773.51,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6123,2025-10-08,121518.76,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6124,2025-10-09,123352.50,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6125,2025-10-10,121698.03,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6126,2025-10-11,113201.74,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6127,2025-10-12,110853.12,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6128,2025-10-13,115189.57,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6129,2025-10-14,115222.28,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6130,2025-10-15,113156.57,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6131,2025-10-16,110708.67,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6132,2025-10-17,108076.73,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6133,2025-10-18,106443.61,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6134,2025-10-19,107156.00,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6135,2025-10-20,108621.13,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6136,2025-10-21,110608.57,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6137,2025-10-22,108486.10,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6138,2025-10-23,107618.43,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6139,2025-10-24,110048.52,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6140,2025-10-25,110997.80,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6141,2025-10-26,111620.31,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6142,2025-10-27,114476.01,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6143,2025-10-28,114182.79,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6144,2025-10-29,112950.35,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6145,2025-10-30,110046.67,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6146,2025-10-31,108240.77,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6147,2025-11-01,109573.91,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6148,2025-11-02,110014.14,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6149,2025-11-03,110650.21,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6150,2025-11-04,106521.09,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6151,2025-11-05,101635.27,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6152,2025-11-06,103877.96,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6153,2025-11-07,101322.64,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6154,2025-11-08,103396.08,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6155,2025-11-09,102290.14,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6156,2025-11-10,104709.68,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6157,2025-11-11,105909.07,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6158,2025-11-12,102960.78,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6159,2025-11-13,101521.71,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6160,2025-11-14,99730.45,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6161,2025-11-15,94456.39,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6162,2025-11-16,95508.31,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6163,2025-11-17,94411.33,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6164,2025-11-18,92036.73,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6165,2025-11-19,92819.76,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6166,2025-11-20,91363.28,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6167,2025-11-21,86649.97,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6168,2025-11-22,85051.80,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6169,2025-11-23,84682.62,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6170,2025-11-24,86783.85,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6171,2025-11-25,88229.36,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6172,2025-11-26,87310.33,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6173,2025-11-27,90474.23,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6174,2025-11-28,91279.06,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6175,2025-11-29,90950.38,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6176,2025-11-30,90841.45,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6177,2025-12-01,90406.28,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6178,2025-12-02,86281.50,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6179,2025-12-03,91344.73,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6180,2025-12-04,93619.44,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6181,2025-12-05,92140.70,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6182,2025-12-06,89307.09,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6183,2025-12-07,89244.76,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6184,2025-12-08,90162.91,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6185,2025-12-09,90618.05,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6186,2025-12-10,92723.21,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6187,2025-12-11,92005.14,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6188,2025-12-12,92494.18,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6189,2025-12-13,90307.26,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6190,2025-12-14,90257.43,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6191,2025-12-15,88230.77,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6192,2025-12-16,86413.92,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6193,2025-12-17,87821.89,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6194,2025-12-18,86064.95,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6195,2025-12-19,85450.33,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6196,2025-12-20,88103.86,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6197,2025-12-21,88347.94,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6198,2025-12-22,88577.42,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6199,2025-12-23,88491.12,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6200,2025-12-24,87406.44,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6201,2025-12-25,87642.61,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6202,2025-12-26,87229.78,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6203,2025-12-27,87305.96,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6204,2025-12-28,87807.00,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6205,2025-12-29,87822.91,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6206,2025-12-30,87156.56,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6207,2025-12-31,88414.63,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6208,2026-01-01,87520.18,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6209,2026-01-02,88727.67,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6210,2026-01-03,89926.28,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6211,2026-01-04,90593.85,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6212,2026-01-05,91373.22,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6213,2026-01-06,93926.80,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6214,2026-01-07,93666.86,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6215,2026-01-08,91257.16,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6216,2026-01-09,90983.52,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6217,2026-01-10,90504.90,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6218,2026-01-11,90442.02,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6219,2026-01-12,90819.37,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6220,2026-01-13,91134.97,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6221,2026-01-14,95260.44,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6222,2026-01-15,97007.78,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6223,2026-01-16,95584.83,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6224,2026-01-17,95516.08,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6225,2026-01-18,95099.53,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6226,2026-01-19,93752.71,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6227,2026-01-20,92558.46,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6228,2026-01-21,88312.84,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6229,2026-01-22,89354.34,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6230,2026-01-23,89443.40,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6231,2026-01-24,89412.40,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6232,2026-01-25,89170.87,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6233,2026-01-26,86548.32,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6234,2026-01-27,88307.86,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6235,2026-01-28,89204.22,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6236,2026-01-29,89162.10,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6237,2026-01-30,84570.41,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6238,2026-01-31,84141.78,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6239,2026-02-01,78725.86,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6240,2026-02-02,76937.06,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6241,2026-02-03,78767.66,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6242,2026-02-04,75638.96,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6243,2026-02-05,73172.29,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6244,2026-02-06,62853.69,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6245,2026-02-07,70523.95,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6246,2026-02-08,69296.81,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6247,2026-02-09,70542.37,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6248,2026-02-10,70096.41,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6249,2026-02-11,68779.91,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6250,2026-02-12,66937.58,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6251,2026-02-13,66184.58,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6252,2026-02-14,68838.87,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6253,2026-02-15,69765.60,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6254,2026-02-16,68716.58,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6255,2026-02-17,68907.78,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6256,2026-02-18,67489.46,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6257,2026-02-19,66456.35,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6258,2026-02-20,66918.68,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6259,2026-02-21,67970.29,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6260,2026-02-22,67977.91,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6261,2026-02-23,67585.12,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6262,2026-02-24,64577.55,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6263,2026-02-25,64074.11,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6264,2026-02-26,67947.39,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6265,2026-02-27,67469.06,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6266,2026-02-28,65883.99,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6267,2026-03-01,67008.45,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6268,2026-03-02,65713.50,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6269,2026-03-03,68864.04,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6270,2026-03-04,68321.62,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6271,2026-03-05,72669.77,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6272,2026-03-06,70874.99,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6273,2026-03-07,68148.28,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6274,2026-03-08,67271.19,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6275,2026-03-09,66036.16,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
 6276,2026-03-10,69707.36,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
 6277,2026-03-11,70399.57,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
