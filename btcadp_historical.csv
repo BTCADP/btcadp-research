@@ -6276,3 +6276,6 @@ day,date,btcadp_usd,confidence,era,data_source,status,spec_version
 6275,2026-03-09,66036.16,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
 6276,2026-03-10,69707.36,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
 6277,2026-03-11,70399.57,Provisional,3,CoinGecko aggregated daily (provisional),provisional,1.0
+6278,2026-03-12,70399.57,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
+6279,2026-03-13,70399.57,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
+6280,2026-03-14,70399.57,Provisional,3,CoinGecko aggregated daily (provisional) (interpolated from previous day),provisional,1.0
