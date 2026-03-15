@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Knowledge Base | btcadp.org</title>
+<meta name="description" content="Articles, case studies, academic papers, and news related to BTCADP, BTCC, Bitcoin Timeblocks, and the Bitcoin Currency Layer.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary: #0a0a0b;
+    --bg-secondary: #111114;
+    --bg-tertiary: #19191e;
+    --border: #2a2a32;
+    --text-primary: #e8e6e3;
+    --text-secondary: #8a8a95;
+    --text-muted: #555560;
+    --orange: #f7931a;
+    --orange-dim: rgba(247, 147, 26, 0.12);
+    --font-display: 'Source Serif 4', Georgia, serif;
+    --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-display);
+    font-size: 17px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(247,147,26,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(247,147,26,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10,10,11,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+
+  .nav-brand {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--orange);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 0.25rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    padding: 0.4rem 0.7rem;
+    border-radius: 4px;
+    transition: color 0.2s, background 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--text-primary); background: var(--bg-tertiary); }
+  .nav-links a.active { color: var(--orange); }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 72px 0 52px;
+    border-bottom: 1px solid var(--border);
+    background: radial-gradient(ellipse at 50% 0%, rgba(247,147,26,0.05) 0%, transparent 60%);
+  }
+
+  .hero-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 14px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    letter-spacing: -1px;
+    line-height: 1.1;
+    margin-bottom: 16px;
+    color: #fff;
+  }
+
+  .hero-sub {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    max-width: 580px;
+    line-height: 1.7;
+    font-family: var(--font-sans);
+  }
+
+  /* ── CONTENT ── */
+  .content { padding: 56px 0 80px; }
+
+  /* ── SECTION ── */
+  .kb-section {
+    margin-bottom: 64px;
+  }
+
+  .kb-section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .kb-section-num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--orange);
+  }
+
+  .kb-section-title {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: -0.5px;
+  }
+
+  .kb-section-count {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-left: auto;
+  }
+
+  /* ── EMPTY STATE ── */
+  .empty-state {
+    background: var(--bg-secondary);
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    padding: 48px 32px;
+    text-align: center;
+  }
+
+  .empty-icon {
+    font-size: 2.4rem;
+    margin-bottom: 16px;
+    opacity: 0.4;
+  }
+
+  .empty-title {
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+  }
+
+  .empty-desc {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    max-width: 360px;
+    margin: 0 auto 20px;
+    line-height: 1.6;
+  }
+
+  .empty-cta {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: var(--orange);
+    text-decoration: none;
+    border: 1px solid rgba(247,147,26,0.3);
+    padding: 6px 14px;
+    border-radius: 4px;
+    transition: background 0.2s;
+  }
+  .empty-cta:hover { background: var(--orange-dim); }
+
+  /* ── CARD GRID (for future content) ── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .kb-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    text-decoration: none;
+    display: block;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .kb-card:hover {
+    border-color: var(--orange);
+    background: var(--bg-tertiary);
+  }
+
+  .kb-card-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 8px;
+  }
+
+  .kb-card-title {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+
+  .kb-card-desc {
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+
+  .kb-card-meta {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--text-muted);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 24px;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+  footer a { color: var(--text-muted); text-decoration: none; }
+  footer a:hover { color: var(--orange); }
+
+  @media (max-width: 640px) {
+    .nav-links a { padding: 0.4rem 0.4rem; font-size: 0.68rem; }
+    .kb-section-header { flex-wrap: wrap; }
+  }
+</style>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="index.html">BTCADP</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="live.html">Live</a></li>
+    <li><a href="days/index.html">Days</a></li>
+    <li><a href="specification.html">Specification</a></li>
+    <li><a href="btcc.html">BTCC</a></li>
+    <li><a href="bitcoin-timeblocks.html">Timeblocks</a></li>
+    <li><a href="currency-layer.html">Currency Layer</a></li>
+    <li><a href="knowledge-base.html" class="active">Knowledge Base</a></li>
+  </ul>
+</nav>
+
+<div class="container">
+  <div class="hero">
+    <div class="hero-label">Research &bull; Articles &bull; Papers</div>
+    <h1>Knowledge Base</h1>
+    <p class="hero-sub">
+      Articles, case studies, academic papers, and news covering BTCADP,
+      BTCC, Bitcoin Timeblocks, and the Bitcoin Currency Layer.
+      Content added as the ecosystem develops.
+    </p>
+  </div>
+
+  <div class="content">
+
+    <!-- SECTION 1: Articles -->
+    <div class="kb-section">
+      <div class="kb-section-header">
+        <span class="kb-section-num">01</span>
+        <span class="kb-section-title">Articles</span>
+        <span class="kb-section-count">Coming soon</span>
+      </div>
+      <div class="empty-state">
+        <div class="empty-icon">📝</div>
+        <div class="empty-title">No articles yet</div>
+        <div class="empty-desc">
+          Accessible explainers and commentary on BTCADP, BTCC,
+          Bitcoin Timeblocks, and the currency layer concept will
+          be published here as the project develops.
+        </div>
+        <a href="https://github.com/BTCADP/btcadp-research" class="empty-cta">Contribute on GitHub &rarr;</a>
+      </div>
+    </div>
+
+    <!-- SECTION 2: Case Studies -->
+    <div class="kb-section">
+      <div class="kb-section-header">
+        <span class="kb-section-num">02</span>
+        <span class="kb-section-title">Case Studies</span>
+        <span class="kb-section-count">Coming soon</span>
+      </div>
+      <div class="empty-state">
+        <div class="empty-icon">🔬</div>
+        <div class="empty-title">No case studies yet</div>
+        <div class="empty-desc">
+          In-depth examinations of BTCC adoption scenarios, treasury
+          consortium models, and real-world currency layer applications
+          will be published here.
+        </div>
+        <a href="https://github.com/BTCADP/btcadp-research" class="empty-cta">Contribute on GitHub &rarr;</a>
+      </div>
+    </div>
+
+    <!-- SECTION 3: Academic Papers -->
+    <div class="kb-section">
+      <div class="kb-section-header">
+        <span class="kb-section-num">03</span>
+        <span class="kb-section-title">Academic Papers</span>
+        <span class="kb-section-count">Coming soon</span>
+      </div>
+      <div class="empty-state">
+        <div class="empty-icon">🎓</div>
+        <div class="empty-title">No academic papers yet</div>
+        <div class="empty-desc">
+          Peer-reviewed research on BTCADP methodology, BTCC stability
+          properties, manipulation resistance, and historical era
+          verification will be listed here. Researchers are invited
+          to contribute.
+        </div>
+        <a href="specification.html" class="empty-cta">Read the Specification &rarr;</a>
+      </div>
+    </div>
+
+    <!-- SECTION 4: News -->
+    <div class="kb-section">
+      <div class="kb-section-header">
+        <span class="kb-section-num">04</span>
+        <span class="kb-section-title">News</span>
+        <span class="kb-section-count">Coming soon</span>
+      </div>
+      <div class="empty-state">
+        <div class="empty-icon">📡</div>
+        <div class="empty-title">No news yet</div>
+        <div class="empty-desc">
+          Coverage, mentions, and developments related to BTCADP,
+          BTCC, and the Bitcoin currency layer will be tracked here
+          as the project gains visibility.
+        </div>
+        <a href="https://github.com/BTCADP/btcadp-research" class="empty-cta">Follow on GitHub &rarr;</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <p>
+    <a href="index.html">Home</a> &nbsp;&bull;&nbsp;
+    <a href="btcc.html">BTCC</a> &nbsp;&bull;&nbsp;
+    <a href="specification.html">Specification</a> &nbsp;&bull;&nbsp;
+    <a href="currency-layer.html">Currency Layer</a> &nbsp;&bull;&nbsp;
+    <a href="https://github.com/BTCADP/btcadp-research">GitHub</a>
+  </p>
+  <p style="margin-top:8px;">CC0 Public Domain &bull; btcadp.org &bull; 2026</p>
+</footer>
+
+</body>
+</html>
