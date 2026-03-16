@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ | btcadp.org</title>
+  <meta name="description" content="Frequently asked questions about BTCADP, BTCC, and the TBDC.">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:           #0a0a0b;
+      --bg-secondary: #111114;
+      --bg-tertiary:  #19191e;
+      --border:       rgba(255,255,255,0.08);
+      --orange:       #f7931a;
+      --orange-dim:   rgba(247,147,26,0.12);
+      --green:        #2ecc71;
+      --text:         #e8e8ed;
+      --text-secondary: #c4c4cc;
+      --text-muted:   #6e6e7a;
+      --font-mono:    'SF Mono', 'Fira Mono', 'Consolas', monospace;
+      --font-sans:    'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    html { font-size: 17px; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      line-height: 1.7;
+      min-height: 100vh;
+      background-image:
+        linear-gradient(rgba(247,147,26,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(247,147,26,0.02) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(10,10,11,0.95);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 24px; height: 52px;
+    }
+    .nav-brand { font-family: var(--font-mono); font-size: 1rem; font-weight: bold; color: var(--orange); text-decoration: none; letter-spacing: 0.05em; }
+    .nav-links { display: flex; gap: 4px; list-style: none; }
+    .nav-links a { font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-muted); text-decoration: none; padding: 0.4rem 0.7rem; border-radius: 4px; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--orange); }
+
+    /* ── CONTAINER ── */
+    .container { max-width: 860px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 64px 24px 48px;
+      border-bottom: 1px solid var(--border);
+      background: radial-gradient(ellipse at 50% 0%, rgba(247,147,26,0.06) 0%, transparent 60%);
+      text-align: left;
+    }
+    .hero .container {}
+    .hero-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--orange); margin-bottom: 16px; }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; letter-spacing: -1px; line-height: 1.1; color: #fff; margin-bottom: 16px; }
+    .hero-sub { font-size: 1.05rem; color: var(--text-secondary); max-width: 640px; line-height: 1.75; font-family: var(--font-sans); }
+
+    /* ── SECTIONS ── */
+    .faq-section { padding: 56px 0; border-bottom: 1px solid var(--border); }
+    .faq-section:last-of-type { border-bottom: none; }
+
+    .section-tag { font-family: var(--font-mono); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--orange); margin-bottom: 10px; }
+    .section-title { font-size: 1.5rem; font-weight: 600; color: #fff; margin-bottom: 32px; letter-spacing: -0.4px; }
+
+    /* ── FAQ ITEMS ── */
+    .faq-item {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      background: var(--bg-secondary);
+      transition: border-color 0.2s;
+    }
+    .faq-item:hover { border-color: rgba(247,147,26,0.25); }
+    .faq-item.open { border-color: rgba(247,147,26,0.35); }
+
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 20px 24px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      cursor: pointer;
+      text-align: left;
+    }
+    .faq-q-text {
+      font-family: var(--font-sans);
+      font-size: 0.97rem;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.5;
+    }
+    .faq-icon {
+      font-family: var(--font-mono);
+      font-size: 1.2rem;
+      color: var(--orange);
+      flex-shrink: 0;
+      transition: transform 0.25s;
+      margin-top: 1px;
+    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+    .faq-answer {
+      display: none;
+      padding: 0 24px 22px 24px;
+      font-family: var(--font-sans);
+      font-size: 0.93rem;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      border-top: 1px solid var(--border);
+    }
+    .faq-item.open .faq-answer { display: block; }
+    .faq-answer p { margin-bottom: 12px; }
+    .faq-answer p:last-child { margin-bottom: 0; }
+
+    .faq-answer strong { color: var(--text); }
+
+    .callout {
+      background: var(--orange-dim);
+      border-left: 3px solid var(--orange);
+      border-radius: 0 4px 4px 0;
+      padding: 14px 18px;
+      margin: 16px 0;
+      font-size: 0.88rem;
+      color: #c4a46a;
+      line-height: 1.7;
+    }
+
+    /* ── CTA ── */
+    .cta-block {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-top: 2px solid var(--orange);
+      border-radius: 8px;
+      padding: 36px 32px;
+      text-align: center;
+      margin: 48px 0;
+    }
+    .cta-block h3 { font-size: 1.15rem; font-weight: 600; color: #fff; margin-bottom: 8px; }
+    .cta-block p { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px; }
+    .cta-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary { background: var(--orange); color: #000; font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700; padding: 10px 22px; border-radius: 4px; text-decoration: none; transition: opacity 0.2s; }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-secondary { background: transparent; color: var(--text-secondary); font-family: var(--font-mono); font-size: 0.8rem; padding: 10px 22px; border-radius: 4px; border: 1px solid var(--border); text-decoration: none; transition: all 0.2s; }
+    .btn-secondary:hover { border-color: var(--orange); color: var(--orange); }
+
+    /* ── FOOTER ── */
+    footer { border-top: 1px solid var(--border); padding: 32px 24px; text-align: center; font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+    footer a { color: var(--text-muted); text-decoration: none; }
+    footer a:hover { color: var(--orange); }
+
+    @media (max-width: 600px) {
+      .nav-links a { padding: 0.4rem 0.5rem; font-size: 0.72rem; }
+      .hero { padding: 40px 24px 36px; }
+      .faq-question { padding: 16px 18px; }
+      .faq-answer { padding: 0 18px 18px 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="index.html">BTCADP</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="live.html">Live</a></li>
+    <li><a href="days/index.html">Days</a></li>
+    <li><a href="specification.html">Specification</a></li>
+    <li><a href="btcc.html">BTCC</a></li>
+    <li><a href="tbdc.html">TBDC</a></li>
+    <li><a href="faq.html" class="active">FAQ</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="container">
+    <div class="hero-label">Questions &amp; Answers</div>
+    <h1>Frequently Asked<br>Questions</h1>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="container">
+
+  <!-- SECTION: BTCC & DENOMINATION -->
+  <div class="faq-section">
+    <div class="section-tag">The Denomination</div>
+    <div class="section-title">BTCC &amp; the Unit of Account</div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggle(this)">
+        <span class="faq-q-text">Why not just use sats? Bitcoin is the unit of account.</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Sats are a precise unit of account for a volatile asset. That volatility creates three specific barriers to everyday commerce that BTCC addresses directly.</p>
+        <p><strong>Volatility.</strong> A merchant cannot price a sandwich in sats today and have that price mean the same thing tomorrow. BTCC solves this through arithmetic — a cumulative historical average that moves negligibly from day to day — not through a peg or a promise.</p>
+        <p><strong>Familiarity.</strong> Ordinary people think in purchasing power terms. A unit whose fiat-equivalent value barely moves maps onto how humans already think about money. Asking the world to redenominate its intuitions around a number that swings 10% in a day is an adoption barrier that has nothing to do with Bitcoin's technical soundness.</p>
+        <p><strong>Friction.</strong> Every time a user has to consult the spot price, make a mental conversion, or hesitate about spending an appreciating asset, that friction kills the transaction. BTCC removes it entirely at the commerce layer without touching the protocol.</p>
+        <div class="callout">BTCC does not compete with sats. It makes sats more useful to more people sooner. Accelerating Bitcoin adoption benefits every Bitcoin stakeholder. Waiting for the spot price to spontaneously stabilize is not a strategy.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggle(this)">
+        <span class="faq-q-text">Isn't mild BTCC deflation bad for commerce?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Only if you accept the fiat framing of what "good" monetary policy looks like. BTCC deflation is Bitcoin's hard money property expressed in a stable denomination. Prices falling slowly in BTCC terms means purchasing power is improving. That is the point.</p>
+        <p>The magnitude matters. We are talking about fractions of a percent per month — not the deflationary spiral economists warn about. A merchant adjusting BTCC prices downward twice a year is not a burden. It is a feature that tells customers their money is working for them.</p>
+        <p>Anyone arguing that mild deflation destroys commerce is arguing in favor of the inflationary monetary system that Bitcoin was built to replace.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggle(this)">
+        <span class="faq-q-text">Isn't BTCC dependent on the US dollar?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>No. The US dollar is the measurement instrument, not the peg. BTCC measures Bitcoin's cumulative average price in dollars the same way a thermometer measures temperature in Fahrenheit — the thermometer is not Fahrenheit-dependent, it is simply using a common unit for measurement.</p>
+        <p>A BTCC holder does not inherit dollar inflation. If the dollar inflates, the BTCC price in dollars rises accordingly — just as the BTC spot price rises. The purchasing power of the BTCC unit tracks Bitcoin's history, not the Federal Reserve's balance sheet.</p>
+        <p>The USD denomination is a practical choice based on where Bitcoin's deepest liquidity has always lived. Converting BTCC to any other currency is trivial: multiply by the relevant forex rate. A future extension of the BTCADP specification may define additional currency pair variants.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggle(this)">
+        <span class="faq-q-text">Does BTCC require changes to the Bitcoin protocol?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>No. BTCC requires no changes to the Bitcoin protocol whatsoever. No soft fork, no hard fork, no new opcodes, no consensus rule modifications. The Bitcoin network need not accommodate BTCC in any way.</p>
+        <p>The denomination operates entirely in the calculation layer. It defines a unit of account — a way to express and agree upon value — that is deterministic, publicly verifiable, and requires no real-time data beyond the daily BTCADP update at midnight UTC.</p>
+        <p>How this unit is used in practice — wallet interfaces, invoicing systems, merchant pricing, payment protocols — is left entirely to implementers. The BTCC standard specifies what the unit is and how it is computed. Nothing more.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SECTION: BTCADP -->
+  <div class="faq-section">
+    <div class="section-tag">The Reference Price</div>
+    <div class="section-title">BTCADP &amp; Price Methodology</div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggle(this)">
+        <span class="faq-q-text">Why is Era 0 defined as $0.00? Isn't that arbitrary?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>It is a deliberate, documented convention — the opposite of arbitrary. No organized exchange existed between January 3, 2009 and July 17, 2010. A daily reference price requires a market, and no market existed. Defining those 561 days as $0.00 provides a clean, unambiguous, reproducible baseline. The alternative — treating those days as undefined — would produce an incomplete historical record.</p>
+        <p>The specification acknowledges this convention openly and invites researchers to produce alternative valuations based on documented peer-to-peer transactions, mining costs, or other methodologies. That work is encouraged.</p>
+        <div class="callout">Critically, even if researchers produce compelling alternative Era 0 valuations, the mathematical impact on a cumulative average now exceeding 6,200 days is negligible. Those 561 early days carry 1/6,200th of the total weight. No credible alternative methodology produces a BTCC price that differs meaningfully from the current one.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggle(this)">
+        <span class="faq-q-text">Why equal exchange weighting instead of volume weighting?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Volume weighting across exchanges would reintroduce the exact manipulation vector the methodology is designed to eliminate. An exchange that fabricates volume would gain proportional influence over the final price. Equal weighting ensures no single exchange, regardless of its reported size, can dominate the result.</p>
+        <p>The trimmed mean handles the trade-off: if a small exchange's VWAP is an outlier, it is trimmed. If it falls within the middle 50%, its price is broadly consistent with the market and deserves equal inclusion. The known Sybil attack vector — creating multiple small exchanges to shift the mean — is documented, cost-analyzed, and detectable through the transparency record.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggle(this)">
+        <span class="faq-q-text">Who controls the price of BTCC?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Nobody. That is not a rhetorical answer — it is a mathematical one. The BTCC price is the cumulative arithmetic mean of every daily Bitcoin price since the genesis block. No person, institution, or publisher can alter that calculation. The methodology is the authority, not the publisher.</p>
+        <p>The independence is mathematically enforced. Because the cumulative average incorporates over 6,200 days of history, the weight of any single day's data is approximately 1/6,200 of the total. Any researcher with access to basic historical Bitcoin price data — freely available from CoinGecko, CoinMarketCap, or any standard price feed — will arrive at a BTCC price essentially indistinguishable from one computed using the most rigorous trade-level data available. The arithmetic buries the noise.</p>
+        <p>This property strengthens over time, not weakens. In ten years with 9,700 days of history, the tolerance for data imprecision is even larger. A researcher in 2035 with nothing but a free API and a spreadsheet can independently verify the BTCC price to within a fraction of a cent. If btcadp.org ceased to exist tomorrow, any competent party with the specification and trade data could continue computing the BTCADP without interruption.</p>
+        <div class="callout">LIBOR required trusting banks with every incentive to lie. The CME Bitcoin Reference Rate requires trusting a specific set of approved venues. BTCADP requires trusting arithmetic. Anyone can check it. No institution can capture it.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SECTION: TBDC -->
+  <div class="faq-section">
+    <div class="section-tag">The Token Layer</div>
+    <div class="section-title">TBDC &amp; the Reserve System</div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggle(this)">
+        <span class="faq-q-text">Isn't this just another stablecoin? Stablecoins fail.</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>The Terra/Luna comparison does not survive contact with the actual mechanics. Terra/Luna failed because its collateral was endogenous — the system's own token, whose value depended entirely on confidence in the system itself. When confidence broke, the collateral evaporated simultaneously with the liability. It was a circular firing squad by design.</p>
+        <p>TBDC is the structural opposite. The collateral is Bitcoin — exogenous, independently valued, liquid, and completely indifferent to whether TBDC exists or not. Bitcoin's value does not depend on TBDC succeeding.</p>
+        <p>The risk that does exist is straightforward and knowable: a sustained decline in BTC spot below individual tokens' issuance prices creates Ledger 1 shortfalls that Ledger 2 must cover. Treasury companies understand this risk intimately — it is directional Bitcoin exposure, which is their core business. They already model it, manage it, and hold reserves against it.</p>
+        <div class="callout">Every monetary system carries risk. The question is whether the risk is understood, bounded, and manageable. Here it is all three. And the reserves are Bitcoin on the base layer — publicly addressable, verifiable in real time by anyone, without an auditor.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggle(this)">
+        <span class="faq-q-text">Is the TBDC overcollateralized because BTC spot is higher than the BTCC price?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>No. This is a common conflation worth addressing directly. At issuance, a TBDC token is backed 1:1. The fiat received from the customer purchases exactly enough Bitcoin at the current spot price to cover the BTCC liability at that moment. Ledger 1 starts at 1:1, not overcollateralized.</p>
+        <p>The ratio of BTC spot price to BTCC price — roughly 4-5x at current levels — describes a price relationship between two different units. It does not mean each token is backed by 4-5x its face value. It means one full Bitcoin can redeem approximately 4-5 BTCC units.</p>
+        <p>Surplus only emerges if and as Bitcoin's spot price rises above the issuance price after a token is minted. That divergence over time — Ledger 1 Bitcoin appreciating at the spot rate while the BTCC liability barely moves — is the treasury company's return and the reserve system's growing margin of safety. It is earned through market appreciation, not present at inception.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggle(this)">
+        <span class="faq-q-text">What about intraday price drift? The BTCC price only updates once a day.</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Intraday drift is only a concern at the boundaries of the system — when fiat converts to tokens (minting) or tokens convert back to fiat (redemption). Inside the currency layer, there is no drift because no conversion happens.</p>
+        <p>A merchant prices in BTCC. A customer pays in TBDC tokens. The merchant receives TBDC tokens. No spot price is consulted. No satoshi conversion occurs. The BTCC price is the same at 9am as it is at 4pm because it updates once per day at midnight UTC. Neither party is exposed to intraday Bitcoin volatility.</p>
+        <p>The system is designed for commerce to transact entirely on the token layer. Bitcoin's base layer is touched only at the boundaries: when fiat enters and when fiat exits. Everything in between is token transfers on Liquid, denominated in BTCC, with no reference to spot price required.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggle(this)">
+        <span class="faq-q-text">Who governs the consortium? What happens if a member defaults?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Governance structure is an implementation question for the participating treasury companies, not a specification question for the protocol. The concept demonstrates that the incentives are aligned and the mechanics are sound. How participants choose to formalize their cooperation — legal structure, jurisdiction, decision rules, default procedures — is their problem to solve, and they have every incentive to solve it well.</p>
+        <p>This is the same relationship as Bitcoin's protocol and mining pool governance. Satoshi defined the protocol and the incentive structure. Governance forms emerged organically because participants had skin in the game. The BTCC denomination and TBDC mechanics define the protocol layer. Institutional structure follows from aligned incentives.</p>
+        <p>Importantly, the BTCC denomination computes the same way regardless of how the consortium is structured. The unit of account is not contingent on any particular governance arrangement.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggle(this)">
+        <span class="faq-q-text">What is the regulatory status of TBDC?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Regulatory compliance is jurisdiction-specific, time-specific, and an implementation question for the entities that choose to build on this protocol. The concept is designed to be regulatory-framework-neutral — it can be implemented under whatever compliance structure the participants determine is appropriate in their jurisdiction.</p>
+        <p>Regulatory frameworks for Bitcoin-native instruments are still being written. The landscape in 2026 looks different from 2023 and will look different again in 2028. Treasury companies considering this model will have legal teams whose entire job is navigating that environment. The protocol's job is to be mechanically sound. It is.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-block">
+    <h3>Read the Full Documentation</h3>
+    <p>The complete specifications, technical papers, and case studies are available below.</p>
+    <div class="cta-buttons">
+      <a href="specification.html" class="btn-primary">BTCADP Specification</a>
+      <a href="btcc-paper.html" class="btn-secondary">BTCC Technical Paper</a>
+      <a href="tbdc.html" class="btn-secondary">TBDC Overview</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>
+    <a href="index.html">Home</a> &nbsp;·&nbsp;
+    <a href="specification.html">BTCADP Specification</a> &nbsp;·&nbsp;
+    <a href="btcc-paper.html">BTCC Paper</a> &nbsp;·&nbsp;
+    <a href="tbdc.html">TBDC</a> &nbsp;·&nbsp;
+    <a href="https://github.com/BTCADP/btcadp-research">GitHub</a>
+  </p>
+  <p style="margin-top: 0.8rem;">CC0 Public Domain &nbsp;·&nbsp; btcadp.org &nbsp;·&nbsp; 2026</p>
+</footer>
+
+<script>
+  function toggle(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    // Close all
+    document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+    // Open clicked if it was closed
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // Open first item by default
+  document.addEventListener('DOMContentLoaded', () => {
+    const first = document.querySelector('.faq-item');
+    if (first) first.classList.add('open');
+  });
+</script>
+
+</body>
+</html>
