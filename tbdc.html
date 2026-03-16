@@ -394,17 +394,29 @@
       </p>
 
       <div class="collateral-viz">
-        <div class="cv-label">Natural Bitcoin Collateral Buffer (Illustrative — BTC spot ~$84,000, BTCC ~$18,000)</div>
-        <div class="cv-bars">
-          <div class="cv-bar" style="background:var(--orange);height:100%;">BTC<br>Spot</div>
-          <div class="cv-bar" style="background:rgba(247,147,26,0.3);height:21%;border:1px solid var(--orange);">BTCC</div>
+        <div class="cv-label">How the Reserve Builds Over Time</div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border-radius:6px;overflow:hidden;margin-bottom:16px;">
+          <div style="background:var(--bg-primary);padding:20px;">
+            <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--orange);margin-bottom:10px;">At Issuance — 1:1</div>
+            <div style="display:flex;align-items:flex-end;gap:8px;height:80px;margin-bottom:8px;">
+              <div style="flex:1;background:var(--orange);border-radius:3px 3px 0 0;height:100%;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:10px;color:#000;font-weight:700;">BTC</div>
+              <div style="flex:1;background:rgba(255,255,255,0.15);border:1px dashed var(--border);border-radius:3px 3px 0 0;height:100%;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:10px;color:var(--text-muted);font-weight:700;">BTCC</div>
+            </div>
+            <div style="font-family:var(--font-sans);font-size:0.78rem;color:var(--text-muted);">Fiat in → BTC purchased at spot → exactly covers the BTCC liability. No surplus yet.</div>
+          </div>
+          <div style="background:var(--bg-primary);padding:20px;">
+            <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--green);margin-bottom:10px;">After Appreciation — Surplus builds</div>
+            <div style="display:flex;align-items:flex-end;gap:8px;height:80px;margin-bottom:8px;">
+              <div style="flex:1;background:var(--orange);border-radius:3px 3px 0 0;height:100%;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:10px;color:#000;font-weight:700;">BTC</div>
+              <div style="flex:1;background:rgba(255,255,255,0.15);border:1px dashed var(--border);border-radius:3px 3px 0 0;height:32%;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:10px;color:var(--text-muted);font-weight:700;">BTCC</div>
+            </div>
+            <div style="font-family:var(--font-sans);font-size:0.78rem;color:var(--text-muted);">BTC spot rises. Ledger 1 assets appreciate at spot rate. BTCC liability barely moves. Surplus accumulates.</div>
+          </div>
         </div>
-        <div class="cv-bar-labels">
-          <div class="cv-bar-label">$84,000<br><span style="color:var(--orange);">BTC Spot Price</span></div>
-          <div class="cv-bar-label">~$18,000<br><span style="color:var(--text-muted);">BTCC (liability)</span></div>
-        </div>
-        <div style="margin-top:16px;font-family:var(--font-sans);font-size:0.82rem;color:var(--text-secondary);line-height:1.6;">
-          Bitcoin's spot price is naturally ~4.5× the BTCC cumulative average. This means Ledger 1 alone — without any Ledger 2 backstop — holds approximately 4.5× the value of the liabilities it backs. This is not engineered overcollateralization. It is a structural property of Bitcoin's price history relative to the BTCC formula.
+
+        <div style="font-family:var(--font-sans);font-size:0.82rem;color:var(--text-secondary);line-height:1.6;">
+          Every token is issued 1:1 — the fiat received purchases exactly enough Bitcoin to cover the BTCC liability at that moment. Surplus only emerges if and as Bitcoin's spot price rises above the issuance price. The BTCC liability is anchored to a slow-moving cumulative average, while the Bitcoin in Ledger 1 appreciates at the full spot rate. That divergence over time is the treasury company's return — and the reserve system's growing margin of safety.
         </div>
       </div>
 
