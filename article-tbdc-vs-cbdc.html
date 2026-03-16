@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Could Bitcoin Treasury Companies Offer a Viable Alternative to CBDCs? | btcadp.org</title>
+<meta name="description" content="An examination of the Treasury-Backed Digital Currency (TBDC) as a counter-architecture to Central Bank Digital Currencies.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary: #0a0a0b;
+    --bg-secondary: #111114;
+    --bg-tertiary: #19191e;
+    --border: #2a2a32;
+    --text-primary: #e8e6e3;
+    --text-secondary: #8a8a95;
+    --text-muted: #555560;
+    --orange: #f7931a;
+    --orange-dim: rgba(247,147,26,0.12);
+    --red: #e74c3c;
+    --green: #2ecc71;
+    --font-display: 'Source Serif 4', Georgia, serif;
+    --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-display);
+    font-size: 18px;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(247,147,26,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(247,147,26,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(10,10,11,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 56px;
+  }
+
+  .nav-brand { font-family: var(--font-mono); font-size: 1rem; font-weight: bold; color: var(--orange); text-decoration: none; letter-spacing: 0.05em; }
+  .nav-links { display: flex; gap: 0.25rem; list-style: none; }
+  .nav-links a { color: var(--text-muted); text-decoration: none; font-family: var(--font-mono); font-size: 0.72rem; padding: 0.4rem 0.6rem; border-radius: 4px; transition: color 0.2s, background 0.2s; }
+  .nav-links a:hover { color: var(--text-primary); background: var(--bg-tertiary); }
+  .nav-links a.active { color: var(--orange); }
+
+  .article-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 64px 24px 100px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .article-meta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 20px;
+  }
+
+  .article-title {
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -1px;
+    line-height: 1.15;
+    color: #fff;
+    margin-bottom: 20px;
+  }
+
+  .article-byline {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 48px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .article-body h2 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #fff;
+    margin: 48px 0 16px;
+    letter-spacing: -0.3px;
+  }
+
+  .article-body h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--orange);
+    margin: 32px 0 12px;
+    font-family: var(--font-sans);
+    letter-spacing: 0;
+  }
+
+  .article-body p {
+    color: #c8c6c3;
+    margin-bottom: 20px;
+    font-size: 1rem;
+  }
+
+  .article-body blockquote {
+    border-left: 3px solid var(--orange);
+    padding: 12px 20px;
+    margin: 28px 0;
+    background: var(--orange-dim);
+    border-radius: 0 4px 4px 0;
+  }
+
+  .article-body blockquote p {
+    color: #c4a46a;
+    font-style: italic;
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 28px 0;
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+  }
+
+  .compare-table th {
+    text-align: left;
+    padding: 10px 14px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .compare-table td {
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    color: #c4c4cc;
+    vertical-align: top;
+    line-height: 1.55;
+  }
+
+  .compare-table tr:nth-child(even) td { background: var(--bg-secondary); }
+  .good { color: var(--green); }
+  .bad { color: var(--red); }
+
+  .reserve-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 28px 0;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+  }
+
+  .reserve-table th {
+    text-align: left;
+    padding: 8px 12px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    white-space: nowrap;
+  }
+
+  .reserve-table td {
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    color: #c4c4cc;
+    white-space: nowrap;
+  }
+
+  .reserve-table tr:nth-child(even) td { background: var(--bg-secondary); }
+  .surplus { color: var(--green); }
+  .neutral { color: var(--orange); }
+  .stress { color: #f1c40f; }
+
+  .article-footer {
+    margin-top: 64px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary { background: var(--orange); color: #000; font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700; padding: 10px 20px; border-radius: 4px; text-decoration: none; transition: opacity 0.2s; }
+  .btn-primary:hover { opacity: 0.85; }
+  .btn-secondary { background: transparent; color: var(--text-secondary); font-family: var(--font-mono); font-size: 0.8rem; padding: 10px 20px; border-radius: 4px; border: 1px solid var(--border); text-decoration: none; transition: all 0.2s; }
+  .btn-secondary:hover { border-color: var(--orange); color: var(--orange); }
+
+  footer { border-top: 1px solid var(--border); padding: 32px 24px; text-align: center; font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+  footer a { color: var(--text-muted); text-decoration: none; }
+  footer a:hover { color: var(--orange); }
+
+  @media (max-width: 640px) {
+    .nav-links a { font-size: 0.65rem; padding: 0.3rem 0.4rem; }
+    .reserve-table { font-size: 0.68rem; }
+  }
+</style>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="index.html">BTCADP</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="btcc.html">BTCC</a></li>
+    <li><a href="bitcoin-timeblocks.html">Timeblocks</a></li>
+    <li><a href="currency-layer.html">Currency Layer</a></li>
+    <li><a href="knowledge-base.html" class="active">Knowledge Base</a></li>
+  </ul>
+</nav>
+
+<div class="article-wrap">
+
+  <div class="article-meta">Article &nbsp;&bull;&nbsp; btcadp.org &nbsp;&bull;&nbsp; March 2026</div>
+
+  <h1 class="article-title">Could Bitcoin Treasury Companies Offer a Viable Alternative to Central Bank CBDCs?</h1>
+
+  <div class="article-byline">
+    Anonymous &nbsp;&bull;&nbsp; btcadp.org &nbsp;&bull;&nbsp; March 2026 &nbsp;&bull;&nbsp; CC0 Public Domain
+  </div>
+
+  <div class="article-body">
+
+    <p>
+      Central banks around the world are developing digital currencies. The Bank of International
+      Settlements estimates that over 130 countries are in some stage of CBDC exploration or rollout,
+      with several — China, the Bahamas, Nigeria — already operating live systems. The case for CBDCs
+      is made in the language of efficiency: faster payments, lower costs, financial inclusion for the
+      unbanked. But efficiency is not the only thing a monetary system delivers to those who use it.
+      It also delivers, or fails to deliver, financial privacy, protection from arbitrary account action,
+      and freedom from the coercive use of monetary policy as a behavioral instrument.
+    </p>
+
+    <p>
+      What would it mean to build a digital currency that preserves the freedom properties of physical
+      cash while providing the settlement efficiency of a digital network — and does so without a central
+      issuer capable of inflating the supply, surveilling every transaction, or weaponizing access? This
+      article examines one concrete proposal: the Treasury-Backed Digital Currency, or TBDC — a
+      Bitcoin-backed instrument issued by a consortium of publicly traded Bitcoin treasury companies and
+      denominated in the BTCC (Bitcoin Currency) unit of account.
+    </p>
+
+    <p>
+      The TBDC is not a speculative concept. Its components — a published reference price specification,
+      a mathematically defined denomination, and a class of institutional participants with existing
+      Bitcoin holdings exceeding 600,000 BTC — are already in place. What the proposal requires is their
+      assembly into a functioning monetary institution.
+    </p>
+
+    <h2>I. What CBDCs Are — and What They Are Not</h2>
+
+    <p>
+      A Central Bank Digital Currency is a liability of the central bank, denominated in the national
+      unit of account, and accessible directly by the public in digital form. It is, in effect, a digital
+      banknote — except that unlike a physical banknote, it is not bearer money. Every balance and every
+      transaction is recorded on infrastructure controlled by, or directly accessible to, the issuing
+      authority.
+    </p>
+
+    <p>
+      The efficiency case for CBDCs is real and should be acknowledged clearly. Programmable money that
+      can be transferred in seconds without passing through commercial bank intermediaries would represent
+      a genuine improvement over much existing payment infrastructure. The financial inclusion argument
+      is substantive. These are not fabricated benefits.
+    </p>
+
+    <p>The structural problems are also real, and they are inherent to the architecture rather than artifacts of implementation.</p>
+
+    <h3>The Inflation Problem Has Not Been Solved</h3>
+
+    <p>
+      A CBDC does not alter the fundamental property of central bank money: that it can be created,
+      expanded, and devalued at the discretion of monetary authorities. The US dollar has lost
+      approximately 97% of its purchasing power since the Federal Reserve's founding in 1913. This is
+      not a malfunction — it is the system operating as designed. At a 2% annual inflation target —
+      the explicit policy goal of most major central banks — a unit of currency loses half its purchasing
+      power in approximately 35 years. At 8%, a rate experienced in the US in 2022, purchasing power
+      halves in 9 years.
+    </p>
+
+    <blockquote>
+      <p>Central banks target 2% annual inflation as a policy goal. At that rate, the currency in your wallet loses half its purchasing power every 35 years without a single policy failure. A CBDC does not change this. It removes the last tool — physical cash — that allowed holders to partially escape it.</p>
+    </blockquote>
+
+    <h3>Programmability as a Control Mechanism</h3>
+
+    <p>
+      The defining technical property of a CBDC is programmability. Unlike a physical banknote — a bearer
+      instrument that changes hands without any record or condition — a CBDC balance is software. Software
+      can have rules. Proposals already publicly discussed include: expiry dates on currency that force
+      spending within defined windows; negative interest rates on held balances that eliminate the option
+      to save; categorical spending restrictions limiting purchases to approved vendors or categories.
+    </p>
+
+    <blockquote>
+      <p>The most important thing to understand about a CBDC is not what it does today, but what it makes technically possible that was previously impractical. Physical cash is a bearer instrument. It cannot be surveilled, frozen, programmed, or expired by a central authority. A CBDC can be all four.</p>
+    </blockquote>
+
+    <h3>Total Transactional Surveillance</h3>
+
+    <p>
+      Physical cash transactions leave no record. A CBDC transaction necessarily does. Every payment,
+      every merchant, every amount, every timestamp — the complete record of an individual's economic life
+      — is recorded on infrastructure that the issuing authority either operates directly or can access.
+      This is not a privacy policy question. It is a structural property of the architecture. China's
+      e-CNY describes its privacy model as "controllable anonymity" — meaning the PBOC retains full access
+      to the underlying data. This is not anonymity. It is pseudonymity with a government override.
+    </p>
+
+    <h2>II. The TBDC: A Counter-Architecture</h2>
+
+    <p>
+      The term TBDC — Treasury-Backed Digital Currency — is chosen to mark a structural contrast with the
+      CBDC model. A TBDC is issued by a consortium of publicly traded Bitcoin treasury companies. As of
+      early 2026, such companies include Strategy, MARA Holdings, Metaplanet, Twenty One Capital, and
+      others, with combined Bitcoin holdings exceeding 600,000 BTC.
+    </p>
+
+    <p>
+      Where a CBDC is a new form of an old instrument — sovereign-issued money, digitized — a TBDC is a
+      genuinely different kind of institution. Its reserves are a scarce asset no issuer can produce.
+      Its denomination is determined by arithmetic rather than policy. And the properties that CBDCs
+      eliminate — transaction privacy, censorship resistance, freedom from behavioral programming — are
+      structural features of the TBDC architecture rather than policy choices that might be reversed.
+    </p>
+
+    <h3>The Two-Ledger Reserve System</h3>
+
+    <p>
+      When a customer purchases a TBDC token, they send fiat to a consortium member. The treasury company
+      uses those funds to purchase Bitcoin at spot and deposits it into Ledger 1, the issuance pool.
+      One TBDC token is issued. Ledger 2 — the reserve backstop — holds Bitcoin from the treasury
+      company's existing holdings, guaranteeing redemptions when spot has declined. Both ledgers are held
+      in publicly addressable wallets on Bitcoin's base layer, verifiable by any observer in real time.
+      The reserves are not lent, staked, or rehypothecated.
+    </p>
+
+    <table class="reserve-table">
+      <thead>
+        <tr>
+          <th>BTC Spot</th>
+          <th>Ledger 1</th>
+          <th>Ledger 2</th>
+          <th>Combined</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>$140,000</td><td>$36,000</td><td>$35,000</td><td class="surplus">394%</td><td>Significant surplus</td></tr>
+        <tr><td>$100,000</td><td>$25,714</td><td>$25,000</td><td class="surplus">282%</td><td>Surplus; profit on redemption</td></tr>
+        <tr><td>$70,000</td><td>$18,000</td><td>$17,500</td><td class="neutral">197%</td><td>Fully backed at issuance</td></tr>
+        <tr><td>$50,000</td><td>$12,857</td><td>$12,500</td><td class="neutral">141%</td><td>Ledger 1 short; Ledger 2 covers</td></tr>
+        <tr><td>$30,000</td><td>$7,714</td><td>$7,500</td><td class="stress">84%</td><td>Draw on Ledger 2; solvent</td></tr>
+        <tr><td>$18,000</td><td>$4,629</td><td>$4,500</td><td class="stress">51%</td><td>Break-even threshold (BTCC price)</td></tr>
+      </tbody>
+    </table>
+
+    <h3>The BTCC Denomination</h3>
+
+    <p>
+      TBDC tokens are denominated in BTCC — defined as the arithmetic mean of every historical Bitcoin
+      Average Daily Price from the genesis block through the previous completed day. As of early 2026,
+      this incorporates over 6,200 daily observations. A day on which Bitcoin's spot price moves 10%
+      shifts the BTCC price by less than 0.01%. A 40% single-day crash shifts it by approximately 0.04%.
+      These are arithmetic facts, not policy commitments. The BTCC denomination cannot be inflated, given
+      an expiry date, or programmed with spending conditions. It is a number produced by a public
+      calculation from public data.
+    </p>
+
+    <h2>III. Where TBDC and CBDC Diverge</h2>
+
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Property</th>
+          <th>Physical Cash</th>
+          <th>CBDC</th>
+          <th>TBDC</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Supply constraint</td>
+          <td>Fixed print run</td>
+          <td class="bad">None — issuer can expand at will</td>
+          <td class="good">Bitcoin reserve only. Fixed supply asset.</td>
+        </tr>
+        <tr>
+          <td>Purchasing power</td>
+          <td class="bad">Erodes at inflation rate</td>
+          <td class="bad">Erodes at inflation rate</td>
+          <td class="good">Appreciates slowly while BTC spot &gt; BTCC</td>
+        </tr>
+        <tr>
+          <td>Programmability</td>
+          <td class="good">None. Bearer instrument.</td>
+          <td class="bad">Expiry, negative rates, spending limits possible</td>
+          <td class="good">Denomination is arithmetic. Cannot be programmed.</td>
+        </tr>
+        <tr>
+          <td>Transaction surveillance</td>
+          <td class="good">None. No record.</td>
+          <td class="bad">Complete government-accessible ledger</td>
+          <td class="good">Pseudonymous. Sidechain transfers not tied to identity.</td>
+        </tr>
+        <tr>
+          <td>Censorship resistance</td>
+          <td class="good">Cannot be frozen</td>
+          <td class="bad">Accounts can be frozen without court order</td>
+          <td class="good">No central authority. Consortium cannot unilaterally freeze.</td>
+        </tr>
+        <tr>
+          <td>Transparency</td>
+          <td>Opaque supply</td>
+          <td class="bad">Periodic reports. Limited visibility.</td>
+          <td class="good">Reserves on-chain. Methodology open-source. Auditable.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>IV. Conclusion</h2>
+
+    <p>
+      The TBDC is not presented here as a complete solution to every problem in monetary design. It carries
+      its own risks — sidechain infrastructure, consortium coordination, regulatory evolution. But it
+      addresses the structural problems of the CBDC model at their root: it cannot inflate, cannot
+      surveil, cannot program spending behavior, and cannot be weaponized by a sovereign authority
+      against its own users, because no such authority is involved in its operation.
+    </p>
+
+    <p>
+      The most consequential difference between a TBDC and a CBDC is not technical. It is that a TBDC
+      consortium cannot inflate the money supply. This is not a policy commitment that could be reversed
+      under pressure. It is an immutable property of the reserve asset. No governance vote, no emergency
+      measure, no executive decision can produce additional Bitcoin.
+    </p>
+
+    <p>
+      Against the backdrop of accelerating CBDC development globally, the TBDC represents an alternative
+      that does not require surrendering the financial autonomy that physical cash currently provides —
+      while delivering the settlement efficiency and global accessibility of a digital instrument.
+    </p>
+
+  </div>
+
+  <div class="article-footer">
+    <a href="knowledge-base.html" class="btn-primary">&larr; Knowledge Base</a>
+    <a href="currency-layer.html" class="btn-secondary">Currency Layer &rarr;</a>
+    <a href="btcc.html" class="btn-secondary">BTCC Denomination &rarr;</a>
+  </div>
+
+</div>
+
+<footer>
+  <p>
+    <a href="index.html">Home</a> &nbsp;&bull;&nbsp;
+    <a href="knowledge-base.html">Knowledge Base</a> &nbsp;&bull;&nbsp;
+    <a href="specification.html">Specification</a> &nbsp;&bull;&nbsp;
+    <a href="https://github.com/BTCADP/btcadp-research">GitHub</a>
+  </p>
+  <p style="margin-top:8px;">CC0 Public Domain &bull; btcadp.org &bull; 2026</p>
+</footer>
+
+</body>
+</html>

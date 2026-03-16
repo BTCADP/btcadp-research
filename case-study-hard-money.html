@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hard Money Central Banking — Case Study | btcadp.org</title>
+<meta name="description" content="How a consortium of Bitcoin treasury companies could issue Bitcoin-backed stablecoins using the BTCC denomination.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary: #0a0a0b;
+    --bg-secondary: #111114;
+    --bg-tertiary: #19191e;
+    --border: #2a2a32;
+    --text-primary: #e8e6e3;
+    --text-secondary: #8a8a95;
+    --text-muted: #555560;
+    --orange: #f7931a;
+    --orange-dim: rgba(247,147,26,0.12);
+    --green: #2ecc71;
+    --yellow: #f1c40f;
+    --font-display: 'Source Serif 4', Georgia, serif;
+    --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-display);
+    font-size: 18px;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(247,147,26,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(247,147,26,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none; z-index: 0;
+  }
+
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(10,10,11,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 56px;
+  }
+
+  .nav-brand { font-family: var(--font-mono); font-size: 1rem; font-weight: bold; color: var(--orange); text-decoration: none; letter-spacing: 0.05em; }
+  .nav-links { display: flex; gap: 0.25rem; list-style: none; }
+  .nav-links a { color: var(--text-muted); text-decoration: none; font-family: var(--font-mono); font-size: 0.72rem; padding: 0.4rem 0.6rem; border-radius: 4px; transition: color 0.2s, background 0.2s; }
+  .nav-links a:hover { color: var(--text-primary); background: var(--bg-tertiary); }
+  .nav-links a.active { color: var(--orange); }
+
+  .article-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 64px 24px 100px;
+    position: relative; z-index: 1;
+  }
+
+  .article-meta { font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--green); margin-bottom: 20px; }
+
+  .article-title { font-size: clamp(1.8rem, 5vw, 3rem); font-weight: 700; letter-spacing: -1px; line-height: 1.15; color: #fff; margin-bottom: 12px; }
+
+  .article-subtitle { font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 20px; font-style: italic; }
+
+  .article-byline { font-family: var(--font-sans); font-size: 0.85rem; color: var(--text-muted); margin-bottom: 48px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
+
+  .article-body h2 { font-size: 1.4rem; font-weight: 600; color: #fff; margin: 48px 0 16px; letter-spacing: -0.3px; }
+
+  .article-body h3 { font-size: 1.05rem; font-weight: 600; color: var(--orange); margin: 32px 0 12px; font-family: var(--font-sans); }
+
+  .article-body p { color: #c8c6c3; margin-bottom: 20px; font-size: 1rem; }
+
+  .callout {
+    background: var(--orange-dim);
+    border-left: 3px solid var(--orange);
+    border-radius: 0 4px 4px 0;
+    padding: 16px 20px;
+    margin: 28px 0;
+  }
+
+  .callout p { color: #c4a46a; font-family: var(--font-sans); font-size: 0.92rem; line-height: 1.7; margin: 0; }
+  .callout strong { color: var(--orange); }
+
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 28px 0;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    overflow-x: auto;
+    display: block;
+  }
+
+  .data-table th {
+    text-align: left; padding: 8px 12px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    white-space: nowrap;
+  }
+
+  .data-table td {
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    color: #c4c4cc;
+    white-space: nowrap;
+  }
+
+  .data-table tr:nth-child(even) td { background: var(--bg-secondary); }
+  .surplus { color: var(--green); font-weight: 600; }
+  .neutral { color: var(--orange); font-weight: 600; }
+  .stress { color: var(--yellow); font-weight: 600; }
+
+  .tradeoff {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 28px 0;
+  }
+
+  .tradeoff-side { background: var(--bg-secondary); padding: 24px; }
+  .tradeoff-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
+  .tradeoff-title { font-size: 1rem; font-weight: 600; color: #fff; margin-bottom: 10px; }
+  .tradeoff-side p { font-family: var(--font-sans); font-size: 0.82rem; color: var(--text-secondary); line-height: 1.6; margin: 0; }
+
+  .article-footer { margin-top: 64px; padding-top: 32px; border-top: 1px solid var(--border); display: flex; gap: 12px; flex-wrap: wrap; }
+
+  .btn-primary { background: var(--orange); color: #000; font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700; padding: 10px 20px; border-radius: 4px; text-decoration: none; transition: opacity 0.2s; }
+  .btn-primary:hover { opacity: 0.85; }
+  .btn-secondary { background: transparent; color: var(--text-secondary); font-family: var(--font-mono); font-size: 0.8rem; padding: 10px 20px; border-radius: 4px; border: 1px solid var(--border); text-decoration: none; transition: all 0.2s; }
+  .btn-secondary:hover { border-color: var(--orange); color: var(--orange); }
+
+  footer { border-top: 1px solid var(--border); padding: 32px 24px; text-align: center; font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+  footer a { color: var(--text-muted); text-decoration: none; }
+  footer a:hover { color: var(--orange); }
+
+  @media (max-width: 640px) {
+    .tradeoff { grid-template-columns: 1fr; }
+    .nav-links a { font-size: 0.65rem; padding: 0.3rem 0.4rem; }
+  }
+</style>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="index.html">BTCADP</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="btcc.html">BTCC</a></li>
+    <li><a href="currency-layer.html">Currency Layer</a></li>
+    <li><a href="knowledge-base.html" class="active">Knowledge Base</a></li>
+  </ul>
+</nav>
+
+<div class="article-wrap">
+
+  <div class="article-meta">Case Study &nbsp;&bull;&nbsp; btcadp.org &nbsp;&bull;&nbsp; March 2026</div>
+
+  <h1 class="article-title">Hard Money Central Banking</h1>
+  <p class="article-subtitle">How a Consortium of Bitcoin Treasury Companies Could Issue Bitcoin-Backed Stablecoins Using the BTCC Denomination</p>
+
+  <div class="article-byline">
+    A Framework for the BTCADP/BTCC Ecosystem &nbsp;&bull;&nbsp; btcadp.org &nbsp;&bull;&nbsp; March 2026 &nbsp;&bull;&nbsp; CC0 Public Domain
+  </div>
+
+  <div class="article-body">
+
+    <p>
+      This case study examines how a consortium of Bitcoin treasury companies — publicly traded firms
+      that hold Bitcoin as their primary reserve asset — could collectively issue a Treasury-Backed
+      Digital Currency (TBDC): a Bitcoin-backed stablecoin denominated in BTCC (Bitcoin Currency).
+      The BTCC denomination provides the stable unit of account. The treasury companies provide the
+      reserve infrastructure. Together, they form a decentralized monetary authority that issues a
+      hard-money stablecoin without the trust dependencies, printing risks, or counterparty exposure
+      inherent in both fiat central banking and existing stablecoin models.
+    </p>
+
+    <div class="callout">
+      <p><strong>Where a CBDC is issued by an entity that can expand the money supply, a TBDC is backed by a finite reserve asset that no issuer can create, expand, or dilute.</strong> The distinction is not rhetorical. It defines the economic properties of the instrument and the constraints under which its issuers operate.</p>
+    </div>
+
+    <h2>1. The Two-Ledger Reserve System</h2>
+
+    <p>
+      The mechanics are built on a two-ledger reserve system. When a user purchases a TBDC token with
+      fiat currency, the treasury company mints one TBDC token and uses the incoming cash to acquire a
+      corresponding quantity of satoshis at the prevailing BTC spot price. These satoshis are deposited
+      into a pooled issuance ledger — Ledger 1 — that backs outstanding TBDC tokens.
+    </p>
+
+    <p>
+      Each treasury company also maintains a reserve ledger — Ledger 2 — drawn from its existing
+      Bitcoin holdings, which guarantees redemptions in the event that a decline in BTC spot price
+      leaves Ledger 1 temporarily underfunded. Both ledgers are held in publicly addressable wallets
+      on Bitcoin's base layer, verifiable by any observer in real time. The reserves are not lent,
+      staked, or rehypothecated.
+    </p>
+
+    <h3>Reserve Ratio Under Different Spot Scenarios</h3>
+    <p>Assuming BTCC price of $18,000, initial issuance at $70,000 spot, and Ledger 2 holding 0.25 BTC per token issued:</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>BTC Spot</th>
+          <th>Ledger 1 Value</th>
+          <th>Ledger 2 Value</th>
+          <th>Combined Ratio</th>
+          <th>Treasury Position</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>$140,000</td><td>$36,000</td><td>$35,000</td><td class="surplus">394%</td><td>Significant surplus</td></tr>
+        <tr><td>$100,000</td><td>$25,714</td><td>$25,000</td><td class="surplus">282%</td><td>Surplus; profit on redemption</td></tr>
+        <tr><td>$70,000</td><td>$18,000</td><td>$17,500</td><td class="neutral">197%</td><td>Fully backed at issuance — neutral</td></tr>
+        <tr><td>$50,000</td><td>$12,857</td><td>$12,500</td><td class="neutral">141%</td><td>Ledger 1 short; Ledger 2 covers gap</td></tr>
+        <tr><td>$30,000</td><td>$7,714</td><td>$7,500</td><td class="stress">84%</td><td>Draw on Ledger 2; solvent</td></tr>
+        <tr><td>$18,000</td><td>$4,629</td><td>$4,500</td><td class="stress">51%</td><td>Break-even threshold (BTCC price)</td></tr>
+        <tr><td>$10,000</td><td>$2,571</td><td>$2,500</td><td class="stress">28%</td><td>Deep draw on Ledger 2</td></tr>
+      </tbody>
+    </table>
+
+    <p>
+      These reserve dynamics only matter when tokens are redeemed for fiat. Tokens circulating on the
+      sidechain as a medium of exchange exert no pressure on reserves regardless of where Bitcoin's
+      spot price stands.
+    </p>
+
+    <h2>2. The Trade-Off: Stability for Volatility</h2>
+
+    <p>
+      The economics of the TBDC model are honest about what each party gives up and what each party
+      receives. Critically, the customer does not forfeit all upside — they trade volatile, unpredictable
+      appreciation for slow, steady, deflationary appreciation.
+    </p>
+
+    <div class="tradeoff">
+      <div class="tradeoff-side">
+        <div class="tradeoff-label">The Customer</div>
+        <div class="tradeoff-title">Trades volatility for stability — but retains deflationary upside</div>
+        <p>By converting fiat into a TBDC token rather than buying Bitcoin directly, the customer gives up exposure to Bitcoin's day-to-day spot price swings. But this is not a flat peg like a dollar stablecoin. As long as Bitcoin's spot price remains above the historical cumulative average, the BTCC price itself appreciates slowly. The customer holds a deflationary currency: one whose purchasing power improves gradually as an arithmetic certainty — the inverse of fiat.</p>
+      </div>
+      <div class="tradeoff-side">
+        <div class="tradeoff-label">The Treasury Company</div>
+        <div class="tradeoff-title">Trades stability for volatility — captures the spread</div>
+        <p>The treasury company accepts the obligation to honor redemptions at the stable BTCC price regardless of BTC spot. In return, it captures the spread between Bitcoin's spot appreciation rate and the BTCC denomination's much slower appreciation rate. As long as BTC spot trends upward, the satoshis in Ledger 1 appreciate far faster than the BTCC liabilities they back. That widening spread is the treasury company's compensation for bearing downside risk.</p>
+      </div>
+    </div>
+
+    <h2>3. The Revenue Model: Outsized Returns</h2>
+
+    <p>
+      The TBDC model does not merely generate fees. It fundamentally changes the economics of holding
+      Bitcoin. A treasury company that simply holds BTC earns a return equal to spot price appreciation.
+      The TBDC model produces returns that exceed holding alone, and the outperformance accelerates as
+      BTC spot rises.
+    </p>
+
+    <p>
+      The mechanism is the divergence between two rates of appreciation. The satoshis in Ledger 1
+      appreciate at the BTC spot rate. The BTCC-denominated liabilities they back appreciate at the
+      cumulative average rate, which barely moves. As BTC spot rises, the gap between asset value and
+      liability value widens at an accelerating rate.
+    </p>
+
+    <h3>Treasury Surplus at Different BTC Spot Levels</h3>
+    <p>Assuming 1,000 TBDC tokens issued at $70,000 spot, BTCC price ~$18,000:</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>BTC Spot</th>
+          <th>Ledger 1 Value</th>
+          <th>BTCC Liability</th>
+          <th>Treasury Surplus</th>
+          <th>vs. Holding Alone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>$70,000</td><td>$18,000,000</td><td>~$18,000,000</td><td>$0</td><td class="neutral">0% (neutral)</td></tr>
+        <tr><td>$100,000</td><td>$25,714,000</td><td>~$18,000,000</td><td class="surplus">$7,714,000</td><td class="surplus">+43% above holding</td></tr>
+        <tr><td>$140,000</td><td>$36,000,000</td><td>~$18,000,000</td><td class="surplus">$18,000,000</td><td class="surplus">+100% — doubled intake</td></tr>
+        <tr><td>$200,000</td><td>$51,428,000</td><td>~$18,000,000</td><td class="surplus">$33,428,000</td><td class="surplus">+186% above holding</td></tr>
+        <tr><td>$500,000</td><td>$128,571,000</td><td>~$18,000,000</td><td class="surplus">$110,571,000</td><td class="surplus">+614% above holding</td></tr>
+      </tbody>
+    </table>
+
+    <p>
+      The profit accelerates because the denominator — the BTCC liability — is effectively fixed while
+      the numerator — the asset value — compounds with spot. The TBDC model converts a linear BTC holding
+      into what is effectively a leveraged position on Bitcoin's upside, without borrowing, without margin,
+      and without any risk beyond what the company has already accepted by being a Bitcoin treasury company.
+    </p>
+
+    <h2>4. The Savings Effect and Redemption Dynamics</h2>
+
+    <p>
+      TBDC tokens serve two distinct use cases within the same pool. Some tokens are used as a medium of
+      exchange — purchased, circulated in commerce, and redeemed relatively quickly. Others are held as
+      a savings vehicle, purchased precisely because BTCC offers a deflationary store of value that
+      appreciates slowly without the volatility of holding BTC directly.
+    </p>
+
+    <p>
+      Long-term holders do not redeem during a BTC spot downturn. They have no reason to: their TBDC
+      token's purchasing power is stable and trending upward regardless of what BTC spot does on any
+      given day. During a spot decline — the only scenario in which Ledger 2 is tapped — the treasury
+      company does not face redemption demand from the entire outstanding token supply. It faces demand
+      only from the transactional portion. The savings portion remains in place, exerting no redemption
+      pressure.
+    </p>
+
+    <div class="callout">
+      <p><strong>This pooling dynamic is self-reinforcing.</strong> As TBDC adoption grows and more users hold it as a savings vehicle, the proportion of "sticky" tokens increases. The treasury company's actual redemption exposure during a downturn shrinks as a percentage of outstanding tokens, even as the total number of tokens grows. Scale makes the system safer, not more fragile — the structural inverse of traditional banking.</p>
+    </div>
+
+    <h2>5. Conclusion</h2>
+
+    <p>
+      The currency layer described in this case study addresses Bitcoin's primary adoption barrier —
+      price volatility in everyday commerce — without compromising any of Bitcoin's fundamental properties.
+      The user holds a stable denomination. The reserves are fully backed by Bitcoin on the base layer
+      and are on-chain verifiable. No new blockchain is required. No fiat reserves are held in the
+      banking system. No centralized issuer can expand the money supply.
+    </p>
+
+    <p>
+      Bitcoin was proposed as a peer-to-peer electronic cash system. It has succeeded as a store of
+      value and a settlement network, but has not yet achieved the everyday commerce adoption that
+      constitutes the original vision. The TBDC currency layer provides the missing piece: a stable
+      denomination that makes Bitcoin usable for daily transactions — buying coffee, paying rent,
+      receiving a salary, invoicing a client — without exposing any participant to spot price volatility.
+    </p>
+
+    <p>
+      Every user who enters the TBDC economy is a Bitcoin user. Every transaction settles on Bitcoin
+      infrastructure. Every new token requires Bitcoin to be acquired. The currency layer does not
+      compete with Bitcoin. It fulfills Bitcoin's original purpose by solving the one problem the
+      protocol itself could not: the volatility that prevents a superior monetary network from
+      functioning as everyday money.
+    </p>
+
+  </div>
+
+  <div class="article-footer">
+    <a href="knowledge-base.html" class="btn-primary">&larr; Knowledge Base</a>
+    <a href="currency-layer.html" class="btn-secondary">Currency Layer &rarr;</a>
+    <a href="btcc.html" class="btn-secondary">BTCC Denomination &rarr;</a>
+  </div>
+
+</div>
+
+<footer>
+  <p>
+    <a href="index.html">Home</a> &nbsp;&bull;&nbsp;
+    <a href="knowledge-base.html">Knowledge Base</a> &nbsp;&bull;&nbsp;
+    <a href="specification.html">Specification</a> &nbsp;&bull;&nbsp;
+    <a href="https://github.com/BTCADP/btcadp-research">GitHub</a>
+  </p>
+  <p style="margin-top:8px;">CC0 Public Domain &bull; btcadp.org &bull; 2026</p>
+</footer>
+
+</body>
+</html>

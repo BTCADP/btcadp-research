@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Bitcoin Currency Layer — Case Study | btcadp.org</title>
+<meta name="description" content="How a Treasury-Backed Digital Currency could provide the foundation of a Bitcoin network currency layer for everyday commerce.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary: #0a0a0b;
+    --bg-secondary: #111114;
+    --bg-tertiary: #19191e;
+    --border: #2a2a32;
+    --text-primary: #e8e6e3;
+    --text-secondary: #8a8a95;
+    --text-muted: #555560;
+    --orange: #f7931a;
+    --orange-dim: rgba(247,147,26,0.12);
+    --green: #2ecc71;
+    --blue: #3498db;
+    --blue-dim: rgba(52,152,219,0.1);
+    --font-display: 'Source Serif 4', Georgia, serif;
+    --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-display);
+    font-size: 18px;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(247,147,26,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(247,147,26,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none; z-index: 0;
+  }
+
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(10,10,11,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 56px;
+  }
+
+  .nav-brand { font-family: var(--font-mono); font-size: 1rem; font-weight: bold; color: var(--orange); text-decoration: none; letter-spacing: 0.05em; }
+  .nav-links { display: flex; gap: 0.25rem; list-style: none; }
+  .nav-links a { color: var(--text-muted); text-decoration: none; font-family: var(--font-mono); font-size: 0.72rem; padding: 0.4rem 0.6rem; border-radius: 4px; transition: color 0.2s, background 0.2s; }
+  .nav-links a:hover { color: var(--text-primary); background: var(--bg-tertiary); }
+  .nav-links a.active { color: var(--orange); }
+
+  .article-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 64px 24px 100px;
+    position: relative; z-index: 1;
+  }
+
+  .article-meta { font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--green); margin-bottom: 20px; }
+  .article-title { font-size: clamp(1.8rem, 5vw, 3rem); font-weight: 700; letter-spacing: -1px; line-height: 1.15; color: #fff; margin-bottom: 12px; }
+  .article-subtitle { font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 20px; font-style: italic; }
+  .article-byline { font-family: var(--font-sans); font-size: 0.85rem; color: var(--text-muted); margin-bottom: 48px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
+
+  .article-body h2 { font-size: 1.4rem; font-weight: 600; color: #fff; margin: 48px 0 16px; letter-spacing: -0.3px; }
+  .article-body h3 { font-size: 1.05rem; font-weight: 600; color: var(--orange); margin: 32px 0 12px; font-family: var(--font-sans); }
+  .article-body p { color: #c8c6c3; margin-bottom: 20px; font-size: 1rem; }
+
+  .callout {
+    background: var(--orange-dim);
+    border-left: 3px solid var(--orange);
+    border-radius: 0 4px 4px 0;
+    padding: 16px 20px; margin: 28px 0;
+  }
+  .callout p { color: #c4a46a; font-family: var(--font-sans); font-size: 0.92rem; line-height: 1.7; margin: 0; }
+  .callout strong { color: var(--orange); }
+
+  /* Stack diagram */
+  .stack { display: flex; flex-direction: column; gap: 3px; margin: 28px 0; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
+  .stack-layer { display: flex; align-items: center; justify-content: space-between; padding: 18px 24px; gap: 16px; }
+  .stack-layer-left { display: flex; align-items: center; gap: 16px; }
+  .stack-icon { font-size: 1.5rem; flex-shrink: 0; }
+  .stack-name { font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 2px; }
+  .stack-desc { font-family: var(--font-sans); font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5; }
+  .stack-badge { font-family: var(--font-mono); font-size: 10px; padding: 3px 8px; border-radius: 3px; white-space: nowrap; flex-shrink: 0; }
+
+  /* Three components */
+  .components { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin: 28px 0; }
+  .component { background: var(--bg-secondary); padding: 20px; }
+  .component-tag { font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
+  .component-name { font-size: 1rem; font-weight: 600; margin-bottom: 10px; }
+  .component p { font-family: var(--font-sans); font-size: 0.8rem; color: var(--text-secondary); line-height: 1.6; margin: 0; }
+
+  /* Flow diagram */
+  .flow { display: flex; align-items: center; margin: 28px 0; overflow-x: auto; }
+  .flow-step { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 6px; padding: 14px 16px; text-align: center; flex: 1; min-width: 120px; }
+  .flow-step-icon { font-size: 1.4rem; margin-bottom: 6px; }
+  .flow-step-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px; }
+  .flow-step-name { font-family: var(--font-sans); font-size: 0.82rem; font-weight: 600; color: var(--text-primary); }
+  .flow-step-note { font-size: 10px; color: var(--text-muted); margin-top: 4px; font-family: var(--font-sans); }
+  .flow-arrow { color: var(--text-muted); font-size: 1.2rem; padding: 0 8px; flex-shrink: 0; }
+
+  /* Virtuous cycle */
+  .cycle { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin: 28px 0; }
+  .cycle-step { background: var(--bg-secondary); padding: 20px; }
+  .cycle-num { font-family: var(--font-mono); font-size: 1.4rem; font-weight: 700; color: var(--orange); margin-bottom: 6px; opacity: 0.4; }
+  .cycle-title { font-size: 0.95rem; font-weight: 600; color: #fff; margin-bottom: 6px; }
+  .cycle-step p { font-family: var(--font-sans); font-size: 0.82rem; color: var(--text-secondary); line-height: 1.6; margin: 0; }
+
+  .article-footer { margin-top: 64px; padding-top: 32px; border-top: 1px solid var(--border); display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-primary { background: var(--orange); color: #000; font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700; padding: 10px 20px; border-radius: 4px; text-decoration: none; transition: opacity 0.2s; }
+  .btn-primary:hover { opacity: 0.85; }
+  .btn-secondary { background: transparent; color: var(--text-secondary); font-family: var(--font-mono); font-size: 0.8rem; padding: 10px 20px; border-radius: 4px; border: 1px solid var(--border); text-decoration: none; transition: all 0.2s; }
+  .btn-secondary:hover { border-color: var(--orange); color: var(--orange); }
+
+  footer { border-top: 1px solid var(--border); padding: 32px 24px; text-align: center; font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+  footer a { color: var(--text-muted); text-decoration: none; }
+  footer a:hover { color: var(--orange); }
+
+  @media (max-width: 640px) {
+    .components { grid-template-columns: 1fr; }
+    .cycle { grid-template-columns: 1fr; }
+    .nav-links a { font-size: 0.65rem; padding: 0.3rem 0.4rem; }
+    .flow { flex-direction: column; align-items: stretch; }
+    .flow-arrow { transform: rotate(90deg); text-align: center; }
+  }
+</style>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="index.html">BTCADP</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="btcc.html">BTCC</a></li>
+    <li><a href="currency-layer.html">Currency Layer</a></li>
+    <li><a href="knowledge-base.html" class="active">Knowledge Base</a></li>
+  </ul>
+</nav>
+
+<div class="article-wrap">
+
+  <div class="article-meta">Case Study &nbsp;&bull;&nbsp; btcadp.org &nbsp;&bull;&nbsp; March 2026</div>
+  <h1 class="article-title">A Bitcoin Currency Layer</h1>
+  <p class="article-subtitle">How a Treasury-Backed Digital Currency Could Provide the Foundation of a Bitcoin Network Currency Layer for Everyday Commerce</p>
+  <div class="article-byline">A Framework for the BTCADP/BTCC Ecosystem &nbsp;&bull;&nbsp; btcadp.org &nbsp;&bull;&nbsp; March 2026 &nbsp;&bull;&nbsp; CC0 Public Domain</div>
+
+  <div class="article-body">
+
+    <p>
+      This case study examines a currency layer for the Bitcoin network: a system in which end users
+      transact in a stable denomination — displayed in either their native fiat currency or in BTCC
+      (Bitcoin Currency) — while the underlying reserves are held entirely in Bitcoin on the base layer.
+      The user never interacts with Bitcoin's spot price. The volatility that has prevented Bitcoin from
+      functioning as everyday money is abstracted away at the interface level, not by creating a new
+      asset class, but by changing what the user sees and how values are expressed.
+    </p>
+
+    <div class="callout">
+      <p>
+        <strong>The critical design principle is abstraction.</strong> A customer purchasing coffee does
+        not need to know the current BTC/USD spot price, the state of the reserve ledgers, or the
+        mechanics of the sidechain. They see a price in their local currency or in BTCC. They pay. The
+        merchant receives BTCC-denominated value. The complexity lives in the infrastructure; the user
+        experience is indistinguishable from paying with any conventional currency — except that the
+        currency they hold appreciates slowly over time rather than eroding.
+      </p>
+    </div>
+
+    <h2>1. The Abstraction Problem</h2>
+
+    <p>
+      Bitcoin's failure to achieve widespread adoption as a medium of exchange is not a failure of its
+      network, its security model, or its settlement infrastructure. The protocol has operated
+      continuously since January 2009 without a single hour of downtime. The failure is at the interface
+      layer: the way Bitcoin's value is presented to users.
+    </p>
+
+    <p>
+      When a consumer opens a wallet and sees that their balance has changed by 8% since yesterday, they
+      are experiencing Bitcoin's spot price volatility directly. A merchant who prices goods in BTC must
+      reprice constantly. A worker paid in BTC cannot predict next month's purchasing power. A business
+      holding BTC receivables faces balance sheet volatility that complicates accounting, tax compliance,
+      and financial planning.
+    </p>
+
+    <p>
+      The conventional response has been to build stablecoins pegged to fiat currencies — solving
+      volatility by abandoning Bitcoin entirely. The user holds a dollar-denominated token issued by a
+      centralized entity, settled on a separate blockchain, backed by reserves held in the traditional
+      banking system. The cure eliminates the disease by killing the patient.
+    </p>
+
+    <h2>2. Architecture: Three Components</h2>
+
+    <p>
+      The currency layer consists of three distinct components, each independent, each performing a
+      specific function. Each depends only on the layer below it. None requires the layer above it.
+    </p>
+
+    <div class="components">
+      <div class="component">
+        <div class="component-tag">Layer 1</div>
+        <div class="component-name" style="color:var(--orange);">BTCADP</div>
+        <p>The reference price. An open-source daily Bitcoin price from qualifying exchanges using a 25% trimmed mean. Any party can reproduce it. The methodology is the authority — no institution required.</p>
+      </div>
+      <div class="component">
+        <div class="component-tag">Layer 2</div>
+        <div class="component-name" style="color:var(--green);">BTCC</div>
+        <p>The denomination. Cumulative arithmetic mean of every historical BTCADP since genesis. Changes by fractions of a percent per day. No issuer. No reserves. Pure mathematics.</p>
+      </div>
+      <div class="component">
+        <div class="component-tag">Layer 3</div>
+        <div class="component-name" style="color:var(--blue);">TBDC Token</div>
+        <p>The circulating instrument. Issued by a consortium of Bitcoin treasury companies on a sidechain. One token equals one BTCC unit. Fully backed by Bitcoin. Redeemable for fiat at any time.</p>
+      </div>
+    </div>
+
+    <p>
+      A failure or disruption at any layer does not propagate downward. If every TBDC issuer ceased
+      operations, the BTCC denomination would still be computable. If BTCC were abandoned, BTCADP would
+      remain a valid reference price. Each component can be evaluated, adopted, or rejected independently.
+    </p>
+
+    <h2>3. Two Distinct Layers</h2>
+
+    <p>
+      The architecture maintains a clean separation between the token circulation layer and the reserve
+      settlement layer. These two layers operate independently — routine commerce never touches the reserve layer.
+    </p>
+
+    <div class="stack">
+      <div class="stack-layer" style="background:rgba(52,152,219,0.08);border-bottom:1px solid var(--border);">
+        <div class="stack-layer-left">
+          <div class="stack-icon">👤</div>
+          <div>
+            <div class="stack-name" style="color:var(--blue);">User Interface</div>
+            <div class="stack-desc">Wallet shows balance in native currency or BTCC. No BTC spot price visible. No volatility.</div>
+          </div>
+        </div>
+        <div class="stack-badge" style="background:var(--blue-dim);color:var(--blue);">What users see</div>
+      </div>
+      <div class="stack-layer" style="background:rgba(46,204,113,0.08);border-bottom:1px solid var(--border);">
+        <div class="stack-layer-left">
+          <div class="stack-icon">🔄</div>
+          <div>
+            <div class="stack-name" style="color:var(--green);">Token Layer — Sidechain</div>
+            <div class="stack-desc">TBDC tokens circulate peer-to-peer. Fast, low-cost, denominated in BTCC. No Bitcoin moves during routine commerce.</div>
+          </div>
+        </div>
+        <div class="stack-badge" style="background:rgba(46,204,113,0.1);color:var(--green);">Payments</div>
+      </div>
+      <div class="stack-layer" style="background:rgba(247,147,26,0.08);border-bottom:1px solid var(--border);">
+        <div class="stack-layer-left">
+          <div class="stack-icon">🏦</div>
+          <div>
+            <div class="stack-name" style="color:var(--orange);">Reserve Layer — Bitcoin Base Layer</div>
+            <div class="stack-desc">Bitcoin held in transparent on-chain wallets. Touched only at minting and fiat redemption. Never lent. Never rehypothecated.</div>
+          </div>
+        </div>
+        <div class="stack-badge" style="background:var(--orange-dim);color:var(--orange);">Reserves</div>
+      </div>
+      <div class="stack-layer" style="background:var(--bg-secondary);">
+        <div class="stack-layer-left">
+          <div class="stack-icon">⛓️</div>
+          <div>
+            <div class="stack-name" style="color:var(--text-muted);">Bitcoin Proof-of-Work</div>
+            <div class="stack-desc">Secures the base layer. Provides the settlement finality that makes the entire system trustworthy.</div>
+          </div>
+        </div>
+        <div class="stack-badge" style="background:var(--bg-tertiary);color:var(--text-muted);">Foundation</div>
+      </div>
+    </div>
+
+    <p>
+      A million TBDC transactions can occur in a day without a single satoshi moving on-chain. The base
+      layer's role is to hold and secure reserves, not to process payments. This means Bitcoin's base
+      layer transaction throughput, fee dynamics, and block confirmation times are irrelevant to the end
+      user's payment experience.
+    </p>
+
+    <h2>4. Removing the End User from Spot Volatility</h2>
+
+    <h3>Denomination Abstraction</h3>
+    <p>
+      The user's wallet balance is denominated in BTCC, not in BTC and not in satoshis. This number
+      changes only when the user sends or receives tokens. The fiat-equivalent value changes by less than
+      a fraction of a percent per day, because the BTCC price — the cumulative average of over 6,200
+      daily prices — moves negligibly in response to any single day's spot price action.
+    </p>
+
+    <p>
+      This is not a cosmetic change. A worker whose salary is expressed as 2,500 BTCC per month can
+      plan a budget with confidence that its purchasing power next month will be within a fraction of a
+      percent of today's. A worker whose salary is expressed as 0.028 BTC cannot — the fiat-equivalent
+      purchasing power of that figure could change by 10% or more before the month ends.
+    </p>
+
+    <h3>Token Lifecycle</h3>
+
+    <div class="flow">
+      <div class="flow-step" style="border-top:2px solid var(--orange);">
+        <div class="flow-step-icon">💵</div>
+        <div class="flow-step-label">Phase 1</div>
+        <div class="flow-step-name">Minting</div>
+        <div class="flow-step-note">Fiat in → BTC purchased → Token issued</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step" style="border-top:2px solid var(--green);">
+        <div class="flow-step-icon">🔄</div>
+        <div class="flow-step-label">Phase 2</div>
+        <div class="flow-step-name">Circulation</div>
+        <div class="flow-step-note">Token transfers on sidechain. No BTC moves.</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step" style="border-top:2px solid var(--blue);">
+        <div class="flow-step-icon">🏧</div>
+        <div class="flow-step-label">Phase 3</div>
+        <div class="flow-step-name">Redemption</div>
+        <div class="flow-step-note">Token burned → BTC sold → Fiat returned</div>
+      </div>
+    </div>
+
+    <p>
+      Only Phase 1 and Phase 3 interact with Bitcoin's base layer. A user who mints, spends, receives,
+      and saves in TBDC for months has interacted with the reserve layer exactly twice — at the beginning
+      and at the end. Everything in between is sidechain commerce, denominated in BTCC, displayed in
+      their native currency.
+    </p>
+
+    <h2>5. The Virtuous Cycle</h2>
+
+    <p>
+      Every TBDC token minted requires the consortium to purchase actual Bitcoin on the open market.
+      There is no synthetic exposure. One hundred percent of demand for TBDC tokens flows directly to
+      BTC spot as buying pressure. This creates a self-reinforcing cycle.
+    </p>
+
+    <div class="cycle">
+      <div class="cycle-step">
+        <div class="cycle-num">01</div>
+        <div class="cycle-title">Minting creates Bitcoin demand</div>
+        <p>Every TBDC token minted requires purchasing Bitcoin at spot. Commerce-driven demand is persistent — it does not reverse when sentiment shifts.</p>
+      </div>
+      <div class="cycle-step">
+        <div class="cycle-num">02</div>
+        <div class="cycle-title">Demand supports spot price</div>
+        <p>Sustained structural buying from TBDC minting supports BTC spot. Unlike speculative demand, this is tied to real economic activity.</p>
+      </div>
+      <div class="cycle-step">
+        <div class="cycle-num">03</div>
+        <div class="cycle-title">Rising spot deepens reserves</div>
+        <p>As BTC spot rises, the gap between Ledger 1 asset values and BTCC liabilities widens. Treasury companies accumulate surplus. Reserves deepen.</p>
+      </div>
+      <div class="cycle-step">
+        <div class="cycle-num">04</div>
+        <div class="cycle-title">Growth reduces risk</div>
+        <p>As the BTCC economy matures, more users earn, spend, and save in BTCC without needing fiat. The proportion of tokens redeemed for fiat declines. Scale makes the system safer.</p>
+      </div>
+    </div>
+
+    <h2>6. Conclusion</h2>
+
+    <p>
+      The currency layer addresses Bitcoin's primary adoption barrier — price volatility in everyday
+      commerce — without compromising any of Bitcoin's fundamental properties. The user holds a stable
+      denomination. The reserves are fully backed by Bitcoin on the base layer and are on-chain
+      verifiable. No new blockchain is required. No fiat reserves are held in the banking system.
+      No centralized issuer can expand the money supply.
+    </p>
+
+    <p>
+      Bitcoin was proposed as a peer-to-peer electronic cash system. It has succeeded as a store of
+      value and a settlement network, but has not yet achieved the everyday commerce adoption that
+      constitutes the original vision. The TBDC currency layer provides the missing piece: a stable
+      denomination that makes Bitcoin usable for daily transactions without exposing any participant
+      to spot price volatility.
+    </p>
+
+    <div class="callout">
+      <p>
+        <strong>Every user who enters the TBDC economy is a Bitcoin user.</strong> Every transaction
+        settles on Bitcoin infrastructure. Every new token requires Bitcoin to be acquired. The currency
+        layer does not compete with Bitcoin. It fulfills Bitcoin's original purpose by solving the one
+        problem the protocol itself could not: the volatility that prevents a superior monetary network
+        from functioning as everyday money.
+      </p>
+    </div>
+
+    <p>
+      The BTCADP specification is published. The BTCC denomination is mathematically defined. The
+      treasury companies that would form the consortium already hold the necessary reserves. The sidechain
+      infrastructure already exists or is within the consortium's capacity to build. What remains is
+      assembly and execution.
+    </p>
+
+  </div>
+
+  <div class="article-footer">
+    <a href="knowledge-base.html" class="btn-primary">&larr; Knowledge Base</a>
+    <a href="currency-layer.html" class="btn-secondary">Currency Layer Overview &rarr;</a>
+    <a href="case-study-hard-money.html" class="btn-secondary">Hard Money Case Study &rarr;</a>
+  </div>
+
+</div>
+
+<footer>
+  <p>
+    <a href="index.html">Home</a> &nbsp;&bull;&nbsp;
+    <a href="knowledge-base.html">Knowledge Base</a> &nbsp;&bull;&nbsp;
+    <a href="specification.html">Specification</a> &nbsp;&bull;&nbsp;
+    <a href="https://github.com/BTCADP/btcadp-research">GitHub</a>
+  </p>
+  <p style="margin-top:8px;">CC0 Public Domain &bull; btcadp.org &bull; 2026</p>
+</footer>
+
+</body>
+</html>
