@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Treasury-Backed Digital Currency (TBDC) | btcadp.org</title>
+<meta name="description" content="TBDC — a Bitcoin-backed digital currency issued by a consortium of Bitcoin treasury companies, denominated in BTCC. The structural inverse of a CBDC.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary: #0a0a0b;
+    --bg-secondary: #111114;
+    --bg-tertiary: #19191e;
+    --border: #2a2a32;
+    --text-primary: #e8e6e3;
+    --text-secondary: #8a8a95;
+    --text-muted: #555560;
+    --orange: #f7931a;
+    --orange-dim: rgba(247,147,26,0.12);
+    --green: #2ecc71;
+    --green-dim: rgba(46,204,113,0.1);
+    --red: #e74c3c;
+    --red-dim: rgba(231,76,60,0.1);
+    --blue: #3498db;
+    --blue-dim: rgba(52,152,219,0.1);
+    --font-display: 'Source Serif 4', Georgia, serif;
+    --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-display);
+    font-size: 17px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(247,147,26,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(247,147,26,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none; z-index: 0;
+  }
+
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(10,10,11,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 56px;
+  }
+
+  .nav-brand { font-family: var(--font-mono); font-size: 1rem; font-weight: bold; color: var(--orange); text-decoration: none; letter-spacing: 0.05em; }
+  .nav-links { display: flex; gap: 0.25rem; list-style: none; }
+  .nav-links a { color: var(--text-muted); text-decoration: none; font-family: var(--font-mono); font-size: 0.72rem; padding: 0.4rem 0.6rem; border-radius: 4px; transition: color 0.2s, background 0.2s; }
+  .nav-links a:hover { color: var(--text-primary); background: var(--bg-tertiary); }
+  .nav-links a.active { color: var(--orange); }
+
+  .container { max-width: 860px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+  /* HERO */
+  .hero {
+    padding: 80px 0 60px;
+    border-bottom: 1px solid var(--border);
+    background: radial-gradient(ellipse at 50% 0%, rgba(247,147,26,0.06) 0%, transparent 60%);
+  }
+
+  .hero-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--orange); margin-bottom: 16px; }
+  .hero h1 { font-size: clamp(2.2rem, 6vw, 3.8rem); font-weight: 700; letter-spacing: -1px; line-height: 1.1; color: #fff; margin-bottom: 10px; }
+  .hero-full { font-size: 1rem; font-family: var(--font-sans); color: var(--text-muted); margin-bottom: 20px; letter-spacing: 0.02em; }
+  .hero-sub { font-size: 1.05rem; color: var(--text-secondary); max-width: 640px; line-height: 1.75; font-family: var(--font-sans); }
+
+  /* CONTENT */
+  .content { padding: 60px 0 80px; }
+  .section { margin-bottom: 56px; }
+  .section-num { font-family: var(--font-mono); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--orange); margin-bottom: 8px; }
+  .section h2 { font-size: 1.7rem; font-weight: 600; color: #fff; margin-bottom: 20px; letter-spacing: -0.5px; }
+  .section p { color: #c4c4cc; margin-bottom: 16px; font-size: 1rem; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+
+  /* CALLOUT */
+  .callout { background: var(--orange-dim); border-left: 3px solid var(--orange); border-radius: 0 4px 4px 0; padding: 16px 20px; margin: 24px 0; }
+  .callout p { color: #c4a46a; font-family: var(--font-sans); font-size: 0.92rem; line-height: 1.7; margin: 0; }
+  .callout strong { color: var(--orange); }
+
+  /* TBDC VS CBDC VISUAL */
+  .versus {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 0;
+    margin: 28px 0;
+    align-items: stretch;
+  }
+
+  .versus-side {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 28px 24px;
+  }
+
+  .versus-side.cbdc { border-top: 3px solid var(--red); }
+  .versus-side.tbdc { border-top: 3px solid var(--green); }
+
+  .versus-tag { font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
+  .versus-tag.cbdc { color: var(--red); }
+  .versus-tag.tbdc { color: var(--green); }
+
+  .versus-title { font-size: 1.2rem; font-weight: 700; color: #fff; margin-bottom: 16px; }
+
+  .versus-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px; font-family: var(--font-sans); font-size: 0.83rem; color: var(--text-secondary); line-height: 1.5; }
+  .versus-icon { flex-shrink: 0; font-size: 0.9rem; margin-top: 1px; }
+
+  .versus-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 16px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+  }
+
+  .versus-vs {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+  }
+
+  /* HOW IT WORKS FLOW */
+  .how-it-works {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 28px;
+    margin: 24px 0;
+  }
+
+  .hiw-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 20px; }
+
+  .hiw-steps { display: flex; flex-direction: column; gap: 0; }
+
+  .hiw-step { display: flex; gap: 20px; align-items: flex-start; padding: 16px 0; border-bottom: 1px solid var(--border); }
+  .hiw-step:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .hiw-num { font-family: var(--font-mono); font-size: 1.2rem; font-weight: 700; color: var(--orange); opacity: 0.35; flex-shrink: 0; width: 32px; }
+  .hiw-icon { font-size: 1.4rem; flex-shrink: 0; width: 32px; text-align: center; }
+  .hiw-content {}
+  .hiw-title { font-family: var(--font-sans); font-size: 0.9rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .hiw-desc { font-family: var(--font-sans); font-size: 0.82rem; color: var(--text-secondary); line-height: 1.6; }
+  .hiw-tag { display: inline-block; font-family: var(--font-mono); font-size: 9px; padding: 2px 6px; border-radius: 3px; margin-left: 8px; vertical-align: middle; }
+
+  /* CONSORTIUM */
+  .consortium { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin: 24px 0; }
+  .consortium-member { background: var(--bg-secondary); padding: 18px 16px; text-align: center; }
+  .consortium-icon { font-size: 1.6rem; margin-bottom: 8px; }
+  .consortium-name { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+  .consortium-desc { font-family: var(--font-sans); font-size: 0.72rem; color: var(--text-muted); line-height: 1.4; }
+
+  /* RESERVE COLLATERAL VIZ */
+  .collateral-viz { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 8px; padding: 28px; margin: 24px 0; }
+  .cv-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 20px; }
+  .cv-bars { display: flex; gap: 12px; align-items: flex-end; height: 120px; margin-bottom: 12px; }
+  .cv-bar { flex: 1; border-radius: 4px 4px 0 0; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 8px; font-family: var(--font-mono); font-size: 10px; font-weight: 700; color: #000; min-width: 0; }
+  .cv-bar-labels { display: flex; gap: 12px; }
+  .cv-bar-label { flex: 1; text-align: center; font-family: var(--font-sans); font-size: 0.75rem; color: var(--text-muted); }
+
+  /* KEY PROPERTIES GRID */
+  .props { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 24px 0; }
+  .prop { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 6px; padding: 18px; }
+  .prop-icon { font-size: 1.4rem; margin-bottom: 8px; }
+  .prop-title { font-family: var(--font-sans); font-size: 0.8rem; font-weight: 700; color: var(--orange); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+  .prop-desc { font-family: var(--font-sans); font-size: 0.8rem; color: var(--text-secondary); line-height: 1.55; }
+
+  /* CTA */
+  .cta-block { background: var(--bg-secondary); border: 1px solid var(--border); border-top: 2px solid var(--orange); border-radius: 8px; padding: 32px; text-align: center; margin-top: 48px; }
+  .cta-block h3 { font-size: 1.2rem; font-weight: 600; color: #fff; margin-bottom: 8px; }
+  .cta-block p { font-family: var(--font-sans); font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px; }
+  .cta-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary { background: var(--orange); color: #000; font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700; padding: 10px 20px; border-radius: 4px; text-decoration: none; transition: opacity 0.2s; }
+  .btn-primary:hover { opacity: 0.85; }
+  .btn-secondary { background: transparent; color: var(--text-secondary); font-family: var(--font-mono); font-size: 0.8rem; padding: 10px 20px; border-radius: 4px; border: 1px solid var(--border); text-decoration: none; transition: all 0.2s; }
+  .btn-secondary:hover { border-color: var(--orange); color: var(--orange); }
+
+  footer { border-top: 1px solid var(--border); padding: 32px 24px; text-align: center; font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+  footer a { color: var(--text-muted); text-decoration: none; }
+  footer a:hover { color: var(--orange); }
+
+  @media (max-width: 640px) {
+    .versus { grid-template-columns: 1fr; }
+    .versus-divider { padding: 12px 0; }
+    .nav-links a { font-size: 0.65rem; padding: 0.3rem 0.4rem; }
+  }
+</style>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="index.html">BTCADP</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="btcc.html">BTCC</a></li>
+    <li><a href="currency-layer.html">Currency Layer</a></li>
+    <li><a href="tbdc.html" class="active">TBDC</a></li>
+    <li><a href="knowledge-base.html">Knowledge Base</a></li>
+  </ul>
+</nav>
+
+<div class="container">
+  <div class="hero">
+    <div class="hero-label">Concept &bull; Bitcoin-Backed Currency</div>
+    <h1>TBDC</h1>
+    <p class="hero-full">Treasury-Backed Digital Currency</p>
+    <p class="hero-sub">
+      A Bitcoin-backed digital currency issued by a consortium of Bitcoin treasury companies
+      and denominated in BTCC. The structural inverse of a Central Bank Digital Currency —
+      with no money printer, no surveillance, and no discretionary monetary policy.
+    </p>
+  </div>
+
+  <div class="content">
+
+    <!-- SECTION 1: TBDC vs CBDC -->
+    <div class="section">
+      <div class="section-num">01</div>
+      <h2>TBDC vs. CBDC</h2>
+      <p>
+        The term TBDC is deliberately chosen to mark a structural contrast with the CBDC model —
+        not just a branding distinction. Where a Central Bank Digital Currency is issued by an
+        entity with the authority to expand the money supply, a TBDC is backed by a finite reserve
+        asset that no issuer can create, expand, or dilute.
+      </p>
+
+      <div class="versus">
+        <div class="versus-side cbdc">
+          <div class="versus-tag cbdc">Central Bank Digital Currency</div>
+          <div class="versus-title">CBDC</div>
+          <div class="versus-item"><span class="versus-icon">🖨️</span> Issued at discretion of central bank. No supply constraint.</div>
+          <div class="versus-item"><span class="versus-icon">📉</span> Purchasing power erodes by design — inflation is the stated goal.</div>
+          <div class="versus-item"><span class="versus-icon">👁️</span> Every transaction recorded and accessible to issuing authority.</div>
+          <div class="versus-item"><span class="versus-icon">🔒</span> Accounts can be frozen, programmed, or expired.</div>
+          <div class="versus-item"><span class="versus-icon">🏛️</span> Single point of failure — sovereign authority, political capture.</div>
+          <div class="versus-item"><span class="versus-icon">⚙️</span> Programmable spending restrictions and negative interest rates possible.</div>
+        </div>
+        <div class="versus-divider"><div class="versus-vs">VS</div></div>
+        <div class="versus-side tbdc">
+          <div class="versus-tag tbdc">Treasury-Backed Digital Currency</div>
+          <div class="versus-title">TBDC</div>
+          <div class="versus-item"><span class="versus-icon">₿</span> Issued only against Bitcoin reserves acquired at market price.</div>
+          <div class="versus-item"><span class="versus-icon">📈</span> Purchasing power appreciates slowly — inverse of fiat inflation.</div>
+          <div class="versus-item"><span class="versus-icon">🔐</span> Sidechain transfers pseudonymous. No central surveillance ledger.</div>
+          <div class="versus-item"><span class="versus-icon">✅</span> No central authority. Cannot be frozen or programmed by one party.</div>
+          <div class="versus-item"><span class="versus-icon">🌐</span> Multiple independent companies across jurisdictions — no single point of failure.</div>
+          <div class="versus-item"><span class="versus-icon">📐</span> Denomination determined by arithmetic. Cannot be inflated.</div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <p><strong>The most consequential difference:</strong> a TBDC consortium cannot inflate the money supply. This is not a policy commitment that could be reversed under pressure. It is an immutable property of the reserve asset. No governance vote, no emergency measure, no executive decision can produce additional Bitcoin.</p>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- SECTION 2: HOW IT WORKS -->
+    <div class="section">
+      <div class="section-num">02</div>
+      <h2>How It Works</h2>
+      <p>
+        A TBDC token is a redeemable claim on Bitcoin reserves held on Bitcoin's base layer.
+        The token lifecycle has three phases — only the first and last touch the Bitcoin base layer.
+        Everything in between is fast, low-cost sidechain commerce.
+      </p>
+
+      <div class="how-it-works">
+        <div class="hiw-label">Token Lifecycle</div>
+        <div class="hiw-steps">
+          <div class="hiw-step">
+            <div class="hiw-num">01</div>
+            <div class="hiw-icon">💵</div>
+            <div class="hiw-content">
+              <div class="hiw-title">Minting <span class="hiw-tag" style="background:var(--orange-dim);color:var(--orange);">Base Layer</span></div>
+              <div class="hiw-desc">User sends fiat to a consortium member. The treasury company purchases Bitcoin at spot and deposits it into Ledger 1 (the issuance pool). One TBDC token is issued — fully backed at the moment of creation.</div>
+            </div>
+          </div>
+          <div class="hiw-step">
+            <div class="hiw-num">02</div>
+            <div class="hiw-icon">🔄</div>
+            <div class="hiw-content">
+              <div class="hiw-title">Circulation <span class="hiw-tag" style="background:var(--green-dim);color:var(--green);">Sidechain only</span></div>
+              <div class="hiw-desc">TBDC tokens transfer peer-to-peer on the sidechain. Payments, salaries, merchant transactions — all occur without touching Bitcoin's base layer. No Bitcoin is bought, sold, or moved. The reserves sit untouched, appreciating at spot.</div>
+            </div>
+          </div>
+          <div class="hiw-step">
+            <div class="hiw-num">03</div>
+            <div class="hiw-icon">💱</div>
+            <div class="hiw-content">
+              <div class="hiw-title">Saving in BTCC <span class="hiw-tag" style="background:var(--green-dim);color:var(--green);">Sidechain only</span></div>
+              <div class="hiw-desc">Users who hold BTCC as savings see their purchasing power appreciate slowly over time. No redemption required. The BTCC denomination trends upward as long as BTC spot exceeds the historical average — the inverse of fiat inflation.</div>
+            </div>
+          </div>
+          <div class="hiw-step">
+            <div class="hiw-num">04</div>
+            <div class="hiw-icon">🏧</div>
+            <div class="hiw-content">
+              <div class="hiw-title">Redemption <span class="hiw-tag" style="background:var(--orange-dim);color:var(--orange);">Base Layer</span></div>
+              <div class="hiw-desc">User redeems token for fiat. The token is burned. Bitcoin is sold from Ledger 1 (or Ledger 2 backstop if needed) and fiat is returned at the BTCC face value. The reserve system only engages at this moment.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- SECTION 3: THE CONSORTIUM -->
+    <div class="section">
+      <div class="section-num">03</div>
+      <h2>The Consortium</h2>
+      <p>
+        A TBDC is issued by a consortium of publicly traded Bitcoin treasury companies — firms whose
+        primary business is acquiring and holding Bitcoin as a reserve asset. As of early 2026,
+        such companies collectively hold over 600,000 BTC. Each consortium member independently
+        issues TBDC tokens backed by their own reserves, with no single company controlling the system.
+      </p>
+
+      <div class="consortium">
+        <div class="consortium-member">
+          <div class="consortium-icon">🏢</div>
+          <div class="consortium-name">Strategy</div>
+          <div class="consortium-desc">Formerly MicroStrategy. Largest corporate BTC holder.</div>
+        </div>
+        <div class="consortium-member">
+          <div class="consortium-icon">⛏️</div>
+          <div class="consortium-name">MARA Holdings</div>
+          <div class="consortium-desc">Bitcoin mining and treasury operations.</div>
+        </div>
+        <div class="consortium-member">
+          <div class="consortium-icon">🇯🇵</div>
+          <div class="consortium-name">Metaplanet</div>
+          <div class="consortium-desc">Japan-based Bitcoin treasury company.</div>
+        </div>
+        <div class="consortium-member">
+          <div class="consortium-icon">🔷</div>
+          <div class="consortium-name">Twenty One Capital</div>
+          <div class="consortium-desc">Purpose-built Bitcoin treasury company.</div>
+        </div>
+        <div class="consortium-member">
+          <div class="consortium-icon">➕</div>
+          <div class="consortium-name">Others</div>
+          <div class="consortium-desc">Open consortium. Any qualifying Bitcoin treasury company may participate.</div>
+        </div>
+      </div>
+
+      <p>
+        The distributed consortium structure provides resilience — members in different jurisdictions
+        ensure no single regulatory action can shut down the entire system. Each member independently
+        manages its own ledgers and reserves. The BTCC denomination that defines token value is
+        independent of all of them — it persists even if the consortium is dissolved.
+      </p>
+    </div>
+
+    <hr>
+
+    <!-- SECTION 4: RESERVE STRUCTURE -->
+    <div class="section">
+      <div class="section-num">04</div>
+      <h2>The Two-Ledger Reserve System</h2>
+      <p>
+        Each consortium member maintains two Bitcoin reserve ledgers, both held in publicly
+        addressable wallets on Bitcoin's base layer — verifiable by anyone in real time.
+        The reserves are never lent, staked, or rehypothecated.
+      </p>
+
+      <div class="collateral-viz">
+        <div class="cv-label">Natural Bitcoin Collateral Buffer (Illustrative — BTC spot ~$84,000, BTCC ~$18,000)</div>
+        <div class="cv-bars">
+          <div class="cv-bar" style="background:var(--orange);height:100%;">BTC<br>Spot</div>
+          <div class="cv-bar" style="background:rgba(247,147,26,0.3);height:21%;border:1px solid var(--orange);">BTCC</div>
+        </div>
+        <div class="cv-bar-labels">
+          <div class="cv-bar-label">$84,000<br><span style="color:var(--orange);">BTC Spot Price</span></div>
+          <div class="cv-bar-label">~$18,000<br><span style="color:var(--text-muted);">BTCC (liability)</span></div>
+        </div>
+        <div style="margin-top:16px;font-family:var(--font-sans);font-size:0.82rem;color:var(--text-secondary);line-height:1.6;">
+          Bitcoin's spot price is naturally ~4.5× the BTCC cumulative average. This means Ledger 1 alone — without any Ledger 2 backstop — holds approximately 4.5× the value of the liabilities it backs. This is not engineered overcollateralization. It is a structural property of Bitcoin's price history relative to the BTCC formula.
+        </div>
+      </div>
+
+      <div class="props">
+        <div class="prop">
+          <div class="prop-icon">📒</div>
+          <div class="prop-title">Ledger 1 — Issuance Pool</div>
+          <div class="prop-desc">Bitcoin acquired with incoming fiat at time of token minting. Backs all outstanding TBDC tokens directly. On-chain and publicly verifiable.</div>
+        </div>
+        <div class="prop">
+          <div class="prop-icon">🛡️</div>
+          <div class="prop-title">Ledger 2 — Reserve Backstop</div>
+          <div class="prop-desc">Bitcoin from the treasury company's existing holdings. Guarantees redemptions if BTC spot falls below the issuance price. Only engaged when fiat redemptions exceed Ledger 1 capacity.</div>
+        </div>
+        <div class="prop">
+          <div class="prop-icon">🔍</div>
+          <div class="prop-title">On-Chain Transparency</div>
+          <div class="prop-desc">Both ledgers held in publicly addressable Bitcoin wallets. Any observer can verify reserve levels in real time without trusting the issuer.</div>
+        </div>
+        <div class="prop">
+          <div class="prop-icon">🚫</div>
+          <div class="prop-title">No Rehypothecation</div>
+          <div class="prop-desc">Reserves are never lent, staked, or used as collateral elsewhere. The Bitcoin sits cold — its only purpose is to back outstanding tokens.</div>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- SECTION 5: KEY PROPERTIES -->
+    <div class="section">
+      <div class="section-num">05</div>
+      <h2>Key Properties</h2>
+
+      <div class="props">
+        <div class="prop">
+          <div class="prop-icon">📐</div>
+          <div class="prop-title">Mathematically Stable</div>
+          <div class="prop-desc">Denominated in BTCC — the cumulative average of 6,200+ daily prices. A 40% BTC crash shifts the BTCC price by ~0.04%. Stability is arithmetic, not policy.</div>
+        </div>
+        <div class="prop">
+          <div class="prop-icon">📈</div>
+          <div class="prop-title">Deflationary by Design</div>
+          <div class="prop-desc">As long as BTC spot exceeds the historical average, BTCC appreciates slowly. Holders' purchasing power trends upward — the inverse of every fiat currency.</div>
+        </div>
+        <div class="prop">
+          <div class="prop-icon">₿</div>
+          <div class="prop-title">100% Bitcoin Backed</div>
+          <div class="prop-desc">Every token is backed by real Bitcoin on the base layer. No fractional reserves. No fiat in the banking system. No counterparty beyond the reserve ledger.</div>
+        </div>
+        <div class="prop">
+          <div class="prop-icon">🔗</div>
+          <div class="prop-title">No Protocol Changes</div>
+          <div class="prop-desc">TBDC requires no changes to Bitcoin. No soft fork, no hard fork, no new opcodes. It operates as an application layer on top of Bitcoin's existing infrastructure.</div>
+        </div>
+        <div class="prop">
+          <div class="prop-icon">🌐</div>
+          <div class="prop-title">Open Standard</div>
+          <div class="prop-desc">The BTCC denomination and BTCADP reference price are CC0 public domain. Any institution can independently implement the standard without permission.</div>
+        </div>
+        <div class="prop">
+          <div class="prop-icon">⚡</div>
+          <div class="prop-title">Everyday Commerce</div>
+          <div class="prop-desc">Sidechain settlement is fast and low-cost. A million TBDC transactions can occur without a single satoshi moving on-chain. Commerce and reserves are fully separated.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-block">
+      <h3>Explore Further</h3>
+      <p>TBDC is built on the BTCADP reference price and the BTCC denomination. Read the full case studies and specifications.</p>
+      <div class="cta-buttons">
+        <a href="btcc.html" class="btn-primary">BTCC Denomination &rarr;</a>
+        <a href="currency-layer.html" class="btn-secondary">Currency Layer &rarr;</a>
+        <a href="knowledge-base.html" class="btn-secondary">Knowledge Base &rarr;</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <p>
+    <a href="index.html">Home</a> &nbsp;&bull;&nbsp;
+    <a href="btcc.html">BTCC</a> &nbsp;&bull;&nbsp;
+    <a href="currency-layer.html">Currency Layer</a> &nbsp;&bull;&nbsp;
+    <a href="knowledge-base.html">Knowledge Base</a> &nbsp;&bull;&nbsp;
+    <a href="https://github.com/BTCADP/btcadp-research" target="_blank" rel="noopener">GitHub</a>
+  </p>
+  <p style="margin-top:8px;">CC0 Public Domain &bull; btcadp.org &bull; 2026</p>
+</footer>
+
+</body>
+</html>
