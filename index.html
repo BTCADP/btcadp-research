@@ -605,6 +605,7 @@
       <div class="era-item"><div class="era-dot" style="background:var(--era1)"></div> Era 1: Mt. Gox (2010&ndash;2014)</div>
       <div class="era-item"><div class="era-dot" style="background:var(--era2)"></div> Era 2: Transition (2014&ndash;2017)</div>
       <div class="era-item"><div class="era-dot" style="background:var(--era3)"></div> Era 3: Maturity (2018&ndash;Present)</div>
+      <div class="era-item"><div style="width:24px;height:2px;border-top:2px dashed rgba(255,255,255,0.45);margin-right:2px;"></div> BTCC Cumulative Avg</div>
     </div>
   </section>
 
@@ -865,29 +866,66 @@ function renderChart(rangeFilter) {
   const labels = filtered.map(r => r.date);
   const values = filtered.map(r => r.btcadp_usd_num);
   const segmentColors = filtered.map(r => eraColors[r.era] || '#f7931a');
+
+  // Compute BTCC cumulative average across ALL data so line is accurate when zoomed
+  const allSorted = [...allData].sort((a, b) => a.date.localeCompare(b.date));
+  let runSum = 0, runCount = 0;
+  const btccByDate = {};
+  for (const r of allSorted) { runSum += r.btcadp_usd_num; runCount++; btccByDate[r.date] = runSum / runCount; }
+  const btccValues = filtered.map(r => btccByDate[r.date] || null);
+
   const ctx = document.getElementById('priceChart').getContext('2d');
   if (chart) chart.destroy();
   chart = new Chart(ctx, {
     type: 'line',
     data: {
       labels,
-      datasets: [{
-        data: values,
-        borderWidth: 1.5,
-        pointRadius: 0,
-        pointHitRadius: 8,
-        tension: 0.1,
-        fill: true,
-        backgroundColor: 'rgba(247, 147, 26, 0.05)',
-        segment: { borderColor: ctx2 => segmentColors[ctx2.p0DataIndex] || '#f7931a' }
-      }]
+      datasets: [
+        {
+          label: 'BTCADP',
+          data: values,
+          borderWidth: 1.5,
+          pointRadius: 0,
+          pointHitRadius: 8,
+          tension: 0.1,
+          fill: true,
+          backgroundColor: 'rgba(247, 147, 26, 0.05)',
+          segment: { borderColor: ctx2 => segmentColors[ctx2.p0DataIndex] || '#f7931a' }
+        },
+        {
+          label: 'BTCC',
+          data: btccValues,
+          borderColor: 'rgba(255, 255, 255, 0.45)',
+          borderWidth: 1.5,
+          borderDash: [5, 4],
+          pointRadius: 0,
+          pointHitRadius: 8,
+          tension: 0.1,
+          fill: false
+        }
+      ]
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
       interaction: { mode: 'index', intersect: false },
       plugins: {
-        legend: { display: false },
+        legend: {
+          display: true,
+          position: 'top',
+          align: 'end',
+          labels: {
+            color: '#8a8a95',
+            font: { family: "'JetBrains Mono'", size: 11 },
+            boxWidth: 24,
+            boxHeight: 2,
+            padding: 16,
+            generateLabels: () => [
+              { text: 'BTCADP Daily Price', strokeStyle: '#f7931a', lineWidth: 2, fillStyle: 'transparent' },
+              { text: 'BTCC Cumulative Avg', strokeStyle: 'rgba(255,255,255,0.45)', lineWidth: 2, lineDash: [5,4], fillStyle: 'transparent' }
+            ]
+          }
+        },
         tooltip: {
           backgroundColor: '#19191e',
           borderColor: '#2a2a32',
@@ -895,11 +933,15 @@ function renderChart(rangeFilter) {
           titleFont: { family: "'JetBrains Mono'", size: 12 },
           bodyFont: { family: "'JetBrains Mono'", size: 13 },
           titleColor: '#8a8a95',
-          bodyColor: '#f7931a',
           padding: 12,
           callbacks: {
             title: items => items[0].label,
-            label: item => '$' + item.raw.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + '  [Era ' + filtered[item.dataIndex].era + ']'
+            label: item => {
+              const val = '$' + item.raw.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+              if (item.datasetIndex === 0) return ' BTCADP: ' + val + '  [Era ' + filtered[item.dataIndex].era + ']';
+              if (item.datasetIndex === 1) return ' BTCC:   ' + val;
+              return val;
+            }
           }
         }
       },
