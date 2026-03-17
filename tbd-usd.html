@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treasury-Backed Digital Currency (₿USD) | btcadp.org</title>
+    <meta name="description" content="₿USD is a USD-pegged stablecoin backed by Bitcoin reserves held by a consortium of Bitcoin treasury companies, using the ₿C price as its conservative collateral floor.">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --bg2: #111111;
+            --bg3: #1a1a1a;
+            --border: #2a2a2a;
+            --text: #e8e8e8;
+            --muted: #888888;
+            --orange: #f7931a;
+            --orange-dim: rgba(247, 147, 26, 0.12);
+            --orange-dim2: rgba(247, 147, 26, 0.06);
+            --green: #4caf7d;
+            --red: #e74c3c;
+            --font: 'Georgia', 'Times New Roman', serif;
+            --mono: 'Courier New', Courier, monospace;
+            --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font);
+            line-height: 1.7;
+            font-size: 17px;
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(10,10,10,0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 56px;
+        }
+
+        .nav-brand {
+            font-family: var(--mono);
+            font-size: 1rem;
+            font-weight: bold;
+            color: var(--orange);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.25rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-family: var(--sans);
+            font-size: 0.85rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            transition: color 0.2s, background 0.2s;
+            letter-spacing: 0.03em;
+        }
+
+        .nav-links a:hover { color: var(--text); background: var(--bg3); }
+        .nav-links a.active { color: var(--orange); }
+
+        .hero {
+            border-bottom: 1px solid var(--border);
+            padding: 5rem 2rem 4rem;
+            text-align: center;
+            background: radial-gradient(ellipse at 50% 0%, rgba(247,147,26,0.07) 0%, transparent 65%);
+        }
+
+        .hero-label {
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            color: var(--orange);
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: normal;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+            margin-bottom: 1.2rem;
+            color: #fff;
+        }
+
+        .hero h1 span { color: var(--orange); }
+
+        .hero-sub {
+            font-family: var(--sans);
+            font-size: 1.05rem;
+            color: var(--muted);
+            max-width: 620px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.6;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--orange);
+            color: #000;
+            font-family: var(--sans);
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 0.7rem 1.6rem;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .hero-cta:hover { opacity: 0.85; }
+
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section { margin-bottom: 4rem; }
+
+        .section-number {
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            color: var(--orange);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .section h2 {
+            font-size: 1.6rem;
+            font-weight: normal;
+            color: #fff;
+            margin-bottom: 1.2rem;
+            letter-spacing: -0.01em;
+        }
+
+        .section p { color: #c8c8c8; margin-bottom: 1rem; }
+
+        .callout {
+            background: var(--orange-dim);
+            border: 1px solid rgba(247,147,26,0.2);
+            border-radius: 6px;
+            padding: 1.2rem 1.5rem;
+            margin: 1.5rem 0;
+            font-family: var(--sans);
+            font-size: 0.9rem;
+            color: #d4b483;
+            line-height: 1.6;
+        }
+
+        .callout strong { color: var(--orange); }
+
+        /* Ledger cards */
+        .ledger-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .ledger-card {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-top: 2px solid var(--orange);
+            border-radius: 6px;
+            padding: 1.4rem;
+        }
+
+        .ledger-title {
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            color: var(--orange);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+
+        .ledger-name {
+            font-size: 1rem;
+            color: #fff;
+            margin-bottom: 0.8rem;
+            font-family: var(--sans);
+            font-weight: 600;
+        }
+
+        .ledger-card p {
+            font-family: var(--sans);
+            font-size: 0.85rem;
+            color: var(--muted);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* Mechanics table */
+        .mechanics-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-family: var(--sans);
+            font-size: 0.85rem;
+        }
+
+        .mechanics-table th {
+            text-align: left;
+            padding: 0.6rem 1rem;
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            color: var(--muted);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .mechanics-table td {
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border);
+            color: #c8c8c8;
+            vertical-align: top;
+        }
+
+        .mechanics-table tr:nth-child(even) td { background: var(--bg2); }
+        .mechanics-table .good { color: var(--green); font-weight: 600; }
+        .mechanics-table .warn { color: var(--orange); }
+        .mechanics-table .bad  { color: var(--red); }
+
+        /* Cycle steps */
+        .cycle {
+            counter-reset: cycle-counter;
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .cycle li {
+            counter-increment: cycle-counter;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            font-family: var(--sans);
+            font-size: 0.9rem;
+            color: #c8c8c8;
+        }
+
+        .cycle li::before {
+            content: counter(cycle-counter);
+            flex-shrink: 0;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--orange-dim);
+            border: 1px solid rgba(247,147,26,0.3);
+            color: var(--orange);
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 2px;
+        }
+
+        /* Comparison table */
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-family: var(--sans);
+            font-size: 0.85rem;
+        }
+
+        .compare-table th {
+            text-align: left;
+            padding: 0.6rem 1rem;
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            color: var(--muted);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .compare-table th.highlight-col { color: var(--orange); }
+
+        .compare-table td {
+            padding: 0.7rem 1rem;
+            border: 1px solid var(--border);
+            color: #c8c8c8;
+            vertical-align: top;
+        }
+
+        .compare-table td.highlight-col { background: var(--orange-dim2); color: #d4b483; }
+        .compare-table tr:nth-child(even) td { background: var(--bg2); }
+        .compare-table tr:nth-child(even) td.highlight-col { background: rgba(247,147,26,0.09); }
+
+        hr.divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 3rem 0;
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 2rem;
+            text-align: center;
+            font-family: var(--sans);
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        footer a { color: var(--muted); text-decoration: none; }
+        footer a:hover { color: var(--orange); }
+
+        @media (max-width: 600px) {
+            .ledger-grid { grid-template-columns: 1fr; }
+            .nav-links a { padding: 0.4rem 0.5rem; font-size: 0.78rem; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a class="nav-brand" href="index.html">BTCADP</a>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="specification.html">Specification</a></li>
+        <li><a href="btcc.html">₿C</a></li>
+        <li><a href="tbd-usd.html" class="active">₿USD</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+    </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-label">Treasury-Backed Digital Currency</div>
+    <h1>₿USD — <span>A Bitcoin-Backed</span><br>USD Stablecoin</h1>
+    <p class="hero-sub">
+        One token equals one dollar. Backed by Bitcoin held in verifiable on-chain reserves by a
+        consortium of Bitcoin treasury companies. The ₿C price serves as the conservative
+        collateral floor.
+    </p>
+    <a href="#mechanics" class="hero-cta">How It Works →</a>
+</section>
+
+<!-- MAIN CONTENT -->
+<div class="content">
+
+    <!-- 1. WHAT IS ₿USD -->
+    <div class="section">
+        <div class="section-number">01</div>
+        <h2>What is ₿USD?</h2>
+        <p>
+            Treasury-Backed Digital Currency (₿USD) is a USD-pegged stablecoin — one token equals
+            one dollar — issued by a consortium of Bitcoin treasury companies. Each token is backed
+            by Bitcoin held in a two-ledger reserve system, verifiable on the base layer in publicly
+            addressable wallets.
+        </p>
+        <p>
+            ₿USD is not an algorithmic stablecoin. It carries no endogenous token mechanism and
+            makes no market-incentive assumptions. It is not a fiat-backed stablecoin. It holds no
+            dollars, no US Treasuries, and no bank deposits. Its collateral is Bitcoin — the only
+            asset whose supply is fixed by protocol and whose custody requires no counterparty.
+        </p>
+        <div class="callout">
+            <strong>The distinction that matters:</strong> when a consumer buys ₿USD, the issuing
+            consortium uses the incoming dollars to purchase Bitcoin. Every unit of ₿USD demand is
+            structurally identical to Bitcoin demand. The two cannot be separated.
+        </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- 2. THE TWO-LEDGER RESERVE SYSTEM -->
+    <div class="section" id="mechanics">
+        <div class="section-number">02</div>
+        <h2>The Two-Ledger Reserve System</h2>
+        <p>
+            Each consortium member maintains two Bitcoin ledgers on the base layer. Both hold
+            actual Bitcoin in publicly verifiable wallets. Reserves are not lent, staked,
+            or rehypothecated.
+        </p>
+
+        <div class="ledger-grid">
+            <div class="ledger-card">
+                <div class="ledger-title">Ledger 1</div>
+                <div class="ledger-name">Issuance Pool</div>
+                <p>Holds Bitcoin purchased with incoming consumer USD at the moment of minting.
+                Directly backs outstanding tokens. In a rising market, this ledger appreciates
+                faster than the ₿USD redemption obligation it covers, generating surplus.</p>
+            </div>
+            <div class="ledger-card">
+                <div class="ledger-title">Ledger 2</div>
+                <div class="ledger-name">Reserve Backstop</div>
+                <p>Holds Bitcoin drawn from each consortium member's existing treasury holdings.
+                Covers redemptions when Ledger 1 is insufficient — i.e. when Bitcoin spot has
+                declined below the acquisition price. The size of Ledger 2 determines the depth
+                of the system's bear market protection.</p>
+            </div>
+        </div>
+
+        <p>
+            The issuance process is straightforward. A consumer sends $1,000. The consortium
+            purchases Bitcoin at spot with those funds and deposits it into Ledger 1. One thousand
+            ₿USD tokens are issued. From that moment, the Ledger 1 Bitcoin tracks spot price while
+            the ₿USD liability tracks the ₿C price — a cumulative historical average that moves
+            a fraction of a percent per day regardless of spot volatility.
+        </p>
+        <p>
+            On redemption, the consortium sells the required Bitcoin from Ledger 1 and returns
+            $1,000. The tokens are burned. If Ledger 1 has appreciated, the consortium retains
+            the surplus. If Ledger 1 has fallen below the redemption amount, Ledger 2 covers
+            the difference.
+        </p>
+    </div>
+
+    <hr class="divider">
+
+    <!-- 3. THE ₿C COLLATERAL FLOOR -->
+    <div class="section">
+        <div class="section-number">03</div>
+        <h2>The ₿C Collateral Floor</h2>
+        <p>
+            Total ₿USD issuance is capped at the Bitcoin Currency (₿C) denominated value of the
+            consortium's combined Bitcoin holdings — not spot value. Because ₿C is a conservative
+            floor that currently sits at approximately one-quarter of spot price, the system is
+            structurally overcollateralized at all times.
+        </p>
+        <p>
+            For the peg to fail, Bitcoin's spot price would need to fall below its own lifetime
+            cumulative average and remain there permanently. That event has no precedent in
+            Bitcoin's history. Every time spot has approached the ₿C level, it has recovered —
+            because sustained spot prices below the historical average imply that Bitcoin's
+            entire market history has been repriced to zero, which is indistinguishable from
+            Bitcoin's terminal failure as an asset.
+        </p>
+
+        <table class="mechanics-table">
+            <thead>
+                <tr>
+                    <th>BTC Spot</th>
+                    <th>₿C Price</th>
+                    <th>Overcollateralization Ratio</th>
+                    <th>System Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>$140,000</td>
+                    <td>~$22,000</td>
+                    <td class="good">~6.4×</td>
+                    <td>Deep surplus</td>
+                </tr>
+                <tr>
+                    <td>$70,000 (today)</td>
+                    <td>~$18,700</td>
+                    <td class="good">~3.75×</td>
+                    <td>Healthy</td>
+                </tr>
+                <tr>
+                    <td>$35,000</td>
+                    <td>~$17,000</td>
+                    <td class="warn">~2.1×</td>
+                    <td>Issuance tightens; peg holds</td>
+                </tr>
+                <tr>
+                    <td>$18,700 (= ₿C)</td>
+                    <td>~$18,700</td>
+                    <td class="bad">~1.0×</td>
+                    <td>Floor — no historical precedent</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="callout">
+            As spot rises, the overcollateralization ratio widens and issuance capacity expands.
+            As spot falls, issuance tightens automatically — no board vote required. The ₿C
+            formula governs, not discretion.
+        </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- 4. THE VIRTUOUS CYCLE -->
+    <div class="section">
+        <div class="section-number">04</div>
+        <h2>The Virtuous Cycle</h2>
+        <p>
+            Every ₿USD token minted requires the consortium to purchase Bitcoin. Consumer demand
+            for ₿USD is therefore structurally identical to Bitcoin demand. As adoption grows,
+            three things happen simultaneously:
+        </p>
+
+        <ol class="cycle">
+            <li>Incoming USD purchases Bitcoin for Ledger 1, increasing spot demand directly.</li>
+            <li>Rising spot price increases the USD value of all consortium holdings, expanding the ₿C-denominated issuance ceiling.</li>
+            <li>Fee revenue, reinvested into Bitcoin during the bootstrapping phase, deepens Ledger 2 and further raises the floor.</li>
+        </ol>
+
+        <p>
+            The consortium commits to a pre-determined fee reinvestment policy: 100% of fee
+            revenue is deployed to purchase additional Bitcoin until the coverage ratio —
+            total Bitcoin holdings valued at ₿C price divided by total ₿USD outstanding —
+            reaches a defined threshold. Above that threshold, fee reinvestment tapers according
+            to a fixed schedule and profits are distributed. The threshold is determined by the
+            coverage ratio formula, not by board discretion.
+        </p>
+
+        <div class="callout">
+            The consortium does not bet on Bitcoin's price going up and then hope. It builds a
+            system in which Bitcoin's price going up is the direct and necessary consequence of
+            the product succeeding. The mutual dependence between product success and Bitcoin
+            appreciation is the mechanism, not the risk.
+        </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- 5. CIRCULATION AND THE CURRENCY LAYER -->
+    <div class="section">
+        <div class="section-number">05</div>
+        <h2>Circulation and the Currency Layer</h2>
+        <p>
+            The reserve system is designed for the transition phase — the period when consumers
+            still think of ₿USD as "digital dollars" and the option to redeem for USD remains
+            relevant. As adoption deepens, that mental model changes.
+        </p>
+        <p>
+            When a merchant prices goods in ₿USD, a worker receives a salary in ₿USD, and a
+            lender denominates a loan in ₿USD, redemption pressure approaches zero. Tokens
+            circulate on the currency layer indefinitely. Ledger 1 and Ledger 2 accumulate
+            appreciation without outflow. The coverage ratio compounds continuously.
+        </p>
+        <p>
+            At sufficient scale, the reserve requirement transitions from a defensive mechanism
+            to an asymptotic certainty. The consortium's Bitcoin holdings, accumulated through
+            years of issuance and fee reinvestment, represent collateral so deep that no plausible
+            bear market threatens the peg. The bridge between fiat and the currency layer remains
+            open — but fewer and fewer people need to cross back.
+        </p>
+    </div>
+
+    <hr class="divider">
+
+    <!-- 6. COMPARISON -->
+    <div class="section">
+        <div class="section-number">06</div>
+        <h2>How ₿USD Compares</h2>
+
+        <table class="compare-table">
+            <thead>
+                <tr>
+                    <th>Property</th>
+                    <th>USDT / USDC</th>
+                    <th>Algorithmic</th>
+                    <th class="highlight-col">₿USD</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Collateral</td>
+                    <td>Fiat / Treasuries</td>
+                    <td>None / endogenous token</td>
+                    <td class="highlight-col">Bitcoin (base layer)</td>
+                </tr>
+                <tr>
+                    <td>Reserves verifiable</td>
+                    <td>Audited periodically</td>
+                    <td>On-chain (no real backing)</td>
+                    <td class="highlight-col">On-chain, real-time</td>
+                </tr>
+                <tr>
+                    <td>Peg mechanism</td>
+                    <td>1:1 fiat backing</td>
+                    <td>Market incentives</td>
+                    <td class="highlight-col">₿C floor + treasury backstop</td>
+                </tr>
+                <tr>
+                    <td>Demand creates</td>
+                    <td>US Treasury demand</td>
+                    <td>Token volatility</td>
+                    <td class="highlight-col">Bitcoin demand</td>
+                </tr>
+                <tr>
+                    <td>Holding value over time</td>
+                    <td>Depreciates with USD</td>
+                    <td>Unpredictable</td>
+                    <td class="highlight-col">$1.00 redeemable; reserves appreciate</td>
+                </tr>
+                <tr>
+                    <td>Censorship resistance</td>
+                    <td>Accounts can be frozen</td>
+                    <td>Varies</td>
+                    <td class="highlight-col">Bitcoin base layer</td>
+                </tr>
+                <tr>
+                    <td>Failure mode</td>
+                    <td>Issuer insolvency / regulation</td>
+                    <td>Reflexive collapse</td>
+                    <td class="highlight-col">BTC spot below ₿C — no precedent</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr class="divider">
+
+    <!-- 7. RELATIONSHIP TO ₿C -->
+    <div class="section">
+        <div class="section-number">07</div>
+        <h2>Relationship to ₿C</h2>
+        <p>
+            ₿USD is built on Bitcoin Currency (₿C) but is a distinct product. ₿C is a denomination
+            protocol — it requires no issuer, holds no reserves, and makes no promise of redemption.
+            Any wallet or merchant can adopt ₿C independently. ₿USD is an issued monetary instrument
+            with specific institutional participants, reserve requirements, and redemption obligations.
+        </p>
+        <p>
+            The ₿C price serves two roles within ₿USD. First, it is the issuance ceiling: total
+            ₿USD supply cannot exceed the ₿C-denominated value of consortium holdings. Second, it
+            is the liability reference: the ₿USD obligation tracks the ₿C price, which appreciates
+            more slowly than Bitcoin spot, ensuring the collateral always has room to absorb
+            drawdowns before the peg is threatened.
+        </p>
+        <a href="btcc.html" class="hero-cta" style="margin-top:1rem;display:inline-flex;">Learn about ₿C →</a>
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <p>
+        <a href="index.html">Home</a> &nbsp;·&nbsp;
+        <a href="btcc.html">Bitcoin Currency (₿C)</a> &nbsp;·&nbsp;
+        <a href="specification.html">BTCADP Specification</a> &nbsp;·&nbsp;
+        <a href="https://github.com/BTCADP/btcadp-research">GitHub</a>
+    </p>
+    <p style="margin-top:0.8rem;">CC0 Public Domain · btcadp.org · 2026</p>
+</footer>
+
+</body>
+</html>

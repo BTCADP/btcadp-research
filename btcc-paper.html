@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BTCC Technical Paper | btcadp.org</title>
-    <meta name="description" content="BTCC: A Denomination Protocol for Peer-to-Peer Electronic Cash. Full technical paper.">
+    <title>Bitcoin Currency (₿C) Technical Paper | btcadp.org</title>
+    <meta name="description" content="Bitcoin Currency (₿C): A Denomination Protocol for Peer-to-Peer Electronic Cash. Full technical paper.">
     <style>
         :root {
             --bg: #0a0a0a;
@@ -329,7 +329,7 @@
         <li><a href="live.html">Live</a></li>
         <li><a href="days/index.html">Days</a></li>
         <li><a href="specification.html">Specification</a></li>
-        <li><a href="btcc.html" class="active">BTCC</a></li>
+        <li><a href="btcc.html" class="active">₿C</a></li>
         <li><a href="bitcoin-timeblocks.html">Timeblocks</a></li>
     </ul>
 </nav>
@@ -337,7 +337,7 @@
 <!-- PAPER HEADER -->
 <div class="paper-header">
     <div class="paper-label">Technical Paper</div>
-    <h1>BTCC: A Denomination Protocol for<br>Peer-to-Peer Electronic Cash</h1>
+    <h1>Bitcoin Currency (₿C): A Denomination Protocol for<br>Peer-to-Peer Electronic Cash</h1>
     <div class="subtitle">Anonymous &nbsp;·&nbsp; btcadp.org &nbsp;·&nbsp; 2026</div>
     <div class="paper-meta">
         <span>📄 Technical Paper</span>
@@ -345,7 +345,7 @@
         <span>🔗 btcadp.org</span>
     </div>
     <div class="download-bar" id="download">
-        <button class="btn-primary" onclick="downloadPaper()">⬇ Download PDF</button>
+        <button class="btn-primary" onclick="downloadPaper()">🖨 Print / Save as PDF</button>
         <a href="btcc.html" class="btn-secondary">← Summary Page</a>
     </div>
 </div>
@@ -357,16 +357,17 @@
     <div class="abstract">
         <div class="abstract-label">Abstract</div>
         <p>
-            This paper proposes a denomination protocol that enables Bitcoin to function as a stable
-            unit of account without modification to the underlying protocol. Transaction amounts are
-            expressed using a cumulative historical average of daily Bitcoin prices, producing a unit
-            whose purchasing power changes negligibly from day to day. Each calendar day constitutes
-            a timeblock whose price, once recorded, becomes progressively more permanent as subsequent
-            days are added to the average. The denomination requires no token, no issuer, no reserves,
-            and no trusted third party. It is computed from publicly available trade data using a
-            transparent methodology that any participant can independently verify and reproduce.
-            The result is a stable Bitcoin denomination whose resistance to disruption strengthens
-            over time through a deterministic mathematical formula.
+            This paper proposes a denomination protocol that enables Bitcoin to function as a
+            predictable unit of account without modification to the underlying protocol. Transaction
+            amounts are expressed using a cumulative historical average of daily Bitcoin prices,
+            producing a unit whose fiat price moves approximately 0.04% per day regardless of spot
+            price action, and appreciates incrementally over time as Bitcoin's long-run price history
+            accumulates. Each calendar day constitutes a timeblock whose price, once recorded, becomes
+            progressively more permanent as subsequent days are added to the average. The denomination
+            requires no token, no issuer, no reserves, and no trusted third party. It is computed from
+            publicly available trade data using a transparent methodology that any participant can
+            independently verify and reproduce. The result is a Bitcoin unit of account whose
+            resistance to disruption strengthens over time through a deterministic mathematical formula.
         </p>
     </div>
 
@@ -391,7 +392,7 @@
             digital dollars routed through additional intermediaries.
         </p>
         <p>
-            What is needed is a way to express Bitcoin's value that is stable enough for daily use
+            What is needed is a way to express Bitcoin's value that is predictable enough for daily use
             while remaining entirely Bitcoin-native. This paper proposes a denomination protocol that
             achieves this through a cumulative historical average of daily prices. No new token is
             created. No reserves are held. No entity is trusted. The protocol is a standard for
@@ -435,7 +436,7 @@
             day is the arithmetic mean of every historical BTCADP value from the genesis block to the
             present:
         </p>
-        <div class="formula">BTCC(d) = (1/N) Σ BTCADP(i), for i = 1 to N</div>
+        <div class="formula">₿C(d) = (1/N) Σ BTCADP(i), for i = 1 to N</div>
         <p>
             Where N is the total number of days in Bitcoin's history through the previous completed day.
             At the start of each UTC day (00:00:00.000), the BTCC price is recalculated to incorporate
@@ -444,7 +445,7 @@
         <p>
             The sensitivity of the BTCC price to each new BTCADP value is:
         </p>
-        <div class="formula">ΔBTCC = (BTCADP(new) − BTCC(current)) / (N + 1)</div>
+        <div class="formula">Δ₿C = (BTCADP(new) − ₿C(current)) / (N + 1)</div>
         <p>
             As N grows, this sensitivity approaches zero. As of early 2026, N exceeds 6,200. A day in
             which Bitcoin's price moves 10% produces a change in the BTCC price of less than 0.01%.
@@ -498,12 +499,12 @@
 
     <!-- SECTION 6 -->
     <div class="paper-section">
-        <h2><span class="sec-num">6.</span> Stability Properties</h2>
-        <p>Three properties govern the stability of the BTCC price:</p>
+        <h2><span class="sec-num">6.</span> Mathematical Properties</h2>
+        <p>Three properties govern the day-to-day stability and long-run appreciation of the BTCC price:</p>
         <p>
             <em>Monotonically decreasing sensitivity.</em> The impact of each new BTCADP on the BTCC
             price is exactly 1/(N+1) of the difference from the current average. As N grows, this
-            sensitivity approaches zero. The denomination becomes more stable with each passing day,
+            sensitivity approaches zero. The denomination becomes more resistant to disruption with each passing day,
             permanently and irreversibly.
         </p>
         <p>
@@ -512,10 +513,11 @@
             extreme that shock is.
         </p>
         <p>
-            <em>Slow-moving trend.</em> A flash crash in which BTC drops 40% in a single day shifts the
-            BTCC price by approximately $6 — a change of 0.04%. A prolonged bear market in which BTC
-            remains at $20,000 for three years produces less than 5% total change in the BTCC price
-            over the entire period.
+            <em>Incremental appreciation.</em> A flash crash in which BTC drops 40% in a single day shifts the
+            BTCC price by approximately $6 — a change of 0.04%. Sustained higher prices are absorbed
+            slowly and permanently into the average, producing long-run appreciation anchored to
+            Bitcoin's price history. A prolonged bear market in which BTC remains at $20,000 for
+            three years produces less than 5% total change in the BTCC price over the entire period.
         </p>
     </div>
 
@@ -550,7 +552,7 @@
             Even a successfully manipulated BTCADP has limited effect on the BTCC price. A single
             manipulated day shifts the cumulative average by at most 1/(N+1) of the difference. With
             N exceeding 6,200, an attacker would need to sustain manipulation across hundreds of
-            consecutive days to produce a meaningful shift — a cost that is, for practical purposes,
+            consecutive days to produce a meaningful shift in the BTCC price — a cost that is, for practical purposes,
             prohibitive.
         </p>
     </div>
@@ -577,9 +579,9 @@
     <div class="paper-section">
         <h2><span class="sec-num">10.</span> Known Limitations</h2>
         <p>
-            The BTCC fiat price appreciates slowly over time as long as BTC spot exceeds the historical
-            average. In BTCC terms, this constitutes mild deflation. Merchants pricing in BTCC will
-            occasionally need to adjust prices downward.
+            The BTCC fiat price appreciates over time as long as BTC spot exceeds the historical
+            average. In BTCC terms, this constitutes deflation — prices expressed in BTCC decline
+            gradually over time. Merchants pricing in BTCC will periodically adjust prices downward.
         </p>
         <p>
             If BTC spot were to fall below the BTCC fiat price for an extended period, the denomination
@@ -598,7 +600,7 @@
     <div class="paper-section">
         <h2><span class="sec-num">11.</span> Conclusion</h2>
         <p>
-            This paper has described a denomination protocol for Bitcoin that produces a stable unit of
+            This paper has described a denomination protocol for Bitcoin that produces a predictable unit of
             account without introducing trust, issuers, reserves, or protocol modifications. The
             stability derives from a cumulative historical average that, by its mathematical nature,
             becomes more resistant to disruption with every passing day.
@@ -606,8 +608,8 @@
         <p>
             Bitcoin's blockchain records transactions in Space, secures them with Energy, and the BTCC
             denomination records their value across Time. The denomination asks nothing of the protocol
-            and changes nothing about it. It requires only that the price history be computed honestly —
-            and provides a transparent, reproducible methodology for doing so.
+            and changes nothing about it. It requires only that the price history be computed transparently —
+            and provides a reproducible methodology for doing so.
         </p>
     </div>
 
@@ -629,7 +631,7 @@
         <h3>Download This Paper</h3>
         <p>CC0 Public Domain — free to use, share, and build upon without restriction.</p>
         <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
-            <button class="btn-primary" onclick="downloadPaper()">⬇ Download PDF</button>
+            <button class="btn-primary" onclick="downloadPaper()">🖨 Print / Save as PDF</button>
             <a href="btcc.html" class="btn-secondary">← Back to Summary</a>
         </div>
     </div>
@@ -648,13 +650,7 @@
 </footer>
 
 <script>
-function downloadPaper() {
-    // Look for a PDF in the specification folder (same pattern as BTCADP spec)
-    const link = document.createElement('a');
-    link.href = 'specification/BTCC_Technical_Paper.pdf';
-    link.download = 'BTCC_Technical_Paper.pdf';
-    link.click();
-}
+function downloadPaper() { window.print(); }
 </script>
 
 </body>

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bitcoin Currency Layer | btcadp.org</title>
-<meta name="description" content="A Bitcoin currency layer built on BTCADP and BTCC — enabling everyday commerce on Bitcoin without exposing users to spot price volatility.">
+<meta name="description" content="A Bitcoin currency layer built on BTCADP and ₿USD — enabling everyday commerce on Bitcoin without exposing users to spot price volatility.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
 <style>
@@ -470,7 +470,7 @@
     <li><a href="live.html">Live</a></li>
     <li><a href="days/index.html">Days</a></li>
     <li><a href="specification.html">Specification</a></li>
-    <li><a href="btcc.html">BTCC</a></li>
+    <li><a href="btcc.html">₿C</a></li>
     <li><a href="bitcoin-timeblocks.html">Timeblocks</a></li>
     <li><a href="currency-layer.html" class="active">Currency Layer</a></li>
   </ul>
@@ -482,10 +482,7 @@
     <h1>Bitcoin Currency Layer</h1>
     <p class="hero-sub">
       A system in which everyday users transact in a stable denomination —
-      displayed in their native currency or in BTCC — while the underlying
-      reserves are held entirely in Bitcoin. The volatility that has prevented
-      Bitcoin from functioning as everyday money is abstracted away at the
-      interface level.
+      displayed in dollars — while the underlying reserves are held entirely in Bitcoin. The volatility that has prevented Bitcoin from functioning as everyday money is abstracted away at the interface level.
     </p>
   </div>
 
@@ -539,19 +536,19 @@
         </div>
         <div class="component">
           <div class="component-tag">Layer 2</div>
-          <div class="component-name" style="color:var(--green);">BTCC</div>
-          <p>The denomination. The cumulative arithmetic mean of every historical BTCADP since genesis. Changes by fractions of a percent per day. Stable enough for commerce, deflationary by design. No issuer. No reserves. Pure math.</p>
+          <div class="component-name" style="color:var(--green);">Bitcoin Currency (₿C)</div>
+          <p>The collateral floor. Cumulative arithmetic mean of every historical BTCADP since genesis. Moves approximately 0.04% per day. Appreciates over time. No issuer. No reserves. Pure mathematics.</p>
         </div>
         <div class="component">
           <div class="component-tag">Layer 3</div>
-          <div class="component-name" style="color:var(--blue);">TBDC Token</div>
-          <p>The circulating instrument. A Treasury-Backed Digital Currency issued by a consortium of Bitcoin treasury companies. One token equals one BTCC unit. Fully backed by Bitcoin reserves. Redeemable for fiat at any time.</p>
+          <div class="component-name" style="color:var(--blue);">₿USD</div>
+          <p>The monetary instrument. One token equals one US dollar. Issued by a consortium of Bitcoin treasury companies. Fully backed by Bitcoin reserves. Uses ₿C as its conservative collateral floor. Redeemable for fiat at any time.</p>
         </div>
       </div>
 
       <p>
-        A failure or disruption at any layer does not propagate downward. If every TBDC
-        issuer ceased operations, BTCC would still be computable. If BTCC were abandoned,
+        A failure or disruption at any layer does not propagate downward. If every ₿USD
+        issuer ceased operations, ₿C would still be computable. If ₿C were abandoned,
         BTCADP would remain a valid reference price. Each component can be evaluated,
         adopted, or rejected independently.
       </p>
@@ -575,7 +572,7 @@
             <div class="stack-icon">👤</div>
             <div>
               <div class="stack-name" style="color:var(--blue);">User Interface</div>
-              <div class="stack-desc">Wallet shows balance in native currency or BTCC. No BTC spot price. No satoshis. No volatility.</div>
+              <div class="stack-desc">Wallet shows balance in dollars. No BTC spot price. No satoshis. No volatility.</div>
             </div>
           </div>
           <div class="stack-badge" style="background:var(--blue-dim);color:var(--blue);">What users see</div>
@@ -585,7 +582,7 @@
             <div class="stack-icon">🔄</div>
             <div>
               <div class="stack-name" style="color:var(--green);">Token Layer (Sidechain)</div>
-              <div class="stack-desc">TBDC tokens circulate via peer-to-peer transfers. Fast, low-cost, denominated in BTCC. No Bitcoin moves during routine commerce.</div>
+              <div class="stack-desc">₿USD tokens circulate via peer-to-peer transfers. Fast, low-cost, denominated in dollars. $1.00 peg holds throughout. No Bitcoin moves during routine commerce.</div>
             </div>
           </div>
           <div class="stack-badge" style="background:var(--green-dim);color:var(--green);">Payments</div>
@@ -620,7 +617,7 @@
       <div class="section-num">04</div>
       <h2>Token Lifecycle</h2>
       <p>
-        A TBDC token has three phases. Only the first and last involve Bitcoin's base layer.
+        A ₿USD token has three phases. Only the first and last involve Bitcoin's base layer.
         Everything in between — the commerce, the payments, the savings — occurs on the
         sidechain without touching reserves.
       </p>
@@ -649,10 +646,10 @@
       </div>
 
       <p>
-        A user who mints TBDC tokens with fiat, spends them at merchants, receives them
+        A user who mints ₿USD tokens with fiat, spends them at merchants, receives them
         as salary, saves them for months, and eventually redeems some for fiat has
         interacted with Bitcoin's base layer exactly twice — at the beginning and at the
-        end. Everything in between was sidechain commerce, denominated in BTCC, displayed
+        end. Everything in between was sidechain commerce, denominated in dollars, displayed
         in their native currency. Bitcoin's spot volatility was present throughout —
         the user never encountered it.
       </p>
@@ -660,12 +657,12 @@
 
     <hr>
 
-    <!-- SECTION 5: TBDC vs CBDC -->
+    <!-- SECTION 5: ₿USD vs CBDC -->
     <div class="section">
       <div class="section-num">05</div>
-      <h2>TBDC vs. CBDC</h2>
+      <h2>₿USD vs. CBDC</h2>
       <p>
-        The term TBDC is deliberate. Central Bank Digital Currencies are issued by
+        The term ₿USD is deliberate. Central Bank Digital Currencies are issued by
         entities with the legal authority to expand the money supply. A Treasury-Backed
         Digital Currency is the structural inverse.
       </p>
@@ -675,7 +672,7 @@
           <tr>
             <th>Property</th>
             <th>CBDC</th>
-            <th>TBDC</th>
+            <th>₿USD</th>
           </tr>
         </thead>
         <tbody>
@@ -687,12 +684,12 @@
           <tr>
             <td>Monetary Policy</td>
             <td class="bad">Controlled by committee. Rates, QE, open market ops.</td>
-            <td class="good">None. BTCC price is determined by arithmetic. Cannot be inflated.</td>
+            <td class="good">₿USD issuance is capped by the ₿C floor. Cannot be inflated beyond Bitcoin reserves.</td>
           </tr>
           <tr>
             <td>Purchasing Power</td>
             <td class="bad">Erodes over time by design (inflation targeting).</td>
-            <td class="good">Appreciates slowly as long as BTC spot exceeds the cumulative average.</td>
+            <td class="good">$1.00 peg for the token. Underlying Bitcoin reserves appreciate over time.</td>
           </tr>
           <tr>
             <td>Reserves</td>
@@ -713,7 +710,7 @@
       </table>
 
       <div class="callout">
-        <strong>The most consequential difference:</strong> a TBDC consortium cannot inflate
+        <strong>The most consequential difference:</strong> a ₿USD consortium cannot inflate
         the money supply. This is not a policy commitment that could be reversed under
         pressure. It is an immutable property of the reserve asset. No governance vote,
         no emergency measure, no executive decision can produce additional Bitcoin.
@@ -727,9 +724,9 @@
       <div class="section-num">06</div>
       <h2>The Virtuous Cycle</h2>
       <p>
-        Every TBDC token minted requires the consortium to purchase actual Bitcoin on
+        Every ₿USD token minted requires the consortium to purchase actual Bitcoin on
         the open market. There is no synthetic exposure. One hundred percent of demand
-        for TBDC tokens flows directly to BTC spot as buying pressure. This creates a
+        for ₿USD tokens flows directly to BTC spot as buying pressure. This creates a
         self-reinforcing cycle.
       </p>
 
@@ -737,28 +734,28 @@
         <div class="cycle-step">
           <div class="cycle-num">01</div>
           <div class="cycle-title">Minting creates Bitcoin demand</div>
-          <p>Every TBDC token minted requires purchasing Bitcoin at spot. Commerce-driven demand is persistent — it does not reverse when sentiment shifts.</p>
+          <p>Every ₿USD token minted requires purchasing Bitcoin at spot. Commerce-driven demand is persistent — it does not reverse when sentiment shifts.</p>
         </div>
         <div class="cycle-step">
           <div class="cycle-num">02</div>
           <div class="cycle-title">Demand supports spot price</div>
-          <p>Sustained structural buying from TBDC minting supports BTC spot. Unlike speculative demand, this is tied to real economic activity.</p>
+          <p>Sustained structural buying from ₿USD minting supports BTC spot. Unlike speculative demand, this is tied to real economic activity.</p>
         </div>
         <div class="cycle-step">
           <div class="cycle-num">03</div>
           <div class="cycle-title">Rising spot widens treasury surplus</div>
-          <p>As BTC spot rises, the gap between Ledger 1 asset values and BTCC liabilities widens. Treasury companies accumulate surplus. Reserves deepen.</p>
+          <p>As BTC spot rises, the gap between Ledger 1 asset values and ₿USD liabilities widens. Treasury companies accumulate surplus. Reserves deepen.</p>
         </div>
         <div class="cycle-step">
           <div class="cycle-num">04</div>
           <div class="cycle-title">Growth reduces redemption pressure</div>
-          <p>As the BTCC economy matures, users earn, spend, and save in BTCC without needing fiat. The system's risk decreases precisely as it scales.</p>
+          <p>As the ₿USD economy matures, users earn, spend, and save in ₿USD without needing fiat. The system's risk decreases precisely as it scales.</p>
         </div>
       </div>
 
       <p>
         Scale makes the system safer, not more fragile — the structural inverse of
-        traditional banking. Every user who enters the TBDC economy is a Bitcoin user.
+        traditional banking. Every user who enters the ₿USD economy is a Bitcoin user.
         Every transaction settles on Bitcoin infrastructure. The currency layer does not
         compete with Bitcoin. It fulfills Bitcoin's original purpose.
       </p>
@@ -767,10 +764,11 @@
     <!-- CTA -->
     <div class="cta-block">
       <h3>Learn More</h3>
-      <p>The currency layer is built on the BTCADP reference price and the BTCC denomination. Read the full specifications.</p>
+      <p>The currency layer is built on the BTCADP reference price and the ₿C denomination. Read the full specifications.</p>
       <div class="cta-buttons">
-        <a href="btcc.html" class="btn-primary">BTCC Denomination &rarr;</a>
+        <a href="btcc.html" class="btn-primary">Bitcoin Currency (₿C) &rarr;</a>
         <a href="specification.html" class="btn-secondary">BTCADP Specification &rarr;</a>
+        <a href="tbd-usd.html" class="btn-secondary">₿USD Overview &rarr;</a>
         <a href="bitcoin-timeblocks.html" class="btn-secondary">Bitcoin Timeblocks &rarr;</a>
       </div>
     </div>
@@ -781,7 +779,7 @@
 <footer>
   <p>
     <a href="index.html">Home</a> &nbsp;&bull;&nbsp;
-    <a href="btcc.html">BTCC</a> &nbsp;&bull;&nbsp;
+    <a href="btcc.html">₿C</a> &nbsp;&bull;&nbsp;
     <a href="bitcoin-timeblocks.html">Timeblocks</a> &nbsp;&bull;&nbsp;
     <a href="specification.html">Specification</a> &nbsp;&bull;&nbsp;
     <a href="https://github.com/BTCADP/btcadp-research">GitHub</a>

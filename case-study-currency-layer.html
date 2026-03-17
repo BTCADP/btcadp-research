@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>A Bitcoin Currency Layer — Case Study | btcadp.org</title>
-<meta name="description" content="How a Treasury-Backed Digital Currency could provide the foundation of a Bitcoin network currency layer for everyday commerce.">
+<title>₿USD — A Bitcoin Currency Layer | btcadp.org</title>
+<meta name="description" content="How Treasury-Backed Digital Currency (₿USD) provides a Bitcoin-native currency layer for everyday commerce, using Bitcoin Currency (₿C) as the collateral floor.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
 <style>
@@ -25,9 +25,7 @@
     --font-mono: 'JetBrains Mono', 'Courier New', monospace;
     --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   body {
     background: var(--bg-primary);
     color: var(--text-primary);
@@ -36,7 +34,6 @@
     line-height: 1.75;
     min-height: 100vh;
   }
-
   body::before {
     content: '';
     position: fixed; inset: 0;
@@ -46,7 +43,6 @@
     background-size: 60px 60px;
     pointer-events: none; z-index: 0;
   }
-
   nav {
     position: sticky; top: 0; z-index: 100;
     background: rgba(10,10,11,0.95);
@@ -56,29 +52,24 @@
     display: flex; align-items: center; justify-content: space-between;
     height: 56px;
   }
-
   .nav-brand { font-family: var(--font-mono); font-size: 1rem; font-weight: bold; color: var(--orange); text-decoration: none; letter-spacing: 0.05em; }
   .nav-links { display: flex; gap: 0.25rem; list-style: none; }
   .nav-links a { color: var(--text-muted); text-decoration: none; font-family: var(--font-mono); font-size: 0.72rem; padding: 0.4rem 0.6rem; border-radius: 4px; transition: color 0.2s, background 0.2s; }
   .nav-links a:hover { color: var(--text-primary); background: var(--bg-tertiary); }
   .nav-links a.active { color: var(--orange); }
-
   .article-wrap {
     max-width: 720px;
     margin: 0 auto;
     padding: 64px 24px 100px;
     position: relative; z-index: 1;
   }
-
   .article-meta { font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--green); margin-bottom: 20px; }
   .article-title { font-size: clamp(1.8rem, 5vw, 3rem); font-weight: 700; letter-spacing: -1px; line-height: 1.15; color: #fff; margin-bottom: 12px; }
   .article-subtitle { font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 20px; font-style: italic; }
   .article-byline { font-family: var(--font-sans); font-size: 0.85rem; color: var(--text-muted); margin-bottom: 48px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
-
   .article-body h2 { font-size: 1.4rem; font-weight: 600; color: #fff; margin: 48px 0 16px; letter-spacing: -0.3px; }
   .article-body h3 { font-size: 1.05rem; font-weight: 600; color: var(--orange); margin: 32px 0 12px; font-family: var(--font-sans); }
   .article-body p { color: #c8c6c3; margin-bottom: 20px; font-size: 1rem; }
-
   .callout {
     background: var(--orange-dim);
     border-left: 3px solid var(--orange);
@@ -87,7 +78,6 @@
   }
   .callout p { color: #c4a46a; font-family: var(--font-sans); font-size: 0.92rem; line-height: 1.7; margin: 0; }
   .callout strong { color: var(--orange); }
-
   /* Stack diagram */
   .stack { display: flex; flex-direction: column; gap: 3px; margin: 28px 0; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
   .stack-layer { display: flex; align-items: center; justify-content: space-between; padding: 18px 24px; gap: 16px; }
@@ -96,15 +86,13 @@
   .stack-name { font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 2px; }
   .stack-desc { font-family: var(--font-sans); font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5; }
   .stack-badge { font-family: var(--font-mono); font-size: 10px; padding: 3px 8px; border-radius: 3px; white-space: nowrap; flex-shrink: 0; }
-
-  /* Three components */
+  /* Components */
   .components { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin: 28px 0; }
   .component { background: var(--bg-secondary); padding: 20px; }
   .component-tag { font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
   .component-name { font-size: 1rem; font-weight: 600; margin-bottom: 10px; }
   .component p { font-family: var(--font-sans); font-size: 0.8rem; color: var(--text-secondary); line-height: 1.6; margin: 0; }
-
-  /* Flow diagram */
+  /* Flow */
   .flow { display: flex; align-items: center; margin: 28px 0; overflow-x: auto; }
   .flow-step { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 6px; padding: 14px 16px; text-align: center; flex: 1; min-width: 120px; }
   .flow-step-icon { font-size: 1.4rem; margin-bottom: 6px; }
@@ -112,24 +100,28 @@
   .flow-step-name { font-family: var(--font-sans); font-size: 0.82rem; font-weight: 600; color: var(--text-primary); }
   .flow-step-note { font-size: 10px; color: var(--text-muted); margin-top: 4px; font-family: var(--font-sans); }
   .flow-arrow { color: var(--text-muted); font-size: 1.2rem; padding: 0 8px; flex-shrink: 0; }
-
-  /* Virtuous cycle */
+  /* Cycle */
   .cycle { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin: 28px 0; }
   .cycle-step { background: var(--bg-secondary); padding: 20px; }
   .cycle-num { font-family: var(--font-mono); font-size: 1.4rem; font-weight: 700; color: var(--orange); margin-bottom: 6px; opacity: 0.4; }
   .cycle-title { font-size: 0.95rem; font-weight: 600; color: #fff; margin-bottom: 6px; }
   .cycle-step p { font-family: var(--font-sans); font-size: 0.82rem; color: var(--text-secondary); line-height: 1.6; margin: 0; }
-
+  /* Data table */
+  .data-table { width: 100%; border-collapse: collapse; margin: 28px 0; font-family: var(--font-mono); font-size: 0.75rem; overflow-x: auto; display: block; }
+  .data-table th { text-align: left; padding: 8px 12px; background: var(--bg-tertiary); border: 1px solid var(--border); color: var(--text-muted); font-size: 10px; text-transform: uppercase; letter-spacing: 1px; white-space: nowrap; }
+  .data-table td { padding: 8px 12px; border: 1px solid var(--border); color: #c4c4cc; white-space: nowrap; }
+  .data-table tr:nth-child(even) td { background: var(--bg-secondary); }
+  .surplus { color: var(--green); font-weight: 600; }
+  .neutral { color: var(--orange); font-weight: 600; }
+  .stress { color: #f1c40f; font-weight: 600; }
   .article-footer { margin-top: 64px; padding-top: 32px; border-top: 1px solid var(--border); display: flex; gap: 12px; flex-wrap: wrap; }
   .btn-primary { background: var(--orange); color: #000; font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700; padding: 10px 20px; border-radius: 4px; text-decoration: none; transition: opacity 0.2s; }
   .btn-primary:hover { opacity: 0.85; }
   .btn-secondary { background: transparent; color: var(--text-secondary); font-family: var(--font-mono); font-size: 0.8rem; padding: 10px 20px; border-radius: 4px; border: 1px solid var(--border); text-decoration: none; transition: all 0.2s; }
   .btn-secondary:hover { border-color: var(--orange); color: var(--orange); }
-
   footer { border-top: 1px solid var(--border); padding: 32px 24px; text-align: center; font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
   footer a { color: var(--text-muted); text-decoration: none; }
   footer a:hover { color: var(--orange); }
-
   @media (max-width: 640px) {
     .components { grid-template-columns: 1fr; }
     .cycle { grid-template-columns: 1fr; }
@@ -141,278 +133,305 @@
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>
 <body>
-
 <nav>
   <a class="nav-brand" href="index.html">BTCADP</a>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
-    <li><a href="btcc.html">BTCC</a></li>
-    <li><a href="currency-layer.html">Currency Layer</a></li>
+    <li><a href="btcc.html">₿C</a></li>
+    <li><a href="tbd-usd.html">₿USD</a></li>
     <li><a href="knowledge-base.html" class="active">Knowledge Base</a></li>
   </ul>
 </nav>
 
 <div class="article-wrap">
-
   <div class="article-meta">Case Study &nbsp;&bull;&nbsp; btcadp.org &nbsp;&bull;&nbsp; March 2026</div>
-  <h1 class="article-title">A Bitcoin Currency Layer</h1>
-  <p class="article-subtitle">How a Treasury-Backed Digital Currency Could Provide the Foundation of a Bitcoin Network Currency Layer for Everyday Commerce</p>
-  <div class="article-byline">A Framework for the BTCADP/BTCC Ecosystem &nbsp;&bull;&nbsp; btcadp.org &nbsp;&bull;&nbsp; March 2026 &nbsp;&bull;&nbsp; CC0 Public Domain</div>
+  <h1 class="article-title">₿USD — A Bitcoin Currency Layer</h1>
+  <p class="article-subtitle">How Treasury-Backed Digital Currency Provides a Bitcoin-Native Foundation for Everyday Commerce</p>
+  <div class="article-byline">
+    A Framework for Bitcoin Treasury Companies &nbsp;&bull;&nbsp; btcadp.org &nbsp;&bull;&nbsp; March 2026 &nbsp;&bull;&nbsp; CC0 Public Domain
+  </div>
 
   <div class="article-body">
 
     <p>
-      This case study examines a currency layer for the Bitcoin network: a system in which end users
-      transact in a stable denomination — displayed in either their native fiat currency or in BTCC
-      (Bitcoin Currency) — while the underlying reserves are held entirely in Bitcoin on the base layer.
-      The user never interacts with Bitcoin's spot price. The volatility that has prevented Bitcoin from
-      functioning as everyday money is abstracted away at the interface level, not by creating a new
-      asset class, but by changing what the user sees and how values are expressed.
+      This paper examines how a consortium of Bitcoin treasury companies can issue Treasury-Backed
+      Digital Currency (₿USD) — a USD-pegged stablecoin backed by Bitcoin reserves — to provide
+      a currency layer for everyday commerce. The core argument is that ₿USD solves Bitcoin's
+      volatility problem for commerce without abandoning Bitcoin, using Bitcoin Currency (₿C)
+      as the mechanism that makes the collateral floor credible.
+    </p>
+    <p>
+      The paper is addressed to Bitcoin treasury companies evaluating participation in a ₿USD
+      consortium. It describes the architecture, the economic model, and the structural dynamics
+      that make this product viable at scale.
     </p>
 
     <div class="callout">
-      <p>
-        <strong>The critical design principle is abstraction.</strong> A customer purchasing coffee does
-        not need to know the current BTC/USD spot price, the state of the reserve ledgers, or the
-        mechanics of the sidechain. They see a price in their local currency or in BTCC. They pay. The
-        merchant receives BTCC-denominated value. The complexity lives in the infrastructure; the user
-        experience is indistinguishable from paying with any conventional currency — except that the
-        currency they hold appreciates slowly over time rather than eroding.
-      </p>
+      <p><strong>The central problem ₿USD solves:</strong> Bitcoin's spot price volatility makes
+      it impractical for everyday commerce. Existing stablecoins solve this by abandoning Bitcoin
+      entirely — holding dollars, US Treasuries, or bank deposits. ₿USD solves it differently:
+      one token equals one dollar, backed entirely by Bitcoin held on the base layer, with the
+      ₿C price serving as the conservative collateral floor that makes the peg credible through
+      Bitcoin's cyclical volatility.</p>
     </div>
 
-    <h2>1. The Abstraction Problem</h2>
-
+    <h2>1. The Problem</h2>
     <p>
-      Bitcoin's failure to achieve widespread adoption as a medium of exchange is not a failure of its
-      network, its security model, or its settlement infrastructure. The protocol has operated
-      continuously since January 2009 without a single hour of downtime. The failure is at the interface
-      layer: the way Bitcoin's value is presented to users.
+      Bitcoin has not achieved widespread adoption as a medium of everyday exchange. The barrier
+      is not technical. The network has operated continuously since January 2009. Lightning
+      provides throughput. Settlement is secure and final. The barrier is that Bitcoin's spot
+      price can move 10% in a day, making it impractical for the pricing, invoicing, and
+      budgeting that constitute most economic activity.
+    </p>
+    <p>
+      The stablecoin market has grown to over $200 billion in response to this problem. USDT
+      and USDC have achieved genuine adoption for payments and commerce. But every dollar that
+      flows into a fiat-backed stablecoin goes into US Treasuries or bank accounts — not into
+      Bitcoin. Fiat stablecoins solve the volatility problem for users while actively competing
+      with Bitcoin for monetary adoption.
+    </p>
+    <p>
+      For Bitcoin treasury companies, this represents a structural opportunity. The same
+      demand that has built a $200 billion fiat stablecoin market exists for a Bitcoin-backed
+      alternative. Capturing even a fraction of it would create direct, sustained Bitcoin
+      demand — while generating fee revenue on a growing float.
     </p>
 
+    <h2>2. The Architecture</h2>
     <p>
-      When a consumer opens a wallet and sees that their balance has changed by 8% since yesterday, they
-      are experiencing Bitcoin's spot price volatility directly. A merchant who prices goods in BTC must
-      reprice constantly. A worker paid in BTC cannot predict next month's purchasing power. A business
-      holding BTC receivables faces balance sheet volatility that complicates accounting, tax compliance,
-      and financial planning.
-    </p>
-
-    <p>
-      The conventional response has been to build stablecoins pegged to fiat currencies — solving
-      volatility by abandoning Bitcoin entirely. The user holds a dollar-denominated token issued by a
-      centralized entity, settled on a separate blockchain, backed by reserves held in the traditional
-      banking system. The cure eliminates the disease by killing the patient.
-    </p>
-
-    <h2>2. Architecture: Three Components</h2>
-
-    <p>
-      The currency layer consists of three distinct components, each independent, each performing a
-      specific function. Each depends only on the layer below it. None requires the layer above it.
+      ₿USD is built on three layers. Each is independent. Each depends only on the layer below it.
     </p>
 
     <div class="components">
       <div class="component">
         <div class="component-tag">Layer 1</div>
         <div class="component-name" style="color:var(--orange);">BTCADP</div>
-        <p>The reference price. An open-source daily Bitcoin price from qualifying exchanges using a 25% trimmed mean. Any party can reproduce it. The methodology is the authority — no institution required.</p>
+        <p>The reference price. A daily Bitcoin price computed from qualifying exchanges using a 25% trimmed mean. Any party can reproduce it independently. The methodology is the authority — no institution required.</p>
       </div>
       <div class="component">
         <div class="component-tag">Layer 2</div>
-        <div class="component-name" style="color:var(--green);">BTCC</div>
-        <p>The denomination. Cumulative arithmetic mean of every historical BTCADP since genesis. Changes by fractions of a percent per day. No issuer. No reserves. Pure mathematics.</p>
+        <div class="component-name" style="color:var(--green);">Bitcoin Currency (₿C)</div>
+        <p>The collateral floor. The cumulative arithmetic mean of every historical BTCADP since genesis. Moves approximately 0.04% per day. No issuer. No reserves. Pure mathematics. Used to cap ₿USD issuance conservatively.</p>
       </div>
       <div class="component">
         <div class="component-tag">Layer 3</div>
-        <div class="component-name" style="color:var(--blue);">TBDC Token</div>
-        <p>The circulating instrument. Issued by a consortium of Bitcoin treasury companies on a sidechain. One token equals one BTCC unit. Fully backed by Bitcoin. Redeemable for fiat at any time.</p>
+        <div class="component-name" style="color:var(--blue);">₿USD</div>
+        <p>The monetary instrument. One token equals one US dollar. Issued by the consortium. Backed by Bitcoin in a two-ledger reserve system. Redeemable for fiat at any time.</p>
       </div>
     </div>
 
     <p>
-      A failure or disruption at any layer does not propagate downward. If every TBDC issuer ceased
-      operations, the BTCC denomination would still be computable. If BTCC were abandoned, BTCADP would
-      remain a valid reference price. Each component can be evaluated, adopted, or rejected independently.
+      A failure at any layer does not propagate downward. If every ₿USD issuer ceased operations,
+      the ₿C denomination would still be computable. If ₿C were abandoned, BTCADP would remain a
+      valid reference price. Each component can be evaluated independently.
     </p>
 
-    <h2>3. Two Distinct Layers</h2>
-
+    <h2>3. How ₿C Makes the Peg Credible</h2>
     <p>
-      The architecture maintains a clean separation between the token circulation layer and the reserve
-      settlement layer. These two layers operate independently — routine commerce never touches the reserve layer.
+      The ₿C price is the conservative anchor of the entire system. Total ₿USD issuance is capped
+      at the ₿C-denominated value of the consortium's combined Bitcoin holdings — not spot value.
+      Because ₿C currently sits at approximately one-quarter of spot price, every Bitcoin in the
+      consortium's treasury supports only $18,700 of ₿USD issuance rather than the full $70,000
+      spot value. The system is structurally overcollateralized at all times by approximately 3.75x.
+    </p>
+    <p>
+      For the peg to fail, Bitcoin's spot price would need to fall below the ₿C price and remain
+      there permanently. The ₿C price is Bitcoin's own lifetime cumulative average — a level that
+      spot has never sustained below in Bitcoin's history. The floor is not a promise made by the
+      consortium. It is a mathematical property of Bitcoin's price history.
+    </p>
+    <p>
+      As Bitcoin's spot price rises over time, the ₿C price rises with it — slowly and permanently,
+      as each new day's price is absorbed into the cumulative average. The floor rises. Issuance
+      capacity expands. The system becomes more robust as it succeeds.
+    </p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>BTC Spot</th>
+          <th>₿C Price (approx.)</th>
+          <th>Overcollateralization</th>
+          <th>System Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>$140,000</td><td>~$22,000</td><td class="surplus">~6.4×</td><td>Deep surplus — aggressive issuance possible</td></tr>
+        <tr><td>$70,000 (today)</td><td>~$18,700</td><td class="surplus">~3.75×</td><td>Healthy — standard operations</td></tr>
+        <tr><td>$35,000</td><td>~$17,000</td><td class="neutral">~2.1×</td><td>Issuance tightens — peg holds</td></tr>
+        <tr><td>$18,700 (= ₿C)</td><td>~$18,700</td><td class="stress">~1.0×</td><td>Floor — no historical precedent</td></tr>
+      </tbody>
+    </table>
+
+    <h2>4. The Two-Ledger Reserve System</h2>
+    <p>
+      Each consortium member maintains two Bitcoin ledgers on the base layer. Both hold actual
+      Bitcoin in publicly verifiable wallets. Reserves are not lent, staked, or rehypothecated.
     </p>
 
     <div class="stack">
-      <div class="stack-layer" style="background:rgba(52,152,219,0.08);border-bottom:1px solid var(--border);">
-        <div class="stack-layer-left">
-          <div class="stack-icon">👤</div>
-          <div>
-            <div class="stack-name" style="color:var(--blue);">User Interface</div>
-            <div class="stack-desc">Wallet shows balance in native currency or BTCC. No BTC spot price visible. No volatility.</div>
-          </div>
-        </div>
-        <div class="stack-badge" style="background:var(--blue-dim);color:var(--blue);">What users see</div>
-      </div>
-      <div class="stack-layer" style="background:rgba(46,204,113,0.08);border-bottom:1px solid var(--border);">
-        <div class="stack-layer-left">
-          <div class="stack-icon">🔄</div>
-          <div>
-            <div class="stack-name" style="color:var(--green);">Token Layer — Sidechain</div>
-            <div class="stack-desc">TBDC tokens circulate peer-to-peer. Fast, low-cost, denominated in BTCC. No Bitcoin moves during routine commerce.</div>
-          </div>
-        </div>
-        <div class="stack-badge" style="background:rgba(46,204,113,0.1);color:var(--green);">Payments</div>
-      </div>
       <div class="stack-layer" style="background:rgba(247,147,26,0.08);border-bottom:1px solid var(--border);">
         <div class="stack-layer-left">
-          <div class="stack-icon">🏦</div>
+          <div class="stack-icon">1️⃣</div>
           <div>
-            <div class="stack-name" style="color:var(--orange);">Reserve Layer — Bitcoin Base Layer</div>
-            <div class="stack-desc">Bitcoin held in transparent on-chain wallets. Never lent. Never rehypothecated. Sold only when a customer exits the ecosystem by redeeming for fiat.</div>
+            <div class="stack-name" style="color:var(--orange);">Ledger 1 — Issuance Pool</div>
+            <div class="stack-desc">Bitcoin purchased with incoming consumer USD at the moment of minting. Directly backs outstanding tokens. Appreciates at BTC spot rate. Generates surplus as spot rises above issuance price.</div>
           </div>
         </div>
-        <div class="stack-badge" style="background:var(--orange-dim);color:var(--orange);">Reserves</div>
+        <div class="stack-badge" style="background:var(--orange-dim);color:var(--orange);">Primary backing</div>
       </div>
-      <div class="stack-layer" style="background:var(--bg-secondary);">
+      <div class="stack-layer" style="background:rgba(46,204,113,0.08);">
         <div class="stack-layer-left">
-          <div class="stack-icon">⛓️</div>
+          <div class="stack-icon">2️⃣</div>
           <div>
-            <div class="stack-name" style="color:var(--text-muted);">Bitcoin Proof-of-Work</div>
-            <div class="stack-desc">Secures the base layer. Provides the settlement finality that makes the entire system trustworthy.</div>
+            <div class="stack-name" style="color:var(--green);">Ledger 2 — Reserve Backstop</div>
+            <div class="stack-desc">Bitcoin drawn from each consortium member's existing treasury holdings. Covers redemptions when Ledger 1 is insufficient. Size of Ledger 2 determines the system's bear market depth.</div>
           </div>
         </div>
-        <div class="stack-badge" style="background:var(--bg-tertiary);color:var(--text-muted);">Foundation</div>
+        <div class="stack-badge" style="background:rgba(46,204,113,0.1);color:var(--green);">Backstop</div>
       </div>
     </div>
 
     <p>
-      A million TBDC transactions can occur in a day without a single satoshi moving on-chain. The base
-      layer's role is to hold and secure reserves, not to process payments. This means Bitcoin's base
-      layer transaction throughput, fee dynamics, and block confirmation times are irrelevant to the end
-      user's payment experience.
+      The reserve system only matters at the boundaries — when fiat enters (minting) and when
+      fiat exits (redemption). Tokens circulating between wallets as a medium of exchange create
+      no reserve pressure at any BTC spot price. A million ₿USD transactions can occur without
+      a single satoshi moving on-chain.
     </p>
 
-    <h2>4. Removing the End User from Spot Volatility</h2>
-
-    <h3>Denomination Abstraction</h3>
-    <p>
-      The user's wallet balance is denominated in BTCC, not in BTC and not in satoshis. This number
-      changes only when the user sends or receives tokens. The fiat-equivalent value changes by less than
-      a fraction of a percent per day, because the BTCC price — the cumulative average of over 6,200
-      daily prices — moves negligibly in response to any single day's spot price action.
-    </p>
-
-    <p>
-      This is not a cosmetic change. A worker whose salary is expressed as 2,500 BTCC per month can
-      plan a budget with confidence that its purchasing power next month will be within a fraction of a
-      percent of today's. A worker whose salary is expressed as 0.028 BTC cannot — the fiat-equivalent
-      purchasing power of that figure could change by 10% or more before the month ends.
-    </p>
-
-    <h3>Token Lifecycle</h3>
+    <h2>5. The Token Lifecycle</h2>
 
     <div class="flow">
       <div class="flow-step" style="border-top:2px solid var(--orange);">
         <div class="flow-step-icon">💵</div>
         <div class="flow-step-label">Phase 1</div>
         <div class="flow-step-name">Minting</div>
-        <div class="flow-step-note">Fiat in → BTC purchased → Token issued</div>
+        <div class="flow-step-note">USD in → BTC purchased → ₿USD issued</div>
       </div>
       <div class="flow-arrow">→</div>
       <div class="flow-step" style="border-top:2px solid var(--green);">
         <div class="flow-step-icon">🔄</div>
         <div class="flow-step-label">Phase 2</div>
         <div class="flow-step-name">Circulation</div>
-        <div class="flow-step-note">Token transfers on sidechain. No BTC moves.</div>
+        <div class="flow-step-note">₿USD transfers. No BTC moves. $1.00 peg holds.</div>
       </div>
       <div class="flow-arrow">→</div>
       <div class="flow-step" style="border-top:2px solid var(--blue);">
         <div class="flow-step-icon">🏧</div>
         <div class="flow-step-label">Phase 3</div>
         <div class="flow-step-name">Redemption</div>
-        <div class="flow-step-note">Token burned → BTC sold → Fiat returned</div>
+        <div class="flow-step-note">₿USD burned → BTC sold → USD returned</div>
       </div>
     </div>
 
     <p>
-      Only Phase 1 and Phase 3 interact with Bitcoin's base layer. A user who mints, spends, receives,
-      and saves in TBDC for months has interacted with the reserve layer exactly twice — at the beginning
-      and at the end. Everything in between is sidechain commerce, denominated in BTCC, displayed in
-      their native currency.
+      A user who mints, spends, receives, and saves in ₿USD for months has interacted with
+      the Bitcoin base layer exactly twice — at entry and at exit. Everything in between is
+      token transfers denominated in dollars, with no exposure to BTC spot price.
     </p>
 
-    <h2>5. The Virtuous Cycle</h2>
-
+    <h2>6. The Currency Layer Effect</h2>
     <p>
-      Every TBDC token minted requires the consortium to purchase actual Bitcoin on the open market.
-      There is no synthetic exposure. One hundred percent of demand for TBDC tokens flows directly to
-      BTC spot as buying pressure. This creates a self-reinforcing cycle.
+      As ₿USD adoption deepens, the mental model for users shifts. Early adopters think of
+      ₿USD as "digital dollars" — pegged to fiat, redeemable on demand. As more commerce
+      occurs natively in ₿USD — salaries, rent, invoicing, savings — the need to redeem for
+      fiat diminishes. Tokens stay on the currency layer.
+    </p>
+    <p>
+      When a merchant prices goods in ₿USD, a worker receives a salary in ₿USD, and a lender
+      denominates a loan in ₿USD, redemption pressure approaches zero. Ledger 1 and Ledger 2
+      accumulate Bitcoin appreciation without outflow. The coverage ratio compounds
+      continuously. The consortium's collateral position strengthens without any action required.
+    </p>
+    <div class="callout">
+      <p><strong>The reserve requirement is the bridge.</strong> It is what makes ₿USD credible
+      long enough for the currency layer to reach adoption. Once enough commerce occurs natively
+      in ₿USD, the bridge is no longer the critical path — but it remains in place, getting
+      stronger, as collateral accumulates.</p>
+    </div>
+
+    <h2>7. The Virtuous Cycle</h2>
+    <p>
+      Every ₿USD token minted requires the consortium to purchase Bitcoin. Consumer demand for
+      ₿USD is structurally identical to Bitcoin demand. As adoption grows, four things happen
+      simultaneously.
     </p>
 
     <div class="cycle">
       <div class="cycle-step">
         <div class="cycle-num">01</div>
         <div class="cycle-title">Minting creates Bitcoin demand</div>
-        <p>Every TBDC token minted requires purchasing Bitcoin at spot. Commerce-driven demand is persistent — it does not reverse when sentiment shifts.</p>
+        <p>Every ₿USD minted requires purchasing Bitcoin at spot. Commerce-driven demand is persistent — it does not reverse when sentiment shifts.</p>
       </div>
       <div class="cycle-step">
         <div class="cycle-num">02</div>
-        <div class="cycle-title">Demand supports spot price</div>
-        <p>Sustained structural buying from TBDC minting supports BTC spot. Unlike speculative demand, this is tied to real economic activity.</p>
+        <div class="cycle-title">Rising spot expands issuance capacity</div>
+        <p>As BTC spot rises, the ₿C-denominated value of consortium holdings increases. The issuance ceiling rises. More ₿USD can be issued. More BTC gets purchased.</p>
       </div>
       <div class="cycle-step">
         <div class="cycle-num">03</div>
-        <div class="cycle-title">Rising spot deepens reserves</div>
-        <p>As BTC spot rises, the gap between Ledger 1 asset values and BTCC liabilities widens. Treasury companies accumulate surplus. Reserves deepen.</p>
+        <div class="cycle-title">Fee reinvestment deepens reserves</div>
+        <p>100% of fee revenue is deployed to purchase additional Bitcoin until coverage thresholds are met. The threshold is determined by the coverage ratio formula, not by board discretion.</p>
       </div>
       <div class="cycle-step">
         <div class="cycle-num">04</div>
-        <div class="cycle-title">Growth reduces risk</div>
-        <p>As the BTCC economy matures, more users earn, spend, and save in BTCC without needing fiat. The proportion of tokens redeemed for fiat declines. Scale makes the system safer.</p>
+        <div class="cycle-title">Scale reduces redemption risk</div>
+        <p>As more commerce occurs natively in ₿USD, the proportion of tokens redeemed for fiat declines. The system becomes structurally safer as it grows — the inverse of traditional fractional reserve banking.</p>
       </div>
     </div>
 
-    <h2>6. Conclusion</h2>
-
+    <h2>8. The Economic Case for Treasury Companies</h2>
     <p>
-      The currency layer addresses Bitcoin's primary adoption barrier — price volatility in everyday
-      commerce — without compromising any of Bitcoin's fundamental properties. The user holds a stable
-      denomination. The reserves are fully backed by Bitcoin on the base layer and are on-chain
-      verifiable. No new blockchain is required. No fiat reserves are held in the banking system.
-      No centralized issuer can expand the money supply.
+      A treasury company that simply holds Bitcoin earns a return equal to spot price
+      appreciation. The ₿USD model produces returns that exceed holding alone, through
+      three distinct revenue streams.
+    </p>
+    <p>
+      <strong>Fee revenue.</strong> A holding fee of 1–2% annually on the outstanding ₿USD
+      float generates continuous income regardless of Bitcoin's price. On $10 billion in
+      circulation, that is $100–200 million annually.
+    </p>
+    <p>
+      <strong>Collateral appreciation.</strong> The Bitcoin in Ledger 1 appreciates at the
+      spot rate. The ₿USD liability it backs is fixed at $1.00. As spot rises, the surplus
+      between asset value and liability widens. At $140,000 BTC spot, a token issued at
+      $70,000 has a Ledger 1 value of $2.00 against a $1.00 obligation — 100% surplus
+      captured on redemption or held as reserve depth.
+    </p>
+    <p>
+      <strong>Bitcoin accumulation.</strong> Fee revenue reinvested into Bitcoin during the
+      bootstrapping phase compounds the collateral base. The consortium is not merely issuing
+      a product — it is systematically accumulating the reserve asset that makes the product
+      credible, funded by users who are voluntarily paying for a better monetary instrument.
     </p>
 
+    <h2>9. Conclusion</h2>
     <p>
-      Bitcoin was proposed as a peer-to-peer electronic cash system. It has succeeded as a store of
-      value and a settlement network, but has not yet achieved the everyday commerce adoption that
-      constitutes the original vision. The TBDC currency layer provides the missing piece: a stable
-      denomination that makes Bitcoin usable for daily transactions without exposing any participant
-      to spot price volatility.
+      ₿USD provides what the stablecoin market has not yet delivered: a USD-pegged digital
+      currency backed entirely by Bitcoin, with a collateral floor that is mathematically
+      determined rather than institutionally promised. The ₿C price — Bitcoin's own cumulative
+      price history — is the mechanism that makes overcollateralization credible and automatic.
     </p>
-
-    <div class="callout">
-      <p>
-        <strong>Every user who enters the TBDC economy is a Bitcoin user.</strong> Every transaction
-        settles on Bitcoin infrastructure. Every new token requires Bitcoin to be acquired. The currency
-        layer does not compete with Bitcoin. It fulfills Bitcoin's original purpose by solving the one
-        problem the protocol itself could not: the volatility that prevents a superior monetary network
-        from functioning as everyday money.
-      </p>
-    </div>
-
     <p>
-      The BTCADP specification is published. The BTCC denomination is mathematically defined. The
-      treasury companies that would form the consortium already hold the necessary reserves. The sidechain
-      infrastructure already exists or is within the consortium's capacity to build. What remains is
-      assembly and execution.
+      For Bitcoin treasury companies, ₿USD is not a departure from their existing mandate.
+      It is an extension of it. They already hold the collateral. They already believe in
+      Bitcoin's long-run appreciation. ₿USD converts that conviction into a product that
+      creates sustained Bitcoin demand, generates fee revenue on a growing float, and
+      deepens their reserve position through every cycle — funded by the very users who
+      benefit from the product.
+    </p>
+    <p>
+      Every user who enters the ₿USD economy is a Bitcoin user. Every transaction settles
+      on Bitcoin infrastructure. Every new token requires Bitcoin to be acquired. The currency
+      layer does not compete with Bitcoin. It fulfills Bitcoin's original purpose — peer-to-peer
+      electronic cash — by solving the one problem the protocol itself could not.
     </p>
 
   </div>
 
   <div class="article-footer">
     <a href="knowledge-base.html" class="btn-primary">&larr; Knowledge Base</a>
-    <a href="currency-layer.html" class="btn-secondary">Currency Layer Overview &rarr;</a>
+    <a href="tbd-usd.html" class="btn-secondary">₿USD Overview &rarr;</a>
     <a href="case-study-hard-money.html" class="btn-secondary">Hard Money Case Study &rarr;</a>
   </div>
 

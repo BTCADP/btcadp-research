@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BTCC — Bitcoin Currency | btcadp.org</title>
-    <meta name="description" content="BTCC (Bitcoin Currency) is a stable Bitcoin denomination computed as the cumulative historical average of all daily Bitcoin prices since genesis.">
+    <title>Bitcoin Currency (₿C) | btcadp.org</title>
+    <meta name="description" content="Bitcoin Currency (₿C) is a denomination protocol that expresses Bitcoin's value as the cumulative historical average of all daily prices since the genesis block. It is not a stablecoin. Its fiat price appreciates incrementally and predictably with Bitcoin's long-run history.">
     <style>
         :root {
             --bg: #0a0a0a;
@@ -487,10 +487,9 @@
 <!-- HERO -->
 <section class="hero">
     <div class="hero-label">Bitcoin Currency</div>
-    <h1>BTCC — A Stable<br><span>Bitcoin Denomination</span></h1>
+    <h1>Bitcoin Currency (₿C) —<br><span>Bitcoin's Cumulative Value, As a Unit of Account</span></h1>
     <p class="hero-sub">
-        A unit of account for Bitcoin whose purchasing power changes negligibly from day to day —
-        derived from Bitcoin's own price history, with no issuer, no reserves, and no trusted third party.
+        A unit of account derived from Bitcoin's own cumulative price history. Eliminates day-to-day volatility. Appreciates incrementally over time. No issuer, no reserves, no trusted third party.
     </p>
     <a href="btcc-paper.html" class="hero-cta">Read the Full Paper →</a>
 </section>
@@ -518,8 +517,9 @@
         </p>
         <p>
             It is not a token. It is not a stablecoin. It is not a new protocol. It is a
-            <em>unit of account</em> — a standard for expressing Bitcoin's value that is mathematically
-            stable, entirely Bitcoin-native, and requires no institution to maintain it.
+            <em>unit of account</em> — a standard for expressing Bitcoin's value that is entirely
+            Bitcoin-native, requires no institution to maintain it, and appreciates incrementally
+            as Bitcoin's long-run price history accumulates.
         </p>
 
         <div class="formula-box">
@@ -554,10 +554,10 @@
             approaches have demonstrated catastrophic failure modes.
         </p>
         <div class="callout">
-            <strong>BTCC</strong> expresses Bitcoin's value using Bitcoin's own history.
-            No peg to maintain. No issuer to trust. No reserves to audit. The stability is a
-            mathematical property of cumulative averages — it cannot be inflated, confiscated, or
-            turned off.
+            <strong>₿C</strong> expresses Bitcoin's value using Bitcoin's own history.
+            No peg to maintain. No issuer to trust. No reserves to audit. The day-to-day stability
+            and long-run appreciation are both mathematical properties of cumulative averages —
+            they cannot be inflated, confiscated, or turned off.
         </div>
     </div>
 
@@ -566,12 +566,13 @@
     <!-- 3. STABILITY PROPERTIES -->
     <div class="section">
         <div class="section-number">03</div>
-        <h2>Mathematical Stability</h2>
+        <h2>Mathematical Properties</h2>
         <p>
-            The stability of the BTCC price is not maintained by market incentives or policy decisions.
-            It follows directly from the mathematics of cumulative averages. As of early 2026, the BTCC
-            price incorporates over 6,200 daily observations. The sensitivity of the price to any single
-            new day is exactly 1/(N+1) of the difference from the current average.
+            The day-to-day stability and long-run appreciation of the ₿C price are not maintained
+            by market incentives or policy decisions. Both follow directly from the mathematics of
+            cumulative averages. As of early 2026, the ₿C price incorporates over 6,200 daily
+            observations. The sensitivity of the price to any single new day is exactly 1/(N+1)
+            of the difference from the current average.
         </p>
 
         <div class="props-grid">
@@ -584,8 +585,8 @@
                 <p>With N &gt; 6,200, no single day can move the BTCC price by more than ~0.016% of the shock's magnitude, regardless of how extreme.</p>
             </div>
             <div class="prop-card">
-                <div class="prop-card-title">Slow-Moving Trend</div>
-                <p>Sustained price changes in BTC spot are reflected as a gradual drift in BTCC — attenuated by a factor of thousands.</p>
+                <div class="prop-card-title">Incremental Appreciation</div>
+                <p>Sustained BTC price levels are absorbed into the ₿C price slowly and permanently. As long as Bitcoin's long-run trajectory is upward, ₿C appreciates — gradually, predictably, and irreversibly.</p>
             </div>
         </div>
 
@@ -618,7 +619,7 @@
                 <tr>
                     <td>Bull run, BTC rises to $500,000 over years</td>
                     <td>+450%</td>
-                    <td class="highlight">Slow, steady appreciation</td>
+                    <td class="highlight">Slow, steady, permanent appreciation absorbed into the average</td>
                 </tr>
             </tbody>
         </table>
@@ -761,6 +762,25 @@
             and how it is computed. How it is used in invoicing systems, wallet interfaces, merchant
             pricing, or smart contracts is left entirely to implementers.
         </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- 8. BUILT ON ₿C -->
+    <div class="section">
+        <div class="section-number">08</div>
+        <h2>Built on ₿C</h2>
+        <p>
+            Because ₿C is a deterministic, publicly verifiable unit of account, it can serve as
+            the foundation for financial products that require a reliable Bitcoin-native price
+            reference. It requires no modification to the Bitcoin protocol and no cooperation
+            from any institution to function.
+        </p>
+        <p>
+            Treasury-Backed Digital Currency (₿USD) is one such product — a USD-pegged stablecoin
+            that uses the ₿C price as its collateral floor. It is described separately.
+        </p>
+        <a href="tbd-usd.html" class="hero-cta" style="margin-top:1rem;display:inline-flex;">Learn about ₿USD →</a>
     </div>
 
     <!-- PAPER CTA -->
