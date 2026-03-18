@@ -168,6 +168,7 @@
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="btcc.html">₿C</a></li>
+    <li><a href="bitcoin-timeblocks.html">Timeblocks</a></li>
     <li><a href="currency-layer.html">Currency Layer</a></li>
     <li><a href="knowledge-base.html" class="active">Knowledge Base</a></li>
   </ul>
@@ -203,7 +204,7 @@
     <h2>1. The Two-Ledger Reserve System</h2>
 
     <p>
-      The mechanics are built on a two-ledger reserve system. When a user purchases a ₿USD token with
+      The mechanics are built on a reserve system. In the current model, four ledgers are used across both the ₿ond savings product and ₿USD — two per product, keeping them cleanly separated. This article describes the ₿USD reserve mechanics; the full four-ledger architecture is documented in <a href="report-bitcoin-stablecoin.html">The Case for a Bitcoin-Backed Stablecoin</a>. When a user purchases a ₿USD token with
       fiat currency, the treasury company mints one ₿USD token and uses the incoming cash to acquire a
       corresponding quantity of satoshis at the prevailing BTC spot price. These satoshis are deposited
       into a pooled issuance ledger — Ledger 1 — that backs outstanding ₿USD tokens.
@@ -242,7 +243,7 @@
         <tr><td>$70,000</td><td>$18,000</td><td>$17,500</td><td class="neutral">197%</td><td>Fully backed at issuance — neutral</td></tr>
         <tr><td>$50,000</td><td>$12,857</td><td>$12,500</td><td class="neutral">141%</td><td>Ledger 1 short; Ledger 2 covers gap</td></tr>
         <tr><td>$30,000</td><td>$7,714</td><td>$7,500</td><td class="stress">84%</td><td>Draw on Ledger 2; solvent</td></tr>
-        <tr><td>$18,000</td><td>$4,629</td><td>$4,500</td><td class="stress">51%</td><td>Break-even threshold (₿C price)</td></tr>
+        <tr><td>$18,000</td><td>$4,629</td><td>$4,500</td><td class="stress">51%</td><td>Reserve under stress — Ledger 2 heavily drawn</td></tr>
         <tr><td>$10,000</td><td>$2,571</td><td>$2,500</td><td class="stress">28%</td><td>Deep draw on Ledger 2</td></tr>
       </tbody>
     </table>
@@ -298,8 +299,8 @@
         <tr>
           <th>BTC Spot</th>
           <th>Ledger 1 Value</th>
-          <th>₿USD Liability</th>
-          <th>Treasury Surplus</th>
+          <th>₿C Obligation Value</th>
+          <th>Treasury Spread</th>
           <th>vs. Holding Alone</th>
         </tr>
       </thead>
