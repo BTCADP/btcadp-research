@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BTCC (₿C) Unit of Account as a Pricing Denomination | btcadp.org</title>
+<meta name="description" content="How BTCC (₿C) functions as a Bitcoin-native pricing denomination for everyday commerce — covering daily drift tolerances, the merchant margin effect, and the self-calibrating inflation hedge.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary: #0a0a0b;
+    --bg-secondary: #111114;
+    --bg-tertiary: #19191e;
+    --border: #2a2a32;
+    --text-primary: #e8e6e3;
+    --text-secondary: #8a8a95;
+    --text-muted: #555560;
+    --orange: #f7931a;
+    --orange-dim: rgba(247,147,26,0.12);
+    --font-display: 'Source Serif 4', Georgia, serif;
+    --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-display);
+    font-size: 18px;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(247,147,26,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(247,147,26,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none; z-index: 0;
+  }
+
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(10,10,11,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 56px;
+  }
+  .nav-brand { font-family: var(--font-mono); font-size: 1rem; font-weight: bold; color: var(--orange); text-decoration: none; letter-spacing: 0.05em; }
+  .nav-links { display: flex; gap: 0.25rem; list-style: none; }
+  .nav-links a { color: var(--text-muted); text-decoration: none; font-family: var(--font-mono); font-size: 0.72rem; padding: 0.4rem 0.6rem; border-radius: 4px; transition: color 0.2s, background 0.2s; }
+  .nav-links a:hover { color: var(--text-primary); background: var(--bg-tertiary); }
+  .nav-links a.active { color: var(--orange); }
+
+  .article-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 64px 24px 100px;
+    position: relative; z-index: 1;
+  }
+
+  .article-meta { font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); margin-bottom: 20px; }
+  .article-title { font-size: clamp(1.6rem, 4vw, 2.6rem); font-weight: 700; letter-spacing: -0.5px; line-height: 1.2; color: #fff; margin-bottom: 12px; }
+  .article-subtitle { font-size: 1rem; color: var(--text-secondary); margin-bottom: 20px; font-style: italic; font-family: var(--font-sans); }
+  .article-byline { font-family: var(--font-sans); font-size: 0.85rem; color: var(--text-muted); margin-bottom: 40px; padding-bottom: 28px; border-bottom: 1px solid var(--border); }
+
+  .article-body h2 { font-size: 1.2rem; font-weight: 700; color: #fff; margin: 44px 0 14px; font-family: var(--font-sans); letter-spacing: 0; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+  .article-body p { color: #c8c6c3; margin-bottom: 18px; font-size: 1rem; line-height: 1.8; }
+  .article-body ul { color: #c8c6c3; margin: 0 0 18px 24px; font-size: 1rem; line-height: 1.8; }
+  .article-body ul li { margin-bottom: 8px; }
+
+  .math-block {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 14px 20px;
+    margin: 20px 0;
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+    color: var(--orange);
+    text-align: center;
+    overflow-x: auto;
+  }
+
+  .callout {
+    background: var(--orange-dim);
+    border-left: 3px solid var(--orange);
+    border-radius: 0 4px 4px 0;
+    padding: 16px 20px;
+    margin: 24px 0;
+  }
+  .callout p { color: #c4a46a; font-family: var(--font-sans); font-size: 0.92rem; line-height: 1.7; margin: 0; }
+  .callout strong { color: var(--orange); }
+
+  .data-table {
+    width: 100%; border-collapse: collapse;
+    margin: 20px 0; font-size: 0.82rem;
+    display: block; overflow-x: auto;
+  }
+  .data-table th {
+    text-align: left; padding: 9px 12px;
+    background: #0f0f16; border: 1px solid var(--border);
+    color: var(--text-muted); font-family: var(--font-mono);
+    font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1px;
+    white-space: nowrap;
+  }
+  .data-table td {
+    padding: 8px 12px; border: 1px solid var(--border);
+    color: #c8c6c3; font-family: var(--font-sans); font-size: 0.88rem;
+    vertical-align: top; line-height: 1.5;
+  }
+  .data-table tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+  .data-table td.orange { color: var(--orange); font-weight: 700; font-family: var(--font-mono); }
+  .data-table td.green { color: #2ecc71; font-weight: 600; }
+  .data-table td.red { color: #e74c3c; font-weight: 600; }
+
+  .example-box {
+    background: #0f0f16;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin: 24px 0;
+  }
+  .example-box .example-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); margin-bottom: 10px; }
+  .example-box p { color: #c8c6c3; font-size: 0.92rem; margin: 0; line-height: 1.75; font-family: var(--font-sans); }
+
+  .references { margin-top: 56px; padding-top: 32px; border-top: 1px solid var(--border); }
+  .references h2 { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 16px; font-family: var(--font-sans); border: none; padding: 0; }
+  .ref-item { margin-bottom: 10px; font-size: 0.83rem; color: var(--text-secondary); padding-left: 32px; position: relative; font-family: var(--font-sans); line-height: 1.55; }
+  .ref-num { position: absolute; left: 0; color: var(--orange); font-family: var(--font-mono); font-weight: 700; font-size: 0.78rem; }
+  .ref-item a { color: #5b9bd5; text-decoration: none; }
+  .ref-item a:hover { color: var(--orange); }
+
+  footer { border-top: 1px solid var(--border); padding: 32px 24px; text-align: center; font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+  footer a { color: var(--text-muted); text-decoration: none; }
+  footer a:hover { color: var(--orange); }
+
+  @media (max-width: 640px) {
+    .nav-links a { font-size: 0.65rem; padding: 0.3rem 0.4rem; }
+  }
+</style>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="index.html">BTCADP</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="live.html">Live</a></li>
+    <li><a href="specification.html">Specification</a></li>
+    <li><a href="btcc.html">₿C</a></li>
+    <li><a href="bitcoin-timeblocks.html">Timeblocks</a></li>
+    <li><a href="currency-layer.html">Currency Layer</a></li>
+    <li><a href="knowledge-base.html" class="active">Knowledge Base</a></li>
+  </ul>
+</nav>
+
+<div class="article-wrap">
+
+  <div class="article-meta">White Paper &nbsp;&bull;&nbsp; btcadp.org &nbsp;&bull;&nbsp; March 2026</div>
+  <h1 class="article-title">BTCC (₿C) Unit of Account as a Pricing Denomination</h1>
+  <p class="article-subtitle">Bitcoin-native pricing for everyday commerce — the BTCADP Framework</p>
+  <div class="article-byline">
+    btcadp.org &nbsp;&bull;&nbsp; March 2026 &nbsp;&bull;&nbsp; CC0 Public Domain
+  </div>
+
+  <div class="article-body">
+
+    <h2>1. The Missing Denomination Layer</h2>
+
+    <p>Bitcoin is sound money. The obstacle to its use in everyday commerce was never the asset — it was the absence of a suitable denomination layer. Spot price volatility makes Bitcoin impractical as a pricing unit. A merchant who prices a coffee at 0.000071 BTC today must reprice it tomorrow when spot moves. The accounting overhead alone is prohibitive, and the exchange rate risk between pricing and settlement is unmanageable for a small business.</p>
+
+    <p>USD stablecoins do not solve this. They eliminate Bitcoin's volatility by abandoning Bitcoin's monetary properties entirely. A USD stablecoin is a dollar with technical overhead — it inherits every structural problem of fiat denomination, including inflation, monetary policy risk, and issuer counterparty exposure, while adding none of Bitcoin's properties.</p>
+
+    <p>The problem was never Bitcoin. The problem was denomination. For 17 years, no Bitcoin-native unit existed that was stable enough for everyday pricing. BTCC (₿C) is that unit.</p>
+
+    <div class="callout">
+      <p>This system is designed to operate entirely within a Bitcoin economy. BTCC (₿C) denomination does not provide a mechanism to exit to fiat, and does not attempt to. Fiat conversion is outside its scope by design. Participants who need to convert to fiat require a separate instrument — such as a TBDC — at the boundary. Within the Bitcoin economy, no such instrument is needed.</p>
+    </div>
+
+    <h2>2. BTCC (₿C) as a Pricing Unit</h2>
+
+    <p>BTCC (Bitcoin Currency, symbol ₿C) is the cumulative arithmetic mean of every Bitcoin daily price since genesis, computed from the BTCADP specification. It is not a token, not a pegged instrument, and not issued by any party. It is a denomination — a unit derived entirely from Bitcoin's own price history.</p>
+
+    <p>Its daily movement is governed by a mathematical identity:</p>
+
+    <div class="math-block">daily % change = ( spot / BTCC − 1 ) ÷ ( N + 1 )<br><br>where N is the day count from genesis. Current N = 6,280 (March 14, 2026).</div>
+
+    <p>At current levels — BTCC $18,716, spot $70,400, N = 6,280 — the daily rate is +0.044%. The practical drift on common prices is as follows:</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>BTCC price</th>
+          <th>Daily drift</th>
+          <th>30-day drift</th>
+          <th>90-day drift</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Cup of coffee ($5)</td><td class="orange">0.000267 ₿C</td><td>$0.002</td><td>$0.066</td><td>$0.198</td></tr>
+        <tr><td>Lunch ($15)</td><td class="orange">0.000801 ₿C</td><td>$0.007</td><td>$0.199</td><td>$0.597</td></tr>
+        <tr><td>Grocery shop ($100)</td><td class="orange">0.005343 ₿C</td><td>$0.044</td><td>$1.33</td><td>$4.04</td></tr>
+        <tr><td>Car payment ($500)</td><td class="orange">0.026713 ₿C</td><td>$0.220</td><td>$6.64</td><td>$20.2</td></tr>
+        <tr><td>Monthly rent ($1,500)</td><td class="orange">0.080140 ₿C</td><td>$0.660</td><td>$19.93</td><td>$60.6</td></tr>
+      </tbody>
+    </table>
+
+    <p style="font-size:0.85rem;color:var(--text-muted);font-family:var(--font-sans);">Dollar drift figures shown are USD-equivalent at current BTCC (₿C) value. At peak recent rate (0.1114%/day, during Bitcoin's 2024–2025 bull run), multiply by approximately 2.5×.</p>
+
+    <p>A merchant can set BTCC (₿C) prices and leave them unchanged for a month with less than 1.5% drift at current rates, and less than 3.5% drift at peak bull rates. Quarterly repricing is sufficient in all observed market conditions.</p>
+
+    <h2>3. The Margin Effect</h2>
+
+    <p>BTCC (₿C) is deflationary by construction. Because it is a cumulative mean of a historically appreciating asset, it rises in purchasing power over time. For a merchant, this has a direct and concrete consequence: prices set in BTCC (₿C) and left unchanged are automatically worth more in real terms as time passes.</p>
+
+    <p>This is the structural inverse of fiat denomination. A merchant pricing in USD who delays a price increase loses margin to inflation. A merchant pricing in BTCC (₿C) who delays a reprice gains purchasing power. The default outcome favors the merchant.</p>
+
+    <div class="example-box">
+      <div class="example-label">Concrete example</div>
+      <p>A merchant sets a lunch at 0.000801 ₿C in January 2024 (equivalent to $15 at the time, when BTCC = $9,147). By December 2024, BTCC had reached $12,760. That same 0.000801 ₿C is now worth $10.21 in real purchasing power terms — the merchant's margin on that item has expanded 40% without a single repricing decision.</p>
+    </div>
+
+    <p>This dynamic intensifies over longer periods. BTCC (₿C) has appreciated every calendar year since price data exists, including through Bitcoin's three major bear markets (2015, 2018, 2022). A merchant who adopted BTCC (₿C) denomination in 2015, when BTCC was approximately $130, holds pricing denominated in a unit now worth $18,716 — a 143× appreciation in purchasing power terms relative to USD over a decade.</p>
+
+    <p>The comparison to USD over the same period: cumulative inflation of approximately 35%, meaning the USD-pricing merchant's real margins compressed by a third while their costs rose. The divergence compounds silently.</p>
+
+    <p>There is a second dimension to this advantage that runs in the opposite direction. When a merchant reprices in BTCC (₿C), they reprice down, not up. In a fiat economy, repricing is almost always an upward adjustment — costs rise, margins compress, prices follow. In a BTCC (₿C) economy, as productivity improves, technology reduces input costs, or competition intensifies, the natural direction of repricing is a lower BTCC price. The buyer's purchasing power, already appreciating through BTCC (₿C) denomination, stretches further still.</p>
+
+    <p>Technology is inherently deflationary. Fiat monetary systems have suppressed this deflation through continuous inflation, preventing it from reaching consumers. BTCC (₿C) denomination is a practical mechanism through which this deflation can express itself in everyday commerce.</p>
+
+    <h2>4. Fiat Inflation: The Slow Collapse</h2>
+
+    <p>Hyperinflation attracts attention. The slow collapse does more damage because it is invisible until it is not.</p>
+
+    <p>At 3.5% annual USD inflation, a merchant loses approximately 0.0094% of purchasing power per day. This compounds to 3.4% over a year, 18.1% over five years, 41.6% over ten years. A merchant who does not raise prices regularly is not holding steady — they are slowly losing the business.</p>
+
+    <p>BTCC (₿C) denomination reverses this at the operational level:</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th>USD pricing</th>
+          <th>₿C pricing (current)</th>
+          <th>₿C pricing (bull market)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Daily purchasing power change</td>
+          <td class="red">−0.0094%</td>
+          <td class="green">+0.044%</td>
+          <td class="green">+0.111%</td>
+        </tr>
+        <tr>
+          <td>Annual drift</td>
+          <td class="red">−3.5%</td>
+          <td class="green">+17.4%</td>
+          <td class="green">+49.7%</td>
+        </tr>
+        <tr>
+          <td>5-year drift</td>
+          <td class="red">−18.1%</td>
+          <td class="green">+123%</td>
+          <td class="green">+648%</td>
+        </tr>
+        <tr>
+          <td>Direction</td>
+          <td class="red">Always down</td>
+          <td class="green">Always up</td>
+          <td class="green">Always up</td>
+        </tr>
+        <tr>
+          <td>Predictable rate</td>
+          <td class="red">No</td>
+          <td class="green">Yes</td>
+          <td class="green">Yes</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>The BTCC (₿C) rate is not fixed — it varies with Bitcoin's spot price — but it has a hard floor at zero and has never gone negative for a sustained period in 15 years of data. USD inflation has no floor and no ceiling.</p>
+
+    <p>For a merchant operating in a country with elevated monetary inflation — Turkey, Argentina, Nigeria, or the United States over a sufficiently long horizon — BTCC (₿C) denomination is not a speculative position. It is a defensive one.</p>
+
+    <h2>5. Hyperinflation: The Self-Calibrating Hedge</h2>
+
+    <p>In a hyperinflationary environment, Bitcoin's spot price measured in the collapsing currency rises sharply. This directly widens the spot/BTCC ratio. Because BTCC (₿C)'s daily appreciation is a direct function of that ratio, BTCC (₿C) appreciation accelerates automatically — with no mechanism to adjust, no oracle to query, and no governance decision required.</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Spot/₿C ratio</th>
+          <th>Scenario</th>
+          <th>Daily ₿C %</th>
+          <th>Annualized</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="orange">1.7×</td><td>Deep bear</td><td>+0.011%</td><td>+4.1%</td></tr>
+        <tr><td class="orange">3.76×</td><td>Current (Mar 2026)</td><td>+0.044%</td><td>+17.4%</td></tr>
+        <tr><td class="orange">5×</td><td>Moderate bull</td><td>+0.064%</td><td>+26.4%</td></tr>
+        <tr><td class="orange">7×</td><td>Late bull</td><td>+0.096%</td><td>+41.8%</td></tr>
+        <tr><td class="orange">10×</td><td>Strong bull</td><td>+0.144%</td><td>+68.0%</td></tr>
+        <tr><td class="orange">20×</td><td>Hyperinflationary</td><td>+0.306%</td><td>+205%</td></tr>
+      </tbody>
+    </table>
+
+    <p>The mechanism is structurally protective in proportion to the severity of the monetary event. A mild inflationary environment produces mild BTCC (₿C) appreciation. A collapsing currency that drives Bitcoin to 20× BTCC produces 200%+ annualized BTCC (₿C) appreciation. The protection scales with the threat without any intervention.</p>
+
+    <p>USD stablecoins offer the opposite characteristic. In a USD hyperinflation scenario, a USD-pegged instrument offers zero protection. Its stability is precisely its failure mode. BTCC (₿C) has no such exposure because it is pegged to nothing external.</p>
+
+    <p>The historical pattern in monetary crises is consistent: participants who denominate in harder money preserve purchasing power while those who remain in the collapsing unit do not. BTCC (₿C) is a Bitcoin-native denomination with no external peg and no fiat dependency. It does not require fiat exit to function as a store of value or a pricing unit — it functions within the Bitcoin economy regardless of what fiat currencies are doing.</p>
+
+    <h2>6. Implementation</h2>
+
+    <p>A merchant adopting BTCC (₿C) denomination requires three things:</p>
+
+    <ul>
+      <li>A wallet that displays balances in BTCC (₿C) and converts to satoshis at the BTCADP rate at point of sale</li>
+      <li>Access to the current BTCADP daily price — any node running the open specification can provide this independently</li>
+      <li>A price list denominated in BTCC (₿C)</li>
+    </ul>
+
+    <p>No new asset is issued. No token is held. No counterparty is required. The merchant receives satoshis. Their wallet displays the BTCC (₿C) equivalent. The conversion is deterministic and reproducible by any party with the BTCADP specification and trade data. There is no fiat exit mechanism and no fiat dependency at any layer.</p>
+
+    <p>The merchant's existing Bitcoin holdings are unaffected. BTCC (₿C) is a denomination layer, not a separate instrument. Switching to BTCC (₿C) pricing does not require changing what the merchant holds — only how they express prices.</p>
+
+    <div class="example-box">
+      <div class="example-label">What a merchant actually sees</div>
+      <p>Balance: 0.15 BTC &nbsp;|&nbsp; Displayed as: 0.565 ₿C<br><br>
+      Coffee: 0.000267 ₿C &nbsp;&nbsp; Lunch special: 0.000801 ₿C &nbsp;&nbsp; Grocery basket: 0.005343 ₿C<br><br>
+      At settlement: wallet converts to satoshis at today's BTCADP rate. Customer pays sats. Merchant receives sats. BTCC (₿C) price remains unchanged until the merchant chooses to reprice.</p>
+    </div>
+
+    <p>The repricing decision is at the merchant's discretion and tolerance. At current rates, a quarterly reprice is operationally equivalent to a USD merchant repricing annually for inflation. In a bull market with a 5× ratio, monthly repricing may be warranted. In both cases the decision is voluntary — the default of doing nothing always works in the merchant's favor.</p>
+
+    <div class="references">
+      <h2>References</h2>
+      <div class="ref-item">
+        <span class="ref-num">[1]</span>
+        Nakamoto, S. (2008). <em>Bitcoin: A Peer-to-Peer Electronic Cash System.</em>
+        <a href="https://bitcoin.org/bitcoin.pdf" target="_blank" rel="noopener">bitcoin.org/bitcoin.pdf</a>
+      </div>
+      <div class="ref-item">
+        <span class="ref-num">[2]</span>
+        Booth, J. (2020). <em>The Price of Tomorrow: Why Deflation is the Key to an Abundant Future.</em> Stanley Press.
+      </div>
+      <div class="ref-item">
+        <span class="ref-num">[3]</span>
+        BTCADP Framework (2026). <em>Bitcoin Average Daily Price: Specification v1.0.</em>
+        <a href="specification.html">btcadp.org/specification</a>
+      </div>
+      <div class="ref-item">
+        <span class="ref-num">[4]</span>
+        BTCADP Historical Dataset (2026). <em>btcadp_btcc_historical.csv.</em> Daily price series, January 3, 2009 – March 14, 2026.
+        <a href="https://github.com/BTCADP/btcadp-research" target="_blank" rel="noopener">btcadp.org</a>
+      </div>
+    </div>
+
+    <div style="margin-top:48px;padding-top:28px;border-top:1px solid var(--border);text-align:center;">
+      <p style="font-family:var(--font-sans);font-size:0.85rem;color:var(--text-muted);margin-bottom:14px;">CC0 Public Domain — free to use, share, and build upon without restriction.</p>
+      <button onclick="window.print()" style="background:var(--orange);color:#fff;border:none;padding:10px 24px;border-radius:4px;font-family:var(--font-mono);font-size:0.8rem;font-weight:600;letter-spacing:0.05em;cursor:pointer;">&#128424; Print / Save as PDF</button>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <p>
+    <a href="index.html">Home</a> &nbsp;&bull;&nbsp;
+    <a href="btcc.html">₿C</a> &nbsp;&bull;&nbsp;
+    <a href="specification.html">Specification</a> &nbsp;&bull;&nbsp;
+    <a href="bitcoin-timeblocks.html">Timeblocks</a> &nbsp;&bull;&nbsp;
+    <a href="knowledge-base.html">Knowledge Base</a> &nbsp;&bull;&nbsp;
+    <a href="https://github.com/BTCADP/btcadp-research" target="_blank" rel="noopener">GitHub</a>
+  </p>
+  <p style="margin-top:8px;">CC0 Public Domain &bull; btcadp.org &bull; 2026</p>
+</footer>
+
+</body>
+</html>
