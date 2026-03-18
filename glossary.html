@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glossary | btcadp.org</title>
+<meta name="description" content="Terms and definitions for the BTCADP ecosystem — BTCC (₿C), timeblocks, TBDC, ₿USD, ₿ond, Two Spheres, PragMaxi, and more.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary: #0a0a0b;
+    --bg-secondary: #111114;
+    --bg-tertiary: #19191e;
+    --border: #2a2a32;
+    --text-primary: #e8e6e3;
+    --text-secondary: #8a8a95;
+    --text-muted: #555560;
+    --orange: #f7931a;
+    --orange-dim: rgba(247,147,26,0.10);
+    --font-display: 'Source Serif 4', Georgia, serif;
+    --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(247,147,26,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(247,147,26,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none; z-index: 0;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(10,10,11,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 56px;
+  }
+  .nav-brand { font-family: var(--font-mono); font-size: 1rem; font-weight: bold; color: var(--orange); text-decoration: none; letter-spacing: 0.05em; }
+  .nav-links { display: flex; gap: 0.25rem; list-style: none; }
+  .nav-links a { color: var(--text-muted); text-decoration: none; font-family: var(--font-mono); font-size: 0.72rem; padding: 0.4rem 0.6rem; border-radius: 4px; transition: color 0.2s, background 0.2s; }
+  .nav-links a:hover { color: var(--text-primary); background: var(--bg-tertiary); }
+  .nav-links a.active { color: var(--orange); }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 64px 24px 48px;
+    border-bottom: 1px solid var(--border);
+    background: radial-gradient(ellipse at 50% 0%, rgba(247,147,26,0.05) 0%, transparent 60%);
+  }
+  .container { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
+  .hero-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--orange); margin-bottom: 16px; }
+  .hero h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; letter-spacing: -1px; line-height: 1.1; color: #fff; margin-bottom: 16px; font-family: var(--font-display); }
+  .hero-sub { font-size: 1rem; color: var(--text-secondary); max-width: 600px; line-height: 1.75; }
+
+  /* ── SEARCH ── */
+  .search-wrap { padding: 24px 24px 0; }
+  .search-input {
+    width: 100%;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px 16px;
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+    color: var(--text-primary);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .search-input:focus { border-color: var(--orange); }
+  .search-input::placeholder { color: var(--text-muted); }
+
+  /* ── ALPHABET NAV ── */
+  .alpha-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    padding: 20px 24px 0;
+  }
+  .alpha-nav a {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 4px 8px;
+    border-radius: 3px;
+    transition: color 0.2s, background 0.2s;
+  }
+  .alpha-nav a:hover { color: var(--orange); background: var(--bg-secondary); }
+  .alpha-nav a.has-terms { color: var(--text-secondary); }
+
+  /* ── CONTENT ── */
+  .content { padding: 40px 24px 80px; }
+
+  /* ── SECTION ── */
+  .gloss-section { margin-bottom: 56px; }
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--orange);
+  }
+  .section-letter {
+    font-family: var(--font-mono);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--orange);
+    line-height: 1;
+  }
+  .section-name {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  /* ── TERM ENTRY ── */
+  .term-entry {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--bg-secondary);
+    margin-bottom: 10px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .term-entry:hover { border-color: rgba(247,147,26,0.3); }
+
+  .term-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 16px 20px;
+    cursor: pointer;
+    gap: 16px;
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+  }
+
+  .term-title-wrap { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+
+  .term-name {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #fff;
+  }
+  .term-name.featured { color: var(--orange); font-size: 1rem; }
+
+  .term-tag {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background: var(--bg-tertiary);
+    padding: 2px 7px;
+    border-radius: 3px;
+  }
+  .term-tag.new { color: var(--orange); border: 1px solid rgba(247,147,26,0.3); background: var(--orange-dim); }
+
+  .term-icon { color: var(--text-muted); font-size: 1rem; flex-shrink: 0; transition: transform 0.2s; }
+  .term-entry.open .term-icon { transform: rotate(45deg); color: var(--orange); }
+
+  .term-body {
+    display: none;
+    padding: 0 20px 18px 20px;
+    border-top: 1px solid var(--border);
+  }
+  .term-entry.open .term-body { display: block; }
+
+  .term-body p {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    color: #c8c6c3;
+    line-height: 1.8;
+    margin-bottom: 10px;
+  }
+  .term-body p:last-child { margin-bottom: 0; }
+
+  .term-body .see-also {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 12px;
+  }
+  .term-body .see-also a { color: var(--orange); text-decoration: none; }
+  .term-body .see-also a:hover { text-decoration: underline; }
+
+  /* ── NO RESULTS ── */
+  .no-results { display: none; text-align: center; padding: 48px 0; color: var(--text-muted); font-family: var(--font-mono); font-size: 0.85rem; }
+
+  /* ── FOOTER ── */
+  footer { border-top: 1px solid var(--border); padding: 32px 24px; text-align: center; font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+  footer a { color: var(--text-muted); text-decoration: none; }
+  footer a:hover { color: var(--orange); }
+
+  @media (max-width: 640px) {
+    .nav-links a { font-size: 0.65rem; padding: 0.3rem 0.4rem; }
+    .term-title-wrap { flex-direction: column; gap: 6px; }
+  }
+</style>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="index.html">BTCADP</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="live.html">Live</a></li>
+    <li><a href="specification.html">Specification</a></li>
+    <li><a href="btcc.html">₿C</a></li>
+    <li><a href="two-spheres.html">Two Spheres</a></li>
+    <li><a href="currency-layer.html">Currency Layer</a></li>
+    <li><a href="knowledge-base.html">Knowledge Base</a></li>
+    <li><a href="glossary.html" class="active">Glossary</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="container">
+    <div class="hero-label">Terms &amp; Definitions</div>
+    <h1>Glossary</h1>
+    <p class="hero-sub">Every term, concept, and piece of jargon used across the BTCADP ecosystem — defined plainly, from foundational to advanced.</p>
+  </div>
+</div>
+
+<!-- SEARCH -->
+<div class="container">
+  <div class="search-wrap">
+    <input type="text" class="search-input" id="searchInput" placeholder="Search terms..." oninput="filterTerms(this.value)">
+  </div>
+
+  <div class="alpha-nav" id="alphNav">
+    <a href="#B" class="has-terms">B</a>
+    <a href="#C" class="has-terms">C</a>
+    <a href="#D" class="has-terms">D</a>
+    <a href="#F" class="has-terms">F</a>
+    <a href="#G" class="has-terms">G</a>
+    <a href="#H" class="has-terms">H</a>
+    <a href="#I" class="has-terms">I</a>
+    <a href="#L" class="has-terms">L</a>
+    <a href="#M" class="has-terms">M</a>
+    <a href="#O" class="has-terms">O</a>
+    <a href="#P" class="has-terms">P</a>
+    <a href="#S" class="has-terms">S</a>
+    <a href="#T" class="has-terms">T</a>
+    <a href="#V" class="has-terms">V</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="container">
+  <div class="content" id="glossaryContent">
+
+    <div class="no-results" id="noResults">No terms match your search.</div>
+
+    <!-- ── B ── -->
+    <div class="gloss-section" id="B">
+      <div class="section-header">
+        <span class="section-letter">B</span>
+        <span class="section-name">Foundational</span>
+      </div>
+
+      <div class="term-entry">
+        <button class="term-header" onclick="toggle(this)">
+          <div class="term-title-wrap">
+            <span class="term-name">Bitcoin</span>
+            <span class="term-tag">Base Layer</span>
+          </div>
+          <span class="term-icon">+</span>
+        </button>
+        <div class="term-body">
+          <p>A peer-to-peer electronic cash system with a fixed supply of 21 million coins, operating continuously since January 2009 without a trusted third party. The reserve asset underlying the entire BTCADP ecosystem — not held by any institution, not expandable by any decree, not contingent on anyone's continued operation.</p>
+          <p>Bitcoin is both the destination and the foundation. Every ₿USD token minted requires Bitcoin to be purchased. Every ₿ond issued locks Bitcoin in reserve. The ecosystem does not compete with Bitcoin — it is built on it, denominated in its history, and secured by its base layer.</p>
+          <div class="see-also">See also: <a href="specification.html">BTCADP Specification</a></div>
+        </div>
+      </div>
+
+      <div class="term-entry">
+        <button class="term-header" onclick="toggle(this)">
+          <div class="term-title-wrap">
+            <span class="term-name">Bitcoin Circular Economy</span>
+            <span class="term-tag">Sphere B</span>
+          </div>
+          <span class="term-icon">+</span>
+        </button>
+        <div class="term-body">
+          <p>An economy in which participants earn, spend, save, and price entirely in Bitcoin-native denominations, with no need to convert to fiat at any stage. Sphere B. The original vision of the Bitcoin white paper — peer-to-peer electronic cash — operating without banks, without dollar references, and without counterparties.</p>
+          <p>₿C is the unit of account for the Bitcoin circular economy. A coffee costs 0.000267 ₿C. A salary is paid in ₿C. A mortgage is denominated in ₿C. The fiat equivalent of ₿C exists and is knowable — it simply becomes irrelevant to daily commerce once enough participants are operating within the circle.</p>
+          <div class="see-also">See also: <a href="two-spheres.html">Two Spheres</a>, <a href="btcc.html">₿C Overview</a></div>
+        </div>
+      </div>
+
+      <div class="term-entry">
+        <button class="term-header" onclick="toggle(this)">
+          <div class="term-title-wrap">
+            <span class="term-name">Bitcoin Maximalism</span>
+            <span class="term-tag">Philosophy</span>
+          </div>
+          <span class="term-icon">+</span>
+        </button>
+        <div class="term-body">
+          <p>The position that Bitcoin is the only monetary asset that matters and that the destination is a Bitcoin-native global economy. Maximalists are philosophically oriented toward Sphere B — a world where fiat is obsolete and Bitcoin's properties underpin all economic activity.</p>
+          <p>Bitcoin maximalism is correct about the destination. The two-sphere model is a framework for how to get there from a world that still lives in fiat — without asking maximalists to compromise their convictions, and without asking Sphere A participants to abandon the familiar interfaces they depend on.</p>
+          <div class="see-also">See also: <a href="#P">PragMaxi</a>, <a href="two-spheres.html">Two Spheres</a></div>
+        </div>
+      </div>
+
+      <div class="term-entry">
+        <button class="term-header" onclick="toggle(this)">
+          <div class="term-title-wrap">
+            <span class="term-name">₿ond</span>
+            <span class="term-tag">Savings Product</span>
+          </div>
+          <span class="term-icon">+</span>
+        </button>
+        <div class="term-body">
+          <p>A fixed-maturity savings instrument denominated in BTCC (₿C), issued by a Bitcoin treasury company. A saver deposits fiat. The treasury uses those funds to purchase Bitcoin at spot and holds it in reserve. The saver receives a ₿C-denominated balance and a maturity date.</p>
+          <p>The ₿ond cannot be spent directly — the holder must convert to ₿USD first. At maturity, the treasury returns the ₿C obligation as ₿USD, keeping the value inside the Bitcoin ecosystem. The holder may then spend, re-save, or exit to fiat at the standard redemption fee.</p>
+          <p>The ₿ond's fixed maturity structure eliminates the bank run attack vector: redemption dates are contractual and set at issuance, making coordinated mass redemptions structurally impossible.</p>
+          <div class="see-also">See also: <a href="#M">Maturity Date</a>, <a href="#M">Maturity Spread</a>, <a href="report-bitcoin-stablecoin.html">The Report</a></div>
+        </div>
+      </div>
+
+      <div class="term-entry">
+        <button class="term-header" onclick="toggle(this)">
+          <div class="term-title-wrap">
+            <span class="term-name">₿USD</span>
+            <span class="term-tag">Medium of Exchange</span>
+          </div>
+          <span class="term-icon">+</span>
+        </button>
+        <div class="term-body">
+          <p>The US dollar implementation of the Treasury-Backed Digital Currency (TBDC) model. One ₿USD token is always worth exactly $1.00 and is always redeemable for $1.00. It is issued by a consortium of Bitcoin treasury companies and backed by Bitcoin held in publicly auditable on-chain wallets — not by US Treasuries or bank deposits.</p>
+          <p>₿USD is the spending layer of the ecosystem. A customer pays for coffee in ₿USD. A worker receives a salary in ₿USD. A trader settles a position in ₿USD. The $1 peg is identical to USDT or USDC — the difference is entirely in the reserve asset.</p>
+          <div class="see-also">See also: <a href="#T">TBDC</a>, <a href="#H">Hard Peg</a>, <a href="tbd-usd.html">₿USD Overview</a></div>
+        </div>
+      </div>
+
+      <div class="term-entry">
+        <button class="term-header" onclick="toggle(this)">
+          <div class="term-title-wrap">
+            <span class="term-name">BTCADP</span>
+            <span class="term-tag">Reference Price</span>
+          </div>
+          <span class="term-icon">+</span>
+        </button>
+        <div class="term-body">
+          <p>Bitcoin Average Daily Price. An open-source specification for computing a single, reproducible daily Bitcoin reference price from qualifying exchange data. The methodology is the authority — no institution is required. Published at btcadp.org.</p>
+          <p>The BTCADP is computed from per-exchange volume-weighted average prices (VWAPs), aggregated using a 25% trimmed mean with equal exchange weighting. A sequence of filters — minimum trade count, time coverage, spread threshold, price coherence — qualifies exchanges. Any party with the specification and trade data can independently reproduce the number.</p>
+          <p>The BTCADP is the single daily input to the ₿C cumulative average. It is the foundation on which everything else is built.</p>
+          <div class="see-also">See also: <a href="specification.html">Full Specification</a>, <a href="#V">VWAP</a>, <a href="#T">Trimmed Mean</a></div>
+        </div>
+      </div>
+
+      <div class="term-entry">
+        <button class="term-header" onclick="toggle(this)">
+          <div class="term-title-wrap">
+            <span class="term-name">BTCC (₿C)</span>
+            <span class="term-tag">Unit of Account</span>
+          </div>
+          <span class="term-icon">+</span>
+        </button>
+        <div class="term-body">
+          <p>Bitcoin Currency. The cumulative arithmetic mean of every historical BTCADP value from the genesis block through the previous completed day. The unit of account for the ecosystem. Not a token, not a stablecoin, not a peg — a denomination derived entirely from Bitcoin's own price history.</p>
+          <p>As of early 2026, ₿C incorporates over 6,200 daily price observations and sits at approximately $18,700. Its sensitivity to any single day's price move is approximately 1/6,200 of the difference between that day's price and the current average. A 10% single-day Bitcoin crash moves ₿C by less than 0.01%.</p>
+          <p>₿C operates in both Sphere A (expressed in fiat-equivalent terms for accessibility) and Sphere B (used natively as the unit of account for the Bitcoin circular economy) without modification.</p>
+          <div class="see-also">See also: <a href="btcc.html">₿C Overview</a>, <a href="#T">Timeblock</a>, <a href="#C">Cumulative Average</a></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── C ── -->
+    <div class="gloss-section" id="C">
+      <div class="section-header">
+        <span class="section-letter">C</span>
+        <span class="section-name">Concepts</span>
+      </div>
+
+      <div class="term-entry">
+        <button class="term-header" onclick="toggle(this)">
+          <div class="term-title-wrap">
+            <span class="term-name">Consortium</span>
+            <span class="term-tag">Structure</span>
+          </div>
+          <span class="term-icon">+</span>
+        </button>
+        <div class="term-body">
+          <p>The group of publicly traded Bitcoin treasury companies that collectively issue TBDC instruments (₿USD and ₿onds). Distributed across jurisdictions so no single regulatory action can shut down the entire system. Each member maintains its own reserve ledgers and is independently audited.</p>
+          <p>The consortium is the institutional layer of the ecosystem. The BTCADP specification and ₿C formula are independent of it — the unit of account persists even if the consortium dissolves. The consortium provides the issuance and redemption infrastructure; the denomination provides the credibility.</p>
+          <div class="see-also">See also: <a href="#T">TBDC</a>, <a href="#F">Four-Ledger System</a></div>
+        </div>
+      </div>
+
+      <div class="term-entry">
+        <button class="term-header" onclick="toggle(this)">
+          <div class="term-title-wrap">
+            <span class="term-name">Cumulative Average</span>
+            <span class="term-tag">Mathematics</span>
+          </div>
+          <span class="term-icon">+</span>
+        </button>
+        <div class="term-body">
+          <p>The mathematical basis of ₿C's stability. The ₿C price on any given day is the arithmetic mean of every historical BTCADP value from genesis through the previous completed day. As N — the total number of days — grows, the sensitivity of the average to any single new day approaches zero.</p>
+          <p>The formula: ΔBTCC = (BTCADP<sub>new</sub> − BTCC<sub>current</sub>) / (N + 1). With N exceeding 6,200, no single day can move ₿C by more than approximately 0.016% of any price shock's magnitude. This property strengthens permanently with every passing day — time itself is a structural tailwind for the denomination.</p>
+          <div class="see-also">See also: <a href="#T">Timeblock</a>, <a href="btcc-white-paper.html">₿C White Paper</a></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── D ── -->
+    <div class="gloss-section" id="D">
+      <div class="section-header">
+        <span class="section-letter">D</span>
+        <span class="section-name">Concepts</span>
+      </div>
+
+      <div class="term-entry">
+        <button class="term-header" onclick="toggle(this)">
+          <div class="term-title-wrap">
+            <span class="term-name">Deflationary Denomination</span>
+            <span class="term-tag">₿C Property</span>
+          </div>
+          <span class="term-icon">+</span>
+        </button>
+        <div class="term-body">
+          <p>₿C appreciates in purchasing power over time as each new above-average day pulls the cumulative mean upward. Prices set in ₿C and left unchanged become worth more in real terms as time passes. This is the structural inverse of fiat inflation, where prices set and left unchanged lose real value.</p>
+          <p>For a merchant, deflation is an advantage: the default outcome — doing nothing — always works in their favor. A lunch priced at 0.000801 ₿C in January 2024 was worth $15. By December 2024, the same price was worth $10.21 in real purchasing power — the merchant's margin expanded 40% without a single repricing decision.</p>
+          <div class="see-also">See also: <a href="#M">Margin Effect</a>, <a href="btcc-pricing-denomination.html">Pricing Denomination Paper</a></div>
+        </div>
+      </div>
+
+      <div class="term-entry">
+        <button class="term-header" onclick="toggle(this)">
+          <div class="term-title-wrap">
+            <span class="term-name">Denomination</span>
+            <span class="term-tag">Foundational</span>
+          </div>
+          <span class="term-icon">+</span>
+        </button>
+        <div class="term-body">
+          <p>A standard for expressing value. ₿C is a denomination the way the meter is a unit of length or the kilogram is a unit of mass — it defines a unit without issuing a token, holding reserves, or requiring a trusted issuer. Any wallet, merchant, or payment system can adopt ₿C independently by implementing the published formula.</p>
+          <p>The distinction between a denomination and a monetary instrument is fundamental to understanding the ecosystem. ₿C is the denomination. ₿USD and the ₿ond are instruments denominated in ₿C.</p>
+          <div class="see-also">See also: <a href="#B">BTCC (₿C)</a></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── F ── -->
+    <div class="gloss-section" id="F">
+      <div class="section-header">
+        <span class="section-letter">F</span>
+        <span class="section-name">Architecture</span>
+      </div>
+
+      <div class="term-entry">
+        <button class="term-header" onclick="toggle(this)">
+          <div class="term-title-wrap">
+            <span class="term-name">Four-Ledger System</span>
+            <span class="term-tag">Reserve Architecture</span>
+          </div>
+          <span class="term-icon">+</span>
+        </button>
+        <div class="term-body">
+          <p>The reserve architecture that separates ₿ond and ₿USD reserves into four distinct on-chain ledgers. ₿ond Ledger 1 (issuance pool — BTC purchased at ₿ond issuance), ₿ond Ledger 2 (actuarial backstop — sized against the known maturity book), ₿USD Ledger 1 (BTC backing outstanding $1 tokens), and ₿USD Ledger 2 (self-fortifying backstop — grows as BTC appreciates above the $1 obligation).</p>
+          <p>The separation is not technical — all four ledgers are Bitcoin wallets on the base layer. It is an accounting boundary that prevents stress on one product from consuming reserves of the other. A ₿ond bank run cannot touch ₿USD reserves. A ₿USD redemption spike cannot touch maturity-locked ₿ond reserves.</p>
+          <div class="see-also">See also: <a href="#L">Ledger 1</a>, <a href="#L">Ledger 2</a>, <a href="report-bitcoin-stablecoin.html">The Report</a></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── G ── -->
+    <div class="gloss-section" id="G">
+      <div class="section-header">
+        <span class="section-letter">G</span>
+        <span class="section-name">Framework</span>
+      </div>
+
+      <div class="term-entry">
+        <button class="term-header" onclick="toggle(this)">
+          <div class="term-title-wrap">
+            <span class="term-name">The Gateway</span>
+            <span class="term-tag">Two Spheres</span>
+          </div>
+          <span class="term-icon">+</span>
+        </button>
+        <div class="term-body">
+          <p>The mechanism by which Sphere A (the fiat economy) becomes an on-ramp to Sphere B (the Bitcoin circular economy). As participants accumulate ₿C-denominated value through ₿onds and ₿USD commerce, the need to consult the dollar equivalent diminishes naturally — not by mandate, but because the economics of staying inside the ₿C ecosystem are superior to leaving it.</p>
+          <p>The transition is gradual, voluntary, and driven by economic incentive. A denomination that appreciates, backed by the hardest asset ever created, usable for everything from a coffee to a mortgage, makes fiat unnecessary through demonstrated superiority — not through ideology.</p>
+          <div class="see-also">See also: <a href="two-spheres.html">Two Spheres</a>, <a href="#S">Sphere A</a>, <a href="#S">Sphere B</a></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── H ── -->
+    <div class="gloss-section" id="H">
+      <div class="section-header">
+        <span class="section-letter">H</span>
+        <span class="section-name">Properties</span>
+      </div>
+
+      <div class="term-entry">
+        <button class="term-header" onclick="toggle(this)">
+          <div class="term-title-wrap">
+            <span class="term-name">Hard Peg</span>
+            <span class="term-tag">₿USD Property</span>
+          </div>
+          <span class="term-icon">+</span>
+        </button>
+        <div class="term-body">
+          <p>₿USD's $1.00 redemption guarantee. One token is always redeemable for exactly one US dollar. Not an algorithmic target, not a soft peg defended by market incentives — a contractual obligation backed by Bitcoin reserves held on-chain. The peg is the same as USDT or USDC; the reserve asset is different.</p>
+          <div class="see-also">See also: <a href="#B">₿USD</a>, <a href="#T">TBDC</a></div>
+        </div>
+      </div>
+
+      <div class="term-entry">
+        <button class="term-header" onclick="toggle(this)">
+          <div class="term-title-wrap">
+            <span class="term-name">Historical Eras (Era 0–3)</span>
+            <span class="term-tag">BTCADP</span>
+          </div>
+          <span class="term-icon">+</span>
+        </button>
+        <div class="term-body">
+          <p>The four defined periods of Bitcoin's price history in the BTCADP specification, each with a distinct data methodology.</p>
+          <p><strong>Era 0</strong> (Jan 3, 2009 – Jul 17, 2010): No market existed. BTCADP defined as $0.00 for all 561 days. A clean baseline, not a claim that Bitcoin was worthless.</p>
+          <p><strong>Era 1</strong> (Jul 18, 2010 – Feb 24, 2014): Mt. Gox dominated. Single-source VWAP, flagged accordingly.</p>
+          <p><strong>Era 2</strong> (Feb 25, 2014 – Dec 31, 2017): Multi-exchange, reduced confidence initially, improving as the ecosystem matured.</p>
+          <p><strong>Era 3</strong> (Jan 1, 2018 – present): Full trimmed mean methodology. Full confidence. 15–40 qualifying exchanges per day.</p>
+          <div class="see-also">See also: <a href="specification.html">BTCADP Specification</a></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── I ── -->
+    <div class="gloss-section" id="I">
+      <div class="section-header">
+        <span class="section-letter">I</span>
+        <span class="section-name">Principles</span>
+      </div>
+
+      <div class="term-entry">
+        <button class="term-header" onclick="toggle(this)">
+          <div class="term-title-wrap">
+            <span class="term-name">Institutional Independence</span>
+            <span class="term-tag">BTCADP Principle</span>
+          </div>
+          <span class="term-icon">+</span>
+        </button>
+        <div class="term-body">
+          <p>The design principle that the BTCADP belongs to no publisher. The methodology is the authority. Any party with the specification and trade data can reproduce the number independently. If btcadp.org ceased to exist tomorrow, the standard continues — any competent party can pick it up without interruption.</p>
+          <p>This property extends to ₿C: the denomination is computable from any historical Bitcoin price data using a published formula. No institution can capture it, no regulator can shut it down, and no publisher's failure can make it stop working.</p>
+          <div class="see-also">See also: <a href="specification.html">BTCADP Specification</a></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── L ── -->
+    <div class="gloss-section" id="L">
+      <div class="section-header">
+        <span class="section-letter">L</span>
+        <span class="section-name">Reserve Architecture</span>
+      </div>
+
+      <div class="term-entry">
+        <button class="term-header" onclick="toggle(this)">
+          <div class="term-title-wrap">
+            <span class="term-name">Ledger 1 (Issuance Pool)</span>
+            <span class="term-tag">Reserve</span>
+          </div>
+          <span class="term-icon">+</span>
+        </button>
+        <div class="term-body">
+          <p>The Bitcoin purchased at the moment a ₿USD token is minted or a ₿ond is issued. Directly backs the outstanding obligation. Held in publicly addressable wallets on Bitcoin's base layer — verifiable by any observer in real time without an auditor.</p>
+          <p>For ₿USD: Ledger 1 holds BTC backing each $1 token at the moment of issuance. As BTC appreciates above the $1 obligation, surplus flows into Ledger 2. For ₿ond: Ledger 1 holds BTC locked to the maturity schedule.</p>
+          <div class="see-also">See also: <a href="#L">Ledger 2</a>, <a href="#F">Four-Ledger System</a></div>
+        </div>
+      </div>
+
+      <div class="term-entry">
+        <button class="term-header" onclick="toggle(this)">
+          <div class="term-title-wrap">
+            <span class="term-name">Ledger 2 (Reserve Backstop)</span>
+            <span class="term-tag">Reserve</span>
+          </div>
+          <span class="term-icon">+</span>
+        </button>
+        <div class="term-body">
+          <p>Additional Bitcoin drawn from treasury companies' existing holdings that covers redemption shortfalls when Ledger 1 is insufficient — i.e. when Bitcoin spot has declined below the price at which reserves were acquired.</p>
+          <p>For ₿USD: Ledger 2 self-fortifies over time as BTC appreciation in Ledger 1 creates surplus above the $1 obligation. The longer ₿USD circulates, the deeper the backstop becomes without requiring additional capital. For ₿ond: Ledger 2 is sized actuarially against the known maturity book — because maturity dates are fixed at issuance, the required reserve can be calculated precisely rather than estimated.</p>
+          <div class="see-also">See also: <a href="#L">Ledger 1</a>, <a href="#F">Four-Ledger System</a></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── M ── -->
+    <div class="gloss-section" id="M">
+      <div class="section-header">
+        <span class="section-letter">M</span>
+        <span class="section-name">Products &amp; Effects</span>
+      </div>
+
+      <div class="term-entry">
+        <button class="term-header" onclick="toggle(this)">
+          <div class="term-title-wrap">
+            <span class="term-name">Margin Effect</span>
+            <span class="term-tag">₿C Property</span>
+          </div>
+          <span class="term-icon">+</span>
+        </button>
+        <div class="term-body">
+          <p>The commercial consequence of ₿C's deflationary property for merchants. Prices set in ₿C and left unchanged automatically gain purchasing power over time as ₿C appreciates. A merchant who delays repricing gains margin — the structural inverse of fiat, where delaying a price increase erodes it.</p>
+          <p>At current rates (0.044%/day), a merchant can leave ₿C prices unchanged for a month with less than 1.5% drift. Quarterly repricing is operationally equivalent to a fiat merchant repricing annually for inflation. The default outcome in a ₿C economy always favors the holder.</p>
+          <div class="see-also">See also: <a href="#D">Deflationary Denomination</a>, <a href="btcc-pricing-denomination.html">Pricing Denomination Paper</a></div>
+        </div>
+      </div>
+
+      <div class="term-entry">
+        <button class="term-header" onclick="toggle(this)">
+          <div class="term-title-wrap">
+            <span class="term-name">Maturity Date</span>
+            <span class="term-tag">₿ond</span>
+          </div>
+          <span class="term-icon">+</span>
+        </button>
+        <div class="term-body">
+          <p>The fixed date on which a ₿ond obligation is settled. Contractual and set at issuance. Cannot be accelerated en masse by any external actor — this property structurally eliminates the bank run attack vector. An attacker cannot trigger simultaneous mass redemptions because the redemption schedule is not under anyone's control after issuance.</p>
+          <p>Specific maturity tiers (2-year, 5-year, 10-year) are implementation decisions for each treasury company. The structural principle — fixed maturity, no external trigger — is invariant.</p>
+          <div class="see-also">See also: <a href="#B">₿ond</a>, <a href="#M">Maturity Spread</a></div>
+        </div>
+      </div>
+
+      <div class="term-entry">
+        <button class="term-header" onclick="toggle(this)">
+          <div class="term-title-wrap">
+            <span class="term-name">Maturity Spread</span>
+            <span class="term-tag">₿ond Revenue</span>
+          </div>
+          <span class="term-icon">+</span>
+        </button>
+        <div class="term-body">
+          <p>The treasury company's earned return at ₿ond maturity: the difference between Bitcoin's spot appreciation over the holding period and the slowly-rising ₿C obligation. Because Bitcoin has historically appreciated far beyond the cumulative average over multi-year periods, the BTC held for a 10-year ₿ond is typically worth substantially more than the ₿C obligation at maturity.</p>
+          <p>The spread is retained in the reserve ledger — fortifying the backstop for future obligations rather than being distributed as profit. This is the primary long-term revenue engine for consortium members and the structural mechanism that makes the reserve system self-reinforcing across maturity cycles.</p>
+          <div class="see-also">See also: <a href="#B">₿ond</a>, <a href="#M">Maturity Date</a></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── O ── -->
+    <div class="gloss-section" id="O">
+      <div class="section-header">
+        <span class="section-letter">O</span>
+        <span class="section-name">Properties</span>
+      </div>
+
+      <div class="term-entry">
+        <button class="term-header" onclick="toggle(this)">
+          <div class="term-title-wrap">
+            <span class="term-name">On-Chain Verification</span>
+            <span class="term-tag">Transparency</span>
+          </div>
+          <span class="term-icon">+</span>
+        </button>
+        <div class="term-body">
+          <p>The ability for any observer to confirm reserve balances in real time by checking publicly addressable Bitcoin wallets. No auditor required. No quarterly attestation. No trust in a publisher's report. Anyone with a Bitcoin block explorer can verify that the reserves backing every ₿USD token and every ₿ond are exactly where they are claimed to be, at any moment.</p>
+          <p>This is the core transparency property that distinguishes the ecosystem from fiat-backed stablecoins, whose reserves are attested periodically by accountants rather than visible continuously on-chain.</p>
+          <div class="see-also">See also: <a href="#F">Four-Ledger System</a>, <a href="tbd-usd.html">₿USD Overview</a></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── P ── -->
+    <div class="gloss-section" id="P">
+      <div class="section-header">
+        <span class="section-letter">P</span>
+        <span class="section-name">Philosophy</span>
+      </div>
+
+      <div class="term-entry open">
+        <button class="term-header" onclick="toggle(this)">
+          <div class="term-title-wrap">
+            <span class="term-name featured">PragMaxi</span>
+            <span class="term-tag new">New</span>
+          </div>
+          <span class="term-icon">+</span>
+        </button>
+        <div class="term-body">
+          <p>A pragmatic Bitcoin maximalist. A Bitcoiner who holds maximalist convictions about Bitcoin's monetary properties and the destination — Sphere B, the Bitcoin circular economy, the original vision of the white paper — and is pragmatic about the path to get there.</p>
+          <p>The PragMaxi recognizes that the overwhelming majority of the world still lives in Sphere A, denominating in fiat, thinking in dollars, and unable or unwilling to transact in volatile Bitcoin directly. Rather than demanding that the world adopt Bitcoin on Bitcoin's terms, the PragMaxi builds — or supports — the interface layer that meets people where they are and walks them toward where Bitcoin always intended to go.</p>
+          <p>This is not a compromise of conviction. It is a theory of adoption. The destination is Sphere B. Sphere A instruments — ₿USD, the ₿ond, the familiar $1 interface — are the gateway. The PragMaxi understands that the gateway matters, and that building it is not a concession to fiat but a commitment to Bitcoin's success.</p>
+          <div class="see-also">See also: <a href="two-spheres.html">Two Spheres</a>, <a href="#B">Bitcoin Maximalism</a>, <a href="#S">Sphere A</a>, <a href="#S">Sphere B</a></div>
+        </div>
+      </div>
+
+      <div class="term-entry">
+        <button class="term-header" onclick="toggle(this)">
+          <div class="term-title-wrap">
+            <span class="term-name">Peer-to-Peer Electronic Cash</span>
+            <span class="term-tag">Original Vision</span>
+          </div>
+          <span class="term-icon">+</span>
+        </button>
+        <div class="term-body">
+          <p>Satoshi Nakamoto's description of Bitcoin's intended purpose in the opening sentence of the 2008 white paper: "A purely peer-to-peer version of electronic cash would allow online payments to be sent directly from one party to another without going through a financial institution."</p>
+          <p>Bitcoin has succeeded as a store of value and a settlement network. It has not yet succeeded as everyday money. The two-sphere model and the ₿C currency layer are the framework through which this original purpose becomes achievable — not by changing Bitcoin, but by building the denomination and interface layer that Bitcoin's protocol cannot provide by itself.</p>
+          <div class="see-also">See also: <a href="two-spheres.html">Two Spheres</a>, <a href="#B">Bitcoin Circular Economy</a></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── S ── -->
+    <div class="gloss-section" id="S">
+      <div class="section-header">
+        <span class="section-letter">S</span>
+        <span class="section-name">Framework &amp; Economics</span>
+      </div>
+
+      <div class="term-entry">
+        <button class="term-header" onclick="toggle(this)">
+          <div class="term-title-wrap">
+            <span class="term-name">Satoshi (sat)</span>
+            <span class="term-tag">Bitcoin Unit</span>
+          </div>
+          <span class="term-icon">+</span>
+        </button>
+        <div class="term-body">
+          <p>The smallest unit of Bitcoin. One Bitcoin equals 100,000,000 satoshis. All Bitcoin transactions settle in satoshis on the base layer. When a ₿USD token is redeemed or a ₿ond matures, the underlying reserve transaction is denominated in satoshis — regardless of what denomination the user experienced at the interface layer.</p>
+          <div class="see-also">See also: <a href="#B">Bitcoin</a></div>
+        </div>
+      </div>
+
+      <div class="term-entry">
+        <button class="term-header" onclick="toggle(this)">
+          <div class="term-title-wrap">
+            <span class="term-name">Seigniorage</span>
+            <span class="term-tag">Monetary Economics</span>
+          </div>
+          <span class="term-icon">+</span>
+        </button>
+        <div class="term-body">
+          <p>The profit a currency issuer earns from issuing money whose face value exceeds its production cost. In fiat systems, seigniorage is collected silently from all holders through inflation — a tax requiring no vote, no legislation, and no visible collection mechanism.</p>
+          <p>The TBDC model inverts this. Surplus accrues to the consortium from Bitcoin appreciation, not from debasing the currency holders hold. ₿USD holders receive $1 on redemption — the same dollar they deposited. The surplus from BTC appreciation above that $1 obligation belongs to the reserve system, not to an issuer's ability to print.</p>
+          <div class="see-also">See also: <a href="#T">TBDC</a>, <a href="#B">₿USD</a></div>
+        </div>
+      </div>
+
+      <div class="term-entry">
+        <button class="term-header" onclick="toggle(this)">
+          <div class="term-title-wrap">
+            <span class="term-name">Sound Money</span>
+            <span class="term-tag">Philosophy</span>
+          </div>
+          <span class="term-icon">+</span>
+        </button>
+        <div class="term-body">
+          <p>Money whose supply cannot be arbitrarily expanded by a central authority, whose purchasing power is stable or appreciating over time, and whose properties cannot be changed by policy decree. Bitcoin is sound money. ₿C is a sound denomination — its behavior is governed by arithmetic, not by a committee.</p>
+          <div class="see-also">See also: <a href="#B">Bitcoin</a>, <a href="#B">BTCC (₿C)</a></div>
+        </div>
+      </div>
+
+      <div class="term-entry">
+        <button class="term-header" onclick="toggle(this)">
+          <div class="term-title-wrap">
+            <span class="term-name">Sphere A</span>
+            <span class="term-tag">Two Spheres</span>
+          </div>
+          <span class="term-icon">+</span>
+        </button>
+        <div class="term-body">
+          <p>The fiat economy. Participants in Sphere A earn in fiat, spend in fiat, and measure value in fiat. They interact with the ecosystem through familiar instruments: ₿USD (a $1 stablecoin they can spend) and the ₿ond (a savings product with an appreciating fiat-equivalent balance). Bitcoin's monetary properties are delivered without requiring any change in how they think about money.</p>
+          <p>Sphere A is the on-ramp, not the destination. Its instruments are designed to be indistinguishable from fiat products in experience while being fundamentally superior in the reserve asset backing them.</p>
+          <div class="see-also">See also: <a href="#S">Sphere B</a>, <a href="#G">The Gateway</a>, <a href="two-spheres.html">Two Spheres</a></div>
+        </div>
+      </div>
+
+      <div class="term-entry">
+        <button class="term-header" onclick="toggle(this)">
+          <div class="term-title-wrap">
+            <span class="term-name">Sphere B</span>
+            <span class="term-tag">Two Spheres</span>
+          </div>
+          <span class="term-icon">+</span>
+        </button>
+        <div class="term-body">
+          <p>The Bitcoin circular economy. Participants in Sphere B price, earn, spend, and save in ₿C with no fiat reference needed. A coffee costs 0.000267 ₿C. A salary is 40 ₿C per month. Bitcoin spot is irrelevant because you never leave the denomination.</p>
+          <p>Sphere B is the destination — the Bitcoin circular economy the original white paper described. ₿C is the unit of account that makes Sphere B possible: stable enough for daily commerce, Bitcoin-native, appreciating, and requiring no external peg to maintain.</p>
+          <div class="see-also">See also: <a href="#S">Sphere A</a>, <a href="#B">Bitcoin Circular Economy</a>, <a href="two-spheres.html">Two Spheres</a></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── T ── -->
+    <div class="gloss-section" id="T">
+      <div class="section-header">
+        <span class="section-letter">T</span>
+        <span class="section-name">Architecture &amp; Methods</span>
+      </div>
+
+      <div class="term-entry">
+        <button class="term-header" onclick="toggle(this)">
+          <div class="term-title-wrap">
+            <span class="term-name">TBDC (Treasury-Backed Digital Currency)</span>
+            <span class="term-tag">Instrument Class</span>
+          </div>
+          <span class="term-icon">+</span>
+        </button>
+        <div class="term-body">
+          <p>The instrument class. A stablecoin issued by a consortium of Bitcoin treasury companies, backed by Bitcoin held in on-chain reserves, and denominated in a fiat currency. ₿USD is the US dollar implementation of the TBDC model. Other fiat denominations — ₿EUR, ₿GBP — are possible under the same architecture. TBDC is the category; ₿USD is the reference implementation.</p>
+          <div class="see-also">See also: <a href="#B">₿USD</a>, <a href="#C">Consortium</a></div>
+        </div>
+      </div>
+
+      <div class="term-entry">
+        <button class="term-header" onclick="toggle(this)">
+          <div class="term-title-wrap">
+            <span class="term-name">Timeblock</span>
+            <span class="term-tag">Core Concept</span>
+          </div>
+          <span class="term-icon">+</span>
+        </button>
+        <div class="term-body">
+          <p>A single UTC calendar day in Bitcoin's price history, carrying one BTCADP value. Each timeblock, once recorded into the ₿C cumulative average, becomes progressively more permanent as subsequent days are added. Its influence on the ₿C price diminishes as N grows — a timeblock representing 1/100th of the average eventually represents 1/1,000th, then 1/10,000th.</p>
+          <p>This produces an immutability gradient analogous to confirmation depth on the blockchain — but arising from arithmetic weight rather than proof-of-work. Recent timeblocks have measurable influence. Older timeblocks have been so thoroughly absorbed that no plausible market event can meaningfully alter their contribution. The genesis-era timeblocks are, for practical purposes, as permanent as the genesis block itself.</p>
+          <p>Every new timeblock does two things simultaneously: it records a new day's price and reinforces the permanence of every day that came before it.</p>
+          <div class="see-also">See also: <a href="bitcoin-timeblocks.html">Bitcoin Timeblocks</a>, <a href="#C">Cumulative Average</a>, <a href="btcc-white-paper.html">₿C White Paper</a></div>
+        </div>
+      </div>
+
+      <div class="term-entry">
+        <button class="term-header" onclick="toggle(this)">
+          <div class="term-title-wrap">
+            <span class="term-name">Trimmed Mean</span>
+            <span class="term-tag">BTCADP Method</span>
+          </div>
+          <span class="term-icon">+</span>
+        </button>
+        <div class="term-body">
+          <p>The mathematical aggregation method used by BTCADP. The lowest and highest 25% of qualifying exchange VWAPs are discarded, and the arithmetic mean of the remaining 50% is taken. This prevents any single exchange from dominating the result — whether through genuine outlier pricing or through fabricated volume.</p>
+          <p>Equal exchange weighting (each exchange contributes one VWAP regardless of reported volume) combined with the trimmed mean ensures that manipulation requires simultaneously influencing multiple independent exchanges within the middle 50% of the distribution — a practically prohibitive cost that must be sustained daily.</p>
+          <div class="see-also">See also: <a href="#B">BTCADP</a>, <a href="#V">VWAP</a>, <a href="specification.html">Full Specification</a></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── V ── -->
+    <div class="gloss-section" id="V">
+      <div class="section-header">
+        <span class="section-letter">V</span>
+        <span class="section-name">Technical</span>
+      </div>
+
+      <div class="term-entry">
+        <button class="term-header" onclick="toggle(this)">
+          <div class="term-title-wrap">
+            <span class="term-name">VWAP (Volume-Weighted Average Price)</span>
+            <span class="term-tag">BTCADP Input</span>
+          </div>
+          <span class="term-icon">+</span>
+        </button>
+        <div class="term-body">
+          <p>The price computed for a single exchange by weighting each trade price by its volume: VWAP = Σ(Price × Volume) / Σ(Volume). One VWAP per qualifying exchange feeds into the BTCADP trimmed mean. The VWAP is computed at the exchange level; equal weighting across exchanges ensures that no single venue's volume can dominate the final result.</p>
+          <div class="see-also">See also: <a href="#B">BTCADP</a>, <a href="#T">Trimmed Mean</a></div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <p>
+    <a href="index.html">Home</a> &nbsp;&bull;&nbsp;
+    <a href="btcc.html">₿C</a> &nbsp;&bull;&nbsp;
+    <a href="two-spheres.html">Two Spheres</a> &nbsp;&bull;&nbsp;
+    <a href="specification.html">Specification</a> &nbsp;&bull;&nbsp;
+    <a href="knowledge-base.html">Knowledge Base</a> &nbsp;&bull;&nbsp;
+    <a href="faq.html">FAQ</a> &nbsp;&bull;&nbsp;
+    <a href="https://github.com/BTCADP/btcadp-research" target="_blank" rel="noopener">GitHub</a>
+  </p>
+  <p style="margin-top:8px;">CC0 Public Domain &bull; btcadp.org &bull; 2026</p>
+</footer>
+
+<script>
+function toggle(btn) {
+  const entry = btn.closest('.term-entry');
+  const isOpen = entry.classList.contains('open');
+  document.querySelectorAll('.term-entry.open').forEach(el => el.classList.remove('open'));
+  if (!isOpen) entry.classList.add('open');
+}
+
+function filterTerms(query) {
+  const q = query.toLowerCase().trim();
+  const entries = document.querySelectorAll('.term-entry');
+  const sections = document.querySelectorAll('.gloss-section');
+  const noResults = document.getElementById('noResults');
+  const alphNav = document.getElementById('alphNav');
+
+  if (!q) {
+    entries.forEach(e => e.style.display = '');
+    sections.forEach(s => s.style.display = '');
+    noResults.style.display = 'none';
+    alphNav.style.display = 'flex';
+    return;
+  }
+
+  alphNav.style.display = 'none';
+  let anyVisible = false;
+
+  sections.forEach(section => {
+    let sectionVisible = false;
+    section.querySelectorAll('.term-entry').forEach(entry => {
+      const text = entry.textContent.toLowerCase();
+      if (text.includes(q)) {
+        entry.style.display = '';
+        entry.classList.add('open');
+        sectionVisible = true;
+        anyVisible = true;
+      } else {
+        entry.style.display = 'none';
+        entry.classList.remove('open');
+      }
+    });
+    section.style.display = sectionVisible ? '' : 'none';
+  });
+
+  noResults.style.display = anyVisible ? 'none' : 'block';
+}
+</script>
+
+</body>
+</html>
