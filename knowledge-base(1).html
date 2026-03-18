@@ -286,6 +286,61 @@
     .nav-links a { padding: 0.4rem 0.4rem; font-size: 0.68rem; }
     .kb-section-header { flex-wrap: wrap; }
   }
+
+  /* ── FURTHER READING CARD ── */
+  .reading-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+  }
+
+  .reading-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    text-decoration: none;
+    display: block;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .reading-card:hover {
+    border-color: var(--orange);
+    background: var(--bg-tertiary);
+  }
+
+  .reading-card-type {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+
+  .reading-card-title {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 6px;
+    line-height: 1.35;
+  }
+
+  .reading-card-author {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+  }
+
+  .reading-card-link {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--orange);
+    letter-spacing: 0.5px;
+  }
+
 </style>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>
@@ -310,7 +365,7 @@
     <div class="hero-label">Research &bull; Articles &bull; Papers</div>
     <h1>Knowledge Base</h1>
     <p class="hero-sub">
-      Articles, case studies, academic papers, and news covering BTCADP,
+      Articles, white papers, academic papers, and news covering BTCADP,
       Bitcoin Currency (₿C), Treasury-Backed Digital Currency (₿USD), and the Bitcoin currency layer.
       Content added as the ecosystem develops.
     </p>
@@ -318,12 +373,29 @@
 
   <div class="content">
 
-    <!-- SECTION 1: Articles -->
+    <!-- SECTION 1: White Papers -->
     <div class="kb-section">
       <div class="kb-section-header">
         <span class="kb-section-num">01</span>
+        <span class="kb-section-title">White Papers</span>
+        <span class="kb-section-count">1 white paper</span>
+      </div>
+      <div class="card-grid">
+        <a href="btcc-pricing-denomination-layer.html" class="kb-card">
+          <div class="kb-card-tag">White Paper &nbsp;&bull;&nbsp; March 2026</div>
+          <div class="kb-card-title">BTCC (&#x20BF;C) as a Pricing Denomination Layer</div>
+          <div class="kb-card-desc">How BTCC provides a Bitcoin-native unit of account suitable for everyday merchant pricing — covering daily drift tolerances, the deflationary margin effect, behavior under fiat inflation and hyperinflation, and a fully counterparty-free implementation architecture.</div>
+          <div class="kb-card-meta">btcadp.org &nbsp;&bull;&nbsp; CC0 Public Domain</div>
+        </a>
+      </div>
+    </div>
+
+    <!-- SECTION 2: Articles -->
+    <div class="kb-section">
+      <div class="kb-section-header">
+        <span class="kb-section-num">02</span>
         <span class="kb-section-title">Articles</span>
-        <span class="kb-section-count">1 article</span>
+        <span class="kb-section-count">3 articles</span>
       </div>
       <div class="card-grid">
         <a href="article-tbdc-vs-cbdc.html" class="kb-card">
@@ -332,36 +404,44 @@
           <div class="kb-card-desc">An examination of the Treasury-Backed Digital Currency as a counter-architecture to CBDCs — comparing inflation resistance, programmability, surveillance, and censorship resistance property by property.</div>
           <div class="kb-card-meta">btcadp.org &nbsp;&bull;&nbsp; CC0 Public Domain</div>
         </a>
-      </div>
-    </div>
-
-    <!-- SECTION 2: Case Studies -->
-    <div class="kb-section">
-      <div class="kb-section-header">
-        <span class="kb-section-num">02</span>
-        <span class="kb-section-title">Case Studies</span>
-        <span class="kb-section-count">2 case studies</span>
-      </div>
-      <div class="card-grid">
         <a href="case-study-hard-money.html" class="kb-card">
-          <div class="kb-card-tag">Case Study &nbsp;&bull;&nbsp; March 2026</div>
+          <div class="kb-card-tag">Article &nbsp;&bull;&nbsp; March 2026</div>
           <div class="kb-card-title">Hard Money Central Banking</div>
-          <div class="kb-card-desc">How a consortium of Bitcoin treasury companies could issue Treasury-Backed Digital Currency (₿USD) using Bitcoin Currency (₿C) as the collateral floor — covering the two-ledger reserve system, treasury profit mechanics, the savings effect, and redemption dynamics.</div>
+          <div class="kb-card-desc">How a consortium of Bitcoin treasury companies could issue Treasury-Backed Digital Currency (&#x20BF;USD) using Bitcoin Currency (&#x20BF;C) as the collateral floor — covering the two-ledger reserve system, treasury profit mechanics, the savings effect, and redemption dynamics.</div>
           <div class="kb-card-meta">btcadp.org &nbsp;&bull;&nbsp; CC0 Public Domain</div>
         </a>
         <a href="case-study-currency-layer.html" class="kb-card">
-          <div class="kb-card-tag">Case Study &nbsp;&bull;&nbsp; March 2026</div>
+          <div class="kb-card-tag">Article &nbsp;&bull;&nbsp; March 2026</div>
           <div class="kb-card-title">A Bitcoin Currency Layer</div>
-          <div class="kb-card-desc">How ₿USD solves Bitcoin's volatility for everyday commerce using ₿C as the collateral floor — covering the three-component architecture, two-ledger reserve system, token lifecycle, the virtuous cycle, and the economic case for treasury companies.</div>
+          <div class="kb-card-desc">How &#x20BF;USD solves Bitcoin's volatility for everyday commerce using &#x20BF;C as the collateral floor — covering the three-component architecture, two-ledger reserve system, token lifecycle, the virtuous cycle, and the economic case for treasury companies.</div>
           <div class="kb-card-meta">btcadp.org &nbsp;&bull;&nbsp; CC0 Public Domain</div>
         </a>
       </div>
     </div>
 
-    <!-- SECTION 3: Academic Papers -->
+    <!-- SECTION 3: Case Studies -->
     <div class="kb-section">
       <div class="kb-section-header">
         <span class="kb-section-num">03</span>
+        <span class="kb-section-title">Case Studies</span>
+        <span class="kb-section-count">Coming soon</span>
+      </div>
+      <div class="empty-state">
+        <div class="empty-icon">📋</div>
+        <div class="empty-title">No case studies yet</div>
+        <div class="empty-desc">
+          Real-world and hypothetical analyses of BTCC denomination,
+          TBDC issuance, and Bitcoin currency layer adoption will be
+          published here.
+        </div>
+        <a href="specification.html" class="empty-cta">Read the Specification &rarr;</a>
+      </div>
+    </div>
+
+    <!-- SECTION 4: Academic Papers -->
+    <div class="kb-section">
+      <div class="kb-section-header">
+        <span class="kb-section-num">05</span>
         <span class="kb-section-title">Academic Papers</span>
         <span class="kb-section-count">Coming soon</span>
       </div>
@@ -378,7 +458,7 @@
       </div>
     </div>
 
-    <!-- SECTION 4: News -->
+    <!-- SECTION 5: News -->
     <div class="kb-section">
       <div class="kb-section-header">
         <span class="kb-section-num">04</span>
@@ -393,10 +473,45 @@
           BTCC, ₿USD, and the Bitcoin currency layer will be tracked here
           as the project gains visibility.
         </div>
-        <a href="https://github.com/BTCADP/btcadp-research" class="empty-cta">Follow on GitHub &rarr;</a>
+        <a href="https://github.com/BTCADP/btcadp-research" target="_blank" rel="noopener" class="empty-cta">Follow on GitHub &rarr;</a>
       </div>
     </div>
 
+
+    <!-- SECTION 6: Further Reading -->
+    <div class="kb-section">
+      <div class="kb-section-header">
+        <span class="kb-section-num">06</span>
+        <span class="kb-section-title">Further Reading</span>
+        <span class="kb-section-count">4 works</span>
+      </div>
+      <div class="reading-grid">
+        <a href="https://bitcoin.org/bitcoin.pdf" target="_blank" rel="noopener" class="reading-card">
+          <div class="reading-card-type">White Paper &nbsp;&bull;&nbsp; 2008</div>
+          <div class="reading-card-title">Bitcoin: A Peer-to-Peer Electronic Cash System</div>
+          <div class="reading-card-author">Satoshi Nakamoto</div>
+          <div class="reading-card-link">bitcoin.org/bitcoin.pdf &rarr;</div>
+        </a>
+        <a href="https://jeffbooth.com/book" target="_blank" rel="noopener" class="reading-card">
+          <div class="reading-card-type">Book &nbsp;&bull;&nbsp; 2020</div>
+          <div class="reading-card-title">The Price of Tomorrow</div>
+          <div class="reading-card-author">Jeff Booth</div>
+          <div class="reading-card-link">jeffbooth.com &rarr;</div>
+        </a>
+        <a href="https://www.lynalden.com/broken-money/" target="_blank" rel="noopener" class="reading-card">
+          <div class="reading-card-type">Book &nbsp;&bull;&nbsp; 2023</div>
+          <div class="reading-card-title">Broken Money</div>
+          <div class="reading-card-author">Lyn Alden</div>
+          <div class="reading-card-link">lynalden.com &rarr;</div>
+        </a>
+        <a href="https://saifedean.com/the-bitcoin-standard/" target="_blank" rel="noopener" class="reading-card">
+          <div class="reading-card-type">Book &nbsp;&bull;&nbsp; 2018</div>
+          <div class="reading-card-title">The Bitcoin Standard</div>
+          <div class="reading-card-author">Saifedean Ammous</div>
+          <div class="reading-card-link">saifedean.com &rarr;</div>
+        </a>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -406,7 +521,7 @@
     <a href="btcc.html">₿C</a> &nbsp;&bull;&nbsp;
     <a href="specification.html">Specification</a> &nbsp;&bull;&nbsp;
     <a href="currency-layer.html">Currency Layer</a> &nbsp;&bull;&nbsp;
-    <a href="https://github.com/BTCADP/btcadp-research">GitHub</a>
+    <a href="https://github.com/BTCADP/btcadp-research" target="_blank" rel="noopener">GitHub</a>
   </p>
   <p style="margin-top:8px;">CC0 Public Domain &bull; btcadp.org &bull; 2026</p>
 </footer>
