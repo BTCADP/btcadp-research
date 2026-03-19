@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Here | btcadp.org</title>
+    <meta name="description" content="A plain-language introduction to Bitcoin Currency (₿C), the ₿ond, and ₿USD. What they are, why they exist, and how they fit together.">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --bg2: #111111;
+            --bg3: #1a1a1a;
+            --border: #2a2a2a;
+            --text: #e8e8e8;
+            --muted: #888888;
+            --muted2: #555555;
+            --orange: #f7931a;
+            --orange-dim: rgba(247, 147, 26, 0.10);
+            --orange-dim2: rgba(247, 147, 26, 0.05);
+            --green: #4caf7d;
+            --green-dim: rgba(76, 175, 125, 0.10);
+            --blue: #5b9bd5;
+            --blue-dim: rgba(91, 155, 213, 0.10);
+            --font: 'Georgia', 'Times New Roman', serif;
+            --mono: 'Courier New', Courier, monospace;
+            --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font);
+            line-height: 1.75;
+            font-size: 17px;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(10,10,10,0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 56px;
+        }
+
+        .nav-brand {
+            font-family: var(--mono);
+            font-size: 1rem;
+            font-weight: bold;
+            color: var(--orange);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.25rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-family: var(--sans);
+            font-size: 0.85rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            transition: color 0.2s, background 0.2s;
+            letter-spacing: 0.03em;
+        }
+
+        .nav-links a:hover { color: var(--text); background: var(--bg3); }
+        .nav-links a.active { color: var(--orange); }
+
+        /* ── HERO ── */
+        .hero {
+            border-bottom: 1px solid var(--border);
+            padding: 5rem 2rem 4rem;
+            text-align: center;
+            background: radial-gradient(ellipse at 50% 0%, rgba(247,147,26,0.07) 0%, transparent 60%);
+        }
+
+        .hero-label {
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            letter-spacing: 0.22em;
+            color: var(--orange);
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: normal;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+            margin-bottom: 1.2rem;
+            color: #fff;
+        }
+
+        .hero h1 span { color: var(--orange); }
+
+        .hero-sub {
+            font-family: var(--sans);
+            font-size: 1.05rem;
+            color: var(--muted);
+            max-width: 560px;
+            margin: 0 auto 2rem;
+            line-height: 1.65;
+        }
+
+        .progress-bar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-family: var(--sans);
+            font-size: 0.78rem;
+            color: var(--muted2);
+            margin-top: 2rem;
+        }
+
+        .progress-bar span { color: var(--muted); }
+        .progress-bar .dot {
+            width: 5px; height: 5px;
+            background: var(--muted2);
+            border-radius: 50%;
+        }
+
+        /* ── WRAPPER ── */
+        .content {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 0 2rem 6rem;
+        }
+
+        /* ── SECTION ── */
+        .section {
+            padding: 4rem 0 0;
+        }
+
+        .section-num {
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            letter-spacing: 0.2em;
+            color: var(--muted2);
+            text-transform: uppercase;
+            margin-bottom: 0.6rem;
+        }
+
+        .section h2 {
+            font-size: clamp(1.4rem, 3vw, 1.9rem);
+            font-weight: normal;
+            letter-spacing: -0.01em;
+            color: #fff;
+            margin-bottom: 1.2rem;
+            line-height: 1.25;
+        }
+
+        .section h2 span { color: var(--orange); }
+
+        .section p {
+            color: #c8c8c8;
+            margin-bottom: 1.2rem;
+            font-size: 1.02rem;
+        }
+
+        .section p:last-child { margin-bottom: 0; }
+
+        hr.divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 0;
+        }
+
+        /* ── CALLOUT ── */
+        .callout {
+            border-left: 3px solid var(--orange);
+            background: var(--orange-dim2);
+            padding: 1.2rem 1.4rem;
+            margin: 1.6rem 0;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .callout p {
+            margin: 0;
+            font-size: 1rem;
+            color: #d8d8d8;
+            line-height: 1.65;
+        }
+
+        /* ── USE CASE CARDS ── */
+        .use-cases {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 1.2rem;
+            margin: 2rem 0;
+        }
+
+        .use-card {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.6rem 1.4rem;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+
+        .use-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .use-card.orange { border-top: 3px solid var(--orange); }
+        .use-card.green  { border-top: 3px solid var(--green); }
+        .use-card.blue   { border-top: 3px solid var(--blue); }
+
+        .use-card-label {
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .use-card.orange .use-card-label { color: var(--orange); }
+        .use-card.green  .use-card-label { color: var(--green); }
+        .use-card.blue   .use-card-label { color: var(--blue); }
+
+        .use-card h3 {
+            font-family: var(--font);
+            font-size: 1.15rem;
+            font-weight: normal;
+            color: #fff;
+            margin-bottom: 0.7rem;
+            letter-spacing: -0.01em;
+        }
+
+        .use-card p {
+            font-family: var(--sans);
+            font-size: 0.875rem;
+            color: var(--muted);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .use-card-link {
+            display: inline-block;
+            margin-top: 1rem;
+            font-family: var(--sans);
+            font-size: 0.8rem;
+            color: var(--orange);
+            text-decoration: none;
+            letter-spacing: 0.02em;
+        }
+
+        .use-card-link:hover { text-decoration: underline; }
+
+        /* ── ANALOGY BLOCK ── */
+        .analogy {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .analogy-label {
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--muted2);
+            margin-bottom: 1rem;
+        }
+
+        .analogy-row {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            padding: 0.8rem 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .analogy-row:first-of-type { border-top: none; }
+
+        .analogy-icon {
+            font-size: 1.3rem;
+            line-height: 1;
+            padding-top: 0.1rem;
+            flex-shrink: 0;
+            width: 1.6rem;
+            text-align: center;
+        }
+
+        .analogy-body strong {
+            display: block;
+            font-family: var(--sans);
+            font-size: 0.9rem;
+            color: #fff;
+            margin-bottom: 0.2rem;
+        }
+
+        .analogy-body p {
+            font-family: var(--sans);
+            font-size: 0.85rem;
+            color: var(--muted);
+            margin: 0;
+            line-height: 1.55;
+        }
+
+        /* ── FOUNDATION BLOCK ── */
+        .foundation {
+            text-align: center;
+            padding: 3rem 2rem;
+            margin: 3rem 0 0;
+            background: var(--orange-dim2);
+            border: 1px solid rgba(247,147,26,0.2);
+            border-radius: 8px;
+        }
+
+        .foundation p {
+            font-size: 1.05rem;
+            color: #c8c8c8;
+            max-width: 540px;
+            margin: 0 auto 1.6rem;
+        }
+
+        .cta-row {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--orange);
+            color: #000;
+            text-decoration: none;
+            font-family: var(--sans);
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 0.7rem 1.6rem;
+            border-radius: 6px;
+            letter-spacing: 0.02em;
+            transition: opacity 0.2s;
+        }
+
+        .btn-primary:hover { opacity: 0.88; }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--muted);
+            text-decoration: none;
+            font-family: var(--sans);
+            font-size: 0.9rem;
+            padding: 0.7rem 1.6rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            letter-spacing: 0.02em;
+            transition: color 0.2s, border-color 0.2s;
+        }
+
+        .btn-secondary:hover { color: var(--text); border-color: var(--muted); }
+
+        /* ── FOOTER ── */
+        footer {
+            text-align: center;
+            padding: 2.5rem 2rem;
+            border-top: 1px solid var(--border);
+            font-family: var(--sans);
+            font-size: 0.82rem;
+            color: var(--muted2);
+        }
+
+        footer a { color: var(--muted); text-decoration: none; }
+        footer a:hover { color: var(--text); }
+
+        /* ── MOBILE ── */
+        @media (max-width: 600px) {
+            nav { padding: 0 1rem; }
+            .nav-links { display: none; }
+            .hero { padding: 3.5rem 1.5rem 3rem; }
+            .content { padding: 0 1.5rem 4rem; }
+            .use-cases { grid-template-columns: 1fr; }
+            .cta-row { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <a href="index.html" class="nav-brand">BTCADP</a>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="beginners-guide.html" class="active">Start Here</a></li>
+        <li><a href="btcc.html">₿C</a></li>
+        <li><a href="tbd-usd.html">₿USD</a></li>
+        <li><a href="specification.html">Specification</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="knowledge-base.html">Research</a></li>
+    </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+    <div class="hero-label">Start Here · Overview</div>
+    <h1>One building block.<br><span>Three things it makes possible.</span></h1>
+    <p class="hero-sub">
+        Bitcoin is the hardest money ever created. But its price swings wildly day to day.
+        That friction holds back the entire Bitcoin economy. ₿C is a steady unit of account mathematically generated by Bitcoin's own cumulative price history.
+    </p>
+    <div class="progress-bar">
+        <span>5 min read</span>
+        <div class="dot"></div>
+        <span>No prior knowledge required</span>
+    </div>
+</div>
+
+<div class="content">
+
+    <!-- 1. THE PROBLEM -->
+    <div class="section">
+        <div class="section-num">01 — The Problem</div>
+        <h2>Bitcoin's volatility makes pricing hard</h2>
+        <p>
+            Imagine pricing a cup of coffee at 0.000004 BTC on Monday. By Friday, that same
+            amount might be worth half as much — or double. Businesses cannot plan around this,
+            and most people won't quote prices in a unit that can swing 10% in a day.
+        </p>
+        <p>
+            This is not a flaw in Bitcoin. Volatility is what you see when a fixed-supply
+            asset is being price-discovered across the entire world over decades. But it is a
+            real friction for anyone who wants to use Bitcoin as money <em>right now</em>.
+        </p>
+    </div>
+
+    <hr class="divider">
+
+    <!-- 2. BITCOIN CURRENCY -->
+    <div class="section">
+        <div class="section-num">02 — The Idea</div>
+        <h2>Meet <span>₿C</span> — Bitcoin Currency</h2>
+        <p>
+            ₿C is a unit of account derived entirely from Bitcoin's own price history. It is
+            computed as the cumulative average of every daily Bitcoin price going back to the
+            genesis block in 2009. No institution controls it. No one can change it. It is
+            simply mathematics applied to the public record.
+        </p>
+
+        <div class="callout">
+            <p>
+                Today, one ₿C is worth roughly <strong>$18,000–$20,000 USD</strong> — about one-fifth
+                of Bitcoin's current spot price. That gap will close slowly, over years and decades,
+                as today's high prices are absorbed into the long-run average.
+            </p>
+        </div>
+
+        <p>
+            Because it averages across 6,000+ days of history, ₿C barely flinches when Bitcoin
+            has a good or bad week. A 40% crash in Bitcoin spot moves ₿C by less than
+            one-twentieth of one percent on that day. Over the long run, as Bitcoin's price
+            climbs, ₿C climbs too — gradually and predictably.
+        </p>
+        <p>
+            ₿C is not a stablecoin. It does not peg to a dollar or any government currency.
+            It is a Bitcoin-native unit that appreciates steadily with Bitcoin's long-run
+            trajectory while absorbing short-term volatility entirely.
+        </p>
+    </div>
+
+    <hr class="divider">
+
+    <!-- 3. THREE USE CASES -->
+    <div class="section">
+        <div class="section-num">03 — What ₿C Makes Possible</div>
+        <h2>Three applications built on the same foundation</h2>
+        <p>
+            ₿C is a building block. Below are three concrete applications that become possible
+            once you have a stable, Bitcoin-native unit of account. These are not the only
+            things that can be built on it — they are the ones proposed here.
+        </p>
+
+        <div class="use-cases">
+
+            <div class="use-card orange">
+                <div class="use-card-label">Bitcoin Economy</div>
+                <h3>Pricing &amp; Commerce in ₿C</h3>
+                <p>
+                    Merchants and individuals can denominate goods, services, and contracts
+                    in ₿C. Day-to-day prices stay stable. Long-run, both sides of the
+                    transaction benefit from ₿C's steady appreciation against fiat.
+                </p>
+                <a href="btcc.html" class="use-card-link">Learn about ₿C →</a>
+            </div>
+
+            <div class="use-card green">
+                <div class="use-card-label">Bitcoin-Native Finance</div>
+                <h3>The ₿ond</h3>
+                <p>
+                    A Bitcoin-denominated bond instrument that uses ₿C as the benchmark
+                    return. It gives Bitcoin holders a way to deploy capital productively
+                    without leaving the Bitcoin system.
+                </p>
+                <a href="btcc.html#bond" class="use-card-link">Learn about ₿onds →</a>
+            </div>
+
+            <div class="use-card blue">
+                <div class="use-card-label">Fiat Interface</div>
+                <h3>₿USD — A Bitcoin-Backed Dollar</h3>
+                <p>
+                    A USD-pegged stablecoin fully backed by Bitcoin reserves held by a
+                    consortium of public Bitcoin treasury companies. A dollar for the
+                    Bitcoin era — not issued by any government.
+                </p>
+                <a href="tbd-usd.html" class="use-card-link">Learn about ₿USD →</a>
+            </div>
+
+        </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- 4. HOW THEY RELATE -->
+    <div class="section">
+        <div class="section-num">04 — How They Fit Together</div>
+        <h2>Two systems, one bridge</h2>
+        <p>
+            The Bitcoin economy and the fiat economy are two different worlds. ₿C serves a
+            different role in each.
+        </p>
+
+        <div class="analogy">
+            <div class="analogy-label">The two roles of ₿C</div>
+
+            <div class="analogy-row">
+                <div class="analogy-icon">₿</div>
+                <div class="analogy-body">
+                    <strong>Inside the Bitcoin economy</strong>
+                    <p>
+                        ₿C is used to price goods, services, and bonds directly in Bitcoin terms.
+                        Volatility is absorbed. Prices quoted in ₿C remain meaningful from one
+                        week to the next.
+                    </p>
+                </div>
+            </div>
+
+            <div class="analogy-row">
+                <div class="analogy-icon">$</div>
+                <div class="analogy-body">
+                    <strong>At the fiat interface</strong>
+                    <p>
+                        ₿USD uses Bitcoin reserves — valued at the ₿C price — to back
+                        a dollar-pegged token. It lets fiat users transact in a familiar unit
+                        while the underlying reserve appreciates in Bitcoin terms.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <p>
+            The three applications are independent. You do not need ₿USD to use ₿C for
+            pricing. You do not need to hold Bitcoin to use ₿USD. Each layer solves its own
+            problem, and ₿C is the thread that runs through all of them.
+        </p>
+    </div>
+
+    <hr class="divider">
+
+    <!-- 5. OPEN FOUNDATION -->
+    <div class="section">
+        <div class="section-num">05 — The Bigger Picture</div>
+        <h2>An open foundation</h2>
+        <p>
+            The BTCADP price standard and the ₿C protocol are published as public domain
+            under CC0 — no patents, no licenses, no fees. Anyone can implement them, build
+            on them, or critique them.
+        </p>
+        <p>
+            The three applications described here are proposals, not products. They exist to
+            demonstrate that a stable, Bitcoin-native unit of account unlocks things that were
+            not previously possible. What else gets built on this foundation is an open
+            question.
+        </p>
+
+        <div class="foundation">
+            <p>
+                Ready to go deeper? The rest of the site covers the technical specification,
+                the full ₿C paper, case studies, and the research behind ₿USD.
+            </p>
+            <div class="cta-row">
+                <a href="btcc.html" class="btn-primary">₿C — Deep Dive</a>
+                <a href="tbd-usd.html" class="btn-secondary">₿USD Overview</a>
+                <a href="specification.html" class="btn-secondary">BTCADP Spec</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <p>
+        <a href="index.html">Home</a> &nbsp;·&nbsp;
+        <a href="specification.html">BTCADP Specification</a> &nbsp;·&nbsp;
+        <a href="btcc-paper.html">₿C Paper</a> &nbsp;·&nbsp;
+        <a href="faq.html">FAQ</a> &nbsp;·&nbsp;
+        <a href="https://github.com/BTCADP/btcadp-research" target="_blank" rel="noopener">GitHub</a>
+    </p>
+    <p style="margin-top:0.8rem;">CC0 Public Domain · btcadp.org · 2026</p>
+</footer>
+
+</body>
+</html>
