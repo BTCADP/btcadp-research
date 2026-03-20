@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bitcoin Currency Layer | btcadp.org</title>
-<meta name="description" content="A Bitcoin currency layer built on BTCADP and ₿USD — enabling everyday commerce on Bitcoin without exposing users to spot price volatility.">
+<meta name="description" content="A four-layer monetary architecture built on Bitcoin — denomination, application, payment, and settlement — enabling everyday commerce without exposing users to spot price volatility.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
 <style>
@@ -22,6 +22,8 @@
     --green-dim: rgba(46, 204, 113, 0.12);
     --blue: #3498db;
     --blue-dim: rgba(52, 152, 219, 0.12);
+    --purple: #9b59b6;
+    --purple-dim: rgba(155, 89, 182, 0.12);
     --font-display: 'Source Serif 4', Georgia, serif;
     --font-mono: 'JetBrains Mono', 'Courier New', monospace;
     --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -129,13 +131,12 @@
   .hero-sub {
     font-size: 1.05rem;
     color: var(--text-secondary);
-    max-width: 640px;
+    max-width: 660px;
     line-height: 1.75;
   }
 
   /* ── CONTENT ── */
   .content { padding: 60px 0 80px; }
-
   .section { margin-bottom: 56px; }
 
   .section-num {
@@ -163,76 +164,105 @@
 
   hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
 
-  /* ── STACK DIAGRAM ── */
-  .stack {
+  /* ── CALLOUT ── */
+  .callout {
+    background: var(--orange-dim);
+    border-left: 3px solid var(--orange);
+    border-radius: 0 4px 4px 0;
+    padding: 16px 20px;
+    margin: 24px 0;
+    font-family: var(--font-sans);
+    font-size: 0.92rem;
+    color: #c4a46a;
+    line-height: 1.7;
+  }
+  .callout strong { color: var(--orange); }
+
+  /* ── LAYER STACK ── */
+  .layer-stack {
     display: flex;
     flex-direction: column;
-    gap: 3px;
-    margin: 24px 0;
+    gap: 0;
+    margin: 28px 0;
+    border: 1px solid var(--border);
     border-radius: 8px;
     overflow: hidden;
-    border: 1px solid var(--border);
   }
 
-  .stack-layer {
+  .layer-row {
+    display: flex;
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .layer-row:last-child { border-bottom: none; }
+
+  .layer-num-col {
+    width: 52px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 18px 24px;
-    gap: 16px;
-  }
-
-  .stack-layer-left {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .stack-icon { font-size: 1.5rem; flex-shrink: 0; }
-
-  .stack-name {
+    justify-content: center;
     font-family: var(--font-mono);
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 1px;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    border-right: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  .layer-body {
+    padding: 16px 20px;
+    flex: 1;
+  }
+
+  .layer-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
-    margin-bottom: 2px;
+    margin-bottom: 4px;
   }
 
-  .stack-desc {
+  .layer-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+
+  .layer-desc {
     font-family: var(--font-sans);
-    font-size: 0.82rem;
+    font-size: 0.84rem;
     color: var(--text-secondary);
-    line-height: 1.5;
+    line-height: 1.6;
   }
 
-  .stack-badge {
+  .layer-badge {
+    display: inline-block;
     font-family: var(--font-mono);
     font-size: 10px;
     padding: 3px 8px;
     border-radius: 3px;
-    white-space: nowrap;
-    flex-shrink: 0;
+    margin-top: 8px;
   }
 
-  /* ── THREE COMPONENTS ── */
-  .components {
+  /* ── DUAL MOE CARDS ── */
+  .moe-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr 1fr;
     gap: 1px;
     background: var(--border);
     border: 1px solid var(--border);
     border-radius: 8px;
     overflow: hidden;
-    margin: 24px 0;
+    margin: 28px 0;
   }
 
-  .component {
+  .moe-card {
     background: var(--bg-secondary);
     padding: 24px 20px;
   }
 
-  .component-tag {
+  .moe-card-tag {
     font-family: var(--font-mono);
     font-size: 10px;
     letter-spacing: 2px;
@@ -241,19 +271,22 @@
     margin-bottom: 8px;
   }
 
-  .component-name {
+  .moe-card-title {
     font-size: 1.1rem;
     font-weight: 600;
+    color: var(--green);
     margin-bottom: 10px;
   }
 
-  .component p {
+  .moe-card p {
     font-family: var(--font-sans);
-    font-size: 0.82rem;
+    font-size: 0.84rem;
     color: var(--text-secondary);
-    line-height: 1.6;
-    margin: 0;
+    line-height: 1.65;
+    margin-bottom: 8px;
   }
+
+  .moe-card p:last-child { margin-bottom: 0; }
 
   /* ── FLOW DIAGRAM ── */
   .flow {
@@ -332,20 +365,6 @@
   .good { color: var(--green); font-weight: 600; }
   .bad { color: #e74c3c; }
 
-  /* ── CALLOUT ── */
-  .callout {
-    background: var(--orange-dim);
-    border-left: 3px solid var(--orange);
-    border-radius: 0 4px 4px 0;
-    padding: 16px 20px;
-    margin: 24px 0;
-    font-family: var(--font-sans);
-    font-size: 0.92rem;
-    color: #c4a46a;
-    line-height: 1.7;
-  }
-  .callout strong { color: var(--orange); }
-
   /* ── VIRTUOUS CYCLE ── */
   .cycle {
     display: grid;
@@ -387,6 +406,48 @@
     margin: 0;
   }
 
+  /* ── CONVERGENCE ── */
+  .convergence {
+    display: flex;
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 28px 0;
+  }
+
+  .conv-phase {
+    flex: 1;
+    padding: 20px;
+    background: var(--bg-secondary);
+  }
+
+  .conv-phase + .conv-phase { border-left: 1px solid var(--border); }
+
+  .conv-phase-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+
+  .conv-phase-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+
+  .conv-phase p {
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
+  }
+
   /* ── CTA ── */
   .cta-block {
     background: var(--bg-secondary);
@@ -398,20 +459,8 @@
     margin-top: 48px;
   }
 
-  .cta-block h3 {
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: #fff;
-    margin-bottom: 8px;
-  }
-
-  .cta-block p {
-    font-family: var(--font-sans);
-    font-size: 0.88rem;
-    color: var(--text-muted);
-    margin-bottom: 20px;
-  }
-
+  .cta-block h3 { font-size: 1.2rem; font-weight: 600; color: #fff; margin-bottom: 8px; }
+  .cta-block p { font-family: var(--font-sans); font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px; }
   .cta-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 
   .btn-primary {
@@ -452,8 +501,10 @@
   footer a:hover { color: var(--orange); }
 
   @media (max-width: 640px) {
-    .components { grid-template-columns: 1fr; }
+    .moe-grid { grid-template-columns: 1fr; }
     .cycle { grid-template-columns: 1fr; }
+    .convergence { flex-direction: column; }
+    .conv-phase + .conv-phase { border-left: none; border-top: 1px solid var(--border); }
     .nav-links a { padding: 0.4rem 0.4rem; font-size: 0.7rem; }
     .flow { flex-direction: column; align-items: stretch; }
     .flow-arrow { transform: rotate(90deg); text-align: center; }
@@ -473,17 +524,17 @@
     <li><a href="btcc.html">₿C</a></li>
     <li><a href="bitcoin-timeblocks.html">Timeblocks</a></li>
     <li><a href="currency-layer.html" class="active">Currency Layer</a></li>
-    <li><a href="bond-calculator.html">₿OND Calc</a></li>
+    <li><a href="two-spheres.html">Two Spheres</a></li>
+    <li><a href="knowledge-base.html">Knowledge Base</a></li>
   </ul>
 </nav>
 
 <div class="container">
   <div class="hero">
-    <div class="hero-label">Bitcoin &bull; Commerce &bull; Stability</div>
+    <div class="hero-label">Four Layers &bull; Three Functions &bull; One Reserve Asset</div>
     <h1>Bitcoin Currency Layer</h1>
     <p class="hero-sub">
-      A system in which everyday users transact in a stable denomination —
-      displayed in dollars — while the underlying reserves are held entirely in Bitcoin. The volatility that has prevented Bitcoin from functioning as everyday money is abstracted away at the interface level.
+      A four-layer monetary architecture that enables everyday commerce on Bitcoin. A stable denomination at the top. Two mediums of exchange — one native, one transitional — in the middle. Bitcoin as the reserve and settlement layer at the bottom. The user sees a stable balance. The reserves are verifiable on-chain.
     </p>
   </div>
 
@@ -494,133 +545,144 @@
       <div class="section-num">01</div>
       <h2>The Problem</h2>
       <p>
-        Bitcoin's failure to achieve widespread adoption as a medium of everyday exchange
-        is not a failure of its network or security model. The protocol has operated
-        continuously since January 2009 without interruption. The failure is at the
-        interface layer: the way Bitcoin's value is presented to users.
+        Bitcoin has operated continuously since January 2009 without interruption. It is the most successful store of value in financial history and a functional peer-to-peer payment network via Lightning. What it lacks is a stable unit of account — a denomination that moves slowly enough for merchants to set prices, employers to denominate salaries, and ordinary people to think about value without checking a ticker.
       </p>
       <p>
-        A worker paid in BTC cannot predict next month's purchasing power. A merchant
-        who prices goods in BTC must reprice constantly. A business holding BTC
-        receivables faces balance sheet volatility that complicates accounting and
-        financial planning. The conventional response — fiat-pegged stablecoins —
-        solves volatility by abandoning Bitcoin entirely. The cure eliminates the
-        disease by killing the patient.
+        A worker paid in BTC cannot predict next month's purchasing power. A merchant who prices goods in BTC must reprice constantly. A business holding BTC receivables faces balance sheet volatility that complicates accounting and financial planning. The conventional response — fiat-pegged stablecoins like USDT and USDC — solves volatility by abandoning Bitcoin entirely. The reserves are US Treasury bills, not Bitcoin. Every dollar in a fiat stablecoin is a dollar that did not enter Bitcoin.
       </p>
       <div class="callout">
-        <strong>A different approach is possible.</strong> Rather than replacing Bitcoin
-        with a fiat proxy, a currency layer wraps Bitcoin in an interface that removes
-        the end user from spot price volatility entirely. The underlying reserve asset
-        remains Bitcoin. The abstraction is complete: the user's experience of stability
-        is real, the Bitcoin backing is real, and at no point does the user need to
-        reconcile the two.
+        <strong>The problem was never Bitcoin. The problem was denomination.</strong> For seventeen years, no Bitcoin-native unit existed that was stable enough for everyday pricing. The currency layer solves this by separating three functions that every mature monetary system keeps separate: the unit of account, the medium of exchange, and the store of value.
       </div>
     </div>
 
     <hr>
 
-    <!-- SECTION 2: Three Components -->
+    <!-- SECTION 2: The Four-Layer Architecture -->
     <div class="section">
       <div class="section-num">02</div>
-      <h2>Three Components</h2>
+      <h2>The Four-Layer Architecture</h2>
       <p>
-        The currency layer consists of three distinct components, each independent,
-        each performing a specific function. Each layer depends only on the layer
-        below it — none requires the layer above it.
+        The currency layer is a stack of four distinct layers, each performing one function. Each layer depends only on the layer below it. None requires the layer above it. The user interacts only with the top — a wallet showing a stable balance — while the complexity operates beneath the surface.
       </p>
 
-      <div class="components">
-        <div class="component">
-          <div class="component-tag">Layer 1</div>
-          <div class="component-name" style="color:var(--orange);">BTCADP</div>
-          <p>The reference price. An open-source daily Bitcoin price computed from qualifying exchanges using a 25% trimmed mean. Any party can reproduce it independently. The methodology is the authority — no institution required.</p>
+      <div class="layer-stack">
+        <div class="layer-row">
+          <div class="layer-num-col">1</div>
+          <div class="layer-body">
+            <div class="layer-tag" style="color:var(--orange);">₿C — Bitcoin Currency</div>
+            <div class="layer-title">Denomination Layer</div>
+            <div class="layer-desc">How value is expressed. The number on the price tag, the invoice, the paycheck. ₿C is the cumulative arithmetic mean of every Bitcoin Average Daily Price since the genesis block — a denomination protocol, not a token. It moves approximately 0.04% per day, appreciates predictably over time, and requires no issuer. Any wallet can compute it. Any merchant can adopt it.</div>
+            <div class="layer-badge" style="background:var(--orange-dim);color:var(--orange);">Unit of Account</div>
+          </div>
         </div>
-        <div class="component">
-          <div class="component-tag">Layer 2</div>
-          <div class="component-name" style="color:var(--green);">Bitcoin Currency (₿C)</div>
-          <p>The collateral floor. Cumulative arithmetic mean of every historical BTCADP since genesis. Moves approximately 0.04% per day. Appreciates over time. No issuer. No reserves. Pure mathematics.</p>
+        <div class="layer-row">
+          <div class="layer-num-col">2</div>
+          <div class="layer-body">
+            <div class="layer-tag" style="color:var(--purple);">Wallets · POS · Apps</div>
+            <div class="layer-title">Application Layer</div>
+            <div class="layer-desc">The user experience. Wallet apps, point-of-sale interfaces, merchant dashboards. This is where a human initiates and authorizes a payment. The application layer displays balances in ₿C or the user's native currency and handles conversion seamlessly. It is the only layer most users ever touch directly.</div>
+          </div>
         </div>
-        <div class="component">
-          <div class="component-tag">Layer 3</div>
-          <div class="component-name" style="color:var(--blue);">₿USD</div>
-          <p>The monetary instrument. One token equals one US dollar. Issued by a consortium of Bitcoin treasury companies. Fully backed by Bitcoin reserves. Uses ₿C as its conservative collateral floor. Redeemable for fiat at any time.</p>
+        <div class="layer-row">
+          <div class="layer-num-col">3</div>
+          <div class="layer-body">
+            <div class="layer-tag" style="color:var(--green);">BTC / Lightning (native) · ₿USD / Sidechain (transitional)</div>
+            <div class="layer-title">Payment Layer</div>
+            <div class="layer-desc">Two rails serving two populations. BTC via Lightning is the native medium of exchange for the Bitcoin circular economy. ₿USD tokens on a sidechain are the transitional medium of exchange that bridges fiat-native users into Bitcoin — becoming native themselves as fiat redemptions decline over time. Both denominate in ₿C. Both are backed by Bitcoin.</div>
+            <div class="layer-badge" style="background:var(--green-dim);color:var(--green);">Medium of Exchange</div>
+          </div>
+        </div>
+        <div class="layer-row">
+          <div class="layer-num-col">4</div>
+          <div class="layer-body">
+            <div class="layer-tag" style="color:var(--blue);">Bitcoin L1</div>
+            <div class="layer-title">Settlement Layer</div>
+            <div class="layer-desc">Final, irreversible, trustless settlement. The reserve asset backing the entire system. Every satoshi is publicly verifiable on-chain. Bitcoin moves only at the boundaries — minting and redemption — never during routine commerce. A million transactions can occur on the payment layer without a single satoshi moving on the base layer.</div>
+            <div class="layer-badge" style="background:var(--blue-dim);color:var(--blue);">Store of Value</div>
+          </div>
         </div>
       </div>
 
+      <div class="callout">
+        <strong>Reserve accounting — the Ledger 1 / Ledger 2 system</strong> — operates across layers 3 and 4 as a parallel function. It tracks which satoshis were acquired at what price, manages coverage ratios, and governs fee reinvestment. It is a governance and bookkeeping system maintained by the consortium, not a layer in the stack.
+      </div>
+
       <p>
-        A failure or disruption at any layer does not propagate downward. If every ₿USD
-        issuer ceased operations, ₿C would still be computable. If ₿C were abandoned,
-        BTCADP would remain a valid reference price. Each component can be evaluated,
-        adopted, or rejected independently.
+        A failure or disruption at any layer does not propagate downward. If every ₿USD issuer ceased operations, BTC via Lightning would still function as a medium of exchange and the ₿C denomination would still be computable. If ₿C were abandoned, the BTCADP would remain a valid reference price. Each layer can be evaluated, adopted, or rejected independently.
       </p>
     </div>
 
     <hr>
 
-    <!-- SECTION 3: The Stack -->
+    <!-- SECTION 3: Two Mediums of Exchange -->
     <div class="section">
       <div class="section-num">03</div>
-      <h2>The Architecture</h2>
+      <h2>Two Mediums of Exchange</h2>
       <p>
-        The architecture maintains a clean separation between two layers that operate
-        independently. Token circulation on the sidechain never touches the Bitcoin
-        reserves on the base layer.
+        The payment layer is not a single instrument. It is two distinct mediums of exchange serving two distinct populations — one already native to Bitcoin, the other arriving from the fiat economy. Both transact in the same ₿C denomination. Both are backed by the same Bitcoin reserves. The only difference is which rail moves the value.
       </p>
 
-      <div class="stack">
-        <div class="stack-layer" style="background:rgba(52,152,219,0.08);border-bottom:1px solid var(--border);">
-          <div class="stack-layer-left">
-            <div class="stack-icon">👤</div>
-            <div>
-              <div class="stack-name" style="color:var(--blue);">User Interface</div>
-              <div class="stack-desc">Wallet shows balance in dollars. No BTC spot price. No satoshis. No volatility.</div>
-            </div>
-          </div>
-          <div class="stack-badge" style="background:var(--blue-dim);color:var(--blue);">What users see</div>
+      <div class="moe-grid">
+        <div class="moe-card">
+          <div class="moe-card-tag">Native</div>
+          <div class="moe-card-title">BTC via Lightning</div>
+          <p>For people who are already in the Bitcoin economy — who think in sats, who transact peer-to-peer without referencing fiat. Lightning enables fast, low-cost payments with settlement finality. No additional instrument is required.</p>
+          <p>This is the Bitcoin circular economy. Merchants price in ₿C. Workers receive sats. The entire loop operates without touching fiat at any point.</p>
         </div>
-        <div class="stack-layer" style="background:rgba(46,204,113,0.08);border-bottom:1px solid var(--border);">
-          <div class="stack-layer-left">
-            <div class="stack-icon">🔄</div>
-            <div>
-              <div class="stack-name" style="color:var(--green);">Token Layer (Sidechain)</div>
-              <div class="stack-desc">₿USD tokens circulate via peer-to-peer transfers. Fast, low-cost, denominated in dollars. $1.00 peg holds throughout. No Bitcoin moves during routine commerce.</div>
-            </div>
-          </div>
-          <div class="stack-badge" style="background:var(--green-dim);color:var(--green);">Payments</div>
+        <div class="moe-card">
+          <div class="moe-card-tag">Transitional</div>
+          <div class="moe-card-title">₿USD on Sidechain</div>
+          <p>For people coming from the fiat economy. Each ₿USD token equals $1, redeemable on demand, backed by Bitcoin reserves. The $1 peg is the familiar interface — the on-ramp. Users think they are using a better dollar. Under the hood, they are participating in a Bitcoin-reserve economy.</p>
+          <p>₿USD is the medium of exchange <em>at the boundary</em> — the bridge that lets fiat-native users transact in a Bitcoin-backed system without knowing they have crossed the line.</p>
         </div>
-        <div class="stack-layer" style="background:rgba(247,147,26,0.08);border-bottom:1px solid var(--border);">
-          <div class="stack-layer-left">
-            <div class="stack-icon">🏦</div>
-            <div>
-              <div class="stack-name" style="color:var(--orange);">Reserve Layer (Bitcoin Base Layer)</div>
-              <div class="stack-desc">Bitcoin sits in transparent on-chain wallets. Touched only at minting (fiat in → BTC purchased) and fiat redemption (BTC sold → fiat out). Never lent. Never rehypothecated.</div>
-            </div>
-          </div>
-          <div class="stack-badge" style="background:var(--orange-dim);color:var(--orange);">Reserves</div>
-        </div>
-        <div class="stack-layer" style="background:var(--bg-secondary);">
-          <div class="stack-layer-left">
-            <div class="stack-icon">⛓️</div>
-            <div>
-              <div class="stack-name" style="color:var(--text-muted);">Bitcoin Proof-of-Work</div>
-              <div class="stack-desc">Secures the base layer. Provides the settlement finality that makes the entire system trustworthy.</div>
-            </div>
-          </div>
-          <div class="stack-badge" style="background:var(--bg-tertiary);color:var(--text-muted);">Foundation</div>
-        </div>
+      </div>
+
+      <div class="callout">
+        <strong>The transitional label is deliberate.</strong> As the ecosystem matures — as merchants price in ₿C, workers receive ₿C-denominated wages, tokens circulate peer-to-peer without anyone redeeming for fiat — ₿USD becomes a native instrument too. The $1 peg becomes an exit feature rather than a defining characteristic. The two mediums of exchange converge into one economy.
       </div>
     </div>
 
     <hr>
 
-    <!-- SECTION 4: Token Lifecycle -->
+    <!-- SECTION 4: Convergence -->
     <div class="section">
       <div class="section-num">04</div>
-      <h2>Token Lifecycle</h2>
+      <h2>The Convergence</h2>
       <p>
-        A ₿USD token has three phases. Only the first and last involve Bitcoin's base layer.
-        Everything in between — the commerce, the payments, the savings — occurs on the
-        sidechain without touching reserves.
+        The dual medium-of-exchange design acknowledges that the world does not adopt a new monetary system overnight. It creates two on-ramps to the same destination. Over time, the boundary between them dissolves.
+      </p>
+
+      <div class="convergence">
+        <div class="conv-phase">
+          <div class="conv-phase-label">Early Stage</div>
+          <div class="conv-phase-title">Two distinct populations</div>
+          <p>Bitcoin-native users transact via Lightning. Fiat-native users enter via ₿USD. The two groups coexist in the same ₿C-denominated economy but use different rails. Most ₿USD tokens are still redeemed for fiat.</p>
+        </div>
+        <div class="conv-phase">
+          <div class="conv-phase-label">Growth Stage</div>
+          <div class="conv-phase-title">Fiat exit declines</div>
+          <p>As merchants accept ₿USD natively and workers receive ₿C-denominated wages, fewer tokens need to be redeemed for fiat. ₿USD circulates peer-to-peer as its own economy. Reserve pressure decreases structurally.</p>
+        </div>
+        <div class="conv-phase">
+          <div class="conv-phase-label">Maturity</div>
+          <div class="conv-phase-title">One economy</div>
+          <p>The ₿USD $1 peg remains as an exit feature but is rarely used. Both Lightning and sidechain rails serve a single, unified Bitcoin economy denominated in ₿C. The distinction between native and transitional dissolves.</p>
+        </div>
+      </div>
+
+      <p>
+        The proportion of tokens ever redeemed for fiat naturally declines as on-chain commerce matures. This is a structural defense mechanism: the system becomes safer precisely as it scales. Every user who earns, spends, and saves within the ₿C economy without exiting to fiat is a user who exerts zero pressure on the reserve system — regardless of where BTC spot stands.
+      </p>
+    </div>
+
+    <hr>
+
+    <!-- SECTION 5: Token Lifecycle -->
+    <div class="section">
+      <div class="section-num">05</div>
+      <h2>₿USD Token Lifecycle</h2>
+      <p>
+        A ₿USD token has three phases. Only the first and last involve Bitcoin's base layer. Everything in between — the commerce, the payments, the savings — occurs on the sidechain without touching reserves.
       </p>
 
       <div class="flow">
@@ -628,7 +690,7 @@
           <div class="flow-step-icon">💵</div>
           <div class="flow-step-label">Phase 1</div>
           <div class="flow-step-name">Minting</div>
-          <div style="font-size:10px;color:var(--text-muted);margin-top:4px;font-family:var(--font-sans);">Fiat in → BTC purchased → Token issued</div>
+          <div style="font-size:10px;color:var(--text-muted);margin-top:4px;font-family:var(--font-sans);">Fiat in → BTC purchased at spot → Token issued</div>
         </div>
         <div class="flow-arrow">→</div>
         <div class="flow-step" style="border-top:2px solid var(--green);">
@@ -642,30 +704,26 @@
           <div class="flow-step-icon">🏧</div>
           <div class="flow-step-label">Phase 3</div>
           <div class="flow-step-name">Redemption</div>
-          <div style="font-size:10px;color:var(--text-muted);margin-top:4px;font-family:var(--font-sans);">Token burned → BTC sold → Fiat returned</div>
+          <div style="font-size:10px;color:var(--text-muted);margin-top:4px;font-family:var(--font-sans);">Token burned → BTC sold from reserves → Fiat returned</div>
         </div>
       </div>
 
       <p>
-        A user who mints ₿USD tokens with fiat, spends them at merchants, receives them
-        as salary, saves them for months, and eventually redeems some for fiat has
-        interacted with Bitcoin's base layer exactly twice — at the beginning and at the
-        end. Everything in between was sidechain commerce, denominated in dollars, displayed
-        in their native currency. Bitcoin's spot volatility was present throughout —
-        the user never encountered it.
+        A user who mints ₿USD tokens with fiat, spends them at merchants, receives them as salary, saves them for months, and eventually redeems some for fiat has interacted with Bitcoin's base layer exactly twice — at the beginning and at the end. Everything in between was sidechain commerce, denominated in ₿C, displayed in their native currency. Bitcoin's spot volatility was present throughout — the user never encountered it.
+      </p>
+      <p>
+        As the ecosystem matures, Phase 3 becomes increasingly rare. Tokens circulate indefinitely within the ₿C economy. The longer a token circulates without being redeemed, the less reserve pressure the system faces — and the more the surplus in Ledger 2 grows.
       </p>
     </div>
 
     <hr>
 
-    <!-- SECTION 5: ₿USD vs CBDC -->
+    <!-- SECTION 6: ₿USD vs. CBDC -->
     <div class="section">
-      <div class="section-num">05</div>
+      <div class="section-num">06</div>
       <h2>₿USD vs. CBDC</h2>
       <p>
-        The term ₿USD is deliberate. Central Bank Digital Currencies are issued by
-        entities with the legal authority to expand the money supply. A Treasury-Backed
-        Digital Currency is the structural inverse.
+        The term Treasury-Backed Digital Currency is deliberate. Central Bank Digital Currencies are issued by entities with the legal authority to expand the money supply. A TBDC is the structural inverse — issued by private companies against a fixed-supply reserve asset.
       </p>
 
       <table class="compare-table">
@@ -673,7 +731,7 @@
           <tr>
             <th>Property</th>
             <th>CBDC</th>
-            <th>₿USD</th>
+            <th>₿USD (TBDC)</th>
           </tr>
         </thead>
         <tbody>
@@ -685,12 +743,12 @@
           <tr>
             <td>Monetary Policy</td>
             <td class="bad">Controlled by committee. Rates, QE, open market ops.</td>
-            <td class="good">₿USD issuance is capped by the ₿C floor. Cannot be inflated beyond Bitcoin reserves.</td>
+            <td class="good">No monetary policy. Issuance mechanically tied to reserves.</td>
           </tr>
           <tr>
             <td>Purchasing Power</td>
             <td class="bad">Erodes over time by design (inflation targeting).</td>
-            <td class="good">$1.00 peg for the token. Underlying Bitcoin reserves appreciate over time.</td>
+            <td class="good">$1 peg for the token. ₿C denomination appreciates over time.</td>
           </tr>
           <tr>
             <td>Reserves</td>
@@ -711,24 +769,18 @@
       </table>
 
       <div class="callout">
-        <strong>The most consequential difference:</strong> a ₿USD consortium cannot inflate
-        the money supply. This is not a policy commitment that could be reversed under
-        pressure. It is an immutable property of the reserve asset. No governance vote,
-        no emergency measure, no executive decision can produce additional Bitcoin.
+        <strong>The most consequential difference:</strong> a ₿USD consortium cannot inflate the money supply. This is not a policy commitment that could be reversed under pressure. It is an immutable property of the reserve asset. No governance vote, no emergency measure, no executive decision can produce additional Bitcoin.
       </div>
     </div>
 
     <hr>
 
-    <!-- SECTION 6: The Virtuous Cycle -->
+    <!-- SECTION 7: The Virtuous Cycle -->
     <div class="section">
-      <div class="section-num">06</div>
+      <div class="section-num">07</div>
       <h2>The Virtuous Cycle</h2>
       <p>
-        Every ₿USD token minted requires the consortium to purchase actual Bitcoin on
-        the open market. There is no synthetic exposure. One hundred percent of demand
-        for ₿USD tokens flows directly to BTC spot as buying pressure. This creates a
-        self-reinforcing cycle.
+        Every ₿USD token minted requires the consortium to purchase Bitcoin on the open market. There is no synthetic exposure, no fractional reserve, no derivative. One hundred percent of demand for ₿USD tokens flows directly to BTC spot as buying pressure. This creates a self-reinforcing cycle that is structural, not aspirational.
       </p>
 
       <div class="cycle">
@@ -745,35 +797,41 @@
         <div class="cycle-step">
           <div class="cycle-num">03</div>
           <div class="cycle-title">Rising spot widens treasury surplus</div>
-          <p>As BTC spot rises, the gap between Ledger 1 asset values and ₿USD liabilities widens. Treasury companies accumulate surplus. Reserves deepen.</p>
+          <p>As BTC spot rises, the gap between Ledger 1 asset values and ₿USD liabilities widens. Reserves deepen. The system becomes more resilient.</p>
         </div>
         <div class="cycle-step">
           <div class="cycle-num">04</div>
           <div class="cycle-title">Growth reduces redemption pressure</div>
-          <p>As the ₿USD economy matures, users earn, spend, and save in ₿USD without needing fiat. The system's risk decreases precisely as it scales.</p>
+          <p>As the ₿USD economy matures, users earn, spend, and save without exiting to fiat. The system's risk decreases precisely as it scales.</p>
         </div>
       </div>
 
       <p>
-        Scale makes the system safer, not more fragile — the structural inverse of
-        traditional banking. Every user who enters the ₿USD economy is a Bitcoin user.
-        Every transaction settles on Bitcoin infrastructure. The currency layer does not
-        compete with Bitcoin. It fulfills Bitcoin's original purpose.
+        Scale makes the system safer, not more fragile — the structural inverse of traditional banking. Every user who enters the ₿C economy is a Bitcoin user. Every transaction settles on Bitcoin infrastructure. The currency layer does not compete with Bitcoin. It fulfills Bitcoin's original purpose.
       </p>
     </div>
 
     <!-- CTA -->
     <div class="cta-block">
       <h3>Learn More</h3>
-      <p>The currency layer is built on the BTCADP reference price and the ₿C denomination. Read the full specifications.</p>
+      <p>The currency layer is built on the BTCADP reference price and the ₿C denomination. Explore each component in detail.</p>
       <div class="cta-buttons">
-        <a href="btcc.html" class="btn-primary">Bitcoin Currency (₿C) &rarr;</a>
-        <a href="specification.html" class="btn-secondary">BTCADP Specification &rarr;</a>
+        <a href="functions-of-money.html" class="btn-primary">Three Functions of Money &rarr;</a>
+        <a href="btcc.html" class="btn-secondary">Bitcoin Currency (₿C) &rarr;</a>
         <a href="tbd-usd.html" class="btn-secondary">₿USD Overview &rarr;</a>
+        <a href="specification.html" class="btn-secondary">BTCADP Specification &rarr;</a>
         <a href="bitcoin-timeblocks.html" class="btn-secondary">Bitcoin Timeblocks &rarr;</a>
       </div>
     </div>
 
+  </div>
+</div>
+
+<div style="max-width:860px;margin:48px auto 0;padding:0 24px;position:relative;z-index:1;">
+  <div style="padding:24px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:8px;">
+    <p style="font-family:var(--font-sans);font-size:0.88rem;color:var(--text-secondary);margin-bottom:12px;"><strong style="color:#fff;">The philosophical framework behind the currency layer</strong></p>
+    <p style="font-family:var(--font-sans);font-size:0.88rem;color:var(--text-muted);margin-bottom:16px;">The currency layer serves two spheres: the fiat economy (Sphere A) and the Bitcoin circular economy (Sphere B). The two mediums of exchange — ₿USD and BTC via Lightning — map directly to these spheres. Understanding the two-sphere model is understanding why the currency layer is built the way it is.</p>
+    <a href="two-spheres.html" style="font-family:var(--font-mono);font-size:0.78rem;color:var(--orange);text-decoration:none;">Read: Two Spheres →</a>
   </div>
 </div>
 
@@ -783,7 +841,7 @@
     <a href="btcc.html">₿C</a> &nbsp;&bull;&nbsp;
     <a href="bitcoin-timeblocks.html">Timeblocks</a> &nbsp;&bull;&nbsp;
     <a href="specification.html">Specification</a> &nbsp;&bull;&nbsp;
-    <a href="https://github.com/BTCADP/btcadp-research">GitHub</a>
+    <a href="https://github.com/BTCADP/btcadp-research" target="_blank" rel="noopener">GitHub</a>
   </p>
   <p style="margin-top:8px;">CC0 Public Domain &bull; btcadp.org &bull; 2026</p>
 </footer>
