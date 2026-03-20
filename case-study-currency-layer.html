@@ -178,11 +178,11 @@
 
     <h2>1. The Problem</h2>
     <p>
-      Bitcoin has not achieved widespread adoption as a medium of everyday exchange. The barrier
-      is not technical. The network has operated continuously since January 2009. Lightning
-      provides throughput. Settlement is secure and final. The barrier is that Bitcoin's spot
-      price can move 10% in a day, making it impractical for the pricing, invoicing, and
-      budgeting that constitute most economic activity.
+      Bitcoin has operated continuously since January 2009. Lightning provides throughput.
+      Settlement is secure and final. What has not yet been built on top of Bitcoin is a
+      stable denomination layer for everyday commerce — Bitcoin's spot price can move 10%
+      in a day, making it impractical for the pricing, invoicing, and budgeting that
+      constitute most economic activity.
     </p>
     <p>
       The stablecoin market has grown to over $200 billion in response to this problem. USDT
@@ -200,29 +200,29 @@
 
     <h2>2. The Architecture</h2>
     <p>
-      ₿USD is built on three layers. Each is independent. Each depends only on the layer below it.
+      ₿USD is built on three components. Each is independent. Each depends only on the component below it.
     </p>
 
     <div class="components">
       <div class="component">
-        <div class="component-tag">Layer 1</div>
+        <div class="component-tag">Foundation</div>
         <div class="component-name" style="color:var(--orange);">BTCADP</div>
         <p>The reference price. A daily Bitcoin price computed from qualifying exchanges using a 25% trimmed mean. Any party can reproduce it independently. The methodology is the authority — no institution required.</p>
       </div>
       <div class="component">
-        <div class="component-tag">Layer 2</div>
+        <div class="component-tag">Denomination</div>
         <div class="component-name" style="color:var(--green);">Bitcoin Currency (₿C)</div>
         <p>The collateral floor. The cumulative arithmetic mean of every historical BTCADP since genesis. Moves approximately 0.04% per day. No issuer. No reserves. Pure mathematics. Used to cap ₿USD issuance conservatively.</p>
       </div>
       <div class="component">
-        <div class="component-tag">Layer 3</div>
+        <div class="component-tag">Instrument</div>
         <div class="component-name" style="color:var(--blue);">₿USD</div>
         <p>The monetary instrument. One token equals one US dollar. Issued by the consortium. Backed by Bitcoin in a four-ledger reserve system (two per product). Redeemable for fiat at any time.</p>
       </div>
     </div>
 
     <p>
-      A failure at any layer does not propagate downward. If every ₿USD issuer ceased operations,
+      A disruption to any component does not propagate downward. If every ₿USD issuer ceased operations,
       the ₿C denomination would still be computable. If ₿C were abandoned, BTCADP would remain a
       valid reference price. Each component can be evaluated independently.
     </p>
@@ -425,7 +425,8 @@
       Every user who enters the ₿USD economy is a Bitcoin user. Every transaction settles
       on Bitcoin infrastructure. Every new token requires Bitcoin to be acquired. The currency
       layer does not compete with Bitcoin. It fulfills Bitcoin's original purpose — peer-to-peer
-      electronic cash — by solving the one problem the protocol itself could not.
+      electronic cash — by providing the denomination layer the protocol was never designed to
+      include, and never needed to.
     </p>
 
   </div>
@@ -436,11 +437,6 @@
     <a href="case-study-hard-money.html" class="btn-secondary">Hard Money Case Study &rarr;</a>
   </div>
 
-
-  <div style="margin-top:48px;padding-top:28px;border-top:1px solid var(--border);text-align:center;">
-    <p style="font-family:var(--font-sans);font-size:0.85rem;color:var(--text-muted);margin-bottom:14px;">CC0 Public Domain — free to use, share, and build upon without restriction.</p>
-    <button onclick="window.print()" style="background:var(--orange);color:#fff;border:none;padding:10px 24px;border-radius:4px;font-family:var(--font-mono);font-size:0.8rem;font-weight:600;letter-spacing:0.05em;cursor:pointer;">&#128424; Print / Save as PDF</button>
-  </div>
 </div>
 
 <footer>

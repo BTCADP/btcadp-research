@@ -389,10 +389,10 @@
         Bitcoin's protocol has operated without interruption since January 2009. Its security model is without peer among monetary systems. Its supply schedule is fixed to the second decimal place through the year 2140. These are not disputed facts. What is also not disputed is that the overwhelming majority of global commerce does not occur in Bitcoin.
     </p>
     <p>
-        The failure is not technical. The failure is at the interface layer — the point where Bitcoin's abstract properties meet the practical requirements of ordinary economic life.
+        The gap is not technical. It is at the interface layer — the point where Bitcoin's abstract properties meet the practical requirements of ordinary economic life.
     </p>
     <p>
-        A worker whose employer offers to pay in Bitcoin faces an immediate calculation: if rent is due in thirty days, and Bitcoin's price might be 30% lower by then, the real wage is undefined. A merchant who prices a product in Bitcoin must either reprice constantly or absorb the volatility into margin. A business holding Bitcoin receivables faces quarterly statements that fluctuate by amounts that dwarf operating performance. None of these problems reflect flaws in Bitcoin. They reflect the gap between Bitcoin as a long-duration savings instrument — which it excels at — and Bitcoin as a medium of daily exchange — which requires price stability that it does not currently provide.
+        A worker whose employer offers to pay in Bitcoin faces an immediate calculation: if rent is due in thirty days, and Bitcoin's price might be 30% lower by then, the real wage is undefined. A merchant who prices a product in Bitcoin must either reprice constantly or absorb the volatility into margin. A business holding Bitcoin receivables faces quarterly statements that fluctuate by amounts that dwarf operating performance. None of these problems reflect flaws in Bitcoin. They reflect the absence of a denomination layer — a stable unit of account built on top of Bitcoin that makes everyday economic calculation possible.
     </p>
     <p>
         The conventional response has been fiat-pegged stablecoins: USDT, USDC, and their variants. These instruments solve the volatility problem by removing Bitcoin from the equation entirely. They are backed by US Treasuries, bank deposits, and fiat currency. Every dollar held in USDC is a dollar that did not purchase Bitcoin. At scale, the success of fiat-backed stablecoins is structurally adverse to Bitcoin adoption. The cure abandons the patient.
@@ -409,26 +409,26 @@
     <h2>The Currency Layer: Three Components, One System</h2>
 
     <p>
-        A Bitcoin-native currency layer consists of three components, each independent, each performing a distinct function. The framework is modular: each layer can be adopted, evaluated, or replaced without disturbing the layers beneath it.
+        A Bitcoin-native currency layer consists of three components, each independent, each performing a distinct function. The framework is modular: each component can be adopted, evaluated, or replaced without disturbing the components beneath it.
     </p>
 
     <div class="layer-stack">
         <div class="layer">
-            <div class="layer-tag">Layer 1</div>
+            <div class="layer-tag">Foundation</div>
             <div class="layer-body">
                 <div class="layer-name">BTCADP — The Reference Price</div>
                 <p class="layer-desc">An institution-independent daily Bitcoin price computed from qualifying exchanges using a 25% trimmed mean. Any party with trade data and the specification can reproduce it independently. The methodology is the authority — no publisher required.</p>
             </div>
         </div>
         <div class="layer">
-            <div class="layer-tag">Layer 2</div>
+            <div class="layer-tag">Denomination</div>
             <div class="layer-body">
                 <div class="layer-name">Bitcoin Currency (₿C) — The Denomination Protocol</div>
                 <p class="layer-desc">The cumulative arithmetic mean of every historical BTCADP since genesis. Moves approximately 0.04% per day. No issuer. No reserves. Pure arithmetic applied to a public dataset. Appreciates over the long run while exhibiting day-to-day stability that makes economic calculation possible.</p>
             </div>
         </div>
         <div class="layer">
-            <div class="layer-tag">Layer 3</div>
+            <div class="layer-tag">Instrument</div>
             <div class="layer-body">
                 <div class="layer-name">₿USD (TBDC) — The Monetary Instrument</div>
                 <p class="layer-desc">A USD-pegged stablecoin issued by a consortium of Bitcoin treasury companies. One token equals one dollar. Backed by Bitcoin held in verifiable on-chain reserves. Uses ₿C as its conservative collateral floor. Redeemable for fiat at any time. Every token minted requires purchasing Bitcoin at spot.</p>
