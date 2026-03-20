@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Programmable Money That Protects — Why the World Needs TBDCs, Not CBDCs | btcadp.org</title>
+<meta name="description" content="CBDCs program money to control its holders. TBDCs program money to defend them. A framework for self-defending money — the structural inverse of CBDC surveillance.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary: #0a0a0b;
+    --bg-secondary: #111114;
+    --bg-tertiary: #19191e;
+    --border: #2a2a32;
+    --text-primary: #e8e6e3;
+    --text-secondary: #8a8a95;
+    --text-muted: #555560;
+    --orange: #f7931a;
+    --orange-dim: rgba(247,147,26,0.12);
+    --green: #2ecc71;
+    --red: #e74c3c;
+    --font-display: 'Source Serif 4', Georgia, serif;
+    --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-display);
+    font-size: 18px;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(247,147,26,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(247,147,26,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none; z-index: 0;
+  }
+
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(10,10,11,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 56px;
+  }
+
+  .nav-brand { font-family: var(--font-mono); font-size: 1rem; font-weight: bold; color: var(--orange); text-decoration: none; letter-spacing: 0.05em; }
+  .nav-links { display: flex; gap: 0.25rem; list-style: none; }
+  .nav-links a { color: var(--text-muted); text-decoration: none; font-family: var(--font-mono); font-size: 0.72rem; padding: 0.4rem 0.6rem; border-radius: 4px; transition: color 0.2s, background 0.2s; }
+  .nav-links a:hover { color: var(--text-primary); background: var(--bg-tertiary); }
+  .nav-links a.active { color: var(--orange); }
+
+  .article-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 64px 24px 100px;
+    position: relative; z-index: 1;
+  }
+
+  .article-meta { font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); margin-bottom: 20px; }
+  .article-title { font-size: clamp(1.8rem, 5vw, 3rem); font-weight: 700; letter-spacing: -1px; line-height: 1.15; color: #fff; margin-bottom: 12px; }
+  .article-subtitle { font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 20px; font-style: italic; }
+  .article-byline { font-family: var(--font-sans); font-size: 0.85rem; color: var(--text-muted); margin-bottom: 48px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
+
+  .article-body h2 { font-size: 1.4rem; font-weight: 600; color: #fff; margin: 48px 0 16px; letter-spacing: -0.3px; }
+  .article-body h3 { font-size: 1.05rem; font-weight: 600; color: var(--orange); margin: 32px 0 12px; font-family: var(--font-sans); }
+  .article-body p { color: #c8c6c3; margin-bottom: 20px; font-size: 1rem; }
+
+  .callout {
+    background: var(--orange-dim);
+    border-left: 3px solid var(--orange);
+    border-radius: 0 4px 4px 0;
+    padding: 16px 20px;
+    margin: 28px 0;
+  }
+  .callout p { color: #c4a46a; font-family: var(--font-sans); font-size: 0.92rem; line-height: 1.7; margin: 0; }
+  .callout strong { color: var(--orange); }
+
+  .thesis {
+    border-top: 2px solid var(--orange);
+    border-bottom: 2px solid var(--orange);
+    padding: 28px 24px;
+    margin: 36px 0;
+    background: rgba(247,147,26,0.04);
+  }
+  .thesis p {
+    color: #fff;
+    font-size: 1.1rem;
+    font-style: italic;
+    font-weight: 600;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Comparison table */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 28px 0;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    overflow-x: auto;
+    display: block;
+  }
+  .compare-table th {
+    text-align: left; padding: 8px 12px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    white-space: nowrap;
+  }
+  .compare-table th.hl { color: var(--orange); }
+  .compare-table td {
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    color: #c4c4cc;
+    vertical-align: top;
+  }
+  .compare-table tr:nth-child(even) td { background: var(--bg-secondary); }
+  .compare-table td.hl { background: rgba(247,147,26,0.06); color: #d4b483; }
+  .compare-table tr:nth-child(even) td.hl { background: rgba(247,147,26,0.09); }
+
+  /* Fee table */
+  .fee-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+  }
+  .fee-table th {
+    text-align: left; padding: 8px 12px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .fee-table td {
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    color: #c4c4cc;
+  }
+  .fee-table tr:nth-child(even) td { background: var(--bg-secondary); }
+  .fee-table .fee-val { color: var(--orange); font-weight: 600; font-family: var(--font-mono); }
+
+  /* Section numbers */
+  .sec-num {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--orange);
+    display: block;
+    margin-bottom: 8px;
+    margin-top: 56px;
+  }
+
+  /* Two-column contrast */
+  .contrast {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 28px 0;
+  }
+  .contrast-side { background: var(--bg-secondary); padding: 24px; }
+  .contrast-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
+  .contrast-title { font-size: 1rem; font-weight: 600; margin-bottom: 10px; }
+  .contrast-side p { font-family: var(--font-sans); font-size: 0.82rem; color: var(--text-secondary); line-height: 1.6; margin: 0; }
+  .contrast-cbdc .contrast-title { color: var(--red); }
+  .contrast-tbdc .contrast-title { color: var(--green); }
+
+  /* Download banner */
+  .download-banner {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin: 40px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .download-banner-text { font-family: var(--font-sans); font-size: 0.9rem; color: var(--text-secondary); }
+  .download-banner-text strong { color: var(--text-primary); }
+  .download-btn {
+    background: var(--orange); color: #000;
+    font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700;
+    padding: 10px 20px; border-radius: 4px; border: none;
+    cursor: pointer; text-decoration: none; transition: opacity 0.2s;
+  }
+  .download-btn:hover { opacity: 0.85; }
+
+  .article-footer { margin-top: 64px; padding-top: 32px; border-top: 1px solid var(--border); display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-primary { background: var(--orange); color: #000; font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700; padding: 10px 20px; border-radius: 4px; text-decoration: none; transition: opacity 0.2s; }
+  .btn-primary:hover { opacity: 0.85; }
+  .btn-secondary { background: transparent; color: var(--text-secondary); font-family: var(--font-mono); font-size: 0.8rem; padding: 10px 20px; border-radius: 4px; border: 1px solid var(--border); text-decoration: none; transition: all 0.2s; }
+  .btn-secondary:hover { border-color: var(--orange); color: var(--orange); }
+
+  footer { border-top: 1px solid var(--border); padding: 32px 24px; text-align: center; font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+  footer a { color: var(--text-muted); text-decoration: none; }
+  footer a:hover { color: var(--orange); }
+
+  @media (max-width: 640px) {
+    .contrast { grid-template-columns: 1fr; }
+    .nav-links a { font-size: 0.65rem; padding: 0.3rem 0.4rem; }
+    .download-banner { flex-direction: column; text-align: center; }
+  }
+</style>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="index.html">BTCADP</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="btcc.html">&#x20BF;C</a></li>
+    <li><a href="bitcoin-timeblocks.html">Timeblocks</a></li>
+    <li><a href="currency-layer.html">Currency Layer</a></li>
+    <li><a href="knowledge-base.html" class="active">Knowledge Base</a></li>
+  </ul>
+</nav>
+
+<div class="article-wrap">
+
+  <div class="article-meta">White Paper &nbsp;&bull;&nbsp; btcadp.org &nbsp;&bull;&nbsp; March 2026</div>
+
+  <h1 class="article-title">Programmable Money That Protects</h1>
+  <p class="article-subtitle">Why the World Needs TBDCs, Not CBDCs</p>
+  <p class="article-subtitle" style="font-size:0.95rem;color:var(--text-muted);margin-bottom:20px;">CBDCs program money to control its holders. TBDCs program money to defend them.</p>
+
+  <div class="article-byline">
+    btcadp.org &nbsp;&bull;&nbsp; CC0 Public Domain &nbsp;&bull;&nbsp; Draft for Public Review
+    <br>
+    <a href="#download" style="color:var(--orange);text-decoration:none;">Download the full paper &darr;</a>
+  </div>
+
+  <div class="article-body">
+
+    <!-- ═══ SECTION 1 ═══ -->
+    <span class="sec-num" style="margin-top:0;">Section 01</span>
+    <h2>The Programmability Spectrum</h2>
+
+    <p>
+      All digital money is programmable. Every digital dollar that moves through a banking system
+      passes through software that can delay it, reverse it, freeze it, or report it. The question
+      has never been <em>whether</em> money should be programmable. It already is.
+    </p>
+
+    <p>
+      The question that matters is: programmable by whom, for whose benefit, and against whom?
+    </p>
+
+    <p>
+      Central Bank Digital Currencies answer this explicitly. CBDCs are programmable by the issuing
+      authority, for the benefit of the state, and against the holder when the state determines it
+      necessary. Spending conditions, expiration dates, geographic restrictions, and transaction
+      monitoring at the token level are not speculative concerns. They are documented design goals.
+    </p>
+
+    <p>
+      This paper proposes that the technical capability that makes CBDCs dangerous &mdash;
+      programmability at the token level &mdash; can be redirected toward the opposite purpose.
+      Instead of programming money to surveil and control its holders, it is possible to program
+      money to defend itself and its holders from attack.
+    </p>
+
+    <div class="thesis">
+      <p>The token does not serve the consortium. The token does not serve the government. The token serves the network &mdash; which is to say, it serves everyone who holds it equally, including against the consortium itself if the consortium ever tried to act against the network&rsquo;s interest.</p>
+    </div>
+
+    <!-- ═══ SECTION 2 ═══ -->
+    <span class="sec-num">Section 02</span>
+    <h2>The Threat Model</h2>
+
+    <p>
+      Every monetary system has attack surfaces. &#x20BF;USD&rsquo;s primary attack surface is the
+      fiat redemption boundary. Tokens circulating within the Bitcoin economy &mdash; spent, received,
+      lent, and borrowed without converting to dollars &mdash; exert zero pressure on the reserve
+      system regardless of what Bitcoin&rsquo;s spot price does.
+    </p>
+
+    <p>The system is at risk only when holders exit to fiat.</p>
+
+    <h3>Coordinated Short-Plus-Redemption</h3>
+    <p>
+      An attacker builds a large BTC short position, accumulates &#x20BF;USD, then executes a mass
+      fiat redemption to force Bitcoin selling and crash spot. The forced selling makes the short
+      profitable. If other holders panic-redeem, a reflexive spiral begins.
+    </p>
+
+    <h3>Panic-Driven Bank Run</h3>
+    <p>
+      No coordinated attacker is needed. A sharp decline in BTC spot triggers fear among holders
+      who begin redeeming for fiat. The redemption-driven selling deepens the decline, which
+      triggers more redemptions. Individually rational behavior that is collectively destructive.
+    </p>
+
+    <h3>Targeted Consortium Member Attack</h3>
+    <p>
+      Instead of attacking the system as a whole, an adversary targets a single consortium member
+      with thinner reserves. A concentrated redemption wave against that member&rsquo;s tokens
+      could force an entity-level liquidity crisis even if system-wide reserves are adequate.
+    </p>
+
+    <div class="callout">
+      <p>Every one of these vectors has a common dependency: they require the fiat exit. If the fiat exit is structurally difficult to weaponize, the attacks become uneconomical.</p>
+    </div>
+
+    <!-- ═══ SECTION 3 ═══ -->
+    <span class="sec-num">Section 03</span>
+    <h2>Tokens as Network Participants</h2>
+
+    <p>
+      In traditional monetary systems, a token is a passive instrument. A dollar bill sits in a wallet.
+      It does not know what other bills exist, how many are being spent, or whether the monetary system
+      it belongs to is under stress. It is an IOU &mdash; inert, unaware, dependent on external
+      institutions for its value.
+    </p>
+
+    <p>
+      &#x20BF;USD tokens are designed as active participants in the monetary network they constitute.
+      Each token &mdash; or more precisely, the smart contract governing all tokens on the sidechain &mdash;
+      has access to aggregate network state and adjusts its own behavior based on conditions it can
+      independently verify.
+    </p>
+
+    <div class="contrast">
+      <div class="contrast-side contrast-cbdc">
+        <div class="contrast-label">CBDC</div>
+        <div class="contrast-title">Reports on its holder to the issuer</div>
+        <p>The token carries identity metadata. The issuer sees every transaction. Programmability serves surveillance.</p>
+      </div>
+      <div class="contrast-side contrast-tbdc">
+        <div class="contrast-label">TBDC</div>
+        <div class="contrast-title">Reads the state of its own network</div>
+        <p>The token carries provenance metadata about itself &mdash; not its holder. Programmability serves self-defense.</p>
+      </div>
+    </div>
+
+    <!-- ═══ SECTION 4 ═══ -->
+    <span class="sec-num">Section 04</span>
+    <h2>Token Provenance: Data About the Money, Not the Person</h2>
+
+    <p>
+      Every &#x20BF;USD token carries provenance metadata. This metadata describes the token itself &mdash;
+      not its holder. The distinction is the bright line between CBDC surveillance architecture
+      and TBDC defensive architecture.
+    </p>
+
+    <h3>What the token knows about itself</h3>
+    <p>
+      Mint date. Mint-day BTC spot price. Mint-day &#x20BF;C price. Block age. Transfer count.
+      This is sufficient for every defensive mechanism. Self-defense does not require surveillance.
+    </p>
+
+    <h3>What the token cannot know</h3>
+    <p>
+      Holder identity. Spending patterns. Geographic location. Transaction purpose. The data does
+      not exist at the protocol level because the protocol was designed never to produce it.
+      This is not a privacy policy that could be revised. It is an architectural constraint.
+    </p>
+
+    <!-- ═══ SECTION 5 ═══ -->
+    <span class="sec-num">Section 05</span>
+    <h2>Network State Awareness</h2>
+
+    <p>
+      The token contract has read access to aggregate metrics derived from on-chain data &mdash;
+      all independently verifiable by any participant:
+    </p>
+
+    <p>
+      <strong>Total outstanding supply.</strong> The number of &#x20BF;USD tokens in circulation.
+      <strong>Aggregate redemption velocity.</strong> The total volume redeemed for fiat within
+      rolling time windows &mdash; 24 hours, 7 days, 30 days. This is the most important metric
+      for attack detection. <strong>BTC spot relative to &#x20BF;C.</strong> The ratio between
+      current market price and the cumulative average. <strong>Coverage ratio.</strong> Total
+      consortium Bitcoin holdings valued at the &#x20BF;C price divided by total &#x20BF;USD outstanding.
+      <strong>Reserve attestation status.</strong> Whether proof-of-reserves has been updated
+      within the expected window.
+    </p>
+
+    <p>
+      None of these metrics require any information about individual holders. They are system-level
+      vital signs &mdash; the monetary equivalent of blood pressure, heart rate, and oxygen saturation.
+    </p>
+
+    <!-- ═══ SECTION 6 ═══ -->
+    <span class="sec-num">Section 06</span>
+    <h2>The Defensive Toolkit</h2>
+
+    <p>
+      Each mechanism is deterministic, transparent, and applies equally to every participant.
+      None requires human intervention to activate. None can be overridden by the consortium.
+    </p>
+
+    <h3>6.1 &mdash; BTC-Default Redemption</h3>
+    <p>
+      When a holder redeems &#x20BF;USD, the consortium transfers Bitcoin at spot value directly to
+      the redeemer&rsquo;s wallet. No market order is placed. No slippage occurs. The spot price is
+      unaffected by the redemption. This single design choice eliminates the most dangerous attack
+      vector: forced selling. The coordinated short-plus-redemption attack depends on the consortium
+      dumping BTC to meet fiat obligations. With BTC-default redemption, there is no forced selling.
+    </p>
+    <p>
+      Fiat redemption remains available as a premium service &mdash; slower processing, higher fees,
+      subject to velocity limits. The fiat exit is always open. It is simply no longer the default.
+    </p>
+
+    <h3>6.2 &mdash; Time-Weighted Redemption Fees</h3>
+    <p>
+      The fiat redemption fee is a function of token age. The schedule is fixed in the protocol:
+    </p>
+
+    <table class="fee-table">
+      <thead>
+        <tr><th>Token Age</th><th>Fiat Fee</th><th>Rationale</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>0 &ndash; 7 days</td><td class="fee-val">3.0%</td><td>Prices out mint-and-redeem attack loops</td></tr>
+        <tr><td>8 &ndash; 30 days</td><td class="fee-val">1.5%</td><td>Discourages speculative cycling</td></tr>
+        <tr><td>31 &ndash; 90 days</td><td class="fee-val">0.5%</td><td>Modest friction; normal commerce unaffected</td></tr>
+        <tr><td>91 &ndash; 180 days</td><td class="fee-val">0.1%</td><td>Near-zero; long-term holders barely notice</td></tr>
+        <tr><td>&gt; 180 days</td><td class="fee-val">0.0%</td><td>Free &mdash; organic holders face no penalty</td></tr>
+      </tbody>
+    </table>
+
+    <p>
+      BTC-default redemption and &#x20BF;C lateral conversion are not subject to these fees &mdash;
+      they apply only to the fiat exit.
+    </p>
+
+    <h3>6.3 &mdash; Volume-Triggered Fee Escalation</h3>
+    <p>
+      Redemption fees also scale with aggregate redemption velocity. When rolling 7-day fiat
+      redemption volume exceeds defined thresholds as a percentage of total supply, an additional
+      surcharge applies. Below 1%: no surcharge. 1&ndash;2%: +0.5%. 2&ndash;5%: +1.5%. Above 5%: +3.0%.
+      Congestion pricing for the fiat exit ramp.
+    </p>
+
+    <h3>6.4 &mdash; Adaptive Velocity Limits</h3>
+    <p>
+      The protocol imposes throughput limits on aggregate fiat redemptions. Under normal conditions,
+      the daily cap is 5% of outstanding supply. As velocity rises, the cap tightens. These limits
+      apply only to the fiat exit. BTC-default redemption and &#x20BF;C conversion remain unlimited
+      at all times.
+    </p>
+
+    <h3>6.5 &mdash; &#x20BF;C Lateral Conversion</h3>
+    <p>
+      Any holder can convert to a &#x20BF;C-denominated position at any time, at no cost, with no
+      delay. During a market panic, instead of fleeing to fiat, holders can move to the denomination
+      that tracks Bitcoin&rsquo;s lifetime average rather than its spot volatility. The consortium&rsquo;s
+      reserves are untouched. No Bitcoin is sold. The system absorbs the fear without absorbing
+      the outflow. &#x20BF;USD is the on-ramp. &#x20BF;C is the destination.
+    </p>
+
+    <h3>6.6 &mdash; Redemption Notice Periods</h3>
+    <p>
+      Small fiat redemptions process immediately. Above $100,000, a notice period applies: 48 hours
+      up to $1M, 7 days above that. The redemption is guaranteed &mdash; the notice period is a
+      scheduling mechanism, not a gate. BTC-default redemption remains instant at any amount.
+    </p>
+
+    <!-- ═══ SECTION 7 ═══ -->
+    <span class="sec-num">Section 07</span>
+    <h2>The Calm-State Guarantee</h2>
+
+    <p>
+      Under normal network conditions &mdash; which is the vast majority of the token&rsquo;s life &mdash;
+      every defensive mechanism is dormant. Transfers are instant and free. Redemptions are fast
+      and cheap. The token behaves identically to any other stablecoin. The mechanisms activate only
+      when the network&rsquo;s vital signs indicate abnormal stress, and the thresholds are public,
+      auditable, and identical for everyone.
+    </p>
+
+    <div class="callout">
+      <p>Think of a circuit breaker behind a wall. It sits quietly for years. When the electrical load becomes dangerous, it trips &mdash; automatically, instantly, without asking permission. It protects the house. The holder does not experience the defensive mechanism as a restriction. They experience it as the reason their purchasing power survived.</p>
+    </div>
+
+    <!-- ═══ SECTION 8 ═══ -->
+    <span class="sec-num">Section 08</span>
+    <h2>The Inversion: CBDC vs. TBDC</h2>
+
+    <p>
+      The technical capability is identical. Both embed conditional logic at the token level.
+      The architecture is the same. The philosophy could not be more different.
+    </p>
+
+    <table class="compare-table">
+      <thead>
+        <tr><th>Property</th><th>CBDC</th><th class="hl">TBDC (&#x20BF;USD)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Programmability serves</td><td>The issuing authority</td><td class="hl">The token network and its holders</td></tr>
+        <tr><td>Holder surveillance</td><td>Built in by design</td><td class="hl">Structurally impossible &mdash; no identity metadata</td></tr>
+        <tr><td>Spending restrictions</td><td>Expiration dates, category limits, geographic fencing</td><td class="hl">None &mdash; holders spend freely</td></tr>
+        <tr><td>Crisis behavior</td><td>Authorities freeze accounts at discretion</td><td class="hl">Protocol hardens autonomously to protect all holders equally</td></tr>
+        <tr><td>Redemption control</td><td>Issuer can deny or delay</td><td class="hl">Deterministic rules, no discretion</td></tr>
+        <tr><td>Defense trigger</td><td>Political decision</td><td class="hl">On-chain metrics breach published thresholds</td></tr>
+        <tr><td>Collateral</td><td>Government promise</td><td class="hl">Bitcoin on the base layer, verifiable in real time</td></tr>
+        <tr><td>Who benefits</td><td>The state</td><td class="hl">Every holder equally</td></tr>
+        <tr><td>Failure mode</td><td>Policy change, authoritarian overreach</td><td class="hl">BTC sustained below lifetime average (no precedent)</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ═══ SECTION 9 ═══ -->
+    <span class="sec-num">Section 09</span>
+    <h2>Game Theory: Why the Attack Becomes Uneconomical</h2>
+
+    <p>
+      Consider the coordinated short-plus-redemption attack against a defensively programmable
+      &#x20BF;USD. The attacker mints $100M, builds a $100M BTC short, then attempts mass fiat
+      redemption to force selling and crash spot. The obstacles stack:
+    </p>
+
+    <p>
+      <strong>BTC-default redemption</strong> means the consortium transfers Bitcoin rather than
+      selling it. No forced selling, no spot impact, no short profit.
+      <strong>Time-weighted fees</strong> on freshly minted tokens cost 3% &mdash; $3M &mdash; before
+      any potential profit.
+      <strong>Volume-triggered escalation</strong> adds another 3% at scale &mdash; $6M total.
+      <strong>Velocity limits</strong> spread the redemption over weeks, during which the short
+      accrues carrying costs. Even accepting BTC-default redemption and selling personally,
+      the selling is distributed and gradual &mdash; nothing like the concentrated dump a short requires.
+    </p>
+
+    <div class="callout">
+      <p><strong>The defender&rsquo;s advantage is structural, not tactical.</strong> The protocol does not need to detect the attacker, identify their strategy, or respond in real time. It applies the same rules to everyone. The rules happen to make the attack uneconomical. Defense by design, not defense by decision.</p>
+    </div>
+
+    <!-- ═══ SECTION 10 ═══ -->
+    <span class="sec-num">Section 10</span>
+    <h2>The Long Game</h2>
+
+    <p>
+      Every mechanism in this paper is designed for the transition period &mdash; the years during which
+      holders still think of &#x20BF;USD as &ldquo;digital dollars&rdquo; and fiat redemption remains
+      psychologically relevant. As the ecosystem matures &mdash; merchants accept &#x20BF;USD, workers
+      receive salaries, lenders denominate loans &mdash; redemption becomes economically irrational.
+      Tokens circulate indefinitely. Reserve pressure approaches zero.
+    </p>
+
+    <p>
+      The defensive mechanisms go permanently dormant. Not because they are disabled, but because the
+      conditions that would trigger them can no longer occur. The bridge to fiat remains open. Nobody
+      crosses it. The defenses kept the network alive long enough for the network to become self-sustaining.
+    </p>
+
+    <p>
+      This is the fundamental difference. CBDC controls are designed to be permanent &mdash; an
+      architecture of indefinite state authority over money. &#x20BF;USD defenses are designed to be
+      temporary &mdash; scaffolding that comes down when the building can stand on its own.
+    </p>
+
+    <!-- ═══ CONCLUSION ═══ -->
+    <span class="sec-num">Conclusion</span>
+    <h2>Money That Protects, Not Controls</h2>
+
+    <p>
+      Programmable money is coming. CBDCs are in active development across more than 130 countries.
+      The question is not whether programmable money will exist. The question is whether the only
+      programmable money available will be money that serves the state at the expense of the individual.
+    </p>
+
+    <p>
+      The answer is no. The same technical capability that enables CBDC surveillance can be
+      repurposed &mdash; structurally, permanently, and verifiably &mdash; to build money that defends
+      its holders instead of monitoring them.
+    </p>
+
+    <div class="thesis">
+      <p>CBDCs program money to control its holders. TBDCs program money to defend them. Same technology, opposite philosophy, opposite beneficiary. The world does not have to choose between uncontrolled money and controlled people. It can have programmable money that serves the people who hold it.</p>
+    </div>
+
+    <!-- DOWNLOAD -->
+    <div class="download-banner" id="download">
+      <div class="download-banner-text">
+        <strong>Full Paper</strong><br>
+        Programmable Money That Protects &mdash; 12 sections, complete with
+        fee schedules, game-theoretic analysis, and technical implementation details.
+      </div>
+      <button class="download-btn" onclick="window.print();">Print / Save as PDF</button>
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <a href="knowledge-base.html" class="btn-primary">&larr; Knowledge Base</a>
+    <a href="tbd-usd.html" class="btn-secondary">&#x20BF;USD Overview &rarr;</a>
+    <a href="article-tbdc-vs-cbdc.html" class="btn-secondary">TBDC vs CBDC &rarr;</a>
+    <a href="btcc.html" class="btn-secondary">Bitcoin Currency (&#x20BF;C) &rarr;</a>
+  </div>
+
+</div>
+
+<footer>
+  <p>
+    <a href="index.html">Home</a> &nbsp;&bull;&nbsp;
+    <a href="knowledge-base.html">Knowledge Base</a> &nbsp;&bull;&nbsp;
+    <a href="specification.html">Specification</a> &nbsp;&bull;&nbsp;
+    <a href="https://github.com/BTCADP/btcadp-research" target="_blank" rel="noopener">GitHub</a>
+  </p>
+  <p style="margin-top:8px;">CC0 Public Domain &bull; btcadp.org &bull; 2026</p>
+</footer>
+
+</body>
+</html>
