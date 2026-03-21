@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Three Worlds | Why ₿C and Not Just BTC? | btcadp.org</title>
+    <meta name="description" content="A visual guide to why Bitcoin needs a unit of account. The Fiat Treadmill, The Round Trip, and the ₿C Circular Economy — three ways to live on a paycheck, illustrated with 267 real biweekly pay periods.">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --bg2: #111111;
+            --bg3: #1a1a1a;
+            --border: #2a2a2a;
+            --text: #e8e8e8;
+            --muted: #888888;
+            --muted2: #555555;
+            --orange: #f7931a;
+            --orange-dim: rgba(247, 147, 26, 0.10);
+            --orange-dim2: rgba(247, 147, 26, 0.05);
+            --red: #ef4444;
+            --red-dim: rgba(239, 68, 68, 0.08);
+            --green: #4caf7d;
+            --green-dim: rgba(76, 175, 125, 0.10);
+            --font: 'Georgia', 'Times New Roman', serif;
+            --mono: 'Courier New', Courier, monospace;
+            --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font);
+            line-height: 1.75;
+            font-size: 17px;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(10,10,10,0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 2rem;
+            display: flex; align-items: center; justify-content: space-between;
+            height: 56px;
+        }
+        .nav-brand {
+            font-family: var(--mono); font-size: 1rem; font-weight: bold;
+            color: var(--orange); text-decoration: none; letter-spacing: 0.05em;
+        }
+        .nav-links { display: flex; gap: 0.25rem; list-style: none; }
+        .nav-links a {
+            color: var(--muted); text-decoration: none; font-family: var(--sans);
+            font-size: 0.85rem; padding: 0.4rem 0.8rem; border-radius: 4px;
+            transition: color 0.2s, background 0.2s; letter-spacing: 0.03em;
+        }
+        .nav-links a:hover { color: var(--text); background: var(--bg3); }
+        .nav-links a.active { color: var(--orange); }
+
+        /* ── HERO ── */
+        .hero {
+            border-bottom: 1px solid var(--border);
+            padding: 5rem 2rem 4rem;
+            text-align: center;
+            background: radial-gradient(ellipse at 50% 0%, rgba(247,147,26,0.07) 0%, transparent 60%);
+        }
+        .hero-label {
+            font-family: var(--mono); font-size: 0.72rem;
+            letter-spacing: 0.22em; color: var(--orange);
+            text-transform: uppercase; margin-bottom: 1.2rem;
+        }
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: normal; letter-spacing: -0.02em;
+            line-height: 1.15; margin-bottom: 1.2rem; color: #fff;
+        }
+        .hero h1 span { color: var(--orange); }
+        .hero-sub {
+            font-family: var(--sans); font-size: 1.05rem;
+            color: var(--muted); max-width: 620px;
+            margin: 0 auto 2rem; line-height: 1.65;
+        }
+        .hero-meta {
+            display: flex; justify-content: center; gap: 1.2rem;
+            flex-wrap: wrap; font-family: var(--sans); font-size: 0.78rem;
+            color: var(--muted2);
+        }
+        .hero-meta span {
+            padding: 0.3rem 0.8rem; border-radius: 4px;
+            border: 1px solid var(--border);
+        }
+
+        /* ── CONTENT ── */
+        .content { max-width: 760px; margin: 0 auto; padding: 0 2rem 6rem; }
+
+        /* ── SECTIONS ── */
+        .section { padding: 4rem 0 0; }
+        .section-num {
+            font-family: var(--mono); font-size: 0.72rem;
+            letter-spacing: 0.2em; color: var(--muted2);
+            text-transform: uppercase; margin-bottom: 0.6rem;
+        }
+        .section-num.orange { color: var(--orange); }
+        .section h2 {
+            font-size: clamp(1.4rem, 3vw, 1.9rem);
+            font-weight: normal; letter-spacing: -0.01em;
+            color: #fff; margin-bottom: 1.2rem; line-height: 1.25;
+        }
+        .section h2 span { color: var(--orange); }
+        .section h2 .gray { color: var(--muted); }
+        .section h2 .red { color: var(--red); }
+        .section p {
+            color: #c8c8c8; margin-bottom: 1.2rem; font-size: 1.02rem;
+        }
+        .section p:last-child { margin-bottom: 0; }
+
+        hr.divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+        /* ── CALLOUT ── */
+        .callout {
+            border-left: 3px solid var(--orange);
+            background: var(--orange-dim2);
+            padding: 1.2rem 1.4rem; margin: 1.6rem 0;
+            border-radius: 0 6px 6px 0;
+        }
+        .callout p { margin: 0; font-size: 1rem; color: #d8d8d8; line-height: 1.65; }
+        .callout.gray { border-left-color: var(--muted); background: rgba(136,136,136,0.05); }
+        .callout.red { border-left-color: var(--red); background: var(--red-dim); }
+        .callout.green { border-left-color: var(--green); background: var(--green-dim); }
+
+        /* ── PULL QUOTE ── */
+        .pull-quote {
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 3rem 0;
+            margin: 3rem 0;
+            text-align: center;
+        }
+        .pull-quote p {
+            font-size: clamp(1.2rem, 3vw, 1.6rem);
+            color: #fff;
+            line-height: 1.5;
+            max-width: 600px;
+            margin: 0 auto;
+            font-style: italic;
+        }
+        .pull-quote p strong { color: var(--orange); font-style: normal; }
+
+        /* ── TABLE ── */
+        .data-table { width: 100%; border-collapse: collapse; margin: 1.4rem 0; }
+        .data-table th {
+            font-family: var(--mono); font-size: 0.68rem;
+            letter-spacing: 0.15em; color: var(--muted2);
+            text-transform: uppercase; text-align: left;
+            padding: 0.7rem 0.8rem; border-bottom: 2px solid var(--border);
+            font-weight: 600;
+        }
+        .data-table td {
+            padding: 0.6rem 0.8rem;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.92rem;
+        }
+        .data-table tr:nth-child(even) { background: rgba(255,255,255,0.015); }
+        .data-table .mono { font-family: var(--mono); font-size: 0.82rem; }
+        .data-table .orange { color: var(--orange); font-weight: 600; }
+        .data-table .red { color: var(--red); }
+        .data-table .dim { color: var(--muted2); font-size: 0.78rem; }
+        .data-table .right { text-align: right; }
+
+        /* ── STAT ROW ── */
+        .stats {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem; margin: 1.6rem 0;
+        }
+        .stat {
+            background: var(--bg2); border: 1px solid var(--border);
+            border-radius: 8px; padding: 1.2rem 1.4rem;
+        }
+        .stat-label {
+            font-family: var(--mono); font-size: 0.68rem;
+            letter-spacing: 0.12em; color: var(--muted2);
+            text-transform: uppercase; margin-bottom: 0.5rem;
+        }
+        .stat-value {
+            font-family: var(--font); font-size: 1.5rem;
+            color: #fff; margin-bottom: 0.2rem;
+        }
+        .stat-value.orange { color: var(--orange); }
+        .stat-value.red { color: var(--red); }
+        .stat-value.gray { color: var(--muted); }
+        .stat-value.green { color: var(--green); }
+        .stat-sub { font-family: var(--sans); font-size: 0.78rem; color: var(--muted2); }
+
+        /* ── VISUAL BARS (CSS-only charts) ── */
+        .bar-chart { margin: 1.6rem 0; }
+        .bar-row {
+            display: flex; align-items: center; gap: 0.8rem;
+            margin-bottom: 0.5rem; font-family: var(--sans); font-size: 0.82rem;
+        }
+        .bar-label {
+            width: 80px; text-align: right; color: var(--muted);
+            font-family: var(--mono); font-size: 0.75rem; flex-shrink: 0;
+        }
+        .bar-track {
+            flex: 1; height: 22px; background: var(--bg2);
+            border-radius: 3px; overflow: hidden; position: relative;
+        }
+        .bar-fill {
+            height: 100%; border-radius: 3px;
+            transition: width 0.6s ease;
+        }
+        .bar-val {
+            width: 70px; color: var(--muted); font-family: var(--mono);
+            font-size: 0.75rem; flex-shrink: 0;
+        }
+
+        /* ── WORLD INDICATOR ── */
+        .world-tag {
+            display: inline-block;
+            font-family: var(--mono); font-size: 0.68rem;
+            letter-spacing: 0.15em; text-transform: uppercase;
+            padding: 0.25rem 0.7rem; border-radius: 4px;
+            margin-bottom: 0.8rem;
+        }
+        .world-tag.fiat { color: var(--muted); background: rgba(136,136,136,0.1); border: 1px solid rgba(136,136,136,0.2); }
+        .world-tag.bridge { color: var(--red); background: var(--red-dim); border: 1px solid rgba(239,68,68,0.2); }
+        .world-tag.circular { color: var(--orange); background: var(--orange-dim); border: 1px solid rgba(247,147,26,0.2); }
+
+        /* ── SYNTHESIS CARDS ── */
+        .synthesis {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem; margin: 1.6rem 0;
+        }
+        .synth-card {
+            background: var(--bg2); border: 1px solid var(--border);
+            border-top: 3px solid var(--orange);
+            border-radius: 0 0 8px 8px; padding: 1.4rem;
+        }
+        .synth-card h3 {
+            font-size: 1.05rem; color: #fff; margin: 0.6rem 0 0.5rem;
+            font-weight: normal;
+        }
+        .synth-card p {
+            font-family: var(--sans); font-size: 0.88rem;
+            color: var(--muted); line-height: 1.6; margin: 0;
+        }
+        .synth-icon { font-size: 1.5rem; }
+
+        /* ── CTA ── */
+        .cta-row { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.6rem; }
+        .btn-primary {
+            background: var(--orange); color: #000; text-decoration: none;
+            font-family: var(--sans); font-size: 0.9rem; font-weight: 600;
+            padding: 0.7rem 1.6rem; border-radius: 6px; letter-spacing: 0.02em;
+            transition: opacity 0.2s;
+        }
+        .btn-primary:hover { opacity: 0.88; }
+        .btn-secondary {
+            background: transparent; color: var(--muted); text-decoration: none;
+            font-family: var(--sans); font-size: 0.9rem;
+            padding: 0.7rem 1.6rem; border: 1px solid var(--border);
+            border-radius: 6px; letter-spacing: 0.02em;
+            transition: color 0.2s, border-color 0.2s;
+        }
+        .btn-secondary:hover { color: var(--text); border-color: var(--muted); }
+
+        /* ── FOOTER ── */
+        footer {
+            text-align: center; padding: 2.5rem 2rem;
+            border-top: 1px solid var(--border);
+            font-family: var(--sans); font-size: 0.82rem; color: var(--muted2);
+        }
+        footer a { color: var(--muted); text-decoration: none; }
+        footer a:hover { color: var(--text); }
+
+        /* ── MOBILE ── */
+        @media (max-width: 600px) {
+            nav { padding: 0 1rem; }
+            .nav-links { display: none; }
+            .hero { padding: 3.5rem 1.5rem 3rem; }
+            .content { padding: 0 1.5rem 4rem; }
+            .stats { grid-template-columns: 1fr; }
+            .synthesis { grid-template-columns: 1fr; }
+            .cta-row { flex-direction: column; align-items: stretch; text-align: center; }
+            .bar-label { width: 60px; font-size: 0.65rem; }
+            .data-table { font-size: 0.82rem; }
+            .data-table td, .data-table th { padding: 0.5rem 0.4rem; }
+        }
+    </style>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <a href="index.html" class="nav-brand">BTCADP</a>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="beginners-guide.html">Start Here</a></li>
+        <li><a href="btcc.html">₿C</a></li>
+        <li><a href="tbd-usd.html">₿USD</a></li>
+        <li><a href="specification.html">Specification</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="knowledge-base.html">Research</a></li>
+    </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+    <div class="hero-label">Visual Guide · The Case for ₿C</div>
+    <h1>The Fiat Treadmill, The Round Trip,<br>and the <span>₿C Circular Economy</span></h1>
+    <p class="hero-sub">
+        You get paid every two weeks. You buy coffee. There are three economies
+        you could be living in — and only one of them works.
+        This is why Bitcoin needs a unit of account.
+    </p>
+    <div class="hero-meta">
+        <span>Based on 267 real biweekly pay periods</span>
+        <span>January 2016 – March 2026</span>
+        <span>~8 min read</span>
+    </div>
+</div>
+
+<div class="content">
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- THE MENU                                               -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <div class="section">
+        <div class="section-num orange">The Setup</div>
+        <h2>One cup of coffee. <span>Three price tags.</span></h2>
+        <p>
+            Before we get to the three worlds, look at what happens when you price the same cup of
+            coffee in three different denominations.
+        </p>
+
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>When</th>
+                    <th>USD Price</th>
+                    <th>BTC Price</th>
+                    <th>₿C Price</th>
+                    <th>Context</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Jan 2016</strong></td>
+                    <td class="red">$4.50</td>
+                    <td class="mono red">1,022,286 sats</td>
+                    <td class="mono orange">0.0313 ₿C</td>
+                    <td class="dim">BTC at $440</td>
+                </tr>
+                <tr>
+                    <td><strong>Dec 2017</strong></td>
+                    <td class="red">$4.77</td>
+                    <td class="mono red">24,925 sats</td>
+                    <td class="mono orange">0.0079 ₿C</td>
+                    <td class="dim">BTC all-time high</td>
+                </tr>
+                <tr>
+                    <td><strong>Nov 2018</strong></td>
+                    <td class="red">$4.90</td>
+                    <td class="mono red">133,533 sats</td>
+                    <td class="mono orange">0.0036 ₿C</td>
+                    <td class="dim">BTC crashed 84%</td>
+                </tr>
+                <tr>
+                    <td><strong>Mar 2020</strong></td>
+                    <td class="red">$5.10</td>
+                    <td class="mono red">94,101 sats</td>
+                    <td class="mono orange">0.0025 ₿C</td>
+                    <td class="dim">COVID crash</td>
+                </tr>
+                <tr>
+                    <td><strong>Nov 2021</strong></td>
+                    <td class="red">$5.35</td>
+                    <td class="mono red">7,964 sats</td>
+                    <td class="mono orange">0.0009 ₿C</td>
+                    <td class="dim">BTC at $67k</td>
+                </tr>
+                <tr>
+                    <td><strong>Jun 2022</strong></td>
+                    <td class="red">$5.45</td>
+                    <td class="mono red">29,790 sats</td>
+                    <td class="mono orange">0.0008 ₿C</td>
+                    <td class="dim">BTC crashed 73%</td>
+                </tr>
+                <tr>
+                    <td><strong>Mar 2026</strong></td>
+                    <td class="red">$6.08</td>
+                    <td class="mono red">8,642 sats</td>
+                    <td class="mono orange">0.0003 ₿C</td>
+                    <td class="dim">Today</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>
+            Read each column. USD creeps up — that is inflation, doing what it always does. BTC is
+            chaos: 7,964 sats one year, 133,533 the next, then back to 8,642. No merchant can run a
+            business repricing their menu by a factor of 17 between paychecks.
+        </p>
+        <p>
+            Now look at ₿C. It moves in one direction: <em>down</em>. From 0.0313 to 0.0003 over ten
+            years, smoothly, every single pay period. That is a price tag you can plan around. That is
+            a price tag that makes commerce possible.
+        </p>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- WORLD 1: THE FIAT TREADMILL                           -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <div class="section">
+        <div class="world-tag fiat">World 1</div>
+        <div class="section-num">01 — The Fiat Treadmill</div>
+        <h2>You earn dollars. <span class="gray">You spend dollars.</span></h2>
+        <p>
+            You earn $2,307.69 every two weeks — a $60,000 annual salary. Everything is priced in
+            dollars. You know this world. You live in it.
+        </p>
+        <p>
+            The problem is invisible because it is slow. Your paycheck number does not change. But
+            what it buys shrinks a little bit every pay period. In January 2016, your paycheck bought
+            513 cups of coffee. By March 2026, the same paycheck buys 379. Nothing changed except
+            what a dollar is worth.
+        </p>
+
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-label">2016: Coffees per paycheck</div>
+                <div class="stat-value">513 ☕</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">2026: Coffees per paycheck</div>
+                <div class="stat-value red">379 ☕</div>
+                <div class="stat-sub">Same paycheck. Fewer coffees.</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Purchasing power lost</div>
+                <div class="stat-value red">−26%</div>
+                <div class="stat-sub">To inflation. Guaranteed.</div>
+            </div>
+        </div>
+
+        <p>
+            Coffee went from $4.50 to $6.08. That is three percent annual inflation compounding for
+            a decade. It does not feel dramatic in any given month. But over ten years, more than a
+            quarter of your purchasing power is gone. The treadmill never stops, and it never runs
+            in your favor.
+        </p>
+
+        <div class="callout gray">
+            <p>
+                This is the economy everyone knows. It is stable in the sense that you can plan
+                around it — prices move slowly and predictably. But the direction is always the same:
+                your money buys less, every paycheck, forever. If you want to maintain purchasing
+                power, you must invest. Saving is penalized by design. Remember this — it is the
+                exact property that the ₿C economy inverts.
+            </p>
+        </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- WORLD 2: THE ROUND TRIP                               -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <div class="section">
+        <div class="world-tag bridge">World 2</div>
+        <div class="section-num">02 — The Round Trip</div>
+        <h2>You earn dollars. You hold Bitcoin. <span class="red">You spend dollars.</span></h2>
+        <p>
+            You are a Bitcoiner. You understand that Bitcoin is the best savings technology ever
+            created. So every payday, you convert your $2,307 into BTC. But the world around you
+            still prices everything in dollars. So every time you buy something, you are forced to
+            convert <em>back</em>. Fiat → BTC → fiat. Two conversions. Two exposures to BTC spot
+            volatility.
+        </p>
+        <p>
+            The first conversion is the one you choose. The second is the one the fiat-denominated
+            world forces on you. And that second conversion is where it hurts.
+        </p>
+
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-label">Best paycheck</div>
+                <div class="stat-value green">748 ☕</div>
+                <div class="stat-sub">Nov 2017 — BTC doubled in two weeks</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Worst paycheck</div>
+                <div class="stat-value red">293 ☕</div>
+                <div class="stat-sub">Nov 2018 — BTC dropped 38%</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">The range</div>
+                <div class="stat-value red">293 – 748</div>
+                <div class="stat-sub">2.5× spread, paycheck to paycheck</div>
+            </div>
+        </div>
+
+        <p>
+            In the best two-week stretch, your paycheck was worth 748 coffees — far more than the
+            fiat saver ever sees. In the worst, it was 293 — far less than even the slowly eroding
+            fiat paycheck. The problem is not that you are holding the wrong asset. Bitcoin's
+            long-term trajectory is up, and dramatically so. The problem is the round trip.
+        </p>
+        <p>
+            Every purchase forces you out of Bitcoin and back into the fiat frame, at whatever spot
+            price happens to prevail at that moment. Some paychecks you feel rich. Others you cannot
+            afford lunch. This is not a sustainable way to live, and it is not a system that can
+            support commerce.
+        </p>
+
+        <div class="callout red">
+            <p>
+                This is where most Bitcoiners live today. They understand fiat is a melting ice cube.
+                They hold Bitcoin. But because the world still prices things in dollars, every
+                transaction is a forced round trip — and that round trip imports all of Bitcoin's
+                volatility into their day-to-day purchasing power. The round trip is better than the
+                treadmill over a decade, but it is chaos to live on paycheck to paycheck.
+            </p>
+        </div>
+
+        <p>
+            This is the problem that <a href="pragmatic-bridge.html" style="color:var(--orange);text-decoration:none;border-bottom:1px solid rgba(247,147,26,0.3);">₿USD</a>
+            is built to solve during the transition. ₿USD is a dollar-pegged token backed by Bitcoin
+            reserves — it lets someone in the round trip hold a stable dollar-equivalent without leaving
+            the Bitcoin ecosystem. The merchant who needs to pay rent in fiat next week does not have to
+            sell raw BTC at whatever spot price happens to prevail that day. ₿USD absorbs that volatility
+            so the merchant does not have to. It is bridge infrastructure — scaffolding designed to carry
+            people from World 2 into World 3, and to bear less weight as the circular economy grows.
+        </p>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- WORLD 3: THE ₿C CIRCULAR ECONOMY                     -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <div class="section">
+        <div class="world-tag circular">World 3</div>
+        <div class="section-num orange">03 — The ₿C Circular Economy</div>
+        <h2>You exit fiat once. <span>You never go back.</span></h2>
+        <p>
+            Here is the shift. You convert your paycheck to ₿C — which means buying Bitcoin,
+            denominated in ₿C terms. But now everything around you is <em>also</em> priced in ₿C.
+            Your employer pays you in ₿C. Your coffee shop prices in ₿C. Your rent, your
+            groceries, your phone bill — all in ₿C. You exit the fiat frame once, at the point of
+            earning, and you never convert back.
+        </p>
+        <p>
+            No round trip. No second conversion. No exposure to spot volatility at the point of
+            sale. You are now living in a Bitcoin-native economy with a unit of account that
+            actually works.
+        </p>
+        <p>
+            This does not happen overnight. Nobody converts an entire paycheck to ₿C on day one —
+            nor do they need to. The
+            <a href="pragmatic-bridge.html" style="color:var(--orange);text-decoration:none;border-bottom:1px solid rgba(247,147,26,0.3);">pragmatic path</a>
+            starts with the savings portion: the money that would otherwise sit in a bank account
+            losing value. ₿C as savings, fiat for obligations. As more merchants price in ₿C and
+            more employers offer ₿C payroll, the fraction of life that requires fiat shrinks
+            gradually. ₿USD covers the gap during the transition. The three stages — savings,
+            bridge, circular economy — are self-sequencing. No central authority decides when to
+            shift. Each participant adjusts as their own ₿C income and ₿C spending options grow.
+        </p>
+
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-label">2016: Coffees per paycheck</div>
+                <div class="stat-value">513 ☕</div>
+                <div class="stat-sub">Starting point — same as fiat</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">2026: Coffees per paycheck</div>
+                <div class="stat-value orange">49,322 ☕</div>
+                <div class="stat-sub">Same ₿C salary. 96× more purchasing power.</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Coffee price direction</div>
+                <div class="stat-value green">Always down ↓</div>
+                <div class="stat-sub">267 of 267 pay periods</div>
+            </div>
+        </div>
+
+        <p>
+            The ₿C-denominated salary that bought 513 coffees in January 2016 buys 49,322 coffees
+            in March 2026. Not because you got a raise — the ₿C amount never changed. Because
+            everything priced in ₿C gets cheaper over time. This is what a deflationary economy
+            looks like from the inside. In the fiat world, saving is penalized — your money buys
+            less every year unless you invest it. In the ₿C economy, saving <em>is</em> the optimal
+            strategy. Your purchasing power grows every pay period just by holding.
+        </p>
+        <p>
+            Coffee dropped from 0.0313 ₿C to 0.0003 ₿C. Not in one dramatic crash, but smoothly,
+            predictably, every single pay period for ten years. You do not need to invest to
+            maintain purchasing power. You do not need a raise to afford more. The economy itself
+            rewards you for participating.
+        </p>
+        <p>
+            There is an important mechanical nuance underneath the stable prices. When you buy a
+            coffee for 0.0003 ₿C, you are transferring satoshis. The number of satoshis that flow
+            in that transaction changes with BTC spot — when spot is high, fewer sats move; when
+            spot is low, more sats move. But both sides of the transaction — what you earn and what
+            you spend — adjust through the same spot rate at the same moment. The ₿C price stays
+            the same. The sat flow fluctuates. Over many transactions, those fluctuations are
+            exactly what dollar-cost averaging smooths out — and since Bitcoin's long-run trajectory
+            is up, participants tend to accumulate surplus sats over time, not deficits.
+        </p>
+
+        <div class="callout green">
+            <p>
+                A critical distinction: this does not mean your <em>fiat-denominated</em> wealth is
+                immune to Bitcoin's volatility. If you need to exit back to dollars — to pay a
+                fiat-denominated debt, for instance — you are exposed to spot price. That is
+                precisely the problem ₿USD exists to solve during the transition. But inside the
+                ₿C economy, where prices are in ₿C and income is in ₿C, the volatility of BTC/USD
+                is irrelevant. Your coffee costs 0.0003 ₿C regardless of what fiat markets are
+                doing. That separation is the entire point.
+            </p>
+        </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- THE PULL QUOTE                                        -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <div class="pull-quote">
+        <p>
+            <strong>BTC is the asset.</strong> ₿C is the unit of account.
+            You need both. BTC gives you sound money.
+            <strong>₿C gives you price tags that make sense.</strong>
+        </p>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- SIDE BY SIDE                                          -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <div class="section">
+        <div class="section-num">04 — The Comparison</div>
+        <h2>Three paychecks. <span>Three outcomes.</span></h2>
+        <p>
+            Here is what the same paycheck — calibrated to buy 513 coffees in January 2016 — looks
+            like in each economy at key moments over the next decade.
+        </p>
+
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th class="right">Fiat ☕</th>
+                    <th class="right">Round Trip ☕</th>
+                    <th class="right">₿C ☕</th>
+                    <th>What happened</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Jan 2016</strong></td>
+                    <td class="right mono">513</td>
+                    <td class="right mono">513</td>
+                    <td class="right mono orange">513</td>
+                    <td class="dim">All start equal</td>
+                </tr>
+                <tr>
+                    <td><strong>Jun 2016</strong></td>
+                    <td class="right mono">506</td>
+                    <td class="right mono red">691</td>
+                    <td class="right mono orange">583</td>
+                    <td class="dim">BTC rally</td>
+                </tr>
+                <tr>
+                    <td><strong>Nov 2017</strong></td>
+                    <td class="right mono">485</td>
+                    <td class="right mono" style="color:var(--green);">748</td>
+                    <td class="right mono orange">1,594</td>
+                    <td class="dim">BTC at $11k — round trip peaks</td>
+                </tr>
+                <tr>
+                    <td><strong>Dec 2017</strong></td>
+                    <td class="right mono">484</td>
+                    <td class="right mono">608</td>
+                    <td class="right mono orange">2,021</td>
+                    <td class="dim">BTC at all-time high $19k</td>
+                </tr>
+                <tr>
+                    <td><strong>Nov 2018</strong></td>
+                    <td class="right mono">470</td>
+                    <td class="right mono red">293</td>
+                    <td class="right mono orange">4,408</td>
+                    <td class="dim">BTC crashed — round trip at worst</td>
+                </tr>
+                <tr>
+                    <td><strong>Mar 2020</strong></td>
+                    <td class="right mono">453</td>
+                    <td class="right mono red">311</td>
+                    <td class="right mono orange">6,436</td>
+                    <td class="dim">COVID crash</td>
+                </tr>
+                <tr>
+                    <td><strong>Nov 2021</strong></td>
+                    <td class="right mono">431</td>
+                    <td class="right mono">433</td>
+                    <td class="right mono orange">17,075</td>
+                    <td class="dim">BTC at $67k</td>
+                </tr>
+                <tr>
+                    <td><strong>Jun 2022</strong></td>
+                    <td class="right mono">423</td>
+                    <td class="right mono red">336</td>
+                    <td class="right mono orange">21,334</td>
+                    <td class="dim">BTC crashed 73%</td>
+                </tr>
+                <tr>
+                    <td><strong>Nov 2024</strong></td>
+                    <td class="right mono">395</td>
+                    <td class="right mono">471</td>
+                    <td class="right mono orange">32,891</td>
+                    <td class="dim">BTC at $84k</td>
+                </tr>
+                <tr>
+                    <td><strong>Mar 2026</strong></td>
+                    <td class="right mono">379</td>
+                    <td class="right mono">396</td>
+                    <td class="right mono orange">49,322</td>
+                    <td class="dim">Today</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>
+            The fiat column only goes down. The round trip column swings between 293 and 748 — you
+            never know what you will get. The ₿C column only goes up. Every single row, without
+            exception, for ten years.
+        </p>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- WHY THIS MATTERS                                      -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <div class="section">
+        <div class="section-num orange">05 — Why This Matters</div>
+        <h2><span>₿C makes the circular economy possible</span></h2>
+        <p>
+            The argument for Bitcoin as money has always had a missing piece. The asset is sound.
+            The network is secure. The supply is fixed. But you cannot run an economy on a unit of
+            account that swings 38% between paychecks. ₿C fills that gap — not by changing Bitcoin,
+            but by giving it a ruler that works for commerce.
+        </p>
+
+        <div class="synthesis">
+            <div class="synth-card">
+                <div class="synth-icon">🔄</div>
+                <h3>Exit fiat once</h3>
+                <p>
+                    Start with savings — the portion of your paycheck that would otherwise sit in
+                    a bank losing value. As ₿C acceptance grows, fiat obligations shrink. ₿USD
+                    covers the gap. The transition is gradual, bottom-up, and self-sequencing.
+                </p>
+            </div>
+            <div class="synth-card">
+                <div class="synth-icon">📉</div>
+                <h3>Prices only fall</h3>
+                <p>
+                    In a ₿C economy, the price of everything declines over time — because ₿C
+                    appreciates as Bitcoin's cumulative average price rises. Deflation by
+                    mathematics, not policy.
+                </p>
+            </div>
+            <div class="synth-card">
+                <div class="synth-icon">🚫</div>
+                <h3>No round trips</h3>
+                <p>
+                    The round trip hurts because it forces two conversions. The circular economy
+                    eliminates the second one. No converting back to fiat means no volatility
+                    exposure at point of sale.
+                </p>
+            </div>
+            <div class="synth-card">
+                <div class="synth-icon">📐</div>
+                <h3>₿C is the ruler</h3>
+                <p>
+                    BTC is the asset — sound money with a fixed supply. ₿C is the unit of
+                    account — price tags that make sense. You need both. Together, they make
+                    Bitcoin function as a currency.
+                </p>
+            </div>
+        </div>
+
+        <div class="callout">
+            <p>
+                None of this requires new technology. Bitcoin exists. The BTCADP methodology
+                exists. The ₿C formula is a cumulative average — any spreadsheet can compute it.
+                What is required is adoption: merchants, employers, and individuals choosing to
+                denominate in ₿C. The circular economy is not a technical problem. It is a
+                coordination problem. And it starts with a unit of account people can trust.
+            </p>
+        </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- CTA                                                    -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <div class="section">
+        <div class="section-num">Go Deeper</div>
+        <h2>Where to next</h2>
+        <p>
+            This page is a visual argument. The transition from World 2 to World 3 — how merchants,
+            employees, and savers navigate the journey practically — is the subject of
+            <a href="pragmatic-bridge.html" style="color:var(--orange);text-decoration:none;border-bottom:1px solid rgba(247,147,26,0.3);"><em>The Pragmatic Bridge</em></a>.
+            The technical foundations — the BTCADP specification, the ₿C protocol, and the full
+            historical dataset — are documented across the rest of this site.
+        </p>
+        <div class="cta-row">
+            <a href="pragmatic-bridge.html" class="btn-primary">The Pragmatic Bridge</a>
+            <a href="beginners-guide.html" class="btn-secondary">Start Here — Overview</a>
+            <a href="btcc.html" class="btn-secondary">₿C Deep Dive</a>
+            <a href="specification.html" class="btn-secondary">BTCADP Specification</a>
+        </div>
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <p>
+        <a href="index.html">Home</a> &nbsp;·&nbsp;
+        <a href="specification.html">BTCADP Specification</a> &nbsp;·&nbsp;
+        <a href="btcc-paper.html">₿C Paper</a> &nbsp;·&nbsp;
+        <a href="faq.html">FAQ</a> &nbsp;·&nbsp;
+        <a href="https://github.com/BTCADP/btcadp-research" target="_blank" rel="noopener">GitHub</a>
+    </p>
+    <p style="margin-top:0.8rem;">
+        CC0 Public Domain · btcadp.org · 2026<br>
+        <span style="font-size:0.75rem; color: var(--muted2);">
+            Data: BTCADP Historical Records · 267 biweekly periods · January 2016 – March 2026
+        </span>
+    </p>
+</footer>
+
+</body>
+</html>
