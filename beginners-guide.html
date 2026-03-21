@@ -370,6 +370,194 @@
 
         .btn-secondary:hover { color: var(--text); border-color: var(--muted); }
 
+        /* ── PILLAR CARDS ── */
+        .pillars {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.2rem;
+            margin: 2.5rem 0;
+        }
+
+        .pillar {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 2rem 1.4rem 1.6rem;
+            text-align: center;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+
+        .pillar:hover { transform: translateY(-2px); }
+
+        .pillar.orange { border-top: 3px solid var(--orange); }
+        .pillar.green  { border-top: 3px solid var(--green); }
+        .pillar.blue   { border-top: 3px solid var(--blue); }
+
+        .pillar-function {
+            font-family: var(--mono);
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .pillar.orange .pillar-function { color: var(--orange); }
+        .pillar.green  .pillar-function { color: var(--green); }
+        .pillar.blue   .pillar-function { color: var(--blue); }
+
+        .pillar-symbol {
+            font-family: var(--font);
+            font-size: 2.4rem;
+            font-weight: normal;
+            color: #fff;
+            margin-bottom: 0.3rem;
+            letter-spacing: -0.02em;
+        }
+
+        .pillar-name {
+            font-family: var(--sans);
+            font-size: 0.82rem;
+            color: var(--muted);
+            margin-bottom: 1.2rem;
+        }
+
+        .pillar-peg {
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            letter-spacing: 0.06em;
+            color: #fff;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 0.35rem 0.7rem;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .pillar-role {
+            font-family: var(--font);
+            font-size: 1.1rem;
+            color: #c8c8c8;
+            font-style: italic;
+            margin-bottom: 0.6rem;
+        }
+
+        .pillar-desc {
+            font-family: var(--sans);
+            font-size: 0.82rem;
+            color: var(--muted);
+            line-height: 1.55;
+        }
+
+        /* ── CYCLE CARDS ── */
+        .cycle-cards-label {
+            font-family: var(--mono);
+            font-size: 0.9rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--muted2);
+            text-align: center;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .cycle-cards {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.7rem;
+            margin-top: 0;
+            margin-bottom: 2.5rem;
+        }
+
+        .cycle-card {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.2rem 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+
+        .cycle-card:hover { transform: translateY(-2px); }
+
+        .cycle-card.orange { border-left: 3px solid var(--orange); }
+        .cycle-card.green  { border-left: 3px solid var(--green); }
+        .cycle-card.blue   { border-left: 3px solid var(--blue); }
+
+        .cycle-card-sym {
+            font-family: var(--font);
+            font-size: 1.1rem;
+            font-weight: normal;
+            color: #fff;
+            flex-shrink: 0;
+            width: 3rem;
+            text-align: center;
+        }
+
+        .cycle-card.orange .cycle-card-sym { color: var(--orange); }
+        .cycle-card.green  .cycle-card-sym { color: var(--green); }
+        .cycle-card.blue   .cycle-card-sym { color: var(--blue); }
+
+        .cycle-card-flow {
+            font-family: var(--sans);
+            font-size: 0.82rem;
+            color: var(--muted);
+            line-height: 1.5;
+            letter-spacing: 0.01em;
+        }
+
+        .hl-orange { color: var(--orange); font-weight: 600; }
+
+        /* ── BITCOIN FOUNDATION CARD ── */
+        .foundation-card {
+            background: var(--bg2);
+            border: 1px solid var(--orange);
+            border-radius: 8px;
+            padding: 1.6rem 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 1.4rem;
+            margin-bottom: 0;
+        }
+
+        .foundation-sym {
+            font-family: var(--mono);
+            font-size: 2.4rem;
+            color: var(--orange);
+            flex-shrink: 0;
+            width: 3.5rem;
+            text-align: center;
+            line-height: 1;
+        }
+
+        .foundation-body { flex: 1; }
+
+        .foundation-title {
+            font-family: var(--font);
+            font-size: 1.3rem;
+            color: #fff;
+            margin-bottom: 0.15rem;
+        }
+
+        .foundation-subtitle {
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--orange);
+            margin-bottom: 0.7rem;
+        }
+
+        .foundation-desc {
+            font-family: var(--sans);
+            font-size: 0.85rem;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
         /* ── FOOTER ── */
         footer {
             text-align: center;
@@ -390,6 +578,8 @@
             .hero { padding: 3.5rem 1.5rem 3rem; }
             .content { padding: 0 1.5rem 4rem; }
             .use-cases { grid-template-columns: 1fr; }
+            .pillars { grid-template-columns: 1fr; }
+            .foundation-card { flex-direction: column; text-align: center; }
             .cta-row { flex-direction: column; align-items: center; }
         }
     </style>
@@ -404,6 +594,7 @@
         <li><a href="beginners-guide.html" class="active">Start Here</a></li>
         <li><a href="btcc.html">₿C</a></li>
         <li><a href="tbd-usd.html">₿USD</a></li>
+        <li><a href="bond.html">₿ond</a></li>
         <li><a href="specification.html">Specification</a></li>
         <li><a href="faq.html">FAQ</a></li>
         <li><a href="knowledge-base.html">Research</a></li>
@@ -479,104 +670,105 @@
 
     <hr class="divider">
 
-    <!-- 3. THREE USE CASES -->
+    <!-- 3. THE FRAMEWORK -->
     <div class="section">
-        <div class="section-num">03 — What ₿C Makes Possible</div>
-        <h2>Three applications built on the same foundation</h2>
+        <div class="section-num">03 — The Framework</div>
+        <h2>Price it, save it, <span>spend it</span></h2>
         <p>
-            ₿C is a building block. Below are three concrete applications that become possible
-            once you have a stable, Bitcoin-native unit of account. Anyone can use ₿C to help build the Bitcoin economy.
+            Every monetary system needs three things: a unit of account, a store of value,
+            and a medium of exchange. ₿C makes all three possible on Bitcoin — each one
+            a purpose-built instrument sharing the same underlying asset.
         </p>
-
-        <div class="use-cases">
-
-            <div class="use-card orange">
-                <div class="use-card-label">Bitcoin Economy</div>
-                <h3>Pricing &amp; Commerce in ₿C</h3>
-                <p>
-                    Merchants and individuals can denominate goods, services, and contracts
-                    in ₿C. Day-to-day prices stay stable. Long-run, both sides of the
-                    transaction benefit from ₿C's steady appreciation against fiat.
-                </p>
-                <a href="btcc.html" class="use-card-link">Learn about ₿C →</a>
-            </div>
-
-            <div class="use-card green">
-                <div class="use-card-label">Bitcoin-Native Finance</div>
-                <h3>The ₿ond</h3>
-                <p>
-                    A Bitcoin-denominated bond instrument that uses ₿C as the benchmark
-                    return. It gives Bitcoin holders a way to deploy capital productively
-                    without leaving the Bitcoin system.
-                </p>
-                <a href="btcc.html#bond" class="use-card-link">Learn about ₿onds →</a>
-            </div>
-
-            <div class="use-card blue">
-                <div class="use-card-label">Fiat Interface</div>
-                <h3>₿USD — A Bitcoin-Backed Dollar</h3>
-                <p>
-                    A USD-pegged stablecoin fully backed by Bitcoin reserves held by a
-                    consortium of public Bitcoin treasury companies. A dollar for the
-                    Bitcoin era — not issued by any government.
-                </p>
-                <a href="tbd-usd.html" class="use-card-link">Learn about ₿USD →</a>
-            </div>
-
-        </div>
     </div>
 
-    <hr class="divider">
+    <div class="pillars">
 
-    <!-- 4. HOW THEY RELATE -->
-    <div class="section">
-        <div class="section-num">04 — How They Fit Together</div>
-        <h2>Two systems, one bridge</h2>
-        <p>
-            The Bitcoin economy and the fiat economy are two different worlds. ₿C serves a
-            different role in each.
-        </p>
-
-        <div class="analogy">
-            <div class="analogy-label">The two roles of ₿C</div>
-
-            <div class="analogy-row">
-                <div class="analogy-icon">₿</div>
-                <div class="analogy-body">
-                    <strong>Inside the Bitcoin economy</strong>
-                    <p>
-                        ₿C is used to price goods, services, and bonds directly in Bitcoin terms.
-                        Volatility is absorbed. Prices quoted in ₿C remain meaningful from one
-                        week to the next.
-                    </p>
-                </div>
-            </div>
-
-            <div class="analogy-row">
-                <div class="analogy-icon">$</div>
-                <div class="analogy-body">
-                    <strong>At the fiat interface</strong>
-                    <p>
-                        ₿USD uses Bitcoin reserves — valued at the ₿C price — to back
-                        a dollar-pegged token. It lets fiat users transact in a familiar unit
-                        while the underlying reserve appreciates in Bitcoin terms.
-                    </p>
-                </div>
+        <div class="pillar orange">
+            <div class="pillar-function">Unit of account</div>
+            <div class="pillar-symbol">₿C</div>
+            <div class="pillar-name">Bitcoin Currency</div>
+            <div class="pillar-role">For pricing</div>
+            <div class="pillar-desc">
+                The cumulative mean of every daily Bitcoin price since genesis.
+                Stable day-to-day. Appreciates long-run.
+                Everything gets denominated here.
             </div>
         </div>
 
-        <p>
-            Both applications are independent. You do not need ₿USD to use ₿C for
-            pricing. Both solve their own problem in each economy and ₿C is the thread
-            that runs through both of them.
-        </p>
+        <div class="pillar green">
+            <div class="pillar-function">Store of value</div>
+            <div class="pillar-symbol">₿ond</div>
+            <div class="pillar-name">Bitcoin Savings Bond</div>
+            <div class="pillar-peg">1 ₿ond = 1 USD</div>
+            <div class="pillar-role">For saving</div>
+            <div class="pillar-desc">
+                Pick a return — +10%, +25%, +50%, +100%.
+                It matures when ₿C hits your target and the treasury is solvent
+                on your specific bond. No coupon. No timeline. Just a result.
+            </div>
+        </div>
+
+        <div class="pillar blue">
+            <div class="pillar-function">Medium of exchange</div>
+            <div class="pillar-symbol">₿USD</div>
+            <div class="pillar-name">Treasury-Backed Digital Currency</div>
+            <div class="pillar-peg">1 ₿USD = 1 USD</div>
+            <div class="pillar-role">For spending</div>
+            <div class="pillar-desc">
+                A USD-pegged stablecoin backed by Bitcoin reserves held by
+                a consortium of public treasury companies.
+                A dollar for the Bitcoin era.
+            </div>
+        </div>
+
+    </div>
+
+    <!-- VIRTUOUS BUYING CYCLE CARDS -->
+    <div class="cycle-cards-label">Every instrument buys Bitcoin</div>
+    <div class="cycle-cards">
+
+        <div class="cycle-card orange">
+            <div class="cycle-card-sym">₿C</div>
+            <div class="cycle-card-flow">
+                Merchants pricing in ₿C → drives ₿ond &amp; ₿USD demand → <span class="hl-orange">buys BTC</span>
+            </div>
+        </div>
+
+        <div class="cycle-card green">
+            <div class="cycle-card-sym">₿ond</div>
+            <div class="cycle-card-flow">
+                Consumer sends USD → consortium buys BTC at spot → <span class="hl-orange">buys BTC</span>
+            </div>
+        </div>
+
+        <div class="cycle-card blue">
+            <div class="cycle-card-sym">₿USD</div>
+            <div class="cycle-card-flow">
+                User sends USD → consortium buys BTC at spot → <span class="hl-orange">buys BTC</span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- BITCOIN FOUNDATION CARD -->
+    <div class="foundation-card">
+        <div class="foundation-sym">₿</div>
+        <div class="foundation-body">
+            <div class="foundation-title">Bitcoin</div>
+            <div class="foundation-subtitle">The foundational reserve asset</div>
+            <div class="foundation-desc">
+                Every instrument above requires a Bitcoin purchase at issuance. Bitcoin is the
+                single underlying asset backing ₿C's formula, ₿ond's appreciation, and ₿USD's
+                reserves. One asset. Three expressions.
+            </div>
+        </div>
     </div>
 
     <hr class="divider">
 
     <!-- 5. OPEN FOUNDATION -->
     <div class="section">
-        <div class="section-num">05 — The Bigger Picture</div>
+        <div class="section-num">04 — The Bigger Picture</div>
         <h2>An open foundation</h2>
         <p>
             The BTCADP price standard and the ₿C protocol are published as public domain
@@ -584,10 +776,10 @@
             on them, or critique them.
         </p>
         <p>
-            The three applications described here are proposals, not products. They exist to
+            The three instruments described here are proposals, not products. They exist to
             demonstrate that a stable, Bitcoin-native unit of account unlocks things that were
-            not previously possible. What else gets built on this foundation is an open
-            question.
+            not previously possible — and that every instrument built on it mechanically
+            strengthens Bitcoin itself.
         </p>
 
         <div class="foundation">
@@ -597,8 +789,8 @@
             </p>
             <div class="cta-row">
                 <a href="btcc.html" class="btn-primary">₿C — Deep Dive</a>
+                <a href="bond.html" class="btn-secondary">₿ond Overview</a>
                 <a href="tbd-usd.html" class="btn-secondary">₿USD Overview</a>
-                <a href="specification.html" class="btn-secondary">BTCADP Spec</a>
             </div>
         </div>
     </div>
