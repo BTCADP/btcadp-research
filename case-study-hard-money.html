@@ -205,10 +205,9 @@
 
     <p>
       The mechanics are built on a reserve system. In the current model, four ledgers are used across both the ₿ond savings product and ₿USD — two per product, keeping them cleanly separated. This article describes the ₿USD reserve mechanics; the full four-ledger architecture is documented in <a href="report-bitcoin-stablecoin.html">The Case for a Bitcoin-Backed Stablecoin</a>. When a user purchases a ₿USD token with
-      fiat currency, the treasury company mints ₿USD tokens — one per dollar received — and uses
-      the incoming cash to acquire a corresponding quantity of satoshis at the prevailing BTC spot
-      price. These satoshis are deposited into a pooled issuance ledger — Ledger 1 — that backs
-      outstanding ₿USD tokens.
+      fiat currency, the treasury company mints one ₿USD token and uses the incoming cash to acquire a
+      corresponding quantity of satoshis at the prevailing BTC spot price. These satoshis are deposited
+      into a pooled issuance ledger — Ledger 1 — that backs outstanding ₿USD tokens.
     </p>
 
     <p>
@@ -226,7 +225,7 @@
     </p>
 
     <h3>Reserve Ratio Under Different Spot Scenarios</h3>
-    <p>Assuming $18,000 in ₿USD issuance (18,000 tokens) at $70,000 spot, ₿C price ~$18,000, and Ledger 2 holding 0.25 BTC per $18,000 issued:</p>
+    <p>Assuming an issuance batch of $18,000 in ₿USD tokens (18,000 tokens at $1.00 each) when BTC spot is $70,000 (0.257 BTC acquired for Ledger 1), with a Ledger 2 backstop of 0.25 BTC:</p>
 
     <table class="data-table">
       <thead>
@@ -241,7 +240,7 @@
       <tbody>
         <tr><td>$140,000</td><td>$36,000</td><td>$35,000</td><td class="surplus">394%</td><td>Significant surplus</td></tr>
         <tr><td>$100,000</td><td>$25,714</td><td>$25,000</td><td class="surplus">282%</td><td>Surplus; profit on redemption</td></tr>
-        <tr><td>$70,000</td><td>$18,000</td><td>$17,500</td><td class="neutral">197%</td><td>Fully backed at issuance — neutral</td></tr>
+        <tr><td>$70,000</td><td>$18,000</td><td>$17,500</td><td class="neutral">197%</td><td>Ledger 1 at break-even; Ledger 2 provides backstop</td></tr>
         <tr><td>$50,000</td><td>$12,857</td><td>$12,500</td><td class="neutral">141%</td><td>Ledger 1 short; Ledger 2 covers gap</td></tr>
         <tr><td>$30,000</td><td>$7,714</td><td>$7,500</td><td class="stress">84%</td><td>Draw on Ledger 2; solvent</td></tr>
         <tr><td>$18,000</td><td>$4,629</td><td>$4,500</td><td class="stress">51%</td><td>Reserve under stress — Ledger 2 heavily drawn</td></tr>
@@ -272,7 +271,7 @@
       <div class="tradeoff-side">
         <div class="tradeoff-label">The Treasury Company</div>
         <div class="tradeoff-title">Trades stability for volatility — captures the spread</div>
-        <p>The treasury company accepts the obligation to honor redemptions at $1.00 USD regardless of BTC spot. In return, it captures the full upside of Bitcoin's spot appreciation above that fixed obligation. As long as BTC spot trends upward, the satoshis in Ledger 1 appreciate while the ₿USD liabilities they back remain static at $1.00 per token. That widening gap is the treasury company's compensation for bearing downside risk.</p>
+        <p>The treasury company accepts the obligation to honor redemptions at $1.00 USD regardless of BTC spot. In return, it captures the spread between Bitcoin's spot appreciation rate and the BTCC denomination's much slower appreciation rate. As long as BTC spot trends upward, the satoshis in Ledger 1 appreciate far faster than the ₿USD liabilities they back. That widening spread is the treasury company's compensation for bearing downside risk.</p>
       </div>
     </div>
 
@@ -286,31 +285,31 @@
     </p>
 
     <p>
-      The mechanism is the divergence between a moving asset and a fixed liability. The satoshis in
-      Ledger 1 appreciate at the BTC spot rate. The ₿USD liabilities they back are fixed at $1.00
-      per token — they do not move at all. As BTC spot rises, the gap between asset value and
-      liability value widens at an accelerating rate.
+      The mechanism is the divergence between two rates of change. The satoshis in Ledger 1
+      appreciate at the BTC spot rate. The ₿USD liabilities they back are fixed at $1.00 per
+      token. As BTC spot rises, the gap between asset value and liability value widens at an
+      accelerating rate.
     </p>
 
     <h3>Treasury Surplus at Different BTC Spot Levels</h3>
-    <p>Assuming $18,000,000 in ₿USD issuance (18 million tokens) at $70,000 spot:</p>
+    <p>Assuming $18,000,000 in ₿USD tokens issued at $70,000 spot (~257 BTC acquired for Ledger 1):</p>
 
     <table class="data-table">
       <thead>
         <tr>
           <th>BTC Spot</th>
           <th>Ledger 1 Value</th>
-          <th>Redemption Obligation</th>
+          <th>₿USD Obligation (Fixed)</th>
           <th>Treasury Spread</th>
           <th>vs. Holding Alone</th>
         </tr>
       </thead>
       <tbody>
-        <tr><td>$70,000</td><td>$18,000,000</td><td>~$18,000,000</td><td>$0</td><td class="neutral">0% (neutral)</td></tr>
-        <tr><td>$100,000</td><td>$25,714,000</td><td>~$18,000,000</td><td class="surplus">$7,714,000</td><td class="surplus">+43% above holding</td></tr>
-        <tr><td>$140,000</td><td>$36,000,000</td><td>~$18,000,000</td><td class="surplus">$18,000,000</td><td class="surplus">+100% — doubled intake</td></tr>
-        <tr><td>$200,000</td><td>$51,428,000</td><td>~$18,000,000</td><td class="surplus">$33,428,000</td><td class="surplus">+186% above holding</td></tr>
-        <tr><td>$500,000</td><td>$128,571,000</td><td>~$18,000,000</td><td class="surplus">$110,571,000</td><td class="surplus">+614% above holding</td></tr>
+        <tr><td>$70,000</td><td>$18,000,000</td><td>$18,000,000</td><td>$0</td><td class="neutral">0% (neutral)</td></tr>
+        <tr><td>$100,000</td><td>$25,714,000</td><td>$18,000,000</td><td class="surplus">$7,714,000</td><td class="surplus">+43% above holding</td></tr>
+        <tr><td>$140,000</td><td>$36,000,000</td><td>$18,000,000</td><td class="surplus">$18,000,000</td><td class="surplus">+100% — doubled intake</td></tr>
+        <tr><td>$200,000</td><td>$51,428,000</td><td>$18,000,000</td><td class="surplus">$33,428,000</td><td class="surplus">+186% above holding</td></tr>
+        <tr><td>$500,000</td><td>$128,571,000</td><td>$18,000,000</td><td class="surplus">$110,571,000</td><td class="surplus">+614% above holding</td></tr>
       </tbody>
     </table>
 
@@ -326,21 +325,20 @@
     <p>
       ₿USD tokens serve two distinct use cases within the same pool. Some tokens are used as a medium of
       exchange — purchased, circulated in commerce, and redeemed relatively quickly. Others are held as
-      a savings vehicle, purchased precisely because ₿USD is backed by Bitcoin reserves that appreciate over time —
-      appreciates slowly without the volatility of holding BTC directly.
+      a stable store of value by users who prefer the certainty of a $1.00 instrument backed by Bitcoin
+      over the volatility of holding BTC directly.
     </p>
 
     <p>
       Long-term holders do not redeem during a BTC spot downturn. They have no reason to: their ₿USD
-      token's $1.00 peg is stable and the underlying reserve is appreciating regardless of what BTC spot does on any
-      given day. During a spot decline — the only scenario in which Ledger 2 is tapped — the treasury
+      token's $1.00 peg holds, and the reserve system is designed to absorb exactly this scenario. During a spot decline — the only scenario in which Ledger 2 is tapped — the treasury
       company does not face redemption demand from the entire outstanding token supply. It faces demand
-      only from the transactional portion. The savings portion remains in place, exerting no redemption
+      only from the transactional portion. The long-term portion remains in place, exerting no redemption
       pressure.
     </p>
 
     <div class="callout">
-      <p><strong>This pooling dynamic is self-reinforcing.</strong> As ₿USD adoption grows and more users hold it as a savings vehicle, the proportion of "sticky" tokens increases. The treasury company's actual redemption exposure during a downturn shrinks as a percentage of outstanding tokens, even as the total number of tokens grows. Scale makes the system safer, not more fragile — the structural inverse of traditional banking.</p>
+      <p><strong>This pooling dynamic is self-reinforcing.</strong> As ₿USD adoption grows and more users hold tokens for extended periods, the proportion of "sticky" tokens increases. The treasury company's actual redemption exposure during a downturn shrinks as a percentage of outstanding tokens, even as the total number of tokens grows. Scale makes the system safer, not more fragile — the structural inverse of traditional banking.</p>
     </div>
 
     <h2>5. Conclusion</h2>

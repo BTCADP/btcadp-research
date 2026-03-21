@@ -492,7 +492,7 @@
   <p><strong>Step 3.</strong> Remove the lowest k% and the highest k% of values, where k = 25. If the number of values to remove is not an integer, round down (i.e., use floor). This means the trimming is conservative, preferring to include more data.</p>
   <p><strong>Step 4.</strong> Compute the arithmetic mean of the remaining values. This is the BTCADP for that day.</p>
   <div class="formula">BTCADP(d) = mean( trimmed&#x2082;&#x2085;( {VWAP&#x2081;(d), VWAP&#x2082;(d), &hellip;, VWAP&#x2099;(d)} ) )</div>
-  <p>The trimmed mean at k = 25% removes the top and bottom quartiles, making the result robust against outlier exchanges. Even if up to 25% of qualifying exchanges report fraudulent data, the BTCADP remains accurate, provided the majority report honestly.</p>
+  <p>The trimmed mean at k = 25% removes the top and bottom quartiles, making the result robust against outlier exchanges. Even if up to 25% of qualifying exchanges report fraudulent data, the BTCADP remains accurate, provided the majority report faithfully.</p>
   <blockquote><p><strong>Rationale:</strong> The trimmed mean was chosen over the median because it uses more of the available data while still being highly robust. With 20 exchanges, a median uses only 1&ndash;2 data points; a 25% trimmed mean uses 10.</p></blockquote>
 
   <h3>4.3 Equal Weighting of Exchanges</h3>
@@ -550,7 +550,7 @@
 
   <!-- SECTION 6 -->
   <h2 id="s6">6. Historical Eras and Methodology Transitions</h2>
-  <p>Bitcoin&rsquo;s data landscape has evolved dramatically since its inception. A single methodology applied uniformly to all eras would produce either false precision (in early years) or unnecessary imprecision (in recent years). The BTCADP specification therefore defines distinct historical eras, each with an appropriate methodology. This is not a weakness &mdash; it is intellectual honesty formalized as policy.</p>
+  <p>Bitcoin&rsquo;s data landscape has evolved dramatically since its inception. A single methodology applied uniformly to all eras would produce either false precision (in early years) or unnecessary imprecision (in recent years). The BTCADP specification therefore defines distinct historical eras, each with an appropriate methodology. This is not a weakness &mdash; it is intellectual rigor formalized as policy.</p>
 
   <h3>6.1 Era 0: Genesis (January 3, 2009 &ndash; July 17, 2010)</h3>
   <p><strong>BTCADP value: $0.00 for all days.</strong></p>
@@ -696,7 +696,7 @@
 
   <!-- SECTION 12 -->
   <h2 id="s12">12. Conclusion</h2>
-  <p>The BTCADP is designed to be the simplest number that can honestly and fairly answer the question of what Bitcoin was worth on any given day. It makes no claim to perfection in the early years of Bitcoin&rsquo;s history, where data is sparse and unreliable. It makes a strong claim to accuracy and robustness from 2018 onward, where the methodology can be fully applied.</p>
+  <p>The BTCADP is designed to be the simplest number that can accurately and fairly answer the question of what Bitcoin was worth on any given day. It makes no claim to perfection in the early years of Bitcoin&rsquo;s history, where data is sparse and unreliable. It makes a strong claim to accuracy and robustness from 2018 onward, where the methodology can be fully applied.</p>
   <p>The strength of the BTCADP lies not in the authority of its publisher but in the transparency of its methodology. Anyone can verify it. Anyone can reproduce it. Trust comes from the math, not an individual publisher or institution.</p>
 
   <div class="section-end">End of Specification &bull; BTCADP v1.0</div>
