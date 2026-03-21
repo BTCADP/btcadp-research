@@ -427,6 +427,110 @@
   .page-btn:hover:not(:disabled) { border-color: var(--orange); color: var(--orange); }
   .page-btn:disabled { opacity: 0.3; cursor: not-allowed; }
 
+  /* ===== CARD CAROUSEL ===== */
+  .carousel-section {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .carousel-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .carousel-label .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 8px;
+  }
+
+  .carousel-track {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 4px;
+  }
+
+  .carousel-track::-webkit-scrollbar { display: none; }
+
+  .carousel-card {
+    flex: 0 0 360px;
+    min-width: 300px;
+    max-width: 400px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px 28px;
+    scroll-snap-align: start;
+    text-decoration: none;
+    display: block;
+    transition: border-color 0.25s, transform 0.2s;
+  }
+
+  .carousel-card:hover {
+    border-color: rgba(247,147,26,0.4);
+    transform: translateY(-2px);
+  }
+
+  .carousel-card.orange-top { border-top: 3px solid var(--orange); }
+  .carousel-card.gray-top { border-top: 2px solid var(--text-muted); }
+
+  .carousel-card .card-tag {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .carousel-card.orange-top .card-tag { color: var(--orange); }
+  .carousel-card.gray-top .card-tag { color: var(--text-muted); }
+
+  .carousel-card .card-title {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+
+  .carousel-card .card-desc {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  .carousel-card .card-cta {
+    display: inline-block;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 14px;
+    font-family: var(--font-mono);
+    transition: color 0.2s;
+  }
+
+  .carousel-card:hover .card-cta { color: var(--orange); }
+
+  .carousel-scroll-hint {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  @media (max-width: 768px) {
+    .carousel-card { flex: 0 0 85vw; min-width: 260px; }
+  }
+
   .info-section { padding: 40px 0; }
   .info-title { font-family: var(--font-display); font-size: 22px; font-weight: 600; margin-bottom: 20px; }
 
@@ -554,73 +658,71 @@
     </div>
   </div>
 
-  <!-- FUNCTIONS OF MONEY BLOCK -->
-  <div style="padding:24px 0;border-bottom:1px solid var(--border);">
-    <div style="background:var(--bg-secondary);border:1px solid var(--border);border-top:3px solid var(--orange);border-radius:8px;padding:24px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
-      <div>
-        <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--orange);margin-bottom:6px;">Monetary Architecture</div>
-        <div style="font-family:var(--font-display);font-size:22px;font-weight:600;color:var(--text-primary);margin-bottom:8px;">The Three Functions of Money</div>
-        <div style="font-size:13px;color:var(--text-secondary);max-width:600px;line-height:1.7;">Every mature monetary system separates three functions: unit of account, medium of exchange, and store of value. The ₿C/₿USD ecosystem maps each to a purpose-built component &mdash; with two distinct mediums of exchange serving two populations that converge over time &mdash; all anchored to Bitcoin.</div>
-      </div>
-      <div>
-        <a href="functions-of-money.html" style="display:inline-block;font-size:12px;color:var(--text-secondary);text-decoration:none;border:1px solid var(--border);padding:6px 14px;border-radius:4px;transition:all 0.2s;font-family:var(--font-mono);" onmouseover="this.style.borderColor='var(--orange)';this.style.color='var(--orange)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-secondary)'">Learn More &rarr;</a>
-      </div>
+  <!-- ROW 1: ESSAYS & PAPERS (orange top, auto-scroll) -->
+  <div class="carousel-section">
+    <div class="carousel-label">
+      <span><span class="dot" style="background:var(--orange);"></span>Research</span>
+      <span class="carousel-scroll-hint">scroll &rarr;</span>
+    </div>
+    <div class="carousel-track" id="autoScrollTrack">
+      <a href="functions-of-money.html" class="carousel-card orange-top">
+        <div class="card-tag">Monetary Architecture</div>
+        <div class="card-title">The Three Functions of Money</div>
+        <div class="card-desc">Every mature monetary system separates three functions: unit of account, medium of exchange, and store of value. The ₿C/₿USD ecosystem maps each to a purpose-built component &mdash; all anchored to Bitcoin.</div>
+        <div class="card-cta">Learn More &rarr;</div>
+      </a>
+      <a href="pragmatic-bridge.html" class="carousel-card orange-top">
+        <div class="card-tag">Essay</div>
+        <div class="card-title">The Pragmatic Bridge</div>
+        <div class="card-desc">₿USD and ₿OND are the bridges from the fiat economy. ₿C is the key that unlocks the Bitcoin economy. How ordinary commerce, natural DCA, and better savings products build the transition &mdash; one sale, one paycheck, one sat at a time.</div>
+        <div class="card-cta">Read Essay &rarr;</div>
+      </a>
+      <a href="defensive-programmability.html" class="carousel-card orange-top">
+        <div class="card-tag">White Paper</div>
+        <div class="card-title">Programmable Money That Protects</div>
+        <div class="card-desc">CBDCs program money to control its holders. TBDCs program money to defend them. A framework for self-defending money &mdash; the structural inverse of CBDC surveillance.</div>
+        <div class="card-cta">Read Paper &rarr;</div>
+      </a>
+      <a href="pragmatic-hyperbitcoinization.html" class="carousel-card orange-top">
+        <div class="card-tag">Essay</div>
+        <div class="card-title">A Pragmatic Approach to Hyper-Bitcoinization</div>
+        <div class="card-desc">Building the bridge between the fiat and Bitcoin economies &mdash; how a Bitcoin-backed currency layer and ₿C denomination draw the world into the gravitational field of Bitcoin.</div>
+        <div class="card-cta">Read Essay &rarr;</div>
+      </a>
     </div>
   </div>
 
-  <!-- BITCOIN TIMEBLOCKS BLOCK -->
-  <div style="padding:24px 0;border-bottom:1px solid var(--border);">
-    <div style="background:var(--bg-secondary);border:1px solid var(--border);border-top:2px solid var(--text-muted);border-radius:8px;padding:24px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
-      <div>
-        <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">Concept</div>
-        <div style="font-family:var(--font-display);font-size:22px;font-weight:600;color:var(--text-primary);margin-bottom:8px;">Bitcoin Timeblocks</div>
-        <div style="font-size:13px;color:var(--text-secondary);max-width:600px;line-height:1.7;">Each UTC day is a timeblock &mdash; a single day's price permanently absorbed into the cumulative average. Like blocks on the chain, timeblocks become more immutable over time, anchoring the BTCC denomination against disruption and underpinning its long-run appreciation through a deterministic mathematical formula.</div>
-      </div>
-      <div>
-        <a href="bitcoin-timeblocks.html" style="display:inline-block;font-size:12px;color:var(--text-secondary);text-decoration:none;border:1px solid var(--border);padding:6px 14px;border-radius:4px;transition:all 0.2s;font-family:var(--font-mono);" onmouseover="this.style.borderColor='var(--orange)';this.style.color='var(--orange)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-secondary)'">Learn More &rarr;</a>
-      </div>
+  <!-- ROW 2: CONCEPTS (gray top, manual scroll) -->
+  <div class="carousel-section">
+    <div class="carousel-label">
+      <span><span class="dot" style="background:var(--text-muted);"></span>Concepts</span>
+      <span class="carousel-scroll-hint">scroll &rarr;</span>
     </div>
-  </div>
-
-  <!-- CURRENCY LAYER BLOCK -->
-  <div style="padding:24px 0;border-bottom:1px solid var(--border);">
-    <div style="background:var(--bg-secondary);border:1px solid var(--border);border-top:2px solid var(--text-muted);border-radius:8px;padding:24px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
-      <div>
-        <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">Concept</div>
-        <div style="font-family:var(--font-display);font-size:22px;font-weight:600;color:var(--text-primary);margin-bottom:8px;">Currency Layer</div>
-        <div style="font-size:13px;color:var(--text-secondary);max-width:600px;line-height:1.7;">A system in which users transact in a dollar-pegged denomination backed entirely by Bitcoin reserves. The volatility that has prevented Bitcoin from functioning as everyday money is abstracted away at the interface level.</div>
-      </div>
-      <div>
-        <a href="currency-layer.html" style="display:inline-block;font-size:12px;color:var(--text-secondary);text-decoration:none;border:1px solid var(--border);padding:6px 14px;border-radius:4px;transition:all 0.2s;font-family:var(--font-mono);" onmouseover="this.style.borderColor='var(--orange)';this.style.color='var(--orange)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-secondary)'">Learn More &rarr;</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- ₿USD BLOCK -->
-  <div style="padding:24px 0;border-bottom:1px solid var(--border);">
-    <div style="background:var(--bg-secondary);border:1px solid var(--border);border-top:2px solid var(--text-muted);border-radius:8px;padding:24px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
-      <div>
-        <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">Concept</div>
-        <div style="font-family:var(--font-display);font-size:22px;font-weight:600;color:var(--text-primary);margin-bottom:8px;">₿USD &mdash; Treasury-Backed Digital Currency</div>
-        <div style="font-size:13px;color:var(--text-secondary);max-width:600px;line-height:1.7;">A USD-pegged stablecoin backed by Bitcoin reserves held by a consortium of Bitcoin treasury companies. Uses Bitcoin Currency (₿C) as its conservative collateral floor. The structural inverse of a CBDC &mdash; no money printer, no discretionary monetary policy.</div>
-      </div>
-      <div>
-        <a href="tbd-usd.html" style="display:inline-block;font-size:12px;color:var(--text-secondary);text-decoration:none;border:1px solid var(--border);padding:6px 14px;border-radius:4px;transition:all 0.2s;font-family:var(--font-mono);" onmouseover="this.style.borderColor='var(--orange)';this.style.color='var(--orange)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-secondary)'">Learn More &rarr;</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- DEFENSIVE PROGRAMMABILITY BLOCK -->
-  <div style="padding:24px 0;border-bottom:1px solid var(--border);">
-    <div style="background:var(--bg-secondary);border:1px solid var(--border);border-top:2px solid var(--orange);border-radius:8px;padding:24px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
-      <div>
-        <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--orange);margin-bottom:6px;">White Paper</div>
-        <div style="font-family:var(--font-display);font-size:22px;font-weight:600;color:var(--text-primary);margin-bottom:8px;">Programmable Money That Protects</div>
-        <div style="font-size:13px;color:var(--text-secondary);max-width:600px;line-height:1.7;">CBDCs program money to control its holders. TBDCs program money to defend them. A framework for self-defending money &mdash; the structural inverse of CBDC surveillance.</div>
-      </div>
-      <div>
-        <a href="defensive-programmability.html" style="display:inline-block;font-size:12px;color:var(--text-secondary);text-decoration:none;border:1px solid var(--border);padding:6px 14px;border-radius:4px;transition:all 0.2s;font-family:var(--font-mono);" onmouseover="this.style.borderColor='var(--orange)';this.style.color='var(--orange)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-secondary)'">Read Paper &rarr;</a>
-      </div>
+    <div class="carousel-track">
+      <a href="bitcoin-timeblocks.html" class="carousel-card gray-top">
+        <div class="card-tag">Concept</div>
+        <div class="card-title">Bitcoin Timeblocks</div>
+        <div class="card-desc">Each UTC day is a timeblock &mdash; a single day's price permanently absorbed into the cumulative average. Like blocks on the chain, timeblocks become more immutable over time, anchoring the ₿C denomination.</div>
+        <div class="card-cta">Learn More &rarr;</div>
+      </a>
+      <a href="currency-layer.html" class="carousel-card gray-top">
+        <div class="card-tag">Concept</div>
+        <div class="card-title">Currency Layer</div>
+        <div class="card-desc">A system in which users transact in a dollar-pegged denomination backed entirely by Bitcoin reserves. The volatility that has prevented Bitcoin from functioning as everyday money is abstracted away at the interface level.</div>
+        <div class="card-cta">Learn More &rarr;</div>
+      </a>
+      <a href="tbd-usd.html" class="carousel-card gray-top">
+        <div class="card-tag">Concept</div>
+        <div class="card-title">₿USD &mdash; Treasury-Backed Digital Currency</div>
+        <div class="card-desc">A USD-pegged stablecoin backed by Bitcoin reserves held by a consortium of Bitcoin treasury companies. Uses ₿C as its conservative collateral floor. The structural inverse of a CBDC.</div>
+        <div class="card-cta">Learn More &rarr;</div>
+      </a>
+      <a href="two-spheres.html" class="carousel-card gray-top">
+        <div class="card-tag">Concept</div>
+        <div class="card-title">Two Spheres</div>
+        <div class="card-desc">The Bitcoin and fiat economies are two separate monetary spheres. Understanding where they touch &mdash; and where they don't &mdash; is essential to designing products that bridge them without compromising either.</div>
+        <div class="card-cta">Learn More &rarr;</div>
+      </a>
     </div>
   </div>
 
@@ -1136,6 +1238,53 @@ function downloadCSV() {
 loadData();
 startLiveFeeds();
 loadBTCCPrice();
+
+// ===========================================================================
+//  AUTO-SCROLL CAROUSEL
+// ===========================================================================
+
+(function() {
+  const track = document.getElementById('autoScrollTrack');
+  if (!track) return;
+
+  let scrollSpeed = 0.5; // pixels per frame
+  let paused = false;
+  let pauseTimeout = null;
+
+  function autoScroll() {
+    if (!paused) {
+      track.scrollLeft += scrollSpeed;
+      // Reset to start when we've scrolled past all content
+      if (track.scrollLeft >= track.scrollWidth - track.clientWidth - 1) {
+        track.scrollLeft = 0;
+      }
+    }
+    requestAnimationFrame(autoScroll);
+  }
+
+  // Pause on hover or touch
+  track.addEventListener('mouseenter', () => { paused = true; });
+  track.addEventListener('mouseleave', () => {
+    clearTimeout(pauseTimeout);
+    pauseTimeout = setTimeout(() => { paused = false; }, 1000);
+  });
+
+  // Pause on manual scroll/drag
+  track.addEventListener('scroll', () => {
+    paused = true;
+    clearTimeout(pauseTimeout);
+    pauseTimeout = setTimeout(() => { paused = false; }, 3000);
+  }, { passive: true });
+
+  // Pause on touch
+  track.addEventListener('touchstart', () => { paused = true; }, { passive: true });
+  track.addEventListener('touchend', () => {
+    clearTimeout(pauseTimeout);
+    pauseTimeout = setTimeout(() => { paused = false; }, 3000);
+  }, { passive: true });
+
+  requestAnimationFrame(autoScroll);
+})();
 </script>
 </body>
 </html>
