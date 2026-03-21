@@ -422,8 +422,8 @@
             The issuance process is straightforward. A consumer sends $1,000. The consortium
             purchases Bitcoin at spot with those funds and deposits it into Ledger 1. One thousand
             ₿USD tokens are issued. From that moment, the Ledger 1 Bitcoin tracks spot price while
-            the ₿USD liability remains fixed at $1.00 per token. As spot rises above the acquisition
-            price, Ledger 1 generates surplus. As spot falls below it, Ledger 2 covers the gap.
+            the ₿USD liability tracks the ₿C price — a cumulative historical average that moves
+            a fraction of a percent per day regardless of spot volatility.
         </p>
         <p>
             On redemption, the consortium sells the required Bitcoin from Ledger 1 and returns
@@ -440,7 +440,7 @@
         <div class="section-number">03</div>
         <h2>The ₿C Collateral Floor</h2>
         <p>
-            Total ₿USD issuance is capped at the Bitcoin Currency (₿C) denominated value of the
+            Total ₿USD issuance is capped at the Bitcoin Currency (₿C) measured value of the
             consortium's combined Bitcoin holdings — not spot value. Because ₿C is a conservative
             floor that currently sits at approximately one-quarter of spot price, the system is
             structurally overcollateralized at all times.
@@ -512,7 +512,7 @@
 
         <ol class="cycle">
             <li>Incoming USD purchases Bitcoin for Ledger 1, increasing spot demand directly.</li>
-            <li>Rising spot price increases the USD value of all consortium holdings, expanding the ₿C-denominated issuance ceiling.</li>
+            <li>Rising spot price increases the USD value of all consortium holdings, expanding the ₿C-measured issuance ceiling.</li>
             <li>Fee revenue, reinvested into Bitcoin during the bootstrapping phase, deepens Ledger 2 and further raises the floor.</li>
         </ol>
 
@@ -592,7 +592,7 @@
                     <td>Peg mechanism</td>
                     <td>1:1 fiat backing</td>
                     <td>Market incentives</td>
-                    <td class="highlight-col">Bitcoin on-chain reserves, two-ledger architecture</td>
+                    <td class="highlight-col">Bitcoin on-chain reserves, four-ledger architecture</td>
                 </tr>
                 <tr>
                     <td>Demand creates</td>
@@ -636,11 +636,10 @@
         </p>
         <p>
             The ₿C price serves two roles within ₿USD. First, it is the issuance ceiling: total
-            ₿USD supply cannot exceed the ₿C-denominated value of consortium holdings. Second, it
-            is the collateral floor: because ₿USD issuance is capped at the ₿C value — not spot
-            value — the system is structurally overcollateralized at all times. The gap between
-            spot and the slowly-moving ₿C floor ensures the collateral has room to absorb
-            drawdowns before the $1.00 peg is threatened.
+            ₿USD supply cannot exceed the ₿C-measured value of consortium holdings. Second, it
+            is the liability reference: the ₿USD obligation tracks the ₿C price, which appreciates
+            more slowly than Bitcoin spot, ensuring the collateral always has room to absorb
+            drawdowns before the peg is threatened.
         </p>
         <a href="btcc.html" class="hero-cta" style="margin-top:1rem;display:inline-flex;margin-right:0.75rem;">Learn about ₿C →</a>
         <a href="bond.html" class="hero-cta" style="margin-top:1rem;display:inline-flex;background:transparent;color:var(--orange);border:1px solid var(--orange);">Learn about ₿OND →</a>

@@ -178,11 +178,11 @@
 
     <h2>1. The Problem</h2>
     <p>
-      Bitcoin has operated continuously since January 2009. Lightning provides throughput.
-      Settlement is secure and final. What has not yet been built on top of Bitcoin is a
-      stable denomination layer for everyday commerce — Bitcoin's spot price can move 10%
-      in a day, making it impractical for the pricing, invoicing, and budgeting that
-      constitute most economic activity.
+      Bitcoin has not achieved widespread adoption as a medium of everyday exchange. The barrier
+      is not technical. The network has operated continuously since January 2009. Lightning
+      provides throughput. Settlement is secure and final. The barrier is that Bitcoin's spot
+      price can move 10% in a day, making it impractical for the pricing, invoicing, and
+      budgeting that constitute most economic activity.
     </p>
     <p>
       The stablecoin market has grown to over $200 billion in response to this problem. USDT
@@ -200,29 +200,29 @@
 
     <h2>2. The Architecture</h2>
     <p>
-      ₿USD is built on three components. Each is independent. Each depends only on the component below it.
+      ₿USD is built on three layers. Each is independent. Each depends only on the layer below it.
     </p>
 
     <div class="components">
       <div class="component">
-        <div class="component-tag">Foundation</div>
+        <div class="component-tag">Layer 1</div>
         <div class="component-name" style="color:var(--orange);">BTCADP</div>
         <p>The reference price. A daily Bitcoin price computed from qualifying exchanges using a 25% trimmed mean. Any party can reproduce it independently. The methodology is the authority — no institution required.</p>
       </div>
       <div class="component">
-        <div class="component-tag">Denomination</div>
+        <div class="component-tag">Layer 2</div>
         <div class="component-name" style="color:var(--green);">Bitcoin Currency (₿C)</div>
         <p>The collateral floor. The cumulative arithmetic mean of every historical BTCADP since genesis. Moves approximately 0.04% per day. No issuer. No reserves. Pure mathematics. Used to cap ₿USD issuance conservatively.</p>
       </div>
       <div class="component">
-        <div class="component-tag">Instrument</div>
+        <div class="component-tag">Layer 3</div>
         <div class="component-name" style="color:var(--blue);">₿USD</div>
         <p>The monetary instrument. One token equals one US dollar. Issued by the consortium. Backed by Bitcoin in a four-ledger reserve system (two per product). Redeemable for fiat at any time.</p>
       </div>
     </div>
 
     <p>
-      A disruption to any component does not propagate downward. If every ₿USD issuer ceased operations,
+      A failure at any layer does not propagate downward. If every ₿USD issuer ceased operations,
       the ₿C denomination would still be computable. If ₿C were abandoned, BTCADP would remain a
       valid reference price. Each component can be evaluated independently.
     </p>
@@ -230,7 +230,7 @@
     <h2>3. How ₿C Makes the Peg Credible</h2>
     <p>
       The ₿C price is the conservative anchor of the entire system. Total ₿USD issuance is capped
-      at the ₿C-denominated value of the consortium's combined Bitcoin holdings — not spot value.
+      at the ₿C-measured value of the consortium's combined Bitcoin holdings — not spot value.
       Because ₿C currently sits at approximately one-quarter of spot price, every Bitcoin in the
       consortium's treasury supports only $18,700 of ₿USD issuance rather than the full $70,000
       spot value. The system is structurally overcollateralized at all times by approximately 3.75x.
@@ -367,7 +367,7 @@
       <div class="cycle-step">
         <div class="cycle-num">02</div>
         <div class="cycle-title">Rising spot expands issuance capacity</div>
-        <p>As BTC spot rises, the ₿C-denominated value of consortium holdings increases. The issuance ceiling rises. More ₿USD can be issued. More BTC gets purchased.</p>
+        <p>As BTC spot rises, the ₿C-measured value of consortium holdings increases. The issuance ceiling rises. More ₿USD can be issued. More BTC gets purchased.</p>
       </div>
       <div class="cycle-step">
         <div class="cycle-num">03</div>
@@ -425,8 +425,7 @@
       Every user who enters the ₿USD economy is a Bitcoin user. Every transaction settles
       on Bitcoin infrastructure. Every new token requires Bitcoin to be acquired. The currency
       layer does not compete with Bitcoin. It fulfills Bitcoin's original purpose — peer-to-peer
-      electronic cash — by providing the denomination layer the protocol was never designed to
-      include, and never needed to.
+      electronic cash — by solving the one problem the protocol itself could not.
     </p>
 
   </div>
