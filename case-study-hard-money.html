@@ -205,9 +205,10 @@
 
     <p>
       The mechanics are built on a reserve system. In the current model, four ledgers are used across both the ₿ond savings product and ₿USD — two per product, keeping them cleanly separated. This article describes the ₿USD reserve mechanics; the full four-ledger architecture is documented in <a href="report-bitcoin-stablecoin.html">The Case for a Bitcoin-Backed Stablecoin</a>. When a user purchases a ₿USD token with
-      fiat currency, the treasury company mints one ₿USD token and uses the incoming cash to acquire a
-      corresponding quantity of satoshis at the prevailing BTC spot price. These satoshis are deposited
-      into a pooled issuance ledger — Ledger 1 — that backs outstanding ₿USD tokens.
+      fiat currency, the treasury company mints ₿USD tokens — one per dollar received — and uses
+      the incoming cash to acquire a corresponding quantity of satoshis at the prevailing BTC spot
+      price. These satoshis are deposited into a pooled issuance ledger — Ledger 1 — that backs
+      outstanding ₿USD tokens.
     </p>
 
     <p>
@@ -225,7 +226,7 @@
     </p>
 
     <h3>Reserve Ratio Under Different Spot Scenarios</h3>
-    <p>Assuming ₿C price of $18,000, initial issuance at $70,000 spot, and Ledger 2 holding 0.25 BTC per token issued:</p>
+    <p>Assuming $18,000 in ₿USD issuance (18,000 tokens) at $70,000 spot, ₿C price ~$18,000, and Ledger 2 holding 0.25 BTC per $18,000 issued:</p>
 
     <table class="data-table">
       <thead>
@@ -271,7 +272,7 @@
       <div class="tradeoff-side">
         <div class="tradeoff-label">The Treasury Company</div>
         <div class="tradeoff-title">Trades stability for volatility — captures the spread</div>
-        <p>The treasury company accepts the obligation to honor redemptions at $1.00 USD regardless of BTC spot. In return, it captures the spread between Bitcoin's spot appreciation rate and the BTCC denomination's much slower appreciation rate. As long as BTC spot trends upward, the satoshis in Ledger 1 appreciate far faster than the ₿USD liabilities they back. That widening spread is the treasury company's compensation for bearing downside risk.</p>
+        <p>The treasury company accepts the obligation to honor redemptions at $1.00 USD regardless of BTC spot. In return, it captures the full upside of Bitcoin's spot appreciation above that fixed obligation. As long as BTC spot trends upward, the satoshis in Ledger 1 appreciate while the ₿USD liabilities they back remain static at $1.00 per token. That widening gap is the treasury company's compensation for bearing downside risk.</p>
       </div>
     </div>
 
@@ -285,21 +286,21 @@
     </p>
 
     <p>
-      The mechanism is the divergence between two rates of appreciation. The satoshis in Ledger 1
-      appreciate at the BTC spot rate. The ₿C-denominated liabilities they back appreciate at the
-      cumulative average rate, which barely moves. As BTC spot rises, the gap between asset value and
+      The mechanism is the divergence between a moving asset and a fixed liability. The satoshis in
+      Ledger 1 appreciate at the BTC spot rate. The ₿USD liabilities they back are fixed at $1.00
+      per token — they do not move at all. As BTC spot rises, the gap between asset value and
       liability value widens at an accelerating rate.
     </p>
 
     <h3>Treasury Surplus at Different BTC Spot Levels</h3>
-    <p>Assuming 1,000 ₿USD tokens issued at $70,000 spot, ₿C price ~$18,000:</p>
+    <p>Assuming $18,000,000 in ₿USD issuance (18 million tokens) at $70,000 spot:</p>
 
     <table class="data-table">
       <thead>
         <tr>
           <th>BTC Spot</th>
           <th>Ledger 1 Value</th>
-          <th>₿C Obligation Value</th>
+          <th>Redemption Obligation</th>
           <th>Treasury Spread</th>
           <th>vs. Holding Alone</th>
         </tr>

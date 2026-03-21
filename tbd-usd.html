@@ -421,9 +421,9 @@
         <p>
             The issuance process is straightforward. A consumer sends $1,000. The consortium
             purchases Bitcoin at spot with those funds and deposits it into Ledger 1. One thousand
-            ₿USD tokens are issued. From that moment, the Ledger 1 Bitcoin tracks spot price while
-            the ₿USD liability tracks the ₿C price — a cumulative historical average that moves
-            a fraction of a percent per day regardless of spot volatility.
+            ₿USD tokens are issued — each representing a one-dollar redemption obligation. From
+            that moment, the Ledger 1 Bitcoin fluctuates with spot price while the liability remains
+            fixed: $1,000 owed to the token holder regardless of what Bitcoin does next.
         </p>
         <p>
             On redemption, the consortium sells the required Bitcoin from Ledger 1 and returns
@@ -635,11 +635,11 @@
             with specific institutional participants, reserve requirements, and redemption obligations.
         </p>
         <p>
-            The ₿C price serves two roles within ₿USD. First, it is the issuance ceiling: total
-            ₿USD supply cannot exceed the ₿C-denominated value of consortium holdings. Second, it
-            is the liability reference: the ₿USD obligation tracks the ₿C price, which appreciates
-            more slowly than Bitcoin spot, ensuring the collateral always has room to absorb
-            drawdowns before the peg is threatened.
+            The ₿C price serves a single decisive role within ₿USD: it is the issuance ceiling.
+            Total ₿USD supply cannot exceed the ₿C-denominated value of consortium holdings. Because
+            ₿C currently sits at roughly one-quarter of spot price, the system is structurally
+            overcollateralized from the moment of issuance — the collateral has room to absorb
+            significant drawdowns before the $1 peg is threatened.
         </p>
         <a href="btcc.html" class="hero-cta" style="margin-top:1rem;display:inline-flex;margin-right:0.75rem;">Learn about ₿C →</a>
         <a href="bond.html" class="hero-cta" style="margin-top:1rem;display:inline-flex;background:transparent;color:var(--orange);border:1px solid var(--orange);">Learn about ₿OND →</a>
