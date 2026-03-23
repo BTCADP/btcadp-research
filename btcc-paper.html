@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bitcoin Currency (₿C) Technical Paper | btcadp.org</title>
-    <meta name="description" content="Bitcoin Currency (₿C): A Denomination Protocol for Peer-to-Peer Electronic Cash. Full technical paper.">
+    <meta name="description" content="₿C: A Bitcoin-Native Unit of Account. Full technical paper.">
     <style>
         :root {
             --bg: #0a0a0a;
@@ -337,7 +337,7 @@
 <!-- PAPER HEADER -->
 <div class="paper-header">
     <div class="paper-label">Technical Paper</div>
-    <h1>Bitcoin Currency (₿C): A Denomination Protocol for<br>Peer-to-Peer Electronic Cash</h1>
+    <h1>₿C: A Bitcoin-Native Unit of Account</h1>
     <div class="subtitle">Anonymous &nbsp;·&nbsp; btcadp.org &nbsp;·&nbsp; 2026</div>
     <div class="paper-meta">
         <span>📄 Technical Paper</span>
@@ -357,17 +357,17 @@
     <div class="abstract">
         <div class="abstract-label">Abstract</div>
         <p>
-            This paper proposes a denomination protocol that enables Bitcoin to function as a
-            predictable unit of account without modification to the underlying protocol. Transaction
-            amounts are expressed using a cumulative historical average of daily Bitcoin prices,
-            producing a unit whose fiat price moves approximately 0.04% per day regardless of spot
-            price action, and appreciates incrementally over time as Bitcoin's long-run price history
-            accumulates. Each calendar day constitutes a timeblock whose price, once recorded, becomes
-            progressively more permanent as subsequent days are added to the average. The denomination
-            requires no token, no issuer, no reserves, and no trusted third party. It is computed from
-            publicly available trade data using a transparent methodology that any participant can
-            independently verify and reproduce. The result is a Bitcoin unit of account whose
-            resistance to disruption strengthens over time through a deterministic mathematical formula.
+            This paper proposes a unit of account for Bitcoin derived from the cumulative arithmetic
+            mean of all daily Bitcoin prices since the genesis block. The resulting denomination —
+            Bitcoin Currency (₿C) — appreciates predictably over time while exhibiting day-to-day
+            price movements small enough for stable pricing. Each calendar day constitutes a timeblock
+            whose price, once recorded, becomes progressively more permanent as subsequent days are
+            added to the average. The unit of account requires no token, no issuer, no reserves, and
+            no trusted third party. It is computed from publicly available trade data using a transparent
+            methodology that any participant can independently verify and reproduce. ₿C defines a stable
+            language for expressing Bitcoin-denominated value. It does not, by itself, stabilize the
+            purchasing power of Bitcoin holdings — the conversion between ₿C and satoshis remains subject
+            to Bitcoin's spot price. The denomination is a pricing standard, not a monetary instrument.
         </p>
     </div>
 
@@ -377,28 +377,28 @@
         <p>
             Bitcoin [1] created a peer-to-peer electronic cash system that requires no trusted third
             party. The network has operated continuously since January 2009, settling transactions
-            without reliance on financial institutions. The protocol works. Lightning provides
-            throughput. Settlement is secure and final. What has not yet been built on top of
-            Bitcoin is a stable denomination for everyday commerce. Bitcoin's fiat-denominated
-            price is volatile, and this volatility makes it impractical for the daily commerce
-            that constitutes the bulk of economic activity. The gap is not in the protocol — it
-            is in the interface layer.
+            without reliance on financial institutions. The protocol is sound. What has not yet been
+            built on top of it is a stable unit of account. Bitcoin's fiat-denominated price moves
+            by single-digit percentages on ordinary days and by double digits in periods of stress.
+            This volatility makes spot pricing impractical for the function that every working unit
+            of account must perform: expressing prices that remain meaningful from the moment they
+            are quoted to the moment they are paid.
         </p>
         <p>
-            Stablecoins emerged to address this gap by pegging digital tokens to fiat currencies. In
-            doing so, they reintroduce the trust dependencies Bitcoin was designed to eliminate:
-            centralized issuers who can freeze accounts, reserves that must be audited, and continued
-            operation of entities subject to regulatory and counterparty risk. Algorithmic approaches
-            have demonstrated catastrophic failure modes [2]. Fiat-backed stablecoins function as
-            digital dollars routed through additional intermediaries.
+            Units of account are the language of commerce. A merchant prices goods in a unit of account.
+            An employer quotes a salary. A contract specifies a payment. A lender defines a rate. These
+            expressions must be stable enough that both parties share a common understanding of the value
+            described. Spot pricing does not meet this standard. A price quoted in BTC at 9:00 AM may
+            represent a materially different value by 5:00 PM.
         </p>
         <p>
-            What is needed is a way to express Bitcoin's value that is predictable enough for daily use
-            while remaining entirely Bitcoin-native. This paper proposes a denomination protocol that
-            achieves this through a cumulative historical average of daily prices. No new token is
-            created. No reserves are held. No entity is trusted. The protocol is a standard for
-            expressing value — a unit of account that any wallet, merchant, or payment system can
-            adopt independently.
+            This paper proposes a denomination protocol that provides Bitcoin with a stable unit of
+            account. It does not create a token. It does not require reserves. It does not modify the
+            Bitcoin protocol. It defines a way to express value — a pricing standard derived from the
+            cumulative arithmetic mean of Bitcoin's daily price history. The denomination stabilizes
+            the language in which Bitcoin-denominated prices are expressed. It does not, by itself,
+            stabilize the value of Bitcoin holdings. That distinction is central to understanding what
+            the denomination is and what it is not.
         </p>
     </div>
 
@@ -421,11 +421,19 @@
             by VWAP, the lowest and highest quartiles are removed, and the arithmetic mean of the
             remaining values is taken:
         </p>
-        <div class="formula">BTCADP(d) = mean( trimmed₂₅( {VWAP₁(d), VWAP₂(d), ..., VWAPₙ(d)} ) )</div>
+        <div class="formula">BTCADP(d) = mean( trimmed₂₅( {VWAP₁(d), VWAP₂(d), …, VWAPₙ(d)} ) )</div>
         <p>
-            Each exchange contributes exactly one VWAP regardless of its reported volume. Equal
-            weighting limits the maximum influence of any single exchange to 1/n of the untrimmed set,
-            and the trimmed mean ensures that outlier values are excluded entirely.
+            Each exchange contributes exactly one VWAP regardless of its reported volume. This equal
+            weighting is deliberate. Volume-weighting across exchanges would allow an exchange that
+            fabricates volume to gain proportional influence over the final price. Equal weighting
+            limits the maximum influence of any single exchange to 1/n of the untrimmed set, and the
+            trimmed mean ensures that outlier values are excluded entirely.
+        </p>
+        <p>
+            Exchanges qualify through a sequence of filters applied in fixed order: data availability
+            for BTC/USD, minimum trade count (1,000 per day), minimum time coverage (16 of 24 hourly
+            periods), spread threshold where order book data is available, and price coherence with the
+            median of other qualifying exchanges. The ordering and parameters are specified in [3].
         </p>
     </div>
 
@@ -433,26 +441,38 @@
     <div class="paper-section">
         <h2><span class="sec-num">3.</span> The Denomination</h2>
         <p>
-            BTCC (Bitcoin Currency) is defined as a denomination of Bitcoin whose fiat price on a given
+            ₿C (Bitcoin Currency) is defined as a denomination of Bitcoin whose fiat price on a given
             day is the arithmetic mean of every historical BTCADP value from the genesis block to the
             present:
         </p>
         <div class="formula">₿C(d) = (1/N) Σ BTCADP(i), for i = 1 to N</div>
         <p>
-            Where N is the total number of days in Bitcoin's history through the previous completed day.
-            At the start of each UTC day (00:00:00.000), the BTCC price is recalculated to incorporate
+            where N is the total number of days in Bitcoin's history through the previous completed day.
+            At the start of each UTC day (00:00:00.000), the ₿C price is recalculated to incorporate
             the just-completed day's BTCADP. This updated price is then locked for the following 24 hours.
         </p>
         <p>
-            The sensitivity of the BTCC price to each new BTCADP value is:
+            The sensitivity of the ₿C price to each new BTCADP value is:
         </p>
         <div class="formula">Δ₿C = (BTCADP(new) − ₿C(current)) / (N + 1)</div>
         <p>
-            As N grows, this sensitivity approaches zero. As of early 2026, N exceeds 6,200. A day in
-            which Bitcoin's price moves 10% produces a change in the BTCC price of less than 0.01%.
-            A 40% single-day crash shifts the BTCC price by approximately 0.04%. These are mathematical
-            properties of cumulative averages. They do not depend on market conditions, assumptions
-            about future prices, or the continued operation of any institution.
+            As N grows, this sensitivity approaches zero. As of early 2026, N exceeds 6,200 and BTC
+            spot exceeds the ₿C price by a factor of approximately 4.5×. Under these conditions, the
+            ₿C price appreciates every single day — the formula produces a positive Δ₿C whenever BTC
+            spot is above the cumulative average. On a typical day, the ₿C price appreciates approximately
+            0.05%. On a day in which Bitcoin's spot price drops 10%, the ₿C price still appreciates —
+            approximately 0.04%. Even a 40% single-day crash does not reverse the day's appreciation —
+            it reduces it. The ₿C price still rises, just less than usual. These figures reflect current
+            conditions; as both variables evolve, the daily rate converges toward Bitcoin's own long-run
+            growth rate rather than remaining fixed (see Section 6).
+        </p>
+        <p>
+            The ₿C price incorporates Bitcoin's entire history, including the 561 days of Era 0
+            (January 3, 2009 through July 17, 2010) during which no market existed and the BTCADP is
+            defined as $0.00. The current ₿C fiat price is therefore substantially below the current
+            BTC spot price. As long as BTC spot remains above the historical average, the ₿C price
+            appreciates — an incremental, predictable gain in purchasing power that is the inverse of
+            fiat inflation.
         </p>
     </div>
 
@@ -462,21 +482,37 @@
         <p>
             Bitcoin's blockchain achieves immutability through proof-of-work. Each new block
             cryptographically seals the one before it, making reversal exponentially more costly as
-            the chain grows. A transaction buried under enough blocks is considered practically irreversible — and with each additional block, reversal becomes exponentially less plausible.
+            the chain grows. A transaction buried under six blocks is considered practically
+            irreversible. Under six hundred, it is a permanent fact of the ledger.
         </p>
         <p>
-            The BTCC denomination exhibits an analogous property. Each UTC day constitutes a timeblock:
+            The ₿C denomination exhibits an analogous property. Each UTC day constitutes a timeblock:
             a single day's BTCADP value that, once the day closes, is permanently recorded into the
-            cumulative average. Like a block on the chain, a timeblock becomes more immutable over
-            time — not because it is buried under computational work, but because it is buried under
-            subsequent timeblocks.
+            cumulative average. Once a timeblock enters the average, it cannot be significantly altered
+            or removed.
         </p>
         <p>
-            This produces an immutability gradient. Recent timeblocks have measurable influence on the
-            BTCC price. Older timeblocks have been so thoroughly absorbed into the average that no
-            plausible market event could meaningfully alter their contribution. Every new timeblock
-            simultaneously records a new day's price and reinforces the permanence of every day
-            that came before it.
+            Like a block on the chain, a timeblock becomes more immutable over time — not because it
+            is buried under computational work, but because it is buried under subsequent timeblocks.
+            Each new day added to the cumulative average dilutes the influence of every previous day.
+            A timeblock that once represented 1/100th of the ₿C price eventually represents 1/1,000th,
+            then 1/10,000th. The oldest timeblocks — the Era 0 days at $0.00, the early exchange
+            trading days — are now as permanent a feature of the ₿C price as the genesis block is of
+            the blockchain.
+        </p>
+        <p>
+            This produces what can be described as an immutability gradient. Recent timeblocks have
+            measurable influence on the ₿C price and could, in theory, be countered by subsequent
+            extreme price movements. Older timeblocks have been so thoroughly absorbed into the average
+            that no plausible market event could meaningfully alter their contribution. Every new
+            timeblock simultaneously records a new day's price and reinforces the permanence of every
+            day that came before it.
+        </p>
+        <p>
+            On the blockchain, immutability serves trust: participants trust that confirmed transactions
+            will not be reversed. In the ₿C denomination, the progressive immutability of timeblocks
+            serves stability: the accumulated weight of thousands of settled timeblocks anchors the
+            average against any single day's disruption.
         </p>
     </div>
 
@@ -487,7 +523,7 @@
             Bitcoin's blockchain can be understood through three physical dimensions. Blocks represent
             Space: discrete digital structures in which transactions are recorded and preserved.
             Proof-of-work represents Energy: the expenditure of computational energy that secures those
-            blocks and makes them irreversible. Bitcoin Timeblocks represent Time: the daily accumulation
+            blocks and makes them irreversible. ₿C Timeblocks represent Time: the daily accumulation
             of price across Bitcoin's entire history, each day's value permanently absorbed into the
             cumulative average.
         </p>
@@ -500,25 +536,66 @@
 
     <!-- SECTION 6 -->
     <div class="paper-section">
-        <h2><span class="sec-num">6.</span> Mathematical Properties</h2>
-        <p>Three properties govern the day-to-day stability and long-run appreciation of the BTCC price:</p>
+        <h2><span class="sec-num">6.</span> Behavioral Properties</h2>
+        <p>The behavior of the ₿C price follows directly from the mathematical properties of cumulative averages. Four properties are relevant:</p>
         <p>
-            <em>Monotonically decreasing sensitivity.</em> The impact of each new BTCADP on the BTCC
+            <em>Monotonically decreasing sensitivity.</em> The impact of each new BTCADP on the ₿C
             price is exactly 1/(N+1) of the difference from the current average. As N grows, this
-            sensitivity approaches zero. The denomination becomes more resistant to disruption with each passing day,
+            sensitivity approaches zero. The denomination becomes more stable with each passing day,
             permanently and irreversibly.
         </p>
         <p>
-            <em>Bounded response to shocks.</em> With N exceeding 6,200, no single day can move the
-            BTCC price by more than approximately 0.016% of the shock's magnitude, regardless of how
-            extreme that shock is.
+            <em>Bounded response to shocks.</em> As long as BTC spot remains above the cumulative
+            average, the ₿C price appreciates every day. A shock does not reverse this appreciation —
+            it modulates it. The difference between the ₿C price change on a normal day and on a shock
+            day is bounded by 1/(N+1) of the shock's magnitude. With N exceeding 6,200, a day in which
+            BTC spot drops 50% changes the ₿C price by approximately 0.008% less than an otherwise
+            identical day — a difference invisible to pricing.
         </p>
         <p>
-            <em>Incremental appreciation.</em> A flash crash in which BTC drops 40% in a single day shifts the
-            BTCC price by approximately $6 — a change of 0.04%. Sustained higher prices are absorbed
-            slowly and permanently into the average, producing long-run appreciation anchored to
-            Bitcoin's price history. A prolonged bear market in which BTC remains at $20,000 for
-            three years produces less than 5% total change in the BTCC price over the entire period.
+            <em>Incremental appreciation.</em> As long as BTC spot exceeds the cumulative average,
+            the ₿C price appreciates with every new timeblock. This appreciation is substantial in
+            annual terms — the inverse of the inflation that erodes fiat purchasing power — while
+            remaining small enough on any single day to permit stable pricing. A sustained doubling
+            of BTC spot would take many years to double the ₿C price, distributing the gain across
+            thousands of daily increments.
+        </p>
+        <p>
+            <em>Convergence under growth.</em> The daily ₿C appreciation rate is not a fixed constant.
+            It is a function of two variables: the ratio of BTC spot to the current ₿C price, and the
+            total number of days N. As BTC spot rises, the numerator of the sensitivity formula grows.
+            As N grows, the denominator grows. Under sustained exponential growth in BTC spot — the
+            condition the denomination is designed for — these two forces approximately cancel.
+        </p>
+        <p>
+            The mathematical result is that the ₿C daily appreciation rate converges toward Bitcoin's
+            own long-run growth rate. If BTC spot doubles every four years, the daily ₿C appreciation
+            converges to approximately 0.047% per day, or roughly 19% per year. If Bitcoin's growth
+            decelerates to a doubling every ten years, the ₿C rate converges to approximately 0.019%
+            per day, or roughly 7% per year. If BTC spot flatlines, the ₿C rate decelerates toward
+            zero as the cumulative average asymptotically approaches the sustained price level.
+        </p>
+        <p>
+            This convergence is structural, not coincidental. The cumulative average of an exponential
+            function grows at the same exponential rate in the long run — lagged, smoothed, and stripped
+            of short-term volatility, but tracking the same secular trend. The ₿C denomination inherits
+            Bitcoin's long-run trajectory while filtering out the daily noise that makes spot pricing
+            unsuitable for denominating value.
+        </p>
+        <p>
+            To illustrate: on a normal day with BTC spot at $90,000 and the ₿C price at $15,600, the
+            denomination appreciates approximately $12 — a gain of 0.077%. Now suppose BTC crashes 40%
+            in a single day, from $90,000 to $54,000. The ₿C price still appreciates — by approximately
+            $6, a gain of 0.04%. The crash did not push ₿C down. It halved the day's appreciation. A
+            price tag expressed in ₿C is unaffected by an event that would invalidate any spot-priced
+            quotation.
+        </p>
+        <p>
+            A prolonged bear market in which BTC remains at $20,000 for three years would slow the ₿C
+            price's appreciation, but even this extreme scenario produces less than 5% total change in
+            the ₿C price over the entire period. A rise to $500,000 over several years would temporarily
+            accelerate ₿C appreciation as the spot-to-₿C ratio widens, then decelerate as the cumulative
+            average absorbs the higher prices — the convergence property in action.
         </p>
     </div>
 
@@ -527,16 +604,32 @@
         <h2><span class="sec-num">7.</span> Historical Eras</h2>
         <p>
             Bitcoin's price history spans multiple periods with different data characteristics. The
-            BTCADP specification [3] defines four eras. Era 0 (January 3, 2009 – July 17, 2010):
-            no market existed; the BTCADP is defined as $0.00 for all 561 days. Era 1 (July 18, 2010
-            – February 24, 2014): Mt. Gox was the dominant or sole exchange; single-source VWAP,
-            flagged accordingly. Era 2 (February 25, 2014 – December 31, 2017): multiple exchanges,
-            confidence transitions from reduced to full. Era 3 (January 1, 2018 – present): full
-            trimmed mean methodology with consistent qualifying exchanges.
+            BTCADP specification [3] defines four eras:
+        </p>
+        <p>
+            <em>Era 0 (January 3, 2009 – July 17, 2010).</em> No market existed. The BTCADP is defined
+            as $0.00 for all 561 days. This is a definitional choice: Bitcoin existed but had no market
+            price. The alternative — treating these days as undefined — would produce an incomplete
+            historical record.
+        </p>
+        <p>
+            <em>Era 1 (July 18, 2010 – February 24, 2014).</em> Mt. Gox was the dominant or sole
+            exchange for most of this period. The BTCADP relies on a single-source VWAP and is flagged
+            accordingly.
+        </p>
+        <p>
+            <em>Era 2 (February 25, 2014 – December 31, 2017).</em> Multiple exchanges operated but
+            the number of qualifying exchanges varied. Confidence transitions from reduced to full as
+            the exchange ecosystem matured.
+        </p>
+        <p>
+            <em>Era 3 (January 1, 2018 – present).</em> Multiple qualifying exchanges consistently
+            provide robust data. The full trimmed mean methodology applies.
         </p>
         <div class="note">
             Eras 0 through 2 use provisional values. The specification invites researchers with access
-            to trade-level data to produce definitive historical valuations.
+            to trade-level data to produce definitive historical valuations, and provides a framework
+            for incorporating such contributions.
         </div>
     </div>
 
@@ -544,16 +637,26 @@
     <div class="paper-section">
         <h2><span class="sec-num">8.</span> Manipulation Resistance</h2>
         <p>
-            The BTCADP derives its manipulation resistance from reinforcing design choices: the trimmed
-            mean discards the highest and lowest quartile of exchange VWAPs; equal weighting ensures
-            that fabricated volume confers no additional influence; the price coherence filter
-            iteratively removes any exchange whose VWAP deviates more than 5% from the median.
+            The BTCADP derives its manipulation resistance from several reinforcing design choices. The
+            trimmed mean discards the highest and lowest quartile of exchange VWAPs, preventing any
+            single exchange from influencing the final price unless its VWAP falls within the middle
+            50% of the distribution. Equal exchange weighting ensures that fabricated volume confers no
+            additional influence. The price coherence filter iteratively removes any exchange whose VWAP
+            deviates more than 5% from the median of other qualifying exchanges.
         </p>
         <p>
-            Even a successfully manipulated BTCADP has limited effect on the BTCC price. A single
-            manipulated day shifts the cumulative average by at most 1/(N+1) of the difference. With
-            N exceeding 6,200, an attacker would need to sustain manipulation across hundreds of
-            consecutive days to produce a meaningful shift in the BTCC price — a cost that is, for practical purposes,
+            An attacker seeking to distort the BTCADP would need to simultaneously compromise multiple
+            independent exchanges such that a majority of remaining VWAPs, after trimming, reflect the
+            manipulated price. The cost of sustaining such an attack scales with the number of qualifying
+            exchanges and must be renewed daily.
+        </p>
+        <p>
+            Even a successfully manipulated BTCADP has limited effect on the ₿C price. A single
+            manipulated day shifts the cumulative average by at most 1/(N+1) of the difference between
+            the manipulated price and the current average. With N exceeding 6,200, the impact on the
+            denomination is negligible regardless of the magnitude of the daily manipulation. To produce
+            a meaningful shift in the ₿C price, an attacker would need to sustain the manipulation
+            across hundreds or thousands of consecutive days — a cost that is, for practical purposes,
             prohibitive.
         </p>
     </div>
@@ -562,55 +665,128 @@
     <div class="paper-section">
         <h2><span class="sec-num">9.</span> Implementation Neutrality</h2>
         <p>
-            BTCC requires no changes to the Bitcoin protocol. No soft fork, no hard fork, no new
-            opcodes, no consensus rule modifications. The denomination operates entirely in the
-            calculation layer. It defines a unit of account — a way to express and agree upon value —
-            that is deterministic, publicly verifiable, and requires no real-time data beyond the
-            daily BTCADP update at midnight UTC.
+            ₿C requires no changes to the Bitcoin protocol. No soft fork, no hard fork, no new opcodes,
+            no consensus rule modifications. The Bitcoin network need not accommodate ₿C in any way.
+            Nothing about ₿C touches the protocol, and nothing about the protocol needs to accommodate ₿C.
         </p>
         <p>
-            Any existing wallet, payment processor, or settlement infrastructure can adopt BTCC by
-            implementing its own conversion logic against a single daily price. The BTCC standard
-            specifies what the unit is and how it is computed. It does not prescribe how transactions
-            are denominated, settled, or displayed.
+            The denomination operates entirely in the calculation layer. It defines a unit of account —
+            a way to express and agree upon value — that is deterministic, publicly verifiable, and
+            requires no real-time data beyond the daily BTCADP update at midnight UTC. How this unit
+            of account is used in practice — whether in invoicing systems, merchant pricing, financial
+            contracts, salary negotiations, or economic reporting — is left to implementers. The ₿C
+            standard specifies what the unit is and how it is computed. It does not prescribe how
+            transactions are denominated, settled, or displayed.
+        </p>
+        <p>
+            This separation of concerns is deliberate. A unit of account that mandates a specific
+            transaction mechanism couples itself to assumptions about infrastructure, latency, and user
+            experience that vary across implementations and evolve over time. By defining only the
+            denomination and leaving implementation to the application layer, ₿C can be adopted
+            incrementally — a single invoicing system, a single merchant, a single accounting standard —
+            without coordination, permission, or infrastructure changes.
         </p>
     </div>
 
     <!-- SECTION 10 -->
     <div class="paper-section">
-        <h2><span class="sec-num">10.</span> Known Limitations</h2>
+        <h2><span class="sec-num">10.</span> Scope and Boundaries</h2>
         <p>
-            The BTCC fiat price appreciates over time as long as BTC spot exceeds the historical
-            average. In BTCC terms, this constitutes deflation — prices expressed in BTCC decline
-            gradually over time. Merchants pricing in BTCC will periodically adjust prices downward.
+            ₿C is a unit of account. It stabilizes the expression of value. It does not stabilize the
+            value of holdings.
         </p>
         <p>
-            If BTC spot were to fall below the BTCC fiat price for an extended period, the denomination
-            would price goods at a premium to current market value. In practice this would require a
-            decline of over 80% from current levels, sustained indefinitely — a scenario representing
-            a fundamental crisis for Bitcoin itself.
+            This distinction requires precise explanation. When a merchant prices an item at 1 ₿C, that
+            price tag is stable. It moves less than 0.1% per day under any market conditions. The
+            merchant can publish a catalog, quote an invoice, or negotiate a contract in ₿C with
+            confidence that the number means approximately the same thing tomorrow as it does today.
         </p>
         <p>
-            Because the BTCC price updates only once per day, implementations that convert between BTCC
-            and satoshis will experience intraday drift proportional to the day's BTC price movement.
-            Managing this drift is an implementation-specific concern outside the scope of this paper.
+            However, a buyer who acquires Bitcoin to pay that invoice holds satoshis, and satoshis are
+            valued at spot. If the buyer acquires 1 ₿C worth of Bitcoin today and BTC spot drops 50%
+            overnight, the buyer's holdings are worth approximately 0.5 ₿C the following morning —
+            even though the price tag has barely moved. The ₿C denomination did not protect the buyer's
+            purchasing power. It protected the price tag.
+        </p>
+        <p>
+            This is not a deficiency of the denomination. It is a boundary. A unit of account and a
+            store of value are different functions of money. The ₿C denomination fulfills the first
+            without claiming to fulfill the second. Fiat currencies maintain this same separation: the
+            US Dollar is a unit of account whose purchasing power erodes through inflation, and no one
+            considers the unit of account defective because it does not also function as a perfect store
+            of value.
+        </p>
+        <p>
+            To stabilize the holder's purchasing power — to guarantee that 1 ₿C held today can purchase
+            1 ₿C worth of goods tomorrow regardless of spot price movements — requires a counterparty,
+            a reserve, or a token. That is the domain of monetary instruments built on top of the
+            denomination, not of the denomination itself. The ₿C unit of account is the foundation such
+            instruments require. It is not a substitute for them.
         </p>
     </div>
 
     <!-- SECTION 11 -->
     <div class="paper-section">
-        <h2><span class="sec-num">11.</span> Conclusion</h2>
+        <h2><span class="sec-num">11.</span> Known Limitations</h2>
         <p>
-            This paper has described a denomination protocol for Bitcoin that produces a predictable unit of
-            account without introducing trust, issuers, reserves, or protocol modifications. The
-            stability derives from a cumulative historical average that, by its mathematical nature,
-            becomes more resistant to disruption with every passing day.
+            The ₿C fiat price appreciates over time as long as BTC spot exceeds the historical average.
+            In ₿C terms, this constitutes incremental deflation — purchasing power increases rather
+            than erodes. Merchants pricing in ₿C will periodically adjust prices downward, the mirror
+            image of the upward price adjustments that fiat inflation requires in every existing
+            monetary system. The rate of this deflation is predictable, bounded by the cumulative
+            average's sensitivity formula, and small enough on any given day to be operationally
+            manageable.
         </p>
         <p>
-            Bitcoin's blockchain records transactions in Space, secures them with Energy, and the BTCC
-            denomination records their value across Time. The denomination asks nothing of the protocol
-            and changes nothing about it. It requires only that the price history be computed transparently —
-            and provides a reproducible methodology for doing so.
+            If BTC spot were to fall below the ₿C fiat price for an extended period, the denomination
+            would price goods at a premium to current market value. This is mathematically coherent but
+            unusual. In practice it would require a decline of over 80% from current levels, sustained
+            indefinitely — a scenario that would represent a fundamental crisis for Bitcoin itself.
+        </p>
+        <p>
+            The system depends on the integrity of the BTCADP. The specification's manipulation
+            resistance is robust but not absolute. The transparency record ensures that any distortion
+            is detectable after the fact, and the institutional independence of the methodology ensures
+            that no single publisher's compromise is fatal to the system.
+        </p>
+        <p>
+            Because the ₿C price updates only once per day, any implementation that converts between
+            ₿C and satoshis for transaction purposes will experience intraday drift proportional to the
+            day's BTC price movement. The magnitude of this drift and the strategies for managing it
+            are implementation-specific concerns outside the scope of this specification.
+        </p>
+    </div>
+
+    <!-- SECTION 12 -->
+    <div class="paper-section">
+        <h2><span class="sec-num">12.</span> Conclusion</h2>
+        <p>
+            This paper has described a unit of account for Bitcoin that is derived from the cumulative
+            arithmetic mean of all daily prices since the genesis block. The denomination is
+            deterministic, publicly verifiable, and reproducible by any party with access to the
+            specification and trade data. It requires no token, no issuer, no reserves, and no
+            modification to the Bitcoin protocol.
+        </p>
+        <p>
+            The denomination appreciates predictably over time and exhibits day-to-day stability
+            sufficient for pricing, invoicing, and contractual use. Its appreciation rate converges
+            toward Bitcoin's own long-run growth rate — inheriting the secular trend while filtering
+            out the daily volatility that makes spot pricing unsuitable for expressing stable value.
+        </p>
+        <p>
+            Each day constitutes a timeblock that, once recorded, is progressively and permanently
+            absorbed into the average — an immutability gradient analogous to the confirmation depth
+            of blocks on the chain.
+        </p>
+        <p>
+            Bitcoin's blockchain records transactions in Space, secures them with Energy, and the ₿C
+            denomination records their value across Time.
+        </p>
+        <p>
+            The denomination is a stable language for expressing Bitcoin-denominated value. What is
+            built with that language — the monetary instruments, the payment systems, the financial
+            contracts that require a stable unit of account as their foundation — is the work that
+            follows.
         </p>
     </div>
 
@@ -620,7 +796,7 @@
         <ol>
             <li>S. Nakamoto, "Bitcoin: A Peer-to-Peer Electronic Cash System," 2008.</li>
             <li>L.W. Cong, Y. Li, N. Wang, "Token-Based Platform Finance," <em>Journal of Financial Economics</em>, vol. 144, no. 3, 2022.</li>
-            <li>"BTCADP: Bitcoin Average Daily Price — Specification v1.0," <a href="specification.html">btcadp.org</a>, 2026.</li>
+            <li>"BTCADP: Bitcoin Average Daily Price — Specification v1.0," <a href="specification.html" target="_blank" rel="noopener">btcadp.org</a>, 2026.</li>
             <li>N. Gandal, J.T. Hamrick, T. Moore, T. Oberman, "Price manipulation in the Bitcoin ecosystem," <em>Journal of Monetary Economics</em>, vol. 95, pp. 86–96, 2018.</li>
             <li>I. Makarov, A. Schoar, "Trading and arbitrage in cryptocurrency markets," <em>Journal of Financial Economics</em>, vol. 135, no. 2, pp. 293–319, 2020.</li>
             <li>J.M. Griffin, A. Shams, "Is Bitcoin Really Untethered?" <em>The Journal of Finance</em>, vol. 75, no. 4, pp. 1913–1964, 2020.</li>
@@ -643,9 +819,9 @@
 <footer>
     <p>
         <a href="index.html">Home</a> &nbsp;·&nbsp;
-        <a href="btcc.html">BTCC Summary</a> &nbsp;·&nbsp;
+        <a href="btcc.html">₿C Summary</a> &nbsp;·&nbsp;
         <a href="specification.html">BTCADP Specification</a> &nbsp;·&nbsp;
-        <a href="https://github.com/BTCADP/btcadp-research">GitHub</a>
+        <a href="https://github.com/BTCADP/btcadp-research" target="_blank" rel="noopener">GitHub</a>
     </p>
     <p style="margin-top:0.8rem;">CC0 Public Domain · btcadp.org · 2026</p>
 </footer>
