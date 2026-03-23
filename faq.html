@@ -211,8 +211,8 @@
         <span class="faq-icon">+</span>
       </button>
       <div class="faq-answer">
-        <p>Sats are a precise unit of account for a volatile asset. That volatility creates three specific barriers to everyday commerce that ₿C addresses directly.</p>
-        <p><strong>Volatility.</strong> A merchant cannot price a sandwich in sats today and have that price mean the same thing tomorrow. ₿C solves this through arithmetic — a cumulative historical average that moves approximately 0.04% per day regardless of what Bitcoin spot does — not through a peg or a promise. Day-to-day price stability is a mathematical property of the denomination. The long-run appreciation is a separate property, and a desirable one.</p>
+        <p>Sats are a precise unit of account for a volatile asset. That volatility creates three specific barriers to pricing that ₿C addresses directly.</p>
+        <p><strong>Volatility.</strong> A merchant cannot price a sandwich in sats today and have that price mean the same thing tomorrow. ₿C solves this through arithmetic — a cumulative historical average whose day-to-day movements are small enough for stable pricing, even on days when Bitcoin spot crashes. Day-to-day pricing stability is a mathematical property of the denomination. The long-run appreciation is a separate property, and a desirable one.</p>
         <p><strong>Familiarity.</strong> Ordinary people think in purchasing power terms. A unit whose fiat-equivalent value barely moves maps onto how humans already think about money. Asking the world to redenominate its intuitions around a number that swings 10% in a day is an adoption barrier that has nothing to do with Bitcoin's technical soundness.</p>
         <p><strong>Friction.</strong> Every time a user has to consult the spot price, make a mental conversion, or hesitate about spending an appreciating asset, that friction kills the transaction. ₿C removes it entirely at the commerce layer without touching the protocol.</p>
         <div class="callout">₿C does not compete with sats. It makes sats more useful to more people sooner. Accelerating Bitcoin adoption benefits every Bitcoin stakeholder. Waiting for the spot price to spontaneously stabilize is not a strategy.</div>
@@ -225,8 +225,8 @@
         <span class="faq-icon">+</span>
       </button>
       <div class="faq-answer">
-        <p>Only if you accept the fiat framing of what "good" monetary policy looks like. ₿C deflation is Bitcoin's hard money property expressed in a stable denomination. Prices falling slowly in ₿C terms means purchasing power is improving. That is the point.</p>
-        <p>The magnitude is real but gradual. ₿C has appreciated between 19% and 125% annually in recent years — meaningful, but nothing like Bitcoin's spot volatility. A merchant denominating in ₿C adjusts prices periodically as the unit appreciates, exactly as any hard money economy functions. That is not a burden. It is purchasing power working in the holder's favor.</p>
+        <p>Only if you accept the fiat framing of what "good" monetary policy looks like. ₿C deflation is Bitcoin's hard money property expressed in a denomination. Prices falling in ₿C terms means the unit of account is gaining purchasing power — the inverse of fiat inflation. That is the point.</p>
+        <p>The magnitude is real but gradual. ₿C has appreciated between 19% and 125% annually in recent years — meaningful, but nothing like Bitcoin's spot volatility. A merchant denominating in ₿C adjusts prices periodically as the unit appreciates, exactly as any hard money economy functions. This is the mirror image of the upward price adjustments every fiat-denominated merchant already makes.</p>
         <p>Anyone arguing that deflation destroys commerce is arguing in favor of the inflationary monetary system that Bitcoin was built to replace.</p>
       </div>
     </div>
@@ -238,7 +238,7 @@
       </button>
       <div class="faq-answer">
         <p>No. The US dollar is the measurement instrument, not the peg. ₿C measures Bitcoin's cumulative average price in dollars the same way a thermometer measures temperature in Fahrenheit — the thermometer is not Fahrenheit-dependent, it is simply using a common unit for measurement.</p>
-        <p>A ₿C holder does not inherit dollar inflation. If the dollar inflates, the ₿C price in dollars rises accordingly — just as the BTC spot price rises. The purchasing power of the ₿C unit tracks Bitcoin's history, not the Federal Reserve's balance sheet.</p>
+        <p>The ₿C denomination does not inherit dollar inflation. If the dollar inflates, the ₿C price in dollars rises accordingly — just as the BTC spot price rises. The purchasing power expressed by the ₿C unit tracks Bitcoin's history, not the Federal Reserve's balance sheet.</p>
         <p>The USD denomination is a practical choice based on where Bitcoin's deepest liquidity has always lived. Converting BTCC to any other currency is trivial: multiply by the relevant forex rate. A future extension of the BTCADP specification may define additional currency pair variants.</p>
       </div>
     </div>
@@ -312,8 +312,8 @@
       </button>
       <div class="faq-answer">
         <p>₿C is a unit of account. It is not a stablecoin, a peg, or a promise. It is a standard for expressing value — derived from Bitcoin's cumulative price history, updated once per day, and verifiable by anyone.</p>
-        <p>A unit of account does not need to be flat. The meter is a unit of length. The kilogram is a unit of mass. Neither is pegged to anything. ₿C is a unit of value anchored to Bitcoin's full price history since the genesis block. Its fiat-equivalent value changes as that history accumulates — approximately 0.04% per day, compounding to meaningful appreciation over time.</p>
-        <p>It is the hard money property of Bitcoin, expressed in a denomination stable enough for daily commerce.</p>
+        <p>A unit of account does not need to be flat. The meter is a unit of length. The kilogram is a unit of mass. Neither is pegged to anything. ₿C is a unit of value anchored to Bitcoin's full price history since the genesis block. Its fiat-equivalent value appreciates as that history accumulates — the daily rate converges toward Bitcoin's own long-run growth rate, compounding to meaningful appreciation over time.</p>
+        <p>It is the hard money property of Bitcoin, expressed in a denomination stable enough for pricing, invoicing, and contracts.</p>
         <div class="callout">₿C is a unit of account anchored to Bitcoin's cumulative price history. It is designed to hold value — Bitcoin's value, averaged across time.</div>
       </div>
     </div>
@@ -338,8 +338,8 @@
       <div class="faq-answer">
         <p>₿C, ₿ond, and ₿USD are three distinct components of the same ecosystem. Understanding each separately makes the whole clearer.</p>
         <p><strong>₿C (BTCC)</strong> is the unit of account — the denomination. It is the cumulative arithmetic mean of every daily Bitcoin price since the genesis block. It requires no issuer, holds no reserves, and makes no redemption promise. Any wallet, merchant, or payment system can adopt it independently. It is a standard for expressing value, not a product.</p>
-        <p><strong>₿USD</strong> is the medium of exchange — always worth exactly $1.00, redeemable for $1.00 on demand. It is issued by a consortium of Bitcoin treasury companies, with each $1 token backed by Bitcoin purchased at spot. Prices and values across the ecosystem are expressed in ₿C, but ₿USD is the instrument people spend and receive.</p>
-        <p><strong>₿ond</strong> is the savings product — a fixed-maturity instrument with a ₿C obligation. A saver deposits fiat, the treasury purchases Bitcoin, and the saver holds a ₿C-obligated balance until maturity. At maturity, the obligation is returned as ₿USD. The ₿ond is where the appreciation of ₿C is captured by long-term savers.</p>
+        <p><strong>₿USD</strong> is the medium of exchange — always worth exactly $1.00, redeemable for $1.00 on demand. It is issued by a consortium of Bitcoin treasury companies, with each $1 token backed by Bitcoin purchased at spot. Prices and values across the ecosystem are denominated in ₿C, but ₿USD is the instrument people spend and receive.</p>
+        <p><strong>₿ond</strong> is the savings product — a fixed-maturity instrument denominated in ₿C. A saver deposits fiat, the treasury purchases Bitcoin, and the saver holds a ₿C-denominated balance until maturity. At maturity, the obligation is returned as ₿USD. The ₿ond is where the appreciation of ₿C is captured by long-term savers.</p>
         <div class="callout">₿C is the measuring stick. ₿USD is the spending instrument. ₿ond is the savings instrument. Together they form a complete monetary system — unit of account, medium of exchange, and savings product — built entirely on Bitcoin.</div>
       </div>
     </div>
@@ -357,9 +357,9 @@
         <span class="faq-icon">+</span>
       </button>
       <div class="faq-answer">
-        <p>A ₿ond is a fixed-maturity savings instrument with a BTCC (₿C) obligation, issued by a Bitcoin treasury company. A saver deposits fiat. The treasury uses those funds to purchase Bitcoin at the current spot price and holds it in reserve. The saver receives a BTCC (₿C)-obligated balance and a maturity date.</p>
+        <p>A ₿ond is a fixed-maturity savings instrument denominated in BTCC (₿C) and issued by a Bitcoin treasury company. A saver deposits fiat. The treasury uses those funds to purchase Bitcoin at the current spot price and holds it in reserve. The saver receives a BTCC (₿C)-denominated balance and a maturity date.</p>
         <p>The ₿ond is structured like a conventional bond: fixed term, known denomination, and a defined return at maturity. What is unconventional is the underlying asset (Bitcoin), the unit of account (₿C), and the maturity payout mechanism (₿USD, with a fiat exit option). Specific maturity tiers — such as 2-year, 5-year, or 10-year terms — are implementation decisions for each treasury company.</p>
-        <div class="callout">The ₿ond is for savers who want Bitcoin's long-run upside with its day-to-day volatility removed. The ₿C denomination moves approximately 0.04% per day regardless of what Bitcoin spot does — giving savers a predictable, slowly-appreciating unit of account over their holding period.</div>
+        <div class="callout">The ₿ond is for savers who want Bitcoin's long-run upside with its day-to-day volatility removed. The ₿C denomination appreciates predictably — its daily rate converges toward Bitcoin's own long-run growth rate — giving savers a slowly-appreciating unit of account over their holding period.</div>
       </div>
     </div>
 
@@ -369,7 +369,7 @@
         <span class="faq-icon">+</span>
       </button>
       <div class="faq-answer">
-        <p>At maturity, the treasury returns the ₿C obligation as ₿USD — keeping the redeemed value inside the Bitcoin ecosystem. The holder then has three options:</p>
+        <p>At maturity, the treasury returns the ₿C-denominated obligation as ₿USD — keeping the redeemed value inside the Bitcoin ecosystem. The holder then has three options:</p>
         <p><strong>Spend it.</strong> Use the ₿USD tokens for everyday commerce or on trading platforms — the lowest-friction path.</p>
         <p><strong>Re-save it.</strong> Convert into a new ₿ond at the current ₿C rate — also near-frictionless, keeping capital in the Bitcoin savings layer.</p>
         <p><strong>Exit to fiat.</strong> Redeem the ₿USD tokens for dollars at the standard ₿USD redemption fee — the highest-friction path, reflecting the actual cost of selling Bitcoin from reserves into the market.</p>
@@ -409,7 +409,7 @@
       </button>
       <div class="faq-answer">
         <p>They are complementary instruments designed for different purposes.</p>
-        <p><strong>₿ond</strong> is for savers. Its obligation is expressed in BTCC (₿C), it has a fixed maturity date, cannot be spent directly, and its value appreciates slowly over time as the ₿C denomination drifts upward. The holder earns Bitcoin's long-run appreciation in a stable, low-volatility denomination.</p>
+        <p><strong>₿ond</strong> is for savers. It is denominated in BTCC (₿C), has a fixed maturity date, cannot be spent directly, and its value appreciates slowly over time as the ₿C denomination drifts upward. The holder earns Bitcoin's long-run appreciation in a stable, low-volatility denomination.</p>
         <p><strong>₿USD</strong> is for transactors. It is always worth exactly $1.00, can be spent immediately, and pays no yield. Its value proposition is a hard dollar peg backed by Bitcoin on-chain rather than government debt.</p>
         <p>The two products connect through conversion. A ₿ond holder who wants to spend converts to ₿USD. A ₿USD holder who wants to save converts into a ₿ond. Both conversions are near-frictionless because both keep capital inside the Bitcoin economy.</p>
         <div class="callout">₿ond is where value is stored and grown. ₿USD is where value is moved and spent. Together they cover the two core functions every monetary system requires: saving and transacting.</div>
@@ -443,8 +443,8 @@
       </button>
       <div class="faq-answer">
         <p>USDT and USDC achieve price stability by holding dollar reserves — but in doing so, they reproduce every structural weakness of the fiat system they claim to improve upon. The issuer is a centralized entity that can freeze accounts, censor transactions, and is subject to regulatory capture. The reserves must be trusted and audited. And the token is, in economic substance, a digital dollar with extra steps — the user gains blockchain settlement but inherits dollar inflation, counterparty risk, and the jurisdictional vulnerabilities of the issuing entity.</p>
-        <p>A ₿USD token backed by Bitcoin eliminates each of these dependencies. The reserves are Bitcoin on the base layer — publicly addressable, verifiable in real time by anyone without an auditor. The issuing entities are publicly traded companies whose Bitcoin holdings are a matter of public record. No single issuer can unilaterally freeze a token or alter the reserve rules. And critically, the unit of account is ₿C — a denomination that appreciates slowly over time rather than eroding through inflation. A USDC holder is holding a balance that its own issuer is targeting for systematic annual debasement by design. A ₿USD holder is not.</p>
-        <p>For users who want exposure to ₿C's long-run appreciation rather than a fixed dollar peg, the product is the ₿ond — a fixed-maturity savings instrument with a BTCC (₿C) obligation and backed by Bitcoin reserves. See the ₿ond section of this FAQ for details.</p>
+        <p>A ₿USD token backed by Bitcoin eliminates each of these dependencies. The reserves are Bitcoin on the base layer — publicly addressable, verifiable in real time by anyone without an auditor. The issuing entities are publicly traded companies whose Bitcoin holdings are a matter of public record. No single issuer can unilaterally freeze a token or alter the reserve rules. And critically, the reserve asset appreciates over time rather than eroding through inflation. A USDC holder's deposits back US government debt. A ₿USD holder's deposits purchase Bitcoin — an asset whose purchasing power has improved, not eroded, over every multi-year period in its history. Both tokens target $1.00. The difference is what sits behind that dollar.</p>
+        <p>For users who want exposure to ₿C's long-run appreciation rather than a fixed dollar peg, the product is the ₿ond — a fixed-maturity savings instrument denominated in BTCC (₿C) and backed by Bitcoin reserves. See the ₿ond section of this FAQ for details.</p>
         <div class="callout">₿USD targets $1.00 USD parity — the same as USDT or USDC. The difference is entirely in the collateral: Bitcoin on the base layer rather than fiat in a bank account. Every dollar that flows into ₿USD instead of USDC buys Bitcoin rather than US government debt.</div>
       </div>
     </div>
@@ -471,7 +471,7 @@
         <p>No — and this question reflects a common conflation worth addressing directly. The ratio of BTC spot price to ₿C price (roughly 4-5x at current levels) is a price relationship between two different units. It describes how many ₿C units one Bitcoin can purchase. It has no direct bearing on the ₿USD collateral ratio.</p>
         <p>₿USD has a $1 liability, not a ₿C liability. When a user mints ₿USD, they send $1. The treasury uses that $1 to purchase Bitcoin at spot. Ledger 1 holds exactly enough Bitcoin to back that $1 obligation at the moment of minting. The token starts at 1:1, not overcollateralized.</p>
         <p>Surplus in the ₿USD reserve only emerges after minting, as Bitcoin's spot price appreciates above the original $1 purchase price. That growing surplus flows into Ledger 2 — the ₿USD backstop — strengthening the reserve system over time without requiring additional capital contributions.</p>
-        <p>The ₿ond is a different product with a different structure. A ₿ond has a BTCC (₿C) obligation — not a $1 obligation. The spread between Bitcoin's spot appreciation and the slowly-rising ₿C obligation is the treasury company's earned return at ₿ond maturity. These are separate instruments with separate ledgers and separate economics.</p>
+        <p>The ₿ond is a different product with a different structure. A ₿ond has a BTCC (₿C)-denominated obligation — not a $1 obligation. The spread between Bitcoin's spot appreciation and the slowly-rising ₿C obligation is the treasury company's earned return at ₿ond maturity. These are separate instruments with separate ledgers and separate economics.</p>
       </div>
     </div>
 
@@ -483,7 +483,7 @@
       <div class="faq-answer">
         <p>Intraday drift is only a concern at the boundaries of the system — when fiat converts to tokens (minting) or tokens convert back to fiat (redemption). Inside the currency layer, there is no drift because no conversion happens.</p>
         <p>A merchant prices in ₿C. A customer pays in ₿USD tokens. The merchant receives ₿USD tokens. No spot price is consulted. No satoshi conversion occurs. The ₿C price is the same at 9am as it is at 4pm because it updates once per day at midnight UTC. Neither party is exposed to intraday Bitcoin volatility.</p>
-        <p>The system is designed for commerce to transact entirely on the token layer. Bitcoin's base layer is touched only at the boundaries: when fiat enters and when fiat exits. Everything in between is token transfers on Liquid, priced in ₿C, with no reference to spot price required.</p>
+        <p>The system is designed for commerce to transact entirely on the token layer. Bitcoin's base layer is touched only at the boundaries: when fiat enters and when fiat exits. Everything in between is token transfers on Liquid, denominated in ₿C, with no reference to spot price required.</p>
       </div>
     </div>
 

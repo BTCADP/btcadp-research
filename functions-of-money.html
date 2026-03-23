@@ -405,7 +405,7 @@
             Most people assume these three functions must be performed by the same instrument. They rarely are. In nearly every monetary system in history, including the ones that worked best, different instruments handled different functions. The confusion between them is the source of most arguments about whether Bitcoin "works as money."
         </p>
         <p>
-            Bitcoin works as money. It does not yet work as <em>all three functions simultaneously</em> in everyday commerce. Recognizing which function is missing — and building it — is the purpose of the ₿C denomination.
+            Bitcoin works as money. What has not yet been built on top of it is the full stack — a stable unit of account, a medium of exchange for the fiat-native majority, and a savings product — that would make Bitcoin functional for the full range of economic activity. Building that stack is the purpose of the ₿C denomination.
         </p>
     </div>
 
@@ -452,10 +452,10 @@
             </div>
             <span class="function-label label-orange">Denomination Layer</span>
             <p>
-                ₿C (Bitcoin Currency) is the unit of account — and <em>only</em> the unit of account. No ₿C tokens exist. Nothing denominated "₿C" moves in a transaction. ₿C is the number on the price tag, the number on the paycheck, the number on the invoice. It is a denomination protocol — a standard for expressing value, not a product.
+                ₿C (Bitcoin Currency) is the unit of account — and <em>only</em> the unit of account. No ₿C tokens exist. Nothing denominated "₿C" moves in a transaction. ₿C is the number on the price tag, the number on the invoice, the number in the contract. It is a denomination protocol — a standard for expressing value, not a product.
             </p>
             <p>
-                ₿C is defined as the cumulative arithmetic mean of every Bitcoin Average Daily Price since the genesis block. It moves approximately 0.04% per day — stable enough that a merchant can set prices and leave them unchanged for a month. And because it is a cumulative mean of Bitcoin's entire price history, ₿C appreciates predictably over time. The unit of account itself gets stronger, not weaker. This is the inversion of fiat.
+                ₿C is defined as the cumulative arithmetic mean of every Bitcoin Average Daily Price since the genesis block. Its daily appreciation rate converges toward Bitcoin's own long-run growth rate — stable enough that a merchant can set prices and leave them unchanged for a month. And because it is a cumulative mean of Bitcoin's entire price history, ₿C appreciates predictably over time. The unit of account itself gets stronger, not weaker. This is the inversion of fiat.
             </p>
             <p>
                 ₿C requires no issuer, holds no reserves, and makes no redemption promise. Any wallet, merchant, or payment system can adopt it independently. It is a standard for expressing value — a measuring stick anyone can use.
@@ -502,7 +502,7 @@
                 ₿USD is not the medium of exchange <em>in</em> the fiat economy. It is the medium of exchange <em>at the boundary</em> — the bridge instrument that lets fiat-native users transact in a Bitcoin-backed system without knowing they have crossed the line. A customer's wallet displays their balance in ₿C terms. When they pay for coffee, ₿USD tokens move from buyer to seller. Neither party sees a Bitcoin spot price. The experience is indistinguishable from any conventional digital payment — except the currency they hold appreciates slowly rather than eroding.
             </p>
             <p>
-                The transitional label is deliberate. As the ecosystem matures — as merchants price in ₿C, workers receive wages priced in ₿C, tokens circulate peer-to-peer without anyone redeeming for fiat — ₿USD becomes a native instrument too. The $1 peg becomes an exit feature rather than a defining characteristic. The token's primary identity shifts from "digital dollar" to "₿C circulation token that happens to have a fiat exit." Over time, the proportion of tokens ever redeemed for fiat naturally declines, and the boundary between the two economies dissolves.
+                The transitional label is deliberate. As the ecosystem matures — as merchants price in ₿C, workers receive ₿C-denominated wages, tokens circulate peer-to-peer without anyone redeeming for fiat — ₿USD becomes a native instrument too. The $1 peg becomes an exit feature rather than a defining characteristic. The token's primary identity shifts from "digital dollar" to "₿C circulation token that happens to have a fiat exit." Over time, the proportion of tokens ever redeemed for fiat naturally declines, and the boundary between the two economies dissolves.
             </p>
         </div>
 
@@ -574,7 +574,7 @@
                 </tr>
                 <tr>
                     <td class="system-label">₿C / ₿USD</td>
-                    <td><span class="pass">₿C denomination</span><br>Stable (~0.04%/day drift), appreciating, Bitcoin-native. No issuer required.</td>
+                    <td><span class="pass">₿C denomination</span><br>Appreciating, Bitcoin-native, day-to-day movements small enough for stable pricing. No issuer required.</td>
                     <td><span class="pass">BTC (native) + ₿USD (transitional)</span><br>BTC via Lightning for the Bitcoin circular economy. ₿USD as the fiat-to-Bitcoin bridge — converging into native use over time.</td>
                     <td><span class="pass">Bitcoin</span><br>On-chain reserves. Publicly verifiable. No fiat held. No sovereign debt.</td>
                 </tr>
@@ -589,7 +589,7 @@
         <div class="section-number">05</div>
         <h2>The Four-Layer Architecture</h2>
         <p>
-            The three functions of money map onto a four-layer technical stack. Each layer performs one function. Each is independently verifiable. The user interacts only with the top — a wallet that shows a stable balance — while the complexity operates beneath the surface.
+            The three functions of money map onto a four-layer technical stack. Each layer performs one function. Each is independently verifiable. The user interacts only with the top — a wallet displaying prices in ₿C and balances in ₿USD — while the complexity operates beneath the surface.
         </p>
 
         <div class="layer-stack">
@@ -598,7 +598,7 @@
                 <div class="layer-content">
                     <div class="layer-component">₿C</div>
                     <div class="layer-name">Denomination Layer</div>
-                    <div class="layer-desc">How value is expressed. The number on the price tag, the invoice, the paycheck. ₿C is a denomination protocol — not a token, not a product. Any party can compute it. Any wallet can display it.</div>
+                    <div class="layer-desc">How value is expressed. The number on the price tag, the invoice, the contract. ₿C is a denomination protocol — not a token, not a product. Any party can compute it. Any wallet can display it.</div>
                     <div class="layer-function-tag label-orange">Unit of Account</div>
                 </div>
             </div>
@@ -668,7 +668,7 @@
             The analogy to the gold standard is not rhetorical. It is structural. Under the classical gold standard, the architecture was: gold (store of value) → national currencies defined as gold weights (unit of account) → paper notes and bank entries (medium of exchange). The public interacted with the top of the stack — paper money — and rarely thought about the gold in the vault.
         </p>
         <p>
-            Under the ₿C/₿USD model, the architecture is: Bitcoin (store of value) → ₿C as the cumulative mean of Bitcoin's price history (unit of account) → BTC via Lightning for the native Bitcoin economy and ₿USD tokens for fiat-native users entering the system (two mediums of exchange that converge over time). The public interacts with the top of the stack — a wallet showing a stable ₿C balance — and never needs to think about the Bitcoin in the reserve address.
+            Under the ₿C/₿USD model, the architecture is: Bitcoin (store of value) → ₿C as the cumulative mean of Bitcoin's price history (unit of account) → BTC via Lightning for the native Bitcoin economy and ₿USD tokens for fiat-native users entering the system (two mediums of exchange that converge over time). The public interacts with the top of the stack — a wallet displaying prices in ₿C and a ₿USD balance — and never needs to think about the Bitcoin in the reserve address.
         </p>
         <p>
             The critical improvement over the gold standard is verifiability. Gold reserves required trust in the custodian. Nixon's abandonment of Bretton Woods in 1971 was possible precisely because the public had no way to independently verify the gold holdings. Bitcoin reserves are on-chain, publicly addressable, and verifiable in real time by anyone. The custodial trust assumption that destroyed the gold standard does not exist in this architecture.
