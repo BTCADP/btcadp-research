@@ -579,7 +579,7 @@
   <span class="chapter-num">Chapter 5</span>
   <h2>Bitcoin's Unfinished Business</h2>
 </div>
-<p class="hero-line">Bitcoin has succeeded beyond most early projections as a store of value, a settlement network, and a treasury reserve asset. It has not yet succeeded as everyday money.</p>
+<p class="hero-line">Bitcoin has succeeded beyond most early projections as a store of value, a settlement network, and a treasury reserve asset. What has not yet been built on top of it is the denomination and interface layer that everyday commerce requires.</p>
 
 <p>
   The gap between what Bitcoin was proposed to be and what it has become is not a technical failure. The protocol works. The network is the most secure computing infrastructure ever built. The proof-of-work consensus mechanism has operated without interruption since January 2009. The supply schedule is mathematically fixed and has never been altered. No asset in history has appreciated more over any multi-year holding period. By every technical measure, Bitcoin works.
@@ -604,7 +604,7 @@
 </p>
 
 <p>
-  Bitcoin works as money. It does not yet work as all three functions simultaneously in everyday commerce. Recognizing which function is missing — and building it — is the purpose of the framework described here.
+  Bitcoin works as money. What has not yet been built on top of it is the full stack — a stable unit of account, a medium of exchange for the fiat-native majority, and a savings product — that would make Bitcoin functional for the full range of economic activity. Building that stack is the purpose of the framework described here.
 </p>
 
 <h3>A Brief History of Separation</h3>
@@ -636,7 +636,7 @@
 </p>
 
 <p>
-  The stablecoin described in Part III does not replace Bitcoin as a medium of exchange. It provides a transitional medium — a familiar, dollar-denominated interface — that routes eight billion people from the fiat economy they know into the Bitcoin economy they have not yet entered. Every token minted requires purchasing Bitcoin. Every transaction settles on Bitcoin infrastructure. Every user who holds a token is, whether they know it or not, a participant in the Bitcoin network. The currency layer does not compete with Bitcoin. It fulfills Bitcoin's original purpose — peer-to-peer electronic cash — by building the interface layer that the protocol itself was never designed to include, and never needed to, because it can be built on top.
+  The stablecoin described in Part III does not replace Bitcoin as a medium of exchange. It provides a transitional medium — a familiar, dollar-denominated interface — that routes eight billion people from the fiat economy they know into the Bitcoin economy they have not yet entered. Every token minted requires purchasing Bitcoin. Every transaction settles on Bitcoin infrastructure. Every user who holds a token is, whether they know it or not, a participant in the Bitcoin network. The currency layer does not compete with Bitcoin. It builds the interface layer that the protocol itself was never designed to include, and never needed to, because it can be built on top.
 </p>
 
 <p>
@@ -685,7 +685,7 @@
   <span class="chapter-num">Chapter 7</span>
   <h2>The Denomination — Bitcoin Currency (₿C)</h2>
 </div>
-<p class="hero-line">A 10% single-day move in BTC spot shifts the ₿C price by less than 0.01%. This stability improves monotonically with every passing day as a mathematical property of cumulative averages.</p>
+<p class="hero-line">₿C is a stable language for expressing Bitcoin-denominated value. It stabilizes the price tag, the invoice, and the contract. It does not, by itself, stabilize the value of holdings. That is the work of the instruments described in Part III.</p>
 
 <p>
   Bitcoin Currency (₿C) is the cumulative arithmetic mean of every historical BTCADP value from the genesis block — January 3, 2009 — through the previous completed UTC day. As of early 2026, this cumulative average incorporates over 6,200 daily observations and sits at approximately $18,700.
@@ -695,24 +695,48 @@
   The formula is one line of arithmetic: sum every historical daily BTCADP, divide by the number of days. That is the ₿C price. No weighting. No smoothing. No adjustment. No discretion. The result is deterministic — any two parties with the same input data will arrive at the same number to arbitrary decimal precision.
 </p>
 
+<h3>Behavioral Properties</h3>
+
 <p>
-  The key property of ₿C for monetary purposes is its mathematical stability. The sensitivity of the ₿C price to any single day's BTCADP is approximately 1/N, where N is the number of days in the historical series. With over 6,200 days of history, a single day's price can shift the ₿C value by roughly 1/6,200 of the difference between that day's price and the current average. In practice, this means a 10% single-day crash in BTC spot moves ₿C by less than 0.01%. A 50% crash — a catastrophic event by any measure — moves ₿C by less than 0.05%. The day-to-day movement of ₿C averages approximately 0.04%. This stability is not engineered or maintained by any mechanism. It is an arithmetic property of cumulative averages that improves monotonically with every passing day.
+  The sensitivity of the ₿C price to any single day's BTCADP is exactly 1/(N+1) of the difference between that day's price and the current average, where N is the number of days in the historical series. As of early 2026, N exceeds 6,200 and BTC spot exceeds the ₿C price by a factor of approximately 4.5×. Under these conditions, the ₿C price appreciates every single day — the formula produces a positive change whenever BTC spot is above the cumulative average. On a typical day, the ₿C price appreciates approximately 0.05%. On a day in which Bitcoin's spot price drops 10%, the ₿C price still appreciates — approximately 0.04%. Even a 40% single-day crash does not reverse the day's appreciation — it reduces it. The ₿C price still rises, just less than usual.
+</p>
+
+<p>
+  To illustrate: on a normal day with BTC spot at $90,000 and the ₿C price at $15,600, the denomination appreciates approximately $12 — a gain of 0.077%. Now suppose BTC crashes 40% in a single day, from $90,000 to $54,000. The ₿C price still appreciates — by approximately $6, a gain of 0.04%. The crash did not push ₿C down. It halved the day's appreciation. A price tag expressed in ₿C is unaffected by an event that would invalidate any spot-priced quotation.
+</p>
+
+<p>
+  These figures reflect current conditions. They are not permanent properties of the denomination. The daily ₿C appreciation rate is a function of two variables: the ratio of BTC spot to the current ₿C price, and the total number of days N. Under sustained exponential growth in BTC spot — the condition the denomination is designed for — these two forces approximately cancel, and the daily appreciation rate converges toward Bitcoin's own long-run growth rate. If BTC spot doubles every four years, the ₿C rate converges to approximately 0.047% per day, or roughly 19% per year. If Bitcoin's growth decelerates to a doubling every ten years, the rate converges to approximately 7% per year. If BTC spot flatlines, the rate decelerates toward zero. This convergence is structural: the cumulative average of an exponential function grows at the same exponential rate in the long run — lagged, smoothed, and stripped of daily volatility.
 </p>
 
 <h3>Not a Stablecoin</h3>
 
 <p>
-  ₿C is not a stablecoin. It is a predictably appreciating, incrementally deflationary unit of account. The distinction is critical. A stablecoin targets a fixed peg — one token equals one dollar, today and tomorrow and next year. ₿C does not target a fixed value. It moves upward over the long run as Bitcoin's spot price, which has trended upward across every multi-year holding period in its history, pulls the cumulative average higher. Historically, ₿C has appreciated between 19% and 125% annually depending on the measurement period. Its day-to-day movement is small enough for commerce — a merchant can set prices and leave them unchanged for a month — while its long-run trend provides a genuine improvement in purchasing power for those who hold it.
+  ₿C is not a stablecoin. It is a predictably appreciating, incrementally deflationary unit of account. The distinction is critical. A stablecoin targets a fixed peg — one token equals one dollar, today and tomorrow and next year. ₿C does not target a fixed value. It moves upward over the long run as Bitcoin's spot price, which has trended upward across every multi-year holding period in its history, pulls the cumulative average higher. Historically, ₿C has appreciated between 19% and 125% annually depending on the measurement period. Its day-to-day movement is small enough for pricing — a merchant can set prices and leave them unchanged for a month — while its long-run trend makes it the inverse of fiat: a price tag that gains purchasing power rather than losing it.
+</p>
+
+<h3>Scope and Boundaries</h3>
+
+<p>
+  ₿C stabilizes the expression of value. It does not stabilize the value of holdings. This distinction is central to the architecture of everything that follows.
 </p>
 
 <p>
-  This is the inversion of fiat. A dollar-denominated price tag represents a unit that loses value every year. A ₿C-denominated price tag represents a unit that gains value every year. The holder of ₿C does not need to invest, speculate, or take risk to preserve purchasing power. The denomination does the work.
+  When a merchant prices an item at 1 ₿C, that price tag is stable — it moves less than 0.1% per day under any market conditions. The merchant can publish a catalog, quote an invoice, or negotiate a contract in ₿C with confidence that the number means approximately the same thing tomorrow as it does today.
+</p>
+
+<p>
+  However, a buyer who acquires Bitcoin to pay that invoice holds satoshis, and satoshis are valued at spot. If the buyer acquires 1 ₿C worth of Bitcoin today and BTC spot drops 50% overnight, the buyer's holdings are worth approximately 0.5 ₿C the following morning — even though the price tag has barely moved. The ₿C denomination protected the price tag. It did not protect the buyer's purchasing power.
+</p>
+
+<p>
+  This is not a deficiency. It is a boundary — and it is the boundary that defines why the instruments in Part III exist. A unit of account and a store of value are different functions of money. ₿C fulfills the first. To stabilize the holder's purchasing power — to guarantee that 1 ₿C held today can purchase 1 ₿C worth of goods tomorrow regardless of spot price movements — requires a counterparty, a reserve, or a token. That is exactly what ₿USD and the ₿ond provide. The unit of account is the foundation. The instruments are the structure built on it.
 </p>
 
 <h3>No Issuer. No Reserves. No Trust.</h3>
 
 <p>
-  ₿C requires no issuer, holds no reserves, and makes no redemption promise. It is a protocol for expressing value — a measuring stick anyone can use. Any wallet, merchant, or payment system can adopt it independently by computing the formula from publicly available data. If every institution built on ₿C dissolved tomorrow, the denomination would persist unchanged. Anyone with the BTCADP specification and trade data can compute tomorrow's ₿C price. The denomination outlasts the institutions that use it.
+  ₿C requires no issuer, holds no reserves, and makes no redemption promise. It is a protocol for expressing value — a measuring stick anyone can use. Any wallet, merchant, or invoicing system can adopt it independently by computing the formula from publicly available data. If every institution built on ₿C dissolved tomorrow, the denomination would persist unchanged. Anyone with the BTCADP specification and trade data can compute tomorrow's ₿C price. The denomination outlasts the institutions that use it.
 </p>
 
 <p>
@@ -722,7 +746,7 @@
 <h3>A Denomination for Two Worlds</h3>
 
 <p>
-  ₿C operates in two contexts simultaneously. For participants who still think in fiat terms, ₿C has a fiat-equivalent price — approximately $18,700 — that provides a familiar reference point. For participants in the Bitcoin circular economy, ₿C is used natively as the unit of account: a coffee costs 0.000267 ₿C, a monthly salary is 40 ₿C, a mortgage is 12,000 ₿C. The same formula, the same number, the same Bitcoin backing — the only difference is whether the user consults the fiat equivalent. This dual functionality is what makes ₿C viable as the unit of account for both the fiat transition period and the Bitcoin-native economy that emerges on the other side.
+  ₿C operates in two contexts simultaneously. For participants who still think in fiat terms, ₿C has a fiat-equivalent price — approximately $18,700 — that provides a familiar reference point. For participants in the Bitcoin circular economy, ₿C is the native unit of account: a coffee costs 0.000267 ₿C, a monthly salary is 40 ₿C, a mortgage is 12,000 ₿C. The same formula, the same number — the only difference is whether the user consults the fiat equivalent. This dual functionality makes ₿C viable as the unit of account for both the fiat transition period and the Bitcoin-native economy that emerges on the other side.
 </p>
 
 
@@ -1249,7 +1273,7 @@
 </p>
 
 <p>
-  This hard constraint eliminates the inflationary monetary policy that has characterized fiat currencies throughout history. The ₿C denomination appreciates slowly in fiat terms as long as Bitcoin's spot price exceeds the historical average, which means that ₿C holders experience an improvement in purchasing power over time rather than the persistent erosion of fiat. This is not a promise or a policy decision — it is an arithmetic property of the cumulative average, and it would require the permanent collapse of Bitcoin to reverse.
+  This hard constraint eliminates the inflationary monetary policy that has characterized fiat currencies throughout history. The ₿C denomination appreciates in fiat terms as long as Bitcoin's spot price exceeds the historical average, which means that prices expressed in ₿C decline over time — the inverse of fiat inflation. This is not a promise or a policy decision — it is an arithmetic property of the cumulative average, and it would require the permanent collapse of Bitcoin to reverse.
 </p>
 
 <h3>The Inversion of Banking</h3>
@@ -1313,7 +1337,7 @@
 </p>
 
 <p>
-  The ₿C holder — anyone who prices, invoices, or saves in the ₿C denomination — holds a unit of account whose purchasing power improves year over year as a mathematical property of the formula. They do not need to check the price hourly. They do not lie awake during a 20% Bitcoin drawdown. They hold a stable unit whose fiat-equivalent value improves quietly, backed by the hardest money ever created, and they pay for this stability by forgoing Bitcoin's more dramatic appreciation. For the vast majority of economic participants — small businesses, wage earners, individuals who simply want their money to retain or gain value — this is the better deal.
+  Anyone who prices, invoices, or contracts in ₿C — merchants, employers, lenders — uses a unit of account whose fiat-equivalent value appreciates year over year as a mathematical property of the formula. A ₿C-denominated price tag gains purchasing power rather than losing it. The unit of account itself improves, unlike the dollar, which erodes by design. This appreciation accrues to the price tag — not to the holder of satoshis. The holder's purchasing power still depends on BTC spot, which is why the instruments in Part III exist: to bridge the gap between a stable unit of account and a stable holding.
 </p>
 
 <h3>What the Treasury Company Receives</h3>
@@ -1412,7 +1436,7 @@
 <h3>The Calm-State Guarantee</h3>
 
 <p>
-  Under normal network conditions — which is the vast majority of the token's life — every defensive mechanism is dormant. Transfers are instant and free. Redemptions are fast and cheap. The token behaves identically to any other stablecoin. The mechanisms activate only when the network's vital signs indicate abnormal stress, and the thresholds are public, auditable, and identical for everyone. Think of a circuit breaker behind a wall. It sits quietly for years. When the electrical load becomes dangerous, it trips — automatically, instantly, without asking permission. It protects the house. The holder does not experience the defensive mechanism as a restriction. They experience it as the reason their purchasing power survived.
+  Under normal network conditions — which is the vast majority of the token's life — every defensive mechanism is dormant. Transfers are instant and free. Redemptions are fast and cheap. The token behaves identically to any other stablecoin. The mechanisms activate only when the network's vital signs indicate abnormal stress, and the thresholds are public, auditable, and identical for everyone. Think of a circuit breaker behind a wall. It sits quietly for years. When the electrical load becomes dangerous, it trips — automatically, instantly, without asking permission. It protects the house. The holder does not experience the defensive mechanism as a restriction. They experience it as the reason the system survived.
 </p>
 
 <h3>Game Theory: Why the Attack Becomes Uneconomical</h3>
@@ -1532,11 +1556,11 @@
 <h3>Sphere B: The Bitcoin Economy</h3>
 
 <p>
-  Sphere B is the Bitcoin circular economy. Prices are denominated in ₿C. Wages are paid in ₿C. Savings are held in ₿C. The dollar equivalent of a ₿C unit is noted somewhere, available if needed, and consulted approximately never. A coffee costs 0.000267 ₿C. A monthly salary is 40 ₿C. A mortgage is 12,000 ₿C. These numbers are stable — they move at 0.04% per day, well within any merchant's tolerance. No spot price is consulted. No conversion is made. No fiat reference is needed because no fiat is involved.
+  Sphere B is the Bitcoin circular economy. Prices are denominated in ₿C. Wages are quoted in ₿C. Savings targets are expressed in ₿C. The dollar equivalent of a ₿C unit is noted somewhere, available if needed, and consulted approximately never. A coffee costs 0.000267 ₿C. A monthly salary is 40 ₿C. A mortgage is 12,000 ₿C. These price tags are stable — the ₿C price appreciates predictably, requiring only periodic repricing. No spot price is consulted. No conversion is made. No fiat reference is needed because no fiat is involved.
 </p>
 
 <p>
-  Sphere B is what the Bitcoin community has been trying to build since 2009. It is the original vision of the white paper. It requires no external infrastructure, no trusted third party, no stablecoin peg. It requires only that enough participants agree to price, pay, and save in the same denomination — and that the denomination be stable enough for daily use. ₿C is that denomination.
+  Sphere B is what the Bitcoin community has been trying to build since 2009. It requires no external infrastructure, no trusted third party, no stablecoin peg. It requires only that enough participants agree to price, pay, and save in the same denomination — and that the denomination be stable enough for pricing. ₿C is that denomination. Holding value within Sphere B still requires the instruments described in Part III — but the unit of account that makes those instruments possible is ₿C.
 </p>
 
 <h3>The Gateway</h3>
