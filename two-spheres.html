@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Two Spheres: A Framework for Bitcoin Adoption | btcadp.org</title>
-<meta name="description" content="BTCC (₿C) operates in two spheres simultaneously — the fiat economy and the Bitcoin circular economy. Understanding both is the key to understanding how Bitcoin adoption actually happens.">
+<meta name="description" content="Two monetary systems. One unit of account. ₿C is the common denomination between Sphere A (the fiat economy) and Sphere B (the Bitcoin economy, where sats are the native unit). The bridge between them is where most people live.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
 <style>
@@ -197,6 +197,69 @@
     font-style: italic;
   }
 
+  /* ── GLASS PANE VISUAL ── */
+  .glass-pane {
+    background: #0f0f16;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 28px 24px;
+    margin: 32px 0;
+    text-align: center;
+  }
+  .glass-pane-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+  }
+  .glass-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    flex-wrap: wrap;
+  }
+  .glass-side {
+    padding: 16px 20px;
+    min-width: 180px;
+  }
+  .glass-side-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .glass-side-a .glass-side-label { color: var(--text-muted); }
+  .glass-side-b .glass-side-label { color: var(--orange); }
+  .glass-side-desc {
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+  .glass-center {
+    border-left: 2px solid var(--orange);
+    border-right: 2px solid var(--orange);
+    padding: 16px 20px;
+    min-width: 80px;
+  }
+  .glass-center-label {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--orange);
+    letter-spacing: 1px;
+  }
+  .glass-center-desc {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+
   /* ── STACK TABLE ── */
   .stack {
     border: 1px solid var(--border);
@@ -210,9 +273,6 @@
     border-bottom: 1px solid var(--border);
   }
   .stack-row:last-child { border-bottom: none; }
-  .stack-header {
-    background: #0f0f16;
-  }
   .stack-cell {
     padding: 12px 16px;
     font-family: var(--font-sans);
@@ -247,6 +307,8 @@
     .spheres { grid-template-columns: 1fr; }
     .sphere-divider { grid-column: 1; }
     .bridge-row { gap: 4px; }
+    .glass-row { flex-direction: column; }
+    .glass-center { border-left: none; border-right: none; border-top: 2px solid var(--orange); border-bottom: 2px solid var(--orange); }
     .stack-row { grid-template-columns: 80px 1fr 1fr; }
   }
 </style>
@@ -271,108 +333,116 @@
 
   <div class="article-meta">Framework &nbsp;&bull;&nbsp; btcadp.org &nbsp;&bull;&nbsp; March 2026</div>
   <h1 class="article-title">Two Spheres</h1>
-  <p class="article-subtitle">A framework for understanding how Bitcoin becomes everyday money — and why it has not yet.</p>
+  <p class="article-subtitle">Two monetary systems. One unit of account.</p>
   <div class="article-byline">
     btcadp.org &nbsp;&bull;&nbsp; March 2026 &nbsp;&bull;&nbsp; CC0 Public Domain
   </div>
 
   <div class="article-body">
 
-    <h2>The Problem Bitcoin Has Not Solved</h2>
+    <h2>The Interface Gap</h2>
 
-    <p>Bitcoin has operated without interruption since January 2009. Its network has never gone down. Its supply schedule has never been violated. Its settlement is final. By every technical measure, it works.</p>
+    <p>Bitcoin has operated without interruption since January 2009. Its network has never gone down. Its supply schedule has never been violated. Its settlement is final. By every technical measure, the protocol works.</p>
 
     <p>And yet most economic activity on earth is still conducted in fiat currencies. Most prices are still denominated in dollars, euros, and pesos. Most wages are still paid by banks. Most savings are still losing purchasing power at the rate their governments have decided is acceptable.</p>
 
-    <p>The barrier is not technical. It is not a problem with Bitcoin's protocol. It is a gap in the interface — the layer between Bitcoin's properties and the way human beings actually conduct commerce. Bitcoin gives you the hardest money ever created. It does not, by itself, give you a way to price a sandwich.</p>
+    <p>The barrier is not technical. It is not a problem with Bitcoin's protocol. It is a gap in the interface between Bitcoin's properties and the way human beings actually conduct commerce. Bitcoin gives you the hardest money ever created. It does not, by itself, give you a way to price a sandwich.</p>
 
-    <p>That interface problem has produced a genuine division within the Bitcoin community — two coherent schools of thought, both correct about Bitcoin's properties, disagreeing about what to do next.</p>
+    <p>That interface gap has produced a genuine division within the Bitcoin community: two coherent schools of thought, both correct about Bitcoin's properties, disagreeing about what to do next.</p>
 
     <h2>Two Visions, One Destination</h2>
 
-    <p>One school holds that Bitcoin should be adopted as cash — peer-to-peer, direct, the way Satoshi described it. That the path to a sound monetary system runs through daily Bitcoin transactions, merchant adoption, and the gradual obsolescence of fiat intermediaries. That building instruments that reference the dollar is building on sand. That the goal is a self-contained Bitcoin economy where no fiat reference is ever needed.</p>
+    <p>One school holds that Bitcoin should be adopted as cash. Peer-to-peer, direct, the way Satoshi described it. The path runs through daily Bitcoin transactions, merchant adoption, and the gradual obsolescence of fiat intermediaries. Building instruments that reference the dollar is building on sand. The goal is a self-contained Bitcoin economy where sats are the only unit anyone consults.</p>
 
-    <p>The other school holds that Bitcoin should be accumulated as the apex monetary asset — held on balance sheets, never spent, the new gold. That the path to a sound monetary system runs through institutional recognition, corporate treasury allocation, and the gradual displacement of gold and sovereign debt as reserve assets. That the goal is a world where Bitcoin is the reserve asset underlying everything else.</p>
+    <p>The other school holds that Bitcoin should be accumulated as the apex monetary asset. Held on balance sheets, never spent, the new gold. The path runs through institutional recognition, corporate treasury allocation, and the gradual displacement of gold and sovereign debt as reserve assets.</p>
 
-    <p>Both are right about Bitcoin's properties. Both want the same destination: a world where Bitcoin's monetary properties — fixed supply, no counterparty, permissionless — underpin the global economy. The disagreement is about sequence and interface. It is not about Bitcoin.</p>
+    <p>Both are right about Bitcoin's properties. Both want the same destination: a world where Bitcoin's monetary properties underpin the global economy. The disagreement is about sequence and interface. It is not about Bitcoin.</p>
 
     <div class="callout">
       <p>The division is not a disagreement about where to go. It is a disagreement about how to get there from a world that is still, for the overwhelming majority of its inhabitants, denominated in fiat.</p>
     </div>
 
-    <p>What has been missing is a framework that makes both visions compatible — that shows how the path from a fiat-denominated world to a Bitcoin circular economy can be walked without abandoning either vision. That framework is the two-sphere model.</p>
+    <p>What has been missing is a framework that makes both visions compatible. That shows how the path from a fiat-denominated world to a Bitcoin circular economy can be walked without abandoning either vision. That framework is the two-sphere model.</p>
 
     <h2>Sphere A: The Fiat Economy</h2>
 
     <p>Sphere A is where most of the world lives today. People in Sphere A earn in fiat, spend in fiat, and measure value in fiat. They do not know the BTC spot price. They are not interested in running a node. They experience inflation as a background condition they cannot escape and do not fully understand.</p>
 
-    <p>For Sphere A participants, the relevant Bitcoin-native instruments are the ones that look and feel like the financial products they already use — but are backed by harder money.</p>
+    <p>For Sphere A participants, the relevant instruments are the ones that look and feel like the financial products they already use, but are backed by harder money.</p>
 
     <p>₿USD is a dollar. One token equals one dollar. It is stable, spendable, and familiar. The fact that it is backed by Bitcoin on-chain rather than US Treasuries is, from the user's perspective, an improvement in reserve quality that they need not think about. They are using a better dollar without knowing they have crossed a line.</p>
 
-    <p>The ₿ond is a savings product. A Sphere A participant deposits fiat, receives a slowly appreciating balance, and waits for maturity. The denomination is ₿C, but they experience it as a savings account that grows rather than erodes — better than a bank deposit, structured like a bond, backed by Bitcoin. They do not need to know the spot price. They do not need to understand timeblocks or cumulative averages. They need to know that their balance goes up.</p>
+    <p>The ₿ond is a savings product. A Sphere A participant deposits fiat, receives a slowly appreciating balance, and waits for maturity. The denomination is ₿C, but they experience it as a savings account that grows rather than erodes. Better than a bank deposit, structured like a bond, backed by Bitcoin. They do not need to know the spot price. They do not need to understand timeblocks or cumulative averages. They need to know that their balance goes up.</p>
 
     <p>This is the design principle of Sphere A: Bitcoin's monetary properties, delivered through instruments that require no change in how people think about money. The entry cost is zero. The learning curve is flat. The only requirement is a willingness to hold something better than what they already hold.</p>
 
     <h2>Sphere B: The Bitcoin Economy</h2>
 
-    <p>Sphere B is the Bitcoin circular economy. Prices are denominated in ₿C. Wages are paid in ₿C. Savings are held in ₿C. The dollar equivalent of a ₿C unit is noted somewhere, available if needed, and consulted approximately never.</p>
+    <p>Sphere B is the Bitcoin circular economy. Prices are denominated in sats. Wages are paid in sats. Savings are held in sats. One sat equals one sat, a tautology inside the circle, but one with profound implications: no external unit is needed because no external system is referenced.</p>
 
-    <p>A coffee costs 0.000267 ₿C. A monthly salary is quoted at 40 ₿C. A mortgage is 12,000 ₿C. These price tags are stable — the ₿C price appreciates predictably, requiring only periodic repricing. No spot price is consulted. No conversion is made. No fiat reference is needed because no fiat is involved.</p>
+    <p>A coffee costs 5,000 sats. A monthly salary is quoted at 7,000,000 sats. A mortgage is denominated in sats. Sat prices are deflationary: they fall over time as Bitcoin's purchasing power grows. This is manageable, but it means merchants reprice periodically, downward rather than upward.</p>
 
-    <p>Sphere B is what the Bitcoin community has been trying to build since 2009. It requires no external infrastructure, no trusted third party, no stablecoin peg. It requires only that enough participants agree to price, pay, and save in the same denomination — and that the denomination be stable enough for pricing. ₿C is that denomination. Holding value within Sphere B still requires the instruments described on this page — but the unit of account that makes those instruments possible is ₿C.</p>
+    <p>Sphere B is what the Bitcoin community has been trying to build since 2009. It requires no external infrastructure, no trusted third party, no stablecoin peg. It requires only that enough participants agree to earn, spend, and save in sats.</p>
 
-    <p>₿C is that denomination. It is the unit of account for Sphere B. Not because it was designed to be — because it is the only Bitcoin-native unit with the mathematical properties required: day-to-day stability, long-run appreciation, and a historical record that goes back to the genesis block.</p>
+    <p>Today, Sphere B is small. Fragmented pockets of sat-denominated commerce in a world still overwhelmingly denominated in fiat. It may grow. It may never dominate. Even under the most optimistic scenarios, it will coexist with fiat currencies, CBDCs, stablecoins, and other instruments for decades, likely permanently.</p>
 
-    <h2>One Denomination, Two Contexts</h2>
+    <p>₿C does not operate inside Sphere B. It is dollar-derived and has no function where 1 sat = 1 sat. What ₿C provides is the bridge between Sphere A and Sphere B: a common unit of account that both the fiat participant and the Bitcoin participant can read.</p>
 
-    <p>The critical insight of the two-sphere model is that ₿C operates in both spheres simultaneously, without modification and without compromise.</p>
+    <h2>The Glass Pane</h2>
 
-    <div class="spheres">
-      <div class="sphere sphere-a">
-        <div class="sphere-label">Sphere A</div>
-        <div class="sphere-title">The Fiat Economy</div>
-        <p>₿C has a fiat-equivalent price (~$18,700) that provides a familiar reference. Sphere A participants experience it through ₿USD ($1 peg) and ₿onds (appreciating fiat-equivalent balance). They interact with Bitcoin's properties without needing Bitcoin's vocabulary.</p>
+    <p>₿C is like a pane of glass between two monetary systems. You can look through it from either side.</p>
+
+    <div class="glass-pane">
+      <div class="glass-pane-label">₿C: the common unit of account</div>
+      <div class="glass-row">
+        <div class="glass-side glass-side-a">
+          <div class="glass-side-label">Sphere A</div>
+          <div class="glass-side-desc">Serena (fiat participant) looks through and sees a Bitcoin-backed value she can parse. ₿C has a dollar equivalent (~$18,700) that makes it legible.</div>
+        </div>
+        <div class="glass-center">
+          <div class="glass-center-label">₿C</div>
+          <div class="glass-center-desc">same formula<br>same number<br>both sides read it</div>
+        </div>
+        <div class="glass-side glass-side-b">
+          <div class="glass-side-label">Sphere B</div>
+          <div class="glass-side-desc">Marco (sat-native participant) looks through and sees a dollar-legible version of his sat world. ₿C translates his position without changing it.</div>
+        </div>
       </div>
-      <div class="sphere sphere-b">
-        <div class="sphere-label">Sphere B</div>
-        <div class="sphere-title">The Bitcoin Economy</div>
-        <p>₿C is the unit of account. No fiat reference is consulted. Prices, wages, and savings are denominated directly in ₿C. The dollar equivalent exists but is irrelevant to daily commerce. This is the Bitcoin circular economy in operation.</p>
-      </div>
-      <div class="sphere-divider">same denomination · same formula · same Bitcoin backing</div>
     </div>
 
-    <p>In Sphere A, ₿C's fiat-equivalent is the feature that makes it accessible. People understand their balance because it has a dollar reference. In Sphere B, that reference is noise — the denomination is used natively, the way the dollar is used natively by someone who never thinks about the gold price.</p>
+    <p>Fiat's unit of account is the dollar. Bitcoin's unit of account is the sat. ₿C is the shared language both sides read. It is not the destination unit for either sphere. It is the translation layer between them.</p>
 
-    <p>The formula does not change. The Bitcoin backing does not change. The BTCADP does not change. What changes is whether the user consults the fiat equivalent. In Sphere A, they do. In Sphere B, they do not. The same system serves both contexts because the denomination was designed to be Bitcoin-native first and fiat-expressible second — not the other way around.</p>
+    <p>This distinction matters. The original framing positioned ₿C as the unit of account <em>inside</em> the Bitcoin economy. That was incorrect. ₿C is derived from dollar prices. It has no role in a pure sat economy. Its role is at the boundary, where the two monetary systems meet, where prices, contracts, and savings need to be legible from both sides simultaneously.</p>
+
+    <p>Bitcoin's climate, not its temperature. Both are Bitcoin in dollar terms, but one whipsaws and the other tells you something durable. ₿C is the measurement that lets a fiat participant and a sat participant look at the same number and each understand what it means in their own terms.</p>
 
     <h2>The Gateway</h2>
 
-    <p>Sphere A is the on-ramp to Sphere B. This is the most consequential property of the two-sphere model, and the one that resolves the tension between the two schools of Bitcoin thought.</p>
+    <p>Sphere A is the on-ramp toward Sphere B. This is the most consequential property of the two-sphere model.</p>
 
-    <p>A participant enters Sphere A through a familiar door: a dollar-pegged stablecoin they can spend, or a savings product that grows. They accumulate ₿C-denominated value. Their ₿ond matures into ₿USD. Their ₿USD circulates in commerce. As more merchants price in ₿C, as more wages are paid in ₿C, as more savings are held in ₿C, the need to consult the dollar equivalent diminishes. Not because anyone told them to abandon fiat — because the economics of staying inside the ₿C ecosystem are superior to leaving it.</p>
+    <p>A participant enters Sphere A through a familiar door: a dollar-pegged stablecoin they can spend, or a savings product that grows. They accumulate ₿C-denominated value. Their ₿ond matures into ₿USD. Their ₿USD circulates in commerce. As more merchants accept ₿USD, as more suppliers cross over, the need to convert back to fiat diminishes. Not because anyone told them to abandon fiat, but because the economics of staying inside the ecosystem are superior to leaving it.</p>
 
     <div class="bridge">
-      <div class="bridge-label">The Path from Sphere A to Sphere B</div>
+      <div class="bridge-label">The Path from Sphere A toward Sphere B</div>
       <div class="bridge-row">
         <div class="bridge-node">Fiat savings<br><span style="font-size:0.75rem;color:var(--text-muted);">losing purchasing power</span></div>
-        <div class="bridge-arrow">→</div>
+        <div class="bridge-arrow">&rarr;</div>
         <div class="bridge-node">₿ond<br><span style="font-size:0.75rem;color:var(--text-muted);">appreciating, Bitcoin-backed</span></div>
-        <div class="bridge-arrow">→</div>
-        <div class="bridge-node orange">₿USD<br><span style="font-size:0.75rem;color:rgba(247,147,26,0.7);">spending in ₿C terms</span></div>
-        <div class="bridge-arrow">→</div>
-        <div class="bridge-node orange">₿C commerce<br><span style="font-size:0.75rem;color:rgba(247,147,26,0.7);">no fiat reference needed</span></div>
+        <div class="bridge-arrow">&rarr;</div>
+        <div class="bridge-node orange">₿USD<br><span style="font-size:0.75rem;color:rgba(247,147,26,0.7);">spending, dollar-pegged</span></div>
+        <div class="bridge-arrow">&rarr;</div>
+        <div class="bridge-node orange">Sat economy<br><span style="font-size:0.75rem;color:rgba(247,147,26,0.7);">earning, spending, saving in sats</span></div>
       </div>
-      <div class="bridge-note">The transition is gradual, voluntary, and driven by economic incentive — not ideology.</div>
+      <div class="bridge-note">The transition is gradual, voluntary, and driven by economic incentive, not ideology.</div>
     </div>
 
-    <p>The fiat exit point — redeeming ₿USD for dollars — becomes less relevant as the ₿C economy deepens. Not because the exit is closed. Because the reason to use it diminishes. A denomination that appreciates, backed by the hardest asset ever created, usable for everything from a coffee to a mortgage — why would you leave?</p>
+    <p>Most participants will live on this bridge for a very long time, possibly permanently. That is not a failure of the system. It is the realistic condition the system is designed for. The pure bitcoin economy barely exists today and may never exist at scale. ₿C works for anyone with even one fiat touchpoint. That is virtually everyone, for decades.</p>
 
-    <p>This is how Bitcoin becomes everyday money. Not by persuading people to abandon fiat through conviction. By offering them something better, expressed in terms they already understand, that gradually makes fiat unnecessary through demonstrated superiority.</p>
+    <p>The fiat exit point, redeeming ₿USD for dollars, becomes less relevant as the ₿USD economy deepens. Not because the exit is closed. Because the reason to use it diminishes. A stablecoin backed by the hardest asset ever created, usable for everything from a coffee to a mortgage, appreciating in reserve quality over time. The bridge is where most people live. And the bridge is good.</p>
 
     <h2>The Currency Layer Is One System</h2>
 
-    <p>Both spheres are served by the same currency layer. They are not two separate architectures — they are two contexts in which the same architecture operates.</p>
+    <p>Both spheres are served by the same currency layer. They are not two separate architectures. They are two contexts in which the same architecture operates.</p>
 
     <div class="stack">
       <div class="stack-row">
@@ -383,55 +453,55 @@
       <div class="stack-row">
         <div class="stack-cell label">BTCADP</div>
         <div class="stack-cell sphere-a-cell">Provides the daily fiat-equivalent price that anchors ₿C for Sphere A participants</div>
-        <div class="stack-cell sphere-b-cell">Provides the input to the ₿C formula — consulted once daily, then irrelevant to commerce</div>
+        <div class="stack-cell sphere-b-cell">Provides the input to the ₿C formula, consulted by the protocol once daily, irrelevant to sat-denominated commerce</div>
       </div>
       <div class="stack-row">
         <div class="stack-cell label">₿C (BTCC)</div>
-        <div class="stack-cell sphere-a-cell">A familiar savings denomination with a dollar equivalent — the unit in which ₿ond balances are expressed</div>
-        <div class="stack-cell sphere-b-cell">The unit of account for all commerce — prices, wages, savings, contracts</div>
+        <div class="stack-cell sphere-a-cell">A familiar denomination with a dollar equivalent, the unit in which ₿ond balances are expressed</div>
+        <div class="stack-cell sphere-b-cell">The translation layer: a sat participant can express their position in ₿C terms when communicating with Sphere A, without changing anything about how they hold or transact</div>
       </div>
       <div class="stack-row">
         <div class="stack-cell label">₿USD (TBDC)</div>
-        <div class="stack-cell sphere-a-cell">A $1 stablecoin — the spending layer for Sphere A participants, backed by Bitcoin rather than Treasuries</div>
-        <div class="stack-cell sphere-b-cell">The transactional token for ₿C-denominated commerce — the mechanism by which ₿C values move between participants</div>
+        <div class="stack-cell sphere-a-cell">A $1 stablecoin, the spending layer for Sphere A participants, backed by Bitcoin rather than Treasuries</div>
+        <div class="stack-cell sphere-b-cell">An off-ramp from sats to dollar-pegged liquidity when a Sphere B participant needs to transact with the fiat world</div>
       </div>
       <div class="stack-row">
         <div class="stack-cell label">₿ond</div>
-        <div class="stack-cell sphere-a-cell">A savings product expressed in familiar terms — deposit fiat, receive an appreciating ₿C balance at maturity</div>
-        <div class="stack-cell sphere-b-cell">A ₿C-denominated fixed-income instrument for the Bitcoin circular economy — no fiat reference needed at any stage</div>
+        <div class="stack-cell sphere-a-cell">A savings product expressed in familiar terms: deposit fiat, receive an appreciating ₿C balance at maturity</div>
+        <div class="stack-cell sphere-b-cell">Not needed. Sphere B participants save in sats directly. The ₿ond is a Sphere A instrument.</div>
       </div>
       <div class="stack-row">
         <div class="stack-cell label">Bitcoin</div>
-        <div class="stack-cell sphere-a-cell">The reserve asset backing every ₿USD token and every ₿ond — held on-chain, auditable, never lent</div>
-        <div class="stack-cell sphere-b-cell">The settlement layer and base asset — what the entire economy is ultimately denominated in, expressed through ₿C</div>
+        <div class="stack-cell sphere-a-cell">The reserve asset backing every ₿USD token and every ₿ond, held on-chain, auditable, never lent</div>
+        <div class="stack-cell sphere-b-cell">The money. The settlement layer, the store of value, the medium of exchange. Everything is denominated in sats.</div>
       </div>
     </div>
 
-    <p>A failure at any layer does not propagate downward. The BTCADP is reproducible by anyone. ₿C is computable from any price feed. The Bitcoin base layer is indifferent to whether any of the instruments built on it exist. Each component can be adopted, evaluated, or discarded independently. The stack is modular. The destination is singular.</p>
+    <p>A failure at any layer does not propagate downward. The BTCADP is reproducible by anyone. ₿C is computable from any price feed. The Bitcoin base layer is indifferent to whether any of the instruments built on it exist. Each component can be adopted, evaluated, or discarded independently. The stack is modular.</p>
 
     <h2>A Framework for Both Visions</h2>
 
-    <p>The school of thought that wants Bitcoin as cash can point to Sphere B and say: that is the destination. The peer-to-peer electronic cash system Satoshi described. No banks. No fiat. No counterparty. Every transaction on Bitcoin infrastructure. Every price in a Bitcoin-native denomination.</p>
+    <p>The school of thought that wants Bitcoin as cash can point to Sphere B and say: that is the destination. The peer-to-peer electronic cash system Satoshi described. No banks. No fiat. No counterparty. Every transaction on Bitcoin infrastructure. Every price in sats.</p>
 
     <p>The school of thought that wants Bitcoin as the apex reserve asset can point to the ₿ond, the ₿USD reserve architecture, and the treasury company model and say: that is how you get there. Through instruments that meet the world where it is. Through products that compete with fiat on fiat's own terms and win. Through the gradual accumulation of Bitcoin in reserve ledgers that grow larger with every token minted and every ₿ond issued.</p>
 
-    <p>Both are describing the same system. The disagreement dissolves when you recognize that Sphere A and Sphere B are not competing visions — they are sequential stages of the same transition, served by the same currency layer, denominated in the same unit of account.</p>
+    <p>Both are describing the same system. The disagreement dissolves when you recognize that Sphere A and Sphere B are not competing visions. They are sequential stages of the same transition, served by the same currency layer, connected by a common unit of account.</p>
 
-    <p>Bitcoin has not yet seen widespread adoption as everyday money. The barrier was never the asset. It was the absence of a denomination stable enough for pricing and an interface familiar enough for the Sphere A majority. Those are what this project addresses — not by asking anyone to change their vision, but by building the layers that make all visions compatible.</p>
+    <p>The barrier to widespread adoption of Bitcoin as everyday money was never the asset. It was the absence of an interface familiar enough for the Sphere A majority and a common measurement legible from both sides. Those are what this project addresses. Not by asking anyone to change their vision, but by building the layers that make all visions compatible.</p>
 
     <div class="callout">
-      <p>₿C is the denomination that operates in both spheres. TBDC/₿USD and the ₿ond are the Sphere A instruments. The Bitcoin circular economy is Sphere B. The currency layer is the architecture that serves both. And Bitcoin is the reserve asset that makes the entire system possible — and the destination that makes it worth building.</p>
+      <p>₿C is the common unit of account between two monetary systems. ₿USD and the ₿ond are the Sphere A instruments. The sat economy is Sphere B. The currency layer is the architecture that serves both. And Bitcoin is the reserve asset that makes the entire system possible, and the destination that makes it worth building.</p>
     </div>
 
     <div style="margin-top:56px;padding-top:32px;border-top:1px solid var(--border);">
       <p style="font-family:var(--font-sans);font-size:0.9rem;color:var(--text-muted);margin-bottom:20px;">See the two spheres in action, or explore the components:</p>
       <div style="display:flex;gap:12px;flex-wrap:wrap;">
-        <a href="four-participants.html" style="background:var(--bg-tertiary);border:1px solid var(--border);color:var(--text-primary);text-decoration:none;padding:10px 18px;border-radius:4px;font-family:var(--font-mono);font-size:0.78rem;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--orange)'" onmouseout="this.style.borderColor='var(--border)'">Four Participants →</a>
-        <a href="btcc.html" style="background:var(--bg-tertiary);border:1px solid var(--border);color:var(--text-primary);text-decoration:none;padding:10px 18px;border-radius:4px;font-family:var(--font-mono);font-size:0.78rem;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--orange)'" onmouseout="this.style.borderColor='var(--border)'">₿C Overview →</a>
-        <a href="currency-layer.html" style="background:var(--bg-tertiary);border:1px solid var(--border);color:var(--text-primary);text-decoration:none;padding:10px 18px;border-radius:4px;font-family:var(--font-mono);font-size:0.78rem;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--orange)'" onmouseout="this.style.borderColor='var(--border)'">Currency Layer →</a>
-        <a href="tbd-usd.html" style="background:var(--bg-tertiary);border:1px solid var(--border);color:var(--text-primary);text-decoration:none;padding:10px 18px;border-radius:4px;font-family:var(--font-mono);font-size:0.78rem;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--orange)'" onmouseout="this.style.borderColor='var(--border)'">₿USD / TBDC →</a>
-        <a href="report-bitcoin-stablecoin.html" style="background:var(--bg-tertiary);border:1px solid var(--border);color:var(--text-primary);text-decoration:none;padding:10px 18px;border-radius:4px;font-family:var(--font-mono);font-size:0.78rem;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--orange)'" onmouseout="this.style.borderColor='var(--border)'">The Report →</a>
-        <a href="knowledge-base.html" style="background:var(--bg-tertiary);border:1px solid var(--border);color:var(--text-primary);text-decoration:none;padding:10px 18px;border-radius:4px;font-family:var(--font-mono);font-size:0.78rem;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--orange)'" onmouseout="this.style.borderColor='var(--border)'">Knowledge Base →</a>
+        <a href="four-participants.html" style="background:var(--bg-tertiary);border:1px solid var(--border);color:var(--text-primary);text-decoration:none;padding:10px 18px;border-radius:4px;font-family:var(--font-mono);font-size:0.78rem;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--orange)'" onmouseout="this.style.borderColor='var(--border)'">Four Participants &rarr;</a>
+        <a href="btcc.html" style="background:var(--bg-tertiary);border:1px solid var(--border);color:var(--text-primary);text-decoration:none;padding:10px 18px;border-radius:4px;font-family:var(--font-mono);font-size:0.78rem;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--orange)'" onmouseout="this.style.borderColor='var(--border)'">₿C Overview &rarr;</a>
+        <a href="currency-layer.html" style="background:var(--bg-tertiary);border:1px solid var(--border);color:var(--text-primary);text-decoration:none;padding:10px 18px;border-radius:4px;font-family:var(--font-mono);font-size:0.78rem;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--orange)'" onmouseout="this.style.borderColor='var(--border)'">Currency Layer &rarr;</a>
+        <a href="tbd-usd.html" style="background:var(--bg-tertiary);border:1px solid var(--border);color:var(--text-primary);text-decoration:none;padding:10px 18px;border-radius:4px;font-family:var(--font-mono);font-size:0.78rem;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--orange)'" onmouseout="this.style.borderColor='var(--border)'">₿USD / TBDC &rarr;</a>
+        <a href="report-bitcoin-stablecoin.html" style="background:var(--bg-tertiary);border:1px solid var(--border);color:var(--text-primary);text-decoration:none;padding:10px 18px;border-radius:4px;font-family:var(--font-mono);font-size:0.78rem;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--orange)'" onmouseout="this.style.borderColor='var(--border)'">The Report &rarr;</a>
+        <a href="knowledge-base.html" style="background:var(--bg-tertiary);border:1px solid var(--border);color:var(--text-primary);text-decoration:none;padding:10px 18px;border-radius:4px;font-family:var(--font-mono);font-size:0.78rem;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--orange)'" onmouseout="this.style.borderColor='var(--border)'">Knowledge Base &rarr;</a>
       </div>
     </div>
 
