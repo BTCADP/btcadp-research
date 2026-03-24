@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thesis | btcadp.org</title>
+    <meta name="description" content="The foundational claims and reasoning behind the BTCADP framework. Sound money, monetary deflation, the infrastructure problem, and why bridging billions of people to Bitcoin requires products — not persuasion.">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --bg2: #111111;
+            --bg3: #1a1a1a;
+            --border: #2a2a2a;
+            --text: #e8e8e8;
+            --muted: #888888;
+            --dim: #555555;
+            --orange: #f7931a;
+            --orange-dim: rgba(247, 147, 26, 0.10);
+            --font: 'Georgia', 'Times New Roman', serif;
+            --mono: 'Courier New', Courier, monospace;
+            --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font);
+            line-height: 1.8;
+            font-size: 18px;
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(10,10,10,0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 56px;
+        }
+
+        .nav-brand {
+            font-family: var(--mono);
+            font-size: 1rem;
+            font-weight: bold;
+            color: var(--orange);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.25rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-family: var(--sans);
+            font-size: 0.85rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            transition: color 0.2s, background 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--text); background: var(--bg3); }
+
+        .hero {
+            border-bottom: 1px solid var(--border);
+            padding: 6rem 2rem 5rem;
+            text-align: center;
+            background: radial-gradient(ellipse at 50% 0%, rgba(247,147,26,0.06) 0%, transparent 70%);
+        }
+
+        .hero-label {
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            letter-spacing: 0.25em;
+            color: var(--orange);
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: normal;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: #fff;
+            max-width: 780px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-sub {
+            font-family: var(--sans);
+            font-size: 1rem;
+            color: var(--muted);
+            max-width: 620px;
+            margin: 0 auto 2rem;
+            line-height: 1.65;
+        }
+
+        .hero-meta {
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            color: #555;
+            letter-spacing: 0.05em;
+        }
+
+        .article {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 5rem 2rem 6rem;
+        }
+
+        .section-marker {
+            font-family: var(--mono);
+            font-size: 0.65rem;
+            letter-spacing: 0.25em;
+            color: var(--orange);
+            text-transform: uppercase;
+            margin-bottom: 0.6rem;
+            margin-top: 4rem;
+        }
+
+        .section-marker:first-child {
+            margin-top: 0;
+        }
+
+        h2 {
+            font-size: 1.55rem;
+            font-weight: normal;
+            color: #fff;
+            letter-spacing: -0.01em;
+            margin-bottom: 1.4rem;
+            line-height: 1.25;
+        }
+
+        p {
+            color: #c4c4c4;
+            margin-bottom: 1.3rem;
+        }
+
+        .pull {
+            border-left: 3px solid var(--orange);
+            padding: 1.2rem 1.6rem;
+            margin: 2.5rem 0;
+            background: var(--orange-dim);
+            border-radius: 0 6px 6px 0;
+        }
+
+        .pull p {
+            font-family: var(--sans);
+            font-size: 0.95rem;
+            color: #c9a86c;
+            margin: 0;
+            line-height: 1.65;
+        }
+
+        .pull strong { color: var(--orange); }
+
+        hr {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 4rem 0;
+        }
+
+        /* Thesis claims */
+        .claim {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 2rem 0;
+            background: var(--bg2);
+        }
+
+        .claim-number {
+            font-family: var(--mono);
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--orange);
+            padding: 0.8rem 1.4rem;
+            border-bottom: 1px solid var(--border);
+            background: var(--bg3);
+        }
+
+        .claim-body {
+            padding: 1.4rem 1.6rem;
+        }
+
+        .claim-body p {
+            margin-bottom: 0;
+            font-size: 1.05rem;
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        .claim-note {
+            font-family: var(--sans);
+            font-size: 0.85rem;
+            color: var(--muted);
+            margin-top: 0.8rem;
+            line-height: 1.6;
+        }
+
+        /* Requirements list */
+        .req-grid {
+            display: grid;
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 2rem 0;
+        }
+
+        .req-item {
+            background: var(--bg2);
+            padding: 1rem 1.4rem;
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+        }
+
+        .req-letter {
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            color: var(--orange);
+            flex-shrink: 0;
+            letter-spacing: 0.05em;
+        }
+
+        .req-text {
+            font-family: var(--sans);
+            font-size: 0.95rem;
+            color: #c4c4c4;
+            line-height: 1.55;
+        }
+
+        /* Map section */
+        .map-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 2rem 0;
+        }
+
+        .map-cell {
+            background: var(--bg2);
+            padding: 1.4rem 1.6rem;
+        }
+
+        .map-label {
+            font-family: var(--mono);
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--orange);
+            margin-bottom: 0.5rem;
+        }
+
+        .map-name {
+            font-size: 1.1rem;
+            color: #fff;
+            margin-bottom: 0.4rem;
+        }
+
+        .map-desc {
+            font-family: var(--sans);
+            font-size: 0.85rem;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        footer p {
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            color: var(--dim);
+            line-height: 1.8;
+        }
+
+        footer a {
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        footer a:hover { color: var(--orange); }
+
+        @media (max-width: 600px) {
+            .hero { padding: 4rem 1.5rem 3rem; }
+            .article { padding: 3rem 1.5rem 4rem; }
+            nav { padding: 0 1rem; }
+            .nav-links a { font-size: 0.75rem; padding: 0.3rem 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="nav-brand">btcadp.org</a>
+    <div class="nav-links">
+        <a href="beginners-guide.html">Start Here</a>
+        <a href="btcc.html">₿C</a>
+        <a href="tbd-usd.html">₿USD</a>
+        <a href="bond.html">₿OND</a>
+        <a href="knowledge-base.html">Knowledge Base</a>
+    </div>
+</nav>
+
+<div class="hero">
+    <div class="hero-label">Foundation</div>
+    <h1>Thesis</h1>
+    <div class="hero-meta">btcadp.org &middot; March 2026</div>
+</div>
+
+<div class="article">
+
+    <div class="section-marker">Claim 1</div>
+    <h2>Sound money produces better outcomes</h2>
+
+    <div class="claim">
+        <div class="claim-number">Proposition</div>
+        <div class="claim-body">
+            <p>A sound money monetary system&mdash;one in which the money supply cannot be expanded by political decision&mdash;produces better long-run outcomes for ordinary people than an inflationary monetary system.</p>
+        </div>
+    </div>
+
+    <p>Under sound money, the value of savings increases over time. Wages purchase more. Capital allocation is driven by productive use rather than the need to outrun debasement. People who simply earn and save are not penalized for the act of saving.</p>
+
+    <p>Under inflationary money, the opposite is true. Savings lose purchasing power. Wages fall behind prices. The system rewards debt and speculation over production and thrift. The cost of this arrangement is borne disproportionately by those furthest from the point of money creation.</p>
+
+    <hr>
+
+    <div class="section-marker">Claim 2</div>
+    <h2>Monetary deflation is a feature, not a failure</h2>
+
+    <div class="claim">
+        <div class="claim-number">Proposition</div>
+        <div class="claim-body">
+            <p>Monetary deflation&mdash;defined here as the sustained increase in purchasing power per unit of money&mdash;is a natural and beneficial feature of a sound money system.</p>
+            <p class="claim-note"><strong>Term defined:</strong> This framework uses "deflation" exclusively to mean rising purchasing power. It does not refer to economic contraction, falling output, or debt-deflation spirals. These are distinct phenomena with distinct causes.</p>
+        </div>
+    </div>
+
+    <p>In an economy with a fixed or diminishing money supply and growing productivity, each unit of money purchases more goods and services over time. This is not a crisis to be managed. It is the natural result of human productivity outpacing monetary expansion. For most of human history under commodity money standards, this was the ordinary condition.</p>
+
+    <hr>
+
+    <div class="section-marker">Claim 3</div>
+    <h2>Fiat currency makes deflation structurally impossible</h2>
+
+    <div class="claim">
+        <div class="claim-number">Proposition</div>
+        <div class="claim-body">
+            <p>Sustained monetary deflation is structurally impossible under fiat currency. Fiat systems carry an inflationary mandate: governments must expand the money supply to service sovereign debt, fund fiscal operations, and preserve the financial system. The direction is built into the architecture.</p>
+        </div>
+    </div>
+
+    <p>This is not a claim about policy preference. It is a claim about structural incentives. A government that controls its money supply and carries debt denominated in that money will always face pressure to inflate. Temporary disinflation occurs. Sustained deflation does not&mdash;because the system cannot survive it. The architecture demands expansion.</p>
+
+    <hr>
+
+    <div class="section-marker">Claim 4</div>
+    <h2>Bitcoin is sound money</h2>
+
+    <div class="claim">
+        <div class="claim-number">Proposition</div>
+        <div class="claim-body">
+            <p>Bitcoin is sound money. Its supply is fixed at 21 million units. Its issuance schedule is predetermined and enforced by consensus. No entity&mdash;no government, no corporation, no developer&mdash;can alter either property. The protocol is complete.</p>
+        </div>
+    </div>
+
+    <p>This is the least controversial claim in the framework for its intended audience, and the most controversial for everyone else. This document does not attempt to prove it. The <a href="https://bitcoin.org/bitcoin.pdf" target="_blank" rel="noopener" style="color:var(--orange);">Bitcoin white paper</a>, sixteen years of unbroken operation, and the growing body of monetary research built on this premise speak for themselves.</p>
+
+    <hr>
+
+    <div class="section-marker">Claim 5</div>
+    <h2>The gap is infrastructure, not protocol</h2>
+
+    <div class="claim">
+        <div class="claim-number">Proposition</div>
+        <div class="claim-body">
+            <p>The gap between Bitcoin's existence as sound money and its use as everyday money is not a deficiency of the protocol. It is an infrastructure problem. Eight billion people live inside fiat systems. Their salaries, debts, contracts, taxes, and savings are denominated in fiat currencies. The entrenchment is not preference. It is plumbing.</p>
+        </div>
+    </div>
+
+    <p>Every paycheck arrives in fiat. Every mortgage is denominated in fiat. Every tax obligation is calculated in fiat. Asking people to abandon this infrastructure is not a serious transition strategy. The infrastructure has to be met where it is.</p>
+
+    <hr>
+
+    <div class="section-marker">Claim 6</div>
+    <h2>The transition has requirements</h2>
+
+    <div class="claim">
+        <div class="claim-number">Proposition</div>
+        <div class="claim-body">
+            <p>Bridging billions of people from fiat to sound money requires products that meet every one of the following conditions simultaneously.</p>
+        </div>
+    </div>
+
+    <div class="req-grid">
+        <div class="req-item">
+            <span class="req-letter">A</span>
+            <span class="req-text">Deliver immediate, measurable benefit&mdash;not promised future value. The product must be better <em>today</em> than what the user currently holds.</span>
+        </div>
+        <div class="req-item">
+            <span class="req-letter">B</span>
+            <span class="req-text">Work within existing fiat infrastructure&mdash;bank accounts, tax regimes, payroll systems&mdash;rather than against it.</span>
+        </div>
+        <div class="req-item">
+            <span class="req-letter">C</span>
+            <span class="req-text">Create little or no friction for the user. If adoption requires effort, most people will not adopt.</span>
+        </div>
+        <div class="req-item">
+            <span class="req-letter">D</span>
+            <span class="req-text">Require no understanding of Bitcoin to use. The conceptual burden must be zero. The product works; the user benefits; the mechanism is irrelevant to the experience.</span>
+        </div>
+        <div class="req-item">
+            <span class="req-letter">E</span>
+            <span class="req-text">Be accessible to anyone with a bank account or mobile phone. If it is available only to the technically sophisticated or financially privileged, it is not a transition&mdash;it is a club.</span>
+        </div>
+    </div>
+
+    <p>Most Bitcoin products today fail on at least one of these conditions. Many fail on several. They require ideological conversion before they deliver value, or they demand that the user leave fiat infrastructure entirely, or they are accessible only to people who already understand Bitcoin. These products serve the converted. They do not build the bridge.</p>
+
+    <hr>
+
+    <div class="section-marker">Claim 7</div>
+    <h2>Evangelism has a ceiling</h2>
+
+    <div class="claim">
+        <div class="claim-number">Proposition</div>
+        <div class="claim-body">
+            <p>Bitcoin evangelism&mdash;persuading individuals to adopt Bitcoin through ideological argument&mdash;has a structural ceiling. It reaches people who already have the financial literacy to evaluate the argument. Most of the world's population has never had reason to question the money they were born into. The transition to sound money at civilizational scale is not an ideological project. It is an infrastructure project.</p>
+        </div>
+    </div>
+
+    <p>You do not need eight billion people to believe in Bitcoin. You need eight billion people to use products that happen to run on Bitcoin. The smartphone did not succeed because two billion people were persuaded that ARM processors were superior. It succeeded because the products were better. The underlying architecture was irrelevant to the user.</p>
+
+    <hr>
+
+    <div class="section-marker">Claim 8</div>
+    <h2>The measurement problem</h2>
+
+    <div class="claim">
+        <div class="claim-number">Proposition</div>
+        <div class="claim-body">
+            <p>Before any product can bridge the fiat and Bitcoin economies, a shared unit of account is required&mdash;one that is legible from both sides. Bitcoin's native unit (satoshis) is illegible to fiat users. Fiat's native unit (dollars) tells you nothing durable about Bitcoin's value. Without a common measurement, every product that operates between the two systems carries a translation layer that creates friction, confusion, or dependence on one system's framing.</p>
+        </div>
+    </div>
+
+    <p>This is the problem that ₿C addresses. Not as a product, but as a prerequisite. A unit of account derived from Bitcoin's entire price history&mdash;the cumulative arithmetic mean of every daily price since genesis. Bitcoin in dollar terms. Legible to both sides. Controlled by no one.</p>
+
+    <div class="pull">
+        <p>Two monetary systems. One unit of account.</p>
+    </div>
+
+    <hr>
+
+    <div class="section-marker">Claim 9</div>
+    <h2>Store of value is necessary but not sufficient</h2>
+
+    <div class="claim">
+        <div class="claim-number">Proposition</div>
+        <div class="claim-body">
+            <p>Bitcoin as currently adopted functions primarily as a store of value. A store of value that people never spend does not become money&mdash;it becomes gold. The transition from fiat to sound money requires medium-of-exchange infrastructure that provides the stability guarantees everyday commerce demands, without compromising Bitcoin's properties as a store of value.</p>
+        </div>
+    </div>
+
+    <p>This is the problem that ₿USD addresses&mdash;a dollar-pegged medium of exchange backed entirely by Bitcoin reserves. And it is the problem that ₿OND addresses&mdash;a savings instrument that lets fiat holders capture Bitcoin's monetary deflation without exposure to its daily volatility.</p>
+
+    <p>Neither instrument requires the user to understand Bitcoin. Neither requires the user to leave fiat infrastructure. Both deliver measurable benefit from day one. And every unit issued mechanically requires a Bitcoin purchase, feeding the store of value that underwrites the entire system.</p>
+
+    <hr>
+
+    <div class="section-marker">The Framework</div>
+    <h2>Three components, one system</h2>
+
+    <p>Each claim above identifies a problem. The framework proposes three components, each purpose-built to address a specific subset of those problems.</p>
+
+    <div class="map-grid">
+        <div class="map-cell">
+            <div class="map-label">Measurement</div>
+            <div class="map-name">BTCADP &rarr; ₿C</div>
+            <div class="map-desc">A reproducible daily Bitcoin price standard and the cumulative-average unit of account derived from it. Solves the measurement problem. <a href="btcc.html" style="color:var(--orange);">Learn more &rarr;</a></div>
+        </div>
+        <div class="map-cell">
+            <div class="map-label">Medium of Exchange</div>
+            <div class="map-name">₿USD</div>
+            <div class="map-desc">A dollar-pegged stablecoin backed by Bitcoin reserves. Meets fiat users where they are. Solves the medium-of-exchange gap. <a href="tbd-usd.html" style="color:var(--orange);">Learn more &rarr;</a></div>
+        </div>
+        <div class="map-cell">
+            <div class="map-label">Savings</div>
+            <div class="map-name">₿OND</div>
+            <div class="map-desc">A savings instrument denominated in ₿C. Delivers Bitcoin's monetary deflation to fiat savers. Dollars that actually grow. <a href="bond.html" style="color:var(--orange);">Learn more &rarr;</a></div>
+        </div>
+    </div>
+
+    <p>The math behind BTCADP and ₿C is verifiable&mdash;the specification, methodology, and full historical dataset are published and reproducible. The architecture behind ₿USD and ₿OND is proposed&mdash;a design framework for products that do not yet exist. Both are presented for scrutiny.</p>
+
+    <div class="pull">
+        <p><strong>In short:</strong> The transition from fiat to sound money will not be won by argument. It will be won by products that are better than what fiat offers&mdash;products that happen to run on Bitcoin, accessible to anyone, requiring no conversion, delivering value from day one.</p>
+    </div>
+
+</div>
+
+<footer>
+    <p>
+        <a href="index.html">BTCADP</a> &middot;
+        <a href="specification.html">Specification</a> &middot;
+        <a href="btcc.html">₿C</a> &middot;
+        <a href="tbd-usd.html">₿USD</a> &middot;
+        <a href="bond.html">₿OND</a> &middot;
+        <a href="knowledge-base.html">Knowledge Base</a> &middot;
+        <a href="faq.html">FAQ</a> &middot;
+        <a href="https://github.com/BTCADP/btcadp-research" target="_blank" rel="noopener">GitHub</a>
+    </p>
+    <p style="margin-top:8px;">CC0 &middot; No rights reserved &middot; The BTCADP belongs to no one and benefits everyone.</p>
+</footer>
+
+</body>
+</html>
