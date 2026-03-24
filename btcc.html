@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bitcoin Currency (₿C) | btcadp.org</title>
-    <meta name="description" content="Bitcoin Currency (₿C) is a Bitcoin-native unit of account derived from the cumulative arithmetic mean of all daily prices since the genesis block. It appreciates predictably over time while exhibiting day-to-day stability sufficient for pricing, invoicing, and contracts. It is a pricing standard, not a monetary instrument.">
+    <meta name="description" content="Bitcoin Currency (₿C) is a denomination protocol that expresses Bitcoin's value as the cumulative historical average of all daily prices since the genesis block. It is not a stablecoin. Its fiat price appreciates incrementally and predictably with Bitcoin's long-run history.">
     <style>
         :root {
             --bg: #0a0a0a;
@@ -487,9 +487,9 @@
 <!-- HERO -->
 <section class="hero">
     <div class="hero-label">Bitcoin Currency</div>
-    <h1>₿C —<br><span>A Bitcoin-Native Unit of Account</span></h1>
+    <h1>Bitcoin Currency (₿C) —<br><span>Two Monetary Systems. One Unit of Account.</span></h1>
     <p class="hero-sub">
-        A unit of account derived from Bitcoin's own cumulative price history. Day-to-day stability for pricing. Long-run appreciation against fiat. No issuer, no reserves, no trusted third party.
+        The common unit of account between the fiat economy and the Bitcoin economy. Derived from Bitcoin's cumulative USD price history. Appreciates incrementally over time. No issuer, no reserves, no trusted third party.
     </p>
     <a href="btcc-paper.html" class="hero-cta">Read the Full Paper →</a>
 </section>
@@ -517,9 +517,7 @@
         </p>
         <p>
             It is not a token. It is not a stablecoin. It is not a new protocol. It is a
-            <em>unit of account</em> — a standard for expressing Bitcoin's value that is entirely
-            Bitcoin-native, requires no institution to maintain it, and appreciates incrementally
-            as Bitcoin's long-run price history accumulates.
+            <em>unit of account</em> — a standard for expressing value that is derived from Bitcoin's entire USD price history, requires no institution to maintain it, and appreciates incrementally as that history accumulates. ₿C is dollar-derived — its inputs are daily USD prices — which makes it structurally suited to serve as the common unit of account between the fiat economy and the Bitcoin economy.
         </p>
 
         <div class="formula-box">
@@ -539,27 +537,25 @@
     <!-- 2. THE PROBLEM IT SOLVES -->
     <div class="section">
         <div class="section-number">02</div>
-        <h2>The Problem It Addresses</h2>
+        <h2>The Problem It Solves</h2>
         <p>
-            Bitcoin [1] created a peer-to-peer electronic cash system that requires no trusted third
-            party. The network has operated continuously since January 2009. The protocol is sound.
-            What has not yet been built on top of it is a stable unit of account. Bitcoin's
-            fiat-denominated price moves by single-digit percentages on ordinary days and by double
-            digits in periods of stress. Spot pricing does not meet the standard that a working unit
-            of account must meet: expressing prices that remain meaningful from the moment they are
-            quoted to the moment they are paid.
+            Bitcoin works. The network has operated continuously since January 2009. Lightning provides
+            throughput. Settlement is secure and final. Yet Bitcoin has not achieved widespread adoption
+            as a medium of everyday exchange. The barrier is not technical — it is that Bitcoin's
+            fiat-denominated price is volatile, making it impractical for the daily commerce that
+            constitutes most economic activity.
         </p>
         <p>
-            Stablecoins emerged to address this gap, but in doing so they reintroduce the trust
-            dependencies Bitcoin was designed to eliminate: centralized issuers who can freeze accounts,
-            reserves that must be audited, and continued operation of entities subject to regulatory
-            risk. Algorithmic approaches have demonstrated catastrophic failure modes.
+            Stablecoins emerged to fill this gap, but in doing so they reintroduce the trust dependencies
+            Bitcoin was designed to eliminate: centralized issuers who can freeze accounts, reserves that
+            must be audited, and continued operation of entities subject to regulatory risk. Algorithmic
+            approaches have demonstrated catastrophic failure modes.
         </p>
         <div class="callout">
             <strong>₿C</strong> expresses Bitcoin's value using Bitcoin's own history.
-            No peg to maintain. No issuer to trust. No reserves to audit. The day-to-day pricing
-            stability and long-run appreciation are both mathematical properties of cumulative
-            averages — they cannot be inflated, confiscated, or turned off.
+            No peg to maintain. No issuer to trust. No reserves to audit. The day-to-day stability
+            and long-run appreciation are both mathematical properties of cumulative averages —
+            they cannot be inflated, confiscated, or turned off.
         </div>
     </div>
 
@@ -568,9 +564,10 @@
     <!-- 3. STABILITY PROPERTIES -->
     <div class="section">
         <div class="section-number">03</div>
-        <h2>Behavioral Properties</h2>
+        <h2>Mathematical Properties</h2>
         <p>
-            The behavior of the ₿C price follows directly from the mathematics of
+            The day-to-day stability and long-run appreciation of the ₿C price are not maintained
+            by market incentives or policy decisions. Both follow directly from the mathematics of
             cumulative averages. As of early 2026, the ₿C price incorporates over 6,200 daily
             observations. The sensitivity of the price to any single new day is exactly 1/(N+1)
             of the difference from the current average.
@@ -583,48 +580,39 @@
             </div>
             <div class="prop-card">
                 <div class="prop-card-title">Bounded Shocks</div>
-                <p>As long as BTC spot exceeds the ₿C price, the denomination appreciates every day. A crash does not reverse this — it modulates it. The difference between a normal day and a shock day is invisible to pricing.</p>
+                <p>With N &gt; 6,200, no single day can move the BTCC price by more than ~0.016% of the shock's magnitude, regardless of how extreme.</p>
             </div>
             <div class="prop-card">
                 <div class="prop-card-title">Incremental Appreciation</div>
-                <p>As long as Bitcoin's long-run trajectory is upward, ₿C appreciates — gradually, predictably, and irreversibly. The inverse of fiat inflation.</p>
-            </div>
-            <div class="prop-card">
-                <div class="prop-card-title">Convergence Under Growth</div>
-                <p>The daily appreciation rate converges toward Bitcoin's own long-run growth rate. The system is self-regulating — not fixed to any single number.</p>
+                <p>Sustained BTC price levels are absorbed into the ₿C price slowly and permanently. As long as Bitcoin's long-run trajectory is upward, ₿C appreciates — gradually, predictably, and irreversibly.</p>
             </div>
         </div>
 
-        <p>Shock absorption — the ₿C price still appreciates on crash days:</p>
+        <p>Example:</p>
 
         <table class="shock-table">
             <thead>
                 <tr>
                     <th>Market Event</th>
                     <th>BTC Spot Impact</th>
-                    <th>₿C Price (still rises)</th>
+                    <th>BTCC Price Impact</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>Normal day, no shock</td>
-                    <td>—</td>
-                    <td class="highlight">≈ +0.05% (baseline appreciation)</td>
-                </tr>
-                <tr>
                     <td>Flash crash, BTC falls 10% in one day</td>
                     <td>−10%</td>
-                    <td class="highlight">≈ +0.04% (still appreciates)</td>
+                    <td class="highlight">&lt; 0.01%</td>
                 </tr>
                 <tr>
                     <td>Severe crash, BTC falls 40% in one day</td>
                     <td>−40%</td>
-                    <td class="highlight">≈ +0.04% (appreciation halved, not reversed)</td>
+                    <td class="highlight">~0.04%</td>
                 </tr>
                 <tr>
                     <td>Bear market, BTC at $20,000 for 3 years</td>
                     <td>−78%</td>
-                    <td class="highlight">&lt; 5% total change over entire period</td>
+                    <td class="highlight">&lt; 5% total</td>
                 </tr>
                 <tr>
                     <td>Bull run, BTC rises to $500,000 over years</td>
@@ -776,53 +764,16 @@
 
     <hr class="divider">
 
-    <!-- 8. SCOPE AND BOUNDARIES -->
+    <!-- 8. BUILT ON ₿C -->
     <div class="section">
         <div class="section-number">08</div>
-        <h2>Scope and Boundaries</h2>
-        <p>
-            ₿C is a unit of account. It stabilizes the expression of value. It does not stabilize the
-            value of holdings.
-        </p>
-        <p>
-            When a merchant prices an item at 1 ₿C, that price tag is stable — it moves less than 0.1%
-            per day under any market conditions. The merchant can publish a catalog, quote an invoice,
-            or negotiate a contract in ₿C with confidence that the number means approximately the same
-            thing tomorrow as it does today.
-        </p>
-        <p>
-            However, a buyer who acquires Bitcoin to pay that invoice holds satoshis, and satoshis are
-            valued at spot. If BTC spot drops 50% overnight, the buyer's holdings are worth approximately
-            0.5 ₿C the following morning — even though the price tag has barely moved. The ₿C
-            denomination protected the price tag. It did not protect the buyer's purchasing power.
-        </p>
-        <div class="callout">
-            <strong>This is a boundary, not a deficiency.</strong> A unit of account and a store of value
-            are different functions of money. To stabilize the holder's purchasing power — to guarantee
-            that 1 ₿C held today can purchase 1 ₿C worth of goods tomorrow regardless of spot
-            movements — requires a counterparty, a reserve, or a token. That is the domain of monetary
-            instruments built on top of the denomination. ₿C is the foundation such instruments
-            require. It is not a substitute for them.
-        </div>
-    </div>
-
-    <hr class="divider">
-
-    <!-- 9. BUILT ON ₿C -->
-    <div class="section">
-        <div class="section-number">09</div>
         <h2>Built on ₿C</h2>
         <p>
-            Because ₿C is a deterministic, publicly verifiable unit of account, it can serve as
-            the foundation for monetary instruments that require a reliable Bitcoin-native price
-            reference. The denomination defines the language. The instruments built on it define the
-            products.
+            Because ₿C is a deterministic, publicly verifiable unit of account — and because it is derived from USD prices — it naturally bridges the fiat and Bitcoin economies. A fiat participant reads ₿C as a dollar amount. A Bitcoin participant reads it as a sat equivalent. A merchant sets one ₿C price tag and both customers understand it. This bridging function persists for as long as fiat and Bitcoin coexist, which is the foreseeable future.
         </p>
         <p>
-            Treasury-Backed Digital Currency (₿USD) is one such instrument — a USD-pegged stablecoin
-            backed by Bitcoin reserves, using the ₿C price as its conservative collateral floor. ₿USD
-            closes the gap that ₿C alone cannot: it stabilizes the holder's purchasing power by
-            providing a counterparty and a reserve. It is described separately.
+            Treasury-Backed Digital Currency (₿USD) is one such product — a USD-pegged stablecoin
+            that uses the ₿C price as its collateral floor. It is described separately.
         </p>
         <a href="tbd-usd.html" class="hero-cta" style="margin-top:1rem;display:inline-flex;">Learn about ₿USD →</a>
     </div>
@@ -830,7 +781,7 @@
     <!-- PAPER CTA -->
     <div class="paper-section">
         <h3>Read the Full Technical Paper</h3>
-        <p>₿C: A Bitcoin-Native Unit of Account — the complete specification, including behavioral properties, convergence analysis, manipulation resistance, and scope boundaries.</p>
+        <p>The complete BTCC specification, including mathematical proofs, stability analysis, manipulation resistance, and implementation guidance.</p>
         <div class="paper-buttons">
             <a href="btcc-paper.html" class="btn-primary">View Full Paper</a>
             <a href="btcc-paper.html#download" class="btn-secondary">Download PDF</a>
