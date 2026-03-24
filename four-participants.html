@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Better Product | btcadp.org</title>
+    <meta name="description" content="Bitcoin adoption will not come from evangelism. It will come from a savings account that outperforms banks, a spending token that works like a dollar, and a unit of account that holds steady. Follow four participants through two economies to see how.">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --bg2: #111111;
+            --bg3: #1a1a1a;
+            --border: #2a2a2a;
+            --text: #e8e8e8;
+            --muted: #888888;
+            --orange: #f7931a;
+            --orange-dim: rgba(247, 147, 26, 0.10);
+            --green: #4caf7d;
+            --red: #cf6679;
+            --font: 'Georgia', 'Times New Roman', serif;
+            --mono: 'Courier New', Courier, monospace;
+            --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font);
+            line-height: 1.8;
+            font-size: 18px;
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(10,10,10,0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 56px;
+        }
+
+        .nav-brand {
+            font-family: var(--mono);
+            font-size: 1rem;
+            font-weight: bold;
+            color: var(--orange);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.25rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-family: var(--sans);
+            font-size: 0.85rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            transition: color 0.2s, background 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--text); background: var(--bg3); }
+
+        .hero {
+            border-bottom: 1px solid var(--border);
+            padding: 6rem 2rem 5rem;
+            text-align: center;
+            background: radial-gradient(ellipse at 50% 0%, rgba(247,147,26,0.06) 0%, transparent 70%);
+        }
+
+        .hero-label {
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            letter-spacing: 0.25em;
+            color: var(--orange);
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: normal;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: #fff;
+            max-width: 780px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-sub {
+            font-family: var(--sans);
+            font-size: 1rem;
+            color: var(--muted);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.65;
+        }
+
+        .hero-meta {
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            color: #555;
+            letter-spacing: 0.05em;
+        }
+
+        .article {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 5rem 2rem 6rem;
+        }
+
+        .section-marker {
+            font-family: var(--mono);
+            font-size: 0.65rem;
+            letter-spacing: 0.25em;
+            color: var(--orange);
+            text-transform: uppercase;
+            margin-bottom: 0.6rem;
+            margin-top: 4rem;
+        }
+
+        h2 {
+            font-size: 1.55rem;
+            font-weight: normal;
+            color: #fff;
+            letter-spacing: -0.01em;
+            margin-bottom: 1.4rem;
+            line-height: 1.25;
+        }
+
+        h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #ddd;
+            margin-top: 2rem;
+            margin-bottom: 0.8rem;
+            font-family: var(--sans);
+        }
+
+        p {
+            color: #c4c4c4;
+            margin-bottom: 1.3rem;
+        }
+
+        .pull {
+            border-left: 3px solid var(--orange);
+            padding: 1.2rem 1.6rem;
+            margin: 2.5rem 0;
+            background: var(--orange-dim);
+            border-radius: 0 6px 6px 0;
+        }
+
+        .pull p {
+            font-family: var(--sans);
+            font-size: 0.95rem;
+            color: #c9a86c;
+            margin: 0;
+            line-height: 1.65;
+        }
+
+        .pull strong { color: var(--orange); }
+
+        hr {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 4rem 0;
+        }
+
+        /* Scenario boxes */
+        .scenario {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 2rem 0;
+            background: var(--bg2);
+        }
+
+        .scenario-header {
+            font-family: var(--mono);
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--orange);
+            padding: 0.8rem 1.4rem;
+            border-bottom: 1px solid var(--border);
+            background: var(--bg3);
+        }
+
+        .scenario-body {
+            padding: 1.4rem;
+        }
+
+        .scenario-body p {
+            font-family: var(--sans);
+            font-size: 0.88rem;
+            color: #b0b0b0;
+            margin-bottom: 0.8rem;
+            line-height: 1.65;
+        }
+
+        .scenario-body p:last-child { margin-bottom: 0; }
+
+        .scenario-body strong { color: #ddd; }
+        .scenario-body .up { color: var(--green); }
+        .scenario-body .down { color: var(--red); }
+
+        /* Participant cards */
+        .participant-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            margin: 2.5rem 0;
+        }
+
+        .participant-card {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.4rem;
+            background: var(--bg2);
+        }
+
+        .participant-card .card-label {
+            font-family: var(--mono);
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--orange);
+            margin-bottom: 0.3rem;
+        }
+
+        .participant-card .card-name {
+            font-size: 1.15rem;
+            font-weight: normal;
+            color: #fff;
+            margin-bottom: 0.6rem;
+        }
+
+        .participant-card p {
+            font-family: var(--sans);
+            font-size: 0.82rem;
+            color: #999;
+            margin-bottom: 0;
+            line-height: 1.6;
+        }
+
+        /* 2x2 matrix */
+        .matrix {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 2.5rem 0;
+        }
+
+        .matrix-header {
+            display: grid;
+            grid-template-columns: 140px 1fr 1fr;
+            background: var(--bg3);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .matrix-header span {
+            font-family: var(--mono);
+            font-size: 0.6rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--muted);
+            padding: 0.7rem 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .matrix-header span:not(:last-child) {
+            border-right: 1px solid var(--border);
+        }
+
+        .matrix-header span.col-head {
+            color: var(--orange);
+            justify-content: center;
+        }
+
+        .matrix-row {
+            display: grid;
+            grid-template-columns: 140px 1fr 1fr;
+        }
+
+        .matrix-row:not(:last-child) {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .matrix-row span {
+            padding: 1rem;
+            font-family: var(--sans);
+            font-size: 0.82rem;
+            color: #b0b0b0;
+            line-height: 1.5;
+        }
+
+        .matrix-row span:not(:last-child) {
+            border-right: 1px solid var(--border);
+        }
+
+        .matrix-row .row-head {
+            font-family: var(--mono);
+            font-size: 0.6rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--orange);
+            background: var(--bg3);
+            display: flex;
+            align-items: center;
+        }
+
+        .matrix-row .cell-name {
+            color: #fff;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        /* Funnel / flow */
+        .flow {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 2.5rem 0;
+            background: var(--bg2);
+        }
+
+        .flow-step {
+            padding: 1rem 1.4rem;
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+        }
+
+        .flow-step:not(:last-child) {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .flow-num {
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            color: var(--orange);
+            flex-shrink: 0;
+            width: 1.2rem;
+            text-align: right;
+        }
+
+        .flow-text {
+            font-family: var(--sans);
+            font-size: 0.88rem;
+            color: #b0b0b0;
+            line-height: 1.6;
+        }
+
+        .flow-text strong { color: #ddd; }
+
+        /* Aside */
+        .aside {
+            border: 1px solid var(--border);
+            border-left: 3px solid #333;
+            border-radius: 0 6px 6px 0;
+            padding: 1rem 1.4rem;
+            margin: 2rem 0;
+            background: var(--bg2);
+        }
+
+        .aside p {
+            font-family: var(--sans);
+            font-size: 0.82rem;
+            color: #888;
+            margin: 0;
+            line-height: 1.65;
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 2.5rem 2rem;
+            text-align: center;
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            color: #444;
+        }
+
+        footer a { color: #555; text-decoration: none; }
+        footer a:hover { color: var(--orange); }
+
+        @media (max-width: 640px) {
+            .hero { padding: 4rem 1.5rem 3rem; }
+            .article { padding: 3rem 1.5rem 4rem; }
+            .participant-grid { grid-template-columns: 1fr; }
+            .matrix-header, .matrix-row { grid-template-columns: 100px 1fr 1fr; }
+            .matrix-header span, .matrix-row span { padding: 0.7rem; font-size: 0.75rem; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a class="nav-brand" href="index.html">BTCADP</a>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="specification.html">Specification</a></li>
+        <li><a href="btcc.html">₿C</a></li>
+        <li><a href="tbd-usd.html">₿USD</a></li>
+        <li><a href="currency-layer.html">Currency Layer</a></li>
+    </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-label">Essay · Bitcoin Monetary Framework</div>
+    <h1>The Better Product</h1>
+    <p class="hero-sub">
+        Bitcoin adoption will not come from evangelism. It will come from a savings account that outperforms banks, a spending token that works like a dollar, and a unit of account that holds steady. Follow four participants through two economies to see how.
+    </p>
+    <p class="hero-meta">btcadp.org · March 2026 · CC0 Public Domain</p>
+</section>
+
+<!-- ARTICLE BODY -->
+<article class="article">
+
+    <!-- INTRODUCTION -->
+    <p>
+        In the fiat economy, one bitcoin is worth the spot price. It fluctuates by the minute, governed by exchange order books, institutional flows, and collective sentiment. The unit of account is the dollar. Bitcoin is an asset priced in that unit.
+    </p>
+    <p>
+        In a bitcoin economy, one bitcoin is worth one bitcoin. One satoshi is worth one satoshi. This is not a philosophical claim — it is tautological. If bitcoin is the unit of account, there is nothing external to measure it against. The same way one dollar equals one dollar within the dollar system, one sat equals one sat within the bitcoin system.
+    </p>
+    <p>
+        These are two distinct frames of reference. Today's world operates almost entirely in the first. The question is how to get to the second — and what the transition looks like for ordinary people who are neither monetary theorists nor early adopters.
+    </p>
+    <p>
+        ₿C sits between these two frames. It is a mathematical quantity — the cumulative arithmetic mean of every daily bitcoin price since genesis — that belongs to neither economy. It is denominated in dollars but not governed by dollar policy. It is derived from bitcoin's history but not equivalent to bitcoin's present price. It can only increase, and it moves slowly: roughly 0.04% per day. This makes it usable as a unit of account in ways that neither the dollar nor the satoshi currently are.
+    </p>
+    <p>
+        To see why, follow the money through four people.
+    </p>
+
+    <hr>
+
+    <!-- SECTION 1: THE FOUR PARTICIPANTS -->
+    <div class="section-marker">I</div>
+    <h2>The Four Participants</h2>
+
+    <p>
+        Every economy has buyers and sellers. The transition from fiat to bitcoin produces four archetypes defined by a single question: does this person's economic life require converting in or out of fiat?
+    </p>
+
+    <div class="matrix">
+        <div class="matrix-header">
+            <span></span>
+            <span class="col-head">Bitcoin Economy</span>
+            <span class="col-head">Fiat Bridge</span>
+        </div>
+        <div class="matrix-row">
+            <span class="row-head">Buyer</span>
+            <span><span class="cell-name">Buyer Marco</span>Earns in ₿C. Spends in ₿C. Wallet holds sats, displayed as ₿C. Never touches fiat.</span>
+            <span><span class="cell-name">Buyer Serena</span>Earns in fiat. Converts each paycheck into ₿C via ₿OND or direct purchase. Spot price affects her conversion rate.</span>
+        </div>
+        <div class="matrix-row">
+            <span class="row-head">Merchant</span>
+            <span><span class="cell-name">Merchant Mia</span>Receives ₿C. Pays suppliers, rent, and employees in ₿C. Full Bitcoin-economy operation. No fiat conversion.</span>
+            <span><span class="cell-name">Merchant Sam</span>Receives ₿C from customers. Converts out to pay fiat-denominated costs — rent, suppliers, payroll. Hits the treasury ledger at every conversion.</span>
+        </div>
+    </div>
+
+    <p>
+        Buyer Marco and Merchant Mia operate entirely within the bitcoin economy. Buyer Serena and Merchant Sam straddle the boundary. The system must work for all four — and the instruments must be designed so that Buyer Serena and Merchant Sam can gradually become Buyer Marco and Merchant Mia without making a single dramatic decision.
+    </p>
+
+    <hr>
+
+    <!-- SECTION 2: A TRANSACTION -->
+    <div class="section-marker">II</div>
+    <h2>A Transaction</h2>
+
+    <p>
+        To make the numbers concrete: suppose ₿C is $18,000, BTC spot is $100,000, and Merchant Mia prices a product at 1 ₿C.
+    </p>
+    <p>
+        Buyer Marco's wallet shows a balance of 1 ₿C. He toggles: 18,000,000 sats. That is his entire view — ₿C and sats. He sees 1 ₿C on his balance and 1 ₿C on Merchant Mia's price tag. He can afford it.
+    </p>
+    <p>
+        Buyer Serena's wallet also shows a balance near 1 ₿C, but hers is denominated in ₿USD — the dollar-pegged spending token. She holds 18,000 ₿USD, which her app displays as 1 ₿C. She toggles it: $18,000. Same item, same price, different instrument underneath.
+    </p>
+    <p>
+        Merchant Mia's price tag did not change to accommodate either buyer. It reads 1 ₿C. Buyer Marco pays with sats. Buyer Serena pays with ₿USD. Merchant Mia receives both in the same unit.
+    </p>
+
+    <div class="pull">
+        <p>The unit of account held steady across both economies. The buyer in bitcoin and the buyer in fiat both saw the same number, understood the same price, and completed the same transaction. That is what a functioning unit of account does — it disappears into the background so people can focus on what they are buying.</p>
+    </div>
+
+    <hr>
+
+    <!-- SECTION 3: WHAT MOVES -->
+    <div class="section-marker">III</div>
+    <h2>What Moves in a Month</h2>
+
+    <p>
+        One month passes. ₿C, with over 6,000 daily prices in its average, barely moves regardless of what spot does. It ticks up from $18,000 to roughly $18,400. Merchant Mia's product is still priced at 1 ₿C.
+    </p>
+
+    <div class="scenario">
+        <div class="scenario-header">Scenario A — Spot rises to $120,000</div>
+        <div class="scenario-body">
+            <p><strong>Merchant Mia (merchant):</strong> Price unchanged. 1 ₿C. No repricing required.</p>
+            <p><strong>Buyer Marco (bitcoin buyer):</strong> Still holds 18,000,000 sats — not one more, not one fewer. His wallet reads <span class="up">1.174 ₿C</span>. He toggles: 18,000,000 sats. The merchant's price tag still says 1 ₿C. He can afford it — with purchasing power to spare. His sats did not change. They simply command more ₿C now because bitcoin appreciated relative to the average. Buyer Marco never saw a dollar figure.</p>
+            <p><strong>Buyer Serena (fiat buyer):</strong> Her 18,000 ₿USD are still worth exactly $18,000 — that is what dollar-pegged means. But the item now costs $18,400 (the new ₿C price). She has <span class="down">0.978 ₿C</span>. She needs to add 400 ₿USD to buy the item. The spot rally did not help her because she holds dollars, not bitcoin.</p>
+        </div>
+    </div>
+
+    <div class="scenario">
+        <div class="scenario-header">Scenario B — Spot falls to $80,000</div>
+        <div class="scenario-body">
+            <p><strong>Merchant Mia (merchant):</strong> Price unchanged. 1 ₿C. Same stability as Scenario A.</p>
+            <p><strong>Buyer Marco (bitcoin buyer):</strong> Still holds 18,000,000 sats. His wallet reads <span class="down">0.783 ₿C</span>. He toggles: 18,000,000 sats. Same sats as before — but they now command less ₿C because bitcoin depreciated relative to the average. He cannot afford the item. Buyer Marco never saw a dollar figure.</p>
+            <p><strong>Buyer Serena (fiat buyer):</strong> Still holds 18,000 ₿USD = $18,000. Still shows <span class="down">0.978 ₿C</span> — the same shortfall as Scenario A. A 20% crash in bitcoin's spot price did not affect her at all. Her gap is driven by ₿C's slow appreciation, not by spot volatility.</p>
+        </div>
+    </div>
+
+    <p>
+        Notice what happened from Buyer Marco's perspective. He never checked the dollar price. His wallet said 1.174 ₿C or 0.783 ₿C. The merchant's tag said 1 ₿C. Can he afford it — yes or no. The dollar is an input to the ₿C formula, but it is not part of Buyer Marco's experience. It is buried in the math the same way nobody buying groceries thinks about the central bank's balance sheet.
+    </p>
+
+    <hr>
+
+    <!-- SECTION 4: THE TREASURY LEDGER -->
+    <div class="section-marker">IV</div>
+    <h2>What Happens on the Treasury Ledger</h2>
+
+    <p>
+        Here is a question that seems important but whose answer is revealing: what did the treasury company do during the transactions described above?
+    </p>
+    <p>
+        When Buyer Marco paid Merchant Mia in sats — nothing. A pure bitcoin transaction. The treasury company's ledgers were not touched. No tokens minted. None redeemed. No reserve implications.
+    </p>
+    <p>
+        When Buyer Serena paid Merchant Mia in ₿USD — also nothing. The tokens were already in circulation. They moved from Buyer Serena's wallet to Merchant Mia's wallet. The treasury company was not notified, was not involved, and bore no cost. Zero reserve pressure.
+    </p>
+    <p>
+        The treasury company's ledger activates only when someone exits to fiat. If Merchant Mia keeps the ₿USD and pays her suppliers with it — no ledger event. If those suppliers pay their employees with it — no ledger event. The tokens circulate indefinitely without ever touching the reserve.
+    </p>
+    <p>
+        But if someone in the chain redeems for fiat, the treasury moves. Suppose Merchant Mia pays a supplier with the ₿USD she received from Buyer Serena. That supplier pays Merchant Sam. Merchant Sam needs fiat for rent, so he redeems. Those tokens were originally minted when Buyer Serena deposited $18,000 and the treasury bought 0.18 BTC at $100,000. That BTC sits on Ledger 1, tagged to those specific tokens.
+    </p>
+
+    <div class="scenario">
+        <div class="scenario-header">Redemption under Scenario A — Spot at $120,000</div>
+        <div class="scenario-body">
+            <p>The 0.18 BTC on Ledger 1 is now worth <strong>$21,600</strong>. The treasury sells $18,000 worth (0.15 BTC), returns the dollars, and burns the tokens. The remaining <span class="up">0.03 BTC</span> is surplus. That is revenue — already denominated in bitcoin, requiring no further transaction.</p>
+        </div>
+    </div>
+
+    <div class="scenario">
+        <div class="scenario-header">Redemption under Scenario B — Spot at $80,000</div>
+        <div class="scenario-body">
+            <p>The 0.18 BTC on Ledger 1 is now worth <strong>$14,400</strong>. The treasury owes $18,000 on redemption. Ledger 1 is <span class="down">$3,600 short</span>. The deficit is covered by Ledger 2 — the treasury's existing bitcoin reserves, held as a backstop for exactly this scenario.</p>
+        </div>
+    </div>
+
+    <p>
+        The structural implication is straightforward. Every token circulating natively within the ₿USD ecosystem creates zero reserve pressure at any BTC spot price. The reserve is only tested at the fiat exit door. Growing adoption of ₿USD as a medium of exchange — merchants paying suppliers, employers paying workers — is the treasury company's strongest defense, because every participant who recirculates instead of redeeming is reducing the probability of a Ledger 2 draw.
+    </p>
+
+    <hr>
+
+    <!-- SECTION 5: WHAT ₿C DOES FOR EACH -->
+    <div class="section-marker">V</div>
+    <h2>What ₿C Does for Each Participant</h2>
+
+    <p>
+        The value of ₿C is different depending on where you sit.
+    </p>
+
+    <h3>For Buyer Marco and Merchant Mia — the bitcoin economy</h3>
+    <p>
+        ₿C is a pricing language. Nothing more. No tokens, no treasury companies, no ledgers, no redemptions. It is a stable, slowly moving number that lets Merchant Mia put a price on a product today and not change it tomorrow. Buyer Marco and Merchant Mia transact in satoshis the entire time. ₿C tells them how many.
+    </p>
+    <p>
+        If Merchant Mia priced in sats, she would be repricing every time spot moved. The menu changes by the hour. Customers cannot build intuition about what things should cost. There is no price memory. ₿C moves less than 0.04% per day. Merchant Mia sets a price and leaves it for weeks. That is how a unit of account is supposed to work — it disappears into the background so people can focus on the thing they are buying.
+    </p>
+    <p>
+        Because Buyer Marco and Merchant Mia operate inside a circular bitcoin economy — earning, spending, and settling entirely in sats — the fiat price of bitcoin is never displayed on their screens. But they are not insulated from it. When spot rises, Marco's ₿C balance rises — his sats command more purchasing power. When spot falls, his balance falls. He feels the volatility; he just feels it expressed in ₿C rather than dollars. What ₿C gives Marco is not protection from price swings — it is a stable, legible unit on the other side of the transaction. Merchant Mia's price tag says 1 ₿C today, and it will say 1 ₿C next week. The volatility lives in Marco's wallet, not on the menu.
+    </p>
+
+    <h3>For the treasury company</h3>
+    <p>
+        ₿C provides a deterministic, monotonically increasing reference point — a lower bound that spot has never revisited since late 2011. At the deepest crash bottoms, BTC spot was still 1.4× ₿C (January 2015), 2.4× ₿C (December 2018), and 2.1× ₿C (November 2022). The gap has structurally widened over time.
+    </p>
+    <p>
+        This gives the treasury company a collateral floor for reserve modeling, a reference rate for ₿USD issuance that no single exchange defines and no single party controls, a spread (spot minus ₿C) that is the structural source of surplus revenue, a reporting benchmark for investor communications that is not subject to daily volatility, and a standardized unit across all consortium members that is reproduced from the methodology, not supplied by any institution.
+    </p>
+
+    <h3>For Merchant Sam — the fiat-bridge merchant</h3>
+    <p>
+        Merchant Sam sits in the hardest seat. He accepts ₿C-priced payments but some of his costs are still in fiat. Yet ₿C still gives him price stability on the incoming side (no repricing unlike sat-denominated prices), clean fiat conversion when needed (₿USD tokens redeem at $1, no slippage or timing risk), and access to both customer pools through a single price tag — Buyer Marco pays in sats, Buyer Serena pays in ₿USD, same menu.
+    </p>
+    <p>
+        Critically, Merchant Sam does not have to convert all of his ₿USD to fiat. His position is not binary — it is a spectrum. Some of his suppliers already accept ₿USD, so he passes those tokens along directly — no conversion, no redemption, no treasury ledger event. His fiat income covers his fiat-denominated bills. And the ₿USD he does not need for either? He can divert it into a ₿OND savings account, where it compounds at his chosen return target while he uses fiat revenue for rent and payroll.
+    </p>
+    <p>
+        This is the quiet mechanism of transition. Merchant Sam is not making a dramatic decision to "go bitcoin." He is routing different income streams to their natural destinations — ₿USD to suppliers who accept it, ₿USD to savings via ₿OND, and fiat to fiat obligations. Each month, as one more supplier crosses over, the fiat share shrinks and the ₿USD share grows. The transition happens in the accounting, not in a single moment of conviction.
+    </p>
+
+    <hr>
+
+    <!-- SECTION 6: THE SALLY PROBLEM -->
+    <div class="section-marker">VI</div>
+    <h2>The On-Ramp</h2>
+
+    <p>
+        The world today is populated almost entirely by Buyer Serenas and Merchant Sams — people whose economic lives are denominated in fiat. Buyer Marco and Merchant Mia represent the destination, not the starting point. The question is what carries people from one to the other.
+    </p>
+    <p>
+        Buyer Serena does not wake up one day and decide to join the bitcoin economy. She opens a savings product that outperforms her bank. She deposits $200 a month. Each deposit purchases bitcoin at spot, but Buyer Serena never sees the spot price — she sees a progress bar moving toward her chosen return target: +25%. That product is ₿OND.
+    </p>
+    <p>
+        Buyer Serena is dollar-cost averaging without knowing she is dollar-cost averaging. She did not choose the timing. She did not analyze a chart. She did not wait for a dip. She got paid and moved money into a better vehicle. The DCA pattern emerges naturally from the rhythm of earning a living.
+    </p>
+    <p>
+        When her bond matures, the payout does not arrive in dollars. It arrives in ₿USD — the system's spending token. Buyer Serena now has a spending balance. She can cash out to fiat, but that requires an active decision, a fee, and friction. The path of least resistance is to spend the ₿USD. And when she does, she is paying merchants like Merchant Sam.
+    </p>
+    <p>
+        Merchant Sam did not choose to accept bitcoin. He accepted a dollar-pegged token because a customer paid with it. Now he has ₿USD on his balance. He does not have to convert all of it. He pays a supplier who takes ₿USD. He diverts some into a ₿OND savings account. He redeems only what he needs for fiat bills. The ₿USD share of his business grows quietly, without a strategy memo or a board vote.
+    </p>
+
+    <div class="pull">
+        <p>₿OND is the entry point. Not because it is deceptive — because it is a demonstrably better savings product that happens to deposit people into the ₿USD ecosystem as its default output. Nobody in the chain needs to understand bitcoin. They need a savings account that works and a spending token that appeared when it matured.</p>
+    </div>
+
+    <hr>
+
+    <!-- SECTION 7: THE TRANSITION -->
+    <div class="section-marker">VII</div>
+    <h2>The Transition</h2>
+
+    <p>
+        The adoption sequence has a direction, and it runs through ₿OND's maturity payout.
+    </p>
+
+    <div class="flow">
+        <div class="flow-step">
+            <span class="flow-num">1</span>
+            <span class="flow-text"><strong>Buyer Serena saves.</strong> She deposits fiat into ₿OND each pay period. Every deposit triggers a BTC purchase by the issuing treasury company. She sees a progress bar, not a spot price.</span>
+        </div>
+        <div class="flow-step">
+            <span class="flow-num">2</span>
+            <span class="flow-text"><strong>₿OND matures.</strong> The dual condition is met — Buyer Serena's return target is reached and the treasury's BTC position is profitable. The payout lands in her wallet as ₿USD.</span>
+        </div>
+        <div class="flow-step">
+            <span class="flow-num">3</span>
+            <span class="flow-text"><strong>Buyer Serena spends.</strong> She pays Merchant Sam with ₿USD. No fiat conversion. No exchange. She spent her savings balance the same way she would spend from a debit card.</span>
+        </div>
+        <div class="flow-step">
+            <span class="flow-num">4</span>
+            <span class="flow-text"><strong>Merchant Sam routes his income.</strong> He pays suppliers who accept ₿USD directly — no conversion. He diverts a portion into a ₿OND savings account where it compounds. He redeems only what he needs for fiat-denominated bills. Three streams, each going to its natural destination.</span>
+        </div>
+        <div class="flow-step">
+            <span class="flow-num">5</span>
+            <span class="flow-text"><strong>Merchant Sam becomes Merchant Mia.</strong> Each month, one more supplier crosses over to ₿USD. The fiat share of his costs shrinks. The ₿USD share grows. The transition happens in the accounting — not in a single moment of conviction. Eventually, he no longer converts out.</span>
+        </div>
+        <div class="flow-step">
+            <span class="flow-num">6</span>
+            <span class="flow-text"><strong>Merchant Sam's employees become Buyer Marco.</strong> They earn in ₿USD, which displays as ₿C. They spend in ₿C. They budget in ₿C. The dollar is no longer part of their daily experience.</span>
+        </div>
+    </div>
+
+    <p>
+        The system does not require anyone to adopt bitcoin as an ideology. Buyer Serena needed a better savings account. Merchant Sam needed customers. Merchant Mia needed stable prices. Buyer Marco needed a unit he could budget in. Each person entered the system for their own practical reason, and the cumulative effect is a functioning bitcoin economy.
+    </p>
+
+    <hr>
+
+    <!-- SECTION 8: THE BETTER PRODUCT -->
+    <div class="section-marker">VIII</div>
+    <h2>Not Evangelism — Products</h2>
+
+    <p>
+        Seventeen years of Bitcoin advocacy have produced a clear pattern: education converts ideologues, not consumers. The person who reads the whitepaper and understands monetary debasement is already on board. The other eight billion people are not going to read the whitepaper. They are going to use whatever product works best for their money.
+    </p>
+    <p>
+        Buyer Serena did not adopt bitcoin. She opened a savings account that grows faster than anything her bank offers, with no minimums and a progress bar she can understand. The bitcoin purchase happened underneath, invisibly, as a mechanical consequence of the product working.
+    </p>
+    <p>
+        Merchant Sam did not adopt bitcoin. He accepted a payment from a customer and discovered that part of his income could flow to suppliers without converting to fiat, and the rest could sit in a savings instrument that outperforms his business checking account. The transition happened in his accounting software, not in his convictions.
+    </p>
+    <p>
+        As the bitcoin economy matures, the spot price gradually becomes what the price of gold already is — a number that institutions and treasury managers track, but that ordinary people rarely think about. If bitcoin spot reaches millions of dollars because treasury companies are running a perpetual bid, that number is meaningful to a CFO's balance sheet. It is not meaningful to someone buying groceries. ₿C, at that point, might be $250,000 — a human-scale unit that subdivides cleanly, moves slowly, and represents the entire historical trajectory of bitcoin's adoption compressed into a single figure. Buyer Marco budgets in it. Merchant Mia prices in it. Buyer Serena saves toward it. Merchant Sam accepts it. The spot price becomes the institutional layer. ₿C becomes the consumer layer.
+    </p>
+    <p>
+        None of the four participants needed to be persuaded that fiat currency is broken, that central banks are irresponsible, or that bitcoin is the future of money. Those claims may all be true. They are also irrelevant to adoption. What matters is that ₿OND is a better savings product than a bank account. ₿USD is a better spending token than a payment app skimming interchange fees. ₿C is a better unit of account than sats for pricing goods and services. The products are better. That is the only argument that scales.
+    </p>
+    <p>
+        The road to a bitcoin economy is not paved with orange pills. It is paved with better products that happen to run on bitcoin — and a unit of account that makes them usable by everyone, from the saver who deposits $5 a week to the merchant who just wants a stable price on the menu.
+    </p>
+
+    <div class="pull">
+        <p>The transition from a world of Buyer Serenas and Merchant Sams to a world of Buyer Marcos and Merchant Mias does not require a single person to change their beliefs about money. It requires products that are demonstrably better than what they already use. The conviction follows the experience. It does not precede it.</p>
+    </div>
+
+    <div class="aside">
+        <p>This essay describes theoretical mechanisms that have not yet been implemented at scale. Claims about ₿USD reserve stability, ₿C denomination properties, and ₿OND savings dynamics are grounded in the mathematical properties of the framework as designed and in Bitcoin's historical price data. Actual outcomes depend on consortium implementation, legal jurisdiction, market conditions, and adoption dynamics beyond the scope of this analysis. All materials published at btcadp.org are released under CC0 Public Domain. No rights reserved.</p>
+    </div>
+
+</article>
+
+<footer>
+    <p>
+        <a href="index.html">Home</a> &nbsp;·&nbsp;
+        <a href="btcc.html">Bitcoin Currency (₿C)</a> &nbsp;·&nbsp;
+        <a href="tbd-usd.html">₿USD</a> &nbsp;·&nbsp;
+        <a href="bond_v2.html">₿OND</a> &nbsp;·&nbsp;
+        <a href="pragmatic-bridge.html">The Pragmatic Bridge</a> &nbsp;·&nbsp;
+        <a href="currency-layer.html">Currency Layer</a> &nbsp;·&nbsp;
+        <a href="specification.html">BTCADP Specification</a> &nbsp;·&nbsp;
+        <a href="https://github.com/BTCADP/btcadp-research" target="_blank" rel="noopener">GitHub</a>
+    </p>
+    <p style="margin-top: 0.8rem;">CC0 Public Domain · btcadp.org · 2026</p>
+</footer>
+
+</body>
+</html>
