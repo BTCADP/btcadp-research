@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BTCC (₿C) Unit of Account as a Pricing Denomination | btcadp.org</title>
-<meta name="description" content="How ₿C functions as a Bitcoin-native pricing denomination — covering daily drift tolerances, the merchant margin effect, and the self-calibrating inflation hedge.">
+<meta name="description" content="How ₿C functions as a pricing denomination between the fiat and Bitcoin economies — covering daily drift tolerances, the merchant margin effect, and the self-calibrating inflation hedge.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
 <style>
@@ -167,7 +167,7 @@
 
   <div class="article-meta">White Paper &nbsp;&bull;&nbsp; btcadp.org &nbsp;&bull;&nbsp; March 2026</div>
   <h1 class="article-title">BTCC (₿C) Unit of Account as a Pricing Denomination</h1>
-  <p class="article-subtitle">Bitcoin-native pricing for merchants and contracts — the BTCADP Framework</p>
+  <p class="article-subtitle">A common pricing denomination between fiat and Bitcoin — the BTCADP Framework</p>
   <div class="article-byline">
     btcadp.org &nbsp;&bull;&nbsp; March 2026 &nbsp;&bull;&nbsp; CC0 Public Domain
   </div>
@@ -180,10 +180,10 @@
 
     <p>USD stablecoins do not solve this. They eliminate Bitcoin's volatility by abandoning Bitcoin's monetary properties entirely. A USD stablecoin is a dollar with technical overhead — it inherits every structural problem of fiat denomination, including inflation, monetary policy risk, and issuer counterparty exposure, while adding none of Bitcoin's properties.</p>
 
-    <p>The problem was never Bitcoin. The problem was denomination. For 17 years, no Bitcoin-native unit existed that was stable enough for everyday pricing. BTCC (₿C) is that unit.</p>
+    <p>The problem was never Bitcoin. The problem was denomination. For 17 years, no stable unit existed that could bridge the fiat economy and the Bitcoin economy for everyday pricing. BTCC (₿C) is that unit — the common denomination both sides can read.</p>
 
     <div class="callout">
-      <p>This system is designed to operate entirely within a Bitcoin economy. BTCC (₿C) denomination does not provide a mechanism to exit to fiat, and does not attempt to. Fiat conversion is outside its scope by design. Participants who need to convert to fiat require a separate instrument — such as a TBDC — at the boundary. Within the Bitcoin economy, no such instrument is needed.</p>
+      <p>₿C is dollar-derived — its inputs are daily USD prices. This is not a weakness but the source of its bridging function. It provides the common unit of account between the fiat economy and the Bitcoin economy, readable by both sides. Participants who need fiat conversion require a separate instrument — such as a TBDC — at the boundary. ₿C itself is a denomination protocol, not a monetary instrument.</p>
     </div>
 
     <h2>2. BTCC (₿C) as a Pricing Unit</h2>
@@ -320,7 +320,7 @@
 
     <p>USD stablecoins offer the opposite characteristic. In a USD hyperinflation scenario, a USD-pegged instrument offers zero protection. Its stability is precisely its failure mode. BTCC (₿C) has no such exposure because it is pegged to nothing external.</p>
 
-    <p>The historical pattern in monetary crises is consistent: participants who denominate in harder money preserve purchasing power while those who remain in the collapsing unit do not. BTCC (₿C) is a Bitcoin-native denomination with no external peg and no fiat dependency. It does not require fiat exit to function as a store of value or a pricing unit — it functions within the Bitcoin economy regardless of what fiat currencies are doing.</p>
+    <p>The historical pattern in monetary crises is consistent: participants who denominate in harder money preserve purchasing power while those who remain in the collapsing unit do not. BTCC (₿C) is a denomination with no external peg and no issuer. It is dollar-derived — computed from daily USD prices — but it is not pegged to the dollar. It appreciates structurally as Bitcoin's cumulative average rises. For merchants pricing in ₿C, the denomination preserves and expands margins regardless of what fiat currencies are doing.</p>
 
     <h2>6. Implementation</h2>
 
@@ -332,7 +332,7 @@
       <li>A price list denominated in BTCC (₿C)</li>
     </ul>
 
-    <p>No new asset is issued. No token is held. No counterparty is required. The merchant receives satoshis. Their wallet displays the BTCC (₿C) equivalent. The conversion is deterministic and reproducible by any party with the BTCADP specification and trade data. There is no fiat exit mechanism and no fiat dependency at any layer.</p>
+    <p>No new asset is issued. No token is held. No counterparty is required. The merchant receives satoshis. Their wallet displays the BTCC (₿C) equivalent. The conversion is deterministic and reproducible by any party with the BTCADP specification and trade data. ₿C is dollar-derived — its inputs are USD prices — but requires no fiat exit mechanism to function as a pricing denomination. The conversion from ₿C to sats at point of sale is deterministic and reproducible.</p>
 
     <p>The merchant's existing Bitcoin holdings are unaffected. BTCC (₿C) is a denomination layer, not a separate instrument. Switching to BTCC (₿C) pricing does not require changing what the merchant holds — only how they express prices.</p>
 
