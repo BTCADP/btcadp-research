@@ -348,7 +348,7 @@
         <p>₿C, ₿ond, and ₿USD are three distinct components of the same ecosystem. Understanding each separately makes the whole clearer.</p>
         <p><strong>₿C (BTCC)</strong> is the unit of account — the denomination. It is the cumulative arithmetic mean of every daily Bitcoin price since the genesis block. It requires no issuer, holds no reserves, and makes no redemption promise. Any wallet, merchant, or payment system can adopt it independently. It is a standard for expressing value, not a product.</p>
         <p><strong>₿USD</strong> is the medium of exchange — always worth exactly $1.00, redeemable for $1.00 on demand. It is issued by a consortium of Bitcoin treasury companies, with each $1 token backed by Bitcoin purchased at spot. Prices and values across the ecosystem are denominated in ₿C, but ₿USD is the instrument people spend and receive.</p>
-        <p><strong>₿ond</strong> is the savings product — a fixed-maturity instrument denominated in ₿C. A saver deposits fiat, the treasury purchases Bitcoin, and the saver holds a ₿C-denominated balance until maturity. At maturity, the obligation is returned as ₿USD. The ₿ond is where the appreciation of ₿C is captured by long-term savers.</p>
+        <p><strong>₿ond</strong> is the savings product — a return-based instrument denominated in ₿C. A saver deposits fiat and selects a target return (+10%, +25%, +50%, etc.). The treasury purchases Bitcoin at spot. The bond matures when a dual condition is met: the saver's ₿C return target has been reached, and the treasury's BTC position on that bond is profitable. At maturity, the payout is returned as ₿USD. The ₿ond is where the appreciation of ₿C is captured by long-term savers.</p>
         <div class="callout">₿C is the measuring stick. ₿USD is the spending instrument. ₿ond is the savings instrument. Together they form a complete monetary system — unit of account, medium of exchange, and savings product — built entirely on Bitcoin.</div>
       </div>
     </div>
@@ -366,9 +366,9 @@
         <span class="faq-icon">+</span>
       </button>
       <div class="faq-answer">
-        <p>A ₿ond is a fixed-maturity savings instrument denominated in BTCC (₿C) and issued by a Bitcoin treasury company. A saver deposits fiat. The treasury uses those funds to purchase Bitcoin at the current spot price and holds it in reserve. The saver receives a BTCC (₿C)-denominated balance and a maturity date.</p>
-        <p>The ₿ond is structured like a conventional bond: fixed term, known denomination, and a defined return at maturity. What is unconventional is the underlying asset (Bitcoin), the unit of account (₿C), and the maturity payout mechanism (₿USD, with a fiat exit option). Specific maturity tiers — such as 2-year, 5-year, or 10-year terms — are implementation decisions for each treasury company.</p>
-        <div class="callout">The ₿ond is for savers who want Bitcoin's long-run upside with its day-to-day volatility removed. The ₿C denomination appreciates predictably — its daily rate converges toward Bitcoin's own long-run growth rate — giving savers a slowly-appreciating unit of account over their holding period.</div>
+        <p>A ₿ond is a return-based savings instrument denominated in BTCC (₿C) and issued by a Bitcoin treasury company. A saver deposits dollars — any amount, from $1 upward — and selects a target return: +10%, +25%, +50%, +100%, or any tier offered by the issuing consortium. 1 USD = 1 ₿OND. Each dollar becomes a programmable token with its own ₿C entry price, target return, and maturity trigger.</p>
+        <p>The consortium purchases Bitcoin at spot with the deposited funds. The bond matures when two conditions are simultaneously met: the saver's ₿C return target has been reached, and the treasury's BTC position on that specific bond is profitable. At maturity, the saver receives their payout in ₿USD — the system's dollar-pegged spending token — which they can spend, withdraw to fiat, or auto-reinvest into a new ₿OND.</p>
+        <div class="callout">The ₿ond is for savers who want Bitcoin's long-run upside with its day-to-day volatility removed. The return is chosen by the saver. The timeline is determined by the market. The appreciation is mechanical — it follows directly from the ₿C formula. No coupon, no counter-party yield promise, no interest rate set by a central authority.</div>
       </div>
     </div>
 
@@ -378,11 +378,12 @@
         <span class="faq-icon">+</span>
       </button>
       <div class="faq-answer">
-        <p>At maturity, the treasury returns the ₿C-denominated obligation as ₿USD — keeping the redeemed value inside the Bitcoin ecosystem. The holder then has three options:</p>
-        <p><strong>Spend it.</strong> Use the ₿USD tokens for everyday commerce or on trading platforms — the lowest-friction path.</p>
-        <p><strong>Re-save it.</strong> Convert into a new ₿ond at the current ₿C rate — also near-frictionless, keeping capital in the Bitcoin savings layer.</p>
-        <p><strong>Exit to fiat.</strong> Redeem the ₿USD tokens for dollars at the standard ₿USD redemption fee — the highest-friction path, reflecting the actual cost of selling Bitcoin from reserves into the market.</p>
-        <p>The treasury retains the Bitcoin in excess of the ₿C obligation as earned spread — the difference between Bitcoin's spot appreciation over the maturity period and the slowly-rising ₿C denomination. Because Bitcoin has historically appreciated far beyond the cumulative average over multi-year periods, this spread tends to be substantial across a diversified book of maturities.</p>
+        <p>A ₿ond matures when both conditions of the dual trigger are simultaneously met: the saver's ₿C return target has been reached, and the treasury's BTC position on that bond covers the payout plus a minimum profit margin. There is no fixed calendar date — the timeline is determined by the market.</p>
+        <p>At maturity, the saver receives their original deposit plus the chosen return, paid in ₿USD. The holder then has three options:</p>
+        <p><strong>Auto-reinvest.</strong> The ₿USD immediately converts to a new ₿OND at the current ₿C price — no BTC is sold, no fiat changes hands. The saver compounds their returns while the treasury's BTC position remains untouched. This is the lowest-friction and structurally ideal path.</p>
+        <p><strong>Spend it.</strong> The ₿USD enters the saver's spending wallet for everyday commerce within the ecosystem — zero sell pressure on Bitcoin.</p>
+        <p><strong>Exit to fiat.</strong> Redeem the ₿USD tokens for dollars — the highest-friction path and the only one that triggers a BTC sale from reserves.</p>
+        <p>The treasury retains the surplus BTC — the spread between the BTC position's value and the saver's payout — as profit. The dual condition guarantees the treasury is profitable on every individual bond at every payout, by design.</p>
       </div>
     </div>
 
@@ -392,22 +393,22 @@
         <span class="faq-icon">+</span>
       </button>
       <div class="faq-answer">
-        <p>No. A ₿ond cannot be spent directly. It is a savings instrument, not a payment instrument. To spend, a ₿ond holder converts their ₿C balance into ₿USD tokens — paying an implementation-defined early exit fee if before maturity.</p>
-        <p>This distinction is intentional. The separation of savings (₿ond) from spending (₿USD) is what gives the ₿ond its structural properties. A savings instrument that can be instantly liquidated at any moment cannot offer the fixed-maturity reserve architecture that makes the system robust against attacks and enables actuarial reserve sizing.</p>
+        <p>No. A ₿ond cannot be spent directly. It is a savings instrument, not a payment instrument. To spend, a ₿ond holder converts their position into ₿USD tokens — paying an implementation-defined early exit fee if the dual maturity condition has not yet been met.</p>
+        <p>This distinction is intentional. The separation of savings (₿ond) from spending (₿USD) is what gives the ₿ond its structural properties. A savings instrument that can be instantly liquidated at any moment cannot maintain the reserve architecture that makes the system robust against coordinated attacks.</p>
         <div class="callout">Converting a ₿ond to ₿USD keeps capital inside the Bitcoin ecosystem — it simply moves from the savings layer to the spending layer. The only exit that costs Bitcoin is redemption to fiat.</div>
       </div>
     </div>
 
     <div class="faq-item">
       <button class="faq-question" onclick="toggle(this)">
-        <span class="faq-q-text">How does the ₿ond's fixed maturity protect against bank runs and coordinated attacks?</span>
+        <span class="faq-q-text">How does the ₿ond's dual condition protect against bank runs and coordinated attacks?</span>
         <span class="faq-icon">+</span>
       </button>
       <div class="faq-answer">
         <p>The classic attack on a reserve-backed currency is a coordinated bank run: simultaneously short the reserve asset while triggering mass redemptions, using the forced selling of reserves to amplify the short position. This attack has destroyed algorithmic stablecoins and pressured overcollateralized systems. It works because redemptions can be triggered at any moment, en masse, by any sufficiently large coordinated actor.</p>
-        <p>A fixed-maturity ₿ond has no redemption trigger that can be pulled. The redemption schedule is contractual, known, and distributed across time. An attacker cannot force simultaneous mass redemptions because the redemption dates are not under anyone's control — they are set at issuance. The attack vector evaporates entirely.</p>
+        <p>The ₿ond's dual condition structurally defuses this. A bond cannot mature unless both the saver's return target is reached and the treasury's BTC position is profitable on that specific bond. During a sustained spot decline, neither condition is met — bonds simply wait. There is no redemption trigger that an attacker can pull. The system does not pay out during stress; it pauses.</p>
         <p>Early conversion to ₿USD is available — with a fee. That fee is the friction that prevents the maturity structure from being circumvented. An attacker who wants to trigger early conversions at scale must pay the conversion cost on every position. At any meaningful scale, the cost exceeds the profitability of the attack long before it threatens reserve integrity.</p>
-        <p>Additionally, because maturity dates are known at issuance, the ₿ond Ledger 2 backstop can be sized with actuarial precision rather than precautionary estimation — a significant structural advantage over products with unpredictable redemption timing.</p>
+        <p>Additionally, the dual condition guarantees the treasury is profitable on every individual bond at every payout. There is no scenario in which a maturity event weakens the treasury's reserves — every payout, by construction, leaves the treasury with surplus BTC.</p>
       </div>
     </div>
 
@@ -418,9 +419,9 @@
       </button>
       <div class="faq-answer">
         <p>They are complementary instruments designed for different purposes.</p>
-        <p><strong>₿ond</strong> is for savers. It is denominated in BTCC (₿C), has a fixed maturity date, cannot be spent directly, and its value appreciates slowly over time as the ₿C denomination drifts upward. The holder earns Bitcoin's long-run appreciation in a stable, low-volatility denomination.</p>
+        <p><strong>₿ond</strong> is for savers. It is denominated in BTCC (₿C), matures when a dual condition is met (saver's return target reached and treasury position profitable), cannot be spent directly, and its return is chosen by the saver at purchase. The timeline is variable — determined by the market, not a calendar date.</p>
         <p><strong>₿USD</strong> is for transactors. It is always worth exactly $1.00, can be spent immediately, and pays no yield. Its value proposition is a hard dollar peg backed by Bitcoin on-chain rather than government debt.</p>
-        <p>The two products connect through conversion. A ₿ond holder who wants to spend converts to ₿USD. A ₿USD holder who wants to save converts into a ₿ond. Both conversions are near-frictionless because both keep capital inside the Bitcoin economy.</p>
+        <p>The two products connect through conversion. A ₿ond that matures pays out in ₿USD. A ₿USD holder who wants to save converts into a ₿ond. Both conversions keep capital inside the Bitcoin economy. Auto-reinvest makes the cycle seamless — a maturing ₿ond immediately rolls into a new one without touching fiat.</p>
         <div class="callout">₿ond is where value is stored and grown. ₿USD is where value is moved and spent. Together they cover the two core functions every monetary system requires: saving and transacting.</div>
       </div>
     </div>
@@ -433,7 +434,7 @@
       <div class="faq-answer">
         <p>The ₿ond and ₿USD are structurally different instruments with different redemption mechanics, duration profiles, and risk characteristics. Pooling their reserves would allow a stress event on one product to consume the reserves of the other — a cross-contamination that the architecture explicitly prevents.</p>
         <p>Each product has two ledgers: an issuance pool (Ledger 1) holding Bitcoin purchased at the time of product issuance, and a backstop (Ledger 2) drawn from treasury companies' existing holdings to cover redemption shortfalls.</p>
-        <p><strong>₿ond L1</strong> holds BTC locked to the maturity schedule. <strong>₿ond L2</strong> is sized actuarially against the known maturity book. <strong>₿USD L1</strong> holds BTC backing outstanding $1 tokens. <strong>₿USD L2</strong> self-fortifies over time as BTC appreciation creates surplus above the $1 obligation.</p>
+        <p><strong>₿ond L1</strong> holds BTC purchased with saver deposits, tagged to individual bonds. <strong>₿ond L2</strong> provides the backstop reserve drawn from treasury holdings. <strong>₿USD L1</strong> holds BTC backing outstanding $1 tokens. <strong>₿USD L2</strong> self-fortifies over time as BTC appreciation creates surplus above the $1 obligation.</p>
         <p>All four ledgers are held in publicly addressable Bitcoin wallets on the base layer — verifiable by any observer in real time, without an auditor.</p>
       </div>
     </div>
@@ -453,7 +454,7 @@
       <div class="faq-answer">
         <p>USDT and USDC achieve price stability by holding dollar reserves — but in doing so, they reproduce every structural weakness of the fiat system they claim to improve upon. The issuer is a centralized entity that can freeze accounts, censor transactions, and is subject to regulatory capture. The reserves must be trusted and audited. And the token is, in economic substance, a digital dollar with extra steps — the user gains blockchain settlement but inherits dollar inflation, counterparty risk, and the jurisdictional vulnerabilities of the issuing entity.</p>
         <p>A ₿USD token backed by Bitcoin eliminates each of these dependencies. The reserves are Bitcoin on the base layer — publicly addressable, verifiable in real time by anyone without an auditor. The issuing entities are publicly traded companies whose Bitcoin holdings are a matter of public record. No single issuer can unilaterally freeze a token or alter the reserve rules. And critically, the reserve asset appreciates over time rather than eroding through inflation. A USDC holder's deposits back US government debt. A ₿USD holder's deposits purchase Bitcoin — an asset whose purchasing power has improved, not eroded, over every multi-year period in its history. Both tokens target $1.00. The difference is what sits behind that dollar.</p>
-        <p>For users who want exposure to ₿C's long-run appreciation rather than a fixed dollar peg, the product is the ₿ond — a fixed-maturity savings instrument denominated in BTCC (₿C) and backed by Bitcoin reserves. See the ₿ond section of this FAQ for details.</p>
+        <p>For users who want exposure to ₿C's long-run appreciation rather than a fixed dollar peg, the product is the ₿ond — a return-based savings instrument denominated in BTCC (₿C) and backed by Bitcoin reserves. See the ₿ond section of this FAQ for details.</p>
         <div class="callout">₿USD targets $1.00 USD parity — the same as USDT or USDC. The difference is entirely in the collateral: Bitcoin on the base layer rather than fiat in a bank account. Every dollar that flows into ₿USD instead of USDC buys Bitcoin rather than US government debt.</div>
       </div>
     </div>
