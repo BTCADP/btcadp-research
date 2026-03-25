@@ -1,0 +1,1703 @@
+**COULD BITCOIN TREASURY COMPANIES**
+
+**OFFER A VIABLE ALTERNATIVE TO**
+
+**CENTRAL BANK CBDCs?**
+
+btcadp.org • March 2026
+
+Central banks around the world are developing digital currencies. The
+
+Bank of International Settlements estimates that over 130 countries are
+
+in some stage of CBDC exploration or rollout, with several \-\-- China,
+
+the Bahamas, Nigeria \-\-- already operating live systems. The case for
+
+CBDCs is made in the language of efficiency: faster payments, lower
+
+costs, financial inclusion for the unbanked. But efficiency is not the
+
+only thing a monetary system delivers to those who use it. It also
+
+delivers, or fails to deliver, financial privacy, protection from
+
+arbitrary account action, and freedom from the coercive use of monetary
+
+policy as a behavioral instrument.
+
+What would it mean to build a digital currency that preserves the
+
+freedom properties of physical cash while providing the settlement
+
+efficiency of a digital network \-\-- and does so without a central
+issuer
+
+capable of inflating the supply, surveilling every transaction, or
+
+weaponizing access? This article examines one concrete proposal: the
+
+Treasury-Backed Digital Currency, or ₿USD, a Bitcoin-backed stablecoin
+
+issued by a consortium of publicly traded Bitcoin treasury companies and
+
+priced in the BTCC (Bitcoin Currency) unit of account.
+
+The ₿USD is not a speculative concept. Its components \-\-- a published
+
+reference price specification, a mathematically defined denomination,
+
+and a class of institutional participants with existing Bitcoin holdings
+
+exceeding 600,000 BTC \-\-- are already in place. What the proposal
+
+requires is their assembly into a functioning monetary institution. What
+
+it offers, against the backdrop of accelerating CBDC development
+
+globally, is a digitally native alternative that does not require
+
+surrendering the financial autonomy that physical cash currently
+
+provides.
+
+**I. What CBDCs Are \-\-- and What They Are Not**
+
+A Central Bank Digital Currency is a liability of the central bank,
+
+denominated in the national unit of account, and accessible directly by
+
+the public in digital form. It is, in effect, a digital banknote \-\--
+
+except that unlike a physical banknote, it is not bearer money. Every
+
+balance and every transaction is recorded on infrastructure controlled
+
+by, or directly accessible to, the issuing authority.
+
+CBDCs come in two main forms: retail (accessible directly by citizens
+
+and businesses) and wholesale (used for interbank settlement). Most
+
+current proposals target the retail layer, aiming to replace or
+
+supplement physical cash. China\\\'s digital yuan \-\-- the e-CNY \-\--
+is the
+
+most advanced and most widely deployed example, with hundreds of
+
+millions of wallets distributed and mandatory acceptance at some
+
+government venues. The European Central Bank, the Bank of England, the
+
+Federal Reserve, and most other major central banks are in active
+
+development or pilot stages.
+
+The efficiency case for CBDCs is real and should be acknowledged
+
+clearly. Programmable money that can be transferred in seconds without
+
+passing through commercial bank intermediaries would represent a genuine
+
+improvement over much existing payment infrastructure. The financial
+
+inclusion argument \-\-- that a central bank account could serve
+
+populations currently excluded from commercial banking \-\-- is
+
+substantive. These are not fabricated benefits.
+
+The structural problems are also real, and they are not addressed by any
+
+current CBDC proposal, because they are inherent to the architecture
+
+rather than artifacts of implementation.
+
+**The Inflation Problem Has Not Been Solved**
+
+A CBDC does not alter the fundamental property of central bank money:
+
+that it can be created, expanded, and devalued at the discretion of
+
+monetary authorities. The US dollar has lost approximately 97% of its
+
+purchasing power since the Federal Reserve\\\'s founding in 1913. The
+euro
+
+has lost roughly 35% of its purchasing power since its introduction in
+
+1999\. This is not a malfunction \-\-- it is the system operating as
+
+designed. Inflation is the mechanism through which governments finance
+
+expenditures beyond tax revenue. A digital dollar retains this property
+
+in full, and no CBDC proposal has suggested otherwise. The speed of the
+
+payment rail does not change the economics of the currency running on
+
+it.
+
+The mathematics of compounding erosion are worth stating plainly,
+
+because they are rarely presented in the context of CBDC discussions. At
+
+a 2% annual inflation target \-\-- the explicit policy goal of most
+major
+
+central banks \-\-- a unit of currency loses half its purchasing power
+in
+
+approximately 35 years. At 4% \-\-- which has characterized significant
+
+periods of recent US monetary history \-\-- the same erosion takes 18
+
+years. At 8%, a rate experienced in the US in 2022, purchasing power
+
+halves in 9 years. These are not edge cases. They are the stated
+
+operating parameters of the system. A CBDC holder is holding a balance
+
+that its own issuer is targeting for systematic, indefinite devaluation.
+
+The technical term for this mechanism is seigniorage: the profit a
+
+government earns by issuing currency whose face value exceeds the cost
+
+of its production. In a fiat system, seigniorage is collected not at the
+
+printing press but distributed silently across all holders of the
+
+currency, who find their savings worth progressively less without any
+
+transaction occurring. It is, in economic substance, a tax \-\-- one
+that
+
+requires no vote, no legislation, and no visible collection mechanism. A
+
+CBDC does not eliminate seigniorage. It eliminates the last instrument
+
+\-\-- physical cash \-\-- that allows holders to partially opt out of it
+by
+
+holding a form of money the central bank cannot directly devalue.
+
+CBDCs may in fact deepen the inflation problem rather than simply
+
+perpetuating it. The programmable capabilities discussed below \-\--
+
+negative interest rates on held balances, expiry dates on unspent
+
+currency \-\-- are proposals specifically designed to eliminate the
+floor
+
+that physical cash currently places under monetary debasement. A holder
+
+who faces negative rates on a bank deposit today can withdraw to
+
+physical cash and earn zero rather than negative returns. A CBDC system
+
+that replaces physical cash with a programmable balance removes this
+
+option entirely. The lower bound on interest rates \-\-- already pushed
+to
+
+its limits by central banks in the decade following 2008 \-\-- would
+
+effectively be abolished.
+
+  -----------------------------------------------------------------------
+  *\*Central banks target 2% annual inflation as a policy goal. At that*
+
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  *rate, the currency in your wallet loses half its purchasing power*
+
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  *every 35 years without a single policy failure. A CBDC does not
+  change*
+
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  *this. It removes the last tool \-\-- physical cash \-\-- that allowed*
+
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  *holders to partially escape it.\**
+
+  -----------------------------------------------------------------------
+
+**Programmability as a Control Mechanism**
+
+The defining technical property of a CBDC \-\-- and the one that most
+
+distinguishes it from physical cash \-\-- is programmability. Unlike a
+
+physical banknote, which is a bearer instrument that changes hands
+
+without any record or condition, a CBDC balance is software. Software
+
+can have rules. And the rules that have been publicly proposed,
+
+discussed, or quietly implemented in various CBDC programs represent a
+
+meaningful expansion of the state\\\'s capacity to direct economic
+
+behavior.
+
+Expiry dates on currency. The Bank of England, the Bank for
+
+International Settlements, and several academic economists have
+
+discussed time-limited CBDC balances \-\-- money that expires if not
+spent
+
+within a defined window. The stated rationale is macroeconomic: to
+
+stimulate spending during downturns by eliminating the option to save.
+
+The practical effect is the elimination of the holder\\\'s ability to
+
+defer consumption, which is one of the foundational functions of money
+
+as a store of value. Physical cash does not expire. A digital currency
+
+that does is a fundamentally different instrument.
+
+Negative interest rates on held balances. In conventional banking, the
+
+existence of physical cash places a theoretical lower bound on interest
+
+rates: depositors will withdraw to cash rather than accept a guaranteed
+
+loss on held deposits. CBDCs eliminate this escape valve. If physical
+
+cash is phased out and replaced by a CBDC, monetary authorities can
+
+impose negative holding rates \-\-- effectively a tax on saving \-\--
+with
+
+no mechanism for the holder to avoid it except by spending. Several
+
+economists who have advocated for deeply negative rates have cited the
+
+elimination of cash as a necessary precondition for their
+
+implementation.
+
+Categorical spending restrictions. Programmable money can be issued with
+
+conditions on its use. This has been presented in benign forms:
+
+government benefit payments that can only be spent on food, or stimulus
+
+payments restricted to domestic businesses. The same technical
+
+mechanism, applied by a less benign authority, enables the restriction
+
+of purchasing to approved vendors, categories, or geographic areas.
+
+China\\\'s e-CNY has been distributed with geographic spending limits as
+
+part of regional pilot programs. The infrastructure that enables the
+
+benign version also enables the restrictive one.
+
+Social and political access control. A CBDC account is a permissioned
+
+account. The issuing authority \-\-- or institutions operating under its
+
+regulatory oversight \-\-- decides who can hold one, on what conditions,
+
+and with what ongoing obligations. In February 2022, Canadian
+
+authorities invoked emergency powers to freeze bank accounts of donors
+
+to the trucker convoy protest without individual court orders. Every
+
+account affected was a conventional bank account, subject to the same
+
+access architecture a CBDC would use, but requiring bank cooperation. A
+
+retail CBDC would place the same capability directly in the hands of the
+
+central authority, without requiring commercial bank intermediaries to
+
+comply.
+
+  -----------------------------------------------------------------------
+  *\*The most important thing to understand about a CBDC is not what it*
+
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  *does today, but what it makes technically possible that was
+  previously*
+
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  *impractical. Physical cash is a bearer instrument. It cannot be*
+
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  *surveilled, frozen, programmed, or expired by a central authority. A*
+
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  *CBDC can be all four.\**
+
+  -----------------------------------------------------------------------
+
+**Total Transactional Surveillance**
+
+Physical cash transactions leave no record. A CBDC transaction
+
+necessarily does. Every payment, every merchant, every amount, every
+
+timestamp \-\-- the complete record of an individual\\\'s economic life
+\-\--
+
+is recorded on infrastructure that the issuing authority either operates
+
+directly or can access. This is not a privacy policy question. It is a
+
+structural property of the architecture. You cannot have a central bank
+
+liability with central record-keeping that does not produce a central
+
+record.
+
+China\\\'s e-CNY is instructive. The People\\\'s Bank of China has
+described
+
+the system\\\'s privacy model as \\\'controllable anonymity\\\' \-\--
+meaning
+
+transactions below certain thresholds appear anonymous to merchants and
+
+other counterparties, but the PBOC retains full access to the underlying
+
+data. This is not anonymity in any meaningful sense. It is pseudonymity
+
+with a government override. Western CBDC proposals have been more
+
+circumspect about describing surveillance capabilities, but the
+
+architecture produces the same result: a comprehensive,
+
+government-accessible ledger of every retail economic transaction in the
+
+economy.
+
+The implications extend beyond the obvious privacy concern.
+
+Comprehensive transaction surveillance enables the identification of
+
+political donations, union activity, religious giving, participation in
+
+disfavored associations, and any other economic behavior that an
+
+authority might choose to monitor or penalize. Whether any particular
+
+government would choose to use this capability is a political question.
+
+That the capability exists and cannot be removed without dismantling the
+
+architecture is a structural one.
+
+**Nigeria\\\'s eNaira and the Cash Withdrawal Floor**
+
+Nigeria\\\'s eNaira, launched in October 2021, provides the most
+
+instructive early example of how CBDC implementation interacts with the
+
+elimination of cash. Adoption was slow initially, with citizens
+
+resistant to the new system. In late 2022, the Central Bank of Nigeria
+
+sharply restricted cash withdrawals, limiting individuals to
+
+approximately 20,000 naira per week (roughly \\\$45 at the time),
+
+effectively coercing adoption of the eNaira by making the alternative
+
+\-\-- physical cash \-\-- practically inaccessible.
+
+The episode is a working demonstration of a pattern that should be
+
+expected wherever CBDCs are introduced alongside policies that restrict
+
+cash access. The CBDC is not directly mandated; it becomes the path of
+
+least resistance when the alternatives are deliberately constrained.
+
+Financial inclusion as a stated goal becomes financial compulsion as a
+
+practical outcome.
+
+  -----------------------------------------------------------------------
+  *\*A CBDC is only voluntary as long as physical cash remains a viable*
+
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  *alternative. The moment cash is restricted, the CBDC ceases to be a*
+
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  *choice and becomes an obligation \-\-- along with every condition the*
+
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  *issuing authority chooses to attach to it.\**
+
+  -----------------------------------------------------------------------
+
+**II. The ₿USD: A Counter-Architecture**
+
+The term ₿USD \-\-- Treasury-Backed Digital Currency \-\-- is chosen to
+mark
+
+a structural contrast with the CBDC model, not merely a branding
+
+distinction. A ₿USD is issued by a consortium of publicly traded Bitcoin
+
+treasury companies \-\-- firms whose primary business is acquiring and
+
+holding Bitcoin as a reserve asset. As of early 2026, several such
+
+companies exist, including Strategy (formerly MicroStrategy), MARA
+
+Holdings, Metaplanet, Twenty One Capital, and others, with combined
+
+Bitcoin holdings exceeding 600,000 BTC.
+
+Where a CBDC is a new form of an old instrument \-\-- sovereign-issued
+
+money, digitized \-\-- a ₿USD is a genuinely different kind of
+
+institution. Its reserves are a scarce asset no issuer can produce. Its
+
+denomination is determined by arithmetic rather than policy. Its issuers
+
+are private companies, not sovereign authorities. And the properties
+
+that CBDCs eliminate \-\-- transaction privacy, censorship resistance,
+
+freedom from behavioral programming \-\-- are structural features of the
+
+₿USD architecture rather than policy choices that might be reversed.
+
+This section describes how the ₿USD works. The following section
+
+addresses directly how its properties compare to those of a CBDC across
+
+the dimensions that matter most for individual financial freedom.
+
+**Two-Ledger Reserve System**
+
+A ₿USD is issued against Bitcoin reserves held on Bitcoin\\\'s base
+layer.
+
+When a customer purchases a ₿USD token, they send fiat currency to a
+
+consortium member. The treasury company uses those funds to purchase
+
+Bitcoin at the current spot price and deposits the acquired Bitcoin into
+
+Ledger 1, the issuance pool. One ₿USD token is issued to the customer.
+
+At the moment of issuance, the reserves in Ledger 1 perfectly back the
+
+outstanding token.
+
+Ledger 2 \-\-- the reserve backstop \-\-- holds Bitcoin drawn from the
+
+treasury company\\\'s existing holdings. This ledger guarantees
+
+redemptions when Bitcoin\\\'s spot price has declined and Ledger 1\\\'s
+
+holdings are insufficient to cover the full BTCC face value. Both
+
+ledgers are held in publicly addressable wallets on Bitcoin\\\'s base
+
+layer, verifiable by any observer in real time. The reserves are not
+
+lent, staked, or rehypothecated. They are sold only when a customer
+
+exits the ₿USD ecosystem by redeeming a token for fiat\-\--from Ledger 1
+
+first, and from Ledger 2 when spot price declines leave Ledger 1
+
+insufficient. Tokens circulating within the ecosystem\-\--moving between
+
+wallets as a medium of exchange\-\--create no reserve pressure at any
+BTC
+
+spot price. As the ecosystem matures and more commerce occurs natively
+
+in BTCC, the proportion of tokens ever redeemed for fiat naturally
+
+declines. Between minting and the event of fiat exit, the Bitcoin backs
+
+the issued tokens and does nothing else.
+
+The following table illustrates how the combined reserve system behaves
+
+under different Bitcoin spot price scenarios, assuming a BTCC price of
+
+\\\$18,000, initial issuance at \\\$70,000 spot, and Ledger 2 holding an
+
+additional 0.25 BTC per token issued:
+
+\-\-\-\-\-\-\-\-\-\-- \-\-\-\-\-\-\-\-\-\-- \-\-\-\-\-\-\-\-\-\--
+\-\-\-\-\-\-\-\-\-\-\-\-\-- \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--
+
+**BTC \*\*Ledger \*\*Ledger \*\*Combined\*\* \*\*Reserve Status**
+
+Spot **1** 2\*\*
+
+\\\$140,000 \\\$36,000 \\\$35,000 394% Significant surplus;
+
+high profit on
+
+redemption
+
+\\\$100,000 \\\$25,714 \\\$25,000 282% Surplus; profit on
+
+redemption
+
+\\\$70,000 \\\$18,000 \\\$17,500 197% Fully backed at
+
+issuance \-\-- neutral
+
+\\\$50,000 \\\$12,857 \\\$12,500 141% Ledger 1 short; Ledger
+
+2 covers gap
+
+\\\$30,000 \\\$7,714 \\\$7,500 84% Draw on Ledger 2;
+
+solvent
+
+\\\$18,000 \\\$4,629 \\\$4,500 51% Break-even threshold
+
+(BTCC price)
+
+\-\-\-\-\-\-\-\-\-\-- \-\-\-\-\-\-\-\-\-\-- \-\-\-\-\-\-\-\-\-\--
+\-\-\-\-\-\-\-\-\-\-\-\-\-- \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--
+
+Above the issuance price, every redemption generates profit for the
+
+treasury company. Between the issuance price and the BTCC price, Ledger
+
+1 is insufficient but Ledger 2 covers the gap. These reserve dynamics
+
+only matter when tokens are redeemed for fiat. Tokens circulating on the
+
+sidechain as a medium of exchange exert no pressure on reserves
+
+regardless of where Bitcoin\\\'s spot price stands.
+
+**The BTCC Denomination: Stability Without a Peg**
+
+₿USD tokens are pegged to the US dollar, with the ecosystem priced in BTCC (Bitcoin Currency) \-\-- defined as
+
+the arithmetic mean of every historical Bitcoin Average Daily Price
+
+(BTCADP) from the genesis block on January 3, 2009 through the previous
+
+completed day. As of early 2026, this cumulative average incorporates
+
+over 6,200 daily observations and sits at approximately \\\$18,000.
+
+The stability property follows directly from how cumulative averages
+
+work. With N exceeding 6,200, a day on which Bitcoin\\\'s spot price
+moves
+
+10% shifts the BTCC price by less than 0.01%. A 40% single-day crash
+
+shifts the BTCC price by approximately 0.04%. These are arithmetic
+
+facts, not policy commitments. The BTCC denomination cannot be inflated,
+
+cannot have an expiry date applied to it, and cannot be programmed with
+
+spending conditions. It is a number produced by a public calculation
+
+from public data. No institution controls it.
+
+The BTCADP reference price that feeds the BTCC average is computed daily
+
+using a published open-source specification. Any party with the
+
+specification and underlying trade data can independently reproduce the
+
+number. The methodology is the authority. No central bank, no company,
+
+and no government\\\'s continued operation is required for the
+
+denomination to remain valid and computable.
+
+**III. Where ₿USD and CBDC Diverge \-\-- Property by Property**
+
+The differences between a ₿USD and a CBDC are not a matter of degree.
+
+They reflect structurally different architectures that produce different
+
+outcomes for the people who use them. The table below compares how
+
+physical cash, a CBDC, and a ₿USD perform across the properties that
+
+most directly affect financial privacy and individual autonomy.
+
+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-- \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--
+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-- \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--
+
+**Property\*\* \*\*Physical Cash\*\* \*\*CBDC\*\* \*\*₿USD**
+
+**Anonymous use** Yes \-\-- bearer No \-\-- every Partial \-\--
+
+instrument; no transaction is on-chain transfers
+
+identity required recorded and are pseudonymous;
+
+linked to an sidechain
+
+identity confidential
+
+transactions hide
+
+amounts
+
+\*\*Transaction None \-\-- no record Complete \-\-- the None at the
+
+surveillance\*\* of who paid whom issuing authority reserve layer;
+
+has a full record sidechain records
+
+of every payment are public but
+
+pseudonymous
+
+\*\*Account Impossible \-\-- Technically Tokens in
+
+freezing\*\* physical cash trivial \-\-- the self-custodial
+
+cannot be frozen issuer disables wallets cannot be
+
+the account frozen by the
+
+balance consortium; only
+
+custodial balances
+
+are at risk
+
+\*\*Spending None \-\-- cash is Technically None \-\-- token
+
+restrictions\*\* accepted for any feasible \-\-- transfers are
+
+legal transaction programmable rules governed by
+
+can block spending sidechain rules,
+
+on disapproved not issuer
+
+categories, discretion
+
+restrict
+
+geographic use, or
+
+require
+
+pre-approval
+
+\*\*Expiry / None \-\-- physical Technically None \-\-- ₿USD
+
+demurrage\*\* cash does not feasible \-\-- tokens do not
+
+expire time-limited expire
+
+balances have been
+
+proposed as a
+
+monetary policy
+
+tool to force
+
+spending
+
+\*\*Negative Not applicable \-\-- Technically Not applicable \-\--
+
+interest rates\*\* physical cash feasible \-\-- CBDC BTCC denomination
+
+earns zero balances can be appreciates
+
+implicitly programmed to slowly; the system
+
+charge a holding structurally
+
+fee, eliminating cannot apply
+
+the physical cash negative rates
+
+escape valve
+
+\*\*Transaction Irreversible once Reversible at Irreversible \-\--
+
+reversibility\*\* made issuer discretion sidechain
+
+\-\-- central transactions are
+
+authority can final; no party
+
+reverse or void can unwind a
+
+payments completed token
+
+transfer
+
+\*\*Permissioned No permission Account required Minting requires
+
+access\*\* required \-\-- \-\-- access can be identity
+
+anyone with restricted, verification; once
+
+physical cash can conditioned on tokens are held in
+
+transact identity self-custody,
+
+verification, or transfers require
+
+denied for no permission
+
+political or
+
+social reasons
+
+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-- \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--
+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-- \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--
+
+The pattern in this table is consistent. On every dimension where
+
+physical cash provides a freedom property \-\-- anonymity, resistance to
+
+freezing, absence of programmable conditions, transaction finality \-\--
+
+the CBDC eliminates or substantially weakens it. The ₿USD preserves most
+
+of these properties, partially or fully, as structural features rather
+
+than policy choices.
+
+The most consequential row is transaction surveillance. Physical cash
+
+transactions are invisible to any authority; the participants and
+
+amounts are known only to the parties involved. A CBDC transaction is,
+
+by architectural necessity, visible to the issuer. A ₿USD token transfer
+
+on the sidechain is pseudonymous \-\-- the amounts can be hidden using
+
+confidential transaction features available on Liquid, and wallet
+
+addresses are not inherently linked to real-world identities. This does
+
+not provide the complete anonymity of physical cash, but it is
+
+meaningfully different from the comprehensive surveillance a CBDC
+
+provides.
+
+The account freezing row is equally significant. A CBDC balance can be
+
+frozen with a software command \-\-- no physical access, no court order
+
+required under emergency authority provisions that most CBDC proposals
+
+either include or leave ambiguous. A ₿USD token held in a self-custodial
+
+sidechain wallet cannot be frozen by the consortium. The consortium
+
+members can refuse to conduct new minting or redemption transactions
+
+with a given party \-\-- but they cannot touch tokens that have already
+
+been transferred to self-custody. The distinction between custodial and
+
+self-custodial is the difference between a bank account and physical
+
+cash: one is a liability of an institution, and one is a direct holding.
+
+  -----------------------------------------------------------------------
+  *\*A CBDC balance is a liability of the central bank, subject to every*
+
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  *condition and capability the central bank builds into the system. A*
+
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  *₿USD token in self-custody is an asset on a decentralized network.
+  The*
+
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  *issuer can decline to do new business with you. It cannot reach into*
+
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  *your wallet.\**
+
+  -----------------------------------------------------------------------
+
+**The Monetary Policy Comparison**
+
+Beyond the freedom properties, the monetary comparison is also
+
+unambiguous. The table below examines the structural differences between
+
+CBDCs and ₿USDs across the dimensions that affect the value of the money
+
+itself over time.
+
+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--
+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--
+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--
+
+**Function\*\* \*\*CBDC\*\* \*\*₿USD**
+
+**Issuance** Issued at central bank Issued only against
+
+discretion; no hard supply Bitcoin purchased at spot;
+
+limit supply constrained by
+
+finite Bitcoin supply
+
+\*\*Monetary Controlled via interest No discretion. BTCC price
+
+Policy\*\* rates, quantitative is determined by
+
+easing, open market arithmetic of a cumulative
+
+operations average; cannot be
+
+inflated
+
+\*\*Reserve Discretionary \-\-- Bitcoin exclusively, held
+
+Composition\*\* government bonds, foreign on the base layer in two
+
+currency, and other transparent, on-chain
+
+instruments at the ledgers verifiable in real
+
+issuer\\\'s election time
+
+\*\*Purchasing Erodes over time by design Appreciates slowly as long
+
+Power\*\* (inflation targeting). The as BTC spot exceeds the
+
+US dollar has lost \\\~97% historical cumulative
+
+of its purchasing power average \-\-- a deflationary
+
+since 1913 property by arithmetic,
+
+not policy
+
+**Transparency** Periodic reports; limited Bitcoin reserves
+
+public visibility into verifiable on-chain in
+
+operations or reserve real time; BTCADP
+
+composition methodology is open-source
+
+and independently
+
+reproducible
+
+**Surveillance** Complete \-\-- the issuer None at the reserve layer;
+
+has a full record of every sidechain transfers are
+
+transaction by every pseudonymous and do not
+
+participant require disclosure to the
+
+consortium
+
+\*\*Account Technically trivial \-\-- Tokens held in
+
+Freezing\*\* the issuer can disable any self-custodial sidechain
+
+balance at will wallets cannot be frozen;
+
+only exchange-custodied
+
+balances are at risk
+
+\*\*Programmable Yes \-\-- spending No \-\-- token transfers are
+
+Control\*\* restrictions, expiry governed by sidechain
+
+dates, category limits, protocol rules, not issuer
+
+and negative interest discretion; no behavioral
+
+rates are all technically constraints can be
+
+feasible and have been programmed in
+
+publicly proposed
+
+\*\*Single Point of Yes \-\-- sovereign No \-\-- multiple
+
+Failure\*\* authority, political independent companies
+
+capture, policy error, or across jurisdictions;
+
+infrastructure failure methodology survives any
+
+single member\\\'s failure
+
+**Censorship** Issuer can restrict, Consortium members can
+
+reverse, or block refuse service at
+
+transactions at will minting/redemption; they
+
+without judicial process cannot reverse completed
+
+sidechain token transfers
+
+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--
+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--
+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--
+
+The most consequential difference is the monetary policy row. A ₿USD
+
+consortium cannot inflate the money supply. This is not a governance
+
+commitment that could be reversed under political pressure \-\-- it is a
+
+physical property of the reserve asset. No act of the consortium, no
+
+governance vote, no emergency measure can produce additional Bitcoin. To
+
+issue more ₿USD tokens, the consortium must acquire more Bitcoin on the
+
+open market at market prices. The money supply is constrained by the
+
+finite supply of Bitcoin and the consortium\\\'s ability and willingness
+
+to purchase it.
+
+This hard constraint eliminates the inflationary monetary policy that
+
+has characterized every fiat currency in modern history. Consider what
+
+the BTCC denomination actually represents: the arithmetic mean of every
+
+Bitcoin price observation since January 2009, updated daily. Because
+
+Bitcoin\\\'s long-run price trend has been upward, the cumulative
+average
+
+rises over time \-\-- slowly, smoothly, and predictably. The BTCC
+
+fiat-equivalent price in January 2024 was higher than in January 2023.
+
+It was higher still in January 2025. A holder who denominated their
+
+holdings in BTCC three years ago holds more fiat purchasing power today
+
+than when they started, without any investment activity whatsoever. The
+
+denomination itself did the work.
+
+Compare this directly to the CBDC experience. A holder of a digital
+
+dollar in January 2021 who simply retained that balance through the end
+
+of 2023 lost approximately 19% of their purchasing power to cumulative
+
+inflation over that period \-\-- with no policy failure, no crisis, and
+no
+
+discretionary action beyond what the Federal Reserve openly announced as
+
+its target. The loss was policy. For the CBDC holder, inflation is not a
+
+risk to be managed. It is a certainty to be accepted.
+
+  -----------------------------------------------------------------------
+  *\*A CBDC balance erodes in purchasing power by design. A ₿USD
+  balance,*
+
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  *expressed in BTCC, appreciates in purchasing power by arithmetic.*
+
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  *These are not outcomes of different policy choices. They are*
+
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  *consequences of different monetary architectures, and one of them*
+
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  *cannot be changed by any issuer decision.\**
+
+  -----------------------------------------------------------------------
+
+A ₿USD holder does not merely avoid the loss of purchasing power that
+
+CBDC holders experience. They hold a denomination that moves in the
+
+opposite direction \-\-- not because of a promise made by an
+institution,
+
+but because of the mathematical relationship between a finite asset\\\'s
+
+long-run price and its own cumulative historical average.
+
+**IV. How Token Circulation Preserves Base Layer Integrity**
+
+₿USD tokens circulate as issued assets on a Bitcoin sidechain \-\--
+either
+
+Liquid, an existing federated Bitcoin sidechain, or a purpose-built
+
+consortium-operated alternative. When one user pays another, the token
+
+moves from one sidechain address to another. No Bitcoin moves. The
+
+reserves in Ledger 1 and Ledger 2 sit untouched on the base layer. A
+
+consumer paying for coffee does not interact with Bitcoin\\\'s base
+layer.
+
+A worker receiving a salary in ₿USD does not interact with Bitcoin\\\'s
+
+base layer. The base layer secures the reserves. The sidechain handles
+
+commerce.
+
+This separation has a freedom-relevant implication. Routine commerce on
+
+the sidechain occurs without creating base-layer transaction records. A
+
+million ₿USD payments can occur in a day without a single satoshi moving
+
+on-chain. The only moments that interact with Bitcoin\\\'s base layer
+are
+
+minting (when new tokens are created against Bitcoin purchases) and fiat
+
+redemption (when tokens are burned and Bitcoin is sold to return fiat).
+
+Between those endpoints, circulation is a sidechain matter \-\--
+
+pseudonymous, fast, and architecturally separate from the
+consortium\\\'s
+
+reserve management.
+
+Compare this to a CBDC, where every transaction \-\-- including every
+
+routine commercial payment \-\-- is recorded by infrastructure the
+issuer
+
+controls. The CBDC\\\'s efficiency and the CBDC\\\'s surveillance are
+the
+
+same feature: a centralized record of every economic transaction. The
+
+₿USD\\\'s separation of token circulation from reserve settlement is not
+
+merely an architectural choice for scalability. It is the mechanism by
+
+which routine commercial privacy is preserved.
+
+A comment on the distinction from paper gold is also relevant here.
+
+Financial products built on top of scarce assets frequently suppress the
+
+underlying asset\\\'s price by creating synthetic exposure that absorbs
+
+demand without requiring physical acquisition. Paper gold \-\-- futures,
+
+ETF shares, derivatives \-\-- allows investors to gain price exposure
+
+without buying metal, diverting demand away from the spot market. Every
+
+₿USD token in circulation is backed by real Bitcoin purchased at spot at
+
+the moment of minting. Sidechain circulation is neutral with respect to
+
+Bitcoin\\\'s spot price because the Bitcoin is already purchased. Every
+
+new token minted requires fresh Bitcoin acquisition. The financial
+
+product amplifies demand for its reserve asset rather than suppressing
+
+it.
+
+**V. The Economics for Each Party**
+
+**What the Customer Receives**
+
+The customer who holds ₿USD tokens trades Bitcoin\\\'s spot volatility
+for
+
+the BTCC denomination\\\'s stability. But the transaction is better than
+a
+
+simple fiat stablecoin trade in two respects. First, the stability is
+
+genuine: the BTCC denomination changes by fractions of a percent per
+
+day, regardless of what Bitcoin\\\'s spot price does, as an arithmetic
+
+property of a 6,200-day cumulative average. Second, the denomination
+
+trends in the direction of appreciation rather than erosion. As long as
+
+Bitcoin\\\'s spot price remains above its historical cumulative average,
+
+the BTCC fiat-equivalent price rises slowly. A ₿USD holder holds a
+
+currency whose purchasing power improves gradually over time, the
+
+inverse of the quiet erosion experienced by holders of dollar-pegged
+
+stablecoins or CBDC balances.
+
+And critically, the customer holds this stability without surrendering
+
+financial privacy to an issuing authority, without accepting the
+
+possibility of programmable spending restrictions, and without holding a
+
+balance that can be frozen by administrative command. The stability is
+
+delivered without the surveillance.
+
+**What the Treasury Company Receives**
+
+The treasury company accepts the downside risk: it must honor
+
+redemptions at the BTCC fiat-equivalent price even when Bitcoin\\\'s
+spot
+
+price has declined and Ledger 1\\\'s holdings are insufficient. In
+
+exchange, it captures the spread between Bitcoin\\\'s spot appreciation
+
+rate and the BTCC denomination\\\'s much slower appreciation rate.
+
+This spread accelerates non-linearly as Bitcoin\\\'s price rises. A
+
+treasury company that issues 1,000 ₿USD tokens when Bitcoin\\\'s spot
+
+price is \\\$70,000 and the BTCC price is \\\$18,000 receives \\\$18
+million
+
+in fiat and acquires approximately 257 BTC for Ledger 1. If Bitcoin
+
+subsequently rises to \\\$140,000, Ledger 1 holds Bitcoin worth \\\$36
+
+million against a BTCC liability of approximately \\\$18 million. The
+
+surplus equals the full original intake. At \\\$200,000 Bitcoin, the
+
+surplus exceeds \\\$33 million \-\-- 186% above the return from simple
+
+holding. These are not linear returns. The profit accelerates because
+
+the liability \-\-- the BTCC denomination \-\-- barely moves while the
+asset
+
+tracks spot directly.
+
+Transaction fees on minting and fiat redemption \-\-- typically 0.1% to
+
+0.5% \-\-- provide additional revenue independent of Bitcoin\\\'s price
+
+direction. At meaningful circulation scale, even modest fees are
+
+substantial.
+
+**VI. Distributed Issuance vs. Sovereign Authority**
+
+A central bank is a single institution. Its failure \-\-- through
+
+political capture, catastrophic policy error, infrastructure compromise,
+
+or loss of public confidence \-\-- is a systemic event with no internal
+
+fallback. The risks are not hypothetical. Argentina\\\'s repeated peso
+
+crises, Turkey\\\'s 2021-2022 lira collapse (the currency lost over 40%
+of
+
+its value in a matter of weeks), and Venezuela\\\'s bolivar
+hyperinflation
+
+are recent examples of sovereign monetary authority failures that
+
+destroyed the savings of millions of people holding the relevant
+
+currency. In each case, holders had no recourse and no alternative
+
+denomination. The currency had no other issuer.
+
+The ₿USD consortium model distributes issuance risk across multiple
+
+independent publicly traded companies, each in its own regulatory
+
+jurisdiction, each maintaining its own reserve ledgers. If one
+
+consortium member fails, is seized by regulators, or becomes insolvent,
+
+the others continue operating. The tokens are not cancelled. The
+
+denomination remains valid and computable.
+
+More fundamentally, the BTCC denomination \-\-- the unit of account on
+
+which all ₿USD tokens are based \-\-- is independent of every consortium
+
+member. It requires no company\\\'s continued existence to be
+computable.
+
+The specification is published and open-source. Any party with access to
+
+Bitcoin exchange trade data can independently compute the daily BTCADP
+
+and the cumulative BTCC price. The denomination survives the consortium.
+
+An institution-independent unit of account is not a feature available in
+
+any CBDC, because a CBDC\\\'s unit of account is the national currency,
+
+which by definition depends on the continued operation of the sovereign
+
+authority that issues it.
+
+  -----------------------------------------------------------------------
+  *\*A CBDC issuer that fails takes its currency with it. The BTCC*
+
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  *denomination requires no issuer at all \-\-- only the specification,
+  the*
+
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  *trade data, and the arithmetic. It cannot be shut down because there*
+
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  *is nothing to shut down.\**
+
+  -----------------------------------------------------------------------
+
+**VII. Risks and Limitations**
+
+The ₿USD model has genuine structural risks that warrant clear
+
+statement.
+
+**Sustained Bitcoin Price Decline**
+
+The most significant operational risk is a prolonged decline in
+
+Bitcoin\\\'s spot price that underfunds Ledger 1 and forces draws on
+
+Ledger 2 when tokens are redeemed for fiat. As long as the consortium
+
+maintains sufficient Bitcoin in Ledger 2, the system remains solvent at
+
+any spot price above zero. An important nuance: spot price declines only
+
+create reserve pressure when tokens are actually redeemed for fiat.
+
+Tokens held long-term \-\-- whose holders chose BTCC precisely
+
+because it is stable \-\-- do not present for redemption during
+downturns.
+
+Their purchasing power in BTCC terms is unaffected regardless of what
+
+Bitcoin\\\'s spot price does.
+
+**The ₿USD Is Not Cash**
+
+A ₿USD token provides meaningfully better privacy properties than a
+
+CBDC, but it is not equivalent to physical cash. Minting and redemption
+
+require identity verification. Sidechain transfers are pseudonymous, not
+
+anonymous \-\-- wallet addresses are visible on-chain, even if amounts
+can
+
+be obscured using confidential transaction features. Someone with
+
+sufficient chain analysis capability and corroborating data could
+
+potentially link transactions to individuals. Physical cash leaves no
+
+record at all. Users who require complete transactional anonymity cannot
+
+achieve it with a ₿USD, or with any blockchain-based instrument.
+
+**Regulatory Risk**
+
+Stablecoin regulation is evolving globally. The distributed consortium
+
+structure provides some resilience \-\-- members operating in different
+
+jurisdictions ensure no single regulatory action shuts down the entire
+
+system. However, coordinated international regulation targeting
+
+cryptocurrency stablecoins could threaten the token layer. The BTCC
+
+denomination itself requires no regulatory permission to compute or use;
+
+even if the token were banned, the unit of account persists as an open
+
+standard that any party can calculate and reference.
+
+**Consortium Coordination Risk**
+
+Multiple independent companies must cooperate on reserve management, fee
+
+structures, and operational standards. The critical design principle is
+
+that the BTCADP specification is independent of the consortium\\\'s
+
+governance. Even a complete governance failure leaves the denomination
+
+intact. The unit of account outlasts the institution.
+
+**Adoption Dependency**
+
+The value proposition depends on merchants and users adopting BTCC as a
+
+unit of account. Without critical mass, the system is a Bitcoin-backed
+
+stablecoin with limited circulation. The properties are genuine, but
+
+they must be demonstrated in practice before they drive broad adoption.
+
+This is a go-to-market challenge rather than a structural flaw.
+
+**VIII. Historical Timing**
+
+Two conditions had to develop independently before the ₿USD model became
+
+feasible. The first is the BTCC denomination\\\'s stability. The
+
+mathematical property that makes BTCC useful for commerce \-\-- its
+
+insensitivity to any single day\\\'s price movement \-\-- is a function
+of
+
+how many days of price history the cumulative average incorporates. In
+
+2011, with roughly 365 days of history, a single day\\\'s price could
+
+shift the BTCC price by 0.3%. As of early 2026, with over 6,200 days,
+
+the same sensitivity has fallen below 0.01%. There is no shortcut to
+
+this accumulation. It is the product of time.
+
+The second condition is the existence of Bitcoin treasury companies as a
+
+class of institutional participant. The first significant corporate
+
+Bitcoin treasury allocation was announced in August 2020. The cohort of
+
+publicly traded companies holding Bitcoin as a primary reserve asset at
+
+sufficient scale to backstop a meaningful stablecoin is a product of
+
+Bitcoin\\\'s maturation since then. The ₿USD architecture asks them not
+to
+
+take a new risk, but to monetize an existing one: to convert the
+
+downside exposure inherent in their business model into a
+
+revenue-generating service.
+
+Both conditions have now been met. The timing is also relevant in a
+
+second sense. CBDC development is accelerating globally. The window in
+
+which a Bitcoin-backed alternative can be established before digital
+
+sovereign currencies become the default infrastructure for retail
+
+payments is not unlimited. The ₿USD architecture does not require
+
+regulatory approval to begin operating. It requires coordination among a
+
+small number of institutions that have already demonstrated their
+
+commitment to Bitcoin as a reserve asset and their capacity to operate
+
+at institutional scale.
+
+**Conclusion**
+
+The case for ₿USDs as a structural alternative to CBDCs rests on a
+
+fundamental difference in what kind of money each instrument represents.
+
+A CBDC is digitized sovereign money: faster to transfer, easier to
+
+program, and equipped with control capabilities that physical cash does
+
+not have. A ₿USD is something categorically different: a digital
+
+currency backed by a scarce asset no issuer can produce, priced in
+
+a unit determined by arithmetic rather than policy, and structured so
+
+that the freedom properties of physical cash \-\-- privacy, censorship
+
+resistance, protection from behavioral programming \-\-- are preserved
+in
+
+the digital medium.
+
+The CBDC offers efficiency. It does not offer financial autonomy, and it
+
+does not offer monetary integrity. In fact, the properties that make it
+
+efficient \-\-- programmability, central record-keeping, administrative
+
+control of balances \-\-- are precisely the properties that eliminate
+the
+
+financial autonomy that physical cash provides. And the property it
+
+retains from conventional fiat money \-\-- the issuer\\\'s ability to
+expand
+
+the supply at will \-\-- guarantees the same purchasing power erosion
+that
+
+has been the defining feature of central bank money since its inception.
+
+The digital format changes neither of these facts.
+
+This is the inflation point stated plainly: every major central bank has
+
+an explicit mandate to devalue its currency at 2% per year. This is not
+
+a side effect. It is the policy goal. At that rate, a unit of currency
+
+held over a 35-year working career loses half its real value. A CBDC
+
+does not disrupt this mechanism. It accelerates it by removing physical
+
+cash \-\-- the only instrument that has historically allowed holders to
+
+partially exit the devaluation by holding a form of money the central
+
+bank cannot directly program or penalize. A CBDC holder surrenders the
+
+inflation protection of cash while gaining the surveillance exposure of
+
+a digital account. That is not an upgrade.
+
+The BTCC denomination moves in the opposite direction. Not because the
+
+consortium has made a promise to defend its value. Not because a policy
+
+committee has voted to maintain purchasing power. But because the
+
+cumulative average of a scarce asset with a long-run upward price
+
+trajectory rises over time as a matter of arithmetic. A ₿USD holder\'s
+
+token maintains its \$1 peg \-\-- but the reserves backing that token
+
+strengthen with every passing day, and the ₿C denomination that governs
+
+the system\'s issuance ceiling appreciates steadily. This is the
+
+deflationary property of the denomination, and it is as irreversible as
+
+the inflation of fiat currencies, though it operates in the opposite
+
+direction. A participant who moves from ₿USD into the ₿C-denominated
+
+economy \-\-- or into a ₿ond savings product \-\-- captures that
+
+appreciation directly.
+
+  -----------------------------------------------------------------------
+  *\*A CBDC is a promise that your money will be worth less tomorrow
+  than*
+
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  *it is today, enforced by the legal monopoly of a sovereign authority*
+
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  *and backed by the full faith of a government that prints its own*
+
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  *bills. The ₿C denomination that underpins ₿USD gets more valuable as time*
+
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  *passes, governed by arithmetic and secured by a reserve asset with a*
+
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  *fixed supply. The choice between them is not complicated.\**
+
+  -----------------------------------------------------------------------
+
+The ₿USD does not solve every problem. It is not anonymous in the way
+
+that physical cash is anonymous. Minting and redemption require identity
+
+verification. Regulatory risk is real. Adoption requires effort. And the
+
+model\\\'s viability depends on Bitcoin\\\'s long-term price trajectory
+\-\--
+
+the same thesis every Bitcoin treasury company has already committed to.
+
+What the ₿USD offers that no CBDC can offer is this: a digital currency
+
+whose issuer cannot expand its supply by decree, cannot surveil routine
+
+transactions, cannot freeze balances held in self-custody, cannot apply
+
+spending restrictions through software, and cannot be used as an
+
+instrument of behavioral control by sovereign authorities. And a
+
+denomination that, as a structural consequence of its design, returns
+
+purchasing power to its holders over time rather than extracting it from
+
+them. These properties are not the result of good policy choices that
+
+could be reversed. They are structural consequences of using a finite,
+
+decentralized reserve asset and an arithmetic denomination. They cannot
+
+be changed without changing the architecture itself.
+
+Bitcoin solved the problem of digital scarcity. The BTCC denomination
+
+converts that scarcity into a stable, appreciating unit of account. The
+
+treasury consortium provides the institutional infrastructure for
+
+issuance and redemption. And the architecture as a whole produces a form
+
+of digital money that is, for the first time, capable of rivaling
+
+central bank currency issuance \-\-- not by replicating the central bank
+
+model with different managers, but by replacing its foundational
+
+assumption: that stable money requires a trusted central authority with
+
+discretionary power over the supply.
+
+It does not. The mathematics can be trusted instead.
+
+btcadp.org • CC0 Public Domain • March 2026
+
+---
+
+**References**
+
+[1] Nakamoto, Satoshi. "Bitcoin: A Peer-to-Peer Electronic Cash System" (2008). Establishes the design of a peer-to-peer digital currency that operates without a trusted central authority. The ₿USD architecture described in this article is a direct extension of the properties Nakamoto's protocol provides: fixed supply, decentralized consensus, and censorship resistance at the base layer. https://bitcoin.org/bitcoin.pdf
+
+[2] Ammous, Saifedean. *The Bitcoin Standard: The Decentralized Alternative to Central Banking*. Hoboken, NJ: Wiley, 2018. Provides the historical and economic analysis of sound money, the Cantillon effect, seigniorage as a hidden tax, and the argument that fiat monetary systems structurally penalize saving and reward leverage. Central to the framing of Sections I ("The Inflation Problem Has Not Been Solved") and the broader argument that CBDCs perpetuate the inflationary properties of central bank money in a more controllable digital form.
+
+[3] Alden, Lyn. *Broken Money: Why Our Financial System Is Failing Us and How We Can Make It Better*. Timestamp Press, 2023. Analyzes how monetary systems break down across the three classical functions of money, the role of surveillance in modern financial infrastructure, and the distinction between bearer instruments (physical cash) and permissioned accounts. Foundational to the article's comparison of physical cash's freedom properties with the control capabilities inherent in CBDC architecture.
+
+[4] Booth, Jeff. *The Price of Tomorrow: Why Deflation is the Key to an Abundant Future*. Stanley Press, 2020. Argues that technology is naturally deflationary and that central banks' response --- expanding the money supply to maintain inflation targets --- transfers wealth from savers and wage earners to asset holders and debtors. The article's characterization of CBDCs as instruments that could deepen this dynamic (through negative interest rates and expiring currency) draws directly on Booth's analysis of why central banks resist deflation.
+
+[5] Atlantic Council CBDC Tracker (updated 2025). Reports 137 countries and currency unions, representing 98% of global GDP, are exploring a CBDC. 72 countries are in the advanced phase of exploration (development, pilot, or launch). https://www.atlanticcouncil.org/cbdctracker/
+
+[6] Bank for International Settlements, 2024 survey (published August 2025). Found 91% of 93 surveyed central banks were exploring CBDCs. https://www.bis.org/publ/bppdf/bispap159.htm
+
+[7] U.S. Bureau of Labor Statistics, Consumer Price Index: Purchasing Power of the Consumer Dollar (FRED Series CUUR0000SA0R), January 1913 through February 2026. CPI data shows prices have risen more than 30x since 1913, supporting the claim that the US dollar has lost approximately 97% of its purchasing power since the Federal Reserve's creation. https://fred.stlouisfed.org/series/CUUR0000SA0R
+
+[8] Eurostat, Harmonised Index of Consumer Prices (HICP). Euro area inflation data from 1999 through 2026 supports the claim that the euro has lost roughly 35% of its purchasing power since introduction.
+
+[9] Federal Reserve, "Statement on Longer-Run Goals and Monetary Policy Strategy" (reaffirmed annually; targets 2% inflation over the longer run). European Central Bank, "Definition of price stability" (targets inflation of 2% over the medium term). Bank of England Monetary Policy Committee inflation target: 2%. Bank of Japan price stability target: 2%.
+
+[10] Mu Changchun, Director of the Digital Currency Research Institute, People's Bank of China. Remarks at the China Development Forum (March 2021) defining e-CNY's "controllable anonymity" (可控匿名) principle. PBOC white paper, "Theory and Practice of the E-CNY's Managed Anonymity" (November 2022). https://digichina.stanford.edu/work/lexicon-controllable-anonymity-or-managed-anonymity-and-chinas-digital-yuan/; https://www.pbc.gov.cn/en/3935690/3935759/4696666/2022110110364344083.pdf
+
+[11] Reports of e-CNY stimulus disbursements with expiration dates in Chinese pilot cities, including the October 2020 Shenzhen "red packet" distribution of 10 million e-CNY to 50,000 residents, which had to be spent within a defined period. Stanford Law School, "Background and Implications of China's Central Bank Digital Currency: E-CNY" (April 2021). https://law.stanford.edu/2021/04/06/background-and-implications-of-chinas-central-bank-digital-currency-e-cny/
+
+[12] Central Bank of Nigeria launched the eNaira on October 25, 2021. Central Bank of Nigeria, Circular BSD/DIR/PUB/LAB/015/069, "Naira Redesign Policy — Revised Cash Withdrawal Limits" (December 6, 2022). ATM and POS withdrawals limited to 20,000 naira (~$45) per day; weekly over-the-counter withdrawals limited to 100,000 naira (~$225) for individuals, effective January 9, 2023. https://cointelegraph.com/news/nigeria-bans-atm-cash-withdrawals-over-225-a-week-to-force-use-of-cbdc
+
+[13] In February 2022, the Government of Canada invoked the Emergencies Act to freeze bank accounts of donors to the Freedom Convoy protests without individual court orders. Multiple financial institutions complied with government directives to freeze accounts. The Emergencies Act was revoked on February 23, 2022, and was later ruled unconstitutional by the Federal Court of Canada in January 2024.
+
+[14] Bank of England and Bank for International Settlements discussions regarding time-limited CBDC balances and programmable monetary policy instruments. See also: Rogoff, Kenneth. *The Curse of Cash* (2016), which advocates for the reduction of physical cash partly to enable deeply negative interest rates.
+
+[15] MicroStrategy Incorporated (now Strategy), SEC Form 8-K (August 11, 2020). Announced purchase of 21,454 BTC for approximately $250 million --- the first substantial corporate balance sheet allocation to Bitcoin by a publicly traded company. https://www.sec.gov/Archives/edgar/data/0001050446/000119312520215604/d921849dex991.htm
+
+[16] Public filings and Bitcoin Treasuries data (bitcointreasuries.net). Combined Bitcoin holdings exceeding 600,000 BTC across publicly traded treasury companies including Strategy, MARA Holdings, Metaplanet, Twenty One Capital, and others as of early 2026.
+
+[17] Derived from the BTCADP/BTCC historical dataset (btcadp.org). BTCC values and stability properties computed from the cumulative arithmetic mean of all daily BTCADP values, January 3, 2009 through March 2026. Full specification and dataset available at https://btcadp.org
+
+[18] On August 15, 1971, President Richard Nixon announced the suspension of the US dollar's convertibility to gold at the fixed rate of $35 per ounce, effectively ending the Bretton Woods system established in 1944.
+
+[19] Tether has blacklisted hundreds of wallet addresses since 2017. Circle (USDC) has frozen wallets at the direction of law enforcement. Both issuers maintain compliance programs that include address-level freezing capabilities --- capabilities referenced in the article's comparison of centralized stablecoin control with the self-custody properties of the ₿USD architecture.

@@ -1,0 +1,300 @@
+**Bitcoin Currency (BTCC)**
+
+Empirical Behavior Analysis
+
+Based on complete price history: January 3, 2009 -- March 14, 2026 \|
+BTCADP Framework
+
+**Executive Summary**
+
+Bitcoin Currency (BTCC) is the cumulative arithmetic mean of all Bitcoin
+daily prices since genesis. This is an empirical analysis of BTCC
+behavior across 5,719 days of price history (July 18, 2010 through March
+14, 2026), establishing exactly how BTCC moves, why it moves, and what
+conditions govern its direction.
+
+BTCC is a predictably appreciating, incrementally deflationary unit of
+account. Its daily movement is fully determined by a mathematical
+identity --- not market sentiment, not monetary policy, not any external
+oracle. It has posted positive appreciation in 5,712 of 5,719 trading
+days, through every Bitcoin bear market on record, at annualized rates
+ranging from +13% (2015) to +8,665% (2011).
+
++-----------------------------------------------------------------------+
+| **Key figures as of March 14, 2026**                                  |
+|                                                                       |
+| BTCC = \$18,716.02 \| BTC spot = \$70,399.57 \| Spot / BTCC ratio =   |
+| 3.76× \| Current daily rate = +0.044% \| Annualized at current rate ≈ |
+| 17%                                                                   |
++-----------------------------------------------------------------------+
+
+**1. The Governing Formula**
+
+BTCC is defined as the cumulative arithmetic mean of all BTCADP daily
+prices from day 1 to day N. This definition produces an exact
+mathematical identity that governs every daily price change:
+
++-----------------------------------------------------------------------+
+| **daily % change = ( spot_price / BTCC − 1 ) ÷ ( N + 1 )**            |
+|                                                                       |
+| where N is the current day count from genesis (day 1 = January 3,     |
+| 2009)                                                                 |
++-----------------------------------------------------------------------+
+
+This is not an approximation. It follows directly from the definition of
+BTCC:
+
+**BTCC**ₙ₊₁ = (sum of all prices through day N+1) / (N+1)
+
+**BTCC**ₙ₊₁ = (N × BTCCₙ + spotₙ₊₁) / (N+1)
+
+ΔBTCC = (spotₙ₊₁ − BTCCₙ) / (N+1)
+
+daily % = ΔBTCC / BTCCₙ = (spotₙ₊₁ / BTCCₙ − 1) / (N+1)
+
+Two variables drive the outcome. The
+
+**numerator** is the spot-to-BTCC premium. When Bitcoin\'s spot price is
+high relative to the accumulated mean, BTCC appreciates more quickly on
+that day. When spot approaches the BTCC level, appreciation slows. The
+numerator fluctuates with Bitcoin\'s market price.
+
+**The denominator** is the running day count. It increases by exactly
+one each day and never decreases. This means the daily appreciation rate
+is structurally decelerating over time regardless of Bitcoin\'s price
+behavior. On day 1,000 the same spot premium produces roughly 6× the
+daily appreciation it would produce on day 6,000.
+
+**1.1 Directionality**
+
+The formula has an important implication for direction:
+
+-   **BTCC increases on any day when spot \> BTCC** (the premium is
+    positive, the numerator is positive)
+
+-   **BTCC is flat on any day when spot = BTCC exactly** (the premium is
+    zero)
+
+-   **BTCC decreases on any day when spot \< BTCC** (the premium is
+    negative)
+
+Bitcoin\'s spot price has traded below BTCC exactly seven times in
+history --- all in a single week in November 2011. Given that BTCC is
+the cumulative mean of all past prices, spot must sustain a level below
+the entire historical average to push BTCC down. As the historical
+average rises, this threshold becomes progressively harder to breach.
+
+**2. Annual Results: 2010--2025**
+
+The following table presents annual BTCC performance for every calendar
+year with available price data. Annual % represents the change in BTCC
+from the first to the last trading day of each year. Bear years ---
+defined as years where Bitcoin\'s spot price finished lower than it
+started --- are highlighted in red.
+
+  ------------------------------------------------------------------------------------------
+  **Year**   **BTCC        **BTCC end**  **Annual    **Avg daily **BTC start** **BTC end**
+             start**                     %**         %**                       
+  ---------- ------------- ------------- ----------- ----------- ------------- -------------
+  **2010**   \$0.00        \$0.03        +31,674%    +3.5100%    \$0.05        \$0.30
+
+  **2011**   \$0.03        \$2.51        +8,665%     +1.2331%    \$0.30        \$5.24
+
+  **2012**   \$2.51        \$3.98        +58%        +0.1256%    \$5.24        \$13.31
+
+  **2013**   \$3.98        \$49.86       +1,151%     +0.6947%    \$13.17       \$764.28
+
+  **2014**   \$50.26       \$126.68      +152%       +0.2536%    \$777.99      \$315.07
+
+  **2015**   \$126.76      \$143.73      +13%        +0.0344%    \$305.16      \$428.45
+
+  **2016**   \$143.84      \$203.86      +42%        +0.0953%    \$440.19      \$964.41
+
+  **2017**   \$204.12      \$672.80      +230%       +0.3273%    \$969.22      \$14,251.86
+
+  **2018**   \$677.07      \$1,365.62    +102%       +0.1924%    \$14,718.84   \$3,693.82
+
+  **2019**   \$1,366.25    \$1,935.99    +42%        +0.0955%    \$3,672.44    \$7,188.00
+
+  **2020**   \$1,937.30    \$2,745.47    +42%        +0.0953%    \$7,201.73    \$28,638.29
+
+  **2021**   \$2,751.96    \$6,179.00    +125%       +0.2218%    \$31,177.31   \$45,793.39
+
+  **2022**   \$6,187.38    \$7,681.37    +24%        +0.0593%    \$45,941.67   \$16,596.23
+
+  **2023**   \$7,683.23    \$9,140.58    +19%        +0.0476%    \$17,195.84   \$42,025.64
+
+  **2024**   \$9,146.74    \$12,759.97   +40%        +0.0910%    \$42,889.77   \$93,713.70
+
+  **2025**   \$12,773.90   \$18,014.84   +41%        +0.0942%    \$94,175.53   \$88,414.63
+  ------------------------------------------------------------------------------------------
+
+**Notable observation:** BTCC posted positive annual appreciation in
+every single year, including during Bitcoin\'s three major bear market
+years (2015, 2022, 2023). In 2022, when Bitcoin fell from roughly
+\$46,000 to \$16,600 --- a 64% decline --- BTCC still gained +24%. In
+2018, when Bitcoin fell from \$14,700 to \$3,700 --- a 75% decline ---
+BTCC still gained +102%.
+
+**This is not a coincidence.** Because BTCC is a cumulative mean, its
+level at any point already incorporates years of prices far below
+current spot. Even during severe bear markets, spot tends to remain well
+above BTCC\'s accumulated historical average, keeping the numerator of
+the formula positive.
+
+**3. Era Analysis**
+
+Examining behavior across multi-year eras reveals the structural
+deceleration of daily appreciation rates as the day count N grows:
+
+  --------------------------------------------------------------------------------------------
+  **Era**            **Period**      **Avg daily     **Annualized    **Annual    **BTCC at
+                                     (geometric)**   (geometric)**   range**     end**
+  ------------------ --------------- --------------- --------------- ----------- -------------
+  **Era 1: Price     2010--2012      +1.20%          +7,667%         +58% to     \$3.98
+  Discovery**                                                        +31,674%    
+
+  **Era 2: Early     2013--2016      +0.27%          +167%           +13% to     \$203.86
+  Adoption**                                                         +1,151%     
+
+  **Era 3:           2017--2020      +0.18%          +91%            +42% to     \$2,745.47
+  Institutional                                                      +230%       
+  Wake**                                                                         
+
+  **Era 4:           2021--present   0.10%           +45%            +19% to     \$18,716.02
+  Institutional**                                                    +125%       
+  --------------------------------------------------------------------------------------------
+
+The average geometric daily rate has declined from +1.20%/day in Era 1
+to +0.10%/day in Era 4 --- a twelvefold reduction. This is entirely
+explained by the denominator effect: day 562 (first price data) divided
+by day 6,280 gives a ratio of roughly 11×, closely matching the observed
+deceleration.
+
+The annualized figures appear to decrease sharply as well, but this is
+partly misleading: Era 4 still delivered +45% annualized appreciation
+across five-plus years, through a full bear market. The deceleration is
+real and structural --- but the magnitude of appreciation even in mature
+eras is substantial.
+
+**4. Daily Rate Behavior**
+
+**4.1 Current range**
+
+Over the last 365 days (through March 14, 2026), the daily BTCC change
+has ranged as follows:
+
+-   Minimum: +0.0386% per day
+
+-   Maximum: +0.1114% per day
+
+-   Mean: +0.0833% per day
+
+-   Median: +0.0890% per day
+
+Annualizing these figures, the current daily rates imply annual
+appreciation of approximately 15--50%, with the midpoint around 35%,
+depending on where Bitcoin\'s spot price is trading relative to BTCC at
+any given time.
+
+**4.2 Monthly variation**
+
+Within any given month, the daily rate is relatively stable --- the
+intramonth range in recent periods has been approximately 0.01--0.03
+percentage points. The larger variation occurs across months as
+Bitcoin\'s spot price moves. December 2024 and January 2025 (during
+Bitcoin\'s post-halving rally toward \$100k) saw average daily rates
+near +0.12%, while February and March 2026 (with spot around \$70k) have
+seen rates near +0.04%.
+
+This is consistent with the formula: a higher spot price increases the
+numerator (spot/BTCC − 1), increasing the daily rate, while a lower spot
+price compresses it.
+
+**4.3 Negative days**
+
+Seven negative days have been recorded across 5,719 days of history ---
+all in the week of November 15--21, 2011. During this period Bitcoin\'s
+spot price fell to approximately \$2.18--\$2.42 while BTCC stood at
+\$2.46. This is the only instance in Bitcoin\'s price history where spot
+sustained a level below the cumulative historical mean.
+
+For BTCC to decline today, Bitcoin\'s spot price would need to fall
+below \$18,716 --- a decline of approximately 73% from the current
+\$70,400 level. Even in such a scenario, BTCC would resume appreciation
+as soon as spot recovered above its current level.
+
+**5. Forward Behavior**
+
+The formula permits precise projection of BTCC\'s daily appreciation
+rate under any assumed future spot price. For a given spot-to-BTCC ratio
+and day count N:
+
+  ------------------------------------------------------------------------------
+  **Scenario        **Day 6,280   **Day       **Day       **Day       **Day
+  (spot/BTCC        (today)**     7,000**     8,000**     9,000**     10,000**
+  ratio)**                                                            
+  ----------------- ------------- ----------- ----------- ----------- ----------
+  Bear (2× ratio)   **+0.016%**   +0.014%     +0.013%     +0.011%     +0.010%
+
+  Current (3.76×)   **+0.044%**   +0.040%     +0.034%     +0.030%     +0.027%
+
+  Moderate (5×)     **+0.064%**   +0.057%     +0.050%     +0.044%     +0.040%
+
+  Bull (7×)         **+0.096%**   +0.086%     +0.075%     +0.067%     +0.060%
+
+  Peak (10×)        **+0.144%**   +0.129%     +0.113%     +0.100%     +0.090%
+  ------------------------------------------------------------------------------
+
+As N increases, all scenarios converge toward lower daily rates. This is
+a structural feature, not a concern: it reflects the growing stability
+of the denominator. Even at day 10,000 (approximately 2036), a moderate
+bull market (5× ratio) would still deliver +0.040%/day --- approximately
++15% annualized.
+
+**6. Observations**
+
+-   BTCC has never had a losing year. Annual appreciation ranges from
+    +13% to +31,674% across all years with data.
+
+-   BTCC's daily movement is fully deterministic given Bitcoin's spot
+    price. There is no randomness, no oracle dependency, and no
+    discretionary mechanism. Any party with the BTCADP specification and
+    trade data can reproduce BTCC to eight decimal places.
+
+-   BTCC cannot be inflated. New days can only add to the denominator.
+    The formula has no issuance lever, monetary policy setting, or
+    parameter to adjust.
+
+-   BTCC should not be described as stable or flat. The correct
+    characterization is a predictably appreciating, incrementally
+    deflationary unit of account with bounded daily volatility.
+
+-   BTCC's appreciation rate is structurally decelerating. Each
+    successive day brings greater predictability and tighter day-to-day
+    ranges.
+
+BTCC is a predictably appreciating, incrementally deflationary unit of
+account with bounded daily volatility. It is the cumulative performance
+of Bitcoin's price discovery process itself --- a function of every
+trade that has ever occurred on the global Bitcoin market since the
+first on-chain transaction.
+
+BTCADP Framework --- btcadp.org \| CC0 Public Domain \| Data through
+March 14, 2026
+
+---
+
+**References**
+
+[1] Nakamoto, Satoshi. "Bitcoin: A Peer-to-Peer Electronic Cash System" (2008). Establishes the Bitcoin protocol, fixed 21-million supply cap, and the genesis block (Block 0, January 3, 2009) that defines day 1 of the BTCADP/BTCC time series. https://bitcoin.org/bitcoin.pdf
+
+[2] BTCADP Specification, published at btcadp.org. Defines the Bitcoin Average Daily Price (BTCADP) methodology: a 25% trimmed mean of volume-weighted average prices across qualifying exchanges, with equal exchange weighting and algorithmic quality filters. The BTCC (Bitcoin Currency) denomination is defined as the cumulative arithmetic mean of all daily BTCADP values from genesis. Full specification and historical dataset available at https://btcadp.org
+
+[3] BTCADP/BTCC Historical Dataset (btcadp.org). All empirical data in this analysis --- annual performance tables, era analysis, daily rate statistics, and negative day observations --- are derived from the complete BTCADP price history, January 3, 2009 through March 14, 2026 (5,719 days of price data from July 18, 2010 onward). Dataset is open-source and independently reproducible.
+
+[4] Ammous, Saifedean. *The Bitcoin Standard: The Decentralized Alternative to Central Banking*. Hoboken, NJ: Wiley, 2018. Provides the economic framework for understanding Bitcoin as sound money with a fixed supply --- the property that produces BTCC's structural appreciation when spot price exceeds the historical cumulative average. The observation that BTCC "cannot be inflated" (Section 6) follows directly from the protocol properties Ammous analyzes.
+
+[5] Alden, Lyn. *Broken Money: Why Our Financial System Is Failing Us and How We Can Make It Better*. Timestamp Press, 2023. Analyzes the three functions of money (unit of account, medium of exchange, store of value) and the characteristics a monetary instrument requires to serve each function. The characterization of BTCC as "a predictably appreciating, incrementally deflationary unit of account" draws on Alden's framework for evaluating monetary instruments against these criteria.
+
+[6] Booth, Jeff. *The Price of Tomorrow: Why Deflation is the Key to an Abundant Future*. Stanley Press, 2020. Argues that technology is naturally deflationary and that a sound monetary system should reflect this reality rather than mask it through monetary expansion. BTCC's structural deflationary behavior --- appreciation that decelerates over time but remains positive --- is consistent with Booth's thesis that deflation, when driven by productivity, is a feature rather than a failure.

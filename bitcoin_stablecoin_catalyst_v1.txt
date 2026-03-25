@@ -1,0 +1,767 @@
+**HOW A BITCOIN-BACKED STABLECOIN**
+
+**COULD BE A CATALYST FOR**
+
+**WIDESPREAD ADOPTION**
+
+*A Theoretical Framework for Modeling Bitcoin-Denominated Stablecoins*
+
+*as Additive to Bitcoin\'s Addressable Market*
+
+btcadp.org
+
+March 2026
+
+CC0 Public Domain
+
+**1. The Stablecoin Problem Is Real**
+
+In November 2025, Cathie Wood and ARK Invest reduced their bull-case
+
+2030 Bitcoin price target from \\\$1.5 million to \\\$1.2 million. The
+
+reason was specific and data-driven: fiat-denominated stablecoins are
+
+absorbing the emerging-market demand that ARK\'s model had previously
+
+assigned to Bitcoin. In Wood\'s words, stablecoins are \"usurping part
+of
+
+the role we thought Bitcoin would play.\"
+
+ARK\'s January 2026 Big Ideas report formalized the revision. The firm
+
+sharply reduced its expectations for Bitcoin\'s role as an
+
+emerging-market safe haven, citing rapid stablecoin adoption in
+
+developing economies. The digital gold total addressable market was
+
+increased by 37% (reflecting gold\'s 64.5% market cap expansion in
+2025),
+
+but the emerging-market medium-of-exchange component was cut
+
+significantly. The net effect was a base-case 2030 target of
+
+approximately \\\$762,000 per BTC, implying a market capitalization of
+
+roughly \\\$16 trillion.
+
+The data supports the concern. As of early 2026, the total stablecoin
+
+market capitalization exceeds \\\$317 billion. It grew by approximately
+
+\\\$100 billion in 2025 alone, following \\\$70 billion of growth in
+2024.
+
+Tether (USDT) controls roughly 60% of the market at \\\$187 billion in
+
+supply, with Circle\'s USDC holding approximately 25% at \\\$76 billion.
+
+Monthly stablecoin transaction volumes approached \\\$970 billion by
+
+August 2025, with projections pointing toward \\\$1 trillion in monthly
+
+flows by late 2026. In Latin America, 71% of stablecoin activity is tied
+
+to cross-border payments. In sub-Saharan Africa and Southeast Asia,
+
+stablecoins are functioning as dollar-access infrastructure for
+
+populations with limited banking services.
+
+These are not speculative figures. The stablecoin market is growing
+
+faster than Bitcoin adoption in the use cases ARK originally modeled.
+
+The people ARK expected to adopt Bitcoin as a store of value and payment
+
+mechanism in emerging markets are instead adopting dollar-pegged
+
+stablecoins. The revision to the price target is a rational response to
+
+observable data.
+
+**2. The Hidden Assumption**
+
+ARK\'s model treats the stablecoin market as structurally competitive
+
+with Bitcoin. This is correct given the current design of fiat
+
+stablecoins, but it rests on an assumption that is worth making
+
+explicit: it assumes that all stablecoins will be fiat-backed.
+
+Consider what happens when someone purchases a USDT or USDC token. They
+
+send dollars to an issuer. The issuer holds those dollars (or
+
+dollar-equivalent instruments, primarily US Treasury bills) as reserves.
+
+The capital flow is: user → stablecoin issuer → US government debt. At
+
+\\\$317 billion in aggregate supply, stablecoin issuers are now among
+the
+
+largest purchasers of US Treasuries globally. Tether alone held over
+
+\\\$100 billion in Treasury bills as of late 2025.
+
+From the perspective of Bitcoin\'s addressable market, every dollar that
+
+enters a fiat stablecoin is a dollar that does not enter Bitcoin. The
+
+demand is captured by the traditional financial system\'s debt
+
+instruments. The blockchain provides the settlement rail, but the
+
+economic substance is a digital dollar deposit backed by sovereign debt.
+
+Bitcoin is excluded from the transaction entirely.
+
+This is why ARK\'s model correctly identifies stablecoins as competitive
+
+with Bitcoin. The current generation of stablecoins is, in economic
+
+terms, a distribution mechanism for US government debt on blockchain
+
+rails. The technology is Bitcoin-adjacent. The capital flow is
+
+Bitcoin-absent.
+
+The question for a long-term model is whether this is an inherent
+
+property of stablecoins as a category, or whether it is a design choice
+
+specific to the first generation. If a stablecoin could be constructed
+
+with Bitcoin as the reserve asset instead of Treasuries, the demand
+
+vector would invert: every token minted would require Bitcoin
+
+acquisition at spot rather than Treasury purchase. The stablecoin market
+
+would become additive to Bitcoin demand rather than competitive with it.
+
+**3. A Theoretical Bitcoin-Backed Stablecoin**
+
+A theoretical framework for such an instrument has been proposed under
+
+the name Treasury-Backed Digital Currency (₿USD). The model is not yet
+
+operational. No tokens have been issued. What exists is a published
+
+specification, a defined denomination, and a structural argument for how
+
+the components could be assembled. The following description is of a
+
+theoretical system, not a deployed product.
+
+The core problem any Bitcoin-backed stablecoin must solve is
+
+denomination. Bitcoin\'s spot price volatility\-\--routinely 5\--10% in
+a
+
+single week\-\--makes it unsuitable as a unit of account for commerce or
+
+savings. Any stablecoin denominated directly in BTC inherits this
+
+volatility and fails the basic stability requirement.
+
+**The BTCC Denomination**
+
+The ₿USD framework proposes a denomination called BTCC (Bitcoin
+
+Currency), defined as the arithmetic mean of every historical Bitcoin
+
+Average Daily Price (BTCADP) from the genesis block on January 3, 2009
+
+through the previous completed day. The BTCADP itself is an open-source
+
+reference price computed daily from trade data across qualifying
+
+exchanges, using a published specification that any party can
+
+independently reproduce.
+
+The stability claim rests on the mathematical properties of cumulative
+
+averages. As of early 2026, the BTCC denomination incorporates over
+
+6,200 daily price observations. The sensitivity of the cumulative
+
+average to any single day\'s price is approximately 1/6,200 of the
+
+difference between that day\'s price and the current average. In
+concrete
+
+terms: a 10% single-day move in BTC spot would shift the BTCC price by
+
+less than 0.01%. A 40% single-day crash would shift it by approximately
+
+0.04%. These are arithmetic properties of cumulative averages, not
+
+claims about market behavior.
+
+The BTCC fiat-equivalent price as of early 2026 sits at approximately
+
+\\\$18,000\-\--the cumulative average of all daily Bitcoin prices over
+16
+
+years of market history. Because Bitcoin\'s current spot price
+
+substantially exceeds the historical average, the BTCC price appreciates
+
+slowly over time as each new above-average observation pulls the
+
+cumulative mean upward. This rate of appreciation decelerates as the
+
+denominator grows.
+
+**The Consortium Model**
+
+The proposed issuance mechanism relies on a consortium of Bitcoin
+
+treasury companies\-\--publicly traded firms whose primary business is
+
+acquiring and holding Bitcoin as a reserve asset. In the ₿USD framework,
+
+a customer sends fiat to a consortium member to purchase a ₿USD token.
+
+The treasury company uses the incoming fiat to buy Bitcoin at spot and
+
+deposits it into a transparent on-chain reserve. One ₿USD token,
+
+pegged to one US dollar, is issued.
+
+Two reserve ledgers are proposed. Ledger 1 (the issuance pool) holds
+
+Bitcoin acquired with incoming fiat at the time of token minting. Ledger
+
+2 (the reserve backstop) holds additional Bitcoin drawn from the
+
+treasury company\'s existing holdings, which would guarantee redemptions
+
+during periods when BTC spot has declined below the price at issuance.
+
+Both ledgers would be held in publicly addressable Bitcoin wallets,
+
+verifiable by any observer in real time.
+
+The economic trade-off is straightforward. The customer trades
+Bitcoin\'s
+
+spot volatility for the BTCC denomination\'s stability. The treasury
+
+company accepts the downside risk of backstopping redemptions during
+
+spot declines, and in exchange captures the spread between Bitcoin\'s
+
+spot appreciation rate and the BTCC denomination\'s much slower rate of
+
+change. This spread widens as Bitcoin\'s spot price rises\-\--the core
+
+thesis on which every Bitcoin treasury company has already staked its
+
+balance sheet.
+
+Tokens would circulate as issued assets on a Bitcoin sidechain. When one
+
+user pays another, the token moves on the sidechain. No Bitcoin moves.
+
+The reserves sit on Bitcoin\'s base layer, untouched by token
+
+circulation. Bitcoin is bought at minting and sold only when a customer
+
+exits the ecosystem by redeeming a token for fiat. As the ecosystem
+
+matures and more commerce occurs natively in BTCC, the proportion of
+
+tokens ever redeemed for fiat naturally declines\-\--a user who can
+earn,
+
+spend, and hold a denomination has diminishing reason to exit.
+
+Everything between minting and the increasingly infrequent event of fiat
+
+exit is token circulation.
+
+**4. The Demand Inversion: The Core Analytical Insight**
+
+This is the observation most relevant to a long-term Bitcoin price
+
+model. The current stablecoin market routes capital away from Bitcoin. A
+
+Bitcoin-backed stablecoin, if it achieved meaningful adoption, would
+
+route capital toward it.
+
+The mechanism is direct. Every fiat stablecoin minted creates demand for
+
+US Treasuries. Every ₿USD token minted, under the proposed framework,
+
+would create demand for Bitcoin at spot. The stablecoin layer\'s
+
+relationship to Bitcoin changes from competitive to symbiotic. Rather
+
+than absorbing demand that might otherwise flow to BTC, the stablecoin
+
+layer would *generate* demand for BTC as a structural feature of its
+
+operation.
+
+To frame this quantitatively for modeling purposes, consider the current
+
+stablecoin market at approximately \\\$320 billion. All of that capital
+
+currently sits in Treasuries or dollar-equivalent instruments. None of
+
+it is in Bitcoin. If a Bitcoin-backed stablecoin captured even a
+
+fraction of this market, the capital would need to flow into BTC at
+
+spot.
+
+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-- \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--
+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-- \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--
+
+**Market** Capital Into **BTC Acquired** % of
+
+Capture **BTC** (at \\\~\\\$85K)\*\* Circulating
+
+Supply\*\*
+
+5% (\\\$16B) \\\$16 billion \\\~188,000 BTC \\\~0.9%
+
+10% (\\\$32B) \\\$32 billion \\\~376,000 BTC \\\~1.8%
+
+25% (\\\$80B) \\\$80 billion \\\~941,000 BTC \\\~4.5%
+
+50% (\\\$160B) \\\$160 billion \\\~1,882,000 BTC \\\~9.0%
+
+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-- \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--
+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-- \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--
+
+\*Table assumes BTC spot of approximately \\\$85,000 and circulating
+supply
+
+of approximately 19.8 million BTC. These are illustrative scenarios for
+
+modeling purposes, not predictions of adoption rates.\*
+
+These numbers are worth contextualizing. At 10% capture of the current
+
+stablecoin market, Bitcoin-backed stablecoin reserves would require
+
+approximately 376,000 BTC\-\--roughly half of what Strategy alone
+
+currently holds. At 25%, the required reserves approach 1 million BTC.
+
+These are large figures, but the institutional infrastructure to support
+
+them arguably already exists in nascent form.
+
+The more consequential figure for a price model is not the static
+
+snapshot but the flow. If the stablecoin market continues growing at its
+
+current trajectory\-\--Standard Chartered has projected \\\$2 trillion
+in
+
+total supply by 2028\-\--even a modest Bitcoin-backed share generates
+
+continuous spot demand for BTC. At \\\$2 trillion in total stablecoins
+and
+
+10% Bitcoin-backed capture, the reserves alone would represent \\\$200
+
+billion in Bitcoin holdings, requiring roughly 2.35 million BTC at
+
+current prices. This is capital that, under the current architecture,
+
+would flow entirely into US Treasuries.
+
+It is worth stating clearly that these are theoretical calculations. No
+
+Bitcoin-backed stablecoin at this scale has been tested. The adoption
+
+rates are illustrative. The point is not to predict what will happen,
+
+but to identify what the demand implications would be if the stablecoin
+
+market\'s reserve composition changed.
+
+**5. The Infrastructure Question**
+
+A common objection to theoretical frameworks is that the required
+
+infrastructure does not exist. In this case, the building blocks are
+
+present, though they have not been assembled for this purpose.
+
+As of March 2026, Strategy (formerly MicroStrategy) holds 738,731 BTC,
+
+valued at over \\\$52 billion. MARA Holdings holds approximately 53,800
+
+BTC. Twenty One Capital, backed by Tether, holds 43,514 BTC. Metaplanet,
+
+the largest publicly traded Bitcoin treasury company in Asia, holds
+
+35,102 BTC. In total, 193 publicly traded companies have adopted some
+
+form of Bitcoin treasury strategy, with the top 10 alone holding well
+
+over 1 million BTC collectively.
+
+These companies hold Bitcoin that currently generates no direct yield.
+
+The Bitcoin appreciates (or depreciates) in value, but it does not
+
+produce cash flow while sitting in reserve. A Bitcoin-backed stablecoin
+
+model would, in theory, allow treasury companies to generate fee revenue
+
+from their holdings by pledging them as reserve backing for a
+
+circulating stablecoin. The reserves are not lent, staked, or
+
+rehypothecated\-\--but they are not permanently inert. Bitcoin is sold
+
+from Ledger 1 when a customer exits the ₿USD ecosystem by redeeming a
+
+token for fiat. If BTC spot has fallen below the minting price, the
+
+treasury company must also sell Bitcoin from Ledger 2\-\--its own
+
+pre-existing holdings\-\--to cover the shortfall. This is a real cost,
+and
+
+it is the treasury company\'s compensation risk for the spread it
+
+captures during periods of appreciation. Crucially, tokens circulating
+
+within the ecosystem\-\--moving between wallets as a medium of
+
+exchange\-\--create no reserve pressure at any BTC spot price. As the
+
+ecosystem matures and users can earn, spend, and transact in a stable
+
+denomination, the proportion of tokens ever redeemed for fiat naturally
+
+declines, reducing the frequency and magnitude of reserve sales over
+
+time.
+
+The reference price infrastructure also exists. The BTCADP specification
+
+is published, open-source, and independently reproducible. It uses
+
+per-exchange volume-weighted average prices aggregated via a trimmed
+
+mean with equal exchange weighting and a sequence of algorithmic quality
+
+filters. The methodology is the authority; no single institution is
+
+required for the denomination to remain valid and computable.
+
+What does not exist is the assembled product: no consortium has been
+
+formed, no tokens have been issued, no sidechain deployment has
+
+occurred, and no market test has been conducted. The gap between
+
+available components and a functioning monetary instrument is
+
+non-trivial. It requires coordination among multiple independent
+
+companies, regulatory navigation, and a go-to-market effort against
+
+entrenched incumbents with hundreds of billions in existing supply.
+
+These are real barriers, not theoretical ones.
+
+**6. Implications for Bitcoin Price Models**
+
+ARK\'s current model treats the stablecoin market as a demand
+competitor.
+
+The \\\$300,000 reduction to the bull case reflects the model\'s
+assumption
+
+that stablecoin adoption in emerging markets directly subtracts from
+
+Bitcoin\'s addressable market in those regions. This is the correct
+
+treatment given the current composition of stablecoin reserves.
+
+A Bitcoin-backed stablecoin, if it achieved meaningful scale, would
+
+change that model input from negative to positive. Rather than
+
+subtracting stablecoin market growth from Bitcoin\'s TAM, a portion of
+it
+
+would be added. The stablecoin market\'s growth rate\-\--currently among
+
+the fastest in digital assets\-\--would become a Bitcoin demand driver
+
+rather than a drag.
+
+To be specific about what this means for the model: ARK\'s November 2025
+
+revision subtracted approximately \\\$300,000 from the bull-case 2030
+
+target. That figure corresponds to the emerging-market
+
+medium-of-exchange TAM component that ARK reassigned from Bitcoin to
+
+stablecoins. If a Bitcoin-backed stablecoin recaptured that
+demand\-\--not
+
+by replacing fiat stablecoins entirely, but by offering an alternative
+
+that routes reserves into BTC\-\--the subtracted value would return to
+the
+
+model, and potentially more, because the stablecoin market has continued
+
+growing since the revision was made.
+
+A simple framework for incorporating this into a price model:
+
+**Variable 1: Stablecoin market size at target date.** ARK\'s 2030
+
+timeframe. Projections range from \\\$1\--2 trillion depending on the
+
+source and assumptions about regulatory environment and adoption curves.
+
+**Variable 2: Bitcoin-backed share.** The percentage of total stablecoin
+
+supply backed by Bitcoin rather than Treasuries. Even conservative
+
+assumptions (5\--10%) produce large absolute figures given the projected
+
+market size.
+
+**Variable 3: Demand impact.** The additional BTC that must be acquired
+
+at spot to collateralize the Bitcoin-backed share. This is net new
+
+demand that does not exist in the current model and would not exist
+
+under a purely fiat-backed stablecoin regime.
+
+At a projected \\\$1.5 trillion stablecoin market in 2030 and a 10%
+
+Bitcoin-backed share, the reserve requirement would be \\\$150 billion
+in
+
+Bitcoin\-\--roughly 1.76 million BTC at current prices, or approximately
+
+8.4% of the total 21 million supply. This is demand that ARK\'s current
+
+model assigns a value of zero, because it assumes all stablecoins will
+
+be fiat-backed.
+
+It should be emphasized that this is a modeling exercise, not a
+
+prediction. The Bitcoin-backed share could be zero if the model never
+
+progresses beyond the theoretical stage. It could also exceed 10% if the
+
+properties of the BTCC denomination\-\--slow appreciation rather than
+
+guaranteed inflation, no issuer capable of supply expansion, transparent
+
+on-chain reserves\-\--prove attractive to a meaningful segment of the
+
+market. The point is that the current model treats the outcome as
+
+structurally determined, when it may in fact be a variable worth
+
+tracking.
+
+**7. Risks and Limitations**
+
+Any assessment of this framework should account for the following risks,
+
+each of which could prevent the model from achieving meaningful scale.
+
+**The framework is theoretical.** No ₿USD tokens have been issued. No
+
+consortium has been formed. No market test has been conducted. The gap
+
+between a published specification and a functioning monetary product is
+
+substantial, and many sound theoretical frameworks never achieve
+
+real-world adoption.
+
+**Sustained Bitcoin price decline.** The reserve model depends on
+
+consortium members\' willingness and ability to backstop redemptions
+
+during periods when BTC spot falls below the price at which reserves
+
+were acquired. A prolonged bear market would pressure reserve ratios and
+
+could trigger a confidence crisis similar to those that have affected
+
+algorithmic stablecoins. The two-ledger reserve design provides a
+
+buffer, but it is not unlimited. This risk is real and should not be
+
+understated.
+
+\*\*The denomination\'s appreciation depends on Bitcoin\'s long-run
+price
+
+trajectory.\*\* The BTCC denomination appreciates as long as Bitcoin\'s
+
+spot price remains above the historical cumulative average. If
+Bitcoin\'s
+
+price were to enter a multi-year structural decline below the cumulative
+
+average, the denomination would depreciate. The stability property
+
+(insensitivity to single-day moves) holds regardless, but the direction
+
+of that slow drift would reverse.
+
+**Regulatory uncertainty.** Stablecoin regulation is evolving. The
+
+GENIUS Act in the US has provided some clarity for fiat-backed issuers,
+
+but the regulatory treatment of a Bitcoin-backed stablecoin priced in
+
+in a non-fiat unit of account is untested. Coordinated international
+
+regulation targeting cryptocurrency stablecoins could constrain or
+
+prevent the model\'s deployment.
+
+**Entrenched competition.** USDT and USDC collectively control over 85%
+
+of the stablecoin market. Network effects, exchange integrations, and
+
+established liquidity make displacement difficult. A Bitcoin-backed
+
+alternative would need to offer a compelling enough value proposition to
+
+overcome the switching costs and inertia of a \\\$320 billion incumbent
+
+market.
+
+**Consortium coordination.** Multiple independent publicly traded
+
+companies, each in its own regulatory jurisdiction, would need to agree
+
+on reserve management, fee structures, operational standards, and
+
+governance. Corporate coordination at this scale is difficult under the
+
+best circumstances and is not guaranteed to succeed.
+
+**Adoption dependency.** The demand inversion described in this article
+
+only occurs if the Bitcoin-backed stablecoin achieves meaningful
+
+adoption. A small pilot with limited circulation does not change the
+
+model inputs for a long-term Bitcoin price target. The framework must
+
+reach scale to matter, and scale requires merchant acceptance, user
+
+adoption, and integration into existing payment infrastructure.
+
+**8. Conclusion**
+
+ARK Invest\'s concern about fiat stablecoins is well-founded. The
+\\\$300
+
+billion stablecoin market is absorbing emerging-market demand that
+
+Bitcoin bulls had counted on, and the growth trajectory shows no sign of
+
+slowing. The revision to the 2030 bull case is a rational response to
+
+observed data.
+
+What the current model does not incorporate is the possibility that the
+
+stablecoin market\'s reserve composition could change. A Bitcoin-backed
+
+stablecoin\-\--if one were to be built and achieve meaningful
+
+scale\-\--would invert the demand relationship. Every token minted would
+
+require Bitcoin acquisition at spot. The stablecoin market would become
+
+a source of Bitcoin demand rather than a competitor for it.
+
+The ₿USD framework described here proposes a specific mechanism for how
+
+this could work: a consortium of existing Bitcoin treasury companies
+
+issuing tokens priced in a cumulative-average-based unit of
+
+account, backed by on-chain Bitcoin reserves. The components exist. The
+
+specification is published. The institutional participants hold over 1
+
+million BTC collectively. What has not been demonstrated is whether
+
+these components can be assembled into a functioning product that
+
+achieves adoption at scale. That remains an open question.
+
+For the purposes of a long-term Bitcoin price model, the relevant
+
+takeaway is this: the stablecoin market\'s impact on Bitcoin\'s
+
+addressable market is not necessarily a fixed negative. It is a variable
+
+whose sign depends on the reserve composition of the stablecoins that
+
+capture the market. A model that treats it as permanently negative may
+
+be underweighting a scenario worth tracking.
+
+btcadp.org • CC0 Public Domain • March 2026
+
+---
+
+**References**
+
+[1] Nakamoto, Satoshi. "Bitcoin: A Peer-to-Peer Electronic Cash System" (2008). The opening sentence describes "a purely peer-to-peer version of electronic cash" --- the use case this article identifies as being captured by fiat-denominated stablecoins in emerging markets. https://bitcoin.org/bitcoin.pdf
+
+[2] Ammous, Saifedean. *The Bitcoin Standard: The Decentralized Alternative to Central Banking*. Hoboken, NJ: Wiley, 2018. Provides the economic framework for Bitcoin as sound money with a fixed supply and the argument that fiat reserve systems structurally channel capital into sovereign debt instruments. The observation that fiat stablecoin reserves flow into US Treasuries (Section 2) is a direct consequence of the monetary architecture Ammous describes.
+
+[3] Alden, Lyn. *Broken Money: Why Our Financial System Is Failing Us and How We Can Make It Better*. Timestamp Press, 2023. Analyzes the structural fragilities of fiat monetary systems, the mechanics of dollar hegemony, and why emerging markets are disproportionately affected by monetary policy set in Washington. Central to the framing of why emerging-market populations adopt dollar stablecoins as a response to local currency instability.
+
+[4] Booth, Jeff. *The Price of Tomorrow: Why Deflation is the Key to an Abundant Future*. Stanley Press, 2020. Argues that technology is naturally deflationary and that a monetary system built on a scarce reserve asset would allow this deflation to benefit consumers rather than being masked by credit expansion. The BTCC denomination's deflationary properties (Section 3) are consistent with Booth's framework for how a sound monetary system should behave.
+
+[5] Cathie Wood, CNBC Squawk Box interview (November 6, 2025). Bull case reduced from $1.5 million to approximately $1.2 million for 2030, specifically citing stablecoin adoption in emerging markets. https://www.ark-invest.com/articles/valuation-models/arks-bitcoin-price-target-2030
+
+[6] ARK Invest, "Big Ideas 2026" (January 2026). Formalized the revision to Bitcoin price targets, reducing the emerging-market medium-of-exchange component while increasing the digital gold TAM by 37%. Base-case 2030 target of approximately $762,000 per BTC. https://www.ark-invest.com/big-ideas-2026
+
+[7] Macquarie Research, "Stablecoins are starting to reshape payments and banking" (March 2026). Estimates combined stablecoin market capitalization at approximately $312–317 billion as of early 2026. https://www.coindesk.com/business/2026/03/10/stablecoins-are-starting-to-reshape-payments-and-banking-macquarie-says
+
+[8] CoinGecko 2025 Annual Crypto Industry Report (January 2026). Stablecoin market cap surged +$102.1 billion (+48.9%) in 2025. Arkham Intelligence reports the stablecoin market cap increased by nearly $100 billion in 2025. https://www.coingecko.com/research/publications/2025-annual-crypto-report; https://info.arkm.com/research/how-stablecoins-reached-a-300-billion-market-cap-in-2025
+
+[9] As of late 2025, USDT comprises approximately 58–60% and USDC approximately 25% of total stablecoin market capitalization, per Arkham Intelligence (October 2025) and CoinGecko data.
+
+[10] Visa, a16z crypto, and Castle Island Ventures, "The State of Stablecoins 2025." Monthly stablecoin transaction volumes approached $970 billion by August 2025. In Latin America, 71% of stablecoin activity is tied to cross-border payments.
+
+[11] Tether Holdings Limited, attestation reports (2025). Tether held over $100 billion in US Treasury bills as of late 2025, making it one of the largest holders of short-term US government debt globally.
+
+[12] U.S. v. Do Kwon, Southern District of New York (December 2025). The May 2022 Terra/Luna collapse wiped out approximately $40 billion in value. See also: "Anatomy of a Run: The Terra Luna Crash" (Harvard Law School Forum on Corporate Governance, May 2023). https://corpgov.law.harvard.edu/2023/05/22/anatomy-of-a-run-the-terra-luna-crash/
+
+[13] U.S. Senate Committee on Banking, Housing, and Urban Affairs. The GENIUS Act (Guiding and Establishing National Innovation for U.S. Stablecoins Act), introduced 2025. Provides a regulatory framework for fiat-backed payment stablecoins.
+
+[14] Derived from the BTCADP/BTCC historical dataset (btcadp.org). BTCC values, daily sensitivity calculations, and stability properties computed from the cumulative arithmetic mean of all daily BTCADP values, January 3, 2009 through March 2026. Full specification and dataset available at https://btcadp.org
+
+[15] Public filings and Bitcoin Treasuries data (bitcointreasuries.net). Combined institutional Bitcoin holdings exceed 1 million BTC across publicly traded treasury companies and Bitcoin ETFs as of early 2026.
