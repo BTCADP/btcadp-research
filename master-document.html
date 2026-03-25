@@ -830,7 +830,27 @@
 </p>
 
 <p>
-  The second defense is architectural. The system does not rely on the consortium's judgment or restraint during a crisis. It uses deterministic, protocol-level mechanisms that activate automatically when network stress indicators cross published thresholds. These include BTC-default redemption (the consortium transfers Bitcoin directly to the redeemer rather than selling it on the market, eliminating forced selling pressure), time-weighted fees that make rapid mint-and-redeem cycles prohibitively expensive, volume-triggered escalation that prices the systemic cost of mass redemption into the transaction, and lateral conversion to a ₿C-denominated position that absorbs fear without absorbing outflow. None of these mechanisms require human intervention. None can be overridden by the consortium. They are the monetary policy of the system, and unlike central bank policy, they are transparent, predictable, and identical for every participant.
+  The second defense is the token itself. This is the system's chief innovation, and it is worth understanding clearly before proceeding to the details in Chapter 13.
+</p>
+
+<p>
+  Every ₿USD token is a programmable instrument. The word "programmable" carries justified suspicion. In the context of CBDCs, programmability means the issuer can attach conditions to the holder's money: expiration dates, spending restrictions, geographic fencing, surveillance metadata. The token reports on its holder to the authority. CBDC programmability serves the issuer at the expense of the person holding the currency.
+</p>
+
+<p>
+  ₿USD programmability inverts this relationship. The token carries provenance metadata about itself: its mint date, the BTC spot price and ₿C price on the day it was minted, its block age, and its transfer count. This data describes the token's own history. It does not and cannot describe the person holding it. No identity, no spending pattern, no location, no transaction purpose. The data does not exist at the protocol level because the protocol was designed never to produce it. This is not a privacy policy that could be revised under pressure. It is an architectural constraint that would require dismantling the sidechain to override.
+</p>
+
+<p>
+  Using its own provenance data, each token can read the aggregate state of the network: total outstanding supply, aggregate redemption velocity, BTC spot relative to ₿C, the coverage ratio. These are system-level vital signs, independently verifiable by any participant. When those vital signs are normal, the token behaves identically to any other stablecoin: instant transfers, fast redemptions, minimal fees. The defensive logic is dormant. The holder notices nothing.
+</p>
+
+<p>
+  When network stress indicators cross published thresholds, the tokens activate defensive behaviors autonomously. No committee convenes. No emergency board meeting is called. No consortium member makes a judgment call about whether the situation warrants intervention. The mechanisms are deterministic, transparent, and identical for every participant. They include BTC-default redemption (the consortium transfers Bitcoin directly to the redeemer's wallet rather than selling it on the market, eliminating forced selling pressure entirely), time-weighted fees that use the token's own mint date to distinguish attack behavior from ordinary commerce, volume-triggered escalation that prices the systemic cost of mass redemption into the transaction, and lateral conversion to a ₿C-denominated position that absorbs fear without absorbing outflow. The token's provenance data is what makes each of these mechanisms possible. A token that knows when it was minted can distinguish a rapid mint-and-redeem cycle from a token held for months. A token that can read aggregate redemption velocity can participate in a graduated response that tightens as stress increases. The intelligence is in the money itself.
+</p>
+
+<p>
+  This is the structural difference between a CBDC and a TBDC. A CBDC token reports on its holder to the issuer. A TBDC token reads the state of its own network to defend the system and every holder in it. Same technology. Opposite philosophy. Opposite beneficiary. The CBDC serves the institution that issues it. The TBDC serves the person who holds it. The programmability that makes CBDCs a surveillance instrument is, when redirected, the same capability that makes the ₿USD system resilient against the exact bank-run and attack scenarios that would otherwise make it unworkable.
 </p>
 
 <p>
@@ -838,7 +858,7 @@
 </p>
 
 <p>
-  Chapter 13 describes each defensive mechanism in detail. Chapter 14 describes the genuine risks that remain even with these defenses in place. The point to establish here is that the two-ledger system is the reserve architecture, not the complete defense. The complete defense is the reserve architecture plus a set of protocol-level mechanisms that make the fiat exit expensive to weaponize, cheap to use honestly, and impossible to override by any party, including the consortium itself.
+  Chapter 13 describes each defensive mechanism in full technical detail. Chapter 14 describes the genuine risks that remain even with these defenses in place. The point to establish here is that the two-ledger system is the reserve architecture, not the complete defense. The complete defense is the reserve architecture plus money that defends itself: programmable tokens whose embedded intelligence activates automatically under stress, protects every holder equally, and cannot be overridden by any party, including the consortium that issued them.
 </p>
 
 <h3>The Trade-Off</h3>
