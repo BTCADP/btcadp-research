@@ -290,6 +290,17 @@
     .compare-table { font-size: 0.78rem; }
   }
 
+  sup.fn { font-family: var(--font-mono); font-size: 0.62rem; color: var(--orange); cursor: default; vertical-align: super; line-height: 0; padding: 0 1px; }
+  sup.fn a { color: var(--orange); text-decoration: none; }
+  sup.fn a:hover { text-decoration: underline; }
+  .references { max-width: 780px; margin: 0 auto; padding: 0 24px 64px; position: relative; z-index: 1; }
+  .references h2 { font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; color: #fff; margin-bottom: 24px; padding-top: 48px; border-top: 2px solid var(--orange); }
+  .ref-list { list-style: none; counter-reset: ref; }
+  .ref-list li { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 10px; padding-left: 32px; position: relative; }
+  .ref-list li::before { content: attr(data-n); position: absolute; left: 0; color: var(--orange); font-weight: 600; }
+  .ref-list li a { color: var(--text-secondary); text-decoration: none; word-break: break-all; }
+  .ref-list li a:hover { color: var(--orange); }
+
   @media print {
     body { background: #fff; color: #111; font-size: 11pt; }
     nav, body::before { display: none; }
@@ -326,7 +337,7 @@
 <div class="article-body" style="padding-bottom:0;">
 
 <p>
-  The stablecoin market exceeds $317 billion and is growing at roughly $100 billion per year. Every dollar of that growth is used to purchase US Treasury bills — not Bitcoin. The capital that should be flowing into BTC is instead funding US government debt. At the same time, CBDC development is accelerating in over 130 countries, building digital payment infrastructure with surveillance, programmable restrictions, and account-freezing capabilities baked into the architecture. The stablecoin market is a missed opportunity. CBDCs are an approaching threat. Both converge on the same opportunity: monetary infrastructure built on Bitcoin, operated by the institutions that already hold it, offering products that compete with stablecoins and CBDCs on the terms consumers actually care about.
+  The stablecoin market exceeds $317 billion<sup class="fn"><a href="#ref1" id="fn1">[1]</a></sup> and is growing at roughly $100 billion per year.<sup class="fn"><a href="#ref2" id="fn2">[2]</a></sup> Every dollar of that growth is used to purchase US Treasury bills — not Bitcoin. The capital that should be flowing into BTC is instead funding US government debt. At the same time, CBDC development is accelerating in over 130 countries,<sup class="fn"><a href="#ref3" id="fn3">[3]</a></sup> building digital payment infrastructure with surveillance, programmable restrictions, and account-freezing capabilities baked into the architecture. The stablecoin market is a missed opportunity. CBDCs are an approaching threat. Both converge on the same opportunity: monetary infrastructure built on Bitcoin, operated by the institutions that already hold it, offering products that compete with stablecoins and CBDCs on the terms consumers actually care about.
 </p>
 
 <p>
@@ -403,7 +414,7 @@
 <p class="hero-line">The fiat monetary system has endured not because it is optimal but because no viable alternative existed.</p>
 
 <p>
-  Central banks issue fiat currencies backed by sovereign authority rather than scarce assets. The defining feature of this system is that the supply of money is expandable at the discretion of a small number of officials. Since the abandonment of the gold standard, every major fiat currency has experienced persistent inflation driven by monetary expansion. The US dollar has lost approximately 97% of its purchasing power since the Federal Reserve's creation in 1913. This is not a failure of the system — it is the system working as designed. Inflation is the mechanism through which governments finance expenditures beyond tax revenue.
+  Central banks issue fiat currencies backed by sovereign authority rather than scarce assets. The defining feature of this system is that the supply of money is expandable at the discretion of a small number of officials. Since the abandonment of the gold standard, every major fiat currency has experienced persistent inflation driven by monetary expansion. The US dollar has lost approximately 97% of its purchasing power since the Federal Reserve's creation in 1913.<sup class="fn"><a href="#ref4" id="fn4">[4]</a></sup> This is not a failure of the system — it is the system working as designed. Inflation is the mechanism through which governments finance expenditures beyond tax revenue.
 </p>
 
 <p>
@@ -411,7 +422,7 @@
 </p>
 
 <p>
-  This is not a controversial claim. It is the stated policy objective of every major central bank. The Federal Reserve, the European Central Bank, the Bank of England, and the Bank of Japan all target positive inflation as a deliberate goal. The mechanism is described in neutral language — "price stability" — but the outcome is unambiguous: the currency loses value every year, and the people who hold it bear the cost.
+  This is not a controversial claim. It is the stated policy objective of every major central bank. The Federal Reserve, the European Central Bank, the Bank of England, and the Bank of Japan all target positive inflation as a deliberate goal.<sup class="fn"><a href="#ref5" id="fn5">[5]</a></sup> The mechanism is described in neutral language — "price stability" — but the outcome is unambiguous: the currency loses value every year, and the people who hold it bear the cost.
 </p>
 
 <p>
@@ -439,11 +450,11 @@
 <p class="hero-line">The stablecoin market solved Bitcoin's volatility problem by abandoning Bitcoin.</p>
 
 <p>
-  The cryptocurrency ecosystem recognized the problem of fiat monetary erosion early. Bitcoin, proposed in 2008 and launched in 2009, was an explicit response to central bank money printing — Satoshi Nakamoto embedded a newspaper headline about bank bailouts in the genesis block. But Bitcoin's success as a store of value created a new problem: its price volatility made it unsuitable for everyday commerce. A merchant cannot price a sandwich in an asset that moves 5–10% in a single week. A worker cannot negotiate a salary in a unit whose purchasing power is uncertain from one paycheck to the next.
+  The cryptocurrency ecosystem recognized the problem of fiat monetary erosion early. Bitcoin, proposed in 2008 and launched in 2009, was an explicit response to central bank money printing — Satoshi Nakamoto embedded a newspaper headline about bank bailouts in the genesis block.<sup class="fn"><a href="#ref6" id="fn6">[6]</a></sup> But Bitcoin's success as a store of value created a new problem: its price volatility made it unsuitable for everyday commerce. A merchant cannot price a sandwich in an asset that moves 5–10% in a single week. A worker cannot negotiate a salary in a unit whose purchasing power is uncertain from one paycheck to the next.
 </p>
 
 <p>
-  Stablecoins emerged as the market's answer to this volatility problem. The market has grown to over $317 billion in circulation, dominated by fiat-backed tokens like USDT (Tether) and USDC (Circle). These instruments achieve price stability by a straightforward mechanism: for every token issued, the issuer holds a corresponding amount of US dollar reserves — primarily US Treasury bills — in a bank account. The token is a claim on that reserve. One USDT equals one dollar because Tether holds one dollar (or its equivalent in government debt) for every USDT outstanding.
+  Stablecoins emerged as the market's answer to this volatility problem. The market has grown to over $317 billion in circulation,<sup class="fn"><a href="#ref1">[1]</a></sup> dominated by fiat-backed tokens like USDT (Tether) and USDC (Circle). These instruments achieve price stability by a straightforward mechanism: for every token issued, the issuer holds a corresponding amount of US dollar reserves — primarily US Treasury bills — in a bank account. The token is a claim on that reserve. One USDT equals one dollar because Tether holds one dollar (or its equivalent in government debt) for every USDT outstanding.
 </p>
 
 <p>
@@ -455,15 +466,15 @@
 </p>
 
 <p>
-  The issuer is a centralized entity that can freeze accounts, censor transactions, and is subject to regulatory capture. Tether and Circle have each frozen wallets at the direction of law enforcement — a capability that is architecturally identical to the account freezing powers that make CBDCs concerning. The reserves must be trusted and audited — a trust dependency that Bitcoin's architecture was specifically designed to eliminate. The token is pegged to a currency that loses purchasing power by explicit policy design. The user has gained a faster payment rail and inherited dollar inflation, counterparty risk, and the jurisdictional vulnerabilities of the issuing entity.
+  The issuer is a centralized entity that can freeze accounts, censor transactions, and is subject to regulatory capture. Tether and Circle have each frozen wallets at the direction of law enforcement<sup class="fn"><a href="#ref7" id="fn7">[7]</a></sup> — a capability that is architecturally identical to the account freezing powers that make CBDCs concerning. The reserves must be trusted and audited — a trust dependency that Bitcoin's architecture was specifically designed to eliminate. The token is pegged to a currency that loses purchasing power by explicit policy design. The user has gained a faster payment rail and inherited dollar inflation, counterparty risk, and the jurisdictional vulnerabilities of the issuing entity.
 </p>
 
 <p>
-  The scale of the problem becomes apparent when you consider the capital flows. The stablecoin market is growing at roughly $100 billion per year. Every dollar that enters USDT or USDC is a dollar used to purchase US Treasury bills. Not Bitcoin. Treasury bills. The demand that Bitcoin's proponents expected would flow into Bitcoin — the emerging-market demand for a censorship-resistant store of value, the cross-border settlement demand, the demand from the unbanked and underbanked — is being absorbed by instruments that route 100% of that capital into the US government debt market. ARK Invest reduced its 2030 bull-case Bitcoin price target by $300,000 in direct response to this dynamic. The stablecoin market is growing. Bitcoin's share of that growth is zero.
+  The scale of the problem becomes apparent when you consider the capital flows. The stablecoin market is growing at roughly $100 billion per year.<sup class="fn"><a href="#ref2">[2]</a></sup> Every dollar that enters USDT or USDC is a dollar used to purchase US Treasury bills. Not Bitcoin. Treasury bills. The demand that Bitcoin's proponents expected would flow into Bitcoin — the emerging-market demand for a censorship-resistant store of value, the cross-border settlement demand, the demand from the unbanked and underbanked — is being absorbed by instruments that route 100% of that capital into the US government debt market. ARK Invest reduced its 2030 bull-case Bitcoin price target by $300,000 in direct response to this dynamic.<sup class="fn"><a href="#ref8" id="fn8">[8]</a></sup> The stablecoin market is growing. Bitcoin's share of that growth is zero.
 </p>
 
 <p>
-  Algorithmic stablecoins attempted to solve the centralization problem by removing the fiat reserves entirely, using algorithmic mechanisms to maintain a dollar peg through incentive structures and arbitrage. The Terra/Luna collapse of 2022 destroyed over $40 billion in value and demonstrated the fundamental problem: creating stability from volatile collateral without adequate reserves requires assumptions about market behavior that eventually prove wrong. The approach has been discredited.
+  Algorithmic stablecoins attempted to solve the centralization problem by removing the fiat reserves entirely, using algorithmic mechanisms to maintain a dollar peg through incentive structures and arbitrage. The Terra/Luna collapse of 2022 destroyed over $40 billion in value<sup class="fn"><a href="#ref9" id="fn9">[9]</a></sup> and demonstrated the fundamental problem: creating stability from volatile collateral without adequate reserves requires assumptions about market behavior that eventually prove wrong. The approach has been discredited.
 </p>
 
 <p>
@@ -483,7 +494,7 @@
 <p class="hero-line">A CBDC is only voluntary as long as physical cash remains a viable alternative. The moment cash is restricted, the CBDC ceases to be a choice and becomes an obligation — along with every condition the issuing authority chooses to attach to it.</p>
 
 <p>
-  Central banks around the world are developing digital currencies. The Bank of International Settlements estimates that over 130 countries are in some stage of CBDC exploration or rollout, with several — China, the Bahamas, Nigeria — already operating live systems. The case for CBDCs is made in the language of efficiency: faster payments, lower costs, financial inclusion for the unbanked. But efficiency is not the only property a monetary system delivers to those who use it. It also delivers, or fails to deliver, financial privacy, protection from arbitrary account action, and freedom from the coercive use of monetary policy as a behavioral instrument.
+  Central banks around the world are developing digital currencies. The Bank of International Settlements estimates that over 130 countries are in some stage of CBDC exploration or rollout, with several — China, the Bahamas, Nigeria — already operating live systems.<sup class="fn"><a href="#ref3">[3]</a></sup> The case for CBDCs is made in the language of efficiency: faster payments, lower costs, financial inclusion for the unbanked. But efficiency is not the only property a monetary system delivers to those who use it. It also delivers, or fails to deliver, financial privacy, protection from arbitrary account action, and freedom from the coercive use of monetary policy as a behavioral instrument.
 </p>
 
 <p>
@@ -495,7 +506,7 @@
 </p>
 
 <p>
-  China's e-CNY is instructive. The People's Bank of China has described the system's privacy model as "controllable anonymity" — meaning transactions below certain thresholds appear anonymous to merchants and other counterparties, but the PBOC retains full access to the underlying data. This is not anonymity in any meaningful sense. It is pseudonymity with a government override. Western CBDC proposals have been more circumspect about describing surveillance capabilities, but the architecture produces the same result: a comprehensive, government-accessible ledger of every retail economic transaction in the economy.
+  China's e-CNY is instructive. The People's Bank of China has described the system's privacy model as "controllable anonymity"<sup class="fn"><a href="#ref10" id="fn10">[10]</a></sup> — meaning transactions below certain thresholds appear anonymous to merchants and other counterparties, but the PBOC retains full access to the underlying data. This is not anonymity in any meaningful sense. It is pseudonymity with a government override. Western CBDC proposals have been more circumspect about describing surveillance capabilities, but the architecture produces the same result: a comprehensive, government-accessible ledger of every retail economic transaction in the economy.
 </p>
 
 <p>
@@ -509,13 +520,13 @@
 </p>
 
 <p>
-  These capabilities are not theoretical. China's e-CNY has been deployed with expiration dates on government disbursements, requiring recipients to spend within a defined period or lose the funds. The programmability is presented as a feature — targeted stimulus — but the mechanism is indistinguishable from the ability to program any condition the authority chooses. Once money is programmable by the issuer, every transaction is a request that the issuer can approve, deny, modify, or monitor.
+  These capabilities are not theoretical. China's e-CNY has been deployed with expiration dates on government disbursements, requiring recipients to spend within a defined period or lose the funds.<sup class="fn"><a href="#ref11" id="fn11">[11]</a></sup> The programmability is presented as a feature — targeted stimulus — but the mechanism is indistinguishable from the ability to program any condition the authority chooses. Once money is programmable by the issuer, every transaction is a request that the issuer can approve, deny, modify, or monitor.
 </p>
 
 <h3>The Cash Withdrawal Floor</h3>
 
 <p>
-  Nigeria's eNaira, launched in October 2021, provides the most instructive early example of how CBDC implementation interacts with the elimination of cash. Adoption was slow initially, with citizens resistant to the new system. In late 2022, the Central Bank of Nigeria sharply restricted cash withdrawals, limiting individuals to approximately 20,000 naira per week (roughly $45 at the time), effectively coercing adoption of the eNaira by making the alternative — physical cash — practically inaccessible.
+  Nigeria's eNaira, launched in October 2021,<sup class="fn"><a href="#ref12" id="fn12">[12]</a></sup> provides the most instructive early example of how CBDC implementation interacts with the elimination of cash. Adoption was slow initially, with citizens resistant to the new system. In late 2022, the Central Bank of Nigeria sharply restricted cash withdrawals, limiting individuals to approximately 20,000 naira per day (roughly $45 at the time),<sup class="fn"><a href="#ref13">[13]</a></sup> effectively coercing adoption of the eNaira by making the alternative — physical cash — practically inaccessible.
 </p>
 
 <p>
@@ -525,7 +536,7 @@
 <h3>Inflation by Design</h3>
 
 <p>
-  There is a further property of CBDCs that receives less attention than surveillance but is equally consequential. A CBDC does not change the monetary policy of the central bank that issues it. Every major central bank has an explicit mandate to devalue its currency at 2% per year. This is not a side effect. It is the policy goal. A CBDC does not disrupt this mechanism. It digitizes it. At the official target rate, a unit of currency held over a 35-year working career loses half its real value. At actual realized inflation rates — which have frequently exceeded the target — the erosion is steeper. A CBDC holder experiences the same purchasing power loss as a holder of physical cash, with the added properties of comprehensive surveillance, programmable spending restrictions, and the elimination of the bearer-money privacy that physical cash provides.
+  There is a further property of CBDCs that receives less attention than surveillance but is equally consequential. A CBDC does not change the monetary policy of the central bank that issues it. Every major central bank has an explicit mandate to devalue its currency at 2% per year.<sup class="fn"><a href="#ref5">[5]</a></sup> This is not a side effect. It is the policy goal. A CBDC does not disrupt this mechanism. It digitizes it. At the official target rate, a unit of currency held over a 35-year working career loses half its real value. At actual realized inflation rates — which have frequently exceeded the target — the erosion is steeper. A CBDC holder experiences the same purchasing power loss as a holder of physical cash, with the added properties of comprehensive surveillance, programmable spending restrictions, and the elimination of the bearer-money privacy that physical cash provides.
 </p>
 
 <p>
@@ -541,7 +552,7 @@
 <p class="hero-line">The question is not whether programmable money will exist. The question is whether the only programmable money available will be money that serves the state at the expense of the individual.</p>
 
 <p>
-  The trajectory is now visible. On one path, digital money is issued by sovereign authorities who have demonstrated — across every fiat regime in history — a structural inclination toward monetary expansion that erodes purchasing power. That money is backed by government debt, a supply that can and will be expanded as fiscal pressures demand. Every transaction is recorded. Spending can be conditioned, restricted, or expired. Balances can be frozen by administrative command. The currency is efficient, programmable, and fully controlled by the issuing authority. This is the CBDC path. It is already being built. More than 130 countries are developing it.
+  The trajectory is now visible. On one path, digital money is issued by sovereign authorities who have demonstrated — across every fiat regime in history — a structural inclination toward monetary expansion that erodes purchasing power. That money is backed by government debt, a supply that can and will be expanded as fiscal pressures demand. Every transaction is recorded. Spending can be conditioned, restricted, or expired. Balances can be frozen by administrative command. The currency is efficient, programmable, and fully controlled by the issuing authority. This is the CBDC path. It is already being built. More than 130 countries are developing it.<sup class="fn"><a href="#ref3">[3]</a></sup>
 </p>
 
 <p>
@@ -582,7 +593,7 @@
 <p class="hero-line">Bitcoin has succeeded beyond most early projections as a store of value, a settlement network, and a treasury reserve asset. What has not yet been built on top of it is the denomination and interface layer that everyday commerce requires.</p>
 
 <p>
-  The gap between what Bitcoin was proposed to be and what it has become is not a technical failure. The protocol works. The network is the most secure computing infrastructure ever built. The proof-of-work consensus mechanism has operated without interruption since January 2009. The supply schedule is mathematically fixed and has never been altered. No asset in history has appreciated more over any multi-year holding period. By every technical measure, Bitcoin works.
+  The gap between what Bitcoin was proposed to be and what it has become is not a technical failure. The protocol works. The network is the most secure computing infrastructure ever built. The proof-of-work consensus mechanism has operated without interruption since January 2009.<sup class="fn"><a href="#ref6">[6]</a></sup> The supply schedule is mathematically fixed and has never been altered. No asset in history has appreciated more over any multi-year holding period. By every technical measure, Bitcoin works.
 </p>
 
 <p>
@@ -712,7 +723,7 @@
 <h3>Not a Stablecoin</h3>
 
 <p>
-  ₿C is not a stablecoin. It is a predictably appreciating, incrementally deflationary unit of account. The distinction is critical. A stablecoin targets a fixed peg — one token equals one dollar, today and tomorrow and next year. ₿C does not target a fixed value. It moves upward over the long run as Bitcoin's spot price, which has trended upward across every multi-year holding period in its history, pulls the cumulative average higher. Historically, ₿C has appreciated between 19% and 125% annually depending on the measurement period. Its day-to-day movement is small enough for pricing — a merchant can set prices and leave them unchanged for a month — while its long-run trend makes it the inverse of fiat: a price tag that gains purchasing power rather than losing it.
+  ₿C is not a stablecoin. It is a predictably appreciating, incrementally deflationary unit of account. The distinction is critical. A stablecoin targets a fixed peg — one token equals one dollar, today and tomorrow and next year. ₿C does not target a fixed value. It moves upward over the long run as Bitcoin's spot price, which has trended upward across every multi-year holding period in its history, pulls the cumulative average higher. Historically, ₿C has appreciated between 19% and 125% annually depending on the measurement period.<sup class="fn"><a href="#ref14" id="fn14">[14]</a></sup> Its day-to-day movement is small enough for pricing — a merchant can set prices and leave them unchanged for a month — while its long-run trend makes it the inverse of fiat: a price tag that gains purchasing power rather than losing it.
 </p>
 
 <h3>Scope and Boundaries</h3>
@@ -821,7 +832,7 @@
 <h3>The Competitive Case: Why a Consumer Chooses ₿USD</h3>
 
 <p>
-  ₿USD is a product. Like all products, it must compete in a marketplace — and the marketplace it enters is dominated by incumbents with formidable advantages. Tether and Circle collectively control over 85% of the stablecoin market. They have deep liquidity, exchange integrations across every major platform, years of brand recognition, and the network effects that come with being the default settlement currency for crypto trading. CBDCs, meanwhile, carry the weight of sovereign mandate — governments can compel adoption through policy, tax incentives, or the restriction of alternatives. The headwinds are real. The clock is ticking.
+  ₿USD is a product. Like all products, it must compete in a marketplace — and the marketplace it enters is dominated by incumbents with formidable advantages. Tether and Circle collectively control over 85% of the stablecoin market.<sup class="fn"><a href="#ref15" id="fn15">[15]</a></sup> They have deep liquidity, exchange integrations across every major platform, years of brand recognition, and the network effects that come with being the default settlement currency for crypto trading. CBDCs, meanwhile, carry the weight of sovereign mandate — governments can compel adoption through policy, tax incentives, or the restriction of alternatives. The headwinds are real. The clock is ticking.
 </p>
 
 <p>
@@ -833,7 +844,7 @@
 </p>
 
 <p>
-  <strong>Privacy.</strong> Tether and Circle have both frozen wallets at the direction of law enforcement — a capability that is architecturally identical to the account freezing powers that make CBDCs concerning. A USDT holder's balance can be rendered inaccessible by a single company's compliance decision. A CBDC holder's entire transaction history is visible to the issuing authority by design. ₿USD sidechain transfers carry no identity metadata at the protocol level. The consortium has no surveillance capability over routine sidechain commerce. Minting and redemption require identity verification — this is a regulatory reality, not a design choice — but everything between those endpoints is pseudonymous transfer on a sidechain whose architecture does not produce a centralized transaction record. For the billions of people living under governments whose track record with financial surveillance ranges from overreach to outright abuse, this property is not a feature. It is a requirement.
+  <strong>Privacy.</strong> Tether and Circle have both frozen wallets at the direction of law enforcement<sup class="fn"><a href="#ref7">[7]</a></sup> — a capability that is architecturally identical to the account freezing powers that make CBDCs concerning. A USDT holder's balance can be rendered inaccessible by a single company's compliance decision. A CBDC holder's entire transaction history is visible to the issuing authority by design. ₿USD sidechain transfers carry no identity metadata at the protocol level. The consortium has no surveillance capability over routine sidechain commerce. Minting and redemption require identity verification — this is a regulatory reality, not a design choice — but everything between those endpoints is pseudonymous transfer on a sidechain whose architecture does not produce a centralized transaction record. For the billions of people living under governments whose track record with financial surveillance ranges from overreach to outright abuse, this property is not a feature. It is a requirement.
 </p>
 
 <p>
@@ -861,7 +872,7 @@
 </p>
 
 <p>
-  <strong>Censorship resistance.</strong> Beyond the specific capability to freeze individual wallets, there is a broader structural point. Fiat stablecoins depend on the US banking system for their reserves. If a bank closes Tether's account — as has happened — the entire system is at risk. If regulators order Circle to cease operations — a power they hold — every USDC in circulation becomes a claim on a company that can no longer operate. ₿USD's reserves are Bitcoin, held in cryptographic wallets. They do not depend on any bank, any payment processor, or any government's continued willingness to provide access to the financial system. The reserves exist on a network that no single authority controls. This is the deepest form of censorship resistance: not a policy of non-censorship, but an architecture that makes censorship technically infeasible at the reserve layer.
+  <strong>Censorship resistance.</strong> Beyond the specific capability to freeze individual wallets, there is a broader structural point. Fiat stablecoins depend on the US banking system for their reserves. If a bank closes Tether's account — as has happened<sup class="fn"><a href="#ref16" id="fn16">[16]</a></sup> — the entire system is at risk. If regulators order Circle to cease operations — a power they hold — every USDC in circulation becomes a claim on a company that can no longer operate. ₿USD's reserves are Bitcoin, held in cryptographic wallets. They do not depend on any bank, any payment processor, or any government's continued willingness to provide access to the financial system. The reserves exist on a network that no single authority controls. This is the deepest form of censorship resistance: not a policy of non-censorship, but an architecture that makes censorship technically infeasible at the reserve layer.
 </p>
 
 <table class="compare-table">
@@ -1186,7 +1197,7 @@
 </p>
 
 <p>
-  This is the critical improvement over the gold standard. Gold reserves required trust in the custodian. Nixon's abandonment of Bretton Woods in 1971 was possible precisely because the public had no way to independently verify the gold holdings. Bitcoin reserves are on-chain, publicly addressable, and verifiable in real time by anyone. The custodial trust assumption that destroyed the gold standard does not exist in this architecture.
+  This is the critical improvement over the gold standard. Gold reserves required trust in the custodian. Nixon's abandonment of Bretton Woods in 1971<sup class="fn"><a href="#ref17" id="fn17">[17]</a></sup> was possible precisely because the public had no way to independently verify the gold holdings. Bitcoin reserves are on-chain, publicly addressable, and verifiable in real time by anyone. The custodial trust assumption that destroyed the gold standard does not exist in this architecture.
 </p>
 
 <h3>The Pooling Dynamic</h3>
@@ -1473,7 +1484,7 @@
 <h3>Sustained BTC Price Decline</h3>
 
 <p>
-  The most significant operational risk is a prolonged decline in BTC spot that underfunds Ledger 1 and forces sustained draws on Ledger 2 when tokens are redeemed for fiat. The mitigation is structural: as long as the consortium maintains sufficient Bitcoin in Ledger 2, the system remains solvent at any spot price above zero. Spot price declines only create reserve pressure when tokens are redeemed for fiat. Tokens circulating on the sidechain as a medium of exchange — being spent at merchants, sent between users, held long-term — exert no pressure on the reserve system regardless of where BTC spot stands. The ₿C denomination itself would only fail to appreciate if Bitcoin's spot price fell permanently below its own lifetime cumulative average and remained there — an event with no precedent in Bitcoin's history. As of early 2026, a sustained decline of over 73% would be required to breach this condition.
+  The most significant operational risk is a prolonged decline in BTC spot that underfunds Ledger 1 and forces sustained draws on Ledger 2 when tokens are redeemed for fiat. The mitigation is structural: as long as the consortium maintains sufficient Bitcoin in Ledger 2, the system remains solvent at any spot price above zero. Spot price declines only create reserve pressure when tokens are redeemed for fiat. Tokens circulating on the sidechain as a medium of exchange — being spent at merchants, sent between users, held long-term — exert no pressure on the reserve system regardless of where BTC spot stands. The ₿C denomination itself would only fail to appreciate if Bitcoin's spot price fell permanently below its own lifetime cumulative average and remained there — an event with no precedent in Bitcoin's history. As of early 2026, a sustained decline of over 73% would be required to breach this condition.<sup class="fn"><a href="#ref14">[14]</a></sup>
 </p>
 
 <h3>Regulatory Risk</h3>
@@ -1795,7 +1806,7 @@
 </p>
 
 <p>
-  The second condition is the existence of Bitcoin treasury companies as a class of institutional participant. The first significant corporate Bitcoin treasury allocation was announced in August 2020. The cohort of publicly traded companies holding Bitcoin as a primary reserve asset at sufficient scale to backstop a meaningful stablecoin is a product of Bitcoin's maturation since then. The ₿USD architecture does not require these companies to take a new risk. It offers a framework for monetizing an existing one — converting the downside exposure inherent in their business model into a revenue-generating service that simultaneously builds the Bitcoin economy and strengthens their own balance sheets.
+  The second condition is the existence of Bitcoin treasury companies as a class of institutional participant. The first significant corporate Bitcoin treasury allocation was announced in August 2020.<sup class="fn"><a href="#ref18" id="fn18">[18]</a></sup> The cohort of publicly traded companies holding Bitcoin as a primary reserve asset at sufficient scale to backstop a meaningful stablecoin is a product of Bitcoin's maturation since then. The ₿USD architecture does not require these companies to take a new risk. It offers a framework for monetizing an existing one — converting the downside exposure inherent in their business model into a revenue-generating service that simultaneously builds the Bitcoin economy and strengthens their own balance sheets.
 </p>
 
 <p>
@@ -1837,7 +1848,7 @@
 </p>
 
 <p>
-  The components are specified. The institutions exist. The demand is proven — $317 billion in stablecoins and growing. The only question is whether the capital that is currently flowing into US Treasury bills as stablecoin reserves will continue to flow there, or whether some portion of it will flow into Bitcoin instead — building a monetary system that serves the people who use it rather than the institutions that issue it.
+  The components are specified. The institutions exist. The demand is proven — $317 billion in stablecoins<sup class="fn"><a href="#ref1">[1]</a></sup> and growing. The only question is whether the capital that is currently flowing into US Treasury bills as stablecoin reserves will continue to flow there, or whether some portion of it will flow into Bitcoin instead — building a monetary system that serves the people who use it rather than the institutions that issue it.
 </p>
 
 <hr class="section-break">
@@ -1855,6 +1866,33 @@
 </p>
 
 </div><!-- end article-body -->
+
+<!-- ============================================================ -->
+<!-- REFERENCES -->
+<!-- ============================================================ -->
+<div class="references">
+  <h2 id="references">References</h2>
+  <ol class="ref-list">
+    <li data-n="[1]" id="ref1">Macquarie Research, "Stablecoins are starting to reshape payments and banking" (March 2026). Estimates combined stablecoin market capitalization at approximately $312 billion as of March 2026. CoinGecko's 2025 Annual Crypto Industry Report records stablecoin market cap reaching an all-time high of $311.0 billion by year-end 2025. <a href="https://www.coindesk.com/business/2026/03/10/stablecoins-are-starting-to-reshape-payments-and-banking-macquarie-says">coindesk.com</a>; <a href="https://www.coingecko.com/research/publications/2025-annual-crypto-report">coingecko.com</a></li>
+    <li data-n="[2]" id="ref2">CoinGecko 2025 Annual Crypto Industry Report (January 2026). Stablecoin market cap surged +$102.1 billion (+48.9%) in 2025. Arkham Intelligence reports the stablecoin market cap increased by nearly $100 billion in 2025 with three months remaining. <a href="https://www.coingecko.com/research/publications/2025-annual-crypto-report">coingecko.com</a>; <a href="https://info.arkm.com/research/how-stablecoins-reached-a-300-billion-market-cap-in-2025">arkm.com</a></li>
+    <li data-n="[3]" id="ref3">Atlantic Council CBDC Tracker (updated 2025). Reports 137 countries and currency unions, representing 98% of global GDP, are exploring a CBDC. 72 countries are in the advanced phase of exploration (development, pilot, or launch). BIS 2024 survey (published August 2025) found 91% of 93 surveyed central banks were exploring CBDCs. <a href="https://www.atlanticcouncil.org/cbdctracker/">atlanticcouncil.org</a>; <a href="https://www.bis.org/publ/bppdf/bispap159.htm">bis.org</a></li>
+    <li data-n="[4]" id="ref4">U.S. Bureau of Labor Statistics, Consumer Price Index: Purchasing Power of the Consumer Dollar (FRED Series CUUR0000SA0R), January 1913 through February 2026. CPI data shows prices have risen more than 30x since 1913. Visual Capitalist, "Visualizing the Purchasing Power of the U.S. Dollar Over Time" (April 2021). <a href="https://fred.stlouisfed.org/series/CUUR0000SA0R">fred.stlouisfed.org</a>; <a href="https://www.visualcapitalist.com/purchasing-power-of-the-u-s-dollar-over-time/">visualcapitalist.com</a></li>
+    <li data-n="[5]" id="ref5">Federal Reserve, "Statement on Longer-Run Goals and Monetary Policy Strategy" (reaffirmed annually; targets 2% inflation over the longer run). European Central Bank, "Definition of price stability" (targets inflation of 2% over the medium term). Bank of England Monetary Policy Committee inflation target: 2%. Bank of Japan price stability target: 2% year-on-year change in CPI.</li>
+    <li data-n="[6]" id="ref6">Nakamoto, Satoshi. "Bitcoin: A Peer-to-Peer Electronic Cash System" (2008). The Bitcoin genesis block (Block 0, January 3, 2009) contains the embedded text: "The Times 03/Jan/2009 Chancellor on brink of second bailout for banks." <a href="https://bitcoin.org/bitcoin.pdf">bitcoin.org/bitcoin.pdf</a></li>
+    <li data-n="[7]" id="ref7">Tether has blacklisted hundreds of wallet addresses since 2017, including addresses linked to sanctioned entities. Circle (USDC) has frozen wallets at the direction of law enforcement, including freezing $75,000 in USDC linked to Tornado Cash-associated addresses in August 2022. Both issuers maintain compliance programs that include address-level freezing capabilities.</li>
+    <li data-n="[8]" id="ref8">Cathie Wood, CNBC Squawk Box interview (November 6, 2025). "Given what's happening to stablecoins, which are serving emerging markets in a way that we thought bitcoin would, I think we could take maybe $300,000 off of that bullish case just for stablecoins." Bull case reduced from $1.5 million to approximately $1.2 million for 2030. <a href="https://www.ark-invest.com/articles/valuation-models/arks-bitcoin-price-target-2030">ark-invest.com</a></li>
+    <li data-n="[9]" id="ref9">U.S. v. Do Kwon, Southern District of New York (December 2025). Kwon sentenced to 15 years for orchestrating fraud in the May 2022 Terra/Luna collapse, which wiped out approximately $40 billion in value. See also: Wikipedia, "Terra (blockchain)"; MIT Sloan / LSE, "Anatomy of a Run: The Terra Luna Crash" (Harvard Law School Forum on Corporate Governance, May 2023). <a href="https://corpgov.law.harvard.edu/2023/05/22/anatomy-of-a-run-the-terra-luna-crash/">Harvard Law</a>; <a href="https://en.wikipedia.org/wiki/Terra_(blockchain)">Wikipedia</a></li>
+    <li data-n="[10]" id="ref10">Mu Changchun, Director of the Digital Currency Research Institute, People's Bank of China. Remarks at the China Development Forum (March 2021) defining e-CNY's "controllable anonymity" (可控匿名) principle. Stanford DigiChina lexicon entry provides English-language analysis. PBOC white paper, "Theory and Practice of the E-CNY's Managed Anonymity" (November 2022). <a href="https://digichina.stanford.edu/work/lexicon-controllable-anonymity-or-managed-anonymity-and-chinas-digital-yuan/">Stanford DigiChina</a>; <a href="https://www.pbc.gov.cn/en/3935690/3935759/4696666/2022110110364344083.pdf">pbc.gov.cn</a></li>
+    <li data-n="[11]" id="ref11">Reports of e-CNY stimulus disbursements with expiration dates in Chinese pilot cities, including the October 2020 Shenzhen "red packet" distribution of 10 million e-CNY to 50,000 residents, which had to be spent within a defined period. Stanford Law School, "Background and Implications of China's Central Bank Digital Currency: E-CNY" (April 2021). <a href="https://law.stanford.edu/2021/04/06/background-and-implications-of-chinas-central-bank-digital-currency-e-cny/">Stanford Law</a></li>
+    <li data-n="[12]" id="ref12">Central Bank of Nigeria launched the eNaira on October 25, 2021. Wikipedia, "Digital renminbi" and "eNaira"; Cointelegraph, "Nigeria bans ATM cash withdrawals over $225 a week to force use of CBDC" (December 7, 2022). <a href="https://cointelegraph.com/news/nigeria-bans-atm-cash-withdrawals-over-225-a-week-to-force-use-of-cbdc">cointelegraph.com</a></li>
+    <li data-n="[13]" id="ref13">Central Bank of Nigeria, Circular BSD/DIR/PUB/LAB/015/069, "Naira Redesign Policy — Revised Cash Withdrawal Limits" (December 6, 2022). ATM and POS withdrawals limited to 20,000 naira (~$45) per day; weekly over-the-counter withdrawals limited to 100,000 naira (~$225) for individuals, effective January 9, 2023. Reported by Al Jazeera, PYMNTS, NFCW, and others. <a href="https://www.aljazeera.com/news/2022/12/7/nigeria-to-limit-cash-withdrawals-to-225-a-week">Al Jazeera</a></li>
+    <li data-n="[14]" id="ref14">Derived from the BTCADP/₿C historical dataset (btcadp.org). Annual ₿C appreciation rates computed from the cumulative arithmetic mean of all daily BTCADP values, January 3, 2009 through March 2026. Full dataset available at <a href="https://btcadp.org">btcadp.org</a>.</li>
+    <li data-n="[15]" id="ref15">As of late 2025, USDT comprises approximately 58% and USDC approximately 25% of total stablecoin market cap, per Arkham Intelligence (October 2025). Stablecoin Insider (January 2026) reports Tether and USDC account for 93% of stablecoin market capitalization by an alternative measure. <a href="https://info.arkm.com/research/how-stablecoins-reached-a-300-billion-market-cap-in-2025">arkm.com</a></li>
+    <li data-n="[16]" id="ref16">Tether has historically faced banking relationship disruptions, including the loss of its relationship with Wells Fargo and correspondent banks in 2017, and the Bitfinex/Tether settlement with the New York Attorney General in 2021 ($18.5 million penalty). Circle's USDC briefly de-pegged in March 2023 when $3.3 billion in reserves were frozen at Silicon Valley Bank.</li>
+    <li data-n="[17]" id="ref17">On August 15, 1971, President Richard Nixon announced the suspension of the US dollar's convertibility to gold at the fixed rate of $35 per ounce, effectively ending the Bretton Woods system established in 1944.</li>
+    <li data-n="[18]" id="ref18">MicroStrategy Incorporated (now Strategy), SEC Form 8-K (August 11, 2020). Announced purchase of 21,454 BTC for approximately $250 million as a treasury reserve asset. This was the first substantial corporate balance sheet allocation to Bitcoin by a publicly traded company. <a href="https://www.sec.gov/Archives/edgar/data/0001050446/000119312520215604/d921849dex991.htm">SEC.gov</a>; <a href="https://www.businesswire.com/news/home/20200811005331/en/MicroStrategy-Adopts-Bitcoin-as-Primary-Treasury-Reserve-Asset">BusinessWire</a></li>
+  </ol>
+</div>
 
 <footer>
   <p>
