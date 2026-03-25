@@ -583,7 +583,16 @@
             .foundation-card { flex-direction: column; text-align: center; }
             .cta-row { flex-direction: column; align-items: center; }
         }
-    </style>
+    
+  .references { margin-top: 56px; padding-top: 32px; border-top: 1px solid var(--border); }
+  .references h2 { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 16px; font-family: var(--font-sans); border: none; padding: 0; }
+  .ref-item { margin-bottom: 10px; font-size: 0.83rem; color: var(--text-secondary); padding-left: 32px; position: relative; font-family: var(--font-sans); line-height: 1.55; }
+  .ref-num { position: absolute; left: 0; color: var(--orange); font-family: var(--font-mono); font-weight: 700; font-size: 0.78rem; }
+  .ref-item a { color: #5b9bd5; text-decoration: none; }
+  .ref-item a:hover { color: var(--orange); }
+  .ref-item em { font-style: italic; }
+
+</style>
 </head>
 <body>
 
@@ -790,6 +799,33 @@
 </div>
 
 <!-- FOOTER -->
+
+  <div class="references">
+    <h2>References</h2>
+    <div class="ref-item">
+      <span class="ref-num">[1]</span>
+      Nakamoto, S. (2008). <em>Bitcoin: A Peer-to-Peer Electronic Cash System.</em> The genesis block (January 3, 2009) defines day 1 of the BTCADP time series.
+      <a href="https://bitcoin.org/bitcoin.pdf" target="_blank" rel="noopener">bitcoin.org/bitcoin.pdf</a>
+    </div>
+    <div class="ref-item">
+      <span class="ref-num">[2]</span>
+      Ammous, S. (2018). <em>The Bitcoin Standard: The Decentralized Alternative to Central Banking.</em> Hoboken, NJ: Wiley. Provides the historical and economic analysis of sound money, the gold standard's layered architecture, the Cantillon effect, and the argument that fiat monetary systems structurally penalize saving and reward leverage.
+    </div>
+    <div class="ref-item">
+      <span class="ref-num">[3]</span>
+      Alden, L. (2023). <em>Broken Money: Why Our Financial System Is Failing Us and How We Can Make It Better.</em> Timestamp Press. Analyzes how monetary systems break down across the three classical functions of money, the mechanics of fractional-reserve credit creation, and the structural fragilities of fiat monetary systems.
+    </div>
+    <div class="ref-item">
+      <span class="ref-num">[4]</span>
+      Booth, J. (2020). <em>The Price of Tomorrow: Why Deflation is the Key to an Abundant Future.</em> Stanley Press. Argues that technology is naturally deflationary and that central bank monetary expansion masks this deflation, creating an artificial inflationary environment that benefits asset holders at the expense of wage earners.
+    </div>
+    <div class="ref-item">
+      <span class="ref-num">[5]</span>
+      Derived from the BTCADP/₿C historical dataset. ₿C values computed from the cumulative arithmetic mean of all daily BTCADP values, January 3, 2009 through March 2026. Full specification and dataset available at
+      <a href="https://btcadp.org" target="_blank" rel="noopener">btcadp.org</a>
+    </div>
+  </div>
+
 <footer>
     <p>
         <a href="index.html">Home</a> &nbsp;·&nbsp;

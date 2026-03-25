@@ -220,6 +220,14 @@
   .btn-secondary { background: transparent; color: var(--text-secondary); font-family: var(--font-mono); font-size: 0.8rem; padding: 10px 20px; border-radius: 4px; border: 1px solid var(--border); text-decoration: none; transition: all 0.2s; }
   .btn-secondary:hover { border-color: var(--orange); color: var(--orange); }
 
+  .references { margin-top: 56px; padding-top: 32px; border-top: 1px solid var(--border); }
+  .references h2 { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 16px; font-family: var(--font-sans); border: none; padding: 0; }
+  .ref-item { margin-bottom: 10px; font-size: 0.83rem; color: var(--text-secondary); padding-left: 32px; position: relative; font-family: var(--font-sans); line-height: 1.55; }
+  .ref-num { position: absolute; left: 0; color: var(--orange); font-family: var(--font-mono); font-weight: 700; font-size: 0.78rem; }
+  .ref-item a { color: #5b9bd5; text-decoration: none; }
+  .ref-item a:hover { color: var(--orange); }
+  .ref-item em { font-style: italic; }
+
   footer { border-top: 1px solid var(--border); padding: 32px 24px; text-align: center; font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
   footer a { color: var(--text-muted); text-decoration: none; }
   footer a:hover { color: var(--orange); }
@@ -608,6 +616,65 @@
       <button class="download-btn" onclick="window.print();">Print / Save as PDF</button>
     </div>
 
+  </div>
+
+  
+  <div class="references">
+    <h2>References</h2>
+    <div class="ref-item">
+      <span class="ref-num">[1]</span>
+      Nakamoto, S. (2008). <em>Bitcoin: A Peer-to-Peer Electronic Cash System.</em> The genesis block (January 3, 2009) defines day 1 of the BTCADP time series.
+      <a href="https://bitcoin.org/bitcoin.pdf" target="_blank" rel="noopener">bitcoin.org/bitcoin.pdf</a>
+    </div>
+    <div class="ref-item">
+      <span class="ref-num">[2]</span>
+      Ammous, S. (2018). <em>The Bitcoin Standard: The Decentralized Alternative to Central Banking.</em> Hoboken, NJ: Wiley. Provides the historical and economic analysis of sound money, the gold standard's layered architecture, the Cantillon effect, and the argument that fiat monetary systems structurally penalize saving and reward leverage.
+    </div>
+    <div class="ref-item">
+      <span class="ref-num">[3]</span>
+      Alden, L. (2023). <em>Broken Money: Why Our Financial System Is Failing Us and How We Can Make It Better.</em> Timestamp Press. Analyzes how monetary systems break down across the three classical functions of money, the mechanics of fractional-reserve credit creation, and the structural fragilities of fiat monetary systems.
+    </div>
+    <div class="ref-item">
+      <span class="ref-num">[4]</span>
+      Booth, J. (2020). <em>The Price of Tomorrow: Why Deflation is the Key to an Abundant Future.</em> Stanley Press. Argues that technology is naturally deflationary and that central bank monetary expansion masks this deflation, creating an artificial inflationary environment that benefits asset holders at the expense of wage earners.
+    </div>
+    <div class="ref-item">
+      <span class="ref-num">[5]</span>
+      Atlantic Council CBDC Tracker (updated 2025). Reports 137 countries and currency unions, representing 98% of global GDP, are exploring a CBDC. BIS 2024 survey found 91% of 93 surveyed central banks were exploring CBDCs.
+      <a href="https://www.atlanticcouncil.org/cbdctracker/" target="_blank" rel="noopener">atlanticcouncil.org</a>
+    </div>
+    <div class="ref-item">
+      <span class="ref-num">[6]</span>
+      Mu Changchun, People's Bank of China, China Development Forum (March 2021), defining e-CNY's "controllable anonymity" (可控匿名) principle. PBOC white paper, "Theory and Practice of the E-CNY's Managed Anonymity" (November 2022).
+      <a href="https://digichina.stanford.edu/work/lexicon-controllable-anonymity-or-managed-anonymity-and-chinas-digital-yuan/" target="_blank" rel="noopener">Stanford DigiChina</a>
+    </div>
+    <div class="ref-item">
+      <span class="ref-num">[7]</span>
+      Reports of e-CNY stimulus disbursements with expiration dates in Chinese pilot cities, including the October 2020 Shenzhen "red packet" distribution of 10 million e-CNY to 50,000 residents. Stanford Law School, "Background and Implications of China's Central Bank Digital Currency: E-CNY" (April 2021).
+      <a href="https://law.stanford.edu/2021/04/06/background-and-implications-of-chinas-central-bank-digital-currency-e-cny/" target="_blank" rel="noopener">Stanford Law</a>
+    </div>
+    <div class="ref-item">
+      <span class="ref-num">[8]</span>
+      Central Bank of Nigeria launched the eNaira (October 2021). Cash withdrawal limits of 20,000 naira (~$45) per day imposed December 2022 to accelerate digital adoption.
+      <a href="https://cointelegraph.com/news/nigeria-bans-atm-cash-withdrawals-over-225-a-week-to-force-use-of-cbdc" target="_blank" rel="noopener">cointelegraph.com</a>
+    </div>
+    <div class="ref-item">
+      <span class="ref-num">[9]</span>
+      In February 2022, the Government of Canada invoked the Emergencies Act to freeze bank accounts of Freedom Convoy protest donors without individual court orders. The Act was later ruled unconstitutional by the Federal Court of Canada in January 2024.
+    </div>
+    <div class="ref-item">
+      <span class="ref-num">[10]</span>
+      Rogoff, K. (2016). <em>The Curse of Cash.</em> Princeton University Press. Advocates for the reduction of physical cash partly to enable deeply negative interest rates as a monetary policy tool.
+    </div>
+    <div class="ref-item">
+      <span class="ref-num">[11]</span>
+      Derived from the BTCADP/₿C historical dataset. ₿C values computed from the cumulative arithmetic mean of all daily BTCADP values, January 3, 2009 through March 2026. Full specification and dataset available at
+      <a href="https://btcadp.org" target="_blank" rel="noopener">btcadp.org</a>
+    </div>
+    <div class="ref-item">
+      <span class="ref-num">[12]</span>
+      Public filings and Bitcoin Treasuries data (bitcointreasuries.net). Combined Bitcoin holdings exceeding 600,000 BTC across publicly traded treasury companies including Strategy, MARA Holdings, Metaplanet, and others as of early 2026.
+    </div>
   </div>
 
   <div class="article-footer">

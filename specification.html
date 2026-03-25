@@ -408,6 +408,15 @@
     h3 { font-size: 19px; }
     body { font-size: 16px; }
   }
+
+  .references { margin-top: 56px; padding-top: 32px; border-top: 1px solid var(--border); }
+  .references h2 { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 16px; font-family: var(--font-sans); border: none; padding: 0; }
+  .ref-item { margin-bottom: 10px; font-size: 0.83rem; color: var(--text-secondary); padding-left: 32px; position: relative; font-family: var(--font-sans); line-height: 1.55; }
+  .ref-num { position: absolute; left: 0; color: var(--orange); font-family: var(--font-mono); font-weight: 700; font-size: 0.78rem; }
+  .ref-item a { color: #5b9bd5; text-decoration: none; }
+  .ref-item a:hover { color: var(--orange); }
+  .ref-item em { font-style: italic; }
+
 </style>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg"></head>
 <body>
@@ -700,6 +709,20 @@
   <p>The strength of the BTCADP lies not in the authority of its publisher but in the transparency of its methodology. Anyone can verify it. Anyone can reproduce it. Trust comes from the math, not an individual publisher or institution.</p>
 
   <div class="section-end">End of Specification &bull; BTCADP v1.0</div>
+
+  <div class="references">
+    <h2>References</h2>
+    <div class="ref-item">
+      <span class="ref-num">[1]</span>
+      Nakamoto, S. (2008). <em>Bitcoin: A Peer-to-Peer Electronic Cash System.</em> The genesis block (January 3, 2009) defines day 1 of the BTCADP time series.
+      <a href="https://bitcoin.org/bitcoin.pdf" target="_blank" rel="noopener">bitcoin.org/bitcoin.pdf</a>
+    </div>
+    <div class="ref-item">
+      <span class="ref-num">[2]</span>
+      Derived from the BTCADP/₿C historical dataset. ₿C values computed from the cumulative arithmetic mean of all daily BTCADP values, January 3, 2009 through March 2026. Full specification and dataset available at
+      <a href="https://btcadp.org" target="_blank" rel="noopener">btcadp.org</a>
+    </div>
+  </div>
 
 </div>
 
