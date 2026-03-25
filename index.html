@@ -931,7 +931,7 @@ async function loadBTCCPrice() {
       document.getElementById('btccPrice').textContent =
         '$' + btcc.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
       document.getElementById('btccDays').textContent =
-        count.toLocaleString() + ' daily observations';
+        '# of timeblocks: ' + count.toLocaleString();
     }
   } catch(e) {
     document.getElementById('btccPrice').textContent = 'N/A';
