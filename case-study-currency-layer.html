@@ -238,19 +238,21 @@
     <h2>3. How ₿C Makes the Peg Credible</h2>
     <p>
       The ₿C price is the conservative anchor of the entire system. Total ₿USD issuance is capped
-      at the ₿C-denominated value of the consortium's combined Bitcoin holdings — not spot value.
-      Because ₿C currently sits at approximately one-quarter of spot price, every Bitcoin in the
-      consortium's treasury supports only $18,700 of ₿USD issuance rather than the full $70,000
-      spot value. The system is structurally overcollateralized at all times by approximately 3.75x.
+      at the ₿C-denominated value of the consortium's combined Bitcoin holdings, not spot value.
+      Because ₿C currently sits at approximately one-quarter of spot price, the consortium retains
+      significant uncommitted reserves at all times. Individual ₿USD tokens are backed 1:1 at the
+      moment of minting: each dollar of incoming fiat purchases Bitcoin at spot, and Ledger 1 holds
+      exactly the obligation. If spot rises, Ledger 1 moves into surplus. If spot falls, Ledger 2
+      covers the gap.
     </p>
     <p>
       For the peg to fail, Bitcoin's spot price would need to fall below the ₿C price and remain
-      there permanently. The ₿C price is Bitcoin's own lifetime cumulative average — a level that
+      there permanently. The ₿C price is Bitcoin's own lifetime cumulative average, a level that
       spot has never sustained below in Bitcoin's history. The floor is not a promise made by the
       consortium. It is a mathematical property of Bitcoin's price history.
     </p>
     <p>
-      As Bitcoin's spot price rises over time, the ₿C price rises with it — slowly and permanently,
+      As Bitcoin's spot price rises over time, the ₿C price rises with it, slowly and permanently,
       as each new day's price is absorbed into the cumulative average. The floor rises. Issuance
       capacity expands. The system becomes more robust as it succeeds.
     </p>
@@ -260,15 +262,15 @@
         <tr>
           <th>BTC Spot</th>
           <th>₿C Price (approx.)</th>
-          <th>Overcollateralization</th>
+          <th>Issuance Capacity Headroom</th>
           <th>System Status</th>
         </tr>
       </thead>
       <tbody>
-        <tr><td>$140,000</td><td>~$22,000</td><td class="surplus">~6.4×</td><td>Deep surplus — aggressive issuance possible</td></tr>
-        <tr><td>$70,000 (today)</td><td>~$18,700</td><td class="surplus">~3.75×</td><td>Healthy — standard operations</td></tr>
-        <tr><td>$35,000</td><td>~$17,000</td><td class="neutral">~2.1×</td><td>Issuance tightens — peg holds</td></tr>
-        <tr><td>$18,700 (= ₿C)</td><td>~$18,700</td><td class="stress">~1.0×</td><td>Floor — no historical precedent</td></tr>
+        <tr><td>$140,000</td><td>~$22,000</td><td class="surplus">~6.4× headroom</td><td>Deep surplus; wide issuance capacity</td></tr>
+        <tr><td>$70,000 (today)</td><td>~$18,700</td><td class="surplus">~3.75× headroom</td><td>Healthy; substantial uncommitted reserves</td></tr>
+        <tr><td>$35,000</td><td>~$17,000</td><td class="neutral">~2.1× headroom</td><td>Issuance tightens; Ledger 2 backstop active</td></tr>
+        <tr><td>$18,700 (= ₿C)</td><td>~$18,700</td><td class="stress">~1.0×</td><td>Floor; no historical precedent</td></tr>
       </tbody>
     </table>
 
@@ -417,9 +419,11 @@
     <h2>9. Conclusion</h2>
     <p>
       ₿USD provides what the stablecoin market has not yet delivered: a USD-pegged digital
-      currency backed entirely by Bitcoin, with a collateral floor that is mathematically
-      determined rather than institutionally promised. The ₿C price — Bitcoin's own cumulative
-      price history — is the mechanism that makes overcollateralization credible and automatic.
+      currency backed entirely by Bitcoin, with a conservative issuance ceiling that is mathematically
+      determined rather than institutionally promised. Each token is backed 1:1 at minting, with the
+      Ledger 2 backstop covering any shortfall during drawdowns. The ₿C price, Bitcoin's own cumulative
+      price history, sets the issuance ceiling, ensuring the consortium retains significant uncommitted
+      reserves at all times.
     </p>
     <p>
       For Bitcoin treasury companies, ₿USD is not a departure from their existing mandate.
