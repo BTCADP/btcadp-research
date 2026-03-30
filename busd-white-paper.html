@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>₿USD: Treasury-Backed Digital Currency | btcadp.org</title>
+    <meta name="description" content="₿USD White Paper: A Bitcoin-collateralized, dollar-pegged stablecoin issued by a consortium of Bitcoin treasury companies. The structural inverse of a CBDC.">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --bg2: #111111;
+            --bg3: #1a1a1a;
+            --border: #2a2a2a;
+            --text: #e8e8e8;
+            --muted: #888888;
+            --orange: #f7931a;
+            --orange-dim: rgba(247, 147, 26, 0.12);
+            --font: 'Georgia', 'Times New Roman', serif;
+            --mono: 'Courier New', Courier, monospace;
+            --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font);
+            line-height: 1.7;
+            font-size: 17px;
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(10,10,10,0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 56px;
+        }
+
+        .nav-brand {
+            font-family: var(--mono);
+            font-size: 1rem;
+            font-weight: bold;
+            color: var(--orange);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.25rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-family: var(--sans);
+            font-size: 0.85rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            transition: color 0.2s, background 0.2s;
+            letter-spacing: 0.03em;
+        }
+
+        .nav-links a:hover { color: var(--text); background: var(--bg3); }
+        .nav-links a.active { color: var(--orange); }
+
+        .paper-header {
+            border-bottom: 1px solid var(--border);
+            padding: 4rem 2rem 3rem;
+            text-align: center;
+            background: radial-gradient(ellipse at 50% 0%, rgba(247,147,26,0.06) 0%, transparent 60%);
+        }
+
+        .paper-label {
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            letter-spacing: 0.2em;
+            color: var(--orange);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .paper-header h1 {
+            font-size: clamp(1.6rem, 4vw, 2.4rem);
+            font-weight: normal;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .paper-header .subtitle {
+            font-family: var(--sans);
+            font-size: 0.95rem;
+            color: var(--muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .paper-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            font-family: var(--sans);
+            font-size: 0.8rem;
+            color: var(--muted);
+            margin-bottom: 2rem;
+        }
+
+        .paper-meta span { display: flex; align-items: center; gap: 0.4rem; }
+
+        .download-bar {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--orange);
+            color: #000;
+            font-family: var(--sans);
+            font-size: 0.88rem;
+            font-weight: 600;
+            padding: 0.65rem 1.4rem;
+            border-radius: 4px;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: opacity 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .btn-primary:hover { opacity: 0.85; }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--orange);
+            font-family: var(--sans);
+            font-size: 0.88rem;
+            font-weight: 600;
+            padding: 0.65rem 1.4rem;
+            border-radius: 4px;
+            border: 1px solid rgba(247,147,26,0.4);
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .btn-secondary:hover { background: var(--orange-dim); }
+
+        .paper-body {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 4rem 2rem 5rem;
+        }
+
+        .abstract {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--orange);
+            border-radius: 4px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .abstract-label {
+            font-family: var(--sans);
+            font-size: 0.72rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--orange);
+            margin-bottom: 0.8rem;
+        }
+
+        .abstract p {
+            font-size: 0.95rem;
+            color: #c0c0c0;
+            line-height: 1.75;
+        }
+
+        .paper-section {
+            margin-bottom: 3rem;
+        }
+
+        .paper-section h2 {
+            font-size: 1.25rem;
+            font-weight: normal;
+            color: #fff;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+            font-family: var(--sans);
+        }
+
+        .paper-section h2 .sec-num {
+            color: var(--orange);
+            font-family: var(--mono);
+            font-size: 0.85rem;
+            margin-right: 0.5rem;
+        }
+
+        .paper-section h3 {
+            font-family: var(--sans);
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #ddd;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .paper-section p {
+            color: #c4c4c4;
+            margin-bottom: 1rem;
+            font-size: 0.97rem;
+        }
+
+        .paper-section em {
+            font-style: italic;
+            color: #ddd;
+        }
+
+        .paper-section strong {
+            color: #ddd;
+            font-weight: 600;
+        }
+
+        .callout {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--orange);
+            border-radius: 0 4px 4px 0;
+            padding: 1.2rem 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .callout p {
+            margin-bottom: 0;
+            font-style: italic;
+            color: #ddd;
+        }
+
+        .formula {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 1rem 1.5rem;
+            margin: 1.2rem 0;
+            font-family: var(--mono);
+            font-size: 0.95rem;
+            color: var(--orange);
+            text-align: center;
+        }
+
+        .download-section {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-top: 2px solid var(--orange);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .download-section h3 {
+            font-size: 1.1rem;
+            font-weight: normal;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .download-section p {
+            font-family: var(--sans);
+            font-size: 0.85rem;
+            color: var(--muted);
+            margin-bottom: 1.5rem;
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 2rem;
+            text-align: center;
+            font-family: var(--sans);
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        footer a { color: var(--muted); text-decoration: none; }
+        footer a:hover { color: var(--orange); }
+
+        @media (max-width: 600px) {
+            .nav-links a { padding: 0.4rem 0.5rem; font-size: 0.78rem; }
+            .paper-meta { gap: 1rem; }
+        }
+
+        @media print {
+            nav, .download-bar, .download-section, footer { display: none; }
+            .paper-header { background: none; padding: 2rem 0; }
+            .paper-body { padding: 1rem 0; }
+            body { background: #fff; color: #111; font-size: 12pt; }
+            .abstract { background: #f8f8f8; border-color: #ccc; }
+            .abstract p, .paper-section p { color: #222; }
+            .paper-section h2 { color: #000; border-color: #ccc; }
+            .formula { background: #f0f0f0; border-color: #ccc; color: #333; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a class="nav-brand" href="index.html">BTCADP</a>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="live.html">Live</a></li>
+        <li><a href="days/index.html">Days</a></li>
+        <li><a href="specification.html">Specification</a></li>
+        <li><a href="btcc-intro.html">&#x20BF;C</a></li>
+        <li><a href="bitcoin-timeblocks.html">Timeblocks</a></li>
+        <li><a href="currency-layer.html">Currency Layer</a></li>
+        <li><a href="knowledge-base.html" class="active">Knowledge Base</a></li>
+    </ul>
+</nav>
+
+<div class="paper-header">
+    <div class="paper-label">White Paper</div>
+    <h1>₿USD: Treasury-Backed Digital Currency</h1>
+    <div class="subtitle">A Bitcoin-Collateralized, Dollar-Pegged Stablecoin &middot; btcadp.org &middot; 2026</div>
+    <div class="paper-meta">
+        <span>CC0 Public Domain</span>
+        <span>btcadp.org</span>
+        <span>Version 1.0</span>
+    </div>
+    <div class="download-bar">
+        <button class="btn-primary" onclick="window.print()">Print / Save as PDF</button>
+        <a href="tbd-usd.html" class="btn-secondary">&larr; Summary Page</a>
+    </div>
+</div>
+
+<div class="paper-body">
+
+    <div class="abstract">
+        <div class="abstract-label">Abstract</div>
+        <p>₿USD is a dollar-pegged stablecoin—one token equals one dollar—issued by a consortium of publicly traded Bitcoin treasury companies. Unlike existing stablecoins that hold fiat reserves in the form of US Treasury bills and bank deposits, ₿USD is backed entirely by Bitcoin held on the base layer in publicly addressable wallets, verifiable by any observer in real time. The instrument is classified as a Treasury-Backed Digital Currency (TBDC). The term draws a deliberate structural contrast with Central Bank Digital Currencies (CBDCs): where a CBDC is issued by an entity that can expand the money supply, a TBDC is backed by a finite reserve asset that no issuer can create, expand, or dilute. This distinction defines the economic properties of the instrument and the constraints under which its issuers operate. This paper specifies the technical architecture of ₿USD: its issuance mechanism, two-ledger reserve system, sidechain circulation layer, redemption mechanics, defensive programmability framework, fee structure, and risk analysis. The system requires no modification to Bitcoin’s base layer protocol.</p>
+    </div>
+
+    <div class="paper-section">
+        <h2><span class="sec-num">2.</span> Motivation and Problem Statement</h2>
+        <p>The stablecoin market has grown to over $317 billion in aggregate supply, expanding at approximately $100 billion per year. These instruments—primarily USDT and USDC—are backed by US Treasury bills and bank deposits. Tether alone holds over $100 billion in sovereign debt. The stablecoin market has become one of the largest purchasers of US government debt on earth.</p>
+        <p>From Bitcoin’s perspective, this represents a structural failure. Every dollar held in a fiat stablecoin is a dollar that did not enter Bitcoin. The payment rails are digital and built on blockchain infrastructure, but the reserve asset is sovereign debt—the monetary system Bitcoin was designed to replace. ARK Invest formalized this observation in November 2025, reducing its 2030 bull-case Bitcoin price target by $300,000, specifically because stablecoins are capturing the emerging-market demand ARK had previously assigned to Bitcoin.</p>
+        <p>₿USD addresses this gap. When a consumer purchases a ₿USD token, the issuing consortium uses the incoming fiat to purchase Bitcoin at spot. Every unit of ₿USD demand is structurally identical to Bitcoin demand. The two cannot be separated.</p>
+        <div class="callout"><p><em>The distinction that matters: ₿USD does not compete with Bitcoin for capital. It converts stablecoin demand into Bitcoin demand.</em></p></div>
+    </div>
+
+    <div class="paper-section">
+        <h2><span class="sec-num">3.</span> System Architecture Overview</h2>
+        <p>The ₿USD system is composed of four distinct layers, each performing a single function. The separation is deliberate: each layer is independently verifiable, and the failure of any single layer does not compromise the others.</p>
+        <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem;">
+  <tr>
+    <th style="padding:10px 14px;border-bottom:2px solid var(--border);color:var(--orange);font-family:var(--sans);font-size:0.85rem;font-weight:600;letter-spacing:0.05em;text-align:left;"><strong>Layer</strong></th>
+    <th style="padding:10px 14px;border-bottom:2px solid var(--border);color:var(--orange);font-family:var(--sans);font-size:0.85rem;font-weight:600;letter-spacing:0.05em;text-align:left;"><strong>Function</strong></th>
+    <th style="padding:10px 14px;border-bottom:2px solid var(--border);color:var(--orange);font-family:var(--sans);font-size:0.85rem;font-weight:600;letter-spacing:0.05em;text-align:left;"><strong>Network</strong></th>
+    <th style="padding:10px 14px;border-bottom:2px solid var(--border);color:var(--orange);font-family:var(--sans);font-size:0.85rem;font-weight:600;letter-spacing:0.05em;text-align:left;"><strong>Verification</strong></th>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Reference Price price; ₿C cumulative average</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">BTCADP daily standard)</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Off-chain (open trade data</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Any party with</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Reserve Layer two-ledger system layer</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">BTC custody in addresses</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Bitcoin base</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">On-chain wallet</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Token Layer circulation</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">₿USD issuance and Liquid sidechain</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Sidechain explorer</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Interface Layer and apps</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Consumer wallets</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Application layer User experience</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Interface Layer and apps</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Consumer wallets</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Application layer User experience</td>
+  </tr>
+</table>
+    </div>
+
+    <div class="paper-section">
+        <h2><span class="sec-num">4.</span> Issuer Structure: The Consortium Model</h2>
+        <p>₿USD is issued by a consortium of publicly traded Bitcoin treasury companies—firms whose primary business is acquiring and holding Bitcoin as a reserve asset. The consortium model distributes risk across multiple independent entities, each with its own Bitcoin holdings, its own jurisdiction, and its own regulatory compliance.</p>
+        <p>No single consortium member can unilaterally modify the reserve rules, alter the fee structure, or freeze a token. The governance charter codifies reserve management standards, transparency requirements, and operational procedures. The methodology—the BTCADP specification that defines the reference price and denomination—is independent of the consortium. Even a complete governance failure leaves the unit of account intact.</p>
+        <p>Consortium membership requires publicly verifiable Bitcoin holdings at institutional scale, regulatory compliance in the member’s domicile, commitment to on-chain transparency standards, and participation in the Ledger 2 backstop reserve. The distributed structure ensures no single regulatory action in any jurisdiction can shut down the entire system.</p>
+    </div>
+
+    <div class="paper-section">
+        <h2><span class="sec-num">5.</span> The Issuance Mechanism</h2>
+        <p>The issuance process converts fiat demand into Bitcoin demand in a single atomic operation. When a customer sends fiat to a consortium member, the following sequence executes:</p>
+        <p><strong>Step 1.</strong> The customer sends fiat currency (e.g., $18,000) to a consortium member.</p>
+        <p><strong>Step 2.</strong> The consortium member mints ₿USD tokens at a 1:1 dollar ratio (18,000 tokens) and delivers them to the customer on the sidechain.</p>
+        <p><strong>Step 3.</strong> The incoming fiat is used to purchase Bitcoin at the current spot price. At $70,000 spot, $18,000 acquires approximately 0.2571 BTC (25,714,286 satoshis).</p>
+        <p><strong>Step 4.</strong> The acquired satoshis are deposited into Ledger 1 (the issuance pool). At the moment of issuance, Ledger 1 holds satoshis worth exactly $18,000 at spot—perfectly backing the 18,000 outstanding tokens at $1 each.</p>
+        <div class="callout"><p><em>This is the critical structural distinction from fiat stablecoins: every ₿USD token minted requires the treasury company to purchase actual Bitcoin on the open market at the current spot price. There is no synthetic exposure. There is no fractional reserve on the issuance side. 100% of ₿USD demand flows through to BTC spot as buying pressure.</em></p></div>
+    </div>
+
+    <div class="paper-section">
+        <h2><span class="sec-num">6.</span> The Two-Ledger Reserve System</h2>
+        <p>Each consortium member maintains two Bitcoin ledgers on the base layer. Both hold actual Bitcoin in publicly verifiable wallets. Reserves are not lent, staked, or rehypothecated.</p>
+    </div>
+
+    <div class="paper-section">
+        <h3>6.1 Ledger 1 — Issuance Pool</h3>
+        <p>Ledger 1 holds the satoshis acquired with incoming fiat at the time of ₿USD token issuance. This ledger starts empty and grows as tokens are minted. The satoshis in Ledger 1 are the primary backing for outstanding tokens. In a rising market, the value of Ledger 1 grows faster than the aggregate dollar-denominated liabilities it backs, generating a natural surplus.</p>
+    </div>
+
+    <div class="paper-section">
+        <h3>6.2 Ledger 2 — Reserve Backstop</h3>
+        <p>Ledger 2 holds Bitcoin drawn from the treasury company’s existing reserves. This ledger serves as the guarantee: if BTC spot declines and the satoshis in Ledger 1 are insufficient to cover ₿USD redemptions at $1.00 per token, the treasury company covers the shortfall from Ledger 2. The size of Ledger 2 determines how far BTC spot can fall before the system faces solvency pressure.</p>
+        <p>Ledger 2 self-fortifies over time. As BTC appreciates above the $1 obligation, surplus from Ledger 1 flows into Ledger 2. The longer ₿USD circulates without redemption, the deeper the backstop becomes—without requiring additional capital commitment from the treasury company.</p>
+    </div>
+
+    <div class="paper-section">
+        <h3>6.3 Reserve Dynamics Under Stress</h3>
+        <p>The following table illustrates combined reserve behavior under different BTC spot scenarios, assuming a ₿C price of $18,000, initial issuance at $70,000 spot, and Ledger 2 holding 0.25 BTC per token-equivalent issued:</p>
+        <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem;">
+  <tr>
+    <th style="padding:10px 14px;border-bottom:2px solid var(--border);color:var(--orange);font-family:var(--sans);font-size:0.85rem;font-weight:600;letter-spacing:0.05em;text-align:left;"><strong>BTC Spot</strong></th>
+    <th style="padding:10px 14px;border-bottom:2px solid var(--border);color:var(--orange);font-family:var(--sans);font-size:0.85rem;font-weight:600;letter-spacing:0.05em;text-align:left;"><strong>Ledger 1</strong></th>
+    <th style="padding:10px 14px;border-bottom:2px solid var(--border);color:var(--orange);font-family:var(--sans);font-size:0.85rem;font-weight:600;letter-spacing:0.05em;text-align:left;"><strong>Ledger 2</strong></th>
+    <th style="padding:10px 14px;border-bottom:2px solid var(--border);color:var(--orange);font-family:var(--sans);font-size:0.85rem;font-weight:600;letter-spacing:0.05em;text-align:left;"><strong>Combined</strong></th>
+    <th style="padding:10px 14px;border-bottom:2px solid var(--border);color:var(--orange);font-family:var(--sans);font-size:0.85rem;font-weight:600;letter-spacing:0.05em;text-align:left;"><strong>Status</strong></th>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$140,000 surplus</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$36,000</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$35,000</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">394%</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Significant</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$100,000 profit on redemption</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$25,714</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$25,000</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">282%</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Surplus;</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$70,000 at issuance</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$18,000</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$17,500</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">197%</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Fully backed</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$50,000 covers gap</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$12,857</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$12,500</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">141%</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Ledger 2</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$30,000 2; solvent</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$7,714</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$7,500</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">84%</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Draw on Ledger</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$18,000 threshold</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$4,629</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$4,500</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">51%</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Break-even</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$18,000 threshold</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$4,629</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$4,500</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">51%</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Break-even</td>
+  </tr>
+</table>
+        <p>Above the issuance price, every redemption generates profit for the treasury company. Between the issuance price and the ₿C price, Ledger 1 is underfunded but Ledger 2 covers the gap. These reserve dynamics only matter when tokens are redeemed for fiat. Tokens circulating on the sidechain as a medium of exchange exert zero pressure on reserves regardless of where Bitcoin’s spot price stands.</p>
+    </div>
+
+    <div class="paper-section">
+        <h3>6.4 Accounting and Transparency</h3>
+        <p>The consortium publishes daily transparency reports including: total satoshis in Ledger 1 across all members, total satoshis in Ledger 2 across all members, total ₿USD tokens outstanding, the current ₿C fiat-equivalent price, the current Ledger 1-to-liability ratio, and the combined (Ledger 1 + Ledger 2) to-liability ratio. These reports are derived from on-chain data and are independently verifiable. Surplus recognition, cost-basis tracking (weighted average cost), and cross-ledger transfers are governed by the consortium’s operating agreement and subject to independent audit on a quarterly basis.</p>
+    </div>
+
+    <div class="paper-section">
+        <h2><span class="sec-num">7.</span> Circulation: The Sidechain Layer</h2>
+        <p>₿USD tokens circulate as issued assets on a Bitcoin sidechain—Liquid in the reference implementation, though the architecture is compatible with any sidechain capable of issuing transferable assets, including a purpose-built chain operated by the consortium. When one user pays another, the token changes hands on the sidechain. No Bitcoin moves.</p>
+        <p>The BTC reserves sit untouched on Bitcoin’s base layer in transparent, on-chain wallets. Bitcoin is only bought or sold at two moments: when a new token is minted (fiat enters, BTC is purchased) and when a token is redeemed for fiat (BTC is sold to return fiat). Everything between minting and redemption is token circulation—peer-to-peer transfers on the sidechain with no interaction with Bitcoin’s base layer and no exposure to spot price volatility.</p>
+        <div class="callout"><p><em>A million ₿USD transactions can occur on the sidechain without a single satoshi moving on Bitcoin’s base layer. The base layer secures the reserves. The sidechain handles commerce.</em></p></div>
+    </div>
+
+    <div class="paper-section">
+        <h2><span class="sec-num">8.</span> Redemption Mechanics</h2>
+        <p>When a customer redeems a ₿USD token, the treasury company returns $1.00 per token. The Bitcoin backing that token in Ledger 1 is sold to fund the redemption. The token is burned. If Bitcoin’s spot price has risen since issuance, the Ledger 1 position is in surplus—the surplus remains in the consortium’s holdings. If spot has fallen, Ledger 1 may be insufficient, and Ledger 2 covers the shortfall. The customer always receives $1.00 per token.</p>
+    </div>
+
+    <div class="paper-section">
+        <h3>8.1 BTC-Default Redemption</h3>
+        <p>In the default redemption path, the consortium transfers Bitcoin at spot value directly to the redeemer’s wallet. No market order is placed. No slippage occurs. The spot price is unaffected by the redemption. This single design choice eliminates the most dangerous attack vector—forced selling. Fiat redemption remains available as a premium service with slower processing, higher fees, and velocity limits.</p>
+    </div>
+
+    <div class="paper-section">
+        <h3>8.2 Fiat Redemption</h3>
+        <p>Fiat redemption requires the consortium to sell Bitcoin from reserves to return dollars. This is the only exit path that creates selling pressure. The fee structure, detailed in Section 11, reflects the actual cost this exit imposes on the reserve system.</p>
+    </div>
+
+    <div class="paper-section">
+        <h2><span class="sec-num">9.</span> Redemption Economics and Surplus Dynamics</h2>
+        <p>The economic engine of the ₿USD model is the structural divergence between a moving asset and a fixed liability. The satoshis in Ledger 1 appreciate at the BTC spot rate. The dollar-denominated liabilities they back are fixed at $1.00 per token—they do not move at all. As BTC spot rises, the gap between asset value and liability value does not grow linearly. It widens at an accelerating rate, because the asset side tracks a rising spot price while the liability side is permanently fixed.</p>
+    </div>
+
+    <div class="paper-section">
+        <h3>9.1 The Surplus Engine</h3>
+        <p>Consider a concrete example. A treasury company issues $18 million in ₿USD tokens (18 million tokens at $1 each) when BTC spot is $70,000. The consortium deposits approximately 257.14 BTC into Ledger 1. The redemption liability is $18 million—fixed regardless of what Bitcoin does next.</p>
+        <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem;">
+  <tr>
+    <th style="padding:10px 14px;border-bottom:2px solid var(--border);color:var(--orange);font-family:var(--sans);font-size:0.85rem;font-weight:600;letter-spacing:0.05em;text-align:left;"><strong>BTC Spot</strong> Value**</th>
+    <th style="padding:10px 14px;border-bottom:2px solid var(--border);color:var(--orange);font-family:var(--sans);font-size:0.85rem;font-weight:600;letter-spacing:0.05em;text-align:left;"><strong>Ledger 1 Liability</strong></th>
+    <th style="padding:10px 14px;border-bottom:2px solid var(--border);color:var(--orange);font-family:var(--sans);font-size:0.85rem;font-weight:600;letter-spacing:0.05em;text-align:left;"><strong>Redemption Surplus</strong></th>
+    <th style="padding:10px 14px;border-bottom:2px solid var(--border);color:var(--orange);font-family:var(--sans);font-size:0.85rem;font-weight:600;letter-spacing:0.05em;text-align:left;"><strong>Treasury Alone</strong></th>
+    <th style="padding:10px 14px;border-bottom:2px solid var(--border);color:var(--orange);font-family:var(--sans);font-size:0.85rem;font-weight:600;letter-spacing:0.05em;text-align:left;">**vs. Holding</th>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$70,000 (issuance)</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$18,000,000</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$18,000,000</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$0</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">0% (neutral)</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$100,000 holding</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$25,714,000</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$18,000,000</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$7,714,000</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">+43% above</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$140,000 doubled intake</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$36,000,000</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$18,000,000</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$18,000,000</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">+100% —</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$200,000 holding</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$51,428,000</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$18,000,000</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$33,428,000</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">+186% above</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$500,000 holding</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$128,571,000</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$18,000,000</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$110,571,000</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">+614% above</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$500,000 holding</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$128,571,000</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$18,000,000</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$110,571,000</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">+614% above</td>
+  </tr>
+</table>
+        <p>The profit accelerates because the denominator—the $1 liability—is permanently fixed while the numerator—the BTC asset value—compounds with spot. The ₿USD model converts a linear BTC holding into what is effectively a leveraged position on Bitcoin’s upside, without borrowing, without margin, and without any risk beyond what the company has already accepted by being a Bitcoin treasury company.</p>
+    </div>
+
+    <div class="paper-section">
+        <h3>9.2 Compounding Through Surplus Accumulation</h3>
+        <p>The surplus dynamics above describe a single issuance cohort. In practice, the treasury company is continuously issuing and redeeming ₿USD tokens. Each profitable redemption leaves surplus satoshis in Ledger 1. Those surplus satoshis are not withdrawn—they remain in the pool, appreciating at spot alongside all other satoshis. New issuances add more satoshis. In a sustained rising market, Ledger 1 becomes a compounding engine.</p>
+        <p>Surplus sats from early redemptions appreciate alongside new issuance sats. New issuances at higher spot prices deposit fewer sats per token (because each sat is worth more), but the surplus from prior issuances continues growing. Over time, the aggregate surplus in Ledger 1 can exceed the aggregate liability—at which point the pool is self-sustaining and Ledger 2 becomes purely a precautionary reserve that is never tapped.</p>
+    </div>
+
+    <div class="paper-section">
+        <h3>9.3 Pooling Dynamics: Tokens in the Black and the Red</h3>
+        <p>Ledger 1 operates as a pooled reserve, not on a per-token basis. Tokens are issued at different spot prices and redeemed at different times. At any given moment, a percentage of outstanding tokens are "in the black"—their backing satoshis are worth more than the $1 obligation—and a percentage are "in the red," where spot has declined below their issuance price.</p>
+        <p>Over a long enough time horizon, the proportion of tokens in the black grows structurally. Every day that BTC spot remains above prior issuance prices, more cohorts move into surplus. Older tokens—those issued months or years ago at lower spot prices—are deeply in the black. Their surplus more than offsets the shortfall on recently issued tokens that may be temporarily underwater. A token issued at $50,000 spot and redeemed when spot is $80,000 generates a surplus of $0.375 per token. A token issued at $90,000 and redeemed at $80,000 generates a shortfall of $0.125 per token. In a pooled reserve, the surplus tokens subsidize the underwater ones.</p>
+        <p>This is the retention effect. Long-term holders do not redeem during a downturn. They have no reason to—their ₿USD token’s $1.00 peg is stable regardless of what BTC spot does on any given day. The tokens most likely to be redeemed during a downturn are recently minted tokens held by short-term participants—precisely the tokens with the thinnest margin. But the bulk of the pool—the older, deeply in-the-black tokens—sits undisturbed, its surplus growing with every passing day that spot exceeds the historical average.</p>
+        <div class="callout"><p><em>The longer the system operates, the deeper its structural surplus becomes. Time itself is a reserve asset. The model does not merely survive a rising Bitcoin price—it converts that rise into accelerating, compounding returns for the consortium while maintaining a hard $1 peg for every holder.</em></p></div>
+    </div>
+
+    <div class="paper-section">
+        <h2><span class="sec-num">10.</span> Defensive Programmability</h2>
+        <p>Every ₿USD token is a programmable instrument. The word "programmable" carries justified suspicion—in the context of CBDCs, programmability means surveillance and spending restrictions. ₿USD programmability inverts this relationship entirely.</p>
+    </div>
+
+    <div class="paper-section">
+        <h3>10.1 Token Provenance Metadata</h3>
+        <p>Each token carries provenance metadata about itself—not its holder. The metadata includes: mint date, mint-day BTC spot price, mint-day ₿C price, block age, and transfer count. No holder identity, spending pattern, geographic location, or transaction purpose is recorded. The data does not exist at the protocol level because the protocol was designed never to produce it. This is an architectural constraint that would require dismantling the sidechain to override.</p>
+    </div>
+
+    <div class="paper-section">
+        <h3>10.2 Network State Awareness</h3>
+        <p>The token contract has read access to aggregate metrics derived from on-chain data: total outstanding supply, aggregate redemption velocity (rolling 24h, 7d, 30d windows), BTC spot relative to ₿C, the coverage ratio, and reserve attestation status. None of these metrics require information about individual holders. They are system-level vital signs—independently verifiable by any participant.</p>
+    </div>
+
+    <div class="paper-section">
+        <h3>10.3 The Defensive Toolkit</h3>
+        <p>Each mechanism is deterministic, transparent, and applies equally to every participant. None requires human intervention to activate. None can be overridden by the consortium.</p>
+        <p><strong>BTC-Default Redemption:</strong> Eliminates forced selling. The coordinated short-plus-redemption attack depends on forced BTC liquidation—with BTC-default redemption, there is no forced selling.</p>
+        <p><strong>Time-Weighted Redemption Fees:</strong> Fiat redemption fees are a function of token age. 0–7 days: 3.0%. 8–30 days: 1.5%. 31–90 days: 0.5%. 91–180 days: 0.1%. Over 180 days: 0.0%. BTC-default redemption and ₿C lateral conversion are exempt.</p>
+        <p><strong>Volume-Triggered Fee Escalation:</strong> When rolling 7-day fiat redemption volume exceeds defined thresholds as a percentage of total supply, an additional surcharge applies. Below 1%: no surcharge. 1–2%: +0.5%. 2–5%: +1.5%. Above 5%: +3.0%.</p>
+        <p><strong>Adaptive Velocity Limits:</strong> Daily fiat redemption cap of 5% of outstanding supply under normal conditions, tightening as velocity rises. BTC-default redemption and ₿C conversion remain unlimited at all times.</p>
+        <p><strong>₿C Lateral Conversion:</strong> Any holder can convert to a ₿C-denominated position at any time, at no cost, with no delay. During panic, holders move to the denomination tracking Bitcoin’s lifetime average rather than spot volatility. No Bitcoin is sold. The system absorbs fear without absorbing outflow.</p>
+        <p><strong>Redemption Notice Periods:</strong> Small fiat redemptions process immediately. Above $100,000: 48 hours. Above $1,000,000: 7 days. BTC-default redemption remains instant at any amount.</p>
+    </div>
+
+    <div class="paper-section">
+        <h3>10.4 The Calm-State Guarantee</h3>
+        <p>Under normal network conditions—the vast majority of the token’s life—every defensive mechanism is dormant. Transfers are instant and free. Redemptions are fast and cheap. The token behaves identically to any other stablecoin. The mechanisms activate only when the network’s vital signs indicate abnormal stress, and the thresholds are public, auditable, and identical for everyone.</p>
+    </div>
+
+    <div class="paper-section">
+        <h2><span class="sec-num">11.</span> Fee Structure and Exit Architecture</h2>
+        <p>The exit structure is designed around a governing principle: every exit path should reflect the actual cost that exit imposes on the Bitcoin ecosystem, and the fee should route capital toward the path that keeps it inside the ecosystem.</p>
+        <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem;">
+  <tr>
+    <th style="padding:10px 14px;border-bottom:2px solid var(--border);color:var(--orange);font-family:var(--sans);font-size:0.85rem;font-weight:600;letter-spacing:0.05em;text-align:left;"><strong>Exit Path</strong></th>
+    <th style="padding:10px 14px;border-bottom:2px solid var(--border);color:var(--orange);font-family:var(--sans);font-size:0.85rem;font-weight:600;letter-spacing:0.05em;text-align:left;"><strong>Friction</strong></th>
+    <th style="padding:10px 14px;border-bottom:2px solid var(--border);color:var(--orange);font-family:var(--sans);font-size:0.85rem;font-weight:600;letter-spacing:0.05em;text-align:left;"><strong>Market Impact</strong></th>
+    <th style="padding:10px 14px;border-bottom:2px solid var(--border);color:var(--orange);font-family:var(--sans);font-size:0.85rem;font-weight:600;letter-spacing:0.05em;text-align:left;"><strong>Ecosystem Effect</strong></th>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">₿USD → ₿C in ecosystem.</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Near zero</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">None. Capital stays</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Strongly positive</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">₿USD → BTC directly. No market selling.</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Moderate fee stays in Bitcoin</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">BTC transferred</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Neutral—holder</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">₿USD → Fiat reserve at spot.</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Highest fee exits Bitcoin</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">BTC sold from</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Negative—capital</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">₿USD → Fiat reserve at spot.</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Highest fee exits Bitcoin</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">BTC sold from</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Negative—capital</td>
+  </tr>
+</table>
+        <p>The practical consequence is a natural gravity that keeps capital inside the Bitcoin economy. The lowest-friction paths are the ones that keep capital closest to Bitcoin. The highest-friction path—fiat exit—is the one that imposes the greatest cost on the reserve system.</p>
+    </div>
+
+    <div class="paper-section">
+        <h3>11.1 Revenue Streams for Treasury Companies</h3>
+        <p>The consortium generates revenue through three channels: (1) A holding fee of 1–2% annually on outstanding ₿USD float—on $10 billion in circulation, this produces $100–200 million annually. (2) Surplus on redemptions—when BTC spot has risen since issuance, the difference between the reserve value and the $1 obligation is retained. (3) Issuance and exit fees. All fee revenue is deployed to purchase additional Bitcoin until coverage thresholds are met.</p>
+    </div>
+
+    <div class="paper-section">
+        <h2><span class="sec-num">12.</span> Bank Run Analysis and Structural Defenses</h2>
+        <p>A bear market drives BTC spot below the average minting price. Holders panic. Redemptions spike. Each fiat exit forces the consortium to sell Bitcoin into a falling market, depressing the price further, triggering more redemptions. This is a bank run—the oldest failure mode in monetary systems.</p>
+        <p>The ₿USD system deploys five structural defenses against this scenario:</p>
+        <p><strong>First:</strong> Reserve pressure exists only at the fiat exit. Tokens circulating within the ecosystem create zero reserve pressure at any BTC spot price. The run scenario requires holders to not only panic but to convert to fiat specifically—abandoning the ecosystem entirely.</p>
+        <p><strong>Second:</strong> BTC-default redemption eliminates forced selling. The consortium transfers Bitcoin rather than liquidating it. No market order, no slippage, no spot impact.</p>
+        <p><strong>Third:</strong> Time-weighted fees price out mint-and-redeem attack loops. A freshly minted token faces 3% fiat redemption fees, making the attack deeply unprofitable.</p>
+        <p><strong>Fourth:</strong> Volume-triggered fee escalation and velocity limits create congestion pricing at the fiat exit ramp during stress events.</p>
+        <p><strong>Fifth:</strong> ₿C lateral conversion provides a zero-cost escape valve. Holders can move to the ₿C denomination without touching reserves. The system absorbs the fear without absorbing the outflow.</p>
+    </div>
+
+    <div class="paper-section">
+        <h3>12.1 Game Theory: The Coordinated Attack</h3>
+        <p>Consider a coordinated short-plus-redemption attack: an attacker mints $100M in ₿USD, builds a $100M BTC short position, then attempts mass fiat redemption to force selling and crash spot. The obstacles stack: BTC-default redemption means no forced selling. Time-weighted fees cost 3% ($3M) on freshly minted tokens. Volume-triggered escalation adds another 3% ($6M total). Velocity limits spread the redemption over weeks, during which the short accrues carrying costs. The attack’s expected return is deeply negative.</p>
+        <div class="callout"><p><em>The defender’s advantage is structural, not tactical. The protocol does not need to detect the attacker, identify their strategy, or respond in real time. It applies the same rules to everyone. The rules happen to make the attack uneconomical.</em></p></div>
+    </div>
+
+    <div class="paper-section">
+        <h2><span class="sec-num">13.</span> CBDC vs. TBDC: The Programmability Inversion</h2>
+        <p>The technical capability is identical—both CBDCs and TBDCs embed conditional logic at the token level. The architecture is the same. The philosophy is opposite.</p>
+        <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem;">
+  <tr>
+    <th style="padding:10px 14px;border-bottom:2px solid var(--border);color:var(--orange);font-family:var(--sans);font-size:0.85rem;font-weight:600;letter-spacing:0.05em;text-align:left;"><strong>Property</strong></th>
+    <th style="padding:10px 14px;border-bottom:2px solid var(--border);color:var(--orange);font-family:var(--sans);font-size:0.85rem;font-weight:600;letter-spacing:0.05em;text-align:left;"><strong>CBDC</strong></th>
+    <th style="padding:10px 14px;border-bottom:2px solid var(--border);color:var(--orange);font-family:var(--sans);font-size:0.85rem;font-weight:600;letter-spacing:0.05em;text-align:left;"><strong>TBDC (₿USD)</strong></th>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Programmability serves</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">The issuing authority its holders</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">The token network and</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Holder surveillance impossible—no identity metadata</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Built in by design</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Structurally</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Spending restrictions Expiration, category limits, geo-fencing</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">None—holders spend freely</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Crisis behavior accounts at discretion</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Authorities freeze autonomously</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Protocol hardens</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Redemption control discretion</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Issuer can deny or delay Deterministic rules, no</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Collateral verifiable in real time</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Government promise</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Bitcoin on base layer,</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Failure mode lifetime average (no precedent)</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Policy change, overreach BTC sustained below</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Failure mode lifetime average (no precedent)</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Policy change, overreach BTC sustained below</td>
+  </tr>
+</table>
+    </div>
+
+    <div class="paper-section">
+        <h2><span class="sec-num">14.</span> The Virtuous Cycle</h2>
+        <p>The most consequential property of ₿USD is the demand flywheel that activates at scale. Each component reinforces the others, and the cycle has no natural ceiling.</p>
+        <p><strong>Minting creates Bitcoin demand.</strong> Every ₿USD minted requires purchasing BTC at spot. Commerce-driven demand is persistent and does not reverse when sentiment shifts.</p>
+        <p><strong>Rising spot expands issuance capacity.</strong> As BTC rises, the ₿C-denominated value of consortium holdings increases. More ₿USD can be issued. More BTC gets purchased.</p>
+        <p><strong>Fee reinvestment deepens reserves.</strong> 100% of fee revenue is deployed to purchase additional Bitcoin until coverage thresholds are met.</p>
+        <p><strong>Scale reduces redemption risk.</strong> As more commerce occurs natively in ₿USD, the proportion of tokens redeemed for fiat declines. The system becomes structurally safer as it grows—the inverse of traditional fractional reserve banking.</p>
+    </div>
+
+    <div class="paper-section">
+        <h2><span class="sec-num">15.</span> Risk Analysis</h2>
+    </div>
+
+    <div class="paper-section">
+        <h3>15.1 Bitcoin Price Decline</h3>
+        <p>A sustained, severe decline that depresses BTC spot below the average acquisition price of reserves is the most acute risk. The structural mitigation is Ledger 2 overcollateralization. The ₿C denomination’s stability also reduces the correlation between spot declines and redemption pressure—the value a holder sees does not change materially when spot moves 10%. The critical framing: each consortium member already carries this price risk on its balance sheet. The Ledger 2 commitment formalizes an existing exposure with a defined perimeter.</p>
+    </div>
+
+    <div class="paper-section">
+        <h3>15.2 Regulatory Uncertainty</h3>
+        <p>The regulatory treatment of a Bitcoin-backed stablecoin pegged to $1 USD remains untested in most jurisdictions. The structural mitigation is the consortium’s distributed jurisdiction. The ₿C denomination itself requires no permission to compute—it is an open mathematical standard.</p>
+    </div>
+
+    <div class="paper-section">
+        <h3>15.3 Consortium Coordination Failure</h3>
+        <p>Multiple independent companies must cooperate on reserve management and operational standards. The critical design principle is that the BTCADP specification is independent of the consortium. The denomination survives the institutions that use it.</p>
+    </div>
+
+    <div class="paper-section">
+        <h3>15.4 Technical and Operational Risk</h3>
+        <p>Protocol vulnerabilities, oracle manipulation, and private key compromise are inherent in any blockchain financial infrastructure. Mitigations include multi-signature wallets, formal verification of sidechain scripts, geographically distributed key management, and insurance against operational losses. The BTCADP oracle is resistant to manipulation by design—the trimmed mean methodology and exchange qualification filters prevent any single entity from influencing the reference price.</p>
+    </div>
+
+    <div class="paper-section">
+        <h2><span class="sec-num">16.</span> Integration with the Four-Ledger Architecture</h2>
+        <p>When deployed alongside the ₿ond savings product, ₿USD operates within a four-ledger reserve architecture. The ₿ond and ₿USD are structurally different instruments with different redemption mechanics, duration profiles, and risk characteristics. Pooling their reserves would allow a stress event on one product to consume the reserves of the other.</p>
+        <p>The four-ledger separation is as follows: ₿ond L1 holds BTC purchased with saver deposits, locked to the maturity schedule. ₿ond L2 is the backstop reserve sized actuarially against the known maturity book. ₿USD L1 holds BTC backing outstanding $1 tokens. ₿USD L2 self-fortifies over time as BTC appreciation creates surplus above the $1 obligation. All four ledgers are held in publicly addressable Bitcoin wallets on the base layer.</p>
+    </div>
+
+    <div class="paper-section">
+        <h2><span class="sec-num">17.</span> Conclusion</h2>
+        <p>₿USD provides a dollar-stable medium of exchange backed entirely by Bitcoin—the only asset whose supply is fixed by protocol and whose custody requires no counterparty. The system converts stablecoin demand into structural Bitcoin demand, channels fee revenue into additional Bitcoin purchases, and becomes more robust as adoption grows.</p>
+        <p>The architecture requires no modification to Bitcoin’s base layer. It uses existing sidechain infrastructure for token circulation, existing publicly traded companies as issuers, and a published open-source specification for its reference price. The denomination outlasts the institutions that use it.</p>
+        <p>The defensive programmability framework inverts the CBDC paradigm: tokens that read the state of their own network to protect all holders equally, rather than tokens that report on their holders to serve the issuing authority. Under normal conditions, every mechanism is dormant and the token behaves identically to any other stablecoin. Under stress, the protocol hardens autonomously.</p>
+        <div class="callout"><p><em>The transition is not an ideological project. It is the emergent consequence of a stablecoin that is better: backed by harder collateral, verified in real time, issued by institutions with aligned incentives, and defended by its own architecture.</em></p></div>
+        <p>CC0 Public Domain · btcadp.org · 2026</p>
+    </div>
+
+    <div class="download-section" id="download">
+        <h3>Download This Paper</h3>
+        <p>CC0 Public Domain &mdash; free to use, share, and build upon without restriction.</p>
+        <button class="btn-primary" onclick="window.print()">Print / Save as PDF</button>
+    </div>
+
+</div>
+
+<footer>
+    <p>
+        <a href="index.html">Home</a> &nbsp;&middot;&nbsp;
+        <a href="knowledge-base.html">Knowledge Base</a> &nbsp;&middot;&nbsp;
+        <a href="specification.html">Specification</a> &nbsp;&middot;&nbsp;
+        <a href="https://github.com/BTCADP/btcadp-research" target="_blank" rel="noopener">GitHub</a>
+    </p>
+    <p style="margin-top:8px;">CC0 Public Domain &middot; btcadp.org &middot; 2026</p>
+</footer>
+
+</body>
+</html>

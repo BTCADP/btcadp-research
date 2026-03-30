@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>₿OND: Bitcoin Currency Savings | btcadp.org</title>
+    <meta name="description" content="₿OND White Paper: A return-based savings instrument denominated in ₿C, backed by Bitcoin, issued by a consortium of Bitcoin treasury companies.">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --bg2: #111111;
+            --bg3: #1a1a1a;
+            --border: #2a2a2a;
+            --text: #e8e8e8;
+            --muted: #888888;
+            --orange: #f7931a;
+            --orange-dim: rgba(247, 147, 26, 0.12);
+            --font: 'Georgia', 'Times New Roman', serif;
+            --mono: 'Courier New', Courier, monospace;
+            --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font);
+            line-height: 1.7;
+            font-size: 17px;
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(10,10,10,0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 56px;
+        }
+
+        .nav-brand {
+            font-family: var(--mono);
+            font-size: 1rem;
+            font-weight: bold;
+            color: var(--orange);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.25rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-family: var(--sans);
+            font-size: 0.85rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            transition: color 0.2s, background 0.2s;
+            letter-spacing: 0.03em;
+        }
+
+        .nav-links a:hover { color: var(--text); background: var(--bg3); }
+        .nav-links a.active { color: var(--orange); }
+
+        .paper-header {
+            border-bottom: 1px solid var(--border);
+            padding: 4rem 2rem 3rem;
+            text-align: center;
+            background: radial-gradient(ellipse at 50% 0%, rgba(247,147,26,0.06) 0%, transparent 60%);
+        }
+
+        .paper-label {
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            letter-spacing: 0.2em;
+            color: var(--orange);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .paper-header h1 {
+            font-size: clamp(1.6rem, 4vw, 2.4rem);
+            font-weight: normal;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .paper-header .subtitle {
+            font-family: var(--sans);
+            font-size: 0.95rem;
+            color: var(--muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .paper-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            font-family: var(--sans);
+            font-size: 0.8rem;
+            color: var(--muted);
+            margin-bottom: 2rem;
+        }
+
+        .paper-meta span { display: flex; align-items: center; gap: 0.4rem; }
+
+        .download-bar {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--orange);
+            color: #000;
+            font-family: var(--sans);
+            font-size: 0.88rem;
+            font-weight: 600;
+            padding: 0.65rem 1.4rem;
+            border-radius: 4px;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: opacity 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .btn-primary:hover { opacity: 0.85; }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--orange);
+            font-family: var(--sans);
+            font-size: 0.88rem;
+            font-weight: 600;
+            padding: 0.65rem 1.4rem;
+            border-radius: 4px;
+            border: 1px solid rgba(247,147,26,0.4);
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .btn-secondary:hover { background: var(--orange-dim); }
+
+        .paper-body {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 4rem 2rem 5rem;
+        }
+
+        .abstract {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--orange);
+            border-radius: 4px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .abstract-label {
+            font-family: var(--sans);
+            font-size: 0.72rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--orange);
+            margin-bottom: 0.8rem;
+        }
+
+        .abstract p {
+            font-size: 0.95rem;
+            color: #c0c0c0;
+            line-height: 1.75;
+        }
+
+        .paper-section {
+            margin-bottom: 3rem;
+        }
+
+        .paper-section h2 {
+            font-size: 1.25rem;
+            font-weight: normal;
+            color: #fff;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+            font-family: var(--sans);
+        }
+
+        .paper-section h2 .sec-num {
+            color: var(--orange);
+            font-family: var(--mono);
+            font-size: 0.85rem;
+            margin-right: 0.5rem;
+        }
+
+        .paper-section h3 {
+            font-family: var(--sans);
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #ddd;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .paper-section p {
+            color: #c4c4c4;
+            margin-bottom: 1rem;
+            font-size: 0.97rem;
+        }
+
+        .paper-section em {
+            font-style: italic;
+            color: #ddd;
+        }
+
+        .paper-section strong {
+            color: #ddd;
+            font-weight: 600;
+        }
+
+        .callout {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--orange);
+            border-radius: 0 4px 4px 0;
+            padding: 1.2rem 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .callout p {
+            margin-bottom: 0;
+            font-style: italic;
+            color: #ddd;
+        }
+
+        .formula {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 1rem 1.5rem;
+            margin: 1.2rem 0;
+            font-family: var(--mono);
+            font-size: 0.95rem;
+            color: var(--orange);
+            text-align: center;
+        }
+
+        .download-section {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-top: 2px solid var(--orange);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .download-section h3 {
+            font-size: 1.1rem;
+            font-weight: normal;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .download-section p {
+            font-family: var(--sans);
+            font-size: 0.85rem;
+            color: var(--muted);
+            margin-bottom: 1.5rem;
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 2rem;
+            text-align: center;
+            font-family: var(--sans);
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        footer a { color: var(--muted); text-decoration: none; }
+        footer a:hover { color: var(--orange); }
+
+        @media (max-width: 600px) {
+            .nav-links a { padding: 0.4rem 0.5rem; font-size: 0.78rem; }
+            .paper-meta { gap: 1rem; }
+        }
+
+        @media print {
+            nav, .download-bar, .download-section, footer { display: none; }
+            .paper-header { background: none; padding: 2rem 0; }
+            .paper-body { padding: 1rem 0; }
+            body { background: #fff; color: #111; font-size: 12pt; }
+            .abstract { background: #f8f8f8; border-color: #ccc; }
+            .abstract p, .paper-section p { color: #222; }
+            .paper-section h2 { color: #000; border-color: #ccc; }
+            .formula { background: #f0f0f0; border-color: #ccc; color: #333; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a class="nav-brand" href="index.html">BTCADP</a>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="live.html">Live</a></li>
+        <li><a href="days/index.html">Days</a></li>
+        <li><a href="specification.html">Specification</a></li>
+        <li><a href="btcc-intro.html">&#x20BF;C</a></li>
+        <li><a href="bitcoin-timeblocks.html">Timeblocks</a></li>
+        <li><a href="currency-layer.html">Currency Layer</a></li>
+        <li><a href="knowledge-base.html" class="active">Knowledge Base</a></li>
+    </ul>
+</nav>
+
+<div class="paper-header">
+    <div class="paper-label">White Paper</div>
+    <h1>₿OND: Bitcoin Currency Savings</h1>
+    <div class="subtitle">A Return-Based Savings Instrument Denominated in ₿C &middot; btcadp.org &middot; 2026</div>
+    <div class="paper-meta">
+        <span>CC0 Public Domain</span>
+        <span>btcadp.org</span>
+        <span>Version 1.0</span>
+    </div>
+    <div class="download-bar">
+        <button class="btn-primary" onclick="window.print()">Print / Save as PDF</button>
+        <a href="bond.html" class="btn-secondary">&larr; Summary Page</a>
+    </div>
+</div>
+
+<div class="paper-body">
+
+    <div class="abstract">
+        <div class="abstract-label">Abstract</div>
+        <p>The ₿ond is a return-based savings instrument denominated in ₿C (BTCC — Bitcoin Currency) and issued by a consortium of Bitcoin treasury companies. A saver deposits fiat currency—any amount from $1 upward—and selects a target return: +10%, +25%, +50%, +100%, or other tiers defined by the issuing consortium. Each dollar becomes a programmable ₿ond token with its own ₿C entry price, target return, and maturity trigger. The bond matures when two conditions are simultaneously met: the saver’s ₿C return target has been reached, and the treasury’s BTC position on that specific bond is profitable by a minimum margin. At maturity, the saver receives their original deposit plus the target return in ₿USD—the system’s dollar-pegged spending token. The saver can spend it, withdraw to fiat, or auto-reinvest into a new ₿ond. This paper specifies the technical architecture of ₿ond: its dual-condition maturity mechanism, reserve structure, DCA integration, auto-reinvest lifecycle, distribution model, and risk analysis.</p>
+    </div>
+
+    <div class="paper-section">
+        <h2><span class="sec-num">2.</span> The Savings Problem</h2>
+        <p>The global savings system is broken. Interest rates have spent the better part of two decades below the rate of inflation. High-yield savings accounts currently offer 4–5%—generous by recent standards, still insufficient to preserve purchasing power over a multi-decade horizon. CDs lock capital for fixed terms and return single digits. Traditional bonds carry minimums ($1,000+ for treasuries, $25,000+ for many corporates) that exclude the majority of the global population.</p>
+        <p>Bitcoin solves the store-of-value problem in theory. In practice, it asks ordinary people to hold an asset that swings 40–70% in a year and to maintain conviction through drawdowns that would shake professional fund managers. The appreciation is real. The volatility makes it psychologically unsurvivable for most.</p>
+        <p>The ₿ond addresses this gap: it delivers the long-run appreciation of Bitcoin without requiring the saver to endure its short-run volatility. The consumer picks a return. They wait. They get paid. The mechanics underneath are Bitcoin. The experience on top is a savings account.</p>
+    </div>
+
+    <div class="paper-section">
+        <h2><span class="sec-num">3.</span> Return-Based Maturity — A New Category of Financial Product</h2>
+        <p>Traditional savings instruments are time-based: you choose a term (6 months, 1 year, 5 years), and your return is determined by whatever interest rate was set at issuance. You know when you get your money back. You do not know exactly how much it will have grown, and you know with certainty that inflation will erode some of the gain.</p>
+        <p>The ₿ond inverts this. The return is fixed at purchase. The timeline is variable. You know exactly what you are getting—you do not know exactly when.</p>
+        <div class="callout"><p><em>No traditional instrument offers this structure because no traditional instrument is backed by a reserve asset with the appreciation characteristics of Bitcoin.</em></p></div>
+    </div>
+
+    <div class="paper-section">
+        <h3>3.1 Historical Performance</h3>
+        <p>Backtested against actual BTCADP data from 2017–2026, the dual-condition model produces the following median maturity times:</p>
+        <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem;">
+  <tr>
+    <th style="padding:10px 14px;border-bottom:2px solid var(--border);color:var(--orange);font-family:var(--sans);font-size:0.85rem;font-weight:600;letter-spacing:0.05em;text-align:left;"><strong>Tier</strong></th>
+    <th style="padding:10px 14px;border-bottom:2px solid var(--border);color:var(--orange);font-family:var(--sans);font-size:0.85rem;font-weight:600;letter-spacing:0.05em;text-align:left;"><strong>Saver Return</strong></th>
+    <th style="padding:10px 14px;border-bottom:2px solid var(--border);color:var(--orange);font-family:var(--sans);font-size:0.85rem;font-weight:600;letter-spacing:0.05em;text-align:left;"><strong>Median Wait</strong></th>
+    <th style="padding:10px 14px;border-bottom:2px solid var(--border);color:var(--orange);font-family:var(--sans);font-size:0.85rem;font-weight:600;letter-spacing:0.05em;text-align:left;"><strong>Typical Range</strong></th>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Starter</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">+10%</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">\~4 months</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">2–8 months</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Standard</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">+20%</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">\~7 months</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">4–12 months</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Growth</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">+25%</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">\~8 months</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">5–14 months</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Accelerator</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">+50%</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">\~14 months</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">11–23 months</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Double</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">+100%</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">\~25 months</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">13–31 months</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Double</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">+100%</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">\~25 months</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">13–31 months</td>
+  </tr>
+</table>
+        <p>The relationship between chosen return and expected wait is monotonic and predictable. Higher return equals longer expected wait. The consumer chooses their position on the curve.</p>
+    </div>
+
+    <div class="paper-section">
+        <h3>3.2 Dynamic Estimation at Purchase</h3>
+        <p>The spot/₿C ratio at the moment of purchase is a strong predictor of maturity time. The system calculates a personalized estimate at issuance based on current market conditions:</p>
+        <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem;">
+  <tr>
+    <th style="padding:10px 14px;border-bottom:2px solid var(--border);color:var(--orange);font-family:var(--sans);font-size:0.85rem;font-weight:600;letter-spacing:0.05em;text-align:left;"><strong>Market Condition</strong></th>
+    <th style="padding:10px 14px;border-bottom:2px solid var(--border);color:var(--orange);font-family:var(--sans);font-size:0.85rem;font-weight:600;letter-spacing:0.05em;text-align:left;"><strong>Spot/₿C Ratio</strong> <strong>+25% Estimate</strong> <strong>Context</strong></th>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Bear market floor</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">2–3.5×</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">\~12 months</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Spot near ₿C</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Neutral</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">3.5–5.5×</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">\~8 months</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Normal conditions</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Warming growth</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">5.5–8×</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">\~8 months</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Accelerating ₿C</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Bull market</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">8–15×</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">\~2 months</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Rapid maturity</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Bull market</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">8–15×</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">\~2 months</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Rapid maturity</td>
+  </tr>
+</table>
+        <p>The estimate updates in real time. The saver sees a progress bar showing their bond’s advance toward both conditions, with an adjusted expected completion date. Not guaranteed—estimated, based on historical performance.</p>
+    </div>
+
+    <div class="paper-section">
+        <h2><span class="sec-num">4.</span> The Dual Condition — Structural Integrity</h2>
+        <p>The dual condition is not a feature. It is the structural innovation that makes the product viable.</p>
+    </div>
+
+    <div class="paper-section">
+        <h3>4.1 Condition 1: Saver Target</h3>
+        <p>₿C (Bitcoin Currency) has appreciated by the saver’s chosen percentage from the entry price. ₿C is the cumulative arithmetic mean of every Bitcoin daily price since the genesis block, computed from the BTCADP specification. As of early 2026, the ₿C price incorporates over 6,200 daily observations and sits at approximately $18,700. Its daily sensitivity to any single day’s price is approximately 1/6,200 of the difference between that day’s price and the current average.</p>
+        <p>A 10% single-day move in BTC spot shifts ₿C by less than 0.01%. A 40% single-day crash shifts it by approximately 0.04%. The saver’s progress bar may slow during drawdowns, but it never reverses—because the ₿C component only moves upward as long as BTC spot remains above the lifetime cumulative average (which it has for Bitcoin’s entire history).</p>
+    </div>
+
+    <div class="paper-section">
+        <h3>4.2 Condition 2: Treasury Coverage</h3>
+        <p>The treasury’s BTC position on that specific bond is profitable by a minimum margin (e.g., the coverage ratio ≥ 1.10, meaning the BTC held is worth at least 110% of the saver’s payout obligation). This condition ensures the treasury company never pays out at a loss.</p>
+    </div>
+
+    <div class="paper-section">
+        <h3>4.3 Why Single-Condition Models Fail</h3>
+        <p>Under a single-condition model (the ₿C target is hit, the bond matures regardless of the treasury’s position), the treasury would be forced to pay out during bear markets when its BTC holdings have declined in value. A 60% BTC spot drawdown could leave the treasury selling Bitcoin at a loss to honor a ₿C-denominated obligation that matured because ₿C, with its cumulative average stability, continued to appreciate even as spot crashed. The dual condition guarantees that every maturity is profitable for the treasury. The saver waits longer in adverse conditions, but the system never pays out at a loss.</p>
+        <div class="callout"><p><em>The dual condition eliminates counterparty credit risk by construction. The bond only matures when both the saver’s return target is met and the treasury’s BTC position is profitable. The treasury never pays out at a loss. This is not a promise—it is the maturity trigger itself.</em></p></div>
+    </div>
+
+    <div class="paper-section">
+        <h2><span class="sec-num">5.</span> The Issuance Mechanism</h2>
+        <p>The issuance process converts a saver’s deposit into a programmable Bitcoin-backed savings token in a single operation.</p>
+        <p><strong>Step 1 — Deposit:</strong> The saver deposits fiat (e.g., $200). 1 USD = 1 ₿ond. Two hundred ₿ond tokens are created.</p>
+        <p><strong>Step 2 — BTC Acquisition:</strong> The treasury consortium uses the $200 to purchase Bitcoin at the current spot price. The acquired BTC enters Ledger 1, tagged to these specific bonds.</p>
+        <p><strong>Step 3 — Parameter Recording:</strong> Each token records: the ₿C entry price on the day of purchase, the saver’s selected return tier, the BTC spot price at acquisition, and the dual-condition maturity trigger.</p>
+        <p><strong>Step 4 — Progress Tracking:</strong> The saver sees a progress bar showing advance toward both conditions, with a dynamically updated estimated completion date.</p>
+        <p>Each dollar becomes its own programmable token with its own entry price and maturity trigger. The product works identically at $1 and at $1 million. The $1 minimum is not a marketing gesture—it is an architectural property.</p>
+    </div>
+
+    <div class="paper-section">
+        <h2><span class="sec-num">6.</span> Reserve Architecture</h2>
+    </div>
+
+    <div class="paper-section">
+        <h3>6.1 ₿ond Ledger 1 — Maturity Pool</h3>
+        <p>Holds BTC purchased with incoming saver deposits. Each deposit’s BTC is tagged to the individual bond(s) it backs. BTC in Ledger 1 is held for the full maturity period—locked to the maturity schedule. It is not lent, staked, or rehypothecated.</p>
+    </div>
+
+    <div class="paper-section">
+        <h3>6.2 ₿ond Ledger 2 — Backstop Reserve</h3>
+        <p>Additional BTC drawn from treasury companies' existing holdings. Sized actuarially against the known maturity book. Because maturity dates are fixed at issuance and the saver’s obligation is expressed in ₿C, the required reserve can be calculated precisely rather than estimated. Ledger 2 covers any shortfall between the BTC position and the saver’s payout obligation when the dual condition is met but BTC spot is below the level needed for the treasury’s minimum margin.</p>
+    </div>
+
+    <div class="paper-section">
+        <h3>6.3 Separation from ₿USD Reserves</h3>
+        <p>The ₿ond reserves are entirely separate from ₿USD reserves. The four-ledger architecture (₿ond L1, ₿ond L2, ₿USD L1, ₿USD L2) prevents cross-contamination. A stress event on either product cannot consume the reserves of the other. All four ledgers are held in publicly addressable Bitcoin wallets on the base layer, verifiable by any observer in real time.</p>
+    </div>
+
+    <div class="paper-section">
+        <h2><span class="sec-num">7.</span> Maturity, Payout, and Auto-Reinvest</h2>
+    </div>
+
+    <div class="paper-section">
+        <h3>7.1 The Maturity Event</h3>
+        <p>When both conditions are simultaneously met, the bond matures. The saver’s payout is calculated: original ₿C units × current ₿C price = payout amount. For a $200 deposit at +25%, the payout is $250 in ₿USD.</p>
+        <p>The treasury’s BTC position on this bond is worth more than $250 (the coverage condition guarantees this). The surplus BTC—the difference between what the treasury holds and what the saver is owed—moves from obligated to unobligated reserves. This is the treasury’s profit. It is already Bitcoin. No purchase is triggered. No sale is triggered. It is a ledger reclassification, not a transaction.</p>
+    </div>
+
+    <div class="paper-section">
+        <h3>7.2 ₿USD Payout</h3>
+        <p>At maturity, the saver receives their payout in ₿USD—the system’s dollar-pegged spending token. The saver can spend it within the ecosystem, withdraw to fiat (subject to the ₿USD exit fee structure), or auto-reinvest into a new ₿ond.</p>
+    </div>
+
+    <div class="paper-section">
+        <h3>7.3 Auto-Reinvest Lifecycle</h3>
+        <p>With auto-reinvest enabled, the ₿USD payout immediately converts to a new ₿ond at the current ₿C entry price. The BTC that was backing the payout is reassigned to the new bond. A new target is set. The cycle begins again.</p>
+        <div class="callout"><p><em>What moved: nothing. No BTC was sold. No BTC was bought. No fiat was touched. The ₿USD existed for an instant as an accounting step between the old bond closing and the new bond opening. The BTC sat in Ledger 1 the entire time.</em></p></div>
+        <p>This is the zero-sell-pressure property of auto-reinvest. The treasury’s profit is a reclassification of existing Bitcoin. The saver’s new bond is backed by the same satoshis. The market sees no activity. No exchange order book is touched. The system grows silently.</p>
+    </div>
+
+    <div class="paper-section">
+        <h2><span class="sec-num">8.</span> Dollar-Cost Averaging as the Native Operating Mode</h2>
+        <p>Dollar-cost averaging—depositing a fixed amount at regular intervals regardless of market conditions—is one of the most thoroughly validated accumulation strategies in financial history. In the ₿ond context, DCA is not just a strategy. It is the native operating mode.</p>
+        <p>A saver depositing $200 per month into a +25% ₿ond creates a new token with its own entry price and maturity trigger each month. After several months, the saver holds a portfolio of tokens at various stages of progress. Some are near maturity. Some were just purchased. The portfolio naturally ladders itself—functionally identical to CD laddering in traditional finance.</p>
+        <p>After the initial ramp-up period, the saver has tokens maturing on a rolling basis, providing effective liquidity even though individual tokens are locked. The key psychological insight: the saver is never "investing in Bitcoin." They are saving. They deposit money. It grows. They do not check spot prices. They do not make timing decisions. They do not panic during drawdowns because their progress bar may slow, but it never reverses.</p>
+        <div class="callout"><p><em>The number one reason intentional DCA fails in practice is not the math—it is psychology. People stop buying during crashes. The ₿ond removes the decision from the process. The accumulation happens as a byproduct of saving.</em></p></div>
+    </div>
+
+    <div class="paper-section">
+        <h2><span class="sec-num">9.</span> What the Consumer Sees</h2>
+        <p>A savings app. Deposit money. Pick a return. Watch a progress bar. Get paid when it is done. Reinvest automatically or withdraw to a spending wallet.</p>
+        <p>The consumer never needs to know the word Bitcoin, blockchain, sidechain, ₿C, or any of the underlying infrastructure. They see a spending balance (₿USD) and a savings balance (₿ond). 1 USD = 1 ₿USD. 1 USD = 1 ₿ond. The interface is indistinguishable from a conventional savings account. The returns are 5–20 times better than the best traditional alternative.</p>
+        <p>The progress bar is the trust mechanism. It updates in real time, shows advance toward both conditions, and displays an estimated completion date based on current market conditions. Transparency replaces the need for faith.</p>
+    </div>
+
+    <div class="paper-section">
+        <h2><span class="sec-num">10.</span> Distribution Model: Issuer–Distributor Separation</h2>
+    </div>
+
+    <div class="paper-section">
+        <h3>10.1 Issuers</h3>
+        <p>Issuers are Bitcoin treasury companies—entities that hold significant Bitcoin reserves. The issuer performs the core function: receives deposits, purchases BTC, manages the reserve, runs the dual condition logic, and processes maturities. The issuer bears the reserve risk and earns the surplus profit. There will be relatively few issuers—perhaps a dozen globally.</p>
+    </div>
+
+    <div class="paper-section">
+        <h3>10.2 Distributors</h3>
+        <p>Distributors are any financial institution, fintech, neobank, credit union, payments app, or brokerage that wants to offer ₿ond to its customers. The distributor does not hold BTC. It does not manage reserves. It provides the interface—the app, the customer relationship, the onboarding flow—and earns a distribution fee.</p>
+        <p>A traditional bank could offer the ₿ond as a savings product alongside existing CDs and money market accounts—branded in its own name, integrated into its own app. A fintech startup in Nairobi could offer it as a mobile savings account with a $1 minimum. A payroll company could offer automatic ₿ond allocation as a benefit. The underlying product is the same everywhere—same dual condition, same ₿C mechanics, same structural guarantee—but distribution is localized and competitive.</p>
+        <div class="callout"><p><em>Every distributor channel is a new on-ramp for Bitcoin demand. Every savings account opened at every bank that offers ₿ond triggers a BTC purchase by the issuer.</em></p></div>
+    </div>
+
+    <div class="paper-section">
+        <h2><span class="sec-num">11.</span> Exit Structure and Fee Architecture</h2>
+        <p>The exit structure follows the same governing principle as ₿USD: friction is proportional to the ecosystem cost of the exit.</p>
+        <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem;">
+  <tr>
+    <th style="padding:10px 14px;border-bottom:2px solid var(--border);color:var(--orange);font-family:var(--sans);font-size:0.85rem;font-weight:600;letter-spacing:0.05em;text-align:left;"><strong>Exit Path</strong></th>
+    <th style="padding:10px 14px;border-bottom:2px solid var(--border);color:var(--orange);font-family:var(--sans);font-size:0.85rem;font-weight:600;letter-spacing:0.05em;text-align:left;"><strong>Friction</strong></th>
+    <th style="padding:10px 14px;border-bottom:2px solid var(--border);color:var(--orange);font-family:var(--sans);font-size:0.85rem;font-weight:600;letter-spacing:0.05em;text-align:left;"><strong>Market Impact</strong> <strong>Ecosystem Effect</strong></th>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">₿ond held to maturity None → ₿USD reserved</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Planned, actuarially</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Strongly positive</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">₿ond early exit → ₿USD</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Low fee stays</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">None—capital spend layer</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Positive—moves to</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">₿USD → ₿ond positive—capital locked longer</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Near zero</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">None</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Strongly</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">₿ond or ₿USD → BTC directly</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Moderate stays in Bitcoin</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">BTC transferred</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Neutral—holder</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">₿ond or ₿USD → Fiat reserve</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Highest exits Bitcoin</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">BTC sold from</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Negative—capital</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">₿ond or ₿USD → Fiat reserve</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Highest exits Bitcoin</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">BTC sold from</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Negative—capital</td>
+  </tr>
+</table>
+        <p>Specific early-exit fee levels, minimum holding periods, and tiered schedules are implementation decisions for each treasury company. The structural principle—that friction should be proportional to the ecosystem cost of the exit—is invariant across implementations.</p>
+    </div>
+
+    <div class="paper-section">
+        <h2><span class="sec-num">12.</span> Comparison with Traditional Savings Instruments</h2>
+        <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem;">
+  <tr>
+    <th style="padding:10px 14px;border-bottom:2px solid var(--border);color:var(--orange);font-family:var(--sans);font-size:0.85rem;font-weight:600;letter-spacing:0.05em;text-align:left;"><strong>Property</strong> Treasury**</th>
+    <th style="padding:10px 14px;border-bottom:2px solid var(--border);color:var(--orange);font-family:var(--sans);font-size:0.85rem;font-weight:600;letter-spacing:0.05em;text-align:left;"><strong>₿ond</strong> DCA**</th>
+    <th style="padding:10px 14px;border-bottom:2px solid var(--border);color:var(--orange);font-family:var(--sans);font-size:0.85rem;font-weight:600;letter-spacing:0.05em;text-align:left;"><strong>HYSA</strong></th>
+    <th style="padding:10px 14px;border-bottom:2px solid var(--border);color:var(--orange);font-family:var(--sans);font-size:0.85rem;font-weight:600;letter-spacing:0.05em;text-align:left;"><strong>CD</strong></th>
+    <th style="padding:10px 14px;border-bottom:2px solid var(--border);color:var(--orange);font-family:var(--sans);font-size:0.85rem;font-weight:600;letter-spacing:0.05em;text-align:left;">**US</th>
+    <th style="padding:10px 14px;border-bottom:2px solid var(--border);color:var(--orange);font-family:var(--sans);font-size:0.85rem;font-weight:600;letter-spacing:0.05em;text-align:left;">**S&P 500</th>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Return basis appreciation</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">₿C rate</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Fed funds rate Bank rate returns</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Treasury</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Market</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Return chosen by</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Saver Dept.</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Bank</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Bank</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Treasury</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Market</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Minimum</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$1</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$0–$1,000</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$500+</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$100+</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Varies</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Return can be cut</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">No time)</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Yes (at any low)</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">No (but</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">No (but low) N/A</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Counterparty risk</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Eliminated by dual condition</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Bank solvency solvency</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Bank risk</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Sovereign market</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Brokerage +</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Historical return</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">+10% to +100%</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">\~4–5%</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">\~4–5%</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">\~4–5%</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">\~10%/yr avg.</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Historical return</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">+10% to +100%</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">\~4–5%</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">\~4–5%</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">\~4–5%</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">\~10%/yr avg.</td>
+  </tr>
+</table>
+    </div>
+
+    <div class="paper-section">
+        <h2><span class="sec-num">13.</span> Treasury Company Economics</h2>
+        <p>A Bitcoin treasury company that simply holds Bitcoin earns a return equal to spot price appreciation. The ₿ond model produces returns that exceed holding alone.</p>
+    </div>
+
+    <div class="paper-section">
+        <h3>13.1 Revenue Streams</h3>
+        <p><strong>Surplus on maturity:</strong> The dual condition guarantees that every maturity is profitable. The spread between the treasury’s BTC position value and the saver’s payout obligation is retained as surplus—already denominated in Bitcoin.</p>
+        <p><strong>Issuance fees:</strong> A fee charged when fiat enters the system (e.g., 0.5% on new deposits). At $2 billion in annual new issuance, this generates $10 million per year.</p>
+        <p><strong>Early exit fees:</strong> Implementation-defined fees on bonds redeemed before maturity.</p>
+        <p><strong>Fiat redemption fees:</strong> The highest-friction exit, reflecting the actual cost of selling Bitcoin from reserves.</p>
+    </div>
+
+    <div class="paper-section">
+        <h3>13.2 Asymmetric Risk Profile</h3>
+        <p>The treasury’s risk profile is explicitly asymmetric. In a rising market, profits accrue automatically through the maturity surplus. In a falling market, the dual condition prevents forced payouts at a loss—the bond simply does not mature until conditions improve. The downside is bounded: the backstop commitment formalizes an existing Bitcoin price exposure with a defined perimeter. The upside is genuinely asymmetric.</p>
+    </div>
+
+    <div class="paper-section">
+        <h2><span class="sec-num">14.</span> Scale Modeling and Bitcoin Demand</h2>
+        <p>Every dollar deposited into a ₿ond mechanically becomes a Bitcoin purchase. At scale, the demand implications are significant.</p>
+        <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem;">
+  <tr>
+    <th style="padding:10px 14px;border-bottom:2px solid var(--border);color:var(--orange);font-family:var(--sans);font-size:0.85rem;font-weight:600;letter-spacing:0.05em;text-align:left;"><strong>Scale Scenario</strong> spot)**</th>
+    <th style="padding:10px 14px;border-bottom:2px solid var(--border);color:var(--orange);font-family:var(--sans);font-size:0.85rem;font-weight:600;letter-spacing:0.05em;text-align:left;"><strong>Annual Deposits</strong></th>
+    <th style="padding:10px 14px;border-bottom:2px solid var(--border);color:var(--orange);font-family:var(--sans);font-size:0.85rem;font-weight:600;letter-spacing:0.05em;text-align:left;">**BTC Demand (at $85K</th>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Early adoption (100K savers)</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$240M</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">\~2,824 BTC</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Growth phase (1M savers)</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$2.4B</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">\~28,235 BTC</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Mature ecosystem (10M savers)</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$24B</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">\~282,353 BTC</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Global scale (100M savers)</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$240B</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">\~2.8M BTC</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Global scale (100M savers)</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$240B</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">\~2.8M BTC</td>
+  </tr>
+</table>
+        <p>With auto-reinvest, mature bonds generate zero sell pressure. The BTC remains in the reserve, backing the new bond. Every maturity with auto-reinvest is a non-event from the market’s perspective. The system’s entry point is a buy. Its interior is neutral. Its exit is a fee-bearing sell that becomes less frequent as the ecosystem matures.</p>
+    </div>
+
+    <div class="paper-section">
+        <h2><span class="sec-num">15.</span> Risk Analysis</h2>
+    </div>
+
+    <div class="paper-section">
+        <h3>15.1 Extended Maturity Periods</h3>
+        <p>In a prolonged bear market, the dual condition delays maturity. A saver who selected +25% during a sustained downturn could wait significantly longer than the median estimate. This is not a failure—it is the mechanism’s design. The trade-off is explicit: guaranteed return in exchange for variable timing. The DCA laddering strategy mitigates this: even if some bonds take longer, the portfolio as a whole provides rolling liquidity.</p>
+    </div>
+
+    <div class="paper-section">
+        <h3>15.2 Bitcoin Price Decline</h3>
+        <p>A severe decline in BTC spot affects the treasury’s Ledger 1 positions. The dual condition prevents forced payouts at a loss—bonds simply wait for recovery. Ledger 2 provides the backstop for any shortfalls that arise when conditions are eventually met. The ₿ond’s known maturity book allows actuarial sizing of Ledger 2, a structural advantage over the demand-deposit nature of ₿USD.</p>
+    </div>
+
+    <div class="paper-section">
+        <h3>15.3 Regulatory Uncertainty</h3>
+        <p>The classification of ₿ond—as a savings product, a security, a structured note, or something else—will vary by jurisdiction. The distributed consortium model mitigates single-jurisdiction risk. The ₿C denomination requires no permission to compute.</p>
+    </div>
+
+    <div class="paper-section">
+        <h3>15.4 Adoption Dependency</h3>
+        <p>The ₿ond’s value proposition depends on sufficient distribution infrastructure. Without distributors offering the product to their customer bases, the system remains niche. This is a go-to-market challenge, not a structural flaw. The issuer–distributor separation is designed specifically to address it: the barrier to offering ₿ond is integration, not Bitcoin custody.</p>
+    </div>
+
+    <div class="paper-section">
+        <h3>15.5 ₿C Appreciation Deceleration</h3>
+        <p>As the denominator of the cumulative average grows, ₿C’s daily appreciation rate decelerates. At N=6,200 (current), the daily rate is approximately +0.044%. At N=10,000, it will be lower. This means maturity times at a given return tier will gradually lengthen over years. However, this deceleration is extremely slow—fractions of a basis point per year—and is offset by the growing size of Bitcoin’s spot price, which pulls the numerator upward.</p>
+    </div>
+
+    <div class="paper-section">
+        <h2><span class="sec-num">16.</span> Conclusion</h2>
+        <p>The transition to a Bitcoin economy will not happen through education, ideology, or institutional adoption alone. It will happen when Bitcoin-based products are easier to use and better-performing than their fiat equivalents for ordinary people.</p>
+        <p>The ₿ond is a savings product. It does what a savings account is supposed to do—grow your money—and does it 5–20 times better than the best traditional alternative, with zero minimums and a structurally sound counterparty. The consumer never needs to understand Bitcoin. They need to understand that $200 per month turns into more money, faster, than anything else available to them.</p>
+        <p>Every dollar deposited into a ₿ond mechanically becomes a Bitcoin purchase. Every maturity with auto-reinvest generates zero sell pressure. Every payout lands in ₿USD, keeping capital inside the ecosystem by default. The system’s entry point is a buy. Its interior is neutral. Its exit is a fee-bearing sell that becomes less frequent as the ecosystem matures.</p>
+        <div class="callout"><p><em>The savings behavior of millions of ordinary people becomes a continuous, unidirectional bid on Bitcoin—not because they believe in the thesis, but because the product is better.</em></p></div>
+        <p>CC0 Public Domain · btcadp.org · 2026</p>
+    </div>
+
+    <div class="download-section" id="download">
+        <h3>Download This Paper</h3>
+        <p>CC0 Public Domain &mdash; free to use, share, and build upon without restriction.</p>
+        <button class="btn-primary" onclick="window.print()">Print / Save as PDF</button>
+    </div>
+
+</div>
+
+<footer>
+    <p>
+        <a href="index.html">Home</a> &nbsp;&middot;&nbsp;
+        <a href="knowledge-base.html">Knowledge Base</a> &nbsp;&middot;&nbsp;
+        <a href="specification.html">Specification</a> &nbsp;&middot;&nbsp;
+        <a href="https://github.com/BTCADP/btcadp-research" target="_blank" rel="noopener">GitHub</a>
+    </p>
+    <p style="margin-top:8px;">CC0 Public Domain &middot; btcadp.org &middot; 2026</p>
+</footer>
+
+</body>
+</html>
