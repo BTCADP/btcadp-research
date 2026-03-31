@@ -774,7 +774,7 @@
 
     <div class="paper-section">
         <h2><span class="sec-num">16.</span> Integration with the Four-Ledger Architecture</h2>
-        <p>When deployed alongside the ₿ond savings product, ₿USD operates within a four-ledger reserve architecture. The ₿ond and ₿USD are structurally different instruments with different redemption mechanics, duration profiles, and risk characteristics. Pooling their reserves would allow a stress event on one product to consume the reserves of the other.</p>
+        <p>When deployed alongside the ₿ond savings product, ₿USD operates within a four-ledger reserve architecture. ₿USD faces demand-deposit risk — holders can redeem for fiat at any time. The ₿ond does not — the dual condition locks each bond until both the saver's return and the treasury's profitability conditions are met. The four-ledger separation ensures that ₿USD redemption pressure, the system's primary stress vector, can never reach ₿ond reserves.</p>
         <p>The four-ledger separation is as follows: ₿ond L1 holds BTC purchased with saver deposits, locked to the maturity schedule. ₿ond L2 is the backstop reserve sized actuarially against the known maturity book. ₿USD L1 holds BTC backing outstanding $1 tokens. ₿USD L2 self-fortifies over time as BTC appreciation creates surplus above the $1 obligation. All four ledgers are held in publicly addressable Bitcoin wallets on the base layer.</p>
     </div>
 
