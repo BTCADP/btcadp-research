@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>₿USD — A Bitcoin Currency Layer | btcadp.org</title>
-<meta name="description" content="How Treasury-Backed Digital Currency (₿USD) provides a Bitcoin-backed currency layer for commerce, using Bitcoin Currency (₿C) as the collateral floor.">
+<meta name="description" content="How Treasury-Backed Digital Currency (₿USD) provides a Bitcoin-backed currency layer for commerce, using Bitcoin Currency (₿C) as the reserve sizing floor.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
 <style>
@@ -167,7 +167,7 @@
       Digital Currency (₿USD) — a USD-pegged stablecoin backed by Bitcoin reserves — to provide
       a currency layer for everyday commerce. The core argument is that ₿USD solves Bitcoin's
       volatility problem for commerce without abandoning Bitcoin, using Bitcoin Currency (₿C)
-      as the mechanism that makes the collateral floor credible.
+      as the mechanism that makes the reserve sizing floor credible.
     </p>
     <p>
       The paper is addressed to Bitcoin treasury companies evaluating participation in a ₿USD
@@ -180,7 +180,7 @@
       it impractical for everyday commerce. Existing stablecoins solve this by abandoning Bitcoin
       entirely — holding dollars, US Treasuries, or bank deposits. ₿USD solves it differently:
       one token equals one dollar, backed entirely by Bitcoin held on the base layer, with the
-      ₿C price serving as the conservative collateral floor that makes the peg credible through
+      ₿C price serving as the conservative reserve sizing floor that makes the peg credible through
       Bitcoin's cyclical volatility.</p>
     </div>
 
@@ -220,7 +220,7 @@
       <div class="component">
         <div class="component-tag">Layer 2</div>
         <div class="component-name" style="color:var(--green);">Bitcoin Currency (₿C)</div>
-        <p>The collateral floor. The cumulative arithmetic mean of every historical BTCADP since genesis. Appreciates predictably with day-to-day movements small enough for stable pricing. No issuer. No reserves. Pure mathematics. Used to cap ₿USD issuance conservatively.</p>
+        <p>The reserve sizing floor. The cumulative arithmetic mean of every historical BTCADP since genesis. Appreciates predictably with day-to-day movements small enough for stable pricing. No issuer. No reserves. Pure mathematics. Used to cap ₿USD issuance conservatively.</p>
       </div>
       <div class="component">
         <div class="component-tag">Layer 3</div>
@@ -398,10 +398,7 @@
       three distinct revenue streams.
     </p>
     <p>
-      <strong>Fee revenue.</strong> A holding fee of 1–2% annually on the outstanding ₿USD
-      float generates continuous income regardless of Bitcoin's price. On $10 billion in
-      circulation, that is $100–200 million annually.
-    </p>
+      <strong>Fee revenue.</strong> Issuance and redemption fees generate continuous income at the entry and exit points of the system. Redemption fees are tiered by exit path to incentivize remaining in the Bitcoin ecosystem</p>
     <p>
       <strong>Collateral appreciation.</strong> The Bitcoin in Ledger 1 appreciates at the
       spot rate. The ₿USD liability it backs is fixed at $1.00. As spot rises, the surplus
