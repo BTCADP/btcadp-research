@@ -411,17 +411,85 @@
     .compare-table { font-size: 0.78rem; }
   }
 
+  /* Print button */
+  .print-btn {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.3rem 0.6rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.03em;
+  }
+  .print-btn:hover {
+    color: var(--orange);
+    border-color: var(--orange);
+  }
+
   @media print {
-    body { background: #fff; color: #111; font-size: 11pt; }
-    nav, body::before { display: none; }
-    .title-block, .toc, .article-body, .dedication-block { max-width: 100%; padding-left: 0; padding-right: 0; }
-    .callout { border: 1px solid #ccc; background: #f9f9f9; }
-    .part-header { border-top-color: #111; }
-    h2, h3, .contrast-title { color: #111; }
-    .hero-line { color: #444; border-left-color: #111; }
-    a { color: #111; }
-    .dedication-block p { color: #222; }
-    .dedication-block p:first-of-type { color: #000; }
+    /* Base reset */
+    body { background: #fff !important; color: #1a1a1a !important; font-family: Georgia, 'Times New Roman', serif !important; font-size: 11pt !important; line-height: 1.65 !important; }
+    body::before { display: none !important; }
+
+    /* Hide web elements */
+    nav, .print-btn { display: none !important; }
+
+    /* Layout */
+    .title-block, .toc, .article-body, .dedication-block, .content, .container { max-width: 100% !important; padding-left: 0 !important; padding-right: 0 !important; }
+
+    /* Title page */
+    .title-block { text-align: center; padding: 100px 0 40px; page-break-after: always; }
+    .title-block .label { color: #d4750e; }
+    .title-block h1 { color: #1a1a1a; font-size: 28pt; }
+    .title-block .subtitle { color: #555; }
+
+    /* Dedication */
+    .dedication-block { text-align: center; padding: 60px 20px; page-break-after: always; }
+    .dedication-block p { color: #333; }
+    .dedication-block p:first-of-type { color: #1a1a1a; }
+
+    /* TOC */
+    .toc { page-break-after: always; }
+    .toc-title { color: #1a1a1a; }
+    .toc-part { color: #d4750e; }
+    .toc-chapter { color: #333; }
+
+    /* Part headers */
+    .part-header { text-align: center; padding: 80px 0 30px; page-break-before: always; page-break-after: avoid; border-top: none !important; }
+    .part-header .part-label { color: #d4750e; }
+    .part-header .part-title { color: #1a1a1a; }
+
+    /* Chapter headers */
+    .chapter-header { page-break-before: always; page-break-after: avoid; border: none !important; padding: 30px 0 10px; }
+    .chapter-num { color: #d4750e; }
+    .chapter-header h2 { color: #1a1a1a; border: none !important; }
+
+    /* Hero lines */
+    .hero-line { color: #333; border-left: 3px solid #d4750e; font-style: italic; page-break-after: avoid; }
+
+    /* Body text */
+    p { color: #1a1a1a; orphans: 3; widows: 3; }
+    h3 { color: #1a1a1a; page-break-after: avoid; }
+    strong { color: #1a1a1a; }
+    a { color: #d4750e; text-decoration: none; }
+
+    /* Callouts */
+    .callout { border-left: 3px solid #d4750e; background: rgba(212,117,14,0.06); padding: 14px 18px; page-break-inside: avoid; }
+
+    /* Tables */
+    table { border-collapse: collapse; font-size: 9pt; page-break-inside: avoid; }
+    th { background: #f0f0f0; border: 1px solid #ddd; color: #1a1a1a; padding: 6px 10px; }
+    td { border: 1px solid #ddd; color: #333; padding: 6px 10px; }
+    .hl, td.hl { background: rgba(212,117,14,0.06) !important; color: #1a1a1a !important; }
+
+    /* Footnotes */
+    .fn a { color: #d4750e; font-size: 8pt; }
+
+    /* Reference list */
+    .ref-list { font-size: 8.5pt; color: #555; }
   }
 </style>
 </head>
@@ -435,6 +503,7 @@
     <li><a href="currency-layer.html">Currency Layer</a></li>
     <li><a href="knowledge-base.html" class="active">Knowledge Base</a></li>
   </ul>
+  <button class="print-btn" onclick="window.print()">Save as PDF</button>
 </nav>
 
 <!-- ============================================================ -->
