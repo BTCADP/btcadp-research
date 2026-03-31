@@ -336,6 +336,18 @@
 <!-- INTRODUCTION -->
 <div class="article-body" style="padding-bottom:0;">
 
+<div style="background:rgba(255,160,0,0.08);border:1px solid rgba(255,160,0,0.3);border-radius:8px;padding:20px 24px;margin-bottom:32px;">
+  <p style="margin:0 0 8px 0;font-weight:700;color:#f5a623;">Note: Superseded Document</p>
+  <p style="margin:0;color:rgba(255,255,255,0.7);font-size:0.9rem;line-height:1.6;">
+    This document was an earlier version of the framework. It has been superseded by 
+    <a href="bitcoin-bridge.html" style="color:#f5a623;text-decoration:underline;">The Bitcoin ₿ridge</a>, 
+    which extends the framework to 30 chapters across 9 parts — including Reward Savers, 
+    The Three Functions of Money, Consumer Confidence, Tiered Participation, 
+    Defensive Programmability, Risk Analysis, and For Bitcoiners. 
+    The Bitcoin ₿ridge is the authoritative reference.
+  </p>
+</div>
+
 <p>
   The stablecoin market exceeds $317 billion<sup class="fn"><a href="#ref1" id="fn1">[1]</a></sup> and is growing at roughly $100 billion per year.<sup class="fn"><a href="#ref2" id="fn2">[2]</a></sup> Every dollar of that growth is used to purchase US Treasury bills — not Bitcoin. The capital that should be flowing into BTC is instead funding US government debt. At the same time, CBDC development is accelerating in over 130 countries,<sup class="fn"><a href="#ref3" id="fn3">[3]</a></sup> building digital payment infrastructure with surveillance, programmable restrictions, and account-freezing capabilities baked into the architecture. The stablecoin market is a missed opportunity. CBDCs are an approaching threat. Both converge on the same opportunity: monetary infrastructure built on Bitcoin, operated by the institutions that already hold it, offering products that compete with stablecoins and CBDCs on the terms consumers actually care about.
 </p>
@@ -784,7 +796,7 @@
 <h3>The Minting Process</h3>
 
 <p>
-  When a customer purchases a ₿USD token, they send fiat currency to a consortium member. The treasury company uses those funds to purchase Bitcoin at the current spot price and deposits the acquired Bitcoin into Ledger 1, the issuance pool. One ₿USD token is issued to the customer on a Bitcoin sidechain — Liquid, in the reference implementation, though the architecture is compatible with any sidechain capable of issuing transferable assets, including a purpose-built chain operated by the consortium itself. At the moment of issuance, the reserves in Ledger 1 perfectly back the outstanding token.
+  When a customer purchases a ₿USD token, they send fiat currency to a consortium member. The treasury company uses those funds to purchase Bitcoin at the current spot price and deposits the acquired Bitcoin into Ledger 1, the issuance pool. One ₿USD token is issued to the customer on the consortium's purpose-built Bitcoin sidechain. At the moment of issuance, the reserves in Ledger 1 perfectly back the outstanding token.
 </p>
 
 <p>
@@ -842,7 +854,7 @@
 </p>
 
 <p>
-  When network stress indicators cross published thresholds, the tokens activate defensive behaviors autonomously. No committee convenes. No emergency board meeting is called. No consortium member makes a judgment call about whether the situation warrants intervention. The mechanisms are deterministic, transparent, and identical for every participant. They include BTC-default redemption (the consortium transfers Bitcoin directly to the redeemer's wallet rather than selling it on the market, eliminating forced selling pressure entirely), time-weighted fees that use the token's own mint date to distinguish attack behavior from ordinary commerce, volume-triggered escalation that prices the systemic cost of mass redemption into the transaction, and lateral conversion to a ₿C-denominated position that absorbs fear without absorbing outflow. The token's provenance data is what makes each of these mechanisms possible. A token that knows when it was minted can distinguish a rapid mint-and-redeem cycle from a token held for months. A token that can read aggregate redemption velocity can participate in a graduated response that tightens as stress increases. The intelligence is in the money itself.
+  When network stress indicators cross published thresholds, the tokens activate defensive behaviors autonomously. No committee convenes. No emergency board meeting is called. No consortium member makes a judgment call about whether the situation warrants intervention. The mechanisms are deterministic, transparent, and identical for every participant. They include BTC-default redemption (the consortium transfers Bitcoin directly to the redeemer's wallet rather than selling it on the market, eliminating forced selling pressure entirely), time-weighted fees that use the token's own mint date to distinguish attack behavior from ordinary commerce, volume-triggered escalation that prices the systemic cost of mass redemption into the transaction, and ₿OND conversion that allows any ₿USD holder to move from the spending layer to the savings layer at no cost, absorbing fear without absorbing outflow. The token's provenance data is what makes each of these mechanisms possible. A token that knows when it was minted can distinguish a rapid mint-and-redeem cycle from a token held for months. A token that can read aggregate redemption velocity can participate in a graduated response that tightens as stress increases. The intelligence is in the money itself.
 </p>
 
 <p>
@@ -1404,7 +1416,7 @@
 </p>
 
 <p>
-  Second, fee revenue. A holding fee of 1–2% annually on the outstanding ₿USD float generates continuous income regardless of Bitcoin's price. On $10 billion in circulation, that is $100–200 million annually. Redemption fees — structured to incentivize remaining in the Bitcoin ecosystem — generate additional revenue at the fiat exit point.
+  Second, fee revenue. Issuance and redemption fees generate continuous income at the entry and exit points of the system. Redemption fees are tiered by exit path — near-zero for BTC-default redemption, highest for fiat exit — creating a fee structure that generates revenue while incentivizing holders to remain in the Bitcoin ecosystem. Fee income scales with adoption and turnover.
 </p>
 
 <p>
@@ -1483,7 +1495,7 @@
 </p>
 
 <p>
-  ₿C lateral conversion: any holder can convert to a ₿C-denominated position at any time, at no cost, with no delay. During a market panic, instead of fleeing to fiat, holders can move to the denomination that tracks Bitcoin's lifetime average rather than its spot volatility. The consortium's reserves are untouched. No Bitcoin is sold. The system absorbs the fear without absorbing the outflow.
+  ₿OND conversion: any ₿USD holder can convert to a ₿OND at the current ₿C entry price at any time, at no cost, with no delay. During a market panic, instead of fleeing to fiat, holders move their capital from the spending layer to the savings layer. The conversion requires no reserve action. No Bitcoin is sold. The circulating ₿USD supply contracts, improving network health metrics. The holder enters a return-targeted savings product whose dual-condition maturity ensures they receive their target return when conditions recover. The system absorbs fear without absorbing outflow.
 </p>
 
 <h3>The Calm-State Guarantee</h3>

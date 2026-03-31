@@ -206,7 +206,7 @@
       A consortium of Bitcoin treasury companies has the institutional infrastructure, the reserve
       capital, and the Bitcoin thesis alignment to redirect that capital flow. The mechanism is a
       three-component ecosystem built on a single foundation: the BTCADP open reference price standard,
-      a &#x20BF;ond savings product denominated in the BTCC unit of account, and &#x20BF;USD — a
+      a &#x20BF;ond savings product denominated in the ₿C unit of account, and &#x20BF;USD — a
       Treasury-Backed Digital Currency that maintains a hard $1 peg and functions as a medium of exchange.
     </p>
   </div>
@@ -284,7 +284,7 @@
       discontinued by any single entity.
     </p>
     <p>
-      The BTCADP underpins the BTCC unit of account — defined as the arithmetic mean of every historical
+      The BTCADP underpins the ₿C unit of account — defined as the arithmetic mean of every historical
       BTCADP value from the genesis block through the previous completed day. As of early 2026, this
       cumulative average incorporates over 6,200 daily price observations and sits at approximately
       $18,700. This denomination — not Bitcoin's spot price — is what the &#x20BF;ond product is
@@ -302,16 +302,19 @@
     </p>
 
     <div class="callout">
-      <div class="callout-label">&#x20BF;ond — Bitcoin Currency Savings</div>
+      <div class="callout-label">&#x20BF;OND — Bitcoin Currency Savings</div>
       <p>
-        A fixed-maturity savings instrument denominated in BTCC. A saver deposits fiat; the treasury
-        purchases Bitcoin at spot and holds it in reserve. The saver receives a BTCC-denominated balance
-        and a maturity date. At maturity, the saver receives the fiat equivalent of their BTCC balance
-        at that day's BTCC rate — a predictable, slowly appreciating return.
+        A return-based savings instrument denominated in ₿C. A saver deposits fiat — any amount
+        from $1 upward — and selects a target return: +10%, +25%, +50%, +100%, or other tiers
+        defined by the consortium. The bond matures when two conditions are simultaneously met:
+        the saver's ₿C return target has been reached, and the treasury's BTC position on that
+        specific bond is profitable. At maturity, the saver receives their original deposit plus
+        the target return in ₿USD.
       </p>
       <p style="margin-top:0.5rem;">
-        <strong style="color:var(--orange);">Purpose:</strong> Long-term savings in a mathematically
-        stable, appreciating unit of account, fully backed by Bitcoin on the base layer.
+        <strong style="color:var(--orange);">Purpose:</strong> Long-term savings with a
+        saver-chosen return, fully backed by Bitcoin on the base layer. The return is fixed.
+        The timeline is variable.
       </p>
     </div>
 
@@ -332,7 +335,7 @@
 
     <p style="margin-top:1.2rem;">
       The two products connect through conversion. A &#x20BF;ond holder who wants to spend converts
-      their BTCC balance into &#x20BF;USD tokens at the current BTCC/USD rate. A &#x20BF;USD holder
+      their ₿C balance into &#x20BF;USD tokens at the current ₿C/USD rate. A &#x20BF;USD holder
       who wants to save converts tokens into a &#x20BF;ond. Every conversion between the two products
       keeps capital inside the Bitcoin economy. The only exit that costs Bitcoin is redemption to fiat.
     </p>
@@ -362,13 +365,13 @@
           <td><span class="ledger-name">&#x20BF;ond L1</span></td>
           <td>&#x20BF;ond (savings)</td>
           <td>BTC purchased with incoming fiat at &#x20BF;ond issuance. Held for the full maturity period.</td>
-          <td>Backs each &#x20BF;ond's BTCC-denominated obligation at maturity. Locked to maturity schedule.</td>
+          <td>Backs each &#x20BF;ond's ₿C-denominated obligation at maturity. Locked to maturity schedule.</td>
         </tr>
         <tr>
           <td><span class="ledger-name">&#x20BF;ond L2</span></td>
           <td>&#x20BF;ond (backstop)</td>
           <td>Additional BTC from treasury companies' existing holdings. Sized actuarially against the known maturity book.</td>
-          <td>Covers redemption shortfalls where BTC spot at maturity falls below the BTCC obligation value.</td>
+          <td>Covers redemption shortfalls where BTC spot at maturity falls below the ₿C obligation value.</td>
         </tr>
         <tr>
           <td><span class="ledger-name">&#x20BF;USD L1</span></td>
@@ -398,31 +401,35 @@
 
   <!-- 5 -->
   <div class="paper-section">
-    <h2>5. The Maturity Structure: Stability by Design</h2>
+    <h2>5. Structural Defenses: Dual Condition and Defensive Programmability</h2>
     <p>
-      The fixed maturity date on &#x20BF;onds is not merely a product feature. It is the primary
-      structural defense of the entire reserve system.
+      The &#x20BF;OND's dual-condition maturity is the primary structural defense of the savings product.
+      Each bond matures only when both the saver's ₿C return target is met and the treasury's BTC
+      position on that specific bond is profitable. The treasury never pays out at a loss — this is not
+      a promise but the maturity trigger itself. Early exits convert to ₿USD rather than drawing on
+      &#x20BF;OND reserves, preventing coordinated mass redemptions from reaching the savings reserve base.
     </p>
     <p>
-      The classic attack on a reserve-backed currency is a coordinated bank run: simultaneously short
-      the reserve asset at scale while triggering mass redemptions, using the forced selling of reserves
-      to amplify the short position's profitability. A fixed-maturity &#x20BF;ond has no redemption
-      trigger that can be pulled. The redemption schedule is contractual, known, and distributed across
-      time. An attacker cannot force simultaneous mass redemptions because the redemption dates are not
-      under anyone's control — they are set at issuance. The entire attack vector evaporates.
+      For ₿USD, the defense against coordinated attacks operates through defensive programmability.
+      Every ₿USD token carries provenance metadata about itself — mint date, mint-day BTC spot price,
+      block age, and transfer count — but cannot identify its holder. The defensive toolkit includes:
+      BTC-default redemption (consortium transfers Bitcoin directly instead of selling on market),
+      time-weighted fees (freshly minted tokens pay higher fees, making rapid mint-and-redeem attacks
+      expensive), volume-triggered escalation (automatic circuit breakers on mass fiat redemptions),
+      and ₿OND conversion (holders move from spending to savings layer during stress, contracting
+      supply without any reserve action).
     </p>
     <p>
-      Early conversion to &#x20BF;USD is available — with a fee. That fee is the friction that prevents
-      the maturity structure from being circumvented. An attacker who wants to trigger early conversions
-      at scale must pay the conversion cost on every position.
+      Consider a coordinated short-plus-redemption attack against ₿USD. BTC-default redemption produces
+      no spot impact and no short profit. Time-weighted fees on freshly minted tokens cost 3–6% before
+      any potential profit. Volume-triggered escalation adds further friction at scale. The expected
+      return of such an attack is deeply negative. The mechanisms do not eliminate the theoretical
+      possibility of attack. They make it economically irrational to attempt.
     </p>
     <p>
-      Because maturity dates are known at issuance, &#x20BF;ond L2 can be sized with actuarial
-      precision. The treasury knows exactly which BTCC obligations come due on which dates, and can
-      model the BTC price required on each date to cover each obligation. Bitcoin has never ended a
-      10-year period lower than it began. That is not a guarantee of future performance — it is the
-      same long-run thesis every Bitcoin treasury company in this consortium has already committed to
-      with their primary balance sheet.
+      Because &#x20BF;OND obligations are denominated in ₿C and BTC spot has historically appreciated
+      faster than the cumulative average, &#x20BF;OND L2 can be sized actuarially against the known
+      maturity book with a structural tendency toward overcollateralization that strengthens over time.
     </p>
   </div>
 
@@ -492,10 +499,10 @@
       creates revenue-generating products on top of an existing risk position — and converts open-ended
       price risk into a defined, actuarially manageable one.
     </p>
-    <p>Revenue streams include: issuance fees on &#x20BF;onds and &#x20BF;USD; early conversion and
-    redemption fees tiered by exit path; the &#x20BF;ond maturity spread — the primary long-term revenue
-    engine, where BTC held for a 10-year &#x20BF;ond is likely worth substantially more than the BTCC
-    obligation at maturity; &#x20BF;USD reserve appreciation as BTC surplus flows into L2; and an equity
+    <p>Revenue streams include: issuance fees on &#x20BF;ONDs and &#x20BF;USD; redemption
+    fees tiered by exit path (near-zero for BTC-default, highest for fiat exit); the &#x20BF;OND maturity spread — the primary long-term revenue
+    engine, where BTC spot appreciation outpaces the ₿C-denominated obligation and the dual condition
+    captures that surplus at every payout; &#x20BF;USD reserve appreciation as BTC surplus flows into L2; and an equity
     re-rating premium as markets assign higher multiples to a business with recurring revenue, a growing
     user base, and structural alignment between industry growth and primary asset appreciation.</p>
 
@@ -521,7 +528,7 @@
         <tr><td>Stablecoin peg</td><td>$1.00</td><td>$1.00 (identical)</td></tr>
         <tr><td>Reserve auditability</td><td>Quarterly attestation</td><td class="hi">Real-time on-chain verification</td></tr>
         <tr><td>Supply expandable?</td><td>Yes — issuer discretion</td><td class="hi">Only by purchasing more BTC</td></tr>
-        <tr><td>Savings product available?</td><td>No</td><td class="hi">Yes — &#x20BF;ond, fixed maturity, BTCC-denominated</td></tr>
+        <tr><td>Savings product available?</td><td>No</td><td class="hi">Yes — &#x20BF;OND, return-based dual-condition maturity, ₿C-denominated</td></tr>
         <tr><td>Benefit to Bitcoin</td><td>None — competes for capital</td><td class="hi">Direct: every mint = BTC purchase</td></tr>
         <tr><td>Bank run vulnerability</td><td>High — instant mass redemption possible</td><td class="hi">Low — &#x20BF;ond maturities fixed; &#x20BF;USD backstopped by appreciation surplus</td></tr>
         <tr><td>Regulatory exposure</td><td>US Treasury / banking system</td><td class="hi">Bitcoin protocol</td></tr>
@@ -561,7 +568,7 @@
   <div class="paper-section">
     <h2>11. Timing</h2>
     <p>Three conditions had to develop independently before the &#x20BF;ond/&#x20BF;USD model became viable. All three have now been met simultaneously for the first time.</p>
-    <p><strong style="color:#fff;">BTCC denomination stability.</strong> As of early 2026, with over 6,200 days of history, the sensitivity of BTCC to any single day's price movement is below 0.01%. There is no shortcut to this accumulation. That time has elapsed.</p>
+    <p><strong style="color:#fff;">₿C denomination stability.</strong> As of early 2026, with over 6,200 days of history, the sensitivity of ₿C to any single day's price movement is below 0.01%. There is no shortcut to this accumulation. That time has elapsed.</p>
     <p><strong style="color:#fff;">Bitcoin treasury company scale.</strong> The combined Bitcoin holdings of public treasury companies now exceed one million BTC. This reserve base, organized into a consortium, would constitute one of the largest Bitcoin custodians in existence.</p>
     <p><strong style="color:#fff;">Competitive timing.</strong> Over 130 countries are in some stage of CBDC exploration or rollout. The window in which a Bitcoin-native alternative can be established before sovereign digital currencies become the default retail payment infrastructure is open now and will not remain open indefinitely.</p>
   </div>
@@ -570,9 +577,9 @@
   <div class="paper-section">
     <h2>12. Risk Analysis</h2>
     <p><strong style="color:#fff;">Bitcoin price decline.</strong> A sustained, severe Bitcoin price decline is the most acute risk to both products. The critical framing: every consortium member already carries this risk on their primary balance sheet. The reserve commitments formalize existing exposure with defined perimeters and attach revenue streams to it.</p>
-    <p><strong style="color:#fff;">Bank run and coordinated attack.</strong> For the &#x20BF;ond, the bank run attack vector is structurally eliminated — maturity dates cannot be accelerated by any external actor. For &#x20BF;USD, defenses include redemption fee friction, on-chain reserve transparency, and the L2 backstop self-fortified by BTC appreciation.</p>
-    <p><strong style="color:#fff;">Regulatory uncertainty.</strong> The structural mitigation is the consortium's distributed jurisdiction — no single regulatory action shuts down the entire system. The BTCC denomination itself requires no permission to compute or use.</p>
-    <p><strong style="color:#fff;">Consortium coordination.</strong> The foundational methodology is independent of the consortium — the BTCADP specification is published, the BTCC formula is arithmetic, and reserve management rules can be codified in a charter requiring no active committee decisions for routine operations.</p>
+    <p><strong style="color:#fff;">Bank run and coordinated attack.</strong> For the &#x20BF;OND, the dual-condition maturity ensures the treasury never pays out at a loss, and early exits convert to ₿USD rather than drawing on &#x20BF;OND reserves. For &#x20BF;USD, defenses include BTC-default redemption (no market selling), time-weighted fees on freshly minted tokens, volume-triggered escalation, on-chain reserve transparency, and the L2 backstop self-fortified by BTC appreciation.</p>
+    <p><strong style="color:#fff;">Regulatory uncertainty.</strong> The structural mitigation is the consortium's distributed jurisdiction — no single regulatory action shuts down the entire system. The ₿C denomination itself requires no permission to compute or use.</p>
+    <p><strong style="color:#fff;">Consortium coordination.</strong> The foundational methodology is independent of the consortium — the BTCADP specification is published, the ₿C formula is arithmetic, and reserve management rules can be codified in a charter requiring no active committee decisions for routine operations.</p>
   </div>
 
   <!-- Conclusion -->
@@ -591,7 +598,7 @@
       paths that keep it inside the Bitcoin economy.
     </p>
     <p>
-      The components exist. The BTCADP specification is published. The BTCC denomination is
+      The components exist. The BTCADP specification is published. The ₿C denomination is
       mathematically defined. The treasury companies that would form the consortium already hold over
       one million Bitcoin in aggregate. What remains is assembly.
     </p>
@@ -620,7 +627,7 @@
     </div>
 
     <p style="margin-top:1.2rem; font-size:0.8rem; color:var(--dim); font-family:var(--sans); font-style:italic;">
-      Historical BTCADP and BTCC price data is drawn from btcadp_btcc_historical.csv published at btcadp.org,
+      Historical BTCADP and ₿C price data is drawn from btcadp_btcc_historical.csv published at btcadp.org,
       comprising 6,280 daily observations from January 3, 2009 through March 14, 2026.
     </p>
   </div>

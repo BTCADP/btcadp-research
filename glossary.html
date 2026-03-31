@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Glossary | btcadp.org</title>
-<meta name="description" content="Terms and definitions for the BTCADP ecosystem — BTCC (₿C), timeblocks, TBDC, ₿USD, ₿ond, Two Spheres, PragMaxi, and more.">
+<meta name="description" content="Terms and definitions for the BTCADP ecosystem — ₿C (₿C), timeblocks, TBDC, ₿USD, ₿ond, Two Spheres, PragMaxi, and more.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
 <style>
@@ -339,10 +339,10 @@
           <span class="term-icon">+</span>
         </button>
         <div class="term-body">
-          <p>A fixed-maturity savings instrument denominated in BTCC (₿C), issued by a Bitcoin treasury company. A saver deposits fiat. The treasury uses those funds to purchase Bitcoin at spot and holds it in reserve. The saver receives a ₿C-denominated balance and a maturity date.</p>
-          <p>The ₿ond cannot be spent directly — the holder must convert to ₿USD first. At maturity, the treasury returns the ₿C obligation as ₿USD, keeping the value inside the Bitcoin ecosystem. The holder may then spend, re-save, or exit to fiat at the standard redemption fee.</p>
-          <p>The ₿ond's fixed maturity structure eliminates the bank run attack vector: redemption dates are contractual and set at issuance, making coordinated mass redemptions structurally impossible.</p>
-          <div class="see-also">See also: <a href="#M">Maturity Date</a>, <a href="#M">Maturity Spread</a>, <a href="report-bitcoin-stablecoin.html">The Report</a></div>
+          <p>A return-based savings instrument denominated in ₿C and issued by a consortium of Bitcoin treasury companies. A saver deposits fiat — any amount from $1 upward — and selects a target return: +10%, +25%, +50%, +100%, or other tiers defined by the consortium. Each dollar becomes a programmable ₿OND token with its own ₿C entry price, target return, and maturity trigger. 1 USD = 1 ₿OND.</p>
+          <p>The ₿OND matures when two conditions are simultaneously met: (1) the saver's ₿C return target has been reached, and (2) the treasury's BTC position on that specific bond is profitable by a minimum margin. The return is fixed at purchase. The timeline is variable. At maturity, the saver receives their original deposit plus the target return in ₿USD, which they can spend, withdraw to fiat, or auto-reinvest into a new ₿OND.</p>
+          <p>The dual-condition maturity eliminates counterparty credit risk by construction — the treasury never pays out at a loss. Early exits convert to ₿USD rather than drawing on ₿OND reserves, preventing the bank run attack vector.</p>
+          <div class="see-also">See also: <a href="#D">Dual-Condition Maturity</a>, <a href="bond.html">₿OND Overview</a>, <a href="bond-white-paper.html">₿OND White Paper</a></div>
         </div>
       </div>
 
@@ -380,7 +380,7 @@
       <div class="term-entry">
         <button class="term-header" onclick="toggle(this)">
           <div class="term-title-wrap">
-            <span class="term-name">BTCC (₿C)</span>
+            <span class="term-name">₿C (₿C)</span>
             <span class="term-tag">Unit of Account</span>
           </div>
           <span class="term-icon">+</span>
@@ -427,7 +427,7 @@
         </button>
         <div class="term-body">
           <p>The mathematical basis of ₿C's stability. The ₿C price on any given day is the arithmetic mean of every historical BTCADP value from genesis through the previous completed day. As N — the total number of days — grows, the sensitivity of the average to any single new day approaches zero.</p>
-          <p>The formula: ΔBTCC = (BTCADP<sub>new</sub> − BTCC<sub>current</sub>) / (N + 1). With N exceeding 6,200, no single day can move ₿C by more than approximately 0.016% of any price shock's magnitude. This property strengthens permanently with every passing day — time itself is a structural tailwind for the denomination.</p>
+          <p>The formula: Δ₿C = (BTCADP<sub>new</sub> − ₿C<sub>current</sub>) / (N + 1). With N exceeding 6,200, no single day can move ₿C by more than approximately 0.016% of any price shock's magnitude. This property strengthens permanently with every passing day — time itself is a structural tailwind for the denomination.</p>
           <div class="see-also">See also: <a href="#T">Timeblock</a>, <a href="btcc-white-paper.html">₿C White Paper</a></div>
         </div>
       </div>
@@ -467,7 +467,7 @@
         <div class="term-body">
           <p>A standard for expressing value. ₿C is a denomination the way the meter is a unit of length or the kilogram is a unit of mass — it defines a unit without issuing a token, holding reserves, or requiring a trusted issuer. Any wallet, merchant, or payment system can adopt ₿C independently by implementing the published formula.</p>
           <p>The distinction between a denomination and a monetary instrument is fundamental to understanding the ecosystem. ₿C is the denomination — the unit of account in which prices are expressed. The ₿ond is a savings instrument denominated in ₿C. ₿USD is a transactional instrument denominated in US dollars — one token equals one dollar. Both instruments are built on the ₿C ecosystem.</p>
-          <div class="see-also">See also: <a href="#B">BTCC (₿C)</a></div>
+          <div class="see-also">See also: <a href="#B">₿C (₿C)</a></div>
         </div>
       </div>
 
@@ -618,7 +618,7 @@
         </button>
         <div class="term-body">
           <p>Additional Bitcoin drawn from treasury companies' existing holdings that covers redemption shortfalls when Ledger 1 is insufficient — i.e. when Bitcoin spot has declined below the price at which reserves were acquired.</p>
-          <p>For ₿USD: Ledger 2 self-fortifies over time as BTC appreciation in Ledger 1 creates surplus above the $1 obligation. The longer ₿USD circulates, the deeper the backstop becomes without requiring additional capital. For ₿ond: Ledger 2 is sized actuarially against the known maturity book — because maturity dates are fixed at issuance, the required reserve can be calculated precisely rather than estimated.</p>
+          <p>For ₿USD: Ledger 2 self-fortifies over time as BTC appreciation in Ledger 1 creates surplus above the $1 obligation. The longer ₿USD circulates, the deeper the backstop becomes without requiring additional capital. For ₿OND: Ledger 2 is sized actuarially against the known maturity book. The dual-condition maturity ensures the treasury is profitable on every payout, and early exits convert to ₿USD rather than drawing on ₿OND reserves.</p>
           <div class="see-also">See also: <a href="#L">Ledger 1</a>, <a href="#F">Four-Ledger System</a></div>
         </div>
       </div>
@@ -650,15 +650,16 @@
       <div class="term-entry">
         <button class="term-header" onclick="toggle(this)">
           <div class="term-title-wrap">
-            <span class="term-name">Maturity Date</span>
-            <span class="term-tag">₿ond</span>
+            <span class="term-name">Dual-Condition Maturity</span>
+            <span class="term-tag">₿OND</span>
           </div>
           <span class="term-icon">+</span>
         </button>
         <div class="term-body">
-          <p>The fixed date on which a ₿ond obligation is settled. Contractual and set at issuance. Cannot be accelerated en masse by any external actor — this property structurally eliminates the bank run attack vector. An attacker cannot trigger simultaneous mass redemptions because the redemption schedule is not under anyone's control after issuance.</p>
-          <p>Specific maturity tiers (2-year, 5-year, 10-year) are implementation decisions for each treasury company. The structural principle — fixed maturity, no external trigger — is invariant.</p>
-          <div class="see-also">See also: <a href="#B">₿ond</a>, <a href="#M">Maturity Spread</a></div>
+          <p>The structural innovation that makes the ₿OND viable. A ₿OND matures when two conditions are simultaneously met: (1) the saver's ₿C return target has been reached (e.g., ₿C has appreciated +25% from the entry price), and (2) the treasury's BTC position on that specific bond is profitable by a minimum margin (e.g., coverage ratio ≥ 1.10). Neither condition alone is sufficient.</p>
+          <p>The dual condition ensures the treasury never pays out at a loss. Under a single-condition model, the treasury would be forced to pay during bear markets when its BTC holdings have declined in value. The second condition eliminates this liability mismatch by construction. The saver waits longer in adverse conditions, but the system never pays out at a loss. Historical backtests (2017–2026) show median maturities ranging from ~4 months (+10% tier) to ~25 months (+100% tier).</p>
+          <p>Early exits convert to ₿USD rather than drawing on ₿OND reserves, preventing the bank run attack vector.</p>
+          <div class="see-also">See also: <a href="#B">₿ond</a>, <a href="#M">Maturity Spread</a>, <a href="bond.html">₿OND Overview</a></div>
         </div>
       </div>
 
@@ -666,14 +667,14 @@
         <button class="term-header" onclick="toggle(this)">
           <div class="term-title-wrap">
             <span class="term-name">Maturity Spread</span>
-            <span class="term-tag">₿ond Revenue</span>
+            <span class="term-tag">₿OND Revenue</span>
           </div>
           <span class="term-icon">+</span>
         </button>
         <div class="term-body">
           <p>The treasury company's earned return at ₿ond maturity: the difference between Bitcoin's spot appreciation over the holding period and the slowly-rising ₿C obligation. At issuance, the treasury's BTC position equals the ₿C obligation in fiat-equivalent terms. Over time, because Bitcoin spot has historically appreciated faster than the cumulative average, the BTC position outpaces the obligation — creating a widening surplus that the dual condition captures at maturity.</p>
           <p>The spread is retained in the reserve ledger — fortifying the backstop for future obligations rather than being distributed as profit. This is the primary long-term revenue engine for consortium members and the structural mechanism that makes the reserve system self-reinforcing across maturity cycles.</p>
-          <div class="see-also">See also: <a href="#B">₿ond</a>, <a href="#M">Maturity Date</a></div>
+          <div class="see-also">See also: <a href="#B">₿ond</a>, <a href="#D">Dual-Condition Maturity</a></div>
         </div>
       </div>
 
@@ -789,7 +790,7 @@
         </button>
         <div class="term-body">
           <p>Money whose supply cannot be arbitrarily expanded by a central authority, whose purchasing power is stable or appreciating over time, and whose properties cannot be changed by policy decree. Bitcoin is sound money. ₿C is a sound denomination — its behavior is governed by arithmetic, not by a committee.</p>
-          <div class="see-also">See also: <a href="#B">Bitcoin</a>, <a href="#B">BTCC (₿C)</a></div>
+          <div class="see-also">See also: <a href="#B">Bitcoin</a>, <a href="#B">₿C (₿C)</a></div>
         </div>
       </div>
 

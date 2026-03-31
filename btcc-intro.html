@@ -488,7 +488,7 @@
         <li><a href="live.html">Live</a></li>
         <li><a href="days/index.html">Days</a></li>
         <li><a href="specification.html">Specification</a></li>
-        <li><a href="btcc-intro.html" class="active">BTCC</a></li>
+        <li><a href="btcc-intro.html" class="active">₿C</a></li>
         <li><a href="bitcoin-timeblocks.html">Timeblocks</a></li>
     </ul>
 </nav>
@@ -506,7 +506,7 @@
 <!-- PRICE CARD -->
 <div class="price-strip">
     <div class="price-card">
-        <div class="price-card-label">Today's BTCC Price</div>
+        <div class="price-card-label">Today's ₿C Price</div>
         <div class="price-card-value" id="btcc-price">—</div>
         <div class="price-card-sub" id="btcc-sub">Loading from historical data…</div>
     </div>
@@ -518,9 +518,9 @@
     <!-- 1. WHAT IS BTCC -->
     <div class="section">
         <div class="section-number">01</div>
-        <h2>What is BTCC?</h2>
+        <h2>What is ₿C?</h2>
         <p>
-            BTCC (Bitcoin Currency) is a denomination of Bitcoin whose fiat-equivalent price on any given day
+            ₿C (Bitcoin Currency) is a denomination of Bitcoin whose fiat-equivalent price on any given day
             is the arithmetic mean of every historical Bitcoin price from the genesis block (January 3, 2009)
             through the previous completed day.
         </p>
@@ -530,8 +530,8 @@
         </p>
 
         <div class="formula-box">
-            <div class="formula-label">The BTCC Formula</div>
-            BTCC(d) = (1/N) × Σ BTCADP(i), for i = 1 to N
+            <div class="formula-label">The ₿C Formula</div>
+            ₿C(d) = (1/N) × Σ BTCADP(i), for i = 1 to N
         </div>
 
         <p>
@@ -589,7 +589,7 @@
             </div>
             <div class="prop-card">
                 <div class="prop-card-title">Bounded Shocks</div>
-                <p>With N &gt; 6,200, no single day can move the BTCC price by more than ~0.016% of the shock's magnitude, regardless of how extreme.</p>
+                <p>With N &gt; 6,200, no single day can move the ₿C price by more than ~0.016% of the shock's magnitude, regardless of how extreme.</p>
             </div>
             <div class="prop-card">
                 <div class="prop-card-title">Incremental Appreciation</div>
@@ -604,7 +604,7 @@
                 <tr>
                     <th>Market Event</th>
                     <th>BTC Spot Impact</th>
-                    <th>BTCC Price Impact</th>
+                    <th>₿C Price Impact</th>
                 </tr>
             </thead>
             <tbody>
@@ -698,7 +698,7 @@
             it is buried under computational work, but because it is buried under subsequent timeblocks.
             Each new day added to the cumulative average dilutes the influence of every previous day.
             The oldest timeblocks — the Era 0 days at $0.00, the early exchange trading days — are now
-            as permanent a feature of the BTCC price as the genesis block is of the blockchain.
+            as permanent a feature of the ₿C price as the genesis block is of the blockchain.
         </p>
         <div class="callout">
             This produces an <strong>immutability gradient</strong>. Recent timeblocks have measurable
@@ -749,7 +749,7 @@
         <h2>Historical Eras</h2>
         <p>
             Bitcoin's price history spans multiple periods with different data characteristics.
-            The BTCADP specification defines four eras, all of which feed into the BTCC cumulative average.
+            The BTCADP specification defines four eras, all of which feed into the ₿C cumulative average.
         </p>
 
         <table class="eras-table">
@@ -790,9 +790,9 @@
         </table>
 
         <p>
-            The BTCC price incorporates all 561 days of Era 0 at $0.00. This is not a claim that
+            The ₿C price incorporates all 561 days of Era 0 at $0.00. This is not a claim that
             Bitcoin was worthless — it is a recognition that no market-based price discovery mechanism
-            existed. Including these days in the average is what gives the BTCC its historically
+            existed. Including these days in the average is what gives the ₿C its historically
             grounded, deeply anchored baseline.
         </p>
     </div>
@@ -804,18 +804,18 @@
         <div class="section-number">08</div>
         <h2>Implementation</h2>
         <p>
-            BTCC requires no changes to the Bitcoin protocol. No soft fork, no hard fork, no new opcodes.
+            ₿C requires no changes to the Bitcoin protocol. No soft fork, no hard fork, no new opcodes.
             The denomination operates entirely in the calculation layer — it defines a unit of account,
             not a transaction mechanism.
         </p>
         <p>
-            Any wallet, merchant, or payment system can adopt BTCC independently by implementing
+            Any wallet, merchant, or payment system can adopt ₿C independently by implementing
             its own conversion logic against a single daily price that updates at midnight UTC.
             The price is deterministic, publicly verifiable, and reproducible by any party with access
             to the BTCADP specification and trade data.
         </p>
         <div class="callout">
-            <strong>₿C is Bitcoin in dollar terms.</strong> BTCC specifies what the unit is
+            <strong>₿C is Bitcoin in dollar terms.</strong> ₿C specifies what the unit is
             and how it is computed. How it is used in invoicing systems, wallet interfaces, merchant
             pricing, or smart contracts is left entirely to implementers.
         </div>
@@ -840,7 +840,7 @@
     <!-- PAPER CTA -->
     <div class="paper-section">
         <h3>Read the Full Technical Paper</h3>
-        <p>The complete BTCC specification, including mathematical proofs, stability analysis, manipulation resistance, and implementation guidance.</p>
+        <p>The complete ₿C specification, including mathematical proofs, stability analysis, manipulation resistance, and implementation guidance.</p>
         <div class="paper-buttons">
             <a href="btcc-paper.html" class="btn-primary">View Full Paper</a>
             <a href="btcc-paper.html#download" class="btn-secondary">Download PDF</a>
@@ -890,7 +890,7 @@
     <p>
         <a href="index.html">Home</a> &nbsp;·&nbsp;
         <a href="specification.html">BTCADP Specification</a> &nbsp;·&nbsp;
-        <a href="btcc-paper.html">BTCC Paper</a> &nbsp;·&nbsp;
+        <a href="btcc-paper.html">₿C Paper</a> &nbsp;·&nbsp;
         <a href="https://github.com/BTCADP/btcadp-research">GitHub</a>
     </p>
     <p style="margin-top:0.8rem;">CC0 Public Domain · btcadp.org · 2026</p>
