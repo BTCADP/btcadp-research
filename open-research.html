@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Open Research | btcadp.org</title>
+<meta name="description" content="Open research questions in Bitcoin-denominated financial instruments. Published data, specifications, and starter kits for independent academic research.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary: #0a0a0b;
+    --bg-secondary: #111114;
+    --bg-tertiary: #19191e;
+    --border: #2a2a32;
+    --text-primary: #e8e6e3;
+    --text-secondary: #8a8a95;
+    --text-muted: #555560;
+    --orange: #f7931a;
+    --orange-dim: rgba(247,147,26,0.12);
+    --green: #2ecc71;
+    --green-dim: rgba(46,204,113,0.1);
+    --blue: #3498db;
+    --blue-dim: rgba(52,152,219,0.1);
+    --purple: #9b59b6;
+    --purple-dim: rgba(155,89,182,0.1);
+    --font-display: 'Source Serif 4', Georgia, serif;
+    --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-display);
+    font-size: 18px;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(247,147,26,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(247,147,26,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none; z-index: 0;
+  }
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(10,10,11,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 56px;
+  }
+  .nav-brand { font-family: var(--font-mono); font-size: 1rem; font-weight: bold; color: var(--orange); text-decoration: none; letter-spacing: 0.05em; }
+  .nav-links { display: flex; gap: 0.25rem; list-style: none; }
+  .nav-links a { color: var(--text-muted); text-decoration: none; font-family: var(--font-mono); font-size: 0.72rem; padding: 0.4rem 0.6rem; border-radius: 4px; transition: color 0.2s, background 0.2s; }
+  .nav-links a:hover { color: var(--text-primary); background: var(--bg-tertiary); }
+  .nav-links a.active { color: var(--orange); }
+
+  .page-wrap {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 64px 24px 100px;
+    position: relative; z-index: 1;
+  }
+
+  .page-meta { font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--green); margin-bottom: 20px; }
+  .page-title { font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 700; letter-spacing: -1px; line-height: 1.15; color: #fff; margin-bottom: 12px; }
+  .page-subtitle { font-size: 1.05rem; color: var(--text-secondary); margin-bottom: 20px; font-style: italic; }
+  .page-byline { font-family: var(--font-sans); font-size: 0.85rem; color: var(--text-muted); margin-bottom: 48px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
+
+  .intro { color: #c8c6c3; margin-bottom: 32px; font-size: 1rem; }
+  .intro strong { color: var(--orange); }
+
+  /* Section headers */
+  .section-header {
+    display: flex; align-items: center; gap: 16px;
+    margin: 56px 0 28px;
+  }
+  .section-num {
+    font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700;
+    color: var(--orange); letter-spacing: 2px; text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .section-header h2 {
+    font-size: 1.4rem; font-weight: 600; color: #fff; letter-spacing: -0.3px;
+  }
+  .section-header::after {
+    content: ''; flex: 1; height: 1px; background: var(--border);
+  }
+
+  /* Research cards */
+  .research-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 28px;
+    margin-bottom: 16px;
+    transition: border-color 0.2s;
+  }
+  .research-card:hover { border-color: #3a3a44; }
+
+  .card-header {
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 16px;
+    margin-bottom: 16px;
+  }
+  .card-title {
+    font-size: 1.1rem; font-weight: 600; color: #fff; line-height: 1.3;
+  }
+  .card-scope {
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: 1px;
+    text-transform: uppercase; padding: 3px 10px; border-radius: 3px;
+    white-space: nowrap; flex-shrink: 0; margin-top: 3px;
+  }
+  .scope-semester { background: var(--green-dim); color: var(--green); }
+  .scope-dissertation { background: var(--purple-dim); color: var(--purple); }
+  .scope-paper { background: var(--blue-dim); color: var(--blue); }
+
+  .card-field {
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px;
+  }
+
+  .card-question {
+    font-family: var(--font-sans); font-size: 0.95rem; color: var(--orange);
+    font-weight: 600; margin-bottom: 12px; line-height: 1.5;
+  }
+
+  .card-body {
+    font-family: var(--font-sans); font-size: 0.88rem; color: var(--text-secondary);
+    line-height: 1.65; margin-bottom: 16px;
+  }
+
+  .card-data {
+    font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted);
+    padding-top: 12px; border-top: 1px solid var(--border); line-height: 1.8;
+  }
+  .card-data a { color: var(--blue); text-decoration: none; }
+  .card-data a:hover { color: var(--orange); }
+
+  /* Data section */
+  .data-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+    background: var(--border); border: 1px solid var(--border);
+    border-radius: 8px; overflow: hidden; margin: 20px 0;
+  }
+  .data-item {
+    background: var(--bg-secondary); padding: 20px;
+  }
+  .data-icon { font-size: 1.4rem; margin-bottom: 8px; }
+  .data-name {
+    font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700;
+    letter-spacing: 0.5px; color: #fff; margin-bottom: 4px;
+  }
+  .data-desc {
+    font-family: var(--font-sans); font-size: 0.8rem; color: var(--text-secondary);
+    line-height: 1.5; margin-bottom: 10px;
+  }
+  .data-link {
+    font-family: var(--font-mono); font-size: 0.7rem;
+    color: var(--orange); text-decoration: none;
+  }
+  .data-link:hover { text-decoration: underline; }
+
+  /* Callout */
+  .callout {
+    background: var(--orange-dim);
+    border-left: 3px solid var(--orange);
+    border-radius: 0 4px 4px 0;
+    padding: 16px 20px; margin: 28px 0;
+  }
+  .callout p { color: #c4a46a; font-family: var(--font-sans); font-size: 0.92rem; line-height: 1.7; margin: 0; }
+
+  /* Contact */
+  .contact-box {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 32px;
+    text-align: center;
+    margin: 28px 0;
+  }
+  .contact-box p {
+    font-family: var(--font-sans); font-size: 0.92rem;
+    color: var(--text-secondary); margin-bottom: 16px; line-height: 1.6;
+  }
+  .contact-email {
+    font-family: var(--font-mono); font-size: 1rem;
+    color: var(--orange); text-decoration: none;
+    padding: 10px 24px;
+    border: 1px solid var(--orange);
+    border-radius: 4px;
+    display: inline-block;
+    transition: all 0.2s;
+  }
+  .contact-email:hover { background: var(--orange); color: #000; }
+
+  /* Footer */
+  footer { border-top: 1px solid var(--border); padding: 32px 24px; text-align: center; font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+  footer a { color: var(--text-muted); text-decoration: none; }
+  footer a:hover { color: var(--orange); }
+
+  @media (max-width: 640px) {
+    .nav-links a { font-size: 0.65rem; padding: 0.3rem 0.4rem; }
+    .data-grid { grid-template-columns: 1fr; }
+    .card-header { flex-direction: column; }
+  }
+</style>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+</head>
+<body>
+<nav>
+  <a class="nav-brand" href="index.html">BTCADP</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="btcc.html">₿C</a></li>
+    <li><a href="bitcoin-timeblocks.html">Timeblocks</a></li>
+    <li><a href="currency-layer.html">Currency Layer</a></li>
+    <li><a href="knowledge-base.html">Knowledge Base</a></li>
+    <li><a href="open-research.html" class="active">Research</a></li>
+  </ul>
+</nav>
+
+<div class="page-wrap">
+
+  <div class="page-meta">Open Research &nbsp;&bull;&nbsp; btcadp.org &nbsp;&bull;&nbsp; 2026</div>
+  <h1 class="page-title">Open Research</h1>
+  <p class="page-subtitle">Independent academic research questions in Bitcoin-denominated financial instruments</p>
+  <div class="page-byline">
+    All specifications, data, and white papers are CC0 Public Domain &nbsp;&bull;&nbsp; No permission required to use, cite, or publish
+  </div>
+
+  <p class="intro">
+    The BTCADP framework proposes a layered monetary architecture built on Bitcoin. The specification is published. The denomination is mathematically defined. The historical data is compiled and publicly available. What the framework needs now is independent academic stress testing: formal modeling, empirical analysis, and rigorous engagement with the existing literature. The research questions below are scoped, concrete, and publishable. Contributions are independently owned by their authors.
+  </p>
+
+  <div class="callout">
+    <p><strong>For researchers:</strong> Each question below includes the relevant source materials and data. Everything is CC0 public domain. You own your work. Publish wherever you choose. Cite the BTCADP specification and white papers as source material. No permission, coordination, or authorship sharing is required.</p>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- SECTION 1: OPEN RESEARCH QUESTIONS -->
+  <!-- ═══════════════════════════════════════ -->
+
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2>Open Research Questions</h2>
+  </div>
+
+  <!-- PAPER A -->
+  <div class="research-card">
+    <div class="card-header">
+      <div class="card-title">₿C Appreciation and the Deflation Objection</div>
+      <span class="card-scope scope-paper">Research Paper</span>
+    </div>
+    <div class="card-field">Monetary Economics &nbsp;&bull;&nbsp; Economic History</div>
+    <div class="card-question">Is ₿C's predictable appreciation mechanistically distinguishable from historical monetary deflation in a way that addresses the standard objections?</div>
+    <div class="card-body">
+      The ₿C denomination appreciates as a mathematical property of its construction: a cumulative arithmetic mean applied to a naturally appreciating, fixed-supply asset. The standard economics literature (Friedman, Selgin, gold-standard historical episodes) argues that deflationary units of account discourage spending and investment. This paper would engage that literature on its own terms and examine whether the mechanism driving ₿C appreciation (demand-driven, predictable, transparently calculable) is distinguishable from the mechanisms that caused harmful deflation historically (supply-driven, unexpected, contraction-induced). The comparison to fiat inflation as an equally "moving" unit of account, but opaque and discretionary, is part of the analysis.
+    </div>
+    <div class="card-data">
+      Source materials: <a href="btcc-white-paper.html">₿C White Paper</a>, <a href="specification.html">BTCADP Specification</a>, <a href="bitcoin-bridge.html">The Bitcoin Bridge</a> Ch. 10<br>
+      Key literature: Friedman, "The Optimum Quantity of Money"; Selgin, "Less Than Zero"; White, "Better Money"
+    </div>
+  </div>
+
+  <!-- PAPER B -->
+  <div class="research-card">
+    <div class="card-header">
+      <div class="card-title">Early-Phase Vulnerability and Minimum Viable Scale</div>
+      <span class="card-scope scope-dissertation">Simulation / Modeling</span>
+    </div>
+    <div class="card-field">Quantitative Finance &nbsp;&bull;&nbsp; Stablecoin Research</div>
+    <div class="card-question">What is the minimum scale (token supply, reserve depth, token age distribution) at which the ₿USD system crosses from vulnerable to self-reinforcing?</div>
+    <div class="card-body">
+      The ₿USD architecture creates commercial bid pressure on Bitcoin that is qualitatively different from speculative demand. At scale, this bid is persistent and countercyclical. Before scale is achieved, the system is young and the token population is concentrated near recent minting prices. This research would model the coverage ratio dynamics during the early phase under various volatility regimes using Monte Carlo simulation across historical and synthetic BTC price paths. The output is a defined threshold: the minimum token supply, minimum reserve depth, and minimum token age distribution at which the system becomes self-reinforcing.
+    </div>
+    <div class="card-data">
+      Source materials: <a href="busd-white-paper.html">₿USD White Paper</a> (Reserve Architecture, Bank Run Analysis), <a href="bitcoin-bridge.html">The Bitcoin Bridge</a> Ch. 13<br>
+      Data: <a href="https://github.com/BTCADP/btcadp-research">btcadp_historical.csv</a>, <a href="https://github.com/BTCADP/btcadp-research">btcadp_btcc_historical.csv</a>
+    </div>
+  </div>
+
+  <!-- PAPER C -->
+  <div class="research-card">
+    <div class="card-header">
+      <div class="card-title">₿OND Maturity Distribution Analysis</div>
+      <span class="card-scope scope-semester">Empirical Analysis</span>
+    </div>
+    <div class="card-field">Fixed Income &nbsp;&bull;&nbsp; Financial Product Design</div>
+    <div class="card-question">What is the full distribution of ₿OND maturity times under various market regimes, including prolonged bear markets?</div>
+    <div class="card-body">
+      The ₿OND is a return-targeted savings instrument with a dual-condition maturity: both the saver's ₿C return target and the treasury's BTC profitability condition must be met simultaneously. Existing backtested data shows median maturity times for five tiers. This research would produce the full distribution analysis across all historical entry points from 2017 through 2026, segmented by market regime (bull, bear, neutral). Of particular interest: the tail risk for bonds issued at cycle peaks, whether entry points exist where bonds effectively never mature within a reasonable timeframe, and the sensitivity of maturity time to the spot/₿C ratio at issuance.
+    </div>
+    <div class="card-data">
+      Source materials: ₿OND White Paper (Appendix E of <a href="bitcoin-bridge.html">The Bitcoin Bridge</a>), ₿OND DCA Paper<br>
+      Data: <a href="https://github.com/BTCADP/btcadp-research">btcadp_historical.csv</a>, <a href="https://github.com/BTCADP/btcadp-research">btcadp_btcc_historical.csv</a>
+    </div>
+  </div>
+
+  <!-- PAPER D -->
+  <div class="research-card">
+    <div class="card-header">
+      <div class="card-title">Consortium Governance: Game Theory and Mechanism Design</div>
+      <span class="card-scope scope-dissertation">Formal Analysis</span>
+    </div>
+    <div class="card-field">Institutional Economics &nbsp;&bull;&nbsp; Mechanism Design</div>
+    <div class="card-question">What are the formal incentive dynamics of a multi-party consortium that collectively manages monetary reserves, and under what conditions does the governance model hold?</div>
+    <div class="card-body">
+      The ₿USD/₿OND system is issued by a consortium of independent, publicly traded Bitcoin treasury companies. This introduces governance challenges that have historical precedent: gold standard coordination, the Libra/Diem consortium (which failed), and central bank cooperation frameworks. This research would formally model the defection payoffs, collusion scenarios, and enforcement mechanisms. Under what conditions does a member benefit from defection? What prevents a majority from extracting value at the expense of a minority? How do stress-period lockout provisions interact with individual member incentives? The design principles (separation of layers by mutability, transparency as constraint, stress-period immutability) are described but not formally validated.
+    </div>
+    <div class="card-data">
+      Source materials: <a href="bitcoin-bridge.html">The Bitcoin Bridge</a> Ch. 14 (The Consortium), Ch. 15 (Economics for Each Party), Ch. 21 (Objections)<br>
+      Comparable study: Catalini &amp; Gans on Libra/Diem consortium dynamics (MIT Cryptoeconomics Lab)
+    </div>
+  </div>
+
+  <!-- PAPER E -->
+  <div class="research-card">
+    <div class="card-header">
+      <div class="card-title">The Two-Sphere Monetary Model</div>
+      <span class="card-scope scope-paper">Theoretical Framework</span>
+    </div>
+    <div class="card-field">Monetary Theory &nbsp;&bull;&nbsp; Competing Currencies</div>
+    <div class="card-question">Can the coexistence of fiat and Bitcoin monetary systems be formally modeled, and what role does a derived unit of account play as a translation layer?</div>
+    <div class="card-body">
+      The BTCADP framework posits two parallel monetary systems (fiat and Bitcoin) that currently operate without a common unit of account. ₿C is proposed as the bridge denomination: derived from Bitcoin's price history, readable by both systems, controlled by neither. This research would formalize this framework, defining the properties of parallel monetary systems, the requirements a bridge denomination must satisfy, and a demonstration of whether ₿C meets those requirements. The work connects to Hayek's competing currencies framework, Selgin's free banking literature, and White's monetary competition analysis.
+    </div>
+    <div class="card-data">
+      Source materials: <a href="bitcoin-bridge.html">The Bitcoin Bridge</a> Ch. 8 (Functions of Money), Ch. 10 (₿C), Ch. 22 (Two Spheres)<br>
+      Key literature: Hayek, "Denationalisation of Money"; Selgin, "The Theory of Free Banking"; White, "Better Money"
+    </div>
+  </div>
+
+  <!-- PAPER F -->
+  <div class="research-card">
+    <div class="card-header">
+      <div class="card-title">BTCADP and ₿C: Statistical Properties of a Cumulative Average Denomination</div>
+      <span class="card-scope scope-semester">Quantitative Analysis</span>
+    </div>
+    <div class="card-field">Financial Econometrics &nbsp;&bull;&nbsp; Index Construction</div>
+    <div class="card-question">What are the formal statistical properties of a unit of account derived from the cumulative arithmetic mean of daily asset prices?</div>
+    <div class="card-body">
+      ₿C's stability and appreciation claims are central to everything built on top of it. The specification describes the formula and its behavioral properties, but a formal treatment would provide the quantitative foundation for academic credibility. This research would analyze convergence behavior (how does day N+1 sensitivity change as N grows?), volatility compression properties, the structural appreciation ("ratchet") effect, comparison to alternative averaging methods (EMA, SMA, median, trimmed), and empirical validation against 6,200+ daily observations. The dataset is complete and publicly available.
+    </div>
+    <div class="card-data">
+      Source materials: <a href="specification.html">BTCADP Specification</a>, <a href="btcc-white-paper.html">₿C White Paper</a><br>
+      Data: <a href="https://github.com/BTCADP/btcadp-research">btcadp_historical.csv</a> (6,200+ daily observations), <a href="https://github.com/BTCADP/btcadp-research">btcadp_btcc_historical.csv</a>
+    </div>
+  </div>
+
+  <!-- PAPER G -->
+  <div class="research-card">
+    <div class="card-header">
+      <div class="card-title">Legal Classification of TBDC Across Jurisdictions</div>
+      <span class="card-scope scope-paper">Policy / Legal Analysis</span>
+    </div>
+    <div class="card-field">Digital Asset Regulation &nbsp;&bull;&nbsp; Comparative Law</div>
+    <div class="card-question">How would ₿USD and ₿OND be classified under existing and proposed regulatory frameworks in key jurisdictions?</div>
+    <div class="card-body">
+      Stablecoin regulation is being written in real time. The GENIUS Act and equivalent frameworks in the EU, Singapore, Japan, and the UAE are defining what stablecoins can and cannot do. A Bitcoin-backed, dollar-pegged stablecoin issued by a consortium of publicly traded companies across multiple jurisdictions is untested in every framework. This research would analyze the regulatory classification of ₿USD and ₿OND across key jurisdictions: what licenses are required, what reserve requirements apply, how the consortium structure interacts with securities law, and whether the defensive programmability framework creates novel regulatory questions.
+    </div>
+    <div class="card-data">
+      Source materials: <a href="busd-white-paper.html">₿USD White Paper</a>, <a href="bitcoin-bridge.html">The Bitcoin Bridge</a> Ch. 16-18, <a href="defensive-programmability.html">Defensive Programmability</a>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- SECTION 2: DATA & RESOURCES -->
+  <!-- ═══════════════════════════════════════ -->
+
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2>Data &amp; Resources</h2>
+  </div>
+
+  <p class="intro">
+    Everything needed to begin working on any research question above. No login. No registration. CC0 Public Domain.
+  </p>
+
+  <div class="data-grid">
+    <div class="data-item">
+      <div class="data-icon">📊</div>
+      <div class="data-name">BTCADP Historical Data</div>
+      <div class="data-desc">Daily Bitcoin Average Daily Price from genesis through present. 6,200+ observations.</div>
+      <a class="data-link" href="https://github.com/BTCADP/btcadp-research">Download CSV &rarr;</a>
+    </div>
+    <div class="data-item">
+      <div class="data-icon">📈</div>
+      <div class="data-name">₿C Historical Data</div>
+      <div class="data-desc">Daily ₿C (Bitcoin Currency) cumulative average values from genesis through present.</div>
+      <a class="data-link" href="https://github.com/BTCADP/btcadp-research">Download CSV &rarr;</a>
+    </div>
+    <div class="data-item">
+      <div class="data-icon">📐</div>
+      <div class="data-name">BTCADP Specification</div>
+      <div class="data-desc">Complete methodology for computing the daily reference price. Independently reproducible.</div>
+      <a class="data-link" href="specification.html">Read Specification &rarr;</a>
+    </div>
+    <div class="data-item">
+      <div class="data-icon">📄</div>
+      <div class="data-name">₿C White Paper</div>
+      <div class="data-desc">Mathematical derivation, behavioral properties, convergence analysis, known limitations.</div>
+      <a class="data-link" href="btcc-white-paper.html">Read Paper &rarr;</a>
+    </div>
+    <div class="data-item">
+      <div class="data-icon">💵</div>
+      <div class="data-name">₿USD White Paper</div>
+      <div class="data-desc">Reserve architecture, two-ledger system, defensive programmability, fee structure, risk analysis.</div>
+      <a class="data-link" href="busd-white-paper.html">Read Paper &rarr;</a>
+    </div>
+    <div class="data-item">
+      <div class="data-icon">🏦</div>
+      <div class="data-name">₿OND White Paper</div>
+      <div class="data-desc">Return-based maturity mechanics, dual-condition structure, DCA integration, treasury economics.</div>
+      <a class="data-link" href="bitcoin-bridge.html#bond-white-paper">Read Paper &rarr;</a>
+    </div>
+    <div class="data-item">
+      <div class="data-icon">📖</div>
+      <div class="data-name">The Bitcoin Bridge</div>
+      <div class="data-desc">The complete framework. 30 chapters covering the architecture, instruments, institutions, and transition.</div>
+      <a class="data-link" href="bitcoin-bridge.html">Read Full Paper &rarr;</a>
+    </div>
+    <div class="data-item">
+      <div class="data-icon">💻</div>
+      <div class="data-name">GitHub Repository</div>
+      <div class="data-desc">Data files, specification, and community contributions. Open for pull requests.</div>
+      <a class="data-link" href="https://github.com/BTCADP/btcadp-research" target="_blank" rel="noopener">View Repository &rarr;</a>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- SECTION 3: CONTRIBUTE -->
+  <!-- ═══════════════════════════════════════ -->
+
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2>Contribute</h2>
+  </div>
+
+  <p class="intro">
+    Working on one of these questions? Found something the framework missed? Have a question about the data or methodology? Built an independent BTCADP implementation?
+  </p>
+
+  <div class="contact-box">
+    <p>Contributions, critiques, and questions are welcome.<br>Published research will be linked from this page with full attribution.</p>
+    <a class="contact-email" href="mailto:research@btcadp.org">research@btcadp.org</a>
+  </div>
+
+  <div class="callout">
+    <p>The framework is CC0 public domain. There is no cap table, no governance token, no insider allocation, and no institutional agenda. The research program exists to determine whether the architecture is sound. If it is, the work validates it. If it is not, the work improves it. Both outcomes advance the field.</p>
+  </div>
+
+</div>
+
+<footer>
+  <p>
+    <a href="index.html">Home</a> &nbsp;&bull;&nbsp;
+    <a href="knowledge-base.html">Knowledge Base</a> &nbsp;&bull;&nbsp;
+    <a href="specification.html">Specification</a> &nbsp;&bull;&nbsp;
+    <a href="https://github.com/BTCADP/btcadp-research">GitHub</a>
+  </p>
+  <p style="margin-top:8px;">CC0 Public Domain &bull; btcadp.org &bull; 2026</p>
+</footer>
+
+</body>
+</html>
