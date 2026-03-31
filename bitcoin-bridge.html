@@ -1511,7 +1511,7 @@
 <p class="hero-line">Scale makes the system safer, not more fragile. The structural inverse of traditional banking.</p>
 
 <p>
-  Because ₿OND and ₿USD are structurally different instruments with different redemption mechanics, duration profiles, and risk characteristics, they require separate reserve accounting. Pooling them would allow a stress event on one product to consume the reserves of the other. The architecture uses four ledgers, two per product, each with a distinct function.
+  Because ₿OND and ₿USD are structurally different instruments with different redemption mechanics, duration profiles, and risk characteristics, they require separate reserve accounting. ₿USD faces demand-deposit risk — holders can redeem for fiat at any time. ₿OND does not — the dual condition locks each bond until both the saver's return and the treasury's profitability conditions are met. The four-ledger architecture ensures that ₿USD's redemption pressure, the system's primary stress vector, can never reach ₿OND reserves. Each product's reserve base is independently sized, independently verifiable, and independently solvent.
 </p>
 
 <h3>The Four-Ledger System</h3>
@@ -1525,7 +1525,7 @@
 </p>
 
 <p>
-  The separation is not a bookkeeping formality. It is a structural firewall. A mass ₿OND redemption event cannot drain the reserves backing ₿USD. A stress event on ₿USD cannot accelerate ₿OND maturities. Each product lives or dies on its own reserve base.
+  The separation is not a bookkeeping formality. It is a structural firewall. The ₿OND's dual condition makes mass redemption structurally impossible — each bond matures only when both the saver's return target is met and the treasury's position is profitable, and early exits convert to ₿USD rather than drawing on ₿OND reserves. A stress event on ₿USD cannot accelerate ₿OND maturities. The two products share an ecosystem but not a reserve base.
 </p>
 
 <h3>The Coverage Ratio</h3>
@@ -3383,7 +3383,7 @@
 
 <h3>17. Integration with the Four-Ledger Architecture</h3>
 
-<p>When deployed alongside the ₿ond savings product, ₿USD operates within a four-ledger reserve architecture. The ₿ond and ₿USD are structurally different instruments with different redemption mechanics, duration profiles, and risk characteristics. Pooling their reserves would allow a stress event on one product to consume the reserves of the other.</p>
+<p>When deployed alongside the ₿ond savings product, ₿USD operates within a four-ledger reserve architecture. ₿USD faces demand-deposit risk — holders can redeem for fiat at any time. The ₿ond does not — the dual condition locks each bond until both the saver's return and the treasury's profitability conditions are met. The four-ledger separation ensures that ₿USD redemption pressure, the system's primary stress vector, can never reach ₿ond reserves.</p>
 
 <p>The four-ledger separation is as follows: ₿ond L1 holds BTC purchased with saver deposits, locked to the maturity schedule. ₿ond L2 is the backstop reserve sized actuarially against the known maturity book. ₿USD L1 holds BTC backing outstanding $1 tokens. ₿USD L2 self-fortifies over time as BTC appreciation creates surplus above the $1 obligation. All four ledgers are held in publicly addressable Bitcoin wallets on the base layer.</p>
 
@@ -3535,7 +3535,7 @@
 
 <h3>6.3 Separation from ₿USD Reserves</h3>
 
-<p>The ₿ond reserves are entirely separate from ₿USD reserves. The four-ledger architecture (₿ond L1, ₿ond L2, ₿USD L1, ₿USD L2) prevents cross-contamination. A stress event on either product cannot consume the reserves of the other. All four ledgers are held in publicly addressable Bitcoin wallets on the base layer, verifiable by any observer in real time.</p>
+<p>The ₿ond reserves are entirely separate from ₿USD reserves. The four-ledger architecture (₿ond L1, ₿ond L2, ₿USD L1, ₿USD L2) ensures that ₿USD redemption pressure — the system's primary stress vector — can never reach ₿ond reserves. The ₿ond's dual condition makes mass redemption structurally impossible, eliminating the demand-deposit risk that the separation is designed to contain. All four ledgers are held in publicly addressable Bitcoin wallets on the base layer, verifiable by any observer in real time.</p>
 
 <h3>8. Maturity, Payout, and Auto-Reinvest</h3>
 
@@ -3854,7 +3854,7 @@
 <h3>Architecture and Governance</h3>
 
 <p>
-  <strong>Why four ledgers instead of two?</strong> ₿OND and ₿USD have different redemption mechanics, duration profiles, and risk characteristics. Pooling reserves would allow a stress event on one product to consume the reserves of the other. The four-ledger separation is a structural firewall.
+  <strong>Why four ledgers instead of two?</strong> ₿USD faces demand-deposit risk — holders can redeem for fiat at any time. ₿OND does not — the dual condition locks each bond until maturity conditions are met. The four-ledger separation ensures ₿USD redemption pressure can never reach ₿OND reserves. Each product's reserve base is independently sized and independently verifiable.
 </p>
 
 <p>
