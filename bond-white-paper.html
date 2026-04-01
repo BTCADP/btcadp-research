@@ -349,7 +349,7 @@
 
     <div class="abstract">
         <div class="abstract-label">Abstract</div>
-        <p>The ₿ond is a return-based savings instrument denominated in ₿C (₿C — Bitcoin Currency) and issued by a consortium of Bitcoin treasury companies. A saver deposits fiat currency—any amount from $1 upward—and selects a target return: +10%, +25%, +50%, +100%, or other tiers defined by the issuing consortium. Each dollar becomes a programmable ₿ond token with its own ₿C entry price, target return, and maturity trigger. The bond matures when two conditions are simultaneously met: the saver’s ₿C return target has been reached, and the treasury’s BTC position on that specific bond is profitable by a minimum margin. At maturity, the saver receives their original deposit plus the target return in ₿USD—the system’s dollar-pegged spending token. The saver can spend it, withdraw to fiat, or auto-reinvest into a new ₿ond. This paper specifies the technical architecture of ₿ond: its dual-condition maturity mechanism, reserve structure, DCA integration, auto-reinvest lifecycle, distribution model, and risk analysis.</p>
+        <p>The ₿ond is a return-based savings instrument denominated in ₿C (BTCC — Bitcoin Currency) and issued by a consortium of Bitcoin treasury companies. A saver deposits fiat currency—any amount from $1 upward—and selects a target return: +10%, +25%, +50%, +100%, or other tiers defined by the issuing consortium. Each dollar becomes a programmable ₿ond token with its own ₿C entry price, target return, and maturity trigger. The bond matures when two conditions are simultaneously met: the saver’s ₿C return target has been reached, and the treasury’s BTC position on that specific bond is profitable by a minimum margin. At maturity, the saver receives their original deposit plus the target return in ₿USD—the system’s dollar-pegged spending token. The saver can spend it, withdraw to fiat, or auto-reinvest into a new ₿ond. This paper specifies the technical architecture of ₿ond: its dual-condition maturity mechanism, reserve structure, DCA integration, auto-reinvest lifecycle, distribution model, and risk analysis.</p>
     </div>
 
     <div class="paper-section">
@@ -506,7 +506,7 @@
 
     <div class="paper-section">
         <h3>6.3 Separation from ₿USD Reserves</h3>
-        <p>The ₿ond reserves are entirely separate from ₿USD reserves. The four-ledger architecture (₿ond L1, ₿ond L2, ₿USD L1, ₿USD L2) ensures that ₿USD redemption pressure — the system's primary stress vector — can never reach ₿ond reserves. The ₿ond's dual condition makes mass redemption structurally impossible, eliminating the demand-deposit risk that the separation is designed to contain. All four ledgers are held in publicly addressable Bitcoin wallets on the base layer, verifiable by any observer in real time.</p>
+        <p>Each instrument in the framework operates within its own dedicated two-ledger system. The ₿ond reserves are entirely separate from ₿USD and ₿ILL reserves. This separation ensures that ₿USD redemption pressure, the system's primary stress vector, can never reach ₿ond reserves. The ₿ond's dual condition makes mass redemption structurally impossible, eliminating the demand-deposit risk that the separation is designed to contain. All ledgers are held in publicly addressable Bitcoin wallets on the base layer, verifiable by any observer in real time.</p>
     </div>
 
     <div class="paper-section">
