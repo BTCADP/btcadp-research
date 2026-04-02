@@ -644,7 +644,7 @@
 <p class="hero-line">Bitcoin is sound money. Sixteen years of unbroken operation have settled that question. The question that remains is how eight billion people get from where they are to where Bitcoin can take them.</p>
 
 <p>
-  Bitcoin's supply is fixed at 21 million units. Its issuance schedule is predetermined and enforced by consensus. No government, no corporation, and no developer can alter either property. The protocol has operated continuously since January 3, 2009, without a single hour of downtime, without a single unauthorized transaction, without a single modification to its monetary policy. No asset in history has appreciated more over any multi-year holding period. By every measure that matters, Bitcoin works.
+  Bitcoin's supply is fixed at 21 million units. Its issuance schedule is predetermined and enforced by consensus. No government, no corporation, and no developer can alter either property. The network has operated continuously since January 3, 2009, without a single hour of downtime and without a single unauthorized transaction. Its monetary policy has never been modified. No asset in history has appreciated more over any multi-year holding period. By every measure that matters, Bitcoin works.
 </p>
 
 <p>
@@ -956,7 +956,7 @@
 </p>
 
 <p>
-  Every component described here is either already built, already specified, or within the demonstrated capacity of the institutions that would operate it. The reference price specification is published. The denomination protocol is mathematically defined. The treasury companies that would form the consortium already hold the necessary Bitcoin reserves. The consortium's purpose-built sidechain represents a significant engineering investment — a multi-year effort requiring expertise in consensus mechanisms, cryptographic protocols, and distributed systems. This is deliberate. Monetary infrastructure built on rented platforms is monetary infrastructure that someone else controls. The sidechain is not overhead. It is the consortium's competitive moat, the proof that these institutions can build and operate the full stack, and the infrastructure that makes the defensive programmability framework possible. What remains is assembly and execution, and the recognition, by the companies that hold the reserves and the people who need the products, that the alternative to the CBDC future is not a dream. It is an engineering problem with a known solution.
+  Every component described here is either already built, already specified, or within the demonstrated capacity of the institutions that would operate it. The reference price specification is published. The denomination protocol is mathematically defined. The treasury companies that would form the consortium already hold the necessary Bitcoin reserves. The consortium's purpose-built sidechain represents a significant engineering investment, a multi-year effort requiring expertise in consensus mechanisms, cryptographic protocols, and distributed systems. This is deliberate. Monetary infrastructure built on rented platforms is monetary infrastructure that someone else controls. The sidechain is not overhead. It is the consortium's competitive moat, the proof that these institutions can build and operate the full stack, and the infrastructure that makes the defensive programmability framework possible. What remains is assembly and execution, and the recognition, by the companies that hold the reserves and the people who need the products, that the alternative to the CBDC future is not a dream. It is an engineering problem with a known solution.
 </p>
 
 <div class="callout">
@@ -981,7 +981,7 @@
 <p class="hero-line">Bitcoin has succeeded beyond most early projections as a store of value, a settlement network, and a treasury reserve asset. What has not yet been built on top of it is the denomination and interface layer that everyday commerce requires.</p>
 
 <p>
-  The gap between what Bitcoin was proposed to be and what it has become is not a technical failure. The protocol works. The network is the most secure computing infrastructure ever built. The proof-of-work consensus mechanism has operated without interruption since January 2009.<sup class="fn"><a href="#ref6" id="fn6">[6]</a></sup> The supply schedule is mathematically fixed and has never been altered. No asset in history has appreciated more over any multi-year holding period. By every technical measure, Bitcoin works.
+  The gap between what Bitcoin was proposed to be and what it has become is not a technical failure. The protocol works. The network is the most secure computing infrastructure ever built. The proof-of-work consensus mechanism has operated without interruption since January 2009.<sup class="fn"><a href="#ref6" id="fn6">[6]</a></sup> Its monetary policy, the 21 million supply cap and the halving schedule, has never been altered. No asset in history has appreciated more over any multi-year holding period. By every technical measure, Bitcoin works.
 </p>
 
 <p>
@@ -1059,7 +1059,7 @@
 <h3>How the Model Maps Each Function</h3>
 
 <p>
-  The ₿C/₿USD ecosystem assigns each function of money to the component designed for it. No single instrument is asked to do everything.
+  The currency layer assigns each function of money to the component designed for it. No single instrument is asked to do everything.
 </p>
 
 <p>
@@ -1067,11 +1067,11 @@
 </p>
 
 <p>
-  <strong>The medium of exchange is two instruments, not one.</strong> Bitcoin via Lightning is the native medium of exchange for the Bitcoin circular economy: merchants pricing in sats, workers receiving sats, payments moving peer-to-peer without touching fiat at any point. This economy exists today, though it is small. ₿USD, the dollar-pegged stablecoin described in Part III, is the transitional medium of exchange for people coming from the fiat economy. Each token is pegged to $1, backed by Bitcoin reserves. Users think they are using a better dollar. Under the hood, they are participating in a Bitcoin-reserve economy. As the ecosystem matures and more merchants accept ₿USD, the proportion of tokens ever redeemed for fiat naturally declines, and ₿USD transitions from bridge instrument to native currency.
+  <strong>The medium of exchange is two instruments, not one.</strong> Bitcoin via Lightning is the native medium of exchange for the Bitcoin circular economy: merchants pricing in sats, workers receiving sats, payments moving peer-to-peer without touching fiat at any point. This economy exists today, though it is small. For people coming from the fiat economy, the transitional medium of exchange is a dollar-pegged stablecoin, described in Part III, backed entirely by Bitcoin reserves. Each token is pegged to $1. Users think they are using a better dollar. Under the hood, they are participating in a Bitcoin-reserve economy. As the ecosystem matures and more merchants accept the stablecoin, the proportion of tokens ever redeemed for fiat naturally declines.
 </p>
 
 <p>
-  <strong>Bitcoin is the store of value and the settlement layer.</strong> It is the reserve asset sitting in on-chain wallets backing the entire system above it. Every satoshi in reserve is publicly verifiable on Bitcoin's base layer. Bitcoin never moves during routine commerce. A million ₿USD transactions can occur on the sidechain without a single satoshi moving on-chain. Bitcoin moves only at the boundaries: when new tokens are minted (fiat enters, Bitcoin is purchased at spot) or when tokens are redeemed for fiat (Bitcoin is sold from reserves). This is precisely the role gold played under the gold standard: the monetary anchor that never circulated in daily commerce but backed everything that did. The difference is that Bitcoin's reserves are verifiable by anyone, not locked in a vault that requires trust in its custodian.
+  <strong>Bitcoin is the store of value and the settlement layer.</strong> It is the reserve asset sitting in on-chain wallets backing the entire system above it. Every satoshi in reserve is publicly verifiable on Bitcoin's base layer. Bitcoin never moves during routine commerce. A million stablecoin transactions can occur on the sidechain without a single satoshi moving on-chain. Bitcoin moves only at the boundaries: when new tokens are minted (fiat enters, Bitcoin is purchased at spot) or when tokens are redeemed for fiat (Bitcoin is sold from reserves). This is precisely the role gold played under the gold standard: the monetary anchor that never circulated in daily commerce but backed everything that did. The difference is that Bitcoin's reserves are verifiable by anyone, not locked in a vault that requires trust in its custodian.
 </p>
 
 <div class="callout">
@@ -1169,7 +1169,11 @@
 </p>
 
 <p>
-  This is not a deficiency. It is a boundary, and it is the boundary that defines why the instruments in Part III exist. A unit of account and a store of value are different functions of money, as established in Chapter 8. ₿C fulfills the first. To stabilize the holder's purchasing power, to guarantee that 1 ₿C held today can purchase 1 ₿C worth of goods tomorrow regardless of spot price movements, requires a counterparty, a reserve, or a token. That is exactly what ₿USD, the ₿OND, and the ₿ILL provide. The unit of account is the foundation. The instruments are the structure built on it.
+  This is not a deficiency. It is a boundary, and it is the boundary that defines why the instruments in Part III exist. A unit of account and a store of value are different functions of money, as established in Chapter 8. ₿C fulfills the first. To stabilize the holder's purchasing power, to guarantee that 1 ₿C held today can purchase 1 ₿C worth of goods tomorrow regardless of spot price movements, requires a counterparty, a reserve, or a token. That is exactly what the instruments in Part III provide: a stablecoin for spending, a savings product for growing, and a capital markets instrument for institutional yield. The unit of account is the foundation. The instruments are the structure built on it.
+</p>
+
+<p>
+  ₿C is a pricing standard. It appears on price tags, invoices, menus, contracts, and the terms of savings and capital markets instruments. It does not appear as a balance in a consumer's wallet. A consumer's wallet shows their spending balance and their savings balance, each in their own unit: dollars, pesos, bitcoin, or whatever the consumer holds. ₿C tells you what things cost. It does not tell you what you hold. This distinction matters because ₿C stabilizes the price tag, not the value of holdings. A buyer who sees a coffee priced at 0.000268 ₿C today will see roughly the same price next week. But the Bitcoin in that buyer's wallet moves with spot, not with ₿C. The price is stable. The holdings are not. These are different functions, and they belong in different places on the screen.
 </p>
 
 <h3>No Issuer. No Reserves. No Trust.</h3>
@@ -1190,35 +1194,35 @@
 </p>
 
 <p>
-  ₿C solves for that specific problem. It moves approximately 0.04% per day. A merchant sets a price and can leave it unchanged for weeks. The movement is predictable (calculable in advance from the formula), gradual (invisible in any single transaction), unidirectional (it does not swing — it drifts upward), and beneficial (purchasing power improves rather than erodes).
+  ₿C solves for that specific problem. It moves approximately 0.04% per day. A merchant sets a price and can leave it unchanged for weeks. The movement is predictable (calculable in advance from the formula), gradual (invisible in any single transaction), unidirectional (it does not swing, it drifts upward), and beneficial (purchasing power improves rather than erodes).
 </p>
 
 <p>
-  The standard objection follows: a unit of account should be stable. Anything that moves — up or down — is a deficiency. But this objection rests on a confusion between nominal stability and purchasing power stability. These are not the same thing, and the distinction is the heart of the matter.
+  The standard objection follows: a unit of account should be stable. Anything that moves, up or down, is a deficiency. But this objection rests on a confusion between nominal stability and purchasing power stability. These are not the same thing, and the distinction is the heart of the matter.
 </p>
 
 <p>
-  A unit of account exists to express value. Value is purchasing power. That is all it is. A dollar is worth what a dollar buys. If the purchasing power of the dollar erodes, the unit of account is degrading — even though the number on the price tag has not changed. The $5 coffee is still labeled $5. But that $5 buys less of everything else than it did last year. The price tag looks stable. The purchasing power behind it is not. The apparent stability is in the label. The instability is in the substance.
+  A unit of account exists to express value. Value is purchasing power. That is all it is. A dollar is worth what a dollar buys. If the purchasing power of the dollar erodes, the unit of account is degrading, even though the number on the price tag has not changed. The $5 coffee is still labeled $5. But that $5 buys less of everything else than it did last year. The price tag looks stable. The purchasing power behind it is not. The apparent stability is in the label. The instability is in the substance.
 </p>
 
 <p>
-  This is not a minor side effect of an otherwise stable system. It is the instability. The dollar's purchasing power is in constant motion — always downward, at a rate that nobody can forecast with precision. The Federal Reserve targets 2% annual depreciation as official policy. In practice, the rate varies unpredictably: 1.2% in 2020, 7.0% in 2021, 6.5% in 2022, 3.4% in 2023. Inflation is not a footnote to the dollar's stability. Inflation is the expression of the dollar's instability, made invisible by nominally flat price tags.
+  This is not a minor side effect of an otherwise stable system. It is the instability. The dollar's purchasing power is in constant motion, always downward, at a rate that nobody can forecast with precision. The Federal Reserve targets 2% annual depreciation as official policy. In practice, the rate varies unpredictably: 1.2% in 2020, 7.0% in 2021, 6.5% in 2022, 3.4% in 2023. Inflation is not a footnote to the dollar's stability. Inflation is the expression of the dollar's instability, made invisible by nominally flat price tags.
 </p>
 
 <p>
-  ₿C makes the opposite trade-off, and it should be stated plainly. No unit of account is perfectly flat. Every unit of account moves in purchasing power. The question is not whether the unit moves. It is whether the movement is transparent or opaque, predictable or discretionary, beneficial or harmful to the people using it. The dollar hides its movement. The number on the price tag stays the same while the value behind it quietly erodes at an unpredictable rate determined by a central authority's discretionary decisions. The instability is real but invisible. ₿C shows its movement. The number on the price tag visibly changes — slowly, predictably, in a direction that benefits the holder. The movement is real and visible.
+  ₿C makes the opposite trade-off, and it should be stated plainly. No unit of account is perfectly flat. Every unit of account moves in purchasing power. The question is not whether the unit moves. It is whether the movement is transparent or opaque, predictable or discretionary, beneficial or harmful to the people using it. The dollar hides its movement. The number on the price tag stays the same while the value behind it quietly erodes at an unpredictable rate determined by a central authority's discretionary decisions. The instability is real but invisible. ₿C shows its movement. The number on the price tag visibly changes, slowly, predictably, in a direction that benefits the holder. The movement is real and visible.
 </p>
 
 <p>
-  Both systems move. One hides it and is called stable. The other shows it and is called unstable. That framing is backwards. If stability means purchasing power predictability — and for a unit of account, that is the only definition that matters — then ₿C is arguably more stable than fiat. Its rate and direction of change are known in advance, computable by anyone, and moving in the direction that rewards the holder. The dollar's rate and direction are determined after the fact by a discretionary authority and moving in the direction that erodes the holder. The system that shows its movement gives merchants and consumers the information they need to plan. The system that hides its movement does not.
+  Both systems move. One hides it and is called stable. The other shows it and is called unstable. That framing is backwards. If stability means purchasing power predictability, and for a unit of account, that is the only definition that matters, then ₿C is arguably more stable than fiat. Its rate and direction of change are known in advance, computable by anyone, and moving in the direction that rewards the holder. The dollar's rate and direction are determined after the fact by a discretionary authority and moving in the direction that erodes the holder. The system that shows its movement gives merchants and consumers the information they need to plan. The system that hides its movement does not.
 </p>
 
 <p>
-  The practical implication for merchants is that ₿C-denominated prices require periodic downward adjustment — the mirror image of the upward price adjustments every fiat-denominated merchant already makes. The difference is that the ₿C adjustment is calculable in advance, while the fiat adjustment is reactive. A ₿C merchant can schedule a quarterly price revision based on the known appreciation rate. A fiat merchant raises prices when costs force them to, often absorbing months of margin erosion before acting. Both merchants adjust. One does it proactively with full information. The other does it reactively without it.
+  The practical implication for merchants is that ₿C-denominated prices require periodic downward adjustment, the mirror image of the upward price adjustments every fiat-denominated merchant already makes. The difference is that the ₿C adjustment is calculable in advance, while the fiat adjustment is reactive. A ₿C merchant can schedule a quarterly price revision based on the known appreciation rate. A fiat merchant raises prices when costs force them to, often absorbing months of margin erosion before acting. Both merchants adjust. One does it proactively with full information. The other does it reactively without it.
 </p>
 
 <p>
-  This paper does not claim that an appreciating unit of account is without trade-offs. Every monetary system makes trade-offs. It claims that the relevant comparison is not ₿C versus some ideal flat unit that does not exist. It is ₿C's visible, predictable appreciation versus fiat's opaque, discretionary erosion. Both move. The question is which movement serves the people using the unit. Formal analysis of how ₿C's properties interact with the existing monetary economics literature on deflation — distinguishing demand-driven appreciation from supply-driven contraction — is an open research question that would benefit from rigorous academic treatment.
+  This paper does not claim that an appreciating unit of account is without trade-offs. Every monetary system makes trade-offs. It claims that the relevant comparison is not ₿C versus some ideal flat unit that does not exist. It is ₿C's visible, predictable appreciation versus fiat's opaque, discretionary erosion. Both move. The question is which movement serves the people using the unit. Formal analysis of how ₿C's properties interact with the existing monetary economics literature on deflation, distinguishing demand-driven appreciation from supply-driven contraction, is an open research question that would benefit from rigorous academic treatment.
 </p>
 
 <h3>A Denomination for Two Worlds</h3>
@@ -1426,7 +1430,7 @@
 </p>
 
 <p>
-  The reserve structure provides a further layer of confidence. A ₿USD token is backed 1:1 at the moment of minting: the customer sends $1, the consortium buys Bitcoin at spot, and Ledger 1 holds Bitcoin worth exactly the obligation. If BTC spot subsequently rises, the Ledger 1 position moves into surplus, and that surplus deepens with every day the price remains above the minting price. If BTC spot falls, Ledger 2, the backstop reserve drawn from the treasury companies' existing Bitcoin holdings, covers the shortfall. For ₿OND obligations, which are denominated in ₿C rather than dollars, the reserve dynamics differ in a critical respect: the obligation appreciates at the ₿C rate while the Bitcoin held against it appreciates at spot. Because spot has historically outpaced the cumulative average, this creates a widening surplus over time — the longer the ₿OND is held, the more the treasury's BTC position exceeds the ₿C-denominated payout obligation. The dual condition ensures that the ₿OND only matures when this surplus exists. The combined reserve architecture — Ledger 1 plus Ledger 2 plus the structural spread on ₿C-denominated products that develops over time — provides protection that no thin insurance fund can match. The FDIC insurance fund represents 1.3% of insured deposits. The ₿C system's reserves, verifiable on-chain at any moment, back the obligations in full.
+  The reserve structure provides a further layer of confidence. A ₿USD token is backed 1:1 at the moment of minting: the customer sends $1, the consortium buys Bitcoin at spot, and Ledger 1 holds Bitcoin worth exactly the obligation. If BTC spot subsequently rises, the Ledger 1 position moves into surplus, and that surplus deepens with every day the price remains above the minting price. If BTC spot falls, Ledger 2, the backstop reserve drawn from the treasury companies' existing Bitcoin holdings, covers the shortfall. For ₿OND obligations, which are denominated in ₿C rather than dollars, the reserve dynamics differ in a critical respect: the obligation appreciates at the ₿C rate while the Bitcoin held against it appreciates at spot. Because spot has historically outpaced the cumulative average, this creates a widening surplus over time. The longer the ₿OND is held, the more the treasury's BTC position exceeds the ₿C-denominated payout obligation. The dual condition ensures that the ₿OND only matures when this surplus exists. The combined reserve architecture, Ledger 1 plus Ledger 2 plus the structural spread on ₿C-denominated products that develops over time, provides protection that no thin insurance fund can match. The FDIC insurance fund represents 1.3% of insured deposits. The ₿C system's reserves, verifiable on-chain at any moment, back the obligations in full.
 </p>
 
 <p>
@@ -1726,7 +1730,7 @@
 </p>
 
 <p>
-  For ₿OND, whose obligations are denominated in ₿C, the coverage dynamics differ from ₿USD. At the moment of issuance, the treasury's BTC position and the ₿C-denominated obligation have the same fiat-equivalent value — there is no automatic overcollateralization from the spot/₿C ratio alone. The structural advantage develops over time: because BTC spot has historically appreciated faster than the cumulative average, the treasury's BTC position grows in value faster than the ₿C-denominated obligation it backs. This widening spread creates a progressive tendency toward overcollateralization that strengthens the longer the ₿OND is held. The dual condition guarantees that maturity occurs only when this spread is sufficient — the ₿OND does not pay out unless the treasury's position is profitable. This eliminates forced-loss payouts by construction.
+  For ₿OND, whose obligations are denominated in ₿C, the coverage dynamics differ from ₿USD. At the moment of issuance, the treasury's BTC position and the ₿C-denominated obligation have the same fiat-equivalent value. There is no automatic overcollateralization from the spot/₿C ratio alone. The structural advantage develops over time: because BTC spot has historically appreciated faster than the cumulative average, the treasury's BTC position grows in value faster than the ₿C-denominated obligation it backs. This widening spread creates a progressive tendency toward overcollateralization that strengthens the longer the ₿OND is held. The dual condition guarantees that maturity occurs only when this spread is sufficient. The ₿OND does not pay out unless the treasury's position is profitable. This eliminates forced-loss payouts by construction.
 </p>
 
 <p>
@@ -1764,11 +1768,11 @@
 </p>
 
 <p>
-  The reason this dynamic holds — and the reason it is not a generic claim about large systems being safer — requires understanding a structural difference in demand. Today, Bitcoin's bid is almost entirely speculative. Buyers purchase because they expect the price to rise. When sentiment shifts, the bid evaporates. This is why bear markets are severe: the demand is discretionary and sentiment-driven. It disappears precisely when the system needs it most.
+  The reason this dynamic holds, and the reason it is not a generic claim about large systems being safer, requires understanding a structural difference in demand. Today, Bitcoin's bid is almost entirely speculative. Buyers purchase because they expect the price to rise. When sentiment shifts, the bid evaporates. This is why bear markets are severe: the demand is discretionary and sentiment-driven. It disappears precisely when the system needs it most.
 </p>
 
 <p>
-  At scale, the ₿USD system introduces a qualitatively different type of demand. Every ₿USD token minted is a market buy of BTC at spot. Every ₿OND sold and every ₿ILL issued is a market buy of BTC at spot. Every fee reinvestment is a market buy of BTC. This demand is not speculative. It is commercial — driven by ordinary people paying for groceries, receiving paychecks, and saving for the future. A merchant accepting ₿USD for coffee generates BTC buy pressure whether the market is euphoric or terrified. That bid is as persistent as the commerce it is attached to. It does not watch charts. It does not panic sell.
+  At scale, the ₿USD system introduces a qualitatively different type of demand. Every ₿USD token minted is a market buy of BTC at spot. Every ₿OND sold and every ₿ILL issued is a market buy of BTC at spot. Every fee reinvestment is a market buy of BTC. This demand is not speculative. It is commercial, driven by ordinary people paying for groceries, receiving paychecks, and saving for the future. A merchant accepting ₿USD for coffee generates BTC buy pressure whether the market is euphoric or terrified. That bid is as persistent as the commerce it is attached to. It does not watch charts. It does not panic sell.
 </p>
 
 <p>
@@ -1952,20 +1956,20 @@
   The answer could be a tiered participation model. Treasury companies form the founding tier. They write the charter, establish the reserve commitment ratios, launch the first ₿USD tokens, and prove the system works. Once the infrastructure is operational and the governance framework is tested, two additional tiers open: institutional reserve partners and, as regulatory clarity develops, individual reserve participants. Each tier adds backstop depth without diluting the operational clarity of the founding structure.
 </p>
 
-<h3>Tier 1: Founding Members — Treasury Companies</h3>
+<h3>Tier 1: Founding Members: Treasury Companies</h3>
 
 <p>
-  The founding tier is composed exclusively of publicly traded Bitcoin treasury companies. These firms are the natural architects of the consortium for reasons that go beyond their Bitcoin holdings. Their balance sheets are audited quarterly and reported publicly. Their Bitcoin is proprietary — held as a corporate asset, not owed to depositors or customers. There are no competing claims on the reserves they commit to Ledger 2. The regulatory infrastructure around public companies — SEC filings, independent audits, board governance — provides a compliance framework that the consortium inherits rather than builds from scratch.
+  The founding tier is composed exclusively of publicly traded Bitcoin treasury companies. These firms are the natural architects of the consortium for reasons that go beyond their Bitcoin holdings. Their balance sheets are audited quarterly and reported publicly. Their Bitcoin is proprietary, held as a corporate asset, not owed to depositors or customers. There are no competing claims on the reserves they commit to Ledger 2. The regulatory infrastructure around public companies, including SEC filings, independent audits, and board governance, provides a compliance framework that the consortium inherits rather than builds from scratch.
 </p>
 
 <p>
-  Founding members perform the full range of consortium functions: they issue ₿USD, ₿OND, and ₿ILL tokens, manage Ledger 1, commit Ledger 2 capital, participate in governance, and earn the complete fee stack — issuance fees, redemption fees, and the structural appreciation spread between BTC spot and the fixed dollar or ₿C obligations. They bear the full operational burden and earn the full economic return. The system must be credible and functioning at this tier before any expansion occurs.
+  Founding members perform the full range of consortium functions: they issue ₿USD, ₿OND, and ₿ILL tokens, manage Ledger 1, commit Ledger 2 capital, participate in governance, and earn the complete fee stack: issuance fees, redemption fees, and the structural appreciation spread between BTC spot and the fixed dollar or ₿C obligations. They bear the full operational burden and earn the full economic return. The system must be credible and functioning at this tier before any expansion occurs.
 </p>
 
 <h3>Tier 2: Institutional Reserve Partners</h3>
 
 <p>
-  The second tier opens to institutions that hold significant proprietary Bitcoin reserves but whose business models differ from treasury companies. The most obvious candidates are cryptocurrency exchanges. Coinbase, Kraken, Gemini, Binance, Bitfinex, and others hold large volumes of Bitcoin on their balance sheets. The critical distinction — and the reason this distinction must be made precisely — is between customer Bitcoin and proprietary Bitcoin. An exchange's custody of customer deposits is an obligation, not an asset. The Bitcoin that belongs to the exchange as a corporate entity, its treasury reserves, is the only Bitcoin eligible for Ledger 2 commitment. This is a smaller number than the total Bitcoin an exchange holds, but across the major exchanges it is substantial.
+  The second tier opens to institutions that hold significant proprietary Bitcoin reserves but whose business models differ from treasury companies. The most obvious candidates are cryptocurrency exchanges. Coinbase, Kraken, Gemini, Binance, Bitfinex, and others hold large volumes of Bitcoin on their balance sheets. The critical distinction, and the reason this distinction must be made precisely, is between customer Bitcoin and proprietary Bitcoin. An exchange's custody of customer deposits is an obligation, not an asset. The Bitcoin that belongs to the exchange as a corporate entity, its treasury reserves, is the only Bitcoin eligible for Ledger 2 commitment. This is a smaller number than the total Bitcoin an exchange holds, but across the major exchanges it is substantial.
 </p>
 
 <p>
@@ -1981,7 +1985,7 @@
 </p>
 
 <p>
-  The second incentive is strategic. Every major exchange currently depends on Tether as its dominant stablecoin trading pair, settlement layer, and cross-platform liquidity bridge. That dependency is a systemic risk the exchange does not control. If Tether faces a regulatory action, a reserve crisis, or a loss of confidence<sup class="fn"><a href="#ref16">[16]</a></sup>, every exchange that relies on USDT trading pairs faces immediate contagion — loss of liquidity, trading halts, and a crisis of confidence that extends far beyond Tether itself. An exchange that participates as a reserve partner in the ₿USD consortium is building the alternative infrastructure rather than remaining exposed to someone else's. And the exchange becomes a natural distribution channel. A reserve partner exchange lists ₿USD natively, integrates ₿OND products for its retail users, offers ₿C-denominated pricing, and captures the transaction volume that flows through the ecosystem it helped build. This is not philanthropy. It is product expansion funded by a system in which the exchange has a structural stake.
+  The second incentive is strategic. Every major exchange currently depends on Tether as its dominant stablecoin trading pair, settlement layer, and cross-platform liquidity bridge. That dependency is a systemic risk the exchange does not control. If Tether faces a regulatory action, a reserve crisis, or a loss of confidence<sup class="fn"><a href="#ref16">[16]</a></sup>, every exchange that relies on USDT trading pairs faces immediate contagion: loss of liquidity, trading halts, and a crisis of confidence that extends far beyond Tether itself. An exchange that participates as a reserve partner in the ₿USD consortium is building the alternative infrastructure rather than remaining exposed to someone else's. And the exchange becomes a natural distribution channel. A reserve partner exchange lists ₿USD natively, integrates ₿OND products for its retail users, offers ₿C-denominated pricing, and captures the transaction volume that flows through the ecosystem it helped build. This is not philanthropy. It is product expansion funded by a system in which the exchange has a structural stake.
 </p>
 
 <p>
@@ -1989,7 +1993,7 @@
 </p>
 
 <p>
-  Underlying all three incentives is a flywheel dynamic that does not exist in any other yield opportunity available to Bitcoin holders. Every ₿USD token minted requires purchasing Bitcoin at spot. The reserve partner's Ledger 2 commitment enables that minting. The minting creates structural demand for the asset the reserve partner holds. The demand drives Bitcoin's price higher. The higher price increases the value of the reserve partner's entire Bitcoin position — not just the portion committed to Ledger 2, but every satoshi on their balance sheet. The reserve partner is not lending Bitcoin to earn yield. It is backstopping infrastructure that generates buying pressure on its own reserve asset. The more successful the system becomes, the more Bitcoin is purchased, the higher the price trends, and the more valuable the partner's holdings become. This is a fundamental realignment of incentives: the act of participating in the backstop directly strengthens the participant's core position. And for exchanges specifically, the flywheel has a second dimension — every dollar of stablecoin demand that flows through ₿USD rather than Tether is a dollar that purchases Bitcoin instead of U.S. Treasuries, reducing the exchange's systemic dependency on an instrument it does not control while deepening the market for the asset it holds.
+  Underlying all three incentives is a flywheel dynamic that does not exist in any other yield opportunity available to Bitcoin holders. Every ₿USD token minted requires purchasing Bitcoin at spot. The reserve partner's Ledger 2 commitment enables that minting. The minting creates structural demand for the asset the reserve partner holds. The demand drives Bitcoin's price higher. The higher price increases the value of the reserve partner's entire Bitcoin position, not just the portion committed to Ledger 2, but every satoshi on their balance sheet. The reserve partner is not lending Bitcoin to earn yield. It is backstopping infrastructure that generates buying pressure on its own reserve asset. The more successful the system becomes, the more Bitcoin is purchased, the higher the price trends, and the more valuable the partner's holdings become. This is a fundamental realignment of incentives: the act of participating in the backstop directly strengthens the participant's core position. And for exchanges specifically, the flywheel has a second dimension: every dollar of stablecoin demand that flows through ₿USD rather than Tether is a dollar that purchases Bitcoin instead of U.S. Treasuries, reducing the exchange's systemic dependency on an instrument it does not control while deepening the market for the asset it holds.
 </p>
 
 <p>
@@ -1997,7 +2001,7 @@
 </p>
 
 <p>
-  Reserve partners participate in consortium governance on matters that affect Ledger 2 — reserve ratio adjustments, stress-period definitions, fee distribution formulas — but do not vote on matters related to token issuance, Ledger 1 management, or product design. The separation reflects their role: they provide backstop capital, not operational management. This prevents a scenario in which reserve partners, who bear less operational complexity, could outvote founding members on decisions that affect the products those founding members operate.
+  Reserve partners participate in consortium governance on matters that affect Ledger 2, including reserve ratio adjustments, stress-period definitions, and fee distribution formulas, but do not vote on matters related to token issuance, Ledger 1 management, or product design. The separation reflects their role: they provide backstop capital, not operational management. This prevents a scenario in which reserve partners, who bear less operational complexity, could outvote founding members on decisions that affect the products those founding members operate.
 </p>
 
 <h3>Payment Processors as Reserve Partners</h3>
@@ -2025,11 +2029,11 @@
 <h3>Tier 3: Individual Reserve Participants</h3>
 
 <p>
-  The third tier extends Ledger 2 participation to private individuals and entities that hold significant Bitcoin positions — high-net-worth holders, family offices, private funds, and eventually, as frameworks develop, sovereign wealth funds or pension allocators seeking Bitcoin yield without lending risk.
+  The third tier extends Ledger 2 participation to private individuals and entities that hold significant Bitcoin positions: high-net-worth holders, family offices, private funds, and eventually, as frameworks develop, sovereign wealth funds or pension allocators seeking Bitcoin yield without lending risk.
 </p>
 
 <p>
-  The practical mechanism is a custodial commitment arrangement. A participant transfers Bitcoin to a consortium-managed Ledger 2 wallet under a contractual agreement that mirrors the reserve partner terms: defined commitment periods, withdrawal notice requirements, and stress-period lockout provisions. The participant earns proportional fee revenue. The Bitcoin remains on-chain and verifiable. The participant retains economic ownership — the Bitcoin appreciates on their behalf — but operational control is governed by the charter for the duration of the commitment.
+  The practical mechanism is a custodial commitment arrangement. A participant transfers Bitcoin to a consortium-managed Ledger 2 wallet under a contractual agreement that mirrors the reserve partner terms: defined commitment periods, withdrawal notice requirements, and stress-period lockout provisions. The participant earns proportional fee revenue. The Bitcoin remains on-chain and verifiable. The participant retains economic ownership. The Bitcoin appreciates on their behalf, but operational control is governed by the charter for the duration of the commitment.
 </p>
 
 <p>
@@ -2041,11 +2045,11 @@
 </p>
 
 <p>
-  The strategic value of Tier 3 extends beyond the additional backstop depth. It transforms the consortium from an institution that serves Bitcoin holders into an institution that Bitcoin holders own a stake in — not an equity stake, but a structural participation in the monetary system's reserve architecture. A Bitcoin holder who commits reserves to Ledger 2 earns yield, deepens the system's resilience, and participates directly in the infrastructure that supports the Bitcoin economy. The alignment between the individual holder's interest and the system's health is complete: the same Bitcoin appreciation that benefits the holder's personal position also strengthens the backstop they contribute to. There is no divergence of incentives.
+  The strategic value of Tier 3 extends beyond the additional backstop depth. It transforms the consortium from an institution that serves Bitcoin holders into an institution that Bitcoin holders own a stake in, not an equity stake, but a structural participation in the monetary system's reserve architecture. A Bitcoin holder who commits reserves to Ledger 2 earns yield, deepens the system's resilience, and participates directly in the infrastructure that supports the Bitcoin economy. The alignment between the individual holder's interest and the system's health is complete: the same Bitcoin appreciation that benefits the holder's personal position also strengthens the backstop they contribute to. There is no divergence of incentives.
 </p>
 
 <div class="callout">
-  <p>The 800,000 BTC held by treasury companies is the foundation. Exchange proprietary reserves, institutional allocators, and individual holders represent a reserve expansion path that could deepen the backstop by multiples of the founding base — without any single participant bearing disproportionate risk and without any modification to the system's architecture. The two-ledger structure does not care who provides Ledger 2 capital. It cares that the capital is real, verifiable, and committed.</p>
+  <p>The 800,000 BTC held by treasury companies is the foundation. Exchange proprietary reserves, institutional allocators, and individual holders represent a reserve expansion path that could deepen the backstop by multiples of the founding base, without any single participant bearing disproportionate risk and without any modification to the system's architecture. The two-ledger structure does not care who provides Ledger 2 capital. It cares that the capital is real, verifiable, and committed.</p>
 </div>
 
 <h3>The Compounding Backstop</h3>
@@ -2055,7 +2059,7 @@
 </p>
 
 <p>
-  Every participant who joins earns revenue they cannot obtain anywhere else without taking lending or counterparty risk. Their Bitcoin stays on-chain. It appreciates alongside every other holder's position. The fee income is generated by the system's ordinary operations — minting, holding, and redeeming monetary instruments — not by risk-taking or speculation. The participation is voluntary, the terms are transparent, and the economics improve for every existing participant as the backstop deepens, because a deeper backstop means a more resilient system, which means greater adoption, which means more fee revenue distributed across the same capital base.
+  Every participant who joins earns revenue they cannot obtain anywhere else without taking lending or counterparty risk. Their Bitcoin stays on-chain. It appreciates alongside every other holder's position. The fee income is generated by the system's ordinary operations, minting, holding, and redeeming monetary instruments, not by risk-taking or speculation. The participation is voluntary, the terms are transparent, and the economics improve for every existing participant as the backstop deepens, because a deeper backstop means a more resilient system, which means greater adoption, which means more fee revenue distributed across the same capital base.
 </p>
 
 <p>
@@ -2066,11 +2070,11 @@
 <h3>Governance: An Open Problem</h3>
 
 <p>
-  The consortium model requires governance. Multiple independent, profit-motivated, publicly traded companies must cooperate on reserve management, fee structures, operational standards, and defensive mechanism parameters. This is a real challenge, and this document does not claim to have solved it. What follows are the design principles that should constrain the solution. The formal governance framework — including game-theoretic analysis of defection incentives, collusion scenarios, and enforcement mechanisms — is an open research area that requires expert treatment.
+  The consortium model requires governance. Multiple independent, profit-motivated, publicly traded companies must cooperate on reserve management, fee structures, operational standards, and defensive mechanism parameters. This is a real challenge, and this document does not claim to have solved it. What follows are the design principles that should constrain the solution. The formal governance framework, including game-theoretic analysis of defection incentives, collusion scenarios, and enforcement mechanisms, is an open research area that requires expert treatment.
 </p>
 
 <p>
-  The closest analogy in the Bitcoin ecosystem is Bitcoin core development itself. The protocol has no formal governance structure, no board of directors, and no voting mechanism. Yet it has operated and evolved for sixteen years through a process characterized by high transparency, high friction for changes, and distributed veto power. Proposed changes are published openly (BIPs). Anyone can review them. Miners signal. Nodes accept or reject. No single party can force a change. The result is a system that evolves slowly and conservatively — which is precisely the property a monetary system requires.
+  The closest analogy in the Bitcoin ecosystem is Bitcoin core development itself. The protocol has no formal governance structure, no board of directors, and no voting mechanism. Yet it has operated and evolved for sixteen years through a process characterized by high transparency, high friction for changes, and distributed veto power. Proposed changes are published openly (BIPs). Anyone can review them. Miners signal. Nodes accept or reject. No single party can force a change. The result is a system that evolves slowly and conservatively, which is precisely the property a monetary system requires.
 </p>
 
 <p>
@@ -2078,7 +2082,7 @@
 </p>
 
 <p>
-  <strong>Separation of layers by mutability.</strong> BTCADP and ₿C are immutable. No consortium vote can alter the formula. This is already the case architecturally and should be stated explicitly as a governance principle. The monetary policy parameters — defensive programmability thresholds, fee formulas, reserve sizing methodology — should be high-friction to change: supermajority vote, public proposal period, mandatory delay between vote and implementation. Operational parameters — member admission, fee distribution, reporting cadence — can be lower friction. The hierarchy is: the denomination is permanent, the monetary policy is constitutional, the operations are administrative.
+  <strong>Separation of layers by mutability.</strong> BTCADP and ₿C are immutable. No consortium vote can alter the formula. This is already the case architecturally and should be stated explicitly as a governance principle. The monetary policy parameters, including defensive programmability thresholds, fee formulas, and reserve sizing methodology, should be high-friction to change: supermajority vote, public proposal period, mandatory delay between vote and implementation. Operational parameters, including member admission, fee distribution, and reporting cadence, can be lower friction. The hierarchy is: the denomination is permanent, the monetary policy is constitutional, the operations are administrative.
 </p>
 
 <p>
@@ -2086,11 +2090,11 @@
 </p>
 
 <p>
-  <strong>Stress-period immutability.</strong> During a defined stress condition — when the network health metrics cross published thresholds — no monetary policy parameter can be changed. The rules set during calm conditions govern during the storm. This prevents the most dangerous governance failure: loosening reserve requirements or weakening defensive mechanisms under pressure, precisely when the temptation is highest and the constraint matters most. This mirrors the Ledger 2 stress-period lockout already described for reserve withdrawals, extended to all monetary policy parameters.
+  <strong>Stress-period immutability.</strong> During a defined stress condition, when the network health metrics cross published thresholds, no monetary policy parameter can be changed. The rules set during calm conditions govern during the storm. This prevents the most dangerous governance failure: loosening reserve requirements or weakening defensive mechanisms under pressure, precisely when the temptation is highest and the constraint matters most. This mirrors the Ledger 2 stress-period lockout already described for reserve withdrawals, extended to all monetary policy parameters.
 </p>
 
 <p>
-  What these principles do not address — and what requires formal analysis — are the game-theoretic dynamics of multi-party cooperation. Under what conditions does a consortium member benefit from defection? What prevents collusion between a subset of members? What prevents a majority from extracting value at the expense of a minority? What is the mechanism for resolving disputes? Who has emergency authority, and how is it constrained? These are the questions that killed Libra/Diem and that have challenged every multi-party monetary arrangement in history. Stating the design principles is the first step. Proving they are robust to adversarial behavior is the work that follows.
+  What these principles do not address, and what requires formal analysis, are the game-theoretic dynamics of multi-party cooperation. Under what conditions does a consortium member benefit from defection? What prevents collusion between a subset of members? What prevents a majority from extracting value at the expense of a minority? What is the mechanism for resolving disputes? Who has emergency authority, and how is it constrained? These are the questions that killed Libra/Diem and that have challenged every multi-party monetary arrangement in history. Stating the design principles is the first step. Proving they are robust to adversarial behavior is the work that follows.
 </p>
 
 
@@ -2122,7 +2126,7 @@
 </p>
 
 <p>
-  Second, fee revenue. Issuance and redemption fees generate continuous income at the entry and exit points of the system. Redemption fees are tiered by exit path — near-zero for BTC-default redemption, highest for fiat exit — creating a fee structure that generates revenue while incentivizing holders to remain in the Bitcoin ecosystem. On $10 billion in circulation with normal turnover, these fees produce significant recurring income that scales with adoption.
+  Second, fee revenue. Issuance and redemption fees generate continuous income at the entry and exit points of the system. Redemption fees are tiered by exit path: near-zero for BTC-default redemption, highest for fiat exit. This creates a fee structure that generates revenue while incentivizing holders to remain in the Bitcoin ecosystem. On $10 billion in circulation with normal turnover, these fees produce significant recurring income that scales with adoption.
 </p>
 
 <p>
@@ -2344,13 +2348,13 @@
 </p>
 
 <p>
-  This is the real cost, and it must be stated without mitigation: the Ledger 2 contributor loses Bitcoin. Not dollar value — Bitcoin. If BTC spot later recovers, the contributor does not get those satoshis back. They participate in the recovery with fewer satoshis than they started with. The opportunity cost — the appreciation those lost satoshis would have captured — is the true expense of backstopping, and it compounds with every subsequent price increase.
+  This is the real cost, and it must be stated without mitigation: the Ledger 2 contributor loses Bitcoin. Not dollar value. Bitcoin. If BTC spot later recovers, the contributor does not get those satoshis back. They participate in the recovery with fewer satoshis than they started with. The opportunity cost, the appreciation those lost satoshis would have captured, is the true expense of backstopping, and it compounds with every subsequent price increase.
 </p>
 
 <h3>The Mechanics of a Ledger 2 Draw</h3>
 
 <p>
-  Consider a concrete scenario. A consortium has $10 billion in outstanding ₿USD tokens, minted at a weighted average BTC spot price of $85,000. A Ledger 2 contributor — a treasury company — has committed 1,000 BTC to the backstop. Total consortium Ledger 2 holds 10,000 BTC across all members. This contributor's share is 10%.
+  Consider a concrete scenario. A consortium has $10 billion in outstanding ₿USD tokens, minted at a weighted average BTC spot price of $85,000. A Ledger 2 contributor, a treasury company, has committed 1,000 BTC to the backstop. Total consortium Ledger 2 holds 10,000 BTC across all members. This contributor's share is 10%.
 </p>
 
 <p>
@@ -2358,7 +2362,7 @@
 </p>
 
 <p>
-  Not all of them. Not close. The exit funnel described in the defensive architecture reduces actual fiat redemption to a fraction of the outstanding supply. Using the aggressive stress assumptions from Chapter 22 — 15% of total supply presents for redemption, BTC-default redemption absorbs 60% of that (holders who want out of ₿USD but are willing to hold BTC rather than sell to fiat), ₿OND conversion absorbs another 15% (holders who move from the spending layer to the savings layer rather than exiting), and time-weighted fees deter another 10% — the actual fiat exit is approximately 2.2% of total supply: $220 million.
+  Not all of them. Not close. The exit funnel described in the defensive architecture reduces actual fiat redemption to a fraction of the outstanding supply. Using the aggressive stress assumptions from Chapter 22: 15% of total supply presents for redemption, BTC-default redemption absorbs 60% of that (holders who want out of ₿USD but are willing to hold BTC rather than sell to fiat), ₿OND conversion absorbs another 15% (holders who move from the spending layer to the savings layer rather than exiting), and time-weighted fees deter another 10%. The actual fiat exit is approximately 2.2% of total supply: $220 million.
 </p>
 
 <p>
@@ -2366,7 +2370,7 @@
 </p>
 
 <p>
-  Those 259 BTC are gone. Not marked down. Not recoverable. The contributor's Ledger 2 position drops from 1,000 BTC to 741 BTC. When BTC recovers — and the contributor's thesis is that it will — they recover with 741 BTC instead of 1,000. The 259 BTC that would have participated in that recovery are permanently lost. This is the price of being the backstop.
+  Those 259 BTC are gone. Not marked down. Not recoverable. The contributor's Ledger 2 position drops from 1,000 BTC to 741 BTC. When BTC recovers, and the contributor's thesis is that it will, they recover with 741 BTC instead of 1,000. The 259 BTC that would have participated in that recovery are permanently lost. This is the price of being the backstop.
 </p>
 
 <h3>The Offsetting Accumulation</h3>
@@ -2376,11 +2380,11 @@
 </p>
 
 <p>
-  Continuing the scenario above. The consortium generates annual fee revenue of approximately 1.5% on $10 billion in outstanding ₿USD. That revenue is converted to Bitcoin at prevailing spot prices throughout the year. This contributor's 10% share of the fee-funded BTC purchases accumulates at whatever price BTC trades during the period — high prices buy fewer sats, low prices buy more. This is the DCA effect. It smooths the contributor's accumulation cost in the same way the ₿ond smooths the saver's entry cost.
+  Continuing the scenario above. The consortium generates annual fee revenue of approximately 1.5% on $10 billion in outstanding ₿USD. That revenue is converted to Bitcoin at prevailing spot prices throughout the year. This contributor's 10% share of the fee-funded BTC purchases accumulates at whatever price BTC trades during the period. High prices buy fewer sats, low prices buy more. This is the DCA effect. It smooths the contributor's accumulation cost in the same way the ₿ond smooths the saver's entry cost.
 </p>
 
 <p>
-  At an average spot price of $85,000 over the first year, $15 million in fee revenue purchases approximately 176 BTC. At $100,000 average in the second year, $15 million purchases approximately 150 BTC. At $120,000 average in the third year, $15 million purchases approximately 125 BTC. Over three years, this contributor's Ledger 2 position has grown from 1,000 BTC to approximately 1,451 BTC — an accumulation of 451 BTC through fee-funded DCA alone, before any self-fortification surplus from Ledger 1.
+  At an average spot price of $85,000 over the first year, $15 million in fee revenue purchases approximately 176 BTC. At $100,000 average in the second year, $15 million purchases approximately 150 BTC. At $120,000 average in the third year, $15 million purchases approximately 125 BTC. Over three years, this contributor's Ledger 2 position has grown from 1,000 BTC to approximately 1,451 BTC, an accumulation of 451 BTC through fee-funded DCA alone, before any self-fortification surplus from Ledger 1.
 </p>
 
 <p>
@@ -2388,7 +2392,7 @@
 </p>
 
 <p>
-  Compare this to pure holding. A holder who commits nothing to Ledger 2 holds 1,000 BTC through the same period. They experience the same 50% crash. They retain every satoshi and recover with 1,000 BTC. The Ledger 2 contributor recovers with 1,192 BTC. The participant is 192 BTC ahead of the pure holder — not in dollar terms, in Bitcoin.
+  Compare this to pure holding. A holder who commits nothing to Ledger 2 holds 1,000 BTC through the same period. They experience the same 50% crash. They retain every satoshi and recover with 1,000 BTC. The Ledger 2 contributor recovers with 1,192 BTC. The participant is 192 BTC ahead of the pure holder. Not in dollar terms. In Bitcoin.
 </p>
 
 <p>
@@ -2402,11 +2406,11 @@
 </p>
 
 <p>
-  The first is an early stress event. If the 50% crash occurs in month three rather than year three, the contributor has accumulated approximately 44 BTC through fee-funded DCA against a 259 BTC drawdown. Net position: 785 BTC, down 215 from the original 1,000. The contributor would have been better off holding. This is the startup risk: the system is most vulnerable in its early period, before fee-funded accumulation has built a satoshi buffer. It is also why the founding tier must be composed of entities whose existing Bitcoin position is large enough that the Ledger 2 commitment represents a manageable fraction of their total holdings — not entities for whom the commitment is a concentrated bet.
+  The first is an early stress event. If the 50% crash occurs in month three rather than year three, the contributor has accumulated approximately 44 BTC through fee-funded DCA against a 259 BTC drawdown. Net position: 785 BTC, down 215 from the original 1,000. The contributor would have been better off holding. This is the startup risk: the system is most vulnerable in its early period, before fee-funded accumulation has built a satoshi buffer. It is also why the founding tier must be composed of entities whose existing Bitcoin position is large enough that the Ledger 2 commitment represents a manageable fraction of their total holdings, not entities for whom the commitment is a concentrated bet.
 </p>
 
 <p>
-  The second is a deeper crash. A 70% decline to $25,500 doubles the per-token shortfall. Ledger 1 covers $0.30 per token instead of $0.50. If the same percentage of tokens redeem for fiat, the Ledger 2 draw is larger: approximately 604 BTC from this contributor's share. Even with three years of fee-funded DCA (451 BTC accumulated), the contributor is at 847 BTC — down 153 from the original commitment. The deeper the crash, the more accumulated BTC is required to offset the drawdown. A 70% crash after three years of accumulation produces a modest net loss in satoshi terms. A 70% crash in year one produces a severe one.
+  The second is a deeper crash. A 70% decline to $25,500 doubles the per-token shortfall. Ledger 1 covers $0.30 per token instead of $0.50. If the same percentage of tokens redeem for fiat, the Ledger 2 draw is larger: approximately 604 BTC from this contributor's share. Even with three years of fee-funded DCA (451 BTC accumulated), the contributor is at 847 BTC, down 153 from the original commitment. The deeper the crash, the more accumulated BTC is required to offset the drawdown. A 70% crash after three years of accumulation produces a modest net loss in satoshi terms. A 70% crash in year one produces a severe one.
 </p>
 
 <p>
@@ -2430,29 +2434,29 @@
 </p>
 
 <p>
-  As of early 2026, the ₿C price sits at approximately $18,700 — the cumulative arithmetic mean of over 6,200 daily Bitcoin prices since the genesis block. BTC spot would need to fall approximately 78% from $85,000 to reach that level. A 75% drawdown — the most severe in Bitcoin's post-2014 history — would put spot at approximately $21,250, still roughly 14% above the ₿C floor. The floor is not a target that the consortium defends. It is a mathematical property of Bitcoin's own price history that spot has crossed below exactly once, in the pre-market era before Bitcoin had a functioning exchange ecosystem.
+  As of early 2026, the ₿C price sits at approximately $18,700, the cumulative arithmetic mean of over 6,200 daily Bitcoin prices since the genesis block. BTC spot would need to fall approximately 78% from $85,000 to reach that level. A 75% drawdown, the most severe in Bitcoin's post-2014 history, would put spot at approximately $21,250, still roughly 14% above the ₿C floor. The floor is not a target that the consortium defends. It is a mathematical property of Bitcoin's own price history that spot has crossed below exactly once, in the pre-market era before Bitcoin had a functioning exchange ecosystem.
 </p>
 
 <p>
-  The historical record is instructive. In 2018, Bitcoin fell 75% from approximately $14,700 to $3,700 — and spot at the bottom was still nearly three times the ₿C price at that time. In 2022, Bitcoin fell 64% from approximately $46,000 to $16,600 — and spot at the bottom was still more than twice the ₿C price. In every bear market in Bitcoin's history, spot has remained a significant multiple of the cumulative average, even at the deepest point of the drawdown. The gap between spot and ₿C at cycle bottoms has never been zero. It has never been close.
+  The historical record is instructive. In 2018, Bitcoin fell 75% from approximately $14,700 to $3,700, and spot at the bottom was still nearly three times the ₿C price at that time. In 2022, Bitcoin fell 64% from approximately $46,000 to $16,600, and spot at the bottom was still more than twice the ₿C price. In every bear market in Bitcoin's history, spot has remained a significant multiple of the cumulative average, even at the deepest point of the drawdown. The gap between spot and ₿C at cycle bottoms has never been zero. It has never been close.
 </p>
 
 <p>
-  The reason is structural. For BTC spot to fall below the cumulative average, the current price must be lower than the mean of every price that has ever existed. Given that Bitcoin's price was below $1,000 for the majority of its history and has spent recent years between $30,000 and $100,000, the cumulative average is anchored by years of low prices that pull it far below current spot. Every day that spot remains above the average — which is every day in the modern era — the average rises, but slowly. It would take a sustained, multi-year collapse of unprecedented severity to push spot below a number that incorporates a decade of prices ranging from $0.05 to $93,000.
+  The reason is structural. For BTC spot to fall below the cumulative average, the current price must be lower than the mean of every price that has ever existed. Given that Bitcoin's price was below $1,000 for the majority of its history and has spent recent years between $30,000 and $100,000, the cumulative average is anchored by years of low prices that pull it far below current spot. Every day that spot remains above the average, which is every day in the modern era, the average rises, but slowly. It would take a sustained, multi-year collapse of unprecedented severity to push spot below a number that incorporates a decade of prices ranging from $0.05 to $93,000.
 </p>
 
 <p>
-  For the Ledger 2 contributor, this means the catastrophic scenario — the one in which the entire backstop is exhausted — requires spot to not merely decline but to fall below its own lifetime average and remain there. That is not a bear market. It is the terminal failure of Bitcoin as an asset. Every Bitcoin-denominated instrument, every treasury company's balance sheet, every ETF, and every holder's position fails simultaneously in that scenario. The Ledger 2 loss is real but it is a rounding error inside a much larger extinction event. The risk that is specific to the backstop commitment — the risk the contributor needs to evaluate — is the non-catastrophic drawdown: 40%, 50%, 60%. And in those scenarios, the ₿C floor ensures that the system remains structurally solvent even if individual Ledger 2 contributors absorb meaningful losses.
+  For the Ledger 2 contributor, this means the catastrophic scenario, the one in which the entire backstop is exhausted, requires spot to not merely decline but to fall below its own lifetime average and remain there. That is not a bear market. It is the terminal failure of Bitcoin as an asset. Every Bitcoin-denominated instrument, every treasury company's balance sheet, every ETF, and every holder's position fails simultaneously in that scenario. The Ledger 2 loss is real but it is a rounding error inside a much larger extinction event. The risk that is specific to the backstop commitment, the risk the contributor needs to evaluate, is the non-catastrophic drawdown: 40%, 50%, 60%. And in those scenarios, the ₿C floor ensures that the system remains structurally solvent even if individual Ledger 2 contributors absorb meaningful losses.
 </p>
 
 <p>
-  A note on epistemic honesty: the observation that BTC spot has never sustained below its cumulative average is empirical, not axiomatic. It is derived from sixteen years of price history — the strongest foundation available for any monetary system less than two decades old, but not a mathematical guarantee. The ₿C floor's resilience is a product of Bitcoin's specific growth trajectory and the mechanics of cumulative averaging. The system is designed on the premise that this trajectory continues. If it does not — if Bitcoin's long-run price trend permanently reverses — the floor fails, and with it every instrument built on top of it. That is the shared existential condition of the entire Bitcoin ecosystem, not a vulnerability unique to this architecture.
+  A note on epistemic honesty: the observation that BTC spot has never sustained below its cumulative average is empirical, not axiomatic. It is derived from sixteen years of price history, the strongest foundation available for any monetary system less than two decades old, but not a mathematical guarantee. The ₿C floor's resilience is a product of Bitcoin's specific growth trajectory and the mechanics of cumulative averaging. The system is designed on the premise that this trajectory continues. If it does not, if Bitcoin's long-run price trend permanently reverses, the floor fails, and with it every instrument built on top of it. That is the shared existential condition of the entire Bitcoin ecosystem, not a vulnerability unique to this architecture.
 </p>
 
 <h3>The Structural Demand Floor: Why Historical Drawdowns Overstate Future Risk</h3>
 
 <p>
-  The stress scenarios in this chapter use drawdown magnitudes drawn from Bitcoin's history: 50%, 70%, and higher. These magnitudes occurred in a market driven overwhelmingly by speculation — leveraged futures, momentum trading, and sentiment-driven retail flows. The question a Ledger 2 contributor should ask is whether those magnitudes are the correct calibration for a market in which the ₿USD system operates at scale.
+  The stress scenarios in this chapter use drawdown magnitudes drawn from Bitcoin's history: 50%, 70%, and higher. These magnitudes occurred in a market driven overwhelmingly by speculation: leveraged futures, momentum trading, and sentiment-driven retail flows. The question a Ledger 2 contributor should ask is whether those magnitudes are the correct calibration for a market in which the ₿USD system operates at scale.
 </p>
 
 <p>
@@ -2460,19 +2464,19 @@
 </p>
 
 <p>
-  But ETF demand is pro-cyclical. It strengthens when the market is rising and weakens when the market is falling — precisely the opposite of what a reserve backstop needs. The mechanism is straightforward: an ETF does not decide to buy or sell Bitcoin. Its holders do. When BTC spot rises and headlines are bullish, capital flows into the ETF. The ETF purchases Bitcoin at spot. Demand reinforces momentum. When BTC spot falls and fear spreads, holders sell their ETF shares. The ETF redeems by selling Bitcoin at spot. The structural bid becomes structural selling pressure. This is not a theoretical concern — it has been observable during every significant correction since the ETFs launched. Inflows surge during rallies. Outflows accelerate during drawdowns. The bid disappears when it is needed most, because the humans making the allocation decision are still reacting to price action and macro sentiment. The ETF wrapper is institutional. The behavior inside it is discretionary.
+  But ETF demand is pro-cyclical. It strengthens when the market is rising and weakens when the market is falling, precisely the opposite of what a reserve backstop needs. The mechanism is straightforward: an ETF does not decide to buy or sell Bitcoin. Its holders do. When BTC spot rises and headlines are bullish, capital flows into the ETF. The ETF purchases Bitcoin at spot. Demand reinforces momentum. When BTC spot falls and fear spreads, holders sell their ETF shares. The ETF redeems by selling Bitcoin at spot. The structural bid becomes structural selling pressure. This is not a theoretical concern. It has been observable during every significant correction since the ETFs launched. Inflows surge during rallies. Outflows accelerate during drawdowns. The bid disappears when it is needed most, because the humans making the allocation decision are still reacting to price action and macro sentiment. The ETF wrapper is institutional. The behavior inside it is discretionary.
 </p>
 
 <p>
-  ₿USD minting introduces a second generation of structural demand with a fundamentally different character. It is commerce-driven. A merchant who accepts ₿USD for goods does not stop selling because BTC spot declined. A worker receiving a salary in ₿USD does not stop being paid. The minting that backs those transactions occurs at whatever spot price prevails — high or low. The demand does not weaken during a drawdown. It is indifferent to sentiment. And the DCA effect built into the fee reinvestment mechanism means the system purchases more satoshis per dollar of revenue when prices are low, accelerating accumulation precisely when speculative sellers are dumping.
+  ₿USD minting introduces a second generation of structural demand with a fundamentally different character. It is commerce-driven. A merchant who accepts ₿USD for goods does not stop selling because BTC spot declined. A worker receiving a salary in ₿USD does not stop being paid. The minting that backs those transactions occurs at whatever spot price prevails, high or low. The demand does not weaken during a drawdown. It is indifferent to sentiment. And the DCA effect built into the fee reinvestment mechanism means the system purchases more satoshis per dollar of revenue when prices are low, accelerating accumulation precisely when speculative sellers are dumping.
 </p>
 
 <p>
-  The combination changes the probability distribution of severe drawdowns. In a market where the only bid comes from speculators and sentiment-driven investors, a cascade of liquidations can drive spot down 70% before finding a floor. In a market where tens of billions of dollars in commerce-driven demand creates a persistent bid that does not retreat, the same speculative selling meets a thicker floor. The drawdown does not disappear — speculators can still overleverage and unwind — but its depth is structurally dampened by demand that is not for sale at any price.
+  The combination changes the probability distribution of severe drawdowns. In a market where the only bid comes from speculators and sentiment-driven investors, a cascade of liquidations can drive spot down 70% before finding a floor. In a market where tens of billions of dollars in commerce-driven demand creates a persistent bid that does not retreat, the same speculative selling meets a thicker floor. The drawdown does not disappear, speculators can still overleverage and unwind, but its depth is structurally dampened by demand that is not for sale at any price.
 </p>
 
 <p>
-  This effect compounds over time. A nascent ₿USD system with $1 billion in circulation provides a modest structural bid. At $10 billion, the bid is substantial. At $100 billion — the scale at which ₿USD would represent approximately 3% of the current stablecoin market — the annual minting-driven BTC demand would exceed the entire institutional ETF inflow of the past two years. At that scale, a speculative crash must overwhelm not only the ETF bid but also the commerce-driven bid, the fee-reinvestment bid, and the ₿OND and ₿ILL issuance bid simultaneously. The probability of a 70% drawdown in that environment is not zero. But it is materially lower than the probability of a 70% drawdown in a purely speculative market.
+  This effect compounds over time. A nascent ₿USD system with $1 billion in circulation provides a modest structural bid. At $10 billion, the bid is substantial. At $100 billion, the scale at which ₿USD would represent approximately 3% of the current stablecoin market, the annual minting-driven BTC demand would exceed the entire institutional ETF inflow of the past two years. At that scale, a speculative crash must overwhelm not only the ETF bid but also the commerce-driven bid, the fee-reinvestment bid, and the ₿OND and ₿ILL issuance bid simultaneously. The probability of a 70% drawdown in that environment is not zero. But it is materially lower than the probability of a 70% drawdown in a purely speculative market.
 </p>
 
 <p>
@@ -2482,15 +2486,15 @@
 <h3>The Self-Fortification Offset</h3>
 
 <p>
-  The fee-funded DCA is not the only mechanism that deepens Ledger 2 over time. As BTC spot appreciates above the weighted average minting price of outstanding ₿USD tokens, Ledger 1 generates surplus — the satoshis backing each $1 token are worth more than $1. That surplus flows into Ledger 2 as additional Bitcoin, independent of the fee revenue. The backstop deepens through two distinct channels operating simultaneously: fee-funded purchases adding new BTC, and Ledger 1 surplus transferring existing BTC.
+  The fee-funded DCA is not the only mechanism that deepens Ledger 2 over time. As BTC spot appreciates above the weighted average minting price of outstanding ₿USD tokens, Ledger 1 generates surplus. The satoshis backing each $1 token are worth more than $1. That surplus flows into Ledger 2 as additional Bitcoin, independent of the fee revenue. The backstop deepens through two distinct channels operating simultaneously: fee-funded purchases adding new BTC, and Ledger 1 surplus transferring existing BTC.
 </p>
 
 <p>
-  The implication is that in a stress event, the system may consume only the accumulated surplus and the fee-funded additions — never touching the original Ledger 2 commitment. The contributor's initial 1,000 BTC remains intact if the buffer built by both mechanisms is sufficient to cover the redemption shortfall. The original commitment functions as a last-resort reserve, called upon only after the organic growth has been exhausted.
+  The implication is that in a stress event, the system may consume only the accumulated surplus and the fee-funded additions, never touching the original Ledger 2 commitment. The contributor's initial 1,000 BTC remains intact if the buffer built by both mechanisms is sufficient to cover the redemption shortfall. The original commitment functions as a last-resort reserve, called upon only after the organic growth has been exhausted.
 </p>
 
 <p>
-  The longer the system operates in a rising or stable BTC price environment, the deeper the combined buffer becomes. Three years of fee-funded DCA plus three years of Ledger 1 surplus transfers can build a buffer of 600 to 800 BTC above the original 1,000 BTC commitment. A stress event that costs 259 BTC does not touch the original capital. A stress event that costs 604 BTC draws partially on the original capital but leaves the majority intact. Only a catastrophic and sustained decline — BTC falling 70% or more while the system is still in its early years — would substantially deplete the original commitment. That scenario is the existential risk. It should be acknowledged, sized, and accepted with open eyes.
+  The longer the system operates in a rising or stable BTC price environment, the deeper the combined buffer becomes. Three years of fee-funded DCA plus three years of Ledger 1 surplus transfers can build a buffer of 600 to 800 BTC above the original 1,000 BTC commitment. A stress event that costs 259 BTC does not touch the original capital. A stress event that costs 604 BTC draws partially on the original capital but leaves the majority intact. Only a catastrophic and sustained decline, BTC falling 70% or more while the system is still in its early years, would substantially deplete the original commitment. That scenario is the existential risk. It should be acknowledged, sized, and accepted with open eyes.
 </p>
 
 <h3>Risk by Participation Tier</h3>
@@ -2500,11 +2504,11 @@
 </p>
 
 <p>
-  Tier 1 founding members — treasury companies — bear the full spectrum of operational and backstop risk. They manage issuance, handle customer redemptions, maintain compliance infrastructure, and commit Ledger 2 capital. Their compensation is the full fee stack: the BTC purchased with issuance and redemption fees flows into their reserves, and they earn the structural appreciation spread between BTC spot and the fixed dollar obligations. They also control the variables: they set fee levels, define redemption terms, and operate the defensive mechanisms that determine how much BTC is actually sold during stress. A treasury company can influence its own loss exposure through the operational decisions it makes. This is the highest-risk, highest-reward, highest-control position.
+  Tier 1 founding members, the treasury companies, bear the full spectrum of operational and backstop risk. They manage issuance, handle customer redemptions, maintain compliance infrastructure, and commit Ledger 2 capital. Their compensation is the full fee stack: the BTC purchased with issuance and redemption fees flows into their reserves, and they earn the structural appreciation spread between BTC spot and the fixed dollar obligations. They also control the variables: they set fee levels, define redemption terms, and operate the defensive mechanisms that determine how much BTC is actually sold during stress. A treasury company can influence its own loss exposure through the operational decisions it makes. This is the highest-risk, highest-reward, highest-control position.
 </p>
 
 <p>
-  Tier 2 institutional reserve partners — exchanges and other institutional holders — bear backstop risk without operational control. They commit Ledger 2 capital under charter terms defined primarily by the founding members. They receive their proportional share of the fee-funded BTC accumulation, but they do not set the fee levels, do not control the defensive mechanisms, and do not make the redemption decisions that determine how much of Ledger 2 is drawn upon during stress. Their risk is real. Their BTC accumulation rate is defined by the charter. Their control over the variables that determine the magnitude of a drawdown is limited to their governance vote on Ledger 2 matters.
+  Tier 2 institutional reserve partners, exchanges and other institutional holders, bear backstop risk without operational control. They commit Ledger 2 capital under charter terms defined primarily by the founding members. They receive their proportional share of the fee-funded BTC accumulation, but they do not set the fee levels, do not control the defensive mechanisms, and do not make the redemption decisions that determine how much of Ledger 2 is drawn upon during stress. Their risk is real. Their BTC accumulation rate is defined by the charter. Their control over the variables that determine the magnitude of a drawdown is limited to their governance vote on Ledger 2 matters.
 </p>
 
 <p>
@@ -2522,15 +2526,15 @@
 </p>
 
 <p>
-  A pure holder retains every satoshi through every cycle. They never lose BTC. But their stack never grows either — not by a single sat. In a year when BTC spot is flat, the pure holder's position is unchanged. In a multi-year period where BTC spot is volatile but returns to its starting point, the pure holder's position is unchanged. The Ledger 2 contributor, by contrast, accumulates BTC in every period through the fee-funded DCA mechanism, regardless of price direction. When prices are high, the accumulation is slower. When prices are low, the accumulation accelerates. Over time, the contributor's stack grows in a way that the pure holder's cannot.
+  A pure holder retains every satoshi through every cycle. They never lose BTC. But their stack never grows either, not by a single sat. In a year when BTC spot is flat, the pure holder's position is unchanged. In a multi-year period where BTC spot is volatile but returns to its starting point, the pure holder's position is unchanged. The Ledger 2 contributor, by contrast, accumulates BTC in every period through the fee-funded DCA mechanism, regardless of price direction. When prices are high, the accumulation is slower. When prices are low, the accumulation accelerates. Over time, the contributor's stack grows in a way that the pure holder's cannot.
 </p>
 
 <p>
-  The question is not whether the Ledger 2 commitment can produce a net satoshi loss. It can — particularly in early-stage operations or during severe, sustained drawdowns. The question is whether the expected BTC accumulation from fee-funded DCA, across the full holding period and net of expected stress-event drawdowns, exceeds zero. The variables that determine the answer are: the annual fee volume relative to committed capital, the frequency and severity of stress events, the effectiveness of the defensive mechanisms in reducing actual fiat exits, and the duration of the commitment. Over sufficiently long time horizons, with the fee reinvestment policy in place and stress events at historical Bitcoin cycle frequencies, the expected net accumulation is positive. The contributor ends with more Bitcoin than they started with. Over short time horizons or during the system's vulnerable early period, the outcome is uncertain and the variance is high.
+  The question is not whether the Ledger 2 commitment can produce a net satoshi loss. It can, particularly in early-stage operations or during severe, sustained drawdowns. The question is whether the expected BTC accumulation from fee-funded DCA, across the full holding period and net of expected stress-event drawdowns, exceeds zero. The variables that determine the answer are: the annual fee volume relative to committed capital, the frequency and severity of stress events, the effectiveness of the defensive mechanisms in reducing actual fiat exits, and the duration of the commitment. Over sufficiently long time horizons, with the fee reinvestment policy in place and stress events at historical Bitcoin cycle frequencies, the expected net accumulation is positive. The contributor ends with more Bitcoin than they started with. Over short time horizons or during the system's vulnerable early period, the outcome is uncertain and the variance is high.
 </p>
 
 <div class="callout">
-  <p>The Ledger 2 commitment is not a deposit. It is not lending. It is not staking. It is an insurance underwriting position denominated entirely in Bitcoin: the contributor accepts a defined risk — that satoshis must be permanently sold to honor fiat redemptions during a drawdown — in exchange for continuous BTC accumulation through fee-funded purchases at prevailing spot prices. The risk is real, quantifiable, and bounded. The accumulation is continuous, governed by formula, and accelerates when prices are low. The longer the position is held, the more the cumulative BTC accumulation exceeds the expected cost of any single stress event. This is the trade. It should be accepted with full understanding of what is given up, not with the expectation that the downside can be avoided.</p>
+  <p>The Ledger 2 commitment is not a deposit. It is not lending. It is not staking. It is an insurance underwriting position denominated entirely in Bitcoin: the contributor accepts a defined risk, that satoshis must be permanently sold to honor fiat redemptions during a drawdown, in exchange for continuous BTC accumulation through fee-funded purchases at prevailing spot prices. The risk is real, quantifiable, and bounded. The accumulation is continuous, governed by formula, and accelerates when prices are low. The longer the position is held, the more the cumulative BTC accumulation exceeds the expected cost of any single stress event. This is the trade. It should be accepted with full understanding of what is given up, not with the expectation that the downside can be avoided.</p>
 </div>
 
 <!-- ============================================================ -->
@@ -4228,7 +4232,7 @@
 </p>
 
 <p>
-  <strong>Is ₿USD overcollateralized?</strong> ₿USD has a $1 liability, not a ₿C liability. When a user mints ₿USD, they send $1, and the treasury purchases Bitcoin at spot. Ledger 1 holds exactly enough Bitcoin to back that $1 obligation at the moment of minting. The token starts at 1:1. Overcollateralization for ₿USD comes from two sources: BTC spot appreciation above the minting price (which moves Ledger 1 into surplus) and the Ledger 2 backstop drawn from existing treasury holdings. For ₿OND, whose obligations are denominated in ₿C, the reserve dynamics are similar at issuance — asset equals obligation in fiat-equivalent terms. The structural advantage develops over time: because BTC spot historically appreciates faster than the cumulative average, the treasury's BTC position outpaces the ₿C-denominated obligation, creating a widening surplus. The dual condition ensures maturity occurs only when this surplus exists.
+  <strong>Is ₿USD overcollateralized?</strong> ₿USD has a $1 liability, not a ₿C liability. When a user mints ₿USD, they send $1, and the treasury purchases Bitcoin at spot. Ledger 1 holds exactly enough Bitcoin to back that $1 obligation at the moment of minting. The token starts at 1:1. Overcollateralization for ₿USD comes from two sources: BTC spot appreciation above the minting price (which moves Ledger 1 into surplus) and the Ledger 2 backstop drawn from existing treasury holdings. For ₿OND, whose obligations are denominated in ₿C, the reserve dynamics are similar at issuance. Asset equals obligation in fiat-equivalent terms. The structural advantage develops over time: because BTC spot historically appreciates faster than the cumulative average, the treasury's BTC position outpaces the ₿C-denominated obligation, creating a widening surplus. The dual condition ensures maturity occurs only when this surplus exists.
 </p>
 
 <h3>Architecture and Governance</h3>
@@ -4302,7 +4306,7 @@
 
   <li data-n="[20]" id="ref20">Alden, Lyn. <em>Broken Money: Why Our Financial System Is Failing Us and How We Can Make It Better.</em> Timestamp Press, 2023.</li>
 
-  <li data-n="[21]" id="ref21">"BTCADP: Bitcoin Average Daily Price — Specification v1.0," btcadp.org, 2026. CC0 Public Domain. <a href="https://btcadp.org/specification.html">btcadp.org/specification</a></li>
+  <li data-n="[21]" id="ref21">"BTCADP: Bitcoin Average Daily Price: Specification v1.0," btcadp.org, 2026. CC0 Public Domain. <a href="https://btcadp.org/specification.html">btcadp.org/specification</a></li>
 
   <li data-n="[22]" id="ref22">Cong, L.W., Li, Y., Wang, N. "Token-Based Platform Finance," <em>Journal of Financial Economics</em>, vol. 144, no. 3, 2022.</li>
 
