@@ -199,6 +199,11 @@
             line-height: 1.65;
         }
 
+        .callout.symmetric {
+            border-right: 3px solid var(--orange);
+            border-radius: 6px;
+        }
+
         /* ── USE CASE CARDS ── */
         .use-cases {
             display: grid;
@@ -722,17 +727,6 @@
             </div>
         </div>
 
-        <div class="pillar green">
-            <div class="pillar-function">Store of value</div>
-            <div class="pillar-symbol">₿ond</div>
-            <div class="pillar-name">Bitcoin Savings Bond</div>
-            <div class="pillar-peg">1 ₿ond = 1 USD</div>
-            <div class="pillar-role">For saving</div>
-            <div class="pillar-desc">
-                Dollars that actually grow.
-            </div>
-        </div>
-
         <div class="pillar blue">
             <div class="pillar-function">Medium of exchange</div>
             <div class="pillar-symbol">₿USD</div>
@@ -741,6 +735,17 @@
             <div class="pillar-role">For spending</div>
             <div class="pillar-desc">
                 Bitcoin in the fiat world.
+            </div>
+        </div>
+
+        <div class="pillar green">
+            <div class="pillar-function">Store of value</div>
+            <div class="pillar-symbol">₿ond</div>
+            <div class="pillar-name">Bitcoin Savings Bond</div>
+            <div class="pillar-peg">1 ₿ond = 1 USD</div>
+            <div class="pillar-role">For saving</div>
+            <div class="pillar-desc">
+                Dollars that actually grow.
             </div>
         </div>
 
@@ -757,7 +762,7 @@
 
     </div>
 
-    <div class="callout">
+    <div class="callout symmetric">
         <p>
             The ₿ond and ₿ILL share the same foundation — ₿C denomination, Bitcoin reserve backing,
             and dual-condition maturity — but serve different audiences. The ₿ond is non-tradable by design,
