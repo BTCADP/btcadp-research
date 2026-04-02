@@ -529,7 +529,7 @@
 </div>
 
 <p>
-  How do you create permanent, structural and compounding demand for Bitcoin that doesn't depend on anyone's conviction in Bitcoin?
+  How do you create structural, compounding and permanent demand for Bitcoin that doesn't depend on anyone's conviction in Bitcoin?
 </p>
 
 <p>
@@ -1056,6 +1056,10 @@
   Bitcoin today excels at store of value. No asset in history has appreciated more over any multi-year holding period. It functions as a medium of exchange via Lightning and on-chain transactions. What has not yet been built on top of Bitcoin is a stable unit of account. No merchant can price in BTC or sats when the denomination moves 5 to 10% in a single week. No worker can negotiate a salary in BTC and know what their rent payment will look like next month. This is not a deficiency in Bitcoin. It is a missing layer, and it can be built without changing the protocol.
 </p>
 
+<p>
+  There is a second barrier to Bitcoin as a medium of exchange that receives less attention than volatility but is equally crippling: tax friction. In the United States and many other jurisdictions, Bitcoin is classified as property, not currency. Every transaction, buying a coffee, paying a contractor, purchasing groceries, is a disposition of property that triggers a capital gains calculation. The holder must track the cost basis of every satoshi spent, calculate the gain or loss, and report it. No one does this for a $4 coffee. No one will ever do this for a $4 coffee. The tax treatment alone makes BTC impractical as a daily medium of exchange, regardless of volatility. This is not a failure of the Bitcoin protocol. It is a consequence of fiat-era regulatory frameworks applied to an asset class they were never designed to accommodate. The political and legal infrastructure of the fiat system created this friction. Bitcoin did not. But the friction is real, and any framework for Bitcoin-based commerce must route around it rather than pretend it does not exist. The currency layer does exactly this, as described in Part III: a dollar-pegged stablecoin settles at $1 in and $1 out, generating no taxable gain or loss at the commerce layer. The tax event occurs only when the user consciously crosses into the savings layer, a deliberate investment decision rather than a burden imposed on every transaction.
+</p>
+
 <h3>How the Model Maps Each Function</h3>
 
 <p>
@@ -1396,8 +1400,26 @@
       <td>Negative, competes with all crypto</td>
       <td class="hl">Positive, every mint is a BTC purchase</td>
     </tr>
+    <tr>
+      <td>Tax friction at commerce layer</td>
+      <td>None, dollar-pegged</td>
+      <td>None, sovereign currency</td>
+      <td class="hl">None, dollar-pegged; BTC never touches the consumer</td>
+    </tr>
   </tbody>
 </table>
+
+<p>
+  The tax treatment row deserves elaboration because it addresses one of the most persistent and least discussed barriers to Bitcoin adoption as a medium of exchange. In the United States and many other jurisdictions, Bitcoin is classified as property. Every BTC transaction, no matter how small, is a taxable event requiring cost basis tracking and capital gains reporting. A consumer who buys a sandwich with Bitcoin must calculate whether the satoshis they spent appreciated since they acquired them, compute the gain, and report it. This single regulatory fact has done more to prevent Bitcoin commerce than volatility, than complexity, than any technical limitation of the protocol. It is not a failure of Bitcoin. It is a product of fiat-era tax law applied to an asset it was never designed to accommodate.
+</p>
+
+<p>
+  ₿USD eliminates this friction entirely at the commerce layer. A consumer receives ₿USD at $1. They spend ₿USD at $1. There is no gain. There is no loss. There is no taxable event. The experience is identical to spending dollars. The Bitcoin purchase happens inside the reserve, where the consortium manages its own tax obligations as a corporate entity. The consumer never touches BTC, never holds property in the tax sense, and never faces a reporting obligation from ordinary spending. The tax complexity surfaces only when the user makes a conscious decision to cross into the savings layer: opening a ₿OND or accepting BTC at ₿C prices. That is an investment decision, not a hot dog purchase. The separation of the spending layer from the savings layer is not just a product design choice. It is the structural solution to the tax problem that has blocked Bitcoin commerce for over a decade.
+</p>
+
+<p>
+  For merchants, the same logic applies. Receiving ₿USD is ordinary business income, no different from receiving dollars via a payment processor. The merchant enters tax complexity only when they consciously route revenue into BTC savings, a deliberate allocation decision they opted into, not a burden imposed on every sale. The currency layer does not change tax law. It routes commerce through a structure that makes existing tax law irrelevant at the point of transaction, the same way that spending dollars has always been tax-neutral. The bridge to Bitcoin-based commerce was never going to be built by asking billions of people to become their own tax accountants. It is built by giving them a spending instrument that behaves like a dollar at the register and a Bitcoin at the reserve.
+</p>
 
 <p>
   The full technical specification of ₿USD, including its four-layer system architecture, fee structure, and detailed risk analysis, is published as Appendix D.
@@ -2261,7 +2283,7 @@
 </p>
 
 <p>
-  <strong>BTC-default redemption:</strong> when a holder redeems ₿USD, the consortium transfers Bitcoin at spot value directly to the redeemer's wallet rather than selling it on the market. No market order is placed. No slippage occurs. The spot price is unaffected by the redemption.
+  <strong>BTC-default redemption:</strong> when a holder redeems ₿USD, the consortium transfers Bitcoin at spot value directly to the redeemer's wallet rather than selling it on the market. No market order is placed by the consortium. No slippage occurs on the consortium's side. The redeemer may subsequently sell the BTC on an exchange, but the selling pressure is distributed across the open market at the redeemer's discretion rather than concentrated in a single large consortium sell order during a stress event. The mechanism does not eliminate selling pressure entirely. It disperses it, removing the consortium as the forced seller and eliminating the reflexive feedback loop where a single large sell order crashes spot and triggers further redemptions.
 </p>
 
 <p>
@@ -2289,7 +2311,7 @@
 <h3>Why the Attack Becomes Uneconomical</h3>
 
 <p>
-  Consider the coordinated short-plus-redemption attack against a defensively programmable ₿USD. The attacker mints $100M in ₿USD, builds a $100M BTC short position, then attempts mass fiat redemption to force selling and crash spot. The obstacles stack: BTC-default redemption means the consortium transfers Bitcoin rather than selling it, producing no spot impact and no short profit. Time-weighted fees on freshly minted tokens cost 3%, or $3M, before any potential profit. Volume-triggered escalation adds another 3% at scale, $6M total. Redemption notice periods above $100K add 48 hours to 7 days of delay, during which the short position carries funding costs and the market can react. The attack's expected return is deeply negative. The mechanisms do not eliminate the theoretical possibility of attack. They make it economically irrational to attempt.
+  Consider the coordinated short-plus-redemption attack against a defensively programmable ₿USD. The attacker mints $100M in ₿USD, builds a $100M BTC short position, then attempts mass fiat redemption to force selling and crash spot. The obstacles stack: BTC-default redemption means the consortium transfers Bitcoin to the redeemer rather than executing a concentrated sell order, dispersing any subsequent selling pressure across the open market and eliminating the reflexive crash the attacker depends on. Time-weighted fees on freshly minted tokens cost 3%, or $3M, before any potential profit. Volume-triggered escalation adds another 3% at scale, $6M total. Redemption notice periods above $100K add 48 hours to 7 days of delay, during which the short position carries funding costs and the market can react. The attack's expected return is deeply negative. The mechanisms do not eliminate the theoretical possibility of attack. They make it economically irrational to attempt.
 </p>
 
 <div class="contrast-block">
@@ -3123,6 +3145,24 @@
   There is a further consideration. The currency layer rewards holding within the Bitcoin ecosystem over time. Every user who earns, spends, and saves within the ₿C-denominated ecosystem without exiting to fiat is accumulating a unit that appreciates against fiat while depreciating against Bitcoin spot. This creates a systematic, permanent incentive to eventually graduate to direct Bitcoin holding for those who understand what is happening. The currency layer does not compete with full Bitcoinization. It provides a path that leads there.
 </p>
 
+<h3>The Tax Barrier That the Currency Layer Solves</h3>
+
+<p>
+  There is a concession that Bitcoin maximalists have never been able to get around: tax law killed Bitcoin commerce before it started. In the United States and most major economies, Bitcoin is classified as property. Every transaction is a disposition that triggers capital gains reporting. A consumer who spends satoshis on groceries must track cost basis, calculate gain or loss, and report the event. The compliance burden makes daily Bitcoin commerce impractical for any person who files taxes. This is not a theoretical objection. It is the lived reality that has confined Bitcoin to a store of value and prevented it from functioning as a medium of exchange for ordinary people.
+</p>
+
+<p>
+  The standard maximalist response is that tax law is the problem, not Bitcoin. This is correct. Bitcoin's protocol is not deficient. The friction was imposed by fiat-era regulatory frameworks that classify a monetary asset as property, creating a reporting obligation on every transfer. The political and legal infrastructure of the fiat system manufactured this barrier. Bitcoin did not create it and cannot fix it, because tax law is not a protocol parameter.
+</p>
+
+<p>
+  The currency layer routes around it. ₿USD is pegged at $1. A consumer receives $1, spends $1. No gain, no loss, no taxable event. The Bitcoin purchase happens inside the reserve, managed by the consortium as a corporate entity with its own tax obligations. The consumer never holds property in the tax sense. They hold a dollar-equivalent spending instrument. The tax complexity surfaces only when the user makes a deliberate decision to cross into the savings layer: opening a ₿OND or accepting BTC at ₿C prices. That is an investment decision, reported like any other investment. It is not a burden on buying coffee.
+</p>
+
+<p>
+  For the maximalist, this should be the argument that resolves the objection. The currency layer does not compromise Bitcoin's monetary properties. It does not inflate the supply. It does not modify the protocol. It does not create synthetic exposure. Every token minted is a real Bitcoin purchase. And it eliminates the single regulatory barrier that has prevented Bitcoin from functioning as a medium of exchange in the jurisdictions where most of the world's commerce occurs. The spending layer is tax-neutral. The savings layer is where Bitcoin's appreciation accrues. The separation is clean, and it gives Bitcoin something that sixteen years of advocacy could not: a path to daily commerce that does not require every participant to become their own tax accountant or wait for governments to reclassify Bitcoin as currency. The bridge does not ask the fiat system for permission. It builds a structure that makes the fiat system's classification irrelevant at the point of sale.
+</p>
+
 <h3>The Actual Choice</h3>
 
 <p>
@@ -3662,7 +3702,7 @@
 
 <h3>8.1 BTC-Default Redemption</h3>
 
-<p>In the default redemption path, the consortium transfers Bitcoin at spot value directly to the redeemer's wallet. No market order is placed. No slippage occurs. The spot price is unaffected by the redemption. This single design choice eliminates the most dangerous attack vector,forced selling. Fiat redemption remains available as a premium service with slower processing, higher fees, and velocity limits.</p>
+<p>In the default redemption path, the consortium transfers Bitcoin at spot value directly to the redeemer's wallet. No market order is placed by the consortium. The redeemer may subsequently sell the BTC on the open market, but the selling pressure is distributed across exchanges at the redeemer's discretion rather than concentrated in a single consortium sell order during a stress event. This design choice eliminates the most dangerous attack vector: forced, concentrated selling that creates a reflexive feedback loop. Fiat redemption remains available as a premium service with slower processing, higher fees, and velocity limits.</p>
 
 <h3>8.2 Fiat Redemption</h3>
 
@@ -3768,7 +3808,7 @@
 
 <p><strong>First:</strong> Reserve pressure exists only at the fiat exit. Tokens circulating within the ecosystem create zero reserve pressure at any BTC spot price. The run scenario requires holders to not only panic but to convert to fiat specifically,abandoning the ecosystem entirely.</p>
 
-<p><strong>Second:</strong> BTC-default redemption eliminates forced selling. The consortium transfers Bitcoin rather than liquidating it. No market order, no slippage, no spot impact.</p>
+<p><strong>Second:</strong> BTC-default redemption disperses selling pressure. The consortium transfers Bitcoin to the redeemer rather than executing a concentrated sell order. The reflexive feedback loop, where a large consortium sell crashes spot and triggers further redemptions, is broken.</p>
 
 <p><strong>Third:</strong> Time-weighted fees price out mint-and-redeem attack loops. A freshly minted token faces 3% fiat redemption fees, making the attack deeply unprofitable.</p>
 
