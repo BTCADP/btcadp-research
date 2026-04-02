@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Start Here | btcadp.org</title>
-    <meta name="description" content="A plain-language introduction to Bitcoin Currency (₿C), the ₿ond, and ₿USD. What they are, why they exist, and how they fit together.">
+    <meta name="description" content="A plain-language introduction to Bitcoin Currency (₿C), ₿USD, the ₿ond, and ₿ILL. What they are, why they exist, and how they fit together.">
     <style>
         :root {
             --bg: #0a0a0a;
@@ -21,6 +21,8 @@
             --green-dim: rgba(76, 175, 125, 0.10);
             --blue: #5b9bd5;
             --blue-dim: rgba(91, 155, 213, 0.10);
+            --purple: #9b7ed8;
+            --purple-dim: rgba(155, 126, 216, 0.10);
             --font: 'Georgia', 'Times New Roman', serif;
             --mono: 'Courier New', Courier, monospace;
             --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -220,6 +222,7 @@
         .use-card.orange { border-top: 3px solid var(--orange); }
         .use-card.green  { border-top: 3px solid var(--green); }
         .use-card.blue   { border-top: 3px solid var(--blue); }
+        .use-card.purple { border-top: 3px solid var(--purple); }
 
         .use-card-label {
             font-family: var(--mono);
@@ -232,6 +235,7 @@
         .use-card.orange .use-card-label { color: var(--orange); }
         .use-card.green  .use-card-label { color: var(--green); }
         .use-card.blue   .use-card-label { color: var(--blue); }
+        .use-card.purple .use-card-label { color: var(--purple); }
 
         .use-card h3 {
             font-family: var(--font);
@@ -373,7 +377,7 @@
         /* ── PILLAR CARDS ── */
         .pillars {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 1.2rem;
             margin: 2.5rem 0;
         }
@@ -394,6 +398,7 @@
         .pillar.orange { border-top: 3px solid var(--orange); }
         .pillar.green  { border-top: 3px solid var(--green); }
         .pillar.blue   { border-top: 3px solid var(--blue); }
+        .pillar.purple { border-top: 3px solid var(--purple); }
 
         .pillar-function {
             font-family: var(--mono);
@@ -406,6 +411,7 @@
         .pillar.orange .pillar-function { color: var(--orange); }
         .pillar.green  .pillar-function { color: var(--green); }
         .pillar.blue   .pillar-function { color: var(--blue); }
+        .pillar.purple .pillar-function { color: var(--purple); }
 
         .pillar-symbol {
             font-family: var(--font);
@@ -456,6 +462,7 @@
         .pillar.orange .pillar-desc { color: var(--orange); }
         .pillar.green  .pillar-desc { color: var(--green); }
         .pillar.blue   .pillar-desc { color: var(--blue); }
+        .pillar.purple .pillar-desc { color: var(--purple); }
 
         /* ── CYCLE CARDS ── */
         .cycle-cards-label {
@@ -494,6 +501,7 @@
         .cycle-card.orange { border-left: 3px solid var(--orange); }
         .cycle-card.green  { border-left: 3px solid var(--green); border-right: 3px solid var(--green); }
         .cycle-card.blue   { border-left: 3px solid var(--blue); border-right: 3px solid var(--blue); }
+        .cycle-card.purple { border-left: 3px solid var(--purple); border-right: 3px solid var(--purple); }
 
         .cycle-card-sym {
             font-family: var(--font);
@@ -508,6 +516,7 @@
         .cycle-card.orange .cycle-card-sym { color: var(--orange); }
         .cycle-card.green  .cycle-card-sym { color: var(--green); }
         .cycle-card.blue   .cycle-card-sym { color: var(--blue); }
+        .cycle-card.purple .cycle-card-sym { color: var(--purple); }
 
         .cycle-card-flow {
             font-family: var(--sans);
@@ -622,10 +631,10 @@
     <div style="font-size: clamp(3rem, 8vw, 5rem); color: var(--orange); text-align: center; font-weight: bold; margin-bottom: 1.5rem; line-height: 1;">₿C</div>
     <h1>Two worlds.<br><span>One bridge.</span></h1>
     <p class="hero-sub">
-        The fiat economy and the Bitcoin economy run on different rails. Most of the world is still transacting in fiat, with no common language. ₿C is a common unit of account that bridges the divide and facilitates adoption.
+        The fiat economy and the Bitcoin economy run on different rails. Most of the world is still transacting in fiat, with no common language. ₿C is a common unit of account that bridges the divide — and the instruments built on it serve everyone from retail savers to institutional capital markets.
     </p>
     <div class="progress-bar">
-        <span>5 min read</span>
+        <span>6 min read</span>
         <div class="dot"></div>
         <span>No prior knowledge required</span>
     </div>
@@ -692,11 +701,12 @@
     <!-- 3. THE FRAMEWORK -->
     <div class="section">
         <div class="section-num">03 — The Framework</div>
-        <h2>Price it, save it, <span>spend it</span></h2>
+        <h2>Price it, save it, spend it, <span>invest it</span></h2>
         <p>
             Every monetary system needs three things: a unit of account, a store of value,
-            and a medium of exchange. ₿C makes all three possible on Bitcoin — each one
-            a purpose-built instrument sharing the same underlying asset.
+            and a medium of exchange. ₿C makes all three possible on Bitcoin. And for institutional
+            capital markets — pension funds, sovereign wealth managers, corporate treasuries — there is
+            a fourth instrument designed for the way they already operate.
         </p>
     </div>
 
@@ -734,6 +744,27 @@
             </div>
         </div>
 
+        <div class="pillar purple">
+            <div class="pillar-function">Capital markets</div>
+            <div class="pillar-symbol">₿ILL</div>
+            <div class="pillar-name">Capital Markets Instrument</div>
+            <div class="pillar-peg">Tradable · Fungible</div>
+            <div class="pillar-role">For institutions</div>
+            <div class="pillar-desc">
+                Bitcoin yield for capital markets.
+            </div>
+        </div>
+
+    </div>
+
+    <div class="callout">
+        <p>
+            The ₿ond and ₿ILL share the same foundation — ₿C denomination, Bitcoin reserve backing,
+            and dual-condition maturity — but serve different audiences. The ₿ond is non-tradable by design,
+            optimized for retail savers who never want to see a mark-to-market loss. ₿ILL is tradable on
+            secondary markets, issued in fungible tranches, and structured for institutional portfolio
+            integration. Think of it like I-Bonds vs. TIPS: same thesis, different wrapper.
+        </p>
     </div>
 
     <!-- VIRTUOUS BUYING CYCLE CARDS -->
@@ -754,6 +785,13 @@
             </div>
         </div>
 
+        <div class="cycle-card purple">
+            <div class="cycle-card-sym">₿ILL</div>
+            <div class="cycle-card-flow">
+                Institution sends USD → consortium buys BTC at spot → <span class="hl-orange">Bitcoin demand increases</span>
+            </div>
+        </div>
+
     </div>
 
     <!-- BITCOIN FOUNDATION CARD -->
@@ -764,8 +802,8 @@
             <div class="foundation-subtitle">The foundational reserve asset</div>
             <div class="foundation-desc">
                 Every instrument above requires a Bitcoin purchase at issuance. Bitcoin is the
-                single underlying asset backing ₿C's formula, ₿ond's appreciation, and ₿USD's
-                reserves. One asset. Three expressions.
+                single underlying asset backing ₿C's formula, ₿ond's appreciation, ₿USD's
+                reserves, and ₿ILL's institutional yield. One asset. Four expressions.
             </div>
         </div>
     </div>
@@ -782,7 +820,7 @@
             on them, or critique them.
         </p>
         <p>
-            The three instruments described here are proposals, not products. They exist to
+            The instruments described here are proposals, not products. They exist to
             demonstrate that a stable, common unit of account between fiat and Bitcoin unlocks things that were
             not previously possible — and that every instrument built on it mechanically
             strengthens Bitcoin itself.
@@ -791,12 +829,13 @@
         <div class="foundation">
             <p>
                 Ready to go deeper? The rest of the site covers the technical specification,
-                the full ₿C paper, case studies, and the research behind ₿USD.
+                the full ₿C paper, case studies, and the research behind each instrument.
             </p>
             <div class="cta-row">
                 <a href="btcc-intro.html" class="btn-primary">₿C — Deep Dive</a>
-                <a href="bond.html" class="btn-secondary">₿ond Overview</a>
                 <a href="tbd-usd.html" class="btn-secondary">₿USD Overview</a>
+                <a href="bond.html" class="btn-secondary">₿ond Overview</a>
+                <a href="bitcoin-bridge.html#ch13" class="btn-secondary">₿ILL in TBB</a>
             </div>
         </div>
     </div>
