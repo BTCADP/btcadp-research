@@ -294,11 +294,12 @@
 
   <!-- 3 -->
   <div class="paper-section">
-    <h2>3. Two Products, Two Purposes</h2>
+    <h2>3. Three Products, Three Audiences</h2>
     <p>
-      The ecosystem comprises two financial instruments with distinct mechanics, distinct user bases,
-      and distinct roles. They are designed to be complementary — the &#x20BF;ond captures long-term
-      savings capital, &#x20BF;USD captures transactional flow — and each makes the other more valuable.
+      The ecosystem comprises three financial instruments with distinct mechanics, distinct user bases,
+      and distinct roles. &#x20BF;USD captures transactional flow. The &#x20BF;ond captures long-term
+      savings capital. &#x20BF;ILL captures institutional capital markets demand. Each makes the others more valuable,
+      and every instrument issued mechanically requires Bitcoin to be purchased and held in reserve.
     </p>
 
     <div class="callout">
@@ -333,22 +334,40 @@
       </p>
     </div>
 
+    <div class="callout" style="margin-top:1rem;">
+      <div class="callout-label">&#x20BF;ILL — Capital Markets Instrument</div>
+      <p>
+        A tradable, fungible capital markets instrument designed for institutional investors. ₿ILL shares
+        the same architectural foundation as the ₿ond — ₿C denomination, dual-condition maturity, Bitcoin
+        reserve backing, consortium issuance — but is tradable on secondary markets and issued in
+        standardized tranches. The relationship mirrors I-Bonds (₿ond) and TIPS (₿ILL) in traditional finance.
+      </p>
+      <p style="margin-top:0.5rem;">
+        <strong style="color:var(--orange);">Purpose:</strong> Institutional yield with secondary market
+        liquidity — producing a Bitcoin-backed yield curve that portfolio managers can screen alongside
+        T-bills and corporate bonds.
+      </p>
+    </div>
+
     <p style="margin-top:1.2rem;">
-      The two products connect through conversion. A &#x20BF;ond holder who wants to spend converts
+      The retail products connect through conversion. A &#x20BF;ond holder who wants to spend converts
       their ₿C balance into &#x20BF;USD tokens at the current ₿C/USD rate. A &#x20BF;USD holder
-      who wants to save converts tokens into a &#x20BF;ond. Every conversion between the two products
-      keeps capital inside the Bitcoin economy. The only exit that costs Bitcoin is redemption to fiat.
+      who wants to save converts tokens into a &#x20BF;ond. Every conversion between the retail products
+      keeps capital inside the Bitcoin economy. ₿ILL operates on its own secondary market,
+      with its own dedicated two-ledger reserve system entirely separate from ₿USD and ₿ond reserves.
+      The only exit that costs Bitcoin is redemption to fiat.
     </p>
   </div>
 
   <!-- 4 -->
   <div class="paper-section">
-    <h2>4. The Four-Ledger Reserve Architecture</h2>
+    <h2>4. The Six-Ledger Reserve Architecture</h2>
     <p>
-      Because &#x20BF;ond and &#x20BF;USD are structurally different instruments with different
-      redemption mechanics, duration profiles, and risk characteristics, they require separate reserve
-      accounting. Pooling them would allow a stress event on one product to consume the reserves of
-      the other.
+      Each instrument in the framework has structurally different redemption mechanics,
+      duration profiles, and risk characteristics. &#x20BF;USD faces demand-deposit risk.
+      &#x20BF;ond faces maturity-timing risk. &#x20BF;ILL faces secondary-market pricing risk.
+      These cannot share a reserve pool. The architectural principle is universal: every product
+      has its own dedicated two-ledger system.
     </p>
 
     <table class="ledger-table">
@@ -384,6 +403,18 @@
           <td>&#x20BF;USD (backstop)</td>
           <td>Additional BTC from treasury holdings. BTC appreciation surplus from L1 flows here over time.</td>
           <td>Covers redemption shortfalls where BTC spot has declined below $1 per token equivalent. Self-fortifies over time.</td>
+        </tr>
+        <tr>
+          <td><span class="ledger-name">&#x20BF;ILL L1</span></td>
+          <td>&#x20BF;ILL (institutional)</td>
+          <td>BTC purchased with institutional capital at issuance. Parameters defined by consortium at each tranche issuance.</td>
+          <td>Backs ₿ILL obligations. Sized against the institutional obligation book for each tranche.</td>
+        </tr>
+        <tr>
+          <td><span class="ledger-name">&#x20BF;ILL L2</span></td>
+          <td>&#x20BF;ILL (backstop)</td>
+          <td>Additional BTC from treasury holdings. Follows same backstop logic as other products.</td>
+          <td>Covers shortfalls specific to ₿ILL's tradable, secondary-market pricing dynamics.</td>
         </tr>
       </tbody>
     </table>
@@ -591,9 +622,9 @@
       that makes Bitcoin's monetary properties unique.
     </p>
     <p>
-      The &#x20BF;ond/&#x20BF;USD ecosystem solves the presentation problem with two instruments that
-      serve distinct purposes and reinforce each other. The four-ledger reserve architecture keeps the
-      two products cleanly separated so that stress on one cannot contaminate the other. The fixed
+      The &#x20BF;ond/&#x20BF;USD/&#x20BF;ILL ecosystem solves the presentation problem with three instruments that
+      serve distinct purposes and reinforce each other. The six-ledger reserve architecture keeps the
+      three products cleanly separated so that stress on one cannot contaminate the others. The fixed
       maturity structure eliminates the bank run attack vector. The fee hierarchy routes capital toward
       paths that keep it inside the Bitcoin economy.
     </p>

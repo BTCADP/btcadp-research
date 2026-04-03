@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Glossary | btcadp.org</title>
-<meta name="description" content="Terms and definitions for the BTCADP ecosystem — ₿C (₿C), timeblocks, TBDC, ₿USD, ₿ond, Two Spheres, PragMaxi, and more.">
+<meta name="description" content="Terms and definitions for the BTCADP ecosystem — ₿C (₿C), timeblocks, TBDC, ₿USD, ₿ond, ₿ILL, Two Spheres, PragMaxi, and more.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
 <style>
@@ -295,7 +295,7 @@
         </button>
         <div class="term-body">
           <p>A peer-to-peer electronic cash system with a fixed supply of 21 million coins, operating continuously since January 2009 without a trusted third party. The reserve asset underlying the entire BTCADP ecosystem — not held by any institution, not expandable by any decree, not contingent on anyone's continued operation.</p>
-          <p>Bitcoin is both the destination and the foundation. Every ₿USD token minted requires Bitcoin to be purchased. Every ₿ond issued locks Bitcoin in reserve. The ecosystem does not compete with Bitcoin — it is built on it, denominated in its history, and secured by its base layer.</p>
+          <p>Bitcoin is both the destination and the foundation. Every ₿USD token minted requires Bitcoin to be purchased. Every ₿ond issued locks Bitcoin in reserve. Every ₿ILL issued requires an institutional Bitcoin purchase. The ecosystem does not compete with Bitcoin — it is built on it, denominated in its history, and secured by its base layer.</p>
           <div class="see-also">See also: <a href="specification.html">BTCADP Specification</a></div>
         </div>
       </div>
@@ -364,6 +364,22 @@
       <div class="term-entry">
         <button class="term-header" onclick="toggle(this)">
           <div class="term-title-wrap">
+            <span class="term-name">₿ILL</span>
+            <span class="term-tag">Capital Markets Instrument</span>
+          </div>
+          <span class="term-icon">+</span>
+        </button>
+        <div class="term-body">
+          <p>The capital markets instrument of the framework — tradable on secondary markets, issued in fungible tranches, and structured for institutional portfolio integration. ₿ILL shares the same architectural foundation as ₿OND: the ₿C denomination, dual-condition maturity, Bitcoin reserve backing, and consortium issuance model. But where ₿OND is non-tradable by design, optimized for retail savers, ₿ILL is designed for pension funds, sovereign wealth managers, corporate treasuries, and fixed-income funds.</p>
+          <p>The relationship between ₿OND and ₿ILL mirrors I-Bonds and TIPS in traditional finance: same issuer, same thesis, different wrapper for a different audience. A tradable ₿ILL produces something no Bitcoin-backed instrument has ever had — a yield curve that can be quoted, screened, and compared alongside T-bills and corporate bonds.</p>
+          <p>₿ILL has its own dedicated two-ledger system (Ledger 1 for issuance, Ledger 2 for backstop) entirely separate from ₿USD and ₿OND reserves. Every ₿ILL issued mechanically requires Bitcoin to be purchased and held in reserve — the perpetual bid's third channel.</p>
+          <div class="see-also">See also: <a href="#B">₿ond</a>, <a href="bitcoin-bridge.html#ch13">₿ILL in The Bitcoin Bridge</a></div>
+        </div>
+      </div>
+
+      <div class="term-entry">
+        <button class="term-header" onclick="toggle(this)">
+          <div class="term-title-wrap">
             <span class="term-name">BTCADP</span>
             <span class="term-tag">Reference Price</span>
           </div>
@@ -413,7 +429,7 @@
         <div class="term-body">
           <p>The group of publicly traded Bitcoin treasury companies that collectively issue TBDC instruments (₿USD and ₿onds). Distributed across jurisdictions so no single regulatory action can shut down the entire system. Each member maintains its own reserve ledgers and is independently audited.</p>
           <p>The consortium is the institutional layer of the ecosystem. The BTCADP specification and ₿C formula are independent of it — the unit of account persists even if the consortium dissolves. The consortium provides the issuance and redemption infrastructure; the denomination provides the credibility.</p>
-          <div class="see-also">See also: <a href="#T">TBDC</a>, <a href="#F">Four-Ledger System</a></div>
+          <div class="see-also">See also: <a href="#T">TBDC</a>, <a href="#F">Six-Ledger System</a></div>
         </div>
       </div>
 
@@ -483,15 +499,16 @@
       <div class="term-entry">
         <button class="term-header" onclick="toggle(this)">
           <div class="term-title-wrap">
-            <span class="term-name">Four-Ledger System</span>
+            <span class="term-name">Six-Ledger System</span>
             <span class="term-tag">Reserve Architecture</span>
           </div>
           <span class="term-icon">+</span>
         </button>
         <div class="term-body">
-          <p>The reserve architecture that separates ₿ond and ₿USD reserves into four distinct on-chain ledgers. ₿ond Ledger 1 (issuance pool — BTC purchased at ₿ond issuance), ₿ond Ledger 2 (actuarial backstop — sized against the known maturity book), ₿USD Ledger 1 (BTC backing outstanding $1 tokens), and ₿USD Ledger 2 (self-fortifying backstop — grows as BTC appreciates above the $1 obligation).</p>
-          <p>The separation is not technical — all four ledgers are Bitcoin wallets on the base layer. It is an accounting boundary that prevents stress on one product from consuming reserves of the other. A ₿ond bank run cannot touch ₿USD reserves. A ₿USD redemption spike cannot touch maturity-locked ₿ond reserves.</p>
-          <div class="see-also">See also: <a href="#L">Ledger 1</a>, <a href="#L">Ledger 2</a>, <a href="report-bitcoin-stablecoin.html">The Report</a></div>
+          <p>The reserve architecture that separates ₿USD, ₿ond, and ₿ILL reserves into six distinct on-chain ledgers — two per product. Each product has a Ledger 1 (issuance pool — BTC purchased at the time capital enters) and a Ledger 2 (backstop reserve — drawn from consortium holdings to cover shortfalls).</p>
+          <p><strong>₿USD L1:</strong> BTC backing outstanding $1 tokens. <strong>₿USD L2:</strong> Self-fortifying backstop — grows as BTC appreciates above the $1 obligation. <strong>₿ond L1:</strong> BTC purchased with saver deposits, tagged to individual bonds. <strong>₿ond L2:</strong> Actuarial backstop sized against the known maturity book. <strong>₿ILL L1:</strong> BTC purchased with institutional capital at issuance. <strong>₿ILL L2:</strong> Backstop sized against the institutional obligation book.</p>
+          <p>The separation is a structural firewall. A stress event on ₿USD — a surge in fiat redemptions — cannot accelerate ₿OND maturities or draw from ₿ILL reserves. Each product lives or dies on its own reserve base. All six ledgers are Bitcoin wallets on the base layer, verifiable by any observer in real time.</p>
+          <div class="see-also">See also: <a href="#L">Ledger 1</a>, <a href="#L">Ledger 2</a>, <a href="bitcoin-bridge.html#ch14">Reserve Architecture in TBB</a></div>
         </div>
       </div>
 
@@ -604,7 +621,7 @@
         <div class="term-body">
           <p>The Bitcoin purchased at the moment a ₿USD token is minted or a ₿ond is issued. Directly backs the outstanding obligation. Held in publicly addressable wallets on Bitcoin's base layer — verifiable by any observer in real time without an auditor.</p>
           <p>For ₿USD: Ledger 1 holds BTC backing each $1 token at the moment of issuance. As BTC appreciates above the $1 obligation, surplus flows into Ledger 2. For ₿ond: Ledger 1 holds BTC locked to the maturity schedule.</p>
-          <div class="see-also">See also: <a href="#L">Ledger 2</a>, <a href="#F">Four-Ledger System</a></div>
+          <div class="see-also">See also: <a href="#L">Ledger 2</a>, <a href="#F">Six-Ledger System</a></div>
         </div>
       </div>
 
@@ -619,7 +636,7 @@
         <div class="term-body">
           <p>Additional Bitcoin drawn from treasury companies' existing holdings that covers redemption shortfalls when Ledger 1 is insufficient — i.e. when Bitcoin spot has declined below the price at which reserves were acquired.</p>
           <p>For ₿USD: Ledger 2 self-fortifies over time as BTC appreciation in Ledger 1 creates surplus above the $1 obligation. The longer ₿USD circulates, the deeper the backstop becomes without requiring additional capital. For ₿OND: Ledger 2 is sized actuarially against the known maturity book. The dual-condition maturity ensures the treasury is profitable on every payout, and early exits convert to ₿USD rather than drawing on ₿OND reserves.</p>
-          <div class="see-also">See also: <a href="#L">Ledger 1</a>, <a href="#F">Four-Ledger System</a></div>
+          <div class="see-also">See also: <a href="#L">Ledger 1</a>, <a href="#F">Six-Ledger System</a></div>
         </div>
       </div>
 
@@ -698,7 +715,7 @@
         <div class="term-body">
           <p>The ability for any observer to confirm reserve balances in real time by checking publicly addressable Bitcoin wallets. No auditor required. No quarterly attestation. No trust in a publisher's report. Anyone with a Bitcoin block explorer can verify that the reserves backing every ₿USD token and every ₿ond are exactly where they are claimed to be, at any moment.</p>
           <p>This is the core transparency property that distinguishes the ecosystem from fiat-backed stablecoins, whose reserves are attested periodically by accountants rather than visible continuously on-chain.</p>
-          <div class="see-also">See also: <a href="#F">Four-Ledger System</a>, <a href="tbd-usd.html">₿USD Overview</a></div>
+          <div class="see-also">See also: <a href="#F">Six-Ledger System</a>, <a href="tbd-usd.html">₿USD Overview</a></div>
         </div>
       </div>
 

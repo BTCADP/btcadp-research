@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FAQ | btcadp.org</title>
-  <meta name="description" content="Frequently asked questions about BTCADP, ₿C (₿C) Bitcoin Currency, the ₿ond savings product, and Treasury-Backed Digital Currency (₿USD).">
+  <meta name="description" content="Frequently asked questions about BTCADP, ₿C (₿C) Bitcoin Currency, the ₿ond savings product, ₿ILL capital markets instrument, and Treasury-Backed Digital Currency (₿USD).">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -358,11 +358,11 @@
         <span class="faq-icon">+</span>
       </button>
       <div class="faq-answer">
-        <p>₿C, ₿ond, and ₿USD are three distinct components of the same ecosystem. Understanding each separately makes the whole clearer.</p>
+        <p>₿C, ₿USD, ₿ond, and ₿ILL are four distinct components of the same ecosystem. Understanding each separately makes the whole clearer.</p>
         <p><strong>₿C (₿C)</strong> is the unit of account — the denomination. It is the cumulative arithmetic mean of every daily Bitcoin price since the genesis block. It requires no issuer, holds no reserves, and makes no redemption promise. Any wallet, merchant, or payment system can adopt it independently. It is a standard for expressing value, not a product.</p>
         <p><strong>₿USD</strong> is the medium of exchange — always worth exactly $1.00, redeemable for $1.00 on demand. It is issued by a consortium of Bitcoin treasury companies, with each $1 token backed by Bitcoin purchased at spot. Prices and values across the ecosystem are denominated in ₿C, but ₿USD is the instrument people spend and receive.</p>
         <p><strong>₿ond</strong> is the savings product — a return-based instrument denominated in ₿C. A saver deposits fiat and selects a target return (+10%, +25%, +50%, etc.). The treasury purchases Bitcoin at spot. The bond matures when a dual condition is met: the saver's ₿C return target has been reached, and the treasury's BTC position on that bond is profitable. At maturity, the payout is returned as ₿USD. The ₿ond is where the appreciation of ₿C is captured by long-term savers.</p>
-        <div class="callout">₿C is the measuring stick. ₿USD is the spending instrument. ₿ond is the savings instrument. Together they form a complete monetary system — unit of account, medium of exchange, and savings product — built entirely on Bitcoin.</div>
+        <div class="callout">₿C is the measuring stick. ₿USD is the spending instrument. ₿ond is the savings instrument. ₿ILL is the capital markets instrument. Together they form a complete monetary system — unit of account, medium of exchange, savings product, and institutional yield — built entirely on Bitcoin.</div>
       </div>
     </div>
 
@@ -435,20 +435,34 @@
         <p><strong>₿ond</strong> is for savers. It is denominated in ₿C (₿C), matures when a dual condition is met (saver's return target reached and treasury position profitable), cannot be spent directly, and its return is chosen by the saver at purchase. The timeline is variable — determined by the market, not a calendar date.</p>
         <p><strong>₿USD</strong> is for transactors. It is always worth exactly $1.00, can be spent immediately, and pays no yield. Its value proposition is a hard dollar peg backed by Bitcoin on-chain rather than government debt.</p>
         <p>The two products connect through conversion. A ₿ond that matures pays out in ₿USD. A ₿USD holder who wants to save converts into a ₿ond. Both conversions keep capital inside the Bitcoin economy. Auto-reinvest makes the cycle seamless — a maturing ₿ond immediately rolls into a new one without touching fiat.</p>
-        <div class="callout">₿ond is where value is stored and grown. ₿USD is where value is moved and spent. Together they cover the two core functions every monetary system requires: saving and transacting.</div>
+        <div class="callout">₿ond is where value is stored and grown. ₿USD is where value is moved and spent. ₿ILL is where institutional capital finds yield. Together they cover saving, transacting, and capital markets — three audiences, one reserve asset.</div>
       </div>
     </div>
 
     <div class="faq-item">
       <button class="faq-question" onclick="toggle(this)">
-        <span class="faq-q-text">Why are there four ledgers instead of two?</span>
+        <span class="faq-q-text">What is ₿ILL and how does it differ from ₿ond?</span>
         <span class="faq-icon">+</span>
       </button>
       <div class="faq-answer">
-        <p>₿USD faces demand-deposit risk — holders can redeem for fiat at any time. The ₿ond does not — the dual condition locks each bond until both the saver's return and the treasury's profitability conditions are met. The four-ledger separation ensures that ₿USD redemption pressure, the system's primary stress vector, can never reach ₿ond reserves.</p>
+        <p>₿ILL is the capital markets instrument — designed for institutional investors such as pension funds, sovereign wealth managers, and corporate treasuries. It shares the same architectural foundation as ₿ond: the ₿C denomination, dual-condition maturity, Bitcoin reserve backing, and consortium issuance model.</p>
+        <p>The key difference is the wrapper. ₿ond is non-tradable by design, optimized for retail savers who never want to see a mark-to-market loss. ₿ILL is tradable on secondary markets, issued in fungible tranches, and structured for institutional portfolio integration. Think of it like I-Bonds vs. TIPS: same issuer, same inflation-protection thesis, different wrapper for a different audience.</p>
+        <p>A tradable ₿ILL with secondary market pricing produces something no Bitcoin-backed instrument has ever had: a yield curve. Portfolio managers can quote yield-to-maturity, duration, and credit quality in the language they already speak. And during bear markets, when ₿ILLs trade at a discount, counter-cyclical buyers step in — capital that flows into the system precisely when it is under the most stress.</p>
+        <p>The specific mechanics — tranche structure, secondary market infrastructure, coupon design, and minimum denomination — are deliberately left to the institutions that build and trade these instruments. The framework provides the foundation. The capital markets layer is designed to be filled by the participants best equipped to design it.</p>
+        <div class="callout">₿USD is for spending. ₿ond is for saving. ₿ILL is for capital markets. Three instruments, three audiences, one reserve asset. Every entry point is a Bitcoin purchase. The institutional layer does not compete with the retail layer. It compounds it.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggle(this)">
+        <span class="faq-q-text">Why are there six ledgers instead of two?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Each instrument in the framework has structurally different redemption mechanics, duration profiles, and risk characteristics. ₿USD faces demand-deposit risk. ₿OND faces maturity-timing risk. ₿ILL faces secondary-market pricing risk. These cannot share a reserve pool. The architectural principle is universal: every product has its own dedicated two-ledger system. Three products, six ledgers.</p>
         <p>Each product has two ledgers: an issuance pool (Ledger 1) holding Bitcoin purchased at the time of product issuance, and a backstop (Ledger 2) drawn from treasury companies' existing holdings to cover redemption shortfalls.</p>
-        <p><strong>₿ond L1</strong> holds BTC purchased with saver deposits, tagged to individual bonds. <strong>₿ond L2</strong> provides the backstop reserve drawn from treasury holdings. <strong>₿USD L1</strong> holds BTC backing outstanding $1 tokens. <strong>₿USD L2</strong> self-fortifies over time as BTC appreciation creates surplus above the $1 obligation.</p>
-        <p>All four ledgers are held in publicly addressable Bitcoin wallets on the base layer — verifiable by any observer in real time, without an auditor.</p>
+        <p><strong>₿USD L1</strong> holds BTC backing outstanding $1 tokens. <strong>₿USD L2</strong> self-fortifies over time as BTC appreciation creates surplus above the $1 obligation. <strong>₿ond L1</strong> holds BTC purchased with saver deposits, tagged to individual bonds. <strong>₿ond L2</strong> provides the backstop reserve drawn from treasury holdings, sized actuarially against the known maturity book. <strong>₿ILL L1</strong> holds BTC purchased with institutional capital at issuance. <strong>₿ILL L2</strong> follows the same backstop logic, sized against the institutional obligation book.</p>
+        <p>The separation is not a bookkeeping formality. It is a structural firewall. A stress event on ₿USD cannot accelerate ₿OND maturities or draw from ₿ILL reserves. Each product lives or dies on its own reserve base. All six ledgers are held in publicly addressable Bitcoin wallets on the base layer — verifiable by any observer in real time, without an auditor.</p>
       </div>
     </div>
 
@@ -480,7 +494,7 @@
       <div class="faq-answer">
         <p>The Terra/Luna comparison does not survive contact with the actual mechanics. Terra/Luna failed because its collateral was endogenous — the system's own token, whose value depended entirely on confidence in the system itself. When confidence broke, the collateral evaporated simultaneously with the liability. It was a circular firing squad by design.</p>
         <p>₿USD is the structural opposite. The collateral is Bitcoin — exogenous, independently valued, liquid, and completely indifferent to whether ₿USD exists or not. Bitcoin's value does not depend on ₿USD succeeding.</p>
-        <p>The risk that does exist is straightforward and knowable: a sustained decline in BTC spot below individual tokens' issuance prices creates reserve shortfalls that must be covered by the backstop ledger. The system uses four separate ledgers — ₿ond Ledger 1, ₿ond Ledger 2, ₿USD Ledger 1, and ₿USD Ledger 2 — keeping the two products cleanly separated so stress on one cannot consume reserves of the other. Treasury companies understand this risk intimately — it is directional Bitcoin exposure, which is their core business. They already model it, manage it, and hold reserves against it.</p>
+        <p>The risk that does exist is straightforward and knowable: a sustained decline in BTC spot below individual tokens' issuance prices creates reserve shortfalls that must be covered by the backstop ledger. The system uses six separate ledgers — two per product for ₿USD, ₿ond, and ₿ILL — keeping all three products cleanly separated so stress on one cannot consume reserves of another. Treasury companies understand this risk intimately — it is directional Bitcoin exposure, which is their core business. They already model it, manage it, and hold reserves against it.</p>
         <div class="callout">Every monetary system carries risk. The question is whether the risk is understood, bounded, and manageable. Here it is all three. And the reserves are Bitcoin on the base layer — publicly addressable, verifiable in real time by anyone, without an auditor.</div>
       </div>
     </div>
