@@ -617,7 +617,18 @@
     // Close all
     document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
     // Open clicked if it was closed
-    if (!isOpen) item.classList.add('open');
+    if (!isOpen) {
+      item.classList.add('open');
+      // After reflow, scroll so the question is visible below the sticky nav
+      requestAnimationFrame(() => {
+        const navHeight = 56;
+        const margin = 12;
+        const rect = item.getBoundingClientRect();
+        if (rect.top < navHeight) {
+          window.scrollBy({ top: rect.top - navHeight - margin, behavior: 'smooth' });
+        }
+      });
+    }
   }
 
   // Open first item by default
