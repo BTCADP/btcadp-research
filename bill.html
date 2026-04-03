@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>₿ILL — The Capital Markets Instrument | btcadp.org</title>
+    <meta name="description" content="₿ILL is a tradable, fungible capital markets instrument backed by Bitcoin reserves. Designed for institutional investors — pension funds, sovereign wealth managers, and corporate treasuries — with secondary market liquidity and yield curve formation.">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --bg2: #111111;
+            --bg3: #1a1a1a;
+            --border: #2a2a2a;
+            --text: #e8e8e8;
+            --muted: #888888;
+            --orange: #f7931a;
+            --orange-dim: rgba(247, 147, 26, 0.12);
+            --orange-dim2: rgba(247, 147, 26, 0.06);
+            --purple: #9b7ed8;
+            --purple-dim: rgba(155, 126, 216, 0.12);
+            --purple-dim2: rgba(155, 126, 216, 0.06);
+            --green: #4caf7d;
+            --red: #e74c3c;
+            --font: 'Georgia', 'Times New Roman', serif;
+            --mono: 'Courier New', Courier, monospace;
+            --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font);
+            line-height: 1.7;
+            font-size: 17px;
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(10,10,10,0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 56px;
+        }
+
+        .nav-brand {
+            font-family: var(--mono);
+            font-size: 1rem;
+            font-weight: bold;
+            color: var(--orange);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.25rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-family: var(--sans);
+            font-size: 0.85rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            transition: color 0.2s, background 0.2s;
+            letter-spacing: 0.03em;
+        }
+
+        .nav-links a:hover { color: var(--text); background: var(--bg3); }
+        .nav-links a.active { color: var(--purple); }
+
+        .hero {
+            border-bottom: 1px solid var(--border);
+            padding: 5rem 2rem 4rem;
+            text-align: center;
+            background: radial-gradient(ellipse at 50% 0%, rgba(155,126,216,0.07) 0%, transparent 65%);
+        }
+
+        .hero-label {
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            color: var(--purple);
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: normal;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+            margin-bottom: 1.2rem;
+            color: #fff;
+        }
+
+        .hero h1 span { color: var(--purple); }
+
+        .hero-sub {
+            font-family: var(--sans);
+            font-size: 1.05rem;
+            color: var(--muted);
+            max-width: 650px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.6;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--purple);
+            color: #fff;
+            font-family: var(--sans);
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 0.7rem 1.6rem;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: opacity 0.2s;
+            margin-right: 0.75rem;
+        }
+
+        .hero-cta:hover { opacity: 0.85; }
+
+        .hero-cta-ghost {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: transparent;
+            color: var(--purple);
+            border: 1px solid var(--purple);
+            font-family: var(--sans);
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 0.7rem 1.6rem;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .hero-cta-ghost:hover { opacity: 0.85; }
+
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section { margin-bottom: 4rem; }
+
+        .section-number {
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            color: var(--purple);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .section h2 {
+            font-size: 1.6rem;
+            font-weight: normal;
+            color: #fff;
+            margin-bottom: 1.2rem;
+            letter-spacing: -0.01em;
+        }
+
+        .section p { color: #c8c8c8; margin-bottom: 1rem; }
+
+        .callout {
+            background: var(--purple-dim);
+            border: 1px solid rgba(155,126,216,0.2);
+            border-radius: 6px;
+            padding: 1.2rem 1.5rem;
+            margin: 1.5rem 0;
+            font-family: var(--sans);
+            font-size: 0.9rem;
+            color: #c4b4e0;
+            line-height: 1.6;
+        }
+
+        .callout strong { color: var(--purple); }
+
+        .callout.orange {
+            background: var(--orange-dim);
+            border: 1px solid rgba(247,147,26,0.2);
+            color: #d4b483;
+        }
+
+        .callout.orange strong { color: var(--orange); }
+
+        /* Comparison table */
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-family: var(--sans);
+            font-size: 0.85rem;
+        }
+
+        .compare-table th {
+            text-align: left;
+            padding: 0.6rem 1rem;
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            color: var(--muted);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .compare-table th.highlight-col { color: var(--purple); }
+
+        .compare-table td {
+            padding: 0.7rem 1rem;
+            border: 1px solid var(--border);
+            color: #c8c8c8;
+            vertical-align: top;
+        }
+
+        .compare-table td.highlight-col { background: var(--purple-dim2); color: #c4b4e0; }
+        .compare-table tr:nth-child(even) td { background: var(--bg2); }
+        .compare-table tr:nth-child(even) td.highlight-col { background: rgba(155,126,216,0.09); }
+
+        /* Ledger cards */
+        .ledger-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .ledger-card {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-top: 2px solid var(--purple);
+            border-radius: 6px;
+            padding: 1.4rem;
+        }
+
+        .ledger-title {
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            color: var(--purple);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+
+        .ledger-name {
+            font-size: 1rem;
+            color: #fff;
+            margin-bottom: 0.8rem;
+            font-family: var(--sans);
+            font-weight: 600;
+        }
+
+        .ledger-card p {
+            font-family: var(--sans);
+            font-size: 0.85rem;
+            color: var(--muted);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        hr.divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 3rem 0;
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 2rem;
+            text-align: center;
+            font-family: var(--sans);
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        footer a { color: var(--muted); text-decoration: none; }
+        footer a:hover { color: var(--orange); }
+
+        @media (max-width: 600px) {
+            .ledger-grid { grid-template-columns: 1fr; }
+            .nav-links a { padding: 0.4rem 0.5rem; font-size: 0.78rem; }
+            .hero { padding: 3.5rem 1.5rem 3rem; }
+            .content { padding: 2rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a class="nav-brand" href="index.html">BTCADP</a>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="beginners-guide.html">Start Here</a></li>
+        <li><a href="btcc-intro.html">₿C</a></li>
+        <li><a href="tbd-usd.html">₿USD</a></li>
+        <li><a href="bond.html">₿OND</a></li>
+        <li><a href="bill.html" class="active">₿ILL</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="knowledge-base.html">Research</a></li>
+    </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-label">Capital Markets Instrument</div>
+    <h1>₿ILL — <span>Bitcoin Yield</span><br>for Capital Markets</h1>
+    <p class="hero-sub">
+        Tradable on secondary markets. Issued in fungible tranches. Structured for institutional
+        portfolio integration. The same architectural foundation as ₿OND — designed for the
+        capital markets that already exist.
+    </p>
+    <a href="#what-bill-enables" class="hero-cta">What ₿ILL Enables →</a>
+    <a href="bitcoin-bridge.html#ch13" class="hero-cta-ghost">Read in TBB →</a>
+</section>
+
+<!-- MAIN CONTENT -->
+<div class="content">
+
+    <!-- 1. WHAT IS ₿ILL -->
+    <div class="section">
+        <div class="section-number">01</div>
+        <h2>What is ₿ILL?</h2>
+        <p>
+            ₿USD serves the spending layer. ₿OND serves the savings layer. Both are designed for
+            ordinary people who never need to understand what sits beneath the products they use.
+            But there is a third layer of demand that neither instrument reaches: institutional capital.
+        </p>
+        <p>
+            Pension funds, sovereign wealth managers, corporate treasuries, and fixed-income funds
+            allocate trillions of dollars into yield-bearing instruments every year. They do not use
+            savings apps. They use capital markets. They require tradable securities with secondary
+            market liquidity, fungible tranches, and yield curves that can be screened alongside every
+            other fixed-income product on earth.
+        </p>
+        <p>
+            ₿ILL is the instrument designed for this layer. It shares the same architectural foundation
+            as ₿OND: the ₿C denomination, the dual-condition maturity, the Bitcoin reserve backing,
+            and the consortium issuance model. But where ₿OND is a retail savings product — non-tradable
+            by design, optimized for psychological simplicity — ₿ILL is a capital markets instrument:
+            tradable on secondary markets, issued in fungible tranches, and structured for institutional
+            portfolio integration.
+        </p>
+        <div class="callout">
+            <strong>The key distinction:</strong> ₿OND tokens are non-fungible — each one has its own
+            entry price, its own progress toward maturity, its own trajectory. This is ideal for a saver
+            watching a progress bar. It is incompatible with a secondary market, which requires
+            standardized, interchangeable units. ₿ILL provides exactly that.
+        </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- 2. WHY ₿OND CANNOT SERVE INSTITUTIONS -->
+    <div class="section">
+        <div class="section-number">02</div>
+        <h2>Why ₿OND Cannot Serve Institutions</h2>
+        <p>
+            The same properties that make ₿OND an excellent savings product make it unsuitable for
+            institutional capital.
+        </p>
+        <p>
+            ₿OND is non-tradable by design, because introducing a secondary market price would
+            reintroduce the volatility anxiety that the product exists to eliminate. The retail saver
+            needs to never see a mark-to-market loss. The institutional investor needs exactly that:
+            mark-to-market pricing is how they manage risk, hedge exposure, and report to stakeholders.
+        </p>
+
+        <table class="compare-table">
+            <thead>
+                <tr>
+                    <th>Property</th>
+                    <th>₿OND</th>
+                    <th class="highlight-col">₿ILL</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Audience</td>
+                    <td>Retail savers</td>
+                    <td class="highlight-col">Institutional investors</td>
+                </tr>
+                <tr>
+                    <td>Tradable</td>
+                    <td>No — non-tradable by design</td>
+                    <td class="highlight-col">Yes — secondary markets</td>
+                </tr>
+                <tr>
+                    <td>Fungibility</td>
+                    <td>Non-fungible (unique entry price per token)</td>
+                    <td class="highlight-col">Fungible (standardized tranches)</td>
+                </tr>
+                <tr>
+                    <td>Mark-to-market</td>
+                    <td>Never shown (saver sees progress bar)</td>
+                    <td class="highlight-col">Required (portfolio risk management)</td>
+                </tr>
+                <tr>
+                    <td>Position sizing</td>
+                    <td>$1 minimum, no maximum</td>
+                    <td class="highlight-col">Institutional scale, uncapped</td>
+                </tr>
+                <tr>
+                    <td>Exit</td>
+                    <td>Early exit converts to ₿USD (fee applies)</td>
+                    <td class="highlight-col">Sell on secondary market at any time</td>
+                </tr>
+                <tr>
+                    <td>Denomination</td>
+                    <td>₿C</td>
+                    <td class="highlight-col">₿C</td>
+                </tr>
+                <tr>
+                    <td>Maturity payout</td>
+                    <td>₿USD</td>
+                    <td class="highlight-col">₿USD</td>
+                </tr>
+                <tr>
+                    <td>Reserve structure</td>
+                    <td>Dedicated two-ledger system</td>
+                    <td class="highlight-col">Dedicated two-ledger system</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr class="divider">
+
+    <!-- 3. THE I-BOND / TIPS PARALLEL -->
+    <div class="section">
+        <div class="section-number">03</div>
+        <h2>The I-Bond / TIPS Parallel</h2>
+        <p>
+            The relationship between ₿OND and ₿ILL mirrors an existing structure in traditional finance.
+        </p>
+        <p>
+            The US government issues Series I Savings Bonds for retail savers: non-tradable, capped at
+            $10,000 per year, designed to be simple and boring. The same government issues Treasury
+            Inflation-Protected Securities (TIPS) for institutions: tradable on secondary markets,
+            uncapped, actively priced by the bond market. Same issuer. Same inflation-protection thesis.
+            Same underlying credit. Different wrapper for a different audience.
+        </p>
+        <div class="callout">
+            <strong>₿OND is the I-Bond. ₿ILL is the TIPS.</strong> Same consortium. Same ₿C denomination.
+            Same dual-condition maturity logic. Same Bitcoin reserve backing. Different wrapper for a
+            different audience.
+        </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- 4. WHAT ₿ILL ENABLES -->
+    <div class="section" id="what-bill-enables">
+        <div class="section-number">04</div>
+        <h2>What ₿ILL Enables</h2>
+        <p>
+            A tradable ₿ILL with secondary market pricing produces something no Bitcoin-backed instrument
+            has ever had: a yield curve.
+        </p>
+        <p>
+            A ₿ILL purchased at a discount to its maturity payout has an implied yield-to-maturity that
+            can be quoted, screened, and compared alongside T-bills, corporate bonds, and every other
+            fixed-income instrument on the planet. Portfolio managers do not need to understand ₿C or
+            cumulative averages. They need to see yield, duration, and credit quality. ₿ILL gives them
+            all three in a language they already speak.
+        </p>
+        <p>
+            Secondary market liquidity also solves a problem that does not exist for retail but is
+            critical for institutions: position sizing and exit timing. A pension fund cannot lock
+            $50 million into an instrument with a 45-month worst-case maturity and no exit. With a
+            secondary market, the fund can sell its position to another institutional buyer at any time,
+            at a market-determined price.
+        </p>
+        <div class="callout">
+            <strong>Counter-cyclical capital:</strong> During bear markets, when ₿ILLs trade at a
+            discount, counter-cyclical buyers step in — capital that flows into the system at exactly
+            the moment it is under the most stress. This is stabilizing capital that neither ₿USD
+            nor ₿OND can attract on their own.
+        </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- 5. THE MARKET ALREADY EXISTS -->
+    <div class="section">
+        <div class="section-number">05</div>
+        <h2>The Market Already Exists</h2>
+        <p>
+            The institutional appetite for Bitcoin-backed yield has been proven. Bitcoin treasury companies
+            have issued billions of dollars in preferred equity instruments offering 8–10% yields, backed
+            implicitly by their Bitcoin holdings. These products trade at multiples of the volume of
+            comparable traditional preferreds. The demand is not theoretical. It is measured in trading
+            volume, oversubscribed offerings, and a capital stack that grows more sophisticated with
+            each issuance.
+        </p>
+        <p>
+            What these existing instruments lack is what the framework provides: consortium-distributed
+            counterparty risk rather than single-company exposure, on-chain verifiable reserves rather
+            than quarterly SEC disclosures, programmatic dual-condition maturity rather than perpetual
+            duration, and ₿USD payouts that keep capital inside the Bitcoin economy rather than fiat
+            dividends that exit it.
+        </p>
+    </div>
+
+    <hr class="divider">
+
+    <!-- 6. THE RESERVE ARCHITECTURE -->
+    <div class="section">
+        <div class="section-number">06</div>
+        <h2>The Reserve Architecture</h2>
+        <p>
+            ₿ILL has its own dedicated two-ledger system, entirely separate from ₿USD and ₿OND reserves.
+            No product's reserve base can be reached by another product's stress dynamics. Each is
+            independently sized, independently verifiable, and independently solvent.
+        </p>
+
+        <div class="ledger-grid">
+            <div class="ledger-card">
+                <div class="ledger-title">₿ILL Ledger 1</div>
+                <div class="ledger-name">Issuance Pool</div>
+                <p>Holds Bitcoin purchased with institutional capital at issuance. Parameters defined
+                by the consortium at each tranche issuance, reflecting the specific risk profile of
+                a tradable instrument.</p>
+            </div>
+            <div class="ledger-card">
+                <div class="ledger-title">₿ILL Ledger 2</div>
+                <div class="ledger-name">Backstop Reserve</div>
+                <p>Additional BTC drawn from consortium members' existing holdings. Follows the same
+                backstop logic as ₿USD and ₿OND, sized against the institutional obligation book.
+                Covers shortfalls specific to ₿ILL's secondary-market pricing dynamics.</p>
+            </div>
+        </div>
+
+        <p>
+            The separation between products is not a bookkeeping formality. It is a structural firewall.
+            A stress event on ₿USD — a surge in fiat redemptions during a bear market — cannot accelerate
+            ₿OND maturities or draw from ₿ILL reserves. The products share an ecosystem but never a
+            reserve base. All ledgers are held in publicly addressable Bitcoin wallets on the base layer —
+            verifiable by any observer in real time.
+        </p>
+    </div>
+
+    <hr class="divider">
+
+    <!-- 7. OPEN ARCHITECTURE -->
+    <div class="section">
+        <div class="section-number">07</div>
+        <h2>Open Architecture</h2>
+        <p>
+            This page is deliberately concise. The specific mechanics of ₿ILL — its issuance model,
+            tranche structure, secondary market infrastructure, coupon design, and minimum denomination —
+            are decisions that belong to the institutions that build and trade these instruments. The
+            framework provides the foundation: the ₿C denomination, the dual-condition maturity logic,
+            the consortium reserve model, and the ₿USD payout mechanism. The capital markets layer is
+            designed to be filled by the participants best equipped to design it.
+        </p>
+        <p>
+            What the framework establishes is the architectural certainty that the institutional layer
+            fits. ₿ILL uses the same reserve ledger structure as ₿OND, with its own dedicated two-ledger
+            system to ensure complete separation of retail and institutional obligations. It uses the
+            same ₿C denomination. It matures into ₿USD. And every ₿ILL issued, like every ₿OND
+            deposited and every ₿USD minted, mechanically requires Bitcoin to be purchased and held
+            in reserve. The perpetual bid has three channels, not two.
+        </p>
+        <div class="callout orange">
+            <strong>₿USD is for spending. ₿OND is for saving. ₿ILL is for capital markets.</strong>
+            Three instruments, three audiences, one reserve asset. Every entry point is a Bitcoin
+            purchase. The institutional layer does not compete with the retail layer. It compounds it.
+        </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- RELATIONSHIP -->
+    <div class="section">
+        <div class="section-number">08</div>
+        <h2>Relationship to ₿C, ₿USD, and ₿OND</h2>
+        <p>
+            ₿ILL is built on ₿C (Bitcoin Currency) but is a distinct product. ₿C is a denomination
+            protocol — it requires no issuer, holds no reserves, and makes no promise of redemption.
+            ₿ILL is an issued monetary instrument with specific institutional participants, reserve
+            requirements, and maturity obligations.
+        </p>
+        <p>
+            At maturity, ₿ILL pays out in ₿USD — the system's dollar-pegged spending token. Institutional
+            investors can hold the ₿USD, convert it to fiat, or deploy it elsewhere within the Bitcoin
+            economy. Every ₿ILL issuance is a Bitcoin purchase. Every maturity payout is denominated in
+            ₿USD. The institutional layer feeds the same reserve system that backs the retail layer.
+        </p>
+        <a href="btcc-intro.html" class="hero-cta" style="margin-top:1rem;display:inline-flex;background:var(--orange);color:#000;">Learn about ₿C →</a>
+        <a href="tbd-usd.html" class="hero-cta-ghost" style="margin-top:1rem;display:inline-flex;border-color:var(--orange);color:var(--orange);">Learn about ₿USD →</a>
+        <a href="bond.html" class="hero-cta-ghost" style="margin-top:1rem;display:inline-flex;border-color:var(--orange);color:var(--orange);">Learn about ₿OND →</a>
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <p>
+        <a href="index.html">Home</a> &nbsp;·&nbsp;
+        <a href="btcc-intro.html">Bitcoin Currency (₿C)</a> &nbsp;·&nbsp;
+        <a href="specification.html">BTCADP Specification</a> &nbsp;·&nbsp;
+        <a href="bitcoin-bridge.html">The Bitcoin Bridge</a> &nbsp;·&nbsp;
+        <a href="https://github.com/BTCADP/btcadp-research" target="_blank" rel="noopener">GitHub</a>
+    </p>
+    <p style="margin-top:0.8rem;">CC0 Public Domain · btcadp.org · 2026</p>
+</footer>
+
+</body>
+</html>
