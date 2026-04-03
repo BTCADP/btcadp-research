@@ -1307,7 +1307,7 @@
 <h3>The Minting Process</h3>
 
 <p>
-  When a customer purchases a ₿USD token, they send fiat currency to a consortium member. The treasury company uses those funds to purchase Bitcoin at the current spot price and deposits the acquired Bitcoin into Ledger 1, the issuance pool. One ₿USD token is issued to the customer on the consortium's purpose-built Bitcoin sidechain. At the moment of issuance, the reserves in Ledger 1 perfectly back the outstanding token.
+  When a ₿USD token is minted, fiat currency flows to a consortium member through a financial service provider, an exchange, a payment platform, or a wallet application. The treasury company uses those funds to purchase Bitcoin at the current spot price and deposits the acquired Bitcoin into Ledger 1, the issuance pool. One ₿USD token is issued on the consortium's purpose-built Bitcoin sidechain and delivered to the end user through the same service provider. At the moment of issuance, the reserves in Ledger 1 perfectly back the outstanding token.
 </p>
 
 <p>
@@ -1327,7 +1327,7 @@
 <h3>Redemption and the Two-Ledger System</h3>
 
 <p>
-  When a customer redeems a ₿USD token, the treasury company returns $1.00 per token. The Bitcoin backing that token in Ledger 1 is sold to fund the redemption. The token is burned. If Bitcoin's spot price has risen since issuance, the Ledger 1 position is in surplus, the BTC acquired at issuance is worth more than the $1.00 obligation. The surplus remains in the consortium's holdings. If Bitcoin's spot price has fallen since issuance, the Ledger 1 position may be insufficient to cover the $1.00 obligation. This is where Ledger 2, the reserve backstop, enters.
+  When a ₿USD token is redeemed, the holder receives $1.00 per token. The Bitcoin backing that token in Ledger 1 is sold to fund the redemption. The token is burned. If Bitcoin's spot price has risen since issuance, the Ledger 1 position is in surplus, the BTC acquired at issuance is worth more than the $1.00 obligation. The surplus remains in the consortium's holdings. If Bitcoin's spot price has fallen since issuance, the Ledger 1 position may be insufficient to cover the $1.00 obligation. This is where Ledger 2, the reserve backstop, enters.
 </p>
 
 <p>
@@ -1492,7 +1492,7 @@
 </p>
 
 <p>
-  The reserve structure provides a further layer of confidence. A ₿USD token is backed 1:1 at the moment of minting: the customer sends $1, the consortium buys Bitcoin at spot, and Ledger 1 holds Bitcoin worth exactly the obligation. If BTC spot subsequently rises, the Ledger 1 position moves into surplus, and that surplus deepens with every day the price remains above the minting price. If BTC spot falls, Ledger 2, the backstop reserve drawn from the treasury companies' existing Bitcoin holdings, covers the shortfall. For ₿OND obligations, which are denominated in ₿C rather than dollars, the reserve dynamics differ in a critical respect: the obligation appreciates at the ₿C rate while the Bitcoin held against it appreciates at spot. Because spot has historically outpaced the cumulative average, this creates a widening surplus over time. The longer the ₿OND is held, the more the treasury's BTC position exceeds the ₿C-denominated payout obligation. The dual condition ensures that the ₿OND only matures when this surplus exists. The combined reserve architecture, Ledger 1 plus Ledger 2 plus the structural spread on ₿C-denominated products that develops over time, provides protection that no thin insurance fund can match. The FDIC insurance fund represents 1.3% of insured deposits. The currency layer's reserves, verifiable on-chain at any moment, back the obligations in full.
+  The reserve structure provides a further layer of confidence. A ₿USD token is backed 1:1 at the moment of minting: $1 enters the system, the consortium buys Bitcoin at spot, and Ledger 1 holds Bitcoin worth exactly the obligation. If BTC spot subsequently rises, the Ledger 1 position moves into surplus, and that surplus deepens with every day the price remains above the minting price. If BTC spot falls, Ledger 2, the backstop reserve drawn from the treasury companies' existing Bitcoin holdings, covers the shortfall. For ₿OND obligations, which are denominated in ₿C rather than dollars, the reserve dynamics differ in a critical respect: the obligation appreciates at the ₿C rate while the Bitcoin held against it appreciates at spot. Because spot has historically outpaced the cumulative average, this creates a widening surplus over time. The longer the ₿OND is held, the more the treasury's BTC position exceeds the ₿C-denominated payout obligation. The dual condition ensures that the ₿OND only matures when this surplus exists. The combined reserve architecture, Ledger 1 plus Ledger 2 plus the structural spread on ₿C-denominated products that develops over time, provides protection that no thin insurance fund can match. The FDIC insurance fund represents 1.3% of insured deposits. The currency layer's reserves, verifiable on-chain at any moment, back the obligations in full.
 </p>
 
 <p>
@@ -2764,7 +2764,7 @@
 </p>
 
 <p>
-  Under the current model, Bitcoin acquisition is funded by capital markets: equity raises, convertible notes, preferred stock offerings. The treasury company must convince institutional investors to fund each new purchase. Every dollar raised creates an obligation: a note that must convert or be repaid, a preferred share that demands dividends, equity that dilutes existing shareholders. The Bitcoin grows, but so does the liability stack. Under the currency layer model, Bitcoin acquisition is funded by customers. When a consumer purchases a ₿USD token, they send one dollar to the consortium. That dollar buys Bitcoin at spot. There is no equity raise. There is no debt issuance. There is no convertible note. There is no obligation that matures into a cash demand during a bear market. The customer's fiat is the capital, and the product the customer receives, a dollar-pegged stablecoin, is not a debt instrument. It is a service.
+  Under the current model, Bitcoin acquisition is funded by capital markets: equity raises, convertible notes, preferred stock offerings. The treasury company must convince institutional investors to fund each new purchase. Every dollar raised creates an obligation: a note that must convert or be repaid, a preferred share that demands dividends, equity that dilutes existing shareholders. The Bitcoin grows, but so does the liability stack. Under the currency layer model, Bitcoin acquisition is funded by customers. When a consumer purchases a ₿USD token, one dollar flows into the system and buys Bitcoin at spot. There is no equity raise. There is no debt issuance. There is no convertible note. There is no obligation that matures into a cash demand during a bear market. The customer's fiat is the capital, and the product the customer receives, a dollar-pegged stablecoin, is not a debt instrument. It is a service.
 </p>
 
 <p>
@@ -3728,9 +3728,9 @@
 
 <h3>6. The Issuance Mechanism</h3>
 
-<p>The issuance process converts fiat demand into Bitcoin demand in a single atomic operation. When a customer sends fiat to a consortium member, the following sequence executes:</p>
+<p>The issuance process converts fiat demand into Bitcoin demand in a seamless operation. When fiat enters the system through a participating financial service provider, the following sequence executes:</p>
 
-<p><strong>Step 1.</strong> The customer sends fiat currency (e.g., \$18,000) to a consortium member.</p>
+<p><strong>Step 1.</strong> The service provider routes the customer's fiat currency (e.g., \$18,000) to a consortium member.</p>
 
 <p><strong>Step 2.</strong> The consortium member mints ₿USD tokens at a 1:1 dollar ratio (18,000 tokens) and delivers them to the customer on the sidechain.</p>
 
