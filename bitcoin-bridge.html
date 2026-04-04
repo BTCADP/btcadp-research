@@ -1334,6 +1334,28 @@
   Each consortium member maintains a Ledger 2 drawn from its existing Bitcoin holdings. Ledger 2 is the backstop. When Ledger 1 is insufficient to cover a fiat redemption, the treasury company draws from Ledger 2 to make the customer whole. The treasury company absorbs the loss. Under normal and stressed conditions, the customer receives $1.00 per token. The genuine risk, a sustained decline severe enough to exhaust both ledgers, is addressed in Chapter 19.
 </p>
 
+<h3>FIFO: First In, First Out</h3>
+
+<p>
+  When a ₿USD token is redeemed, the system burns the oldest token in circulation first. Always. This is not a user choice. It is a protocol rule built into the token lifecycle.
+</p>
+
+<p>
+  The mechanic is simple and its consequences are profound. The oldest tokens are backed by BTC purchased at the lowest historical prices. Those tokens are the most deeply in surplus. Burning them first means every redemption costs the reserves the least possible amount. The surplus BTC that remains after covering the $1 obligation stays in the system, deepening the backstop.
+</p>
+
+<p>
+  The result is a reserve architecture that strengthens with every redemption rather than weakening. Every token burned releases more surplus than the system needs to hold. Over time, as the token base ages and BTC appreciates, the gap between what each token cost to back and what each token returns on redemption widens. The system heals itself through use.
+</p>
+
+<p>
+  In the early stages, when all tokens are young and the surplus is thin, the system is at its most vulnerable. Time solves this. Every day the system operates, the oldest tokens age deeper into surplus. Every new mint adds BTC at current spot, which will itself become deeply surplus over time. The FIFO structure means the system's security compounds automatically, without any discretionary decision by the consortium.
+</p>
+
+<p>
+  From the user's perspective, none of this is visible. They hold a ₿USD balance. They spend it, receive it, save it. Every token is $1. Fully fungible. FIFO is the consortium's accounting, operating at the protocol level, ensuring that the reserve architecture grows stronger with every transaction.
+</p>
+
 <h3>Bank Runs and Redemption Risk</h3>
 
 <p>
@@ -1345,7 +1367,7 @@
 </p>
 
 <p>
-  Second, the tokens themselves carry defensive mechanisms. Every ₿USD token is a programmable instrument that carries provenance metadata about itself: its mint date, the BTC spot price on the day it was minted, its block age, its transfer count, and a real-time coverage indicator showing whether the token's reserve backing is in the red or in the black with a corresponding percentage. This data describes the token's own history and health. It does not and cannot describe the person holding it. Using this provenance data, tokens can activate defensive behaviors autonomously under stress. These mechanisms are detailed in Chapter 18.
+  Second, the tokens themselves carry defensive mechanisms. Every ₿USD token is a programmable instrument that carries provenance metadata at the protocol level: its mint date, the BTC spot price on the day it was minted, its block age, and its transfer count. This data describes the token's history and reserve health. It does not and cannot describe the person holding it. The user never sees this data. They see a balance, one number, fully fungible. The provenance exists so the system can manage reserves, execute FIFO burn order on redemptions, and activate defensive behaviors autonomously under stress. These mechanisms are detailed in Chapter 18.
 </p>
 
 <p>
@@ -1373,7 +1395,7 @@
 </p>
 
 <p>
-  The case for ₿USD rests on properties that no fiat stablecoin and no CBDC can replicate, because the properties are consequences of the reserve architecture, not policy decisions that can be copied: Bitcoin branding and the trust it carries; privacy through pseudonymous sidechain transfers with no identity metadata at the protocol level; financial autonomy through bearer-instrument architecture that the consortium cannot freeze or restrict after issuance; monetary integrity through a reserve asset with a mathematically fixed supply; reserve transparency verifiable in real time by anyone with a block explorer; distributed issuance with no single point of failure; an integrated savings path through the ₿OND; and aligned incentives where reserve appreciation benefits the holder rather than being extracted by the issuer.
+  The case for ₿USD rests on properties that no fiat stablecoin and no CBDC can replicate, because the properties are consequences of the reserve architecture, not policy decisions that can be copied: Bitcoin branding and the trust it carries; greater transactional privacy than CBDCs, where surveillance is a core design feature, though the financial service providers distributing ₿USD operate within KYC and AML frameworks; resilience through distributed issuance across multiple jurisdictions, making coordinated censorship harder than compelling a single company in a single country; monetary integrity through a reserve asset with a mathematically fixed supply; reserve transparency verifiable in real time by anyone with a block explorer; distributed issuance with no single point of failure; an integrated savings path through the ₿OND; and aligned incentives where reserve appreciation benefits the holder rather than being extracted by the issuer.
 </p>
 
 <table class="compare-table">
@@ -1400,9 +1422,9 @@
     </tr>
     <tr>
       <td>Wallet freeze capability</td>
-      <td>Yes, issuer discretion</td>
+      <td>Yes, one company, one jurisdiction</td>
       <td>Yes, government discretion</td>
-      <td class="hl">No, architectural constraint</td>
+      <td class="hl">Distributed across jurisdictions; instant BTC conversion always available</td>
     </tr>
     <tr>
       <td>Transaction surveillance</td>
@@ -1523,6 +1545,24 @@
 
 <p>
   ₿USD is the on-ramp. Bitcoin is the destination. The on-ramp exists because most people will not make the leap directly. But every person who steps onto it is one step closer to a monetary system that no government can confiscate, surveil, or debase.
+</p>
+
+<h3>The Parachute</h3>
+
+<p>
+  Every ₿USD token carries a feature that no fiat stablecoin can replicate: instant conversion to Bitcoin. At any time, for any reason, a holder can convert their ₿USD to BTC at current spot and send it to a self-custody wallet. The conversion is built into the system because the reserve asset that backs every token is Bitcoin sitting on a public blockchain. USDT cannot give you the Treasury bill backing your token. USDC cannot hand you the government bond. ₿USD can give you the actual Bitcoin, because it is there, on-chain, verifiable, and transferable to any Bitcoin address on earth.
+</p>
+
+<p>
+  Most users will never think about this feature. They will use ₿USD to pay for groceries, receive a salary, and save through a ₿ond. The BTC conversion will sit quietly in their wallet like an emergency parachute under an airplane seat. The parachute is something they never think about until the moment it saves them.
+</p>
+
+<p>
+  Then their government announces a CBDC. Cash withdrawals are restricted. Fiat stablecoins comply with new regulations. A neighbor's USDT is frozen by a court order. And they press one button. Their ₿USD converts to Bitcoin, arrives in a wallet they control, and no government on earth can touch it. They did not believe in Bitcoin. They may still not. But Bitcoin just protected their financial life.
+</p>
+
+<p>
+  And everyone around them sees it happen. That visibility is how the network grows. Not through arguments about monetary theory. Through watching someone's parachute deploy while everyone else falls.
 </p>
 
 <div class="callout">
@@ -2313,11 +2353,11 @@
 <h3>Token Provenance</h3>
 
 <p>
-  Every token in the framework carries provenance metadata that describes the token itself, not its holder. The base metadata common to all instruments: mint date, mint-day BTC spot price, mint-day ₿C price, block age, and transfer count. This is sufficient for every defensive mechanism. What the token cannot know: holder identity, spending patterns, geographic location, transaction purpose. The data does not exist at the protocol level because the protocol was designed never to produce it. This is not a privacy policy that could be revised. It is an architectural constraint.
+  Every token in the framework carries provenance metadata at the protocol level that describes the token itself, not its holder. The base metadata common to all instruments: mint date, mint-day BTC spot price, mint-day ₿C price, block age, and transfer count. This data is used by the system for reserve management, FIFO burn order, and defensive mechanisms. It is not surfaced to the end user, whose experience is a fungible dollar balance. The sidechain protocol does not record holder identity, spending categories, geographic location, or transaction purpose. However, ₿USD is distributed through regulated financial service providers subject to KYC and AML requirements. The privacy advantage over a CBDC, where surveillance is a core design feature, is substantial but not absolute. It does not offer the same privacy as holding Bitcoin directly.
 </p>
 
 <p>
-  Each token also carries a real-time coverage indicator, expressed as red or black with a corresponding percentage. This is the token's self-reporting health status, readable by anyone, updated with every block.
+  Each token's reserve health is deterministic from its provenance data, calculable at any time from the mint-day BTC price and current spot. The consortium uses this data to manage reserves and execute FIFO burn order on redemptions. The end user sees a fungible balance.
 </p>
 
 <p>
@@ -2329,7 +2369,7 @@
 </p>
 
 <p>
-  A ₿ILL token carries the same dual-indicator structure as ₿OND. For tradable instruments, the red/black status and its percentage are visible to secondary market participants, providing real-time transparency into each tranche's proximity to maturity without requiring trust in quarterly disclosures.
+  A ₿ILL token carries the same provenance structure as ₿OND. For tradable instruments, the reserve health data is available to secondary market participants, providing real-time transparency into each tranche's proximity to maturity without requiring trust in quarterly disclosures.
 </p>
 
 <h3>Network State Awareness</h3>
@@ -3722,7 +3762,7 @@
 
 <p>₿USD is issued by a consortium of publicly traded Bitcoin treasury companies,firms whose primary business is acquiring and holding Bitcoin as a reserve asset. The consortium model distributes risk across multiple independent entities, each with its own Bitcoin holdings, its own jurisdiction, and its own regulatory compliance.</p>
 
-<p>No single consortium member can unilaterally modify the reserve rules, alter the fee structure, or freeze a token. The governance charter codifies reserve management standards, transparency requirements, and operational procedures. The methodology,the BTCADP specification that defines the reference price and denomination,is independent of the consortium. Even a complete governance failure leaves the unit of account intact.</p>
+<p>No single consortium member can unilaterally modify the reserve rules or alter the fee structure. The distributed structure means no single jurisdiction can freeze the entire system, though individual members may be subject to regulatory action in their jurisdictions. The governance charter codifies reserve management standards, transparency requirements, and operational procedures. The methodology,the BTCADP specification that defines the reference price and denomination,is independent of the consortium. Even a complete governance failure leaves the unit of account intact.</p>
 
 <p>Consortium membership requires publicly verifiable Bitcoin holdings at institutional scale, regulatory compliance in the member's domicile, commitment to on-chain transparency standards, and participation in the Ledger 2 backstop reserve. The distributed structure ensures no single regulatory action in any jurisdiction can shut down the entire system.</p>
 
@@ -3841,7 +3881,7 @@
 
 <h3>10.1 Token Provenance Metadata</h3>
 
-<p>Each token carries provenance metadata about itself, not its holder. The metadata includes: mint date, mint-day BTC spot price, mint-day ₿C price, block age, transfer count, and a real-time coverage indicator (red or black with percentage) showing whether the Bitcoin backing that specific token is above or below the obligation value. No holder identity, spending pattern, geographic location, or transaction purpose is recorded. The data does not exist at the protocol level because the protocol was designed never to produce it. This is an architectural constraint that would require dismantling the sidechain to override.</p>
+<p>Each token carries provenance metadata at the protocol level about itself, not its holder. The metadata includes: mint date, mint-day BTC spot price, mint-day ₿C price, block age, and transfer count. The consortium uses this data for reserve management and FIFO burn order on redemptions. The end user sees a fungible dollar balance. The sidechain protocol does not record holder identity, spending categories, or transaction purpose. However, the financial service providers distributing ₿USD operate within regulatory frameworks that may require user identification. ₿USD offers substantially greater privacy than a CBDC but does not replicate the privacy properties of holding Bitcoin directly.</p>
 
 <h3>10.2 Network State Awareness</h3>
 
@@ -3920,9 +3960,9 @@
   </thead>
   <tbody>
     <tr><td>Programmability serves</td><td>The issuing authority</td><td>The token network and its holders</td></tr>
-    <tr><td>Holder surveillance</td><td>Built in by design</td><td>Structurally impossible, no identity metadata</td></tr>
+    <tr><td>Holder surveillance</td><td>Built in by design</td><td>Not built into the protocol; distribution layer subject to regulatory requirements</td></tr>
     <tr><td>Spending restrictions</td><td>Expiration, category limits, geo-fencing</td><td>None, holders spend freely</td></tr>
-    <tr><td>Crisis behavior</td><td>Authorities freeze accounts at discretion</td><td>Protocol hardens autonomously</td></tr>
+    <tr><td>Crisis behavior</td><td>Authorities freeze accounts at discretion</td><td>Protocol hardens autonomously; distributed structure resists single-jurisdiction action</td></tr>
     <tr><td>Redemption control</td><td>Issuer can deny or delay</td><td>Deterministic rules, no discretion</td></tr>
     <tr><td>Collateral</td><td>Government promise</td><td>Bitcoin on base layer, verifiable in real time</td></tr>
     <tr><td>Failure mode</td><td>Policy change, overreach</td><td>BTC sustained below lifetime average (no precedent)</td></tr>
@@ -4394,7 +4434,7 @@
 <h3>₿USD</h3>
 
 <p>
-  <strong>What is the advantage of ₿USD over USDT or USDC?</strong> The reserve asset. USDT and USDC are backed by US Treasury bills, sovereign debt that the issuing government is actively devaluing. ₿USD is backed by Bitcoin, an asset with a mathematically fixed supply. Additional advantages include on-chain verifiable reserves, no wallet freezing capability, pseudonymous sidechain transfers, an integrated savings path (₿OND), and a distributed consortium with no single point of failure.
+  <strong>What is the advantage of ₿USD over USDT or USDC?</strong> The reserve asset. USDT and USDC are backed by US Treasury bills, sovereign debt that the issuing government is actively devaluing. ₿USD is backed by Bitcoin, an asset with a mathematically fixed supply. Additional advantages include on-chain verifiable reserves, greater privacy than CBDCs with no surveillance built into the protocol, distributed issuance across jurisdictions that makes freezing harder than with a single issuer, an integrated savings path (₿OND), and a distributed consortium with no single point of failure.
 </p>
 
 <p>
