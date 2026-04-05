@@ -134,11 +134,6 @@
     letter-spacing: 0.08em;
   }
 
-  /* No-appendix print notice (hidden on screen) */
-  .no-appendix-notice {
-    display: none;
-  }
-
   /* Dedication */
   .dedication-block {
     max-width: 600px;
@@ -522,43 +517,6 @@
     .draft-banner .draft-label { color: #111; }
     .draft-banner .draft-version { color: #444; }
 
-    /* No-appendix print notice styling */
-    .no-appendix-notice {
-      max-width: 100%;
-      padding: 80px 0 40px;
-      page-break-before: always;
-      color: #111;
-    }
-    .no-appendix-notice h2 {
-      font-family: var(--font-display);
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: #111;
-      margin-bottom: 24px;
-    }
-    .no-appendix-notice p {
-      font-size: 11pt;
-      line-height: 1.7;
-      color: #222;
-      margin-bottom: 12px;
-    }
-    .no-appendix-notice ul {
-      list-style: none;
-      padding: 0;
-      margin: 16px 0;
-    }
-    .no-appendix-notice ul li {
-      font-size: 11pt;
-      line-height: 1.8;
-      color: #222;
-      padding-left: 16px;
-    }
-    .no-appendix-notice .notice-url {
-      font-family: var(--font-mono);
-      font-size: 10pt;
-      color: #444;
-      margin-top: 20px;
-    }
   }
 </style>
 </head>
@@ -4648,23 +4606,6 @@
 
 
 
-<!-- NO-APPENDIX PRINT NOTICE (hidden on screen, shown only during no-appendix print) -->
-<div class="no-appendix-notice">
-  <h2>Appendix Not Included</h2>
-  <p>This copy has been printed without the Appendix. The complete Appendix, including the following items, can be found at:</p>
-  <p class="notice-url">btcadp.org/bitcoin-bridge.html</p>
-  <p style="margin-top:24px;"><strong>Appendix items not included in this print:</strong></p>
-  <ul>
-    <li>A. The Founding Thesis</li>
-    <li>B. BTCADP Specification (Summary)</li>
-    <li>C. ₿C White Paper</li>
-    <li>D. ₿USD White Paper</li>
-    <li>E. ₿OND White Paper</li>
-    <li>F. Glossary</li>
-    <li>G. Frequently Asked Questions</li>
-  </ul>
-</div>
-
 </div><!-- end article-body -->
 
 
@@ -4706,21 +4647,41 @@
     window.addEventListener('load', updatePageCounts);
   }
 
-  // Print full version (everything)
   window.printFull = function() {
     window.print();
   };
 
-  // Print without appendix (direct DOM hide/show)
   window.printNoAppendix = function() {
     var appendix = document.getElementById('appendix-content');
-    var notice = document.querySelector('.no-appendix-notice');
+    var articleBody = document.querySelector('.article-body');
 
-    // Hide appendix, show notice
+    // Hide appendix
     if (appendix) appendix.style.display = 'none';
-    if (notice) notice.style.display = 'block';
 
-    // Wait for DOM to render, then print
+    // Build notice page dynamically with all styles inline
+    var notice = document.createElement('div');
+    notice.id = 'print-notice-temp';
+    notice.innerHTML =
+      '<div style="page-break-before:always; padding:80px 0 40px; max-width:780px; color:#111; font-family:Georgia,serif;">' +
+        '<h2 style="font-size:1.4rem; font-weight:700; color:#111; margin-bottom:24px;">Appendix Not Included</h2>' +
+        '<p style="font-size:11pt; line-height:1.7; color:#222; margin-bottom:12px;">This copy has been printed without the Appendix. The complete Appendix, including the following items, can be found at:</p>' +
+        '<p style="font-family:monospace; font-size:10pt; color:#444; margin-top:20px; margin-bottom:24px;">btcadp.org/bitcoin-bridge.html</p>' +
+        '<p style="font-size:11pt; line-height:1.7; color:#222; margin-bottom:16px;"><strong>Appendix items not included in this print:</strong></p>' +
+        '<ul style="list-style:none; padding:0; margin:16px 0;">' +
+          '<li style="font-size:11pt; line-height:1.8; color:#222; padding-left:16px;">A. The Founding Thesis</li>' +
+          '<li style="font-size:11pt; line-height:1.8; color:#222; padding-left:16px;">B. BTCADP Specification (Summary)</li>' +
+          '<li style="font-size:11pt; line-height:1.8; color:#222; padding-left:16px;">C. \u20BFC White Paper</li>' +
+          '<li style="font-size:11pt; line-height:1.8; color:#222; padding-left:16px;">D. \u20BFUSD White Paper</li>' +
+          '<li style="font-size:11pt; line-height:1.8; color:#222; padding-left:16px;">E. \u20BFOND White Paper</li>' +
+          '<li style="font-size:11pt; line-height:1.8; color:#222; padding-left:16px;">F. Glossary</li>' +
+          '<li style="font-size:11pt; line-height:1.8; color:#222; padding-left:16px;">G. Frequently Asked Questions</li>' +
+        '</ul>' +
+      '</div>';
+
+    // Inject notice at the end of article-body
+    if (articleBody) articleBody.appendChild(notice);
+
+    // Wait for render, then print
     requestAnimationFrame(function() {
       setTimeout(function() {
         window.print();
@@ -4728,13 +4689,13 @@
         // Restore after print
         var restore = function() {
           if (appendix) appendix.style.display = '';
-          if (notice) notice.style.display = '';
+          var temp = document.getElementById('print-notice-temp');
+          if (temp) temp.parentNode.removeChild(temp);
           window.removeEventListener('afterprint', restore);
         };
         window.addEventListener('afterprint', restore);
-        // Fallback restore
         setTimeout(restore, 5000);
-      }, 100);
+      }, 200);
     });
   };
 })();
