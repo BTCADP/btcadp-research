@@ -124,13 +124,14 @@
     text-transform: uppercase;
   }
 
-  /* Page count in pills */
+  /* Page count inside pills */
   .page-est {
-    display: inline-block;
-    font-size: 0.6rem;
+    display: block;
+    font-size: 0.58rem;
     color: var(--text-muted);
-    margin-left: 6px;
+    margin-top: 4px;
     opacity: 0.7;
+    letter-spacing: 0.08em;
   }
 
   /* No-appendix print notice (hidden on screen) */
@@ -584,8 +585,8 @@
   <p class="subtitle">A Roadmap for Onboarding the World to Sound Money</p>
   <div class="meta">btcadp.org &bull; 2026 &bull; CC BY-NC-ND</div>
   <div class="download-bar">
-    <button class="btn-primary" onclick="printFull()">Print Full Version <span class="page-est" id="full-pages"></span></button>
-    <button class="btn-secondary" onclick="printNoAppendix()">Print Without Appendix <span class="page-est" id="short-pages"></span></button>
+    <button class="btn-primary" onclick="printFull()">Print Full Version<br><span class="page-est" id="full-pages"></span></button>
+    <button class="btn-secondary" onclick="printNoAppendix()">Print Without Appendix<br><span class="page-est" id="short-pages"></span></button>
   </div>
 </div>
 
@@ -594,7 +595,7 @@
 <!-- ============================================================ -->
 <div class="draft-banner">
   <div class="draft-label">Draft Copy</div>
-  <div class="draft-version">Version 29.1</div>
+  <div class="draft-version">Version 29.4</div>
 </div>
 
 <!-- ============================================================ -->
@@ -4553,23 +4554,6 @@
 
 </div><!-- end appendix-content -->
 
-<!-- NO-APPENDIX PRINT NOTICE (hidden on screen, shown only during no-appendix print) -->
-<div class="no-appendix-notice">
-  <h2>Appendix Not Included</h2>
-  <p>This copy has been printed without the Appendix. The complete Appendix, including the following items, can be found at:</p>
-  <p class="notice-url">btcadp.org/bitcoin-bridge.html</p>
-  <p style="margin-top:24px;"><strong>Appendix items not included in this print:</strong></p>
-  <ul>
-    <li>A. The Founding Thesis</li>
-    <li>B. BTCADP Specification (Summary)</li>
-    <li>C. ₿C White Paper</li>
-    <li>D. ₿USD White Paper</li>
-    <li>E. ₿OND White Paper</li>
-    <li>F. Glossary</li>
-    <li>G. Frequently Asked Questions</li>
-  </ul>
-</div>
-
 
 <!-- ============================================================ -->
 <!-- ENDNOTES AND BIBLIOGRAPHY -->
@@ -4666,6 +4650,23 @@
 
 
 
+<!-- NO-APPENDIX PRINT NOTICE (hidden on screen, shown only during no-appendix print) -->
+<div class="no-appendix-notice">
+  <h2>Appendix Not Included</h2>
+  <p>This copy has been printed without the Appendix. The complete Appendix, including the following items, can be found at:</p>
+  <p class="notice-url">btcadp.org/bitcoin-bridge.html</p>
+  <p style="margin-top:24px;"><strong>Appendix items not included in this print:</strong></p>
+  <ul>
+    <li>A. The Founding Thesis</li>
+    <li>B. BTCADP Specification (Summary)</li>
+    <li>C. ₿C White Paper</li>
+    <li>D. ₿USD White Paper</li>
+    <li>E. ₿OND White Paper</li>
+    <li>F. Glossary</li>
+    <li>G. Frequently Asked Questions</li>
+  </ul>
+</div>
+
 </div><!-- end article-body -->
 
 
@@ -4700,8 +4701,8 @@
   function updatePageCounts() {
     var fullEl = document.getElementById('full-pages');
     var shortEl = document.getElementById('short-pages');
-    if (fullEl) fullEl.textContent = '(~' + estimatePages(false) + ' pages)';
-    if (shortEl) shortEl.textContent = '(~' + estimatePages(true) + ' pages)';
+    if (fullEl) fullEl.textContent = '~' + estimatePages(false) + ' pages';
+    if (shortEl) shortEl.textContent = '~' + estimatePages(true) + ' pages';
   }
 
   // Update counts after page loads
@@ -4720,17 +4721,22 @@
   // Print without appendix
   window.printNoAppendix = function() {
     document.body.classList.add('print-no-appendix');
-    window.print();
-    // Clean up after print dialog closes
-    var cleanup = function() {
-      document.body.classList.remove('print-no-appendix');
-      window.removeEventListener('afterprint', cleanup);
-    };
-    window.addEventListener('afterprint', cleanup);
-    // Fallback cleanup after 2 seconds for browsers that don't fire afterprint
-    setTimeout(function() {
-      document.body.classList.remove('print-no-appendix');
-    }, 2000);
+    // Wait for browser to render the class change before triggering print
+    requestAnimationFrame(function() {
+      setTimeout(function() {
+        window.print();
+        // Clean up after print dialog closes
+        var cleanup = function() {
+          document.body.classList.remove('print-no-appendix');
+          window.removeEventListener('afterprint', cleanup);
+        };
+        window.addEventListener('afterprint', cleanup);
+        // Fallback cleanup after 5 seconds for browsers that don't fire afterprint
+        setTimeout(function() {
+          document.body.classList.remove('print-no-appendix');
+        }, 5000);
+      }, 100);
+    });
   };
 })();
 </script>
