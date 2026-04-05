@@ -97,6 +97,47 @@
     color: var(--text-muted);
   }
 
+  /* Draft Banner */
+  .draft-banner {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 48px 24px 0;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+  .draft-banner .draft-label {
+    font-family: var(--font-display);
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--orange);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .draft-banner .draft-version {
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  /* Page count in pills */
+  .page-est {
+    display: inline-block;
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    margin-left: 6px;
+    opacity: 0.7;
+  }
+
+  /* No-appendix print notice (hidden on screen) */
+  .no-appendix-notice {
+    display: none;
+  }
+
   /* Dedication */
   .dedication-block {
     max-width: 600px;
@@ -469,7 +510,7 @@
   @media print {
     body { background: #fff; color: #111; font-size: 11pt; }
     nav, body::before, .download-bar { display: none; }
-    .title-block, .toc, .article-body, .dedication-block { max-width: 100%; padding-left: 0; padding-right: 0; }
+    .title-block, .toc, .article-body, .dedication-block, .draft-banner { max-width: 100%; padding-left: 0; padding-right: 0; }
     .callout { border: 1px solid #ccc; background: #f9f9f9; }
     .part-header { border-top-color: #111; }
     h2, h3, .contrast-title { color: #111; }
@@ -477,6 +518,48 @@
     a { color: #111; }
     .dedication-block p { color: #222; }
     .dedication-block p:first-of-type { color: #000; }
+    .draft-banner .draft-label { color: #111; }
+    .draft-banner .draft-version { color: #444; }
+
+    /* No-appendix print mode */
+    body.print-no-appendix .appendix-content { display: none !important; }
+    body.print-no-appendix .no-appendix-notice {
+      display: block !important;
+      max-width: 100%;
+      padding: 80px 0 40px;
+      page-break-before: always;
+      color: #111;
+    }
+    body.print-no-appendix .no-appendix-notice h2 {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 24px;
+    }
+    body.print-no-appendix .no-appendix-notice p {
+      font-size: 11pt;
+      line-height: 1.7;
+      color: #222;
+      margin-bottom: 12px;
+    }
+    body.print-no-appendix .no-appendix-notice ul {
+      list-style: none;
+      padding: 0;
+      margin: 16px 0;
+    }
+    body.print-no-appendix .no-appendix-notice ul li {
+      font-size: 11pt;
+      line-height: 1.8;
+      color: #222;
+      padding-left: 16px;
+    }
+    body.print-no-appendix .no-appendix-notice .notice-url {
+      font-family: var(--font-mono);
+      font-size: 10pt;
+      color: #444;
+      margin-top: 20px;
+    }
   }
 </style>
 </head>
@@ -488,7 +571,7 @@
     <li><a href="index.html">Home</a></li>
     <li><a href="btcc.html">₿C</a></li>
     <li><a href="currency-layer.html">Currency Layer</a></li>
-    <li><a href="knowledge-base.html" class="active">Knowledge Base</a></li>
+    <li><a href="knowledge-base.html">Knowledge Base</a></li>
   </ul>
 </nav>
 
@@ -501,9 +584,17 @@
   <p class="subtitle">A Roadmap for Onboarding the World to Sound Money</p>
   <div class="meta">btcadp.org &bull; 2026 &bull; CC BY-NC-ND</div>
   <div class="download-bar">
-    <button class="btn-primary" onclick="window.print()">Print / Save as PDF</button>
-    <a href="knowledge-base.html" class="btn-secondary">&larr; Knowledge Base</a>
+    <button class="btn-primary" onclick="printFull()">Print Full Version <span class="page-est" id="full-pages"></span></button>
+    <button class="btn-secondary" onclick="printNoAppendix()">Print Without Appendix <span class="page-est" id="short-pages"></span></button>
   </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- DRAFT NOTICE -->
+<!-- ============================================================ -->
+<div class="draft-banner">
+  <div class="draft-label">Draft Copy</div>
+  <div class="draft-version">Version 28</div>
 </div>
 
 <!-- ============================================================ -->
@@ -3442,6 +3533,7 @@
 <!-- APPENDICES -->
 <!-- ============================================================ -->
 
+<div class="appendix-content">
 <div class="part-header" style="margin-top:120px;">
   <div class="part-label">Appendices</div>
   <div class="part-title">Founding Thesis, White Papers, Glossary, and Reference</div>
@@ -4461,6 +4553,25 @@
 
 <hr class="section-break">
 
+</div><!-- end appendix-content -->
+
+<!-- NO-APPENDIX PRINT NOTICE (hidden on screen, shown only during no-appendix print) -->
+<div class="no-appendix-notice">
+  <h2>Appendix Not Included</h2>
+  <p>This copy has been printed without the Appendix. The complete Appendix, including the following items, can be found at:</p>
+  <p class="notice-url">btcadp.org/bitcoin-bridge.html</p>
+  <p style="margin-top:24px;"><strong>Appendix items not included in this print:</strong></p>
+  <ul>
+    <li>A. The Founding Thesis</li>
+    <li>B. BTCADP Specification (Summary)</li>
+    <li>C. ₿C White Paper</li>
+    <li>D. ₿USD White Paper</li>
+    <li>E. ₿OND White Paper</li>
+    <li>F. Glossary</li>
+    <li>G. Frequently Asked Questions</li>
+  </ul>
+</div>
+
 
 <!-- ============================================================ -->
 <!-- ENDNOTES AND BIBLIOGRAPHY -->
@@ -4570,6 +4681,61 @@
   </p>
   <p style="margin-top:8px;">CC BY-NC-ND &bull; btcadp.org &bull; 2026</p>
 </footer>
+
+<script>
+(function() {
+  // Estimate page counts based on content height
+  // Standard US Letter at 96 DPI print ≈ 900px usable height per page
+  var PX_PER_PAGE = 900;
+
+  function estimatePages(excludeAppendix) {
+    var totalHeight = document.body.scrollHeight;
+    if (excludeAppendix) {
+      var appContent = document.querySelector('.appendix-content');
+      if (appContent) totalHeight -= appContent.offsetHeight;
+      // Add ~1 page for the notice
+      totalHeight += PX_PER_PAGE;
+    }
+    return Math.round(totalHeight / PX_PER_PAGE);
+  }
+
+  function updatePageCounts() {
+    var fullEl = document.getElementById('full-pages');
+    var shortEl = document.getElementById('short-pages');
+    if (fullEl) fullEl.textContent = '(~' + estimatePages(false) + ' pages)';
+    if (shortEl) shortEl.textContent = '(~' + estimatePages(true) + ' pages)';
+  }
+
+  // Update counts after page loads
+  if (document.readyState === 'complete') {
+    updatePageCounts();
+  } else {
+    window.addEventListener('load', updatePageCounts);
+  }
+
+  // Print full version
+  window.printFull = function() {
+    document.body.classList.remove('print-no-appendix');
+    window.print();
+  };
+
+  // Print without appendix
+  window.printNoAppendix = function() {
+    document.body.classList.add('print-no-appendix');
+    window.print();
+    // Clean up after print dialog closes
+    var cleanup = function() {
+      document.body.classList.remove('print-no-appendix');
+      window.removeEventListener('afterprint', cleanup);
+    };
+    window.addEventListener('afterprint', cleanup);
+    // Fallback cleanup after 2 seconds for browsers that don't fire afterprint
+    setTimeout(function() {
+      document.body.classList.remove('print-no-appendix');
+    }, 2000);
+  };
+})();
+</script>
 
 </body>
 </html>
