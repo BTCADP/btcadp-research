@@ -4653,10 +4653,10 @@
 
   window.printNoAppendix = function() {
     var appendix = document.getElementById('appendix-content');
-    var articleBody = document.querySelector('.article-body');
+    if (!appendix) { window.print(); return; }
 
     // Hide appendix
-    if (appendix) appendix.style.display = 'none';
+    appendix.style.display = 'none';
 
     // Build notice page dynamically with all styles inline
     var notice = document.createElement('div');
@@ -4678,8 +4678,8 @@
         '</ul>' +
       '</div>';
 
-    // Inject notice at the end of article-body
-    if (articleBody) articleBody.appendChild(notice);
+    // Append notice to the SAME parent as the appendix (the main article-body)
+    appendix.parentNode.appendChild(notice);
 
     // Wait for render, then print
     requestAnimationFrame(function() {
