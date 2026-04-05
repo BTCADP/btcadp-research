@@ -522,40 +522,38 @@
     .draft-banner .draft-label { color: #111; }
     .draft-banner .draft-version { color: #444; }
 
-    /* No-appendix print mode */
-    body.print-no-appendix .appendix-content { display: none !important; }
-    body.print-no-appendix .no-appendix-notice {
-      display: block !important;
+    /* No-appendix print notice styling */
+    .no-appendix-notice {
       max-width: 100%;
       padding: 80px 0 40px;
       page-break-before: always;
       color: #111;
     }
-    body.print-no-appendix .no-appendix-notice h2 {
+    .no-appendix-notice h2 {
       font-family: var(--font-display);
       font-size: 1.4rem;
       font-weight: 700;
       color: #111;
       margin-bottom: 24px;
     }
-    body.print-no-appendix .no-appendix-notice p {
+    .no-appendix-notice p {
       font-size: 11pt;
       line-height: 1.7;
       color: #222;
       margin-bottom: 12px;
     }
-    body.print-no-appendix .no-appendix-notice ul {
+    .no-appendix-notice ul {
       list-style: none;
       padding: 0;
       margin: 16px 0;
     }
-    body.print-no-appendix .no-appendix-notice ul li {
+    .no-appendix-notice ul li {
       font-size: 11pt;
       line-height: 1.8;
       color: #222;
       padding-left: 16px;
     }
-    body.print-no-appendix .no-appendix-notice .notice-url {
+    .no-appendix-notice .notice-url {
       font-family: var(--font-mono);
       font-size: 10pt;
       color: #444;
@@ -3532,7 +3530,7 @@
 <!-- APPENDICES -->
 <!-- ============================================================ -->
 
-<div class="appendix-content">
+<div class="appendix-content" id="appendix-content">
 <div class="part-header" style="margin-top:120px;">
   <div class="part-label">Appendices</div>
   <div class="part-title">Founding Thesis, White Papers, Glossary, and Reference</div>
@@ -4683,16 +4681,13 @@
 
 <script>
 (function() {
-  // Estimate page counts based on content height
-  // Standard US Letter at 96 DPI print ≈ 900px usable height per page
   var PX_PER_PAGE = 900;
 
   function estimatePages(excludeAppendix) {
     var totalHeight = document.body.scrollHeight;
     if (excludeAppendix) {
-      var appContent = document.querySelector('.appendix-content');
+      var appContent = document.getElementById('appendix-content');
       if (appContent) totalHeight -= appContent.offsetHeight;
-      // Add ~1 page for the notice
       totalHeight += PX_PER_PAGE;
     }
     return Math.round(totalHeight / PX_PER_PAGE);
@@ -4705,36 +4700,40 @@
     if (shortEl) shortEl.textContent = '~' + estimatePages(true) + ' pages';
   }
 
-  // Update counts after page loads
   if (document.readyState === 'complete') {
     updatePageCounts();
   } else {
     window.addEventListener('load', updatePageCounts);
   }
 
-  // Print full version
+  // Print full version (everything)
   window.printFull = function() {
-    document.body.classList.remove('print-no-appendix');
     window.print();
   };
 
-  // Print without appendix
+  // Print without appendix (direct DOM hide/show)
   window.printNoAppendix = function() {
-    document.body.classList.add('print-no-appendix');
-    // Wait for browser to render the class change before triggering print
+    var appendix = document.getElementById('appendix-content');
+    var notice = document.querySelector('.no-appendix-notice');
+
+    // Hide appendix, show notice
+    if (appendix) appendix.style.display = 'none';
+    if (notice) notice.style.display = 'block';
+
+    // Wait for DOM to render, then print
     requestAnimationFrame(function() {
       setTimeout(function() {
         window.print();
-        // Clean up after print dialog closes
-        var cleanup = function() {
-          document.body.classList.remove('print-no-appendix');
-          window.removeEventListener('afterprint', cleanup);
+
+        // Restore after print
+        var restore = function() {
+          if (appendix) appendix.style.display = '';
+          if (notice) notice.style.display = '';
+          window.removeEventListener('afterprint', restore);
         };
-        window.addEventListener('afterprint', cleanup);
-        // Fallback cleanup after 5 seconds for browsers that don't fire afterprint
-        setTimeout(function() {
-          document.body.classList.remove('print-no-appendix');
-        }, 5000);
+        window.addEventListener('afterprint', restore);
+        // Fallback restore
+        setTimeout(restore, 5000);
       }, 100);
     });
   };
