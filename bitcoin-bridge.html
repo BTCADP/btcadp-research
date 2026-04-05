@@ -541,8 +541,8 @@
   <p class="subtitle">A Roadmap for Onboarding the World to Sound Money</p>
   <div class="meta">btcadp.org &bull; 2026 &bull; CC BY-NC-ND</div>
   <div class="download-bar">
-    <button class="btn-primary" onclick="printFull()">Print Full Version<br><span class="page-est" id="full-pages"></span></button>
-    <button class="btn-secondary" onclick="printNoAppendix()">Print Without Appendix<br><span class="page-est" id="short-pages"></span></button>
+    <button class="btn-primary" onclick="printFull()">Print Full Version<br><span class="page-est">150 pages</span></button>
+    <button class="btn-secondary" onclick="printNoAppendix()">Print Without Appendix<br><span class="page-est">109 pages</span></button>
   </div>
 </div>
 
@@ -4623,31 +4623,6 @@
 
 <script>
 (function() {
-  var PX_PER_PAGE = 900;
-
-  function estimatePages(excludeAppendix) {
-    var totalHeight = document.body.scrollHeight;
-    if (excludeAppendix) {
-      var appContent = document.getElementById('appendix-content');
-      if (appContent) totalHeight -= appContent.offsetHeight;
-      totalHeight += PX_PER_PAGE;
-    }
-    return Math.round(totalHeight / PX_PER_PAGE);
-  }
-
-  function updatePageCounts() {
-    var fullEl = document.getElementById('full-pages');
-    var shortEl = document.getElementById('short-pages');
-    if (fullEl) fullEl.textContent = '~' + estimatePages(false) + ' pages';
-    if (shortEl) shortEl.textContent = '~' + estimatePages(true) + ' pages';
-  }
-
-  if (document.readyState === 'complete') {
-    updatePageCounts();
-  } else {
-    window.addEventListener('load', updatePageCounts);
-  }
-
   window.printFull = function() {
     window.print();
   };
@@ -4656,10 +4631,8 @@
     var appendix = document.getElementById('appendix-content');
     if (!appendix) { window.print(); return; }
 
-    // Hide appendix
     appendix.style.display = 'none';
 
-    // Build notice page dynamically with all styles inline
     var notice = document.createElement('div');
     notice.id = 'print-notice-temp';
     notice.innerHTML =
@@ -4679,15 +4652,12 @@
         '</ul>' +
       '</div>';
 
-    // Append notice to the SAME parent as the appendix (the main article-body)
     appendix.parentNode.appendChild(notice);
 
-    // Wait for render, then print
     requestAnimationFrame(function() {
       setTimeout(function() {
         window.print();
 
-        // Restore after print
         var restore = function() {
           if (appendix) appendix.style.display = '';
           var temp = document.getElementById('print-notice-temp');
