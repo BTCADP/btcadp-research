@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BTCADP Live — Bitcoin Average Daily Price</title>
+<title>BTCADP Live | Bitcoin Average Daily Price</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
 <style>
@@ -370,12 +370,12 @@
   <header>
     <div class="header-label">Live Feed &bull; Indicative Pricing</div>
     <h1><span class="accent">BTCADP</span> Live</h1>
-    <p class="subtitle">Real-time indicative Bitcoin price computed from multiple exchange feeds using the BTCADP trimmed mean methodology. This is not the official daily BTCADP — that is computed once per day at 00:00 UTC from a full 24-hour data set.</p>
+    <p class="subtitle">Real-time indicative Bitcoin price computed from multiple exchange feeds using the BTCADP trimmed mean methodology. This is not the official daily BTCADP , that is computed once per day at 00:00 UTC from a full 24-hour data set.</p>
   </header>
 
   <section class="indicative-section">
     <div class="indicative-label">Indicative BTCADP</div>
-    <div class="indicative-price" id="indicativePrice">—</div>
+    <div class="indicative-price" id="indicativePrice">,</div>
     <div class="indicative-method">
       Method: <span class="method-name" id="methodName">Waiting for data...</span>
     </div>
@@ -387,25 +387,25 @@
     <div class="exchange-grid" id="exchangeGrid">
       <div class="exchange-card" id="card-Coinbase">
         <div class="card-header"><span class="ex-name">Coinbase</span><span class="ex-status" id="status-Coinbase"></span></div>
-        <div class="ex-price" id="price-Coinbase">—</div>
+        <div class="ex-price" id="price-Coinbase">,</div>
         <div class="ex-meta" id="meta-Coinbase">Connecting...</div>
         <div class="ex-trades" id="trades-Coinbase"></div>
       </div>
       <div class="exchange-card" id="card-Kraken">
         <div class="card-header"><span class="ex-name">Kraken</span><span class="ex-status" id="status-Kraken"></span></div>
-        <div class="ex-price" id="price-Kraken">—</div>
+        <div class="ex-price" id="price-Kraken">,</div>
         <div class="ex-meta" id="meta-Kraken">Connecting...</div>
         <div class="ex-trades" id="trades-Kraken"></div>
       </div>
       <div class="exchange-card" id="card-Bitstamp">
         <div class="card-header"><span class="ex-name">Bitstamp</span><span class="ex-status" id="status-Bitstamp"></span></div>
-        <div class="ex-price" id="price-Bitstamp">—</div>
+        <div class="ex-price" id="price-Bitstamp">,</div>
         <div class="ex-meta" id="meta-Bitstamp">Connecting...</div>
         <div class="ex-trades" id="trades-Bitstamp"></div>
       </div>
       <div class="exchange-card" id="card-Bitfinex">
         <div class="card-header"><span class="ex-name">Bitfinex</span><span class="ex-status" id="status-Bitfinex"></span></div>
-        <div class="ex-price" id="price-Bitfinex">—</div>
+        <div class="ex-price" id="price-Bitfinex">,</div>
         <div class="ex-meta" id="meta-Bitfinex">Connecting...</div>
         <div class="ex-trades" id="trades-Bitfinex"></div>
       </div>
@@ -417,7 +417,7 @@
     <div class="method-grid">
       <div class="method-card">
         <h3>Live Feeds</h3>
-        <p>Your browser connects directly to exchange WebSocket APIs. No intermediary server processes the data — you see exactly what each exchange reports in real-time.</p>
+        <p>Your browser connects directly to exchange WebSocket APIs. No intermediary server processes the data , you see exactly what each exchange reports in real-time.</p>
       </div>
       <div class="method-card">
         <h3>Computation</h3>
@@ -488,13 +488,13 @@ function setExchangeConnected(name, connected) {
     status.classList.add('on');
     card.classList.add('connected');
     card.classList.remove('disconnected');
-    document.getElementById('meta-' + name).textContent = 'Connected — waiting for data...';
+    document.getElementById('meta-' + name).textContent = 'Connected , waiting for data...';
     addLog(`<span class="log-exchange">${name}</span> connected`);
   } else {
     status.classList.remove('on');
     card.classList.remove('connected');
     card.classList.add('disconnected');
-    document.getElementById('meta-' + name).textContent = 'Disconnected — reconnecting...';
+    document.getElementById('meta-' + name).textContent = 'Disconnected , reconnecting...';
     addLog(`<span class="log-exchange">${name}</span> disconnected`);
   }
   updateGlobalStatus();

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>₿OND Calculator — BTCADP</title>
+<title>₿OND Calculator | BTCADP</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
 <style>
@@ -314,7 +314,7 @@ footer a:hover { color: var(--orange); }
   </div>
   <div class="app-body">
 
-    <p style="font-size:12px;color:var(--text-secondary);line-height:1.7;margin-bottom:20px;">Pick a return target. The bond matures when both conditions are met — no fixed date.</p>
+    <p style="font-size:12px;color:var(--text-secondary);line-height:1.7;margin-bottom:20px;">Pick a return target. The bond matures when both conditions are met , no fixed date.</p>
 
     <div class="form-row">
       <div class="field" style="flex:1;min-width:140px;">
@@ -352,7 +352,7 @@ footer a:hover { color: var(--orange); }
     <!-- Live estimate panel -->
     <div class="estimate-panel" id="estimate-panel">
       <div class="estimate-label">Estimated term</div>
-      <div class="estimate-value" id="estimate-value">—</div>
+      <div class="estimate-value" id="estimate-value">,</div>
       <div class="estimate-sub" id="estimate-sub">Select a date to see historical estimate</div>
     </div>
 
@@ -364,14 +364,14 @@ footer a:hover { color: var(--orange); }
     <!-- Dual condition progress -->
     <div class="progress-wrap">
       <div class="progress-label">
-        <span>Condition 1 &mdash; Saver return</span>
+        <span>Condition 1 , Saver return</span>
         <span class="pval" id="p-saver-val">0%</span>
       </div>
       <div class="progress-bar"><div class="progress-fill saver" id="p-saver-bar" style="width:0%"></div></div>
     </div>
     <div class="progress-wrap">
       <div class="progress-label">
-        <span>Condition 2 &mdash; Issuer coverage</span>
+        <span>Condition 2 , Issuer coverage</span>
         <span class="pval" id="p-treasury-val">0.00</span>
       </div>
       <div class="progress-bar"><div class="progress-fill treasury" id="p-treasury-bar" style="width:0%"></div></div>
@@ -382,36 +382,36 @@ footer a:hover { color: var(--orange); }
 
     <!-- Consumer metrics -->
     <div class="metrics-grid" style="grid-template-columns:repeat(3,1fr);">
-      <div class="m-cell"><div class="m-label">USD deposited</div><div class="m-value orange" id="s-usd-paid">—</div></div>
-      <div class="m-cell"><div class="m-label">₿C price at purchase</div><div class="m-value active" id="s-buy-price">—</div></div>
-      <div class="m-cell"><div class="m-label">BTC spot at purchase</div><div class="m-value active" id="s-spot-buy">—</div></div>
-      <div class="m-cell"><div class="m-label">Payout at maturity</div><div class="m-value orange" id="s-payout">—</div></div>
-      <div class="m-cell"><div class="m-label">₿C price at maturity</div><div class="m-value active" id="s-mat-price">—</div></div>
-      <div class="m-cell"><div class="m-label">BTC spot at maturity</div><div class="m-value active" id="s-spot-mat">—</div></div>
-      <div class="m-cell"><div class="m-label">Saver return</div><div class="m-value green" id="s-return">—</div></div>
-      <div class="m-cell"><div class="m-label">Days to maturity</div><div class="m-value active" id="s-days">—</div></div>
-      <div class="m-cell"><div class="m-label">Spot/₿C ratio at purchase</div><div class="m-value active" id="s-ratio">—</div></div>
+      <div class="m-cell"><div class="m-label">USD deposited</div><div class="m-value orange" id="s-usd-paid">,</div></div>
+      <div class="m-cell"><div class="m-label">₿C price at purchase</div><div class="m-value active" id="s-buy-price">,</div></div>
+      <div class="m-cell"><div class="m-label">BTC spot at purchase</div><div class="m-value active" id="s-spot-buy">,</div></div>
+      <div class="m-cell"><div class="m-label">Payout at maturity</div><div class="m-value orange" id="s-payout">,</div></div>
+      <div class="m-cell"><div class="m-label">₿C price at maturity</div><div class="m-value active" id="s-mat-price">,</div></div>
+      <div class="m-cell"><div class="m-label">BTC spot at maturity</div><div class="m-value active" id="s-spot-mat">,</div></div>
+      <div class="m-cell"><div class="m-label">Saver return</div><div class="m-value green" id="s-return">,</div></div>
+      <div class="m-cell"><div class="m-label">Days to maturity</div><div class="m-value active" id="s-days">,</div></div>
+      <div class="m-cell"><div class="m-label">Spot/₿C ratio at purchase</div><div class="m-value active" id="s-ratio">,</div></div>
     </div>
 
     <!-- Treasury P&L card -->
     <div class="treasury-card" id="treasury-card">
       <div class="treasury-header">
         <span style="font-size:15px;font-weight:700;color:var(--text-primary);">Issuer position at maturity</span>
-        <span class="tag" id="t-tag">—</span>
+        <span class="tag" id="t-tag">,</span>
       </div>
       <div class="metrics-grid" style="grid-template-columns:repeat(3,1fr);border-radius:0;border:none;">
-        <div class="m-cell"><div class="m-label">BTC bought at issuance</div><div class="m-value active" id="t-btc-bought">—</div></div>
-        <div class="m-cell"><div class="m-label">BTC value at maturity</div><div class="m-value active" id="t-btc-value">—</div></div>
-        <div class="m-cell"><div class="m-label">Obligation (payout)</div><div class="m-value orange" id="t-obligation">—</div></div>
-        <div class="m-cell"><div class="m-label">Surplus / deficit</div><div class="m-value" id="t-surplus">—</div></div>
-        <div class="m-cell"><div class="m-label">Coverage ratio</div><div class="m-value" id="t-coverage">—</div></div>
-        <div class="m-cell"><div class="m-label">Surplus BTC retained</div><div class="m-value green" id="t-btc-surplus">—</div></div>
+        <div class="m-cell"><div class="m-label">BTC bought at issuance</div><div class="m-value active" id="t-btc-bought">,</div></div>
+        <div class="m-cell"><div class="m-label">BTC value at maturity</div><div class="m-value active" id="t-btc-value">,</div></div>
+        <div class="m-cell"><div class="m-label">Obligation (payout)</div><div class="m-value orange" id="t-obligation">,</div></div>
+        <div class="m-cell"><div class="m-label">Surplus / deficit</div><div class="m-value" id="t-surplus">,</div></div>
+        <div class="m-cell"><div class="m-label">Coverage ratio</div><div class="m-value" id="t-coverage">,</div></div>
+        <div class="m-cell"><div class="m-label">Surplus BTC retained</div><div class="m-value green" id="t-btc-surplus">,</div></div>
       </div>
     </div>
 
     </div><!-- /#results-wrap -->
 
-    <div class="status-bar" id="stmsg">Ready — adjust parameters and calculate.</div>
+    <div class="status-bar" id="stmsg">Ready , adjust parameters and calculate.</div>
 
   </div>
 </div><!-- /.app-shell -->
@@ -425,7 +425,7 @@ footer a:hover { color: var(--orange); }
     <a href="specification.html">BTCADP Specification</a> &nbsp;·&nbsp;
     <a href="https://github.com/BTCADP/btcadp-research" target="_blank" rel="noopener">GitHub</a>
   </p>
-  <p style="margin-top:0.8rem;">CC0 Public Domain · btcadp.org · 2026</p>
+  <p style="margin-top:0.8rem;">CC BY-NC-ND · btcadp.org · 2026</p>
 </footer>
 
 <script>
@@ -447,19 +447,19 @@ function getTreasuryMin() {
 }
 
 function fmtUSD(n) {
-  if (n == null || isNaN(n)) return "—";
+  if (n == null || isNaN(n)) return ",";
   if (Math.abs(n) >= 10000) return "$" + Math.round(n).toLocaleString("en-US");
   if (Math.abs(n) >= 100) return "$" + n.toFixed(0);
   return "$" + n.toFixed(2);
 }
 
 function fmtPct(n) {
-  if (n == null || isNaN(n)) return "—";
+  if (n == null || isNaN(n)) return ",";
   return (n >= 0 ? "+" : "") + (n * 100).toFixed(1) + "%";
 }
 
 function fmtBTC(sats) {
-  if (sats == null || isNaN(sats)) return "—";
+  if (sats == null || isNaN(sats)) return ",";
   if (sats >= 100000000) return (sats / 100000000).toFixed(4) + " BTC";
   return Math.round(sats).toLocaleString("en-US") + " sats";
 }
@@ -502,7 +502,7 @@ function updateEstimate() {
 
   const buyIdx = findIdx(dateStr);
   if (buyIdx < 0) {
-    estimateVal.textContent = "—";
+    estimateVal.textContent = ",";
     estimateSub.textContent = "No data for selected date.";
     return;
   }
@@ -549,7 +549,7 @@ function updateEstimate() {
 
   const total = waitDays.length + pending;
   if (total === 0) {
-    estimateVal.textContent = "—";
+    estimateVal.textContent = ",";
     estimateSub.textContent = "Insufficient historical data for this ratio band.";
     return;
   }
@@ -661,7 +661,7 @@ function runCalc() {
     const payout = usd * (1 + matBtccAppreciation);
 
     banner.className = "maturity-banner matured";
-    banner.innerHTML = '<span class="big">MATURED — ' + fmtUSD(payout) + '</span>' +
+    banner.innerHTML = '<span class="big">MATURED , ' + fmtUSD(payout) + '</span>' +
       '<span class="sub">Both conditions met on ' + matDate + ' (' + days + ' days)</span>';
 
     document.getElementById("s-usd-paid").textContent = fmtUSD(usd);
@@ -689,7 +689,7 @@ function runCalc() {
     document.getElementById("t-surplus").style.color = surplus >= 0 ? "var(--green)" : "var(--red)";
     document.getElementById("t-coverage").textContent = coverageRatio.toFixed(2) + "×";
     document.getElementById("t-coverage").style.color = coverageRatio >= 1 ? "var(--green)" : "var(--red)";
-    document.getElementById("t-btc-surplus").textContent = surplus >= 0 ? fmtBTC(Math.round(surplusBtc * 100000000)) : "—";
+    document.getElementById("t-btc-surplus").textContent = surplus >= 0 ? fmtBTC(Math.round(surplusBtc * 100000000)) : ",";
 
     stmsg.textContent = "₿OND matured on " + matDate + " after " + days + " days. Payout: " + fmtUSD(payout) + ".";
   } else {
@@ -707,7 +707,7 @@ function runCalc() {
       reason = "Saver return met. Waiting on issuer coverage (" + currentCoverage.toFixed(2) + "× of " + treasuryMin.toFixed(2) + "×).";
     }
 
-    banner.innerHTML = '<span class="big">PENDING — ' + days + ' days</span>' +
+    banner.innerHTML = '<span class="big">PENDING , ' + days + ' days</span>' +
       '<span class="sub">' + reason + ' Current value: ' + fmtUSD(currentValue) + '</span>';
 
     document.getElementById("s-usd-paid").textContent = fmtUSD(usd);
@@ -736,7 +736,7 @@ function runCalc() {
     document.getElementById("t-surplus").style.color = surplusNow >= 0 ? "var(--green)" : "var(--red)";
     document.getElementById("t-coverage").textContent = coverageNow.toFixed(2) + "×";
     document.getElementById("t-coverage").style.color = coverageNow >= 1 ? "var(--green)" : "var(--red)";
-    document.getElementById("t-btc-surplus").textContent = "—";
+    document.getElementById("t-btc-surplus").textContent = ",";
 
     stmsg.textContent = "Bond has not matured within available data (" + days + " days).";
   }

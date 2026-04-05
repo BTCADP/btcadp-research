@@ -335,7 +335,7 @@
     <h1>₿USD: Treasury-Backed Digital Currency</h1>
     <div class="subtitle">A Bitcoin-Collateralized, Dollar-Pegged Stablecoin &middot; btcadp.org &middot; 2026</div>
     <div class="paper-meta">
-        <span>CC0 Public Domain</span>
+        <span>CC BY-NC-ND</span>
         <span>btcadp.org</span>
         <span>Version 1.0</span>
     </div>
@@ -347,21 +347,23 @@
 
 <div class="paper-body">
 
+    <p style="font-family:var(--font-mono); font-size:0.72rem; color:var(--text-muted); font-style:italic; margin-bottom:1.5rem;">Note: Worked examples in this white paper use illustrative figures ($70,000 BTC spot, $18,000 ₿C) reflecting conditions at the time of initial specification. Current figures are referenced in the main text. The mechanics and ratios are identical at any price level.</p>
+
     <div class="abstract">
         <div class="abstract-label">Abstract</div>
-        <p>₿USD is a dollar-pegged stablecoin—one token equals one dollar—issued by a consortium of publicly traded Bitcoin treasury companies. Unlike existing stablecoins that hold fiat reserves in the form of US Treasury bills and bank deposits, ₿USD is backed entirely by Bitcoin held on the base layer in publicly addressable wallets, verifiable by any observer in real time. The instrument is classified as a Treasury-Backed Digital Currency (TBDC). The term draws a deliberate structural contrast with Central Bank Digital Currencies (CBDCs): where a CBDC is issued by an entity that can expand the money supply, a TBDC is backed by a finite reserve asset that no issuer can create, expand, or dilute. This distinction defines the economic properties of the instrument and the constraints under which its issuers operate. This paper specifies the technical architecture of ₿USD: its issuance mechanism, two-ledger reserve system, sidechain circulation layer, redemption mechanics, defensive programmability framework, fee structure, and risk analysis. The system requires no modification to Bitcoin’s base layer protocol.</p>
+        <p>₿USD is a dollar-pegged stablecoin,one token equals one dollar,issued by a consortium of publicly traded Bitcoin treasury companies. Unlike existing stablecoins that hold fiat reserves in the form of US Treasury bills and bank deposits, ₿USD is backed entirely by Bitcoin held on the base layer in publicly addressable wallets, verifiable by any observer in real time. The instrument is classified as a Treasury-Backed Digital Currency (TBDC). The term draws a deliberate structural contrast with Central Bank Digital Currencies (CBDCs): where a CBDC is issued by an entity that can expand the money supply, a TBDC is backed by a finite reserve asset that no issuer can create, expand, or dilute. This distinction defines the economic properties of the instrument and the constraints under which its issuers operate. This paper specifies the technical architecture of ₿USD: its issuance mechanism, two-ledger reserve system, sidechain circulation layer, redemption mechanics, defensive programmability framework, fee structure, and risk analysis. The system requires no modification to Bitcoin's base layer protocol.</p>
     </div>
 
     <div class="paper-section">
-        <h2><span class="sec-num">2.</span> Motivation and Problem Statement</h2>
-        <p>The stablecoin market has grown to over $317 billion in aggregate supply, expanding at approximately $100 billion per year. These instruments—primarily USDT and USDC—are backed by US Treasury bills and bank deposits. Tether alone holds over $100 billion in sovereign debt. The stablecoin market has become one of the largest purchasers of US government debt on earth.</p>
-        <p>From Bitcoin’s perspective, this represents a structural failure. Every dollar held in a fiat stablecoin is a dollar that did not enter Bitcoin. The payment rails are digital and built on blockchain infrastructure, but the reserve asset is sovereign debt—the monetary system Bitcoin was designed to replace. ARK Invest formalized this observation in November 2025, reducing its 2030 bull-case Bitcoin price target by $300,000, specifically because stablecoins are capturing the emerging-market demand ARK had previously assigned to Bitcoin.</p>
+        <h2><span class="sec-num">3.</span> Motivation and Problem Statement</h2>
+        <p>The stablecoin market has grown to over $317 billion in aggregate supply, expanding at approximately $100 billion per year. These instruments,primarily USDT and USDC,are backed by US Treasury bills and bank deposits. Tether alone holds over $100 billion in sovereign debt. The stablecoin market has become one of the largest purchasers of US government debt on earth.</p>
+        <p>From Bitcoin's perspective, this represents a structural failure. Every dollar held in a fiat stablecoin is a dollar that did not enter Bitcoin. The payment rails are digital and built on blockchain infrastructure, but the reserve asset is sovereign debt,the monetary system Bitcoin was designed to replace. ARK Invest formalized this observation in November 2025, reducing its 2030 bull-case Bitcoin price target by $300,000, specifically because stablecoins are capturing the emerging-market demand ARK had previously assigned to Bitcoin.</p>
         <p>₿USD addresses this gap. When a consumer purchases a ₿USD token, the issuing consortium uses the incoming fiat to purchase Bitcoin at spot. Every unit of ₿USD demand is structurally identical to Bitcoin demand. The two cannot be separated.</p>
         <div class="callout"><p><em>The distinction that matters: ₿USD does not compete with Bitcoin for capital. It converts stablecoin demand into Bitcoin demand.</em></p></div>
     </div>
 
     <div class="paper-section">
-        <h2><span class="sec-num">3.</span> System Architecture Overview</h2>
+        <h2><span class="sec-num">4.</span> System Architecture Overview</h2>
         <p>The ₿USD system is composed of four distinct layers, each performing a single function. The separation is deliberate: each layer is independently verifiable, and the failure of any single layer does not compromise the others.</p>
         <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem;">
   <tr>
@@ -401,36 +403,36 @@
     </div>
 
     <div class="paper-section">
-        <h2><span class="sec-num">4.</span> Issuer Structure: The Consortium Model</h2>
-        <p>₿USD is issued by a consortium of publicly traded Bitcoin treasury companies—firms whose primary business is acquiring and holding Bitcoin as a reserve asset. The consortium model distributes risk across multiple independent entities, each with its own Bitcoin holdings, its own jurisdiction, and its own regulatory compliance.</p>
-        <p>No single consortium member can unilaterally modify the reserve rules, alter the fee structure, or freeze a token. The governance charter codifies reserve management standards, transparency requirements, and operational procedures. The methodology—the BTCADP specification that defines the reference price and denomination—is independent of the consortium. Even a complete governance failure leaves the unit of account intact.</p>
-        <p>Consortium membership requires publicly verifiable Bitcoin holdings at institutional scale, regulatory compliance in the member’s domicile, commitment to on-chain transparency standards, and participation in the Ledger 2 backstop reserve. The distributed structure ensures no single regulatory action in any jurisdiction can shut down the entire system.</p>
+        <h2><span class="sec-num">5.</span> Issuer Structure: The Consortium Model</h2>
+        <p>₿USD is issued by a consortium of publicly traded Bitcoin treasury companies,firms whose primary business is acquiring and holding Bitcoin as a reserve asset. The consortium model distributes risk across multiple independent entities, each with its own Bitcoin holdings, its own jurisdiction, and its own regulatory compliance.</p>
+        <p>No single consortium member can unilaterally modify the reserve rules or alter the fee structure. The distributed structure means no single jurisdiction can freeze the entire system, though individual members may be subject to regulatory action in their jurisdictions. The governance charter codifies reserve management standards, transparency requirements, and operational procedures. The methodology,the BTCADP specification that defines the reference price and denomination,is independent of the consortium. Even a complete governance failure leaves the unit of account intact.</p>
+        <p>Consortium membership requires publicly verifiable Bitcoin holdings at institutional scale, regulatory compliance in the member's domicile, commitment to on-chain transparency standards, and participation in the Ledger 2 backstop reserve. The distributed structure ensures no single regulatory action in any jurisdiction can shut down the entire system.</p>
     </div>
 
     <div class="paper-section">
-        <h2><span class="sec-num">5.</span> The Issuance Mechanism</h2>
-        <p>The issuance process converts fiat demand into Bitcoin demand in a single atomic operation. When a customer sends fiat to a consortium member, the following sequence executes:</p>
-        <p><strong>Step 1.</strong> The customer sends fiat currency (e.g., $18,000) to a consortium member.</p>
+        <h2><span class="sec-num">6.</span> The Issuance Mechanism</h2>
+        <p>The issuance process converts fiat demand into Bitcoin demand in a seamless operation. When fiat enters the system through a participating financial service provider, the following sequence executes:</p>
+        <p><strong>Step 1.</strong> The service provider routes the customer's fiat currency (e.g., $18,000) to a consortium member.</p>
         <p><strong>Step 2.</strong> The consortium member mints ₿USD tokens at a 1:1 dollar ratio (18,000 tokens) and delivers them to the customer on the sidechain.</p>
         <p><strong>Step 3.</strong> The incoming fiat is used to purchase Bitcoin at the current spot price. At $70,000 spot, $18,000 acquires approximately 0.2571 BTC (25,714,286 satoshis).</p>
-        <p><strong>Step 4.</strong> The acquired satoshis are deposited into Ledger 1 (the issuance pool). At the moment of issuance, Ledger 1 holds satoshis worth exactly $18,000 at spot—perfectly backing the 18,000 outstanding tokens at $1 each.</p>
+        <p><strong>Step 4.</strong> The acquired satoshis are deposited into Ledger 1 (the issuance pool). At the moment of issuance, Ledger 1 holds satoshis worth exactly $18,000 at spot,perfectly backing the 18,000 outstanding tokens at $1 each.</p>
         <div class="callout"><p><em>This is the critical structural distinction from fiat stablecoins: every ₿USD token minted requires the treasury company to purchase actual Bitcoin on the open market at the current spot price. There is no synthetic exposure. There is no fractional reserve on the issuance side. 100% of ₿USD demand flows through to BTC spot as buying pressure.</em></p></div>
     </div>
 
     <div class="paper-section">
-        <h2><span class="sec-num">6.</span> The Two-Ledger Reserve System</h2>
+        <h2><span class="sec-num">7.</span> The Two-Ledger Reserve System</h2>
         <p>Each consortium member maintains two Bitcoin ledgers on the base layer. Both hold actual Bitcoin in publicly verifiable wallets. Reserves are not lent, staked, or rehypothecated.</p>
     </div>
 
     <div class="paper-section">
-        <h3>6.1 Ledger 1 — Issuance Pool</h3>
+        <h3>6.1 Ledger 1 , Issuance Pool</h3>
         <p>Ledger 1 holds the satoshis acquired with incoming fiat at the time of ₿USD token issuance. This ledger starts empty and grows as tokens are minted. The satoshis in Ledger 1 are the primary backing for outstanding tokens. In a rising market, the value of Ledger 1 grows faster than the aggregate dollar-denominated liabilities it backs, generating a natural surplus.</p>
     </div>
 
     <div class="paper-section">
-        <h3>6.2 Ledger 2 — Reserve Backstop</h3>
-        <p>Ledger 2 holds Bitcoin drawn from the treasury company’s existing reserves. This ledger serves as the guarantee: if BTC spot declines and the satoshis in Ledger 1 are insufficient to cover ₿USD redemptions at $1.00 per token, the treasury company covers the shortfall from Ledger 2. The size of Ledger 2 determines how far BTC spot can fall before the system faces solvency pressure.</p>
-        <p>Ledger 2 self-fortifies over time. As BTC appreciates above the $1 obligation, surplus from Ledger 1 flows into Ledger 2. The longer ₿USD circulates without redemption, the deeper the backstop becomes—without requiring additional capital commitment from the treasury company.</p>
+        <h3>6.2 Ledger 2 , Reserve Backstop</h3>
+        <p>Ledger 2 holds Bitcoin drawn from the treasury company's existing reserves. This ledger serves as the guarantee: if BTC spot declines and the satoshis in Ledger 1 are insufficient to cover ₿USD redemptions at $1.00 per token, the treasury company covers the shortfall from Ledger 2. The size of Ledger 2 determines how far BTC spot can fall before the system faces solvency pressure.</p>
+        <p>Ledger 2 self-fortifies over time. As BTC appreciates above the $1 obligation, surplus from Ledger 1 flows into Ledger 2. The longer ₿USD circulates without redemption, the deeper the backstop becomes,without requiring additional capital commitment from the treasury company.</p>
     </div>
 
     <div class="paper-section">
@@ -494,29 +496,29 @@
     <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Break-even</td>
   </tr>
 </table>
-        <p>Above the issuance price, every redemption generates profit for the treasury company. Between the issuance price and the ₿C price, Ledger 1 is underfunded but Ledger 2 covers the gap. These reserve dynamics only matter when tokens are redeemed for fiat. Tokens circulating on the sidechain as a medium of exchange exert zero pressure on reserves regardless of where Bitcoin’s spot price stands.</p>
+        <p>Above the issuance price, every redemption generates profit for the treasury company. Between the issuance price and the ₿C price, Ledger 1 is underfunded but Ledger 2 covers the gap. These reserve dynamics only matter when tokens are redeemed for fiat. Tokens circulating on the sidechain as a medium of exchange exert zero pressure on reserves regardless of where Bitcoin's spot price stands.</p>
     </div>
 
     <div class="paper-section">
         <h3>6.4 Accounting and Transparency</h3>
-        <p>The consortium publishes daily transparency reports including: total satoshis in Ledger 1 across all members, total satoshis in Ledger 2 across all members, total ₿USD tokens outstanding, the current ₿C fiat-equivalent price, the current Ledger 1-to-liability ratio, and the combined (Ledger 1 + Ledger 2) to-liability ratio. These reports are derived from on-chain data and are independently verifiable. Surplus recognition, cost-basis tracking (weighted average cost), and cross-ledger transfers are governed by the consortium’s operating agreement and subject to independent audit on a quarterly basis.</p>
+        <p>The consortium publishes daily transparency reports including: total satoshis in Ledger 1 across all members, total satoshis in Ledger 2 across all members, total ₿USD tokens outstanding, the current ₿C fiat-equivalent price, the current Ledger 1-to-liability ratio, and the combined (Ledger 1 + Ledger 2) to-liability ratio. These reports are derived from on-chain data and are independently verifiable. Surplus recognition, cost-basis tracking (weighted average cost), and cross-ledger transfers are governed by the consortium's operating agreement and subject to independent audit on a quarterly basis.</p>
     </div>
 
     <div class="paper-section">
-        <h2><span class="sec-num">7.</span> Circulation: The Sidechain Layer</h2>
-        <p>₿USD tokens circulate as issued assets on the consortium’s purpose-built Bitcoin sidechain. When one user pays another, the token changes hands on the sidechain. No Bitcoin moves.</p>
-        <p>The BTC reserves sit untouched on Bitcoin’s base layer in transparent, on-chain wallets. Bitcoin is only bought or sold at two moments: when a new token is minted (fiat enters, BTC is purchased) and when a token is redeemed for fiat (BTC is sold to return fiat). Everything between minting and redemption is token circulation—peer-to-peer transfers on the sidechain with no interaction with Bitcoin’s base layer and no exposure to spot price volatility.</p>
-        <div class="callout"><p><em>A million ₿USD transactions can occur on the sidechain without a single satoshi moving on Bitcoin’s base layer. The base layer secures the reserves. The sidechain handles commerce.</em></p></div>
+        <h2><span class="sec-num">8.</span> Circulation: The Sidechain Layer</h2>
+        <p>₿USD tokens circulate as issued assets on the consortium's purpose-built Bitcoin sidechain. When one user pays another, the token changes hands on the sidechain. No Bitcoin moves.</p>
+        <p>The BTC reserves sit untouched on Bitcoin's base layer in transparent, on-chain wallets. Bitcoin is only bought or sold at two moments: when a new token is minted (fiat enters, BTC is purchased) and when a token is redeemed for fiat (BTC is sold to return fiat). Everything between minting and redemption is token circulation,peer-to-peer transfers on the sidechain with no interaction with Bitcoin's base layer and no exposure to spot price volatility.</p>
+        <div class="callout"><p><em>A million ₿USD transactions can occur on the sidechain without a single satoshi moving on Bitcoin's base layer. The base layer secures the reserves. The sidechain handles commerce.</em></p></div>
     </div>
 
     <div class="paper-section">
-        <h2><span class="sec-num">8.</span> Redemption Mechanics</h2>
-        <p>When a customer redeems a ₿USD token, the treasury company returns $1.00 per token. The Bitcoin backing that token in Ledger 1 is sold to fund the redemption. The token is burned. If Bitcoin’s spot price has risen since issuance, the Ledger 1 position is in surplus—the surplus remains in the consortium’s holdings. If spot has fallen, Ledger 1 may be insufficient, and Ledger 2 covers the shortfall. The customer always receives $1.00 per token.</p>
+        <h2><span class="sec-num">9.</span> Redemption Mechanics</h2>
+        <p>When a customer redeems a ₿USD token, the treasury company returns $1.00 per token. The Bitcoin backing that token in Ledger 1 is sold to fund the redemption. The token is burned. If Bitcoin's spot price has risen since issuance, the Ledger 1 position is in surplus,the surplus remains in the consortium's holdings. If spot has fallen, Ledger 1 may be insufficient, and Ledger 2 covers the shortfall. The customer always receives $1.00 per token.</p>
     </div>
 
     <div class="paper-section">
         <h3>8.1 BTC-Default Redemption</h3>
-        <p>In the default redemption path, the consortium transfers Bitcoin at spot value directly to the redeemer’s wallet. No market order is placed. No slippage occurs. The spot price is unaffected by the redemption. This single design choice eliminates the most dangerous attack vector—forced selling. Fiat redemption remains available as a premium service with slower processing, higher fees, and velocity limits.</p>
+        <p>In the default redemption path, the consortium transfers Bitcoin at spot value directly to the redeemer's wallet. No market order is placed by the consortium. No slippage occurs. The spot price is unaffected by the redemption. This single design choice eliminates the most dangerous attack vector,forced selling. Fiat redemption remains available as a premium service with slower processing, higher fees, and velocity limits.</p>
     </div>
 
     <div class="paper-section">
@@ -525,13 +527,13 @@
     </div>
 
     <div class="paper-section">
-        <h2><span class="sec-num">9.</span> Redemption Economics and Surplus Dynamics</h2>
-        <p>The economic engine of the ₿USD model is the structural divergence between a moving asset and a fixed liability. The satoshis in Ledger 1 appreciate at the BTC spot rate. The dollar-denominated liabilities they back are fixed at $1.00 per token—they do not move at all. As BTC spot rises, the gap between asset value and liability value does not grow linearly. It widens at an accelerating rate, because the asset side tracks a rising spot price while the liability side is permanently fixed.</p>
+        <h2><span class="sec-num">10.</span> Redemption Economics and Surplus Dynamics</h2>
+        <p>The economic engine of the ₿USD model is the structural divergence between a moving asset and a fixed liability. The satoshis in Ledger 1 appreciate at the BTC spot rate. The dollar-denominated liabilities they back are fixed at $1.00 per token,they do not move at all. As BTC spot rises, the gap between asset value and liability value does not grow linearly. It widens at an accelerating rate, because the asset side tracks a rising spot price while the liability side is permanently fixed.</p>
     </div>
 
     <div class="paper-section">
         <h3>9.1 The Surplus Engine</h3>
-        <p>Consider a concrete example. A treasury company issues $18 million in ₿USD tokens (18 million tokens at $1 each) when BTC spot is $70,000. The consortium deposits approximately 257.14 BTC into Ledger 1. The redemption liability is $18 million—fixed regardless of what Bitcoin does next.</p>
+        <p>Consider a concrete example. A treasury company issues $18 million in ₿USD tokens (18 million tokens at $1 each) when BTC spot is $70,000. The consortium deposits approximately 257.14 BTC into Ledger 1. The redemption liability is $18 million,fixed regardless of what Bitcoin does next.</p>
         <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem;">
   <tr>
     <th style="padding:10px 14px;border-bottom:2px solid var(--border);color:var(--orange);font-family:var(--sans);font-size:0.85rem;font-weight:600;letter-spacing:0.05em;text-align:left;"><strong>BTC Spot</strong> Value**</th>
@@ -559,7 +561,7 @@
     <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$36,000,000</td>
     <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$18,000,000</td>
     <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$18,000,000</td>
-    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">+100% —</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">+100% ,</td>
   </tr>
   <tr>
     <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">$200,000 holding</td>
@@ -583,56 +585,56 @@
     <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">+614% above</td>
   </tr>
 </table>
-        <p>The profit accelerates because the denominator—the $1 liability—is permanently fixed while the numerator—the BTC asset value—compounds with spot. The ₿USD model converts a linear BTC holding into what is effectively a leveraged position on Bitcoin’s upside, without borrowing, without margin, and without any risk beyond what the company has already accepted by being a Bitcoin treasury company.</p>
+        <p>The profit accelerates because the denominator,the $1 liability,is permanently fixed while the numerator,the BTC asset value,compounds with spot. The ₿USD model converts a linear BTC holding into what is effectively a leveraged position on Bitcoin's upside, without borrowing, without margin, and without any risk beyond what the company has already accepted by being a Bitcoin treasury company.</p>
     </div>
 
     <div class="paper-section">
         <h3>9.2 Compounding Through Surplus Accumulation</h3>
-        <p>The surplus dynamics above describe a single issuance cohort. In practice, the treasury company is continuously issuing and redeeming ₿USD tokens. Each profitable redemption leaves surplus satoshis in Ledger 1. Those surplus satoshis are not withdrawn—they remain in the pool, appreciating at spot alongside all other satoshis. New issuances add more satoshis. In a sustained rising market, Ledger 1 becomes a compounding engine.</p>
-        <p>Surplus sats from early redemptions appreciate alongside new issuance sats. New issuances at higher spot prices deposit fewer sats per token (because each sat is worth more), but the surplus from prior issuances continues growing. Over time, the aggregate surplus in Ledger 1 can exceed the aggregate liability—at which point the pool is self-sustaining and Ledger 2 becomes purely a precautionary reserve that is never tapped.</p>
+        <p>The surplus dynamics above describe a single issuance cohort. In practice, the treasury company is continuously issuing and redeeming ₿USD tokens. Each profitable redemption leaves surplus satoshis in Ledger 1. Those surplus satoshis are not withdrawn,they remain in the pool, appreciating at spot alongside all other satoshis. New issuances add more satoshis. In a sustained rising market, Ledger 1 becomes a compounding engine.</p>
+        <p>Surplus sats from early redemptions appreciate alongside new issuance sats. New issuances at higher spot prices deposit fewer sats per token (because each sat is worth more), but the surplus from prior issuances continues growing. Over time, the aggregate surplus in Ledger 1 can exceed the aggregate liability,at which point the pool is self-sustaining and Ledger 2 becomes purely a precautionary reserve that is never tapped.</p>
     </div>
 
     <div class="paper-section">
         <h3>9.3 Pooling Dynamics: Tokens in the Black and the Red</h3>
-        <p>Ledger 1 operates as a pooled reserve, not on a per-token basis. Tokens are issued at different spot prices and redeemed at different times. At any given moment, a percentage of outstanding tokens are "in the black"—their backing satoshis are worth more than the $1 obligation—and a percentage are "in the red," where spot has declined below their issuance price.</p>
-        <p>Over a long enough time horizon, the proportion of tokens in the black grows structurally. Every day that BTC spot remains above prior issuance prices, more cohorts move into surplus. Older tokens—those issued months or years ago at lower spot prices—are deeply in the black. Their surplus more than offsets the shortfall on recently issued tokens that may be temporarily underwater. A token issued at $50,000 spot and redeemed when spot is $80,000 generates a surplus of $0.375 per token. A token issued at $90,000 and redeemed at $80,000 generates a shortfall of $0.125 per token. In a pooled reserve, the surplus tokens subsidize the underwater ones.</p>
-        <p>This is the retention effect. Long-term holders do not redeem during a downturn. They have no reason to—their ₿USD token’s $1.00 peg is stable regardless of what BTC spot does on any given day. The tokens most likely to be redeemed during a downturn are recently minted tokens held by short-term participants—precisely the tokens with the thinnest margin. But the bulk of the pool—the older, deeply in-the-black tokens—sits undisturbed, its surplus growing with every passing day that spot exceeds the historical average.</p>
-        <div class="callout"><p><em>The longer the system operates, the deeper its structural surplus becomes. Time itself is a reserve asset. The model does not merely survive a rising Bitcoin price—it converts that rise into accelerating, compounding returns for the consortium while maintaining a hard $1 peg for every holder.</em></p></div>
+        <p>Ledger 1 operates as a pooled reserve, not on a per-token basis. Tokens are issued at different spot prices and redeemed at different times. At any given moment, a percentage of outstanding tokens are "in the black",their backing satoshis are worth more than the $1 obligation,and a percentage are "in the red," where spot has declined below their issuance price.</p>
+        <p>Over a long enough time horizon, the proportion of tokens in the black grows structurally. Every day that BTC spot remains above prior issuance prices, more cohorts move into surplus. Older tokens,those issued months or years ago at lower spot prices,are deeply in the black. Their surplus more than offsets the shortfall on recently issued tokens that may be temporarily underwater. A token issued at $50,000 spot and redeemed when spot is $80,000 generates a surplus of $0.375 per token. A token issued at $90,000 and redeemed at $80,000 generates a shortfall of $0.125 per token. In a pooled reserve, the surplus tokens subsidize the underwater ones.</p>
+        <p>This is the retention effect. Long-term holders do not redeem during a downturn. They have no reason to,their ₿USD token's $1.00 peg is stable regardless of what BTC spot does on any given day. The tokens most likely to be redeemed during a downturn are recently minted tokens held by short-term participants,precisely the tokens with the thinnest margin. But the bulk of the pool,the older, deeply in-the-black tokens,sits undisturbed, its surplus growing with every passing day that spot exceeds the historical average.</p>
+        <div class="callout"><p><em>The longer the system operates, the deeper its structural surplus becomes. Time itself is a reserve asset. The model does not merely survive a rising Bitcoin price,it converts that rise into accelerating, compounding returns for the consortium while maintaining a hard $1 peg for every holder.</em></p></div>
     </div>
 
     <div class="paper-section">
-        <h2><span class="sec-num">10.</span> Defensive Programmability</h2>
-        <p>Every ₿USD token is a programmable instrument. The word "programmable" carries justified suspicion—in the context of CBDCs, programmability means surveillance and spending restrictions. ₿USD programmability inverts this relationship entirely.</p>
+        <h2><span class="sec-num">11.</span> Defensive Programmability</h2>
+        <p>Every ₿USD token is a programmable instrument. The word "programmable" carries justified suspicion,in the context of CBDCs, programmability means surveillance and spending restrictions. ₿USD programmability inverts this relationship entirely.</p>
     </div>
 
     <div class="paper-section">
         <h3>10.1 Token Provenance Metadata</h3>
-        <p>Each token carries provenance metadata about itself—not its holder. The metadata includes: mint date, mint-day BTC spot price, mint-day ₿C price, block age, transfer count, and a real-time coverage indicator (red or black with percentage) showing whether the Bitcoin backing that specific token is above or below the $1 obligation value. No holder identity, spending pattern, geographic location, or transaction purpose is recorded. The data does not exist at the protocol level because the protocol was designed never to produce it. This is an architectural constraint that would require dismantling the sidechain to override.</p>
+        <p>Each token carries provenance metadata at the protocol level about itself, not its holder. The metadata includes: mint date, mint-day BTC spot price, mint-day ₿C price, block age, and transfer count. The consortium uses this data for reserve management and FIFO burn order on redemptions. The end user sees a fungible dollar balance. The sidechain protocol does not record holder identity, spending categories, or transaction purpose. However, the financial service providers distributing ₿USD operate within regulatory frameworks that may require user identification. ₿USD offers substantially greater privacy than a CBDC but does not replicate the privacy properties of holding Bitcoin directly.</p>
     </div>
 
     <div class="paper-section">
         <h3>10.2 Network State Awareness</h3>
-        <p>The token contract has read access to aggregate metrics derived from on-chain data: total outstanding supply, aggregate redemption velocity (rolling 24h, 7d, 30d windows), BTC spot relative to ₿C, the coverage ratio, and reserve attestation status. None of these metrics require information about individual holders. They are system-level vital signs—independently verifiable by any participant.</p>
+        <p>The token contract has read access to aggregate metrics derived from on-chain data: total outstanding supply, aggregate redemption velocity (rolling 24h, 7d, 30d windows), BTC spot relative to ₿C, the coverage ratio, and reserve attestation status. None of these metrics require information about individual holders. They are system-level vital signs,independently verifiable by any participant.</p>
     </div>
 
     <div class="paper-section">
         <h3>10.3 The Defensive Toolkit</h3>
         <p>Each mechanism is deterministic, transparent, and applies equally to every participant. None requires human intervention to activate. None can be overridden by the consortium.</p>
-        <p><strong>BTC-Default Redemption:</strong> Eliminates forced selling. The coordinated short-plus-redemption attack depends on forced BTC liquidation—with BTC-default redemption, there is no forced selling.</p>
-        <p><strong>Time-Weighted Redemption Fees:</strong> Fiat redemption fees are a function of token age. 0–7 days: 3.0%. 8–30 days: 1.5%. 31–90 days: 0.5%. 91–180 days: 0.1%. Over 180 days: 0.0%. BTC-default redemption is exempt.</p>
-        <p><strong>Volume-Triggered Fee Escalation:</strong> When rolling 7-day fiat redemption volume exceeds defined thresholds as a percentage of total supply, an additional surcharge applies. Below 1%: no surcharge. 1–2%: +0.5%. 2–5%: +1.5%. Above 5%: +3.0%.</p>
+        <p><strong>BTC-Default Redemption:</strong> Eliminates forced selling. The coordinated short-plus-redemption attack depends on forced BTC liquidation,with BTC-default redemption, there is no forced selling.</p>
+        <p><strong>Time-Weighted Redemption Fees:</strong> Fiat redemption fees are a function of token age. 0 to 7 days: 3.0%. 8 to 30 days: 1.5%. 31 to 90 days: 0.5%. 91 to 180 days: 0.1%. Over 180 days: 0.0%. BTC-default redemption is exempt.</p>
+        <p><strong>Volume-Triggered Fee Escalation:</strong> When rolling 7-day fiat redemption volume exceeds defined thresholds as a percentage of total supply, an additional surcharge applies. Below 1%: no surcharge. 1 to 2%: +0.5%. 2 to 5%: +1.5%. Above 5%: +3.0%.</p>
         <p><strong>Adaptive Velocity Limits:</strong> Daily fiat redemption cap of 5% of outstanding supply under normal conditions, tightening as velocity rises. BTC-default redemption remains unlimited at all times.</p>
         <p><strong>Redemption Notice Periods:</strong> Small fiat redemptions process immediately. Above $100,000: 48 hours. Above $1,000,000: 7 days. BTC-default redemption remains instant at any amount.</p>
-        <p><strong>₿OND Conversion:</strong> Any ₿USD holder can convert to a ₿OND at the current ₿C entry price at any time, at no cost, with no delay. During panic, holders move capital from the spending layer to the savings layer rather than exiting the ecosystem. No reserves are touched. No Bitcoin is sold. The circulating ₿USD supply contracts. The holder enters a return-targeted savings product whose dual-condition maturity ensures they receive their target return when conditions recover.</p>
+        <p><strong>₿OND Conversion:</strong> Any ₿USD holder can convert to a ₿OND at the current ₿C entry price at any time, at no cost, with no delay. During panic, holders move their capital from the spending layer to the savings layer . No reserves are touched. No Bitcoin is sold. The circulating ₿USD supply contracts. The holder enters a return-targeted savings product whose dual-condition maturity ensures they receive their target return when conditions recover.</p>
     </div>
 
     <div class="paper-section">
         <h3>10.4 The Calm-State Guarantee</h3>
-        <p>Under normal network conditions—the vast majority of the token’s life—every defensive mechanism is dormant. Transfers are instant and free. Redemptions are fast and cheap. The token behaves identically to any other stablecoin. The mechanisms activate only when the network’s vital signs indicate abnormal stress, and the thresholds are public, auditable, and identical for everyone.</p>
+        <p>Under normal network conditions,the vast majority of the token's life,every defensive mechanism is dormant. Transfers are instant and free. Redemptions are fast and cheap. The token behaves identically to any other stablecoin. The mechanisms activate only when the network's vital signs indicate abnormal stress, and the thresholds are public, auditable, and identical for everyone.</p>
     </div>
 
     <div class="paper-section">
-        <h2><span class="sec-num">11.</span> Fee Structure and Exit Architecture</h2>
+        <h2><span class="sec-num">12.</span> Fee Structure and Exit Architecture</h2>
         <p>The exit structure is designed around a governing principle: every exit path should reflect the actual cost that exit imposes on the Bitcoin ecosystem, and the fee should route capital toward the path that keeps it inside the ecosystem.</p>
         <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem;">
   <tr>
@@ -660,33 +662,33 @@
     <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Reserve draw with selling pressure. Capital exits Bitcoin.</td>
   </tr>
 </table>
-        <p>The practical consequence is a natural gravity that keeps capital inside the Bitcoin economy. The lowest-friction paths are the ones that keep capital closest to Bitcoin. The highest-friction path—fiat exit—is the one that imposes the greatest cost on the reserve system.</p>
+        <p>The practical consequence is a natural gravity that keeps capital inside the Bitcoin economy. The lowest-friction paths are the ones that keep capital closest to Bitcoin. The highest-friction path,fiat exit,is the one that imposes the greatest cost on the reserve system.</p>
     </div>
 
     <div class="paper-section">
         <h3>11.1 Revenue Streams for Treasury Companies</h3>
-        <p>The consortium generates revenue through three channels: (1) Issuance and exit fees, tiered by exit path to incentivize remaining in the Bitcoin ecosystem. (2) Surplus on redemptions—when BTC spot has risen since issuance, the difference between the reserve value and the $1 obligation is retained. (3) The structural appreciation spread between BTC spot growth and the fixed dollar obligations. All fee revenue is deployed to purchase additional Bitcoin until coverage thresholds are met.</p>
+        <p>The consortium generates revenue through three channels: (1) Issuance and exit fees, tiered by exit path to incentivize remaining in the Bitcoin ecosystem. (2) Surplus on redemptions,when BTC spot has risen since issuance, the difference between the reserve value and the $1 obligation is retained. (3) The structural appreciation spread between BTC spot growth and the fixed dollar obligations. All fee revenue is deployed to purchase additional Bitcoin until coverage thresholds are met.</p>
     </div>
 
     <div class="paper-section">
-        <h2><span class="sec-num">12.</span> Bank Run Analysis and Structural Defenses</h2>
-        <p>A bear market drives BTC spot below the average minting price. Holders panic. Redemptions spike. Each fiat exit forces the consortium to sell Bitcoin into a falling market, depressing the price further, triggering more redemptions. This is a bank run—the oldest failure mode in monetary systems.</p>
+        <h2><span class="sec-num">13.</span> Bank Run Analysis and Structural Defenses</h2>
+        <p>A bear market drives BTC spot below the average minting price. Holders panic. Redemptions spike. Each fiat exit forces the consortium to sell Bitcoin into a falling market, depressing the price further, triggering more redemptions. This is a bank run,the oldest failure mode in monetary systems.</p>
         <p>The ₿USD system deploys five structural defenses against this scenario:</p>
-        <p><strong>First:</strong> Reserve pressure exists only at the fiat exit. Tokens circulating within the ecosystem create zero reserve pressure at any BTC spot price. The run scenario requires holders to not only panic but to convert to fiat specifically—abandoning the ecosystem entirely.</p>
+        <p><strong>First:</strong> Reserve pressure exists only at the fiat exit. Tokens circulating within the ecosystem create zero reserve pressure at any BTC spot price. The run scenario requires holders to not only panic but to convert to fiat specifically,abandoning the ecosystem entirely.</p>
         <p><strong>Second:</strong> BTC-default redemption eliminates forced selling. The consortium transfers Bitcoin rather than liquidating it. No market order, no slippage, no spot impact.</p>
         <p><strong>Third:</strong> Time-weighted fees price out mint-and-redeem attack loops. A freshly minted token faces 3% fiat redemption fees, making the attack deeply unprofitable.</p>
         <p><strong>Fourth:</strong> Volume-triggered fee escalation and velocity limits create congestion pricing at the fiat exit ramp during stress events.</p>
-        <p><strong>Fifth:</strong> ₿OND conversion provides a zero-cost escape valve. Any ₿USD holder can convert to a ₿OND at the current ₿C entry price at any time, at no cost, with no delay. During a panic, holders move capital from the spending layer to the savings layer. No reserves are touched. No Bitcoin is sold. The circulating ₿USD supply contracts, improving network health. The system absorbs fear without absorbing outflow.</p>
+        <p><strong>Fifth:</strong> ₿OND conversion provides a zero-cost escape valve. Any ₿USD holder can convert to a ₿OND at the current ₿C entry price at any time, at no cost, with no delay. During a panic, holders move their capital from the spending layer to the savings layer. No reserves are touched. No Bitcoin is sold. The circulating ₿USD supply contracts, improving network health. The system absorbs fear without absorbing outflow.</p>
 
     <div class="paper-section">
         <h3>12.1 Game Theory: The Coordinated Attack</h3>
-        <p>Consider a coordinated short-plus-redemption attack: an attacker mints $100M in ₿USD, builds a $100M BTC short position, then attempts mass fiat redemption to force selling and crash spot. The obstacles stack: BTC-default redemption means no forced selling. Time-weighted fees cost 3% ($3M) on freshly minted tokens. Volume-triggered escalation adds another 3% ($6M total). Velocity limits spread the redemption over weeks, during which the short accrues carrying costs. The attack’s expected return is deeply negative.</p>
-        <div class="callout"><p><em>The defender’s advantage is structural, not tactical. The protocol does not need to detect the attacker, identify their strategy, or respond in real time. It applies the same rules to everyone. The rules happen to make the attack uneconomical.</em></p></div>
+        <p>Consider a coordinated short-plus-redemption attack: an attacker mints $100M in ₿USD, builds a $100M BTC short position, then attempts mass fiat redemption to force selling and crash spot. The obstacles stack: BTC-default redemption means no forced selling. Time-weighted fees cost 3% ($3M) on freshly minted tokens. Volume-triggered escalation adds another 3% ($6M total). Velocity limits spread the redemption over weeks, during which the short accrues carrying costs. The attack's expected return is deeply negative.</p>
+        <div class="callout"><p><em>The defender's advantage is structural, not tactical. The protocol does not need to detect the attacker, identify their strategy, or respond in real time. It applies the same rules to everyone. The rules happen to make the attack uneconomical.</em></p></div>
     </div>
 
     <div class="paper-section">
-        <h2><span class="sec-num">13.</span> CBDC vs. TBDC: The Programmability Inversion</h2>
-        <p>The technical capability is identical—both CBDCs and TBDCs embed conditional logic at the token level. The architecture is the same. The philosophy is opposite.</p>
+        <h2><span class="sec-num">14.</span> CBDC vs. TBDC: The Programmability Inversion</h2>
+        <p>The technical capability is identical,both CBDCs and TBDCs embed conditional logic at the token level. The architecture is the same. The philosophy is opposite.</p>
         <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem;">
   <tr>
     <th style="padding:10px 14px;border-bottom:2px solid var(--border);color:var(--orange);font-family:var(--sans);font-size:0.85rem;font-weight:600;letter-spacing:0.05em;text-align:left;"><strong>Property</strong></th>
@@ -695,64 +697,63 @@
   </tr>
   <tr>
     <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Programmability serves</td>
-    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">The issuing authority its holders</td>
-    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">The token network and</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">The issuing authority</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">The token network and its holders</td>
   </tr>
   <tr>
-    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Holder surveillance impossible—no identity metadata</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Holder surveillance</td>
     <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Built in by design</td>
-    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Structurally</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Not built into the protocol; distribution layer subject to regulatory requirements</td>
   </tr>
   <tr>
-    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Spending restrictions Expiration, category limits, geo-fencing</td>
-    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">None—holders spend freely</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Spending restrictions</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Expiration, category limits, geo-fencing</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">None, holders spend freely</td>
   </tr>
   <tr>
-    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Crisis behavior accounts at discretion</td>
-    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Authorities freeze autonomously</td>
-    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Protocol hardens</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Crisis behavior</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Authorities freeze accounts at discretion</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Protocol hardens autonomously; distributed structure resists single-jurisdiction action</td>
   </tr>
   <tr>
-    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Redemption control discretion</td>
-    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Issuer can deny or delay Deterministic rules, no</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Redemption control</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Issuer can deny or delay</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Deterministic rules, no discretion</td>
   </tr>
   <tr>
-    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Collateral verifiable in real time</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Collateral</td>
     <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Government promise</td>
-    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Bitcoin on base layer,</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Bitcoin on base layer, verifiable in real time</td>
   </tr>
   <tr>
-    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Failure mode lifetime average (no precedent)</td>
-    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Policy change, overreach BTC sustained below</td>
-  </tr>
-  <tr>
-    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Failure mode lifetime average (no precedent)</td>
-    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Policy change, overreach BTC sustained below</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Failure mode</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Policy change, overreach</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">BTC sustained below lifetime average (no precedent)</td>
   </tr>
 </table>
     </div>
 
     <div class="paper-section">
-        <h2><span class="sec-num">14.</span> The Virtuous Cycle</h2>
+        <h2><span class="sec-num">15.</span> The Virtuous Cycle</h2>
         <p>The most consequential property of ₿USD is the demand flywheel that activates at scale. Each component reinforces the others, and the cycle has no natural ceiling.</p>
         <p><strong>Minting creates Bitcoin demand.</strong> Every ₿USD minted requires purchasing BTC at spot. Commerce-driven demand is persistent and does not reverse when sentiment shifts.</p>
         <p><strong>Rising spot expands issuance capacity.</strong> As BTC rises, the ₿C-denominated value of consortium holdings increases. More ₿USD can be issued. More BTC gets purchased.</p>
         <p><strong>Fee reinvestment deepens reserves.</strong> 100% of fee revenue is deployed to purchase additional Bitcoin until coverage thresholds are met.</p>
-        <p><strong>Scale reduces redemption risk.</strong> As more commerce occurs natively in ₿USD, the proportion of tokens redeemed for fiat declines. The system becomes structurally safer as it grows—the inverse of traditional fractional reserve banking.</p>
+        <p><strong>Scale reduces redemption risk.</strong> As more commerce occurs natively in ₿USD, the proportion of tokens redeemed for fiat declines. The system becomes structurally safer as it grows,the inverse of traditional fractional reserve banking.</p>
     </div>
 
     <div class="paper-section">
-        <h2><span class="sec-num">15.</span> Risk Analysis</h2>
+        <h2><span class="sec-num">16.</span> Risk Analysis</h2>
     </div>
 
     <div class="paper-section">
         <h3>15.1 Bitcoin Price Decline</h3>
-        <p>A sustained, severe decline that depresses BTC spot below the average acquisition price of reserves is the most acute risk. The structural mitigation is Ledger 2 overcollateralization. The ₿C denomination’s stability also reduces the correlation between spot declines and redemption pressure—the value a holder sees does not change materially when spot moves 10%. The critical framing: each consortium member already carries this price risk on its balance sheet. The Ledger 2 commitment formalizes an existing exposure with a defined perimeter.</p>
+        <p>A sustained, severe decline that depresses BTC spot below the average acquisition price of reserves is the most acute risk. The structural mitigation is Ledger 2 overcollateralization. The ₿C denomination's stability also reduces the correlation between spot declines and redemption pressure,the value a holder sees does not change materially when spot moves 10%. The critical framing: each consortium member already carries this price risk on its balance sheet. The Ledger 2 commitment formalizes an existing exposure with a defined perimeter.</p>
     </div>
 
     <div class="paper-section">
         <h3>15.2 Regulatory Uncertainty</h3>
-        <p>The regulatory treatment of a Bitcoin-backed stablecoin pegged to $1 USD remains untested in most jurisdictions. The structural mitigation is the consortium’s distributed jurisdiction. The ₿C denomination itself requires no permission to compute—it is an open mathematical standard.</p>
+        <p>The regulatory treatment of a Bitcoin-backed stablecoin pegged to $1 USD remains untested in most jurisdictions. The structural mitigation is the consortium's distributed jurisdiction. The ₿C denomination itself requires no permission to compute,it is an open mathematical standard.</p>
     </div>
 
     <div class="paper-section">
@@ -762,27 +763,27 @@
 
     <div class="paper-section">
         <h3>15.4 Technical and Operational Risk</h3>
-        <p>Protocol vulnerabilities, oracle manipulation, and private key compromise are inherent in any blockchain financial infrastructure. Mitigations include multi-signature wallets, formal verification of sidechain scripts, geographically distributed key management, and insurance against operational losses. The BTCADP oracle is resistant to manipulation by design—the trimmed mean methodology and exchange qualification filters prevent any single entity from influencing the reference price.</p>
+        <p>Protocol vulnerabilities, oracle manipulation, and private key compromise are inherent in any blockchain financial infrastructure. Mitigations include multi-signature wallets, formal verification of sidechain scripts, geographically distributed key management, and insurance against operational losses. The BTCADP oracle is resistant to manipulation by design,the trimmed mean methodology and exchange qualification filters prevent any single entity from influencing the reference price.</p>
     </div>
 
     <div class="paper-section">
-        <h2><span class="sec-num">16.</span> Integration with the Reserve Architecture</h2>
+        <h2><span class="sec-num">17.</span> Integration with the Reserve Architecture</h2>
         <p>Each instrument in the framework operates within its own dedicated two-ledger system. ₿USD faces demand-deposit risk. ₿OND faces maturity-timing risk. ₿ILL faces secondary-market pricing risk. The two-ledger separation ensures that stress on any one product can never reach another product's reserves.</p>
         <p>₿USD's two-ledger system: Ledger 1 holds BTC backing outstanding $1 tokens, purchased at spot with incoming fiat. Ledger 2 is the backstop reserve drawn from consortium holdings, self-fortifying over time as BTC appreciation creates surplus above the $1 obligation. The same two-ledger structure applies independently to ₿OND and ₿ILL, each with its own dedicated reserves. All ledgers are held in publicly addressable Bitcoin wallets on the base layer.</p>
     </div>
 
     <div class="paper-section">
-        <h2><span class="sec-num">17.</span> Conclusion</h2>
-        <p>₿USD provides a dollar-stable medium of exchange backed entirely by Bitcoin—the only asset whose supply is fixed by protocol and whose custody requires no counterparty. The system converts stablecoin demand into structural Bitcoin demand, channels fee revenue into additional Bitcoin purchases, and becomes more robust as adoption grows.</p>
-        <p>The architecture requires no modification to Bitcoin’s base layer. It uses existing sidechain infrastructure for token circulation, existing publicly traded companies as issuers, and a published open-source specification for its reference price. The denomination outlasts the institutions that use it.</p>
+        <h2><span class="sec-num">18.</span> Conclusion</h2>
+        <p>₿USD provides a dollar-stable medium of exchange backed entirely by Bitcoin,the only asset whose supply is fixed by protocol and whose custody requires no counterparty. The system converts stablecoin demand into structural Bitcoin demand, channels fee revenue into additional Bitcoin purchases, and becomes more robust as adoption grows.</p>
+        <p>The architecture requires no modification to Bitcoin's base layer. It uses a consortium-operated sidechain infrastructure for token circulation, existing publicly traded companies as issuers, and a published open-source specification for its reference price. The denomination outlasts the institutions that use it.</p>
         <p>The defensive programmability framework inverts the CBDC paradigm: tokens that read the state of their own network to protect all holders equally, rather than tokens that report on their holders to serve the issuing authority. Under normal conditions, every mechanism is dormant and the token behaves identically to any other stablecoin. Under stress, the protocol hardens autonomously.</p>
         <div class="callout"><p><em>The transition is not an ideological project. It is the emergent consequence of a stablecoin that is better: backed by harder collateral, verified in real time, issued by institutions with aligned incentives, and defended by its own architecture.</em></p></div>
-        <p>CC0 Public Domain · btcadp.org · 2026</p>
+        <p>CC BY-NC-ND · btcadp.org · 2026</p>
     </div>
 
     <div class="download-section" id="download">
         <h3>Download This Paper</h3>
-        <p>CC0 Public Domain &mdash; free to use, share, and build upon without restriction.</p>
+        <p>CC BY-NC-ND , free to use, share, and build upon without restriction.</p>
         <button class="btn-primary" onclick="window.print()">Print / Save as PDF</button>
     </div>
 
@@ -795,7 +796,7 @@
         <a href="specification.html">Specification</a> &nbsp;&middot;&nbsp;
         <a href="https://github.com/BTCADP/btcadp-research" target="_blank" rel="noopener">GitHub</a>
     </p>
-    <p style="margin-top:8px;">CC0 Public Domain &middot; btcadp.org &middot; 2026</p>
+    <p style="margin-top:8px;">CC BY-NC-ND &middot; btcadp.org &middot; 2026</p>
 </footer>
 
 </body>

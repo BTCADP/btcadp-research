@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Collaborate | btcadp.org</title>
+<meta name="description" content="Invite-only collaboration space for The Bitcoin Bridge and BTCADP research contributors.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+  :root {
+    --bg-primary: #0a0a0b;
+    --bg-secondary: #111114;
+    --bg-tertiary: #19191e;
+    --bg-hover: #222228;
+    --border: #2a2a32;
+    --border-active: #3a3a45;
+    --text-primary: #e8e6e3;
+    --text-secondary: #8a8a95;
+    --text-muted: #555560;
+    --orange: #f7931a;
+    --orange-dim: rgba(247, 147, 26, 0.12);
+    --orange-glow: rgba(247, 147, 26, 0.4);
+    --green: #2ecc71;
+    --green-dim: rgba(46, 204, 113, 0.12);
+    --red: #e74c3c;
+    --red-dim: rgba(231, 76, 60, 0.12);
+    --blue: #3498db;
+    --blue-dim: rgba(52, 152, 219, 0.12);
+    --purple: #9b59b6;
+    --purple-dim: rgba(155, 89, 182, 0.12);
+    --font-display: 'Source Serif 4', Georgia, serif;
+    --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(247,147,26,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(247,147,26,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(10,10,11,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 56px;
+  }
+  .nav-brand { font-family: var(--font-mono); font-size: 1rem; font-weight: bold; color: var(--orange); text-decoration: none; letter-spacing: 0.05em; }
+  .nav-links { display: flex; gap: 0.25rem; list-style: none; }
+  .nav-links a { color: var(--text-muted); text-decoration: none; font-family: var(--font-mono); font-size: 0.75rem; padding: 0.4rem 0.7rem; border-radius: 4px; transition: color 0.2s, background 0.2s; }
+  .nav-links a:hover { color: var(--text-primary); background: var(--bg-tertiary); }
+  .nav-links a.active { color: var(--orange); }
+  .nav-hamburger { display: none; background: none; border: none; color: var(--text-secondary); font-size: 1.5rem; cursor: pointer; }
+
+  .container { max-width: 960px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+  /* ══════════════════════════════════════════════════════════════════════
+     AUTH
+     ══════════════════════════════════════════════════════════════════════ */
+  .auth-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: calc(100vh - 56px); padding: 60px 24px; text-align: center; }
+  .auth-lockup { margin-bottom: 48px; }
+  .auth-lockup .lock-icon { font-size: 48px; margin-bottom: 16px; opacity: 0.6; }
+  .auth-lockup h1 { font-family: var(--font-display); font-size: 32px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 12px; }
+  .auth-lockup h1 .accent { color: var(--orange); }
+  .auth-lockup p { color: var(--text-secondary); font-size: 13px; max-width: 420px; line-height: 1.7; }
+  .auth-box { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 8px; padding: 32px; width: 100%; max-width: 400px; }
+  .auth-box label { display: block; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 8px; text-align: left; }
+  .auth-box input[type="email"] { width: 100%; background: var(--bg-primary); border: 1px solid var(--border); border-radius: 4px; padding: 12px 16px; color: var(--text-primary); font-family: var(--font-mono); font-size: 14px; outline: none; transition: border-color 0.2s; margin-bottom: 16px; }
+  .auth-box input[type="email"]:focus { border-color: var(--orange); }
+  .auth-box input[type="email"]::placeholder { color: var(--text-muted); }
+  .btn-primary { width: 100%; background: var(--orange); color: #0a0a0b; border: none; border-radius: 4px; padding: 12px 24px; font-family: var(--font-mono); font-size: 13px; font-weight: 600; letter-spacing: 0.5px; cursor: pointer; transition: opacity 0.2s, transform 0.1s; }
+  .btn-primary:hover { opacity: 0.9; }
+  .btn-primary:active { transform: scale(0.98); }
+  .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+  .auth-message { margin-top: 16px; font-size: 12px; color: var(--text-secondary); min-height: 20px; }
+  .auth-message.success { color: var(--green); }
+  .auth-message.error { color: var(--red); }
+
+  /* ══════════════════════════════════════════════════════════════════════
+     APP
+     ══════════════════════════════════════════════════════════════════════ */
+  .app-screen { display: none; padding: 40px 0 80px; }
+  .app-screen.visible { display: block; }
+
+  /* ── USER BAR ── */
+  .user-bar { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid var(--border); margin-bottom: 32px; flex-wrap: wrap; gap: 12px; }
+  .user-info { display: flex; align-items: center; gap: 12px; }
+  .user-avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--orange-dim); border: 1px solid var(--orange); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; color: var(--orange); }
+  .user-handle { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+  .user-real-id { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+  .user-badges { display: flex; gap: 6px; margin-top: 3px; }
+  .badge { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; padding: 2px 8px; border-radius: 3px; font-weight: 600; }
+  .badge.role-admin { color: var(--orange); background: var(--orange-dim); border: 1px solid rgba(247,147,26,0.3); }
+  .badge.role-reviewer { color: var(--purple); background: var(--purple-dim); border: 1px solid rgba(155,89,182,0.3); }
+  .badge.role-contributor { color: var(--text-muted); background: var(--bg-tertiary); border: 1px solid var(--border); }
+  .badge.access-tbb { color: var(--orange); background: var(--orange-dim); }
+  .badge.access-research { color: var(--blue); background: var(--blue-dim); }
+  .badge.access-both { color: var(--green); background: var(--green-dim); }
+  .btn-signout { background: none; border: 1px solid var(--border); border-radius: 4px; padding: 6px 14px; color: var(--text-muted); font-family: var(--font-mono); font-size: 11px; cursor: pointer; transition: all 0.2s; }
+  .btn-signout:hover { color: var(--text-secondary); border-color: var(--border-active); }
+
+  /* ── IDENTITY REVEAL (for reviewers/admins) ── */
+  .author-display { display: inline; }
+  .author-handle { font-weight: 600; }
+  .author-reveal { font-size: 11px; color: var(--text-muted); margin-left: 6px; opacity: 0.7; }
+  .author-reveal::before { content: '('; }
+  .author-reveal::after { content: ')'; }
+
+  /* ── SPACE TABS ── */
+  .space-tabs { display: flex; gap: 0; margin-bottom: 32px; border-bottom: 1px solid var(--border); }
+  .space-tab { padding: 14px 24px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); background: none; border: none; cursor: pointer; position: relative; transition: color 0.2s; }
+  .space-tab:hover { color: var(--text-secondary); }
+  .space-tab.active { color: var(--text-primary); }
+  .space-tab.active::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 2px; background: var(--orange); }
+  .space-tab .tab-count { font-size: 10px; color: var(--text-muted); margin-left: 6px; padding: 1px 6px; background: var(--bg-tertiary); border-radius: 10px; }
+  .space-tab.active .tab-count { color: var(--orange); background: var(--orange-dim); }
+  .space-tab.disabled { opacity: 0.35; cursor: not-allowed; }
+
+  /* ── SORT BAR ── */
+  .sort-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; gap: 8px; }
+  .sort-options { display: flex; gap: 4px; }
+  .sort-btn { font-family: var(--font-mono); font-size: 11px; padding: 5px 12px; border: 1px solid var(--border); border-radius: 4px; background: none; color: var(--text-muted); cursor: pointer; transition: all 0.2s; }
+  .sort-btn:hover { border-color: var(--border-active); color: var(--text-secondary); }
+  .sort-btn.active { border-color: var(--orange); color: var(--orange); background: var(--orange-dim); }
+
+  .space-header { margin-bottom: 24px; }
+  .space-header h2 { font-family: var(--font-display); font-size: 24px; font-weight: 600; margin-bottom: 6px; }
+  .space-header p { font-size: 13px; color: var(--text-secondary); line-height: 1.7; }
+
+  .section-filter { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+  .filter-chip { font-family: var(--font-mono); font-size: 11px; padding: 6px 14px; border: 1px solid var(--border); border-radius: 20px; background: none; color: var(--text-muted); cursor: pointer; transition: all 0.2s; }
+  .filter-chip:hover { border-color: var(--border-active); color: var(--text-secondary); }
+  .filter-chip.active { border-color: var(--orange); color: var(--orange); background: var(--orange-dim); }
+
+  /* ══════════════════════════════════════════════════════════════════════
+     THREAD LIST
+     ══════════════════════════════════════════════════════════════════════ */
+  .thread-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 24px; }
+  .thread-item { background: var(--bg-secondary); display: flex; gap: 0; transition: background 0.15s; }
+  .thread-item:hover { background: var(--bg-tertiary); }
+  .thread-item.pinned { border-left: 2px solid var(--orange); }
+
+  .vote-col { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 16px 6px 16px 14px; min-width: 52px; gap: 2px; }
+  .vote-btn { background: none; border: none; cursor: pointer; padding: 4px; display: flex; align-items: center; justify-content: center; border-radius: 4px; transition: all 0.15s; }
+  .vote-btn svg { width: 18px; height: 18px; fill: none; stroke: var(--text-muted); stroke-width: 2; transition: all 0.15s; }
+  .vote-btn:hover svg { stroke: var(--orange); }
+  .vote-btn.voted svg { stroke: var(--orange); fill: var(--orange); }
+  .vote-count { font-family: var(--font-mono); font-size: 14px; font-weight: 600; color: var(--text-secondary); min-width: 20px; text-align: center; line-height: 1; }
+  .vote-count.has-votes { color: var(--orange); }
+
+  .thread-content { flex: 1; padding: 16px 20px 16px 6px; cursor: pointer; min-width: 0; }
+  .thread-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 6px; }
+  .thread-title-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .pin-icon { font-size: 12px; color: var(--orange); flex-shrink: 0; }
+  .thread-title { font-family: var(--font-display); font-size: 16px; font-weight: 600; color: var(--text-primary); line-height: 1.4; }
+  .thread-meta { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+  .thread-replies { font-size: 11px; color: var(--text-muted); display: flex; align-items: center; gap: 4px; }
+  .thread-section-tag { font-size: 10px; letter-spacing: 1px; text-transform: uppercase; padding: 2px 8px; border-radius: 3px; color: var(--text-muted); border: 1px solid var(--border); }
+  .thread-preview { font-size: 13px; color: var(--text-secondary); line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .thread-footer { display: flex; align-items: center; gap: 8px; margin-top: 8px; font-size: 11px; color: var(--text-muted); }
+  .thread-author-avatar { width: 18px; height: 18px; border-radius: 50%; background: var(--bg-tertiary); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 600; color: var(--text-muted); }
+  .author-role-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+  .author-role-dot.admin { background: var(--orange); }
+  .author-role-dot.reviewer { background: var(--purple); }
+
+  .new-thread-btn { display: flex; align-items: center; gap: 8px; background: none; border: 1px dashed var(--border); border-radius: 8px; padding: 16px 20px; width: 100%; color: var(--text-muted); font-family: var(--font-mono); font-size: 13px; cursor: pointer; transition: all 0.2s; margin-bottom: 24px; }
+  .new-thread-btn:hover { border-color: var(--orange); color: var(--orange); background: rgba(247,147,26,0.03); }
+
+  .status-badge { font-size: 10px; letter-spacing: 1px; text-transform: uppercase; padding: 2px 8px; border-radius: 3px; font-weight: 600; }
+  .status-badge.open { color: var(--green); background: var(--green-dim); }
+  .status-badge.resolved { color: var(--text-muted); background: var(--bg-tertiary); }
+  .status-badge.under-review { color: var(--orange); background: var(--orange-dim); }
+
+  /* ══════════════════════════════════════════════════════════════════════
+     FORMS
+     ══════════════════════════════════════════════════════════════════════ */
+  .new-thread-form { display: none; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 8px; padding: 24px; margin-bottom: 24px; }
+  .new-thread-form.visible { display: block; }
+  .form-row { margin-bottom: 16px; }
+  .form-row label { display: block; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 6px; }
+  .form-row input, .form-row select, .form-row textarea { width: 100%; background: var(--bg-primary); border: 1px solid var(--border); border-radius: 4px; padding: 10px 14px; color: var(--text-primary); font-family: var(--font-mono); font-size: 13px; outline: none; transition: border-color 0.2s; }
+  .form-row input:focus, .form-row select:focus, .form-row textarea:focus { border-color: var(--orange); }
+  .form-row select { cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%238a8a95' viewBox='0 0 16 16'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; }
+  .form-row select option { background: var(--bg-primary); color: var(--text-primary); }
+  .form-row textarea { font-family: var(--font-display); font-size: 15px; line-height: 1.7; min-height: 100px; resize: vertical; }
+  .form-actions { display: flex; gap: 12px; justify-content: flex-end; }
+  .btn-cancel { background: none; border: 1px solid var(--border); border-radius: 4px; padding: 10px 20px; color: var(--text-muted); font-family: var(--font-mono); font-size: 12px; cursor: pointer; transition: all 0.2s; }
+  .btn-cancel:hover { border-color: var(--border-active); color: var(--text-secondary); }
+  .btn-submit { background: var(--orange); color: #0a0a0b; border: none; border-radius: 4px; padding: 10px 24px; font-family: var(--font-mono); font-size: 12px; font-weight: 600; cursor: pointer; transition: opacity 0.2s; }
+  .btn-submit:hover { opacity: 0.9; }
+  .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  /* ══════════════════════════════════════════════════════════════════════
+     THREAD DETAIL
+     ══════════════════════════════════════════════════════════════════════ */
+  .thread-detail { display: none; }
+  .thread-detail.visible { display: block; }
+  .thread-back { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); background: none; border: none; cursor: pointer; padding: 0; margin-bottom: 24px; transition: color 0.2s; }
+  .thread-back:hover { color: var(--orange); }
+  .thread-detail-header { margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+  .thread-detail-header h2 { font-family: var(--font-display); font-size: 28px; font-weight: 700; line-height: 1.3; margin-bottom: 12px; }
+  .thread-detail-meta { display: flex; align-items: center; gap: 12px; font-size: 12px; color: var(--text-muted); flex-wrap: wrap; }
+
+  .detail-vote-bar { display: flex; align-items: center; gap: 16px; padding: 12px 16px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 6px; margin-bottom: 24px; flex-wrap: wrap; }
+  .detail-vote-btn { display: flex; align-items: center; gap: 8px; background: none; border: 1px solid var(--border); border-radius: 4px; padding: 6px 14px; color: var(--text-muted); font-family: var(--font-mono); font-size: 12px; cursor: pointer; transition: all 0.2s; }
+  .detail-vote-btn:hover { border-color: var(--orange); color: var(--orange); }
+  .detail-vote-btn.voted { border-color: var(--orange); color: var(--orange); background: var(--orange-dim); }
+  .detail-vote-btn svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; }
+  .detail-vote-btn.voted svg { fill: currentColor; }
+  .vote-summary { font-size: 12px; color: var(--text-muted); }
+  .vote-summary strong { color: var(--orange); }
+
+  .reviewer-controls { display: none; align-items: center; gap: 12px; margin-left: auto; }
+  .reviewer-controls.visible { display: flex; }
+  .reviewer-controls select { background: var(--bg-primary); border: 1px solid var(--border); border-radius: 4px; padding: 6px 12px; color: var(--text-primary); font-family: var(--font-mono); font-size: 11px; cursor: pointer; outline: none; }
+  .btn-pin { background: none; border: 1px solid var(--border); border-radius: 4px; padding: 6px 12px; color: var(--text-muted); font-family: var(--font-mono); font-size: 11px; cursor: pointer; transition: all 0.2s; }
+  .btn-pin:hover { border-color: var(--orange); color: var(--orange); }
+  .btn-pin.pinned { border-color: var(--orange); color: var(--orange); background: var(--orange-dim); }
+
+  .comment { padding: 20px 0; border-bottom: 1px solid var(--border); }
+  .comment:last-of-type { border-bottom: none; }
+  .comment-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
+  .comment-avatar { width: 28px; height: 28px; border-radius: 50%; background: var(--bg-tertiary); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; color: var(--text-secondary); flex-shrink: 0; }
+  .comment-author { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+  .comment-reveal { font-size: 11px; color: var(--text-muted); opacity: 0.7; }
+  .comment-role-badge { font-size: 9px; letter-spacing: 1px; text-transform: uppercase; padding: 1px 6px; border-radius: 3px; font-weight: 600; }
+  .comment-role-badge.admin { color: var(--orange); background: var(--orange-dim); }
+  .comment-role-badge.reviewer { color: var(--purple); background: var(--purple-dim); }
+  .comment-time { font-size: 11px; color: var(--text-muted); }
+  .comment-body { font-family: var(--font-display); font-size: 15px; line-height: 1.75; color: var(--text-primary); padding-left: 38px; }
+  .comment-body blockquote { border-left: 2px solid var(--orange); padding-left: 16px; margin: 12px 0; color: var(--text-secondary); font-style: italic; }
+  .comment-actions { display: flex; gap: 16px; padding-left: 38px; margin-top: 8px; }
+  .comment-action { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); background: none; border: none; cursor: pointer; transition: color 0.2s; }
+  .comment-action:hover { color: var(--orange); }
+
+  .reply-box { margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border); }
+  .reply-box label { display: block; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 8px; }
+  .reply-textarea { width: 100%; min-height: 120px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 6px; padding: 16px; color: var(--text-primary); font-family: var(--font-display); font-size: 15px; line-height: 1.7; resize: vertical; outline: none; transition: border-color 0.2s; }
+  .reply-textarea:focus { border-color: var(--orange); }
+  .reply-textarea::placeholder { color: var(--text-muted); }
+  .reply-actions { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; }
+  .reply-hint { font-size: 11px; color: var(--text-muted); }
+
+  /* ══════════════════════════════════════════════════════════════════════
+     ADMIN PANEL
+     ══════════════════════════════════════════════════════════════════════ */
+  .admin-panel { display: none; background: var(--bg-secondary); border: 1px solid var(--border); border-top: 2px solid var(--orange); border-radius: 8px; padding: 24px; margin-top: 40px; }
+  .admin-panel.visible { display: block; }
+  .admin-panel h3 { font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); margin-bottom: 16px; }
+  .invite-fields { display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; }
+  .invite-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .invite-row input { flex: 1; min-width: 160px; background: var(--bg-primary); border: 1px solid var(--border); border-radius: 4px; padding: 10px 14px; color: var(--text-primary); font-family: var(--font-mono); font-size: 13px; outline: none; }
+  .invite-row input:focus { border-color: var(--orange); }
+  .invite-row select { background: var(--bg-primary); border: 1px solid var(--border); border-radius: 4px; padding: 10px 14px; color: var(--text-primary); font-family: var(--font-mono); font-size: 13px; cursor: pointer; outline: none; }
+  .btn-invite { background: var(--orange); color: #0a0a0b; border: none; border-radius: 4px; padding: 10px 20px; font-family: var(--font-mono); font-size: 12px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+  .btn-invite:hover { opacity: 0.9; }
+  .invited-list { margin-top: 8px; }
+  .invited-item { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 12px; flex-wrap: wrap; }
+  .invited-item:last-child { border-bottom: none; }
+  .invited-identity { flex: 1; min-width: 0; }
+  .invited-handle { color: var(--text-primary); font-weight: 600; }
+  .invited-email { color: var(--text-muted); font-size: 11px; }
+  .invited-access { font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); white-space: nowrap; }
+  .role-select-inline { background: var(--bg-primary); border: 1px solid var(--border); border-radius: 3px; padding: 3px 8px; color: var(--text-primary); font-family: var(--font-mono); font-size: 11px; cursor: pointer; outline: none; }
+  .btn-revoke { background: none; border: none; color: var(--red); font-family: var(--font-mono); font-size: 11px; cursor: pointer; opacity: 0.6; transition: opacity 0.2s; white-space: nowrap; }
+  .btn-revoke:hover { opacity: 1; }
+
+  .empty-state { text-align: center; padding: 60px 24px; color: var(--text-muted); }
+  .empty-state .empty-icon { font-size: 36px; margin-bottom: 12px; opacity: 0.4; }
+  .empty-state p { font-size: 13px; line-height: 1.7; }
+
+  footer { padding: 32px 0; border-top: 1px solid var(--border); margin-top: 60px; text-align: center; font-size: 11px; color: var(--text-muted); position: relative; z-index: 1; }
+
+  @media (max-width: 640px) {
+    .nav-links { display: none; }
+    .nav-hamburger { display: block; }
+    .auth-lockup h1 { font-size: 24px; }
+    .auth-box { padding: 24px 20px; }
+    .space-tab { padding: 12px 16px; font-size: 11px; }
+    .thread-top { flex-direction: column; gap: 8px; }
+    .thread-meta { align-self: flex-start; }
+    .invite-row { flex-direction: column; }
+    .thread-detail-header h2 { font-size: 22px; }
+    .comment-body, .comment-actions { padding-left: 0; }
+    .reply-actions { flex-direction: column; gap: 8px; }
+    .reply-actions .btn-submit { width: 100%; }
+    .detail-vote-bar { flex-wrap: wrap; }
+    .reviewer-controls { margin-left: 0; width: 100%; }
+    .vote-col { min-width: 44px; padding: 16px 4px 16px 10px; }
+    .sort-bar { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-brand">btcadp.org</a>
+  <ul class="nav-links">
+    <li><a href="/">Index</a></li>
+    <li><a href="/bitcoin-bridge.html">TBB</a></li>
+    <li><a href="/knowledge-base.html">Knowledge Base</a></li>
+    <li><a href="/specification.html">Spec</a></li>
+    <li><a href="/collaborate.html" class="active">Collaborate</a></li>
+  </ul>
+  <button class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open')">&#9776;</button>
+</nav>
+
+<div class="auth-screen" id="authScreen">
+  <div class="auth-lockup">
+    <div class="lock-icon">&#x1f512;</div>
+    <h1>Collaborator <span class="accent">Access</span></h1>
+    <p>This space is reserved for invited contributors to The Bitcoin Bridge and BTCADP research. Enter the email you were invited with to receive a sign-in link.</p>
+  </div>
+  <div class="auth-box">
+    <label for="authEmail">Your email</label>
+    <input type="email" id="authEmail" placeholder="invited@example.com" autocomplete="email">
+    <button class="btn-primary" id="authSubmit" onclick="handleAuth()">Send magic link</button>
+    <div class="auth-message" id="authMessage"></div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="app-screen" id="appScreen">
+
+    <div class="user-bar">
+      <div class="user-info">
+        <div class="user-avatar" id="userAvatar">?</div>
+        <div>
+          <div class="user-handle" id="userHandle">loading...</div>
+          <div class="user-real-id" id="userRealId"></div>
+          <div class="user-badges" id="userBadges"></div>
+        </div>
+      </div>
+      <button class="btn-signout" onclick="handleSignOut()">Sign out</button>
+    </div>
+
+    <div class="space-tabs" id="spaceTabs">
+      <button class="space-tab active" data-space="tbb" onclick="switchSpace('tbb')">The Bitcoin Bridge <span class="tab-count" id="tbbCount">0</span></button>
+      <button class="space-tab" data-space="research" onclick="switchSpace('research')">Research <span class="tab-count" id="researchCount">0</span></button>
+    </div>
+
+    <!-- TBB SPACE -->
+    <div class="space-content" id="space-tbb">
+      <div class="space-header">
+        <h2>The Bitcoin Bridge</h2>
+        <p>Feedback on TBB chapters, concepts, and proposals. Suggest edits, flag inconsistencies, or propose structural changes.</p>
+      </div>
+      <div class="section-filter" id="tbbFilters">
+        <button class="filter-chip active" data-filter="all" onclick="setFilter('tbb','all',this)">All</button>
+        <button class="filter-chip" data-filter="thesis" onclick="setFilter('tbb','thesis',this)">Thesis</button>
+        <button class="filter-chip" data-filter="busd" onclick="setFilter('tbb','busd',this)">&#x20bf;USD</button>
+        <button class="filter-chip" data-filter="bond" onclick="setFilter('tbb','bond',this)">&#x20bf;ond</button>
+        <button class="filter-chip" data-filter="bill" onclick="setFilter('tbb','bill',this)">&#x20bf;ill</button>
+        <button class="filter-chip" data-filter="btcc" onclick="setFilter('tbb','btcc',this)">&#x20bf;C / BTCC</button>
+        <button class="filter-chip" data-filter="general" onclick="setFilter('tbb','general',this)">General</button>
+      </div>
+      <div class="sort-bar"><div class="sort-options">
+        <button class="sort-btn active" data-sort="votes" onclick="setSort('votes',this)">Top voted</button>
+        <button class="sort-btn" data-sort="newest" onclick="setSort('newest',this)">Newest</button>
+        <button class="sort-btn" data-sort="active" onclick="setSort('active',this)">Most active</button>
+      </div></div>
+      <button class="new-thread-btn" onclick="showNewThread('tbb')">+ Start a new thread</button>
+      <div class="new-thread-form" id="newThreadForm-tbb">
+        <div class="form-row"><label>Thread title</label><input type="text" id="newTitle-tbb" placeholder="Summarize your feedback..."></div>
+        <div class="form-row"><label>Section</label><select id="newSection-tbb"><option value="general">General</option><option value="thesis">Thesis</option><option value="busd">&#x20bf;USD</option><option value="bond">&#x20bf;ond</option><option value="bill">&#x20bf;ill</option><option value="btcc">&#x20bf;C / BTCC</option></select></div>
+        <div class="form-row"><label>Details</label><textarea id="newBody-tbb" placeholder="Describe the feedback, suggested change, or question..."></textarea></div>
+        <div class="form-actions"><button class="btn-cancel" onclick="hideNewThread('tbb')">Cancel</button><button class="btn-submit" onclick="submitThread('tbb')">Post thread</button></div>
+      </div>
+      <div class="thread-list" id="threadList-tbb"></div>
+      <div class="empty-state" id="emptyState-tbb" style="display:none;"><div class="empty-icon">&#x1f4ac;</div><p>No threads yet. Start the conversation.</p></div>
+    </div>
+
+    <!-- RESEARCH SPACE -->
+    <div class="space-content" id="space-research" style="display:none;">
+      <div class="space-header">
+        <h2>Research</h2>
+        <p>Academic discussion on BTCADP methodology, specification integrity, data quality, and the broader Bitcoin pricing research agenda.</p>
+      </div>
+      <div class="section-filter" id="researchFilters">
+        <button class="filter-chip active" data-filter="all" onclick="setFilter('research','all',this)">All</button>
+        <button class="filter-chip" data-filter="methodology" onclick="setFilter('research','methodology',this)">Methodology</button>
+        <button class="filter-chip" data-filter="data-quality" onclick="setFilter('research','data-quality',this)">Data Quality</button>
+        <button class="filter-chip" data-filter="specification" onclick="setFilter('research','specification',this)">Specification</button>
+        <button class="filter-chip" data-filter="btcc-model" onclick="setFilter('research','btcc-model',this)">BTCC Model</button>
+        <button class="filter-chip" data-filter="peer-review" onclick="setFilter('research','peer-review',this)">Peer Review</button>
+      </div>
+      <div class="sort-bar"><div class="sort-options">
+        <button class="sort-btn active" data-sort="votes" onclick="setSort('votes',this)">Top voted</button>
+        <button class="sort-btn" data-sort="newest" onclick="setSort('newest',this)">Newest</button>
+        <button class="sort-btn" data-sort="active" onclick="setSort('active',this)">Most active</button>
+      </div></div>
+      <button class="new-thread-btn" onclick="showNewThread('research')">+ Start a new thread</button>
+      <div class="new-thread-form" id="newThreadForm-research">
+        <div class="form-row"><label>Thread title</label><input type="text" id="newTitle-research" placeholder="Summarize your feedback..."></div>
+        <div class="form-row"><label>Category</label><select id="newSection-research"><option value="methodology">Methodology</option><option value="data-quality">Data Quality</option><option value="specification">Specification</option><option value="btcc-model">BTCC Model</option><option value="peer-review">Peer Review</option></select></div>
+        <div class="form-row"><label>Details</label><textarea id="newBody-research" placeholder="Present your analysis, question, or suggested revision..."></textarea></div>
+        <div class="form-actions"><button class="btn-cancel" onclick="hideNewThread('research')">Cancel</button><button class="btn-submit" onclick="submitThread('research')">Post thread</button></div>
+      </div>
+      <div class="thread-list" id="threadList-research"></div>
+      <div class="empty-state" id="emptyState-research" style="display:none;"><div class="empty-icon">&#x1f52c;</div><p>No research threads yet. Open the discussion.</p></div>
+    </div>
+
+    <!-- THREAD DETAIL -->
+    <div class="thread-detail" id="threadDetail">
+      <button class="thread-back" onclick="closeThread()">&larr; Back to threads</button>
+      <div class="thread-detail-header">
+        <h2 id="detailTitle">Thread Title</h2>
+        <div class="thread-detail-meta">
+          <span class="thread-section-tag" id="detailSection">section</span>
+          <span class="status-badge open" id="detailStatus">open</span>
+          <span id="detailAuthor">by handle</span>
+          <span id="detailDate">date</span>
+        </div>
+      </div>
+      <div class="detail-vote-bar">
+        <button class="detail-vote-btn" id="detailVoteBtn" onclick="toggleDetailVote()">
+          <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+          <span id="detailVoteLabel">Upvote</span>
+        </button>
+        <div class="vote-summary" id="detailVoteSummary"></div>
+        <div class="reviewer-controls" id="reviewerControls">
+          <select id="statusSelect" onchange="changeThreadStatus()"><option value="open">Open</option><option value="under-review">Under review</option><option value="resolved">Resolved</option></select>
+          <button class="btn-pin" id="pinBtn" onclick="togglePin()">Pin</button>
+        </div>
+      </div>
+      <div id="detailComments"></div>
+      <div class="reply-box">
+        <label>Reply</label>
+        <textarea class="reply-textarea" id="replyText" placeholder="Share your thoughts..."></textarea>
+        <div class="reply-actions">
+          <span class="reply-hint">Posting as your handle. Be constructive.</span>
+          <button class="btn-submit" onclick="submitReply()">Post reply</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADMIN PANEL -->
+    <div class="admin-panel" id="adminPanel">
+      <h3>Manage Collaborators</h3>
+      <div class="invite-fields">
+        <div class="invite-row">
+          <input type="email" id="inviteEmail" placeholder="collaborator@example.com">
+          <input type="text" id="inviteHandle" placeholder="Handle (public pseudonym)">
+        </div>
+        <div class="invite-row">
+          <select id="inviteAccess"><option value="tbb">TBB only</option><option value="research">Research only</option><option value="both">Both spaces</option></select>
+          <select id="inviteRole"><option value="contributor">Contributor</option><option value="reviewer">Reviewer</option><option value="admin">Admin</option></select>
+          <button class="btn-invite" onclick="inviteCollaborator()">Invite</button>
+        </div>
+      </div>
+      <div class="invited-list" id="invitedList"></div>
+    </div>
+
+  </div>
+</div>
+
+<footer><div class="container">Invite-only. Pseudonymous by default. Reviewers and admins can see real identities.</div></footer>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════════════
+const SUPABASE_URL = 'YOUR_SUPABASE_URL';
+const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+const ADMIN_EMAIL = 'YOUR_EMAIL@example.com';
+
+let supabase = null;
+let currentUser = null;
+let currentUserProfile = null;
+let currentSpace = 'tbb';
+let currentFilter = 'all';
+let currentSort = 'votes';
+let currentThreadId = null;
+let currentThreadSpace = null;
+
+// ═══════════════════════════════════════════════════════════════════════════
+//  IDENTITY: the core of the anonymity system
+// ═══════════════════════════════════════════════════════════════════════════
+
+// Returns what the current viewer should see for a given author.
+// Contributors see handle only. Reviewers/Admins see handle + real identity.
+function resolveAuthorName(handle, realName, email) {
+  return handle || realName || email?.split('@')[0] || 'anon';
+}
+
+function resolveAuthorHTML(handle, realName, email, role) {
+  const h = escapeHtml(handle || realName || email?.split('@')[0] || 'anon');
+  if (canReview()) {
+    const real = escapeHtml(realName || email || '');
+    if (real && real !== h) {
+      return `<span class="author-handle">${h}</span><span class="author-reveal">${real}</span>`;
+    }
+  }
+  return `<span class="author-handle">${h}</span>`;
+}
+
+function resolveAuthorInitial(handle) {
+  return (handle || '?').charAt(0).toUpperCase();
+}
+
+// For the compact thread footer: just the name, with reveal for elevated roles
+function resolveFooterAuthor(handle, realName, email) {
+  const h = escapeHtml(handle || realName || email?.split('@')[0] || 'anon');
+  if (canReview()) {
+    const real = escapeHtml(realName || email || '');
+    if (real && real !== h) return h + ' <span class="author-reveal" style="font-size:10px">' + real + '</span>';
+  }
+  return h;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+//  ROLE HELPERS
+// ═══════════════════════════════════════════════════════════════════════════
+
+function getUserRole() { return currentUserProfile?.role || 'contributor'; }
+function canReview() { const r = getUserRole(); return r === 'reviewer' || r === 'admin'; }
+function isAdmin() { return getUserRole() === 'admin'; }
+
+// ═══════════════════════════════════════════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════════════════════════════════════════
+
+async function init() {
+  if (SUPABASE_URL !== 'YOUR_SUPABASE_URL') {
+    supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    const { data: { session } } = await supabase.auth.getSession();
+    if (session) { currentUser = session.user; await loadUserProfile(); showApp(); }
+    supabase.auth.onAuthStateChange(async (event, session) => {
+      if (event === 'SIGNED_IN' && session) { currentUser = session.user; await loadUserProfile(); showApp(); }
+      if (event === 'SIGNED_OUT') { currentUser = null; currentUserProfile = null; showAuth(); }
+    });
+  } else {
+    loadDemoMode();
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+//  AUTH
+// ═══════════════════════════════════════════════════════════════════════════
+
+async function handleAuth() {
+  const email = document.getElementById('authEmail').value.trim();
+  const msgEl = document.getElementById('authMessage');
+  const btn = document.getElementById('authSubmit');
+  if (!email) { msgEl.textContent = 'Please enter your email.'; msgEl.className = 'auth-message error'; return; }
+  btn.disabled = true; btn.textContent = 'Sending...';
+  if (!supabase) { msgEl.textContent = 'Demo mode: Supabase not configured.'; msgEl.className = 'auth-message error'; btn.disabled = false; btn.textContent = 'Send magic link'; return; }
+  try {
+    const { data: collab } = await supabase.from('collaborators').select('*').eq('email', email.toLowerCase()).single();
+    if (!collab) { msgEl.textContent = 'This email is not on the invite list.'; msgEl.className = 'auth-message error'; btn.disabled = false; btn.textContent = 'Send magic link'; return; }
+    const { error } = await supabase.auth.signInWithOtp({ email, options: { emailRedirectTo: window.location.origin + '/collaborate.html' } });
+    if (error) throw error;
+    msgEl.textContent = 'Check your email for a sign-in link.'; msgEl.className = 'auth-message success'; btn.textContent = 'Link sent';
+  } catch (err) { msgEl.textContent = err.message || 'Something went wrong.'; msgEl.className = 'auth-message error'; btn.disabled = false; btn.textContent = 'Send magic link'; }
+}
+
+async function handleSignOut() { if (supabase) await supabase.auth.signOut(); showAuth(); }
+
+async function loadUserProfile() {
+  if (!supabase || !currentUser) return;
+  const { data } = await supabase.from('collaborators').select('*').eq('email', currentUser.email.toLowerCase()).single();
+  currentUserProfile = data;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+//  UI STATE
+// ═══════════════════════════════════════════════════════════════════════════
+
+function showAuth() { document.getElementById('authScreen').style.display = 'flex'; document.getElementById('appScreen').classList.remove('visible'); }
+
+function showApp() {
+  document.getElementById('authScreen').style.display = 'none';
+  document.getElementById('appScreen').classList.add('visible');
+
+  const handle = currentUserProfile?.handle || currentUserProfile?.display_name || currentUser?.email?.split('@')[0] || '?';
+  document.getElementById('userAvatar').textContent = handle.charAt(0).toUpperCase();
+  document.getElementById('userHandle').textContent = handle;
+
+  // Only show real email to the user themselves (they know who they are)
+  document.getElementById('userRealId').textContent = currentUser?.email || '';
+
+  const role = getUserRole();
+  const access = currentUserProfile?.access || 'both';
+  let badgeHTML = '';
+  if (role === 'admin') badgeHTML += '<span class="badge role-admin">Admin</span>';
+  else if (role === 'reviewer') badgeHTML += '<span class="badge role-reviewer">Reviewer</span>';
+  else badgeHTML += '<span class="badge role-contributor">Contributor</span>';
+  badgeHTML += `<span class="badge access-${access}">${access === 'both' ? 'Full access' : access.toUpperCase()}</span>`;
+  document.getElementById('userBadges').innerHTML = badgeHTML;
+
+  document.querySelectorAll('.space-tab').forEach(tab => {
+    const space = tab.dataset.space;
+    if (access !== 'both' && space !== access) tab.classList.add('disabled');
+    else tab.classList.remove('disabled');
+  });
+
+  if (isAdmin()) { document.getElementById('adminPanel').classList.add('visible'); loadCollaborators(); }
+
+  loadThreads('tbb');
+  loadThreads('research');
+}
+
+function switchSpace(space) {
+  const access = currentUserProfile?.access || 'both';
+  if (access !== 'both' && space !== access) return;
+  currentSpace = space; currentFilter = 'all';
+  document.querySelectorAll('.space-tab').forEach(t => t.classList.remove('active'));
+  document.querySelector(`.space-tab[data-space="${space}"]`).classList.add('active');
+  document.getElementById('space-tbb').style.display = space === 'tbb' ? 'block' : 'none';
+  document.getElementById('space-research').style.display = space === 'research' ? 'block' : 'none';
+  closeThread();
+  const filters = document.querySelectorAll(`#${space}Filters .filter-chip`);
+  filters.forEach(f => f.classList.remove('active'));
+  filters[0]?.classList.add('active');
+}
+
+function setFilter(space, filter, el) { currentFilter = filter; document.getElementById(`${space}Filters`).querySelectorAll('.filter-chip').forEach(f => f.classList.remove('active')); el.classList.add('active'); renderThreadList(space); }
+function setSort(sort, el) { currentSort = sort; document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active')); el.classList.add('active'); renderThreadList(currentSpace); }
+
+// ═══════════════════════════════════════════════════════════════════════════
+//  THREADS
+// ═══════════════════════════════════════════════════════════════════════════
+
+let threadsCache = { tbb: [], research: [] };
+let votesCache = {};
+const UPVOTE_SVG = '<svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>';
+
+async function loadThreads(space) {
+  if (supabase) {
+    const { data } = await supabase.from('threads').select('*, comments(count)').eq('space', space).order('created_at', { ascending: false });
+    if (data) {
+      threadsCache[space] = data;
+      for (const t of data) {
+        const { count } = await supabase.from('votes').select('*', { count: 'exact', head: true }).eq('thread_id', t.id);
+        const { data: myVote } = await supabase.from('votes').select('id').eq('thread_id', t.id).eq('user_email', currentUser.email).maybeSingle();
+        votesCache[t.id] = { count: count || 0, userVoted: !!myVote };
+      }
+    }
+  }
+  renderThreadList(space);
+  updateCounts();
+}
+
+function renderThreadList(space) {
+  let threads = [...(threadsCache[space] || [])];
+  const list = document.getElementById(`threadList-${space}`);
+  const empty = document.getElementById(`emptyState-${space}`);
+
+  if (currentFilter !== 'all') threads = threads.filter(t => t.section === currentFilter);
+
+  threads.sort((a, b) => {
+    if (a.pinned && !b.pinned) return -1;
+    if (!a.pinned && b.pinned) return 1;
+    if (currentSort === 'votes') { const d = (votesCache[b.id]?.count || 0) - (votesCache[a.id]?.count || 0); if (d !== 0) return d; }
+    if (currentSort === 'active') return new Date(b.updated_at || b.created_at) - new Date(a.updated_at || a.created_at);
+    return new Date(b.created_at) - new Date(a.created_at);
+  });
+
+  if (threads.length === 0) { list.style.display = 'none'; empty.style.display = 'block'; return; }
+  list.style.display = 'flex'; empty.style.display = 'none';
+
+  list.innerHTML = threads.map(t => {
+    const replyCount = t.comments?.[0]?.count || t.reply_count || 0;
+    const initial = resolveAuthorInitial(t.author_handle);
+    const footerAuthor = resolveFooterAuthor(t.author_handle, t.author_name, t.author_email);
+    const timeAgo = formatTimeAgo(t.created_at);
+    const votes = votesCache[t.id] || { count: 0, userVoted: false };
+    const votedClass = votes.userVoted ? 'voted' : '';
+    const countClass = votes.count > 0 ? 'has-votes' : '';
+    const pinnedClass = t.pinned ? 'pinned' : '';
+    const pinIcon = t.pinned ? '<span class="pin-icon">&#x1f4cc;</span>' : '';
+    const authorRole = t.author_role || 'contributor';
+    const roleDot = (authorRole === 'admin' || authorRole === 'reviewer') ? `<span class="author-role-dot ${authorRole}"></span>` : '';
+
+    return `
+      <div class="thread-item ${pinnedClass}">
+        <div class="vote-col">
+          <button class="vote-btn ${votedClass}" onclick="event.stopPropagation(); toggleVote('${t.id}','${space}')" title="Upvote">${UPVOTE_SVG}</button>
+          <span class="vote-count ${countClass}">${votes.count}</span>
+        </div>
+        <div class="thread-content" onclick="openThread('${t.id}','${space}')">
+          <div class="thread-top">
+            <div class="thread-title-row">${pinIcon}<span class="thread-title">${escapeHtml(t.title)}</span></div>
+            <div class="thread-meta"><span class="thread-section-tag">${escapeHtml(t.section)}</span><span class="status-badge ${t.status || 'open'}">${t.status || 'open'}</span></div>
+          </div>
+          <div class="thread-preview">${escapeHtml(t.body || '')}</div>
+          <div class="thread-footer">
+            <span class="thread-author-avatar">${initial}</span>
+            ${roleDot}
+            <span>${footerAuthor}</span>
+            <span>&middot;</span><span>${timeAgo}</span><span>&middot;</span>
+            <span class="thread-replies">&#x1f4ac; ${replyCount}</span>
+          </div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function updateCounts() {
+  document.getElementById('tbbCount').textContent = threadsCache.tbb.length;
+  document.getElementById('researchCount').textContent = threadsCache.research.length;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+//  VOTING
+// ═══════════════════════════════════════════════════════════════════════════
+
+async function toggleVote(threadId, space) {
+  const votes = votesCache[threadId] || { count: 0, userVoted: false };
+  const email = currentUser?.email || 'demo@btcadp.org';
+  if (supabase) {
+    if (votes.userVoted) { await supabase.from('votes').delete().eq('thread_id', threadId).eq('user_email', email); votes.count = Math.max(0, votes.count - 1); votes.userVoted = false; }
+    else { await supabase.from('votes').insert({ thread_id: threadId, user_email: email }); votes.count += 1; votes.userVoted = true; }
+  } else { votes.userVoted = !votes.userVoted; votes.count += votes.userVoted ? 1 : -1; }
+  votesCache[threadId] = votes;
+  renderThreadList(space);
+  if (currentThreadId === threadId) updateDetailVoteUI(threadId);
+}
+
+function toggleDetailVote() { if (currentThreadId) toggleVote(currentThreadId, currentThreadSpace); }
+
+function updateDetailVoteUI(threadId) {
+  const votes = votesCache[threadId] || { count: 0, userVoted: false };
+  document.getElementById('detailVoteBtn').className = 'detail-vote-btn' + (votes.userVoted ? ' voted' : '');
+  document.getElementById('detailVoteLabel').textContent = votes.userVoted ? 'Voted' : 'Upvote';
+  document.getElementById('detailVoteSummary').innerHTML = votes.count > 0
+    ? `<strong>${votes.count}</strong> collaborator${votes.count !== 1 ? 's' : ''} support${votes.count === 1 ? 's' : ''} this` : 'No votes yet';
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+//  THREAD DETAIL
+// ═══════════════════════════════════════════════════════════════════════════
+
+async function openThread(threadId, space) {
+  currentThreadId = threadId; currentThreadSpace = space;
+  document.getElementById(`space-${space}`).style.display = 'none';
+  document.getElementById('threadDetail').classList.add('visible');
+
+  const thread = threadsCache[space].find(t => t.id === threadId);
+  if (!thread) return;
+
+  document.getElementById('detailTitle').textContent = thread.title;
+  document.getElementById('detailSection').textContent = thread.section;
+  const statusEl = document.getElementById('detailStatus');
+  statusEl.textContent = thread.status || 'open';
+  statusEl.className = `status-badge ${thread.status || 'open'}`;
+
+  // Author line uses handle system
+  const authorDisplay = resolveAuthorName(thread.author_handle, thread.author_name, thread.author_email);
+  let authorLine = 'by ' + authorDisplay;
+  if (canReview() && thread.author_email && thread.author_email !== authorDisplay) {
+    authorLine += ` (${thread.author_email})`;
+  }
+  document.getElementById('detailAuthor').textContent = authorLine;
+  document.getElementById('detailDate').textContent = formatTimeAgo(thread.created_at);
+
+  updateDetailVoteUI(threadId);
+
+  // Reviewer controls
+  const reviewerCtrl = document.getElementById('reviewerControls');
+  if (canReview()) {
+    reviewerCtrl.classList.add('visible');
+    document.getElementById('statusSelect').value = thread.status || 'open';
+    const pinBtn = document.getElementById('pinBtn');
+    pinBtn.className = 'btn-pin' + (thread.pinned ? ' pinned' : '');
+    pinBtn.textContent = thread.pinned ? 'Unpin' : 'Pin';
+  } else { reviewerCtrl.classList.remove('visible'); }
+
+  // Comments
+  let comments = [];
+  if (supabase) {
+    const { data } = await supabase.from('comments').select('*').eq('thread_id', threadId).order('created_at', { ascending: true });
+    comments = data || [];
+  } else { comments = thread._demoComments || []; }
+
+  const commentsEl = document.getElementById('detailComments');
+  let html = renderComment(thread.author_handle, thread.author_name, thread.author_email, thread.author_role, thread.body, thread.created_at, false);
+  comments.forEach(c => { html += renderComment(c.author_handle, c.author_name, c.author_email, c.author_role, c.body, c.created_at, true); });
+  commentsEl.innerHTML = html;
+}
+
+function renderComment(handle, name, email, role, body, created_at, showQuote) {
+  const initial = resolveAuthorInitial(handle || name);
+  const authorHTML = resolveAuthorHTML(handle, name, email, role);
+  const r = role || 'contributor';
+  const roleBadge = r !== 'contributor' ? `<span class="comment-role-badge ${r}">${r}</span>` : '';
+  const bodySnippet = (body || '').substring(0, 120).replace(/'/g, "\\'").replace(/\n/g, ' ');
+  const quoteBtn = showQuote ? `<div class="comment-actions"><button class="comment-action" onclick="quoteReply('${bodySnippet}')">Quote</button></div>` : '';
+
+  return `
+    <div class="comment">
+      <div class="comment-header">
+        <div class="comment-avatar">${initial}</div>
+        <span class="comment-author">${authorHTML}</span>
+        ${roleBadge}
+        <span class="comment-time">${formatTimeAgo(created_at)}</span>
+      </div>
+      <div class="comment-body">${formatBody(body)}</div>
+      ${quoteBtn}
+    </div>`;
+}
+
+function closeThread() {
+  document.getElementById('threadDetail').classList.remove('visible');
+  document.getElementById(`space-${currentSpace}`).style.display = 'block';
+  document.getElementById('replyText').value = '';
+  currentThreadId = null; currentThreadSpace = null;
+}
+
+function quoteReply(text) { const ta = document.getElementById('replyText'); ta.value = '> ' + text + '\n\n' + ta.value; ta.focus(); }
+
+// ═══════════════════════════════════════════════════════════════════════════
+//  REVIEWER ACTIONS
+// ═══════════════════════════════════════════════════════════════════════════
+
+async function changeThreadStatus() {
+  if (!canReview() || !currentThreadId) return;
+  const newStatus = document.getElementById('statusSelect').value;
+  if (supabase) await supabase.from('threads').update({ status: newStatus }).eq('id', currentThreadId);
+  const thread = threadsCache[currentThreadSpace]?.find(t => t.id === currentThreadId);
+  if (thread) thread.status = newStatus;
+  const s = document.getElementById('detailStatus'); s.textContent = newStatus; s.className = `status-badge ${newStatus}`;
+  renderThreadList(currentThreadSpace);
+}
+
+async function togglePin() {
+  if (!canReview() || !currentThreadId) return;
+  const thread = threadsCache[currentThreadSpace]?.find(t => t.id === currentThreadId);
+  if (!thread) return;
+  const newPinned = !thread.pinned;
+  if (supabase) await supabase.from('threads').update({ pinned: newPinned }).eq('id', currentThreadId);
+  thread.pinned = newPinned;
+  const btn = document.getElementById('pinBtn');
+  btn.className = 'btn-pin' + (newPinned ? ' pinned' : '');
+  btn.textContent = newPinned ? 'Unpin' : 'Pin';
+  renderThreadList(currentThreadSpace);
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+//  SUBMIT
+// ═══════════════════════════════════════════════════════════════════════════
+
+async function submitReply() {
+  const body = document.getElementById('replyText').value.trim();
+  if (!body || !currentThreadId) return;
+  if (supabase) {
+    await supabase.from('comments').insert({
+      thread_id: currentThreadId,
+      author_email: currentUser.email,
+      author_name: currentUserProfile?.display_name || null,
+      author_handle: currentUserProfile?.handle || currentUserProfile?.display_name || currentUser.email.split('@')[0],
+      author_role: getUserRole(),
+      body: body
+    });
+    document.getElementById('replyText').value = '';
+    openThread(currentThreadId, currentThreadSpace);
+    loadThreads(currentThreadSpace);
+  } else { alert('Demo mode: Reply would be saved.'); }
+}
+
+async function submitThread(space) {
+  const title = document.getElementById(`newTitle-${space}`).value.trim();
+  const section = document.getElementById(`newSection-${space}`).value;
+  const body = document.getElementById(`newBody-${space}`).value.trim();
+  if (!title) return;
+  if (supabase) {
+    await supabase.from('threads').insert({
+      space, section, title, body,
+      author_email: currentUser.email,
+      author_name: currentUserProfile?.display_name || null,
+      author_handle: currentUserProfile?.handle || currentUserProfile?.display_name || currentUser.email.split('@')[0],
+      author_role: getUserRole(),
+      status: 'open', pinned: false
+    });
+    document.getElementById(`newTitle-${space}`).value = '';
+    document.getElementById(`newBody-${space}`).value = '';
+    hideNewThread(space);
+    loadThreads(space);
+  } else { alert('Demo mode: Thread would be saved.'); }
+}
+
+function showNewThread(space) { document.getElementById(`newThreadForm-${space}`).classList.add('visible'); }
+function hideNewThread(space) { document.getElementById(`newThreadForm-${space}`).classList.remove('visible'); }
+
+// ═══════════════════════════════════════════════════════════════════════════
+//  ADMIN
+// ═══════════════════════════════════════════════════════════════════════════
+
+async function inviteCollaborator() {
+  const email = document.getElementById('inviteEmail').value.trim().toLowerCase();
+  const handle = document.getElementById('inviteHandle').value.trim();
+  const access = document.getElementById('inviteAccess').value;
+  const role = document.getElementById('inviteRole').value;
+  if (!email || !handle) { alert('Both email and handle are required.'); return; }
+  if (supabase) {
+    const { error } = await supabase.from('collaborators').upsert({
+      email, handle, access, role,
+      invited_by: currentUser.email,
+      invited_at: new Date().toISOString()
+    }, { onConflict: 'email' });
+    if (!error) { document.getElementById('inviteEmail').value = ''; document.getElementById('inviteHandle').value = ''; loadCollaborators(); }
+  } else { alert(`Demo: Would invite ${email} as "${handle}" (${role}, ${access}).`); }
+}
+
+async function loadCollaborators() {
+  if (!supabase) {
+    renderCollaboratorList([
+      { email: 'nik@example.com', handle: 'satoshi_fan', access: 'tbb', role: 'reviewer' },
+      { email: 'team@example.com', handle: 'block_builder', access: 'tbb', role: 'contributor' },
+      { email: 'professor@university.edu', handle: 'proof_of_work', access: 'research', role: 'reviewer' },
+      { email: 'researcher@university.edu', handle: 'hash_scholar', access: 'research', role: 'contributor' },
+      { email: 'analyst@fund.com', handle: 'capital_node', access: 'both', role: 'contributor' },
+    ]);
+    return;
+  }
+  const { data } = await supabase.from('collaborators').select('*').order('invited_at', { ascending: false });
+  renderCollaboratorList(data || []);
+}
+
+function renderCollaboratorList(collabs) {
+  document.getElementById('invitedList').innerHTML = collabs.map(c => {
+    const roleColor = c.role === 'admin' ? 'color:var(--orange)' : c.role === 'reviewer' ? 'color:var(--purple)' : '';
+    return `
+    <div class="invited-item">
+      <div class="invited-identity">
+        <div class="invited-handle">${escapeHtml(c.handle || '?')}</div>
+        <div class="invited-email">${escapeHtml(c.email)}</div>
+      </div>
+      <span class="invited-access">${c.access}</span>
+      <select class="role-select-inline" style="${roleColor}" onchange="changeCollaboratorRole('${escapeHtml(c.email)}', this.value)">
+        <option value="contributor" ${c.role === 'contributor' ? 'selected' : ''}>Contributor</option>
+        <option value="reviewer" ${c.role === 'reviewer' ? 'selected' : ''}>Reviewer</option>
+        <option value="admin" ${c.role === 'admin' ? 'selected' : ''}>Admin</option>
+      </select>
+      <button class="btn-revoke" onclick="revokeAccess('${escapeHtml(c.email)}')">revoke</button>
+    </div>`;
+  }).join('');
+}
+
+async function changeCollaboratorRole(email, newRole) { if (supabase) await supabase.from('collaborators').update({ role: newRole }).eq('email', email); }
+async function revokeAccess(email) { if (!confirm(`Revoke access for ${email}?`)) return; if (supabase) { await supabase.from('collaborators').delete().eq('email', email); loadCollaborators(); } }
+
+// ═══════════════════════════════════════════════════════════════════════════
+//  DEMO
+// ═══════════════════════════════════════════════════════════════════════════
+
+function loadDemoMode() {
+  currentUser = { email: 'demo@btcadp.org' };
+  currentUserProfile = { access: 'both', handle: 'architect', display_name: 'Demo Admin', role: 'admin' };
+
+  threadsCache.tbb = [
+    {
+      id: 'demo-1', space: 'tbb', section: 'busd',
+      title: '\u20bfUSD redemption mechanics need clarification in Ch. 4',
+      body: 'The current draft describes \u20bfUSD redemption but does not clearly distinguish between retail redemption through FSPs versus direct consortium redemption. Suggest adding a flow diagram and explicit language about the two paths.',
+      author_email: 'nik@example.com', author_name: 'Nik', author_handle: 'satoshi_fan', author_role: 'reviewer',
+      status: 'open', pinned: true, created_at: '2026-04-03T14:00:00Z', reply_count: 3,
+      _demoComments: [
+        { author_email: 'team@example.com', author_name: 'Team Member', author_handle: 'block_builder', author_role: 'contributor', body: 'Agreed. The FSP layer is critical to understanding the consumer experience. A sequence diagram would help.', created_at: '2026-04-03T16:30:00Z' },
+        { author_email: 'nik@example.com', author_name: 'Nik', author_handle: 'satoshi_fan', author_role: 'reviewer', body: 'Also, should we explicitly state that retail users never interact with the consortium directly? That is implicit but worth making explicit.', created_at: '2026-04-03T18:00:00Z' },
+        { author_email: 'demo@btcadp.org', author_name: 'Author', author_handle: 'architect', author_role: 'admin', body: 'Good catches. Will add both the diagram and the explicit statement about FSP mediation. Targeting next revision.', created_at: '2026-04-04T09:00:00Z' },
+      ]
+    },
+    {
+      id: 'demo-2', space: 'tbb', section: 'thesis',
+      title: 'Strengthen the "bridge not destination" framing in the intro',
+      body: 'The thesis chapter establishes that \u20bfUSD is the bridge and Bitcoin is the destination, but this could be emphasized more strongly upfront. First-time readers might conflate \u20bfUSD with Bitcoin.',
+      author_email: 'analyst@fund.com', author_name: 'Analyst', author_handle: 'capital_node', author_role: 'contributor',
+      status: 'under-review', pinned: false, created_at: '2026-04-02T10:00:00Z', reply_count: 1,
+      _demoComments: [
+        { author_email: 'demo@btcadp.org', author_name: 'Author', author_handle: 'architect', author_role: 'admin', body: 'This is a valid concern. The distinction is the most important conceptual point in the entire document. I will draft stronger language for the opening section.', created_at: '2026-04-02T14:00:00Z' },
+      ]
+    },
+    {
+      id: 'demo-3', space: 'tbb', section: 'bond',
+      title: '\u20bfond yield mechanics: clarify \u20bfC denomination',
+      body: 'The \u20bfond section describes yields denominated in \u20bfC but the relationship between \u20bfC and USD for yield calculation could confuse traditional finance readers. Suggest a worked example.',
+      author_email: 'analyst@fund.com', author_name: 'Analyst', author_handle: 'capital_node', author_role: 'contributor',
+      status: 'open', pinned: false, created_at: '2026-04-01T08:00:00Z', reply_count: 0, _demoComments: []
+    },
+  ];
+
+  threadsCache.research = [
+    {
+      id: 'demo-r1', space: 'research', section: 'methodology',
+      title: 'Era boundary classification: revisit the halving-based thresholds',
+      body: 'The current era boundaries are defined by halving events, which makes structural sense. However, the market behavior around halvings shows anticipatory pricing 3 to 6 months before each halving. Should era transitions account for this lead time?',
+      author_email: 'professor@university.edu', author_name: 'Dr. Chen', author_handle: 'proof_of_work', author_role: 'reviewer',
+      status: 'open', pinned: true, created_at: '2026-04-03T11:00:00Z', reply_count: 2,
+      _demoComments: [
+        { author_email: 'researcher@university.edu', author_name: 'Dr. Patel', author_handle: 'hash_scholar', author_role: 'contributor', body: 'Interesting point. The BTCADP spec currently uses block height for era boundaries which is clean and objective. Adding anticipatory windows would introduce subjectivity. Perhaps a footnote acknowledging the market behavior is sufficient?', created_at: '2026-04-03T15:00:00Z' },
+        { author_email: 'demo@btcadp.org', author_name: 'Author', author_handle: 'architect', author_role: 'admin', body: 'The block height boundary is intentionally objective. Agree with hash_scholar that a research note acknowledging the anticipatory effect is the right approach rather than modifying the boundary definition.', created_at: '2026-04-04T08:00:00Z' },
+      ]
+    },
+    {
+      id: 'demo-r2', space: 'research', section: 'data-quality',
+      title: 'Pre-exchange era (Era 0) pricing confidence levels',
+      body: 'The confidence scoring for Era 0 data points relies heavily on forum posts and P2P transaction records. Has there been a systematic survey of these sources? Some early transactions may have been misreported or denominated inconsistently.',
+      author_email: 'researcher@university.edu', author_name: 'Dr. Patel', author_handle: 'hash_scholar', author_role: 'contributor',
+      status: 'open', pinned: false, created_at: '2026-04-01T20:00:00Z', reply_count: 0, _demoComments: []
+    },
+  ];
+
+  votesCache = { 'demo-1': { count: 5, userVoted: false }, 'demo-2': { count: 8, userVoted: true }, 'demo-3': { count: 2, userVoted: false }, 'demo-r1': { count: 6, userVoted: true }, 'demo-r2': { count: 3, userVoted: false } };
+  showApp();
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+//  UTILS
+// ═══════════════════════════════════════════════════════════════════════════
+
+function escapeHtml(str) { if (!str) return ''; const d = document.createElement('div'); d.textContent = str; return d.innerHTML; }
+function formatBody(str) { if (!str) return ''; let e = escapeHtml(str); e = e.replace(/^&gt; (.+)$/gm, '<blockquote>$1</blockquote>'); return e.replace(/\n/g, '<br>'); }
+function formatTimeAgo(ds) {
+  if (!ds) return '';
+  const diff = Date.now() - new Date(ds).getTime();
+  const m = Math.floor(diff / 60000), h = Math.floor(diff / 3600000), d = Math.floor(diff / 86400000);
+  if (m < 1) return 'just now'; if (m < 60) return m + 'm ago'; if (h < 24) return h + 'h ago'; if (d < 30) return d + 'd ago';
+  return new Date(ds).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+}
+
+document.getElementById('authEmail').addEventListener('keydown', e => { if (e.key === 'Enter') handleAuth(); });
+
+init();
+</script>
+
+<!--
+═══════════════════════════════════════════════════════════════════════════════
+  SUPABASE SQL MIGRATION  (v3: voting + roles + handles)
+═══════════════════════════════════════════════════════════════════════════════
+
+-- Collaborators with handles (pseudonyms)
+CREATE TABLE collaborators (
+  id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+  email text UNIQUE NOT NULL,
+  handle text UNIQUE NOT NULL,           -- public pseudonym, what everyone sees
+  display_name text,                      -- real name, only visible to reviewers/admins
+  access text NOT NULL DEFAULT 'both' CHECK (access IN ('tbb', 'research', 'both')),
+  role text NOT NULL DEFAULT 'contributor' CHECK (role IN ('contributor', 'reviewer', 'admin')),
+  invited_by text,
+  invited_at timestamptz DEFAULT now()
+);
+
+-- Threads (author_handle is the public-facing identity)
+CREATE TABLE threads (
+  id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+  space text NOT NULL CHECK (space IN ('tbb', 'research')),
+  section text NOT NULL,
+  title text NOT NULL,
+  body text,
+  author_email text NOT NULL,            -- real email, stored but hidden from contributors
+  author_name text,                       -- real name, hidden from contributors
+  author_handle text NOT NULL,            -- what everyone sees
+  author_role text DEFAULT 'contributor',
+  status text DEFAULT 'open' CHECK (status IN ('open', 'under-review', 'resolved')),
+  pinned boolean DEFAULT false,
+  created_at timestamptz DEFAULT now(),
+  updated_at timestamptz DEFAULT now()
+);
+
+-- Comments
+CREATE TABLE comments (
+  id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+  thread_id uuid REFERENCES threads(id) ON DELETE CASCADE,
+  author_email text NOT NULL,
+  author_name text,
+  author_handle text NOT NULL,
+  author_role text DEFAULT 'contributor',
+  body text NOT NULL,
+  created_at timestamptz DEFAULT now()
+);
+
+-- Votes
+CREATE TABLE votes (
+  id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+  thread_id uuid REFERENCES threads(id) ON DELETE CASCADE,
+  user_email text NOT NULL,
+  created_at timestamptz DEFAULT now(),
+  UNIQUE(thread_id, user_email)
+);
+
+-- Enable RLS
+ALTER TABLE collaborators ENABLE ROW LEVEL SECURITY;
+ALTER TABLE threads ENABLE ROW LEVEL SECURITY;
+ALTER TABLE comments ENABLE ROW LEVEL SECURITY;
+ALTER TABLE votes ENABLE ROW LEVEL SECURITY;
+
+-- ── COLLABORATORS ──
+-- Everyone can see handles only. Real emails visible through app logic, not DB.
+CREATE POLICY "Authenticated can view collaborators"
+  ON collaborators FOR SELECT TO authenticated USING (true);
+
+CREATE POLICY "Admins can insert collaborators"
+  ON collaborators FOR INSERT TO authenticated
+  WITH CHECK (EXISTS (SELECT 1 FROM collaborators WHERE email = auth.jwt() ->> 'email' AND role = 'admin'));
+
+CREATE POLICY "Admins can update collaborators"
+  ON collaborators FOR UPDATE TO authenticated
+  USING (EXISTS (SELECT 1 FROM collaborators WHERE email = auth.jwt() ->> 'email' AND role = 'admin'));
+
+CREATE POLICY "Admins can delete collaborators"
+  ON collaborators FOR DELETE TO authenticated
+  USING (EXISTS (SELECT 1 FROM collaborators WHERE email = auth.jwt() ->> 'email' AND role = 'admin'));
+
+-- ── THREADS ──
+CREATE POLICY "View threads in own space"
+  ON threads FOR SELECT TO authenticated
+  USING (EXISTS (SELECT 1 FROM collaborators WHERE email = auth.jwt() ->> 'email' AND (access = 'both' OR access = threads.space)));
+
+CREATE POLICY "Create threads in own space"
+  ON threads FOR INSERT TO authenticated
+  WITH CHECK (EXISTS (SELECT 1 FROM collaborators WHERE email = auth.jwt() ->> 'email' AND (access = 'both' OR access = threads.space)));
+
+CREATE POLICY "Reviewers/admins update threads"
+  ON threads FOR UPDATE TO authenticated
+  USING (EXISTS (SELECT 1 FROM collaborators WHERE email = auth.jwt() ->> 'email' AND role IN ('reviewer', 'admin') AND (access = 'both' OR access = threads.space)));
+
+-- ── COMMENTS ──
+CREATE POLICY "View comments"
+  ON comments FOR SELECT TO authenticated
+  USING (EXISTS (SELECT 1 FROM collaborators c JOIN threads t ON t.id = comments.thread_id WHERE c.email = auth.jwt() ->> 'email' AND (c.access = 'both' OR c.access = t.space)));
+
+CREATE POLICY "Create comments"
+  ON comments FOR INSERT TO authenticated
+  WITH CHECK (EXISTS (SELECT 1 FROM collaborators c JOIN threads t ON t.id = comments.thread_id WHERE c.email = auth.jwt() ->> 'email' AND (c.access = 'both' OR c.access = t.space)));
+
+-- ── VOTES ──
+CREATE POLICY "View votes" ON votes FOR SELECT TO authenticated
+  USING (EXISTS (SELECT 1 FROM collaborators WHERE email = auth.jwt() ->> 'email'));
+
+CREATE POLICY "Cast vote" ON votes FOR INSERT TO authenticated
+  WITH CHECK (auth.jwt() ->> 'email' = user_email AND EXISTS (SELECT 1 FROM collaborators WHERE email = auth.jwt() ->> 'email'));
+
+CREATE POLICY "Remove own vote" ON votes FOR DELETE TO authenticated
+  USING (auth.jwt() ->> 'email' = user_email);
+
+-- ── TRIGGER ──
+CREATE OR REPLACE FUNCTION update_thread_timestamp()
+RETURNS TRIGGER AS $$ BEGIN UPDATE threads SET updated_at = now() WHERE id = NEW.thread_id; RETURN NEW; END; $$ LANGUAGE plpgsql;
+
+CREATE TRIGGER on_comment_insert AFTER INSERT ON comments FOR EACH ROW EXECUTE FUNCTION update_thread_timestamp();
+
+-- ── OPTIONAL: Hide real emails from contributors at DB level ──
+-- If you want extra safety, create a view that strips author_email
+-- and author_name for non-reviewer roles. The app already handles
+-- this client-side, but a DB view adds defense in depth.
+
+-- SEED YOURSELF:
+-- INSERT INTO collaborators (email, handle, display_name, access, role)
+-- VALUES ('your@email.com', 'your_handle', 'Your Name', 'both', 'admin');
+
+═══════════════════════════════════════════════════════════════════════════════
+  SETUP CHECKLIST
+═══════════════════════════════════════════════════════════════════════════════
+  1. Create Supabase project: https://supabase.com/dashboard
+  2. Run the SQL above in the SQL Editor
+  3. Enable Magic Link: Authentication > Providers > Email
+  4. Set Site URL to https://btcadp.org
+  5. Add redirect URL: https://btcadp.org/collaborate.html
+  6. Copy Project URL + anon key from Settings > API
+  7. Replace SUPABASE_URL and SUPABASE_ANON_KEY in this file
+  8. Replace ADMIN_EMAIL with your email
+  9. Seed yourself with the INSERT above
+  10. When inviting collaborators, ALWAYS assign a unique handle
+═══════════════════════════════════════════════════════════════════════════════
+-->
+</body>
+</html>

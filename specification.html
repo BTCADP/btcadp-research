@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BTCADP Specification v1.0 — Bitcoin Average Daily Price</title>
+<title>BTCADP Specification v1.0 | Bitcoin Average Daily Price</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
 <style>
@@ -507,7 +507,7 @@
   <h3>4.3 Equal Weighting of Exchanges</h3>
   <p>Each qualifying exchange contributes exactly one VWAP to the trimmed mean, regardless of its volume. This is a deliberate design choice. Volume-weighting across exchanges would reintroduce the manipulation vector that the methodology is designed to eliminate: an exchange that fabricates volume would gain proportional influence over the final price. Equal weighting ensures that no single exchange, regardless of its reported size, can dominate the result.</p>
   <p>The trade-off is that a small exchange with $2 million in daily volume receives the same weight as a large exchange with $500 million. This is acceptable because the trimmed mean already discards the most extreme values. If a small exchange&rsquo;s VWAP is an outlier, it is trimmed. If it falls within the middle 50%, its price is broadly consistent with the market and deserves inclusion.</p>
-  <blockquote><p><strong>Known attack vector:</strong> An adversary could theoretically create multiple small exchanges that each barely meet the qualification threshold, attempting to shift the trimmed mean. However, with 20+ legitimate qualifying exchanges in the modern era, an attacker would need to introduce and sustain more than 7 fraudulent exchanges to influence the result &mdash; each meeting all qualification criteria including price coherence. The cost and complexity of this attack is substantial, and the transparency record (Section 9) makes it detectable.</p></blockquote>
+  <blockquote><p><strong>Known attack vector:</strong> An adversary could theoretically create multiple small exchanges that each barely meet the qualification threshold, attempting to shift the trimmed mean. However, with 20+ legitimate qualifying exchanges in the modern era, an attacker would need to introduce and sustain more than 7 fraudulent exchanges to influence the result , each meeting all qualification criteria including price coherence. The cost and complexity of this attack is substantial, and the transparency record (Section 9) makes it detectable.</p></blockquote>
 
   <h3>4.4 Rounding and Arithmetic Precision</h3>
   <p>The final BTCADP value is rounded to two decimal places (cents) using the IEEE 754 round-half-to-even rule (banker&rsquo;s rounding). This eliminates rounding bias and is the standard in financial computation.</p>
@@ -521,21 +521,21 @@
       <tr><td>n &ge; 5</td><td>Full trimmed mean (k = 25%)</td><td>Full confidence</td></tr>
       <tr><td>n = 3 or 4</td><td>Median only (trimming not meaningful)</td><td>Reduced confidence</td></tr>
       <tr><td>n = 2</td><td>Simple mean of two VWAPs</td><td>Low confidence</td></tr>
-      <tr><td>n = 1</td><td>Single exchange VWAP</td><td>Single-source &mdash; flagged</td></tr>
+      <tr><td>n = 1</td><td>Single exchange VWAP</td><td>Single-source , flagged</td></tr>
       <tr><td>n = 0</td><td>BTCADP is undefined for this day</td><td>No data</td></tr>
     </tbody>
   </table>
-  <p>The confidence flag is published alongside the BTCADP value for full transparency. It does not change the number itself &mdash; it communicates the degree of statistical robustness behind it.</p>
+  <p>The confidence flag is published alongside the BTCADP value for full transparency. It does not change the number itself , it communicates the degree of statistical robustness behind it.</p>
 
   <!-- SECTION 5 -->
   <h2 id="s5">5. Exchange Qualification Criteria</h2>
-  <p>An exchange qualifies for inclusion in the BTCADP calculation for a given day if and only if it meets the following criteria. These criteria are purely algorithmic &mdash; no subjective judgment or editorial discretion is involved.</p>
+  <p>An exchange qualifies for inclusion in the BTCADP calculation for a given day if and only if it meets the following criteria. These criteria are purely algorithmic , no subjective judgment or editorial discretion is involved.</p>
   <p>The criteria are applied in a specific order. This order matters for reproducibility and is considered part of the specification:</p>
 
   <h3>5.1 The Exchange List</h3>
   <p>The calculation begins with a list of known exchanges to evaluate. This is the one input to the BTCADP that requires human curation, and this specification acknowledges it directly. Any exchange that offers a BTC/USD trading pair and publishes publicly accessible trade-level data (via API or data feed) is a candidate for inclusion. The list should be as comprehensive as reasonably possible.</p>
   <p>The transparency record (Section 9) must publish the full list of exchanges evaluated for each day, including those that were evaluated and excluded. This allows any observer to propose additions. If an exchange meets all algorithmic criteria below but was not included in the evaluated set, the BTCADP publisher should add it to subsequent calculations. Over time, the exchange list converges toward completeness through public scrutiny.</p>
-  <blockquote><p><strong>Principle:</strong> The exchange list is intentionally permissive. The algorithmic filters below are what protect the BTCADP from bad data &mdash; not the curation of the list. When in doubt, include an exchange and let the math decide.</p></blockquote>
+  <blockquote><p><strong>Principle:</strong> The exchange list is intentionally permissive. The algorithmic filters below are what protect the BTCADP from bad data , not the curation of the list. When in doubt, include an exchange and let the math decide.</p></blockquote>
 
   <h3>5.2 Data Availability (Filter 1)</h3>
   <p>The exchange must publish historical trade-level data for the BTC/USD pair, including at minimum: trade timestamp (UTC or convertible to UTC), trade price (USD), and trade volume (BTC). Exchanges that do not provide this data at the required granularity are excluded.</p>
@@ -555,23 +555,23 @@
   <h3>5.6 Price Coherence (Filter 5, applied last)</h3>
   <p>After all exchanges have passed the above filters and their VWAPs have been computed, the price coherence check is applied. An exchange&rsquo;s daily VWAP must fall within 5% of the median VWAP across all other exchanges that passed Filters 1&ndash;4. This is a sanity check that identifies exchanges whose prices have decoupled from the global market due to technical issues, capital controls, or fraud.</p>
   <p>The price coherence check is applied iteratively: after removing outlier exchanges, the median is recalculated, and any newly-outlying exchanges are also removed, until the set stabilizes or a maximum of 5 iterations have been performed. In practice, this rarely requires more than one pass.</p>
-  <blockquote><p><strong>Order of operations:</strong> The explicit ordering &mdash; data availability, then trade count, then time coverage, then spread (where available), then price coherence &mdash; is essential for reproducibility. Two implementations must apply these filters in the same sequence to arrive at the same qualifying set.</p></blockquote>
+  <blockquote><p><strong>Order of operations:</strong> The explicit ordering , data availability, then trade count, then time coverage, then spread (where available), then price coherence , is essential for reproducibility. Two implementations must apply these filters in the same sequence to arrive at the same qualifying set.</p></blockquote>
 
   <!-- SECTION 6 -->
   <h2 id="s6">6. Historical Eras and Methodology Transitions</h2>
-  <p>Bitcoin&rsquo;s data landscape has evolved dramatically since its inception. A single methodology applied uniformly to all eras would produce either false precision (in early years) or unnecessary imprecision (in recent years). The BTCADP specification therefore defines distinct historical eras, each with an appropriate methodology. This is not a weakness &mdash; it is intellectual rigor formalized as policy.</p>
+  <p>Bitcoin&rsquo;s data landscape has evolved dramatically since its inception. A single methodology applied uniformly to all eras would produce either false precision (in early years) or unnecessary imprecision (in recent years). The BTCADP specification therefore defines distinct historical eras, each with an appropriate methodology. This is not a weakness , it is intellectual rigor formalized as policy.</p>
 
   <h3>6.1 Era 0: Genesis (January 3, 2009 &ndash; July 17, 2010)</h3>
   <p><strong>BTCADP value: $0.00 for all days.</strong></p>
   <p>The BTCADP timeline begins on January 3, 2009, the date the Bitcoin genesis block was mined and the first bitcoin came into existence. No organized exchange existed during this period. The only data points are a handful of peer-to-peer transactions (most famously, the 10,000 BTC pizza purchase of May 22, 2010, implying approximately $0.004 per BTC). While these isolated transactions demonstrate that some participants ascribed value to Bitcoin, there was no functioning market from which a daily price could be derived.</p>
-  <p>The BTCADP for this entire era is defined as $0.00. This is not a claim that Bitcoin was worthless &mdash; it is a recognition that no market-based price discovery mechanism existed. A daily reference price requires a market, and no market existed. The $0.00 value provides a clean, unambiguous baseline from which Bitcoin&rsquo;s price history begins.</p>
+  <p>The BTCADP for this entire era is defined as $0.00. This is not a claim that Bitcoin was worthless , it is a recognition that no market-based price discovery mechanism existed. A daily reference price requires a market, and no market existed. The $0.00 value provides a clean, unambiguous baseline from which Bitcoin&rsquo;s price history begins.</p>
   <blockquote><p><strong>Note:</strong> Researchers investigating this era may produce more granular valuations based on documented peer-to-peer transactions, mining costs, or other methodologies. Such work is encouraged under Section 7 and may inform future revisions, but the default BTCADP for Era 0 remains $0.00.</p></blockquote>
 
   <h3>6.2 Era 1: Single-Exchange Market (July 18, 2010 &ndash; February 24, 2014)</h3>
   <p><strong>BTCADP status:</strong> Single-source, flagged.</p>
   <p>Mt. Gox launched on July 18, 2010, and rapidly became the dominant exchange, handling over 70% of global Bitcoin volume for much of this period. While other exchanges existed (TradeHill, Bitcoinica, BTC-e, Bitstamp), their volumes were insufficient to form a statistically meaningful set for trimmed-mean aggregation.</p>
   <p>The BTCADP for this era is defined as the Mt. Gox daily VWAP for the BTC/USD pair. Every value in this era carries a single-source confidence flag. For dates where other exchanges (particularly Bitstamp, from 2012 onward) have sufficient data to compute a VWAP, these values are published in the transparency record as secondary references for cross-validation, but do not alter the primary BTCADP value.</p>
-  <blockquote><p><strong>Known issue:</strong> It is now established that Mt. Gox was insolvent for much of 2013 and that automated trading bots (notably the &ldquo;Willy Bot&rdquo;) generated fraudulent volume. The BTCADP values from late 2013 should be treated with appropriate skepticism. This is an inherent limitation of the historical record, not a methodological failure &mdash; no methodology can produce trustworthy prices from untrustworthy data.</p></blockquote>
+  <blockquote><p><strong>Known issue:</strong> It is now established that Mt. Gox was insolvent for much of 2013 and that automated trading bots (notably the &ldquo;Willy Bot&rdquo;) generated fraudulent volume. The BTCADP values from late 2013 should be treated with appropriate skepticism. This is an inherent limitation of the historical record, not a methodological failure , no methodology can produce trustworthy prices from untrustworthy data.</p></blockquote>
 
   <h3>6.3 Era 2: Transition (February 25, 2014 &ndash; December 31, 2017)</h3>
   <p><strong>BTCADP status:</strong> Multi-exchange, reduced confidence initially, improving over time.</p>
@@ -599,7 +599,7 @@
 
   <h3>7.1 Provisional Values and the Research Mandate</h3>
   <p>For Eras 0, 1, and 2, the initial BTCADP publication uses provisional values: $0.00 for Era 0, Mt. Gox VWAP data for Era 1, and aggregated market data from available sources for Era 2. These values are directionally accurate but were not computed using the full methodology specified in Section 4, because the required trade-level data is either incomplete, difficult to obtain, or housed in sources of uncertain provenance.</p>
-  <p>Every provisional value is clearly marked as such. Provisional status is not a deficiency &mdash; it is a transparent acknowledgment that rigorous historical computation requires dedicated research effort, and an explicit invitation for that effort to be undertaken.</p>
+  <p>Every provisional value is clearly marked as such. Provisional status is not a deficiency , it is a transparent acknowledgment that rigorous historical computation requires dedicated research effort, and an explicit invitation for that effort to be undertaken.</p>
   <p>The research community is encouraged to produce definitive BTCADP values for these historical eras using trade-level data and the methodology described herein. When published, these values supersede the provisional figures and become the accepted historical record.</p>
 
   <h3>7.2 Methodological Adaptation</h3>
