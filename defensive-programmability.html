@@ -280,7 +280,7 @@
   <p class="article-subtitle" style="font-size:0.95rem;color:var(--text-muted);margin-bottom:20px;">The same technical capability that makes CBDCs dangerous can build money that defends every person who holds it.</p>
 
   <div class="article-byline">
-    btcadp.org &nbsp;&bull;&nbsp; CC0 Public Domain &nbsp;&bull;&nbsp; Draft for Public Review
+    btcadp.org &nbsp;&bull;&nbsp; CC BY-NC-ND &nbsp;&bull;&nbsp; Draft for Public Review
     <br>
     Source: <em>The Bitcoin Bridge</em>, Chapters 11, 17, 18 &amp; Appendix D
     <br>
@@ -369,10 +369,46 @@
       Token number. Mint-day &#x20BF;C price, which is the token's timeblock, the cumulative
       average value of Bitcoin on the day the token was created. Together, the token number and
       timeblock form the token ID. Mint date. Mint-day BTC spot price. Block age. Transfer count.
-      This is the complete set. The consortium uses this data for reserve management and FIFO burn
-      order on redemptions. The end user sees a fungible dollar balance. Every token is $1. The
-      provenance exists beneath the surface so the system can manage reserves and activate defensive
-      behaviors autonomously.
+      The end user sees a fungible dollar balance. Every token is $1. The provenance exists beneath
+      the surface so the system can manage reserves and activate defensive behaviors autonomously.
+    </p>
+
+    <h3>PBP# (Profit Burn Priority)</h3>
+    <p>
+      In addition to its static provenance data, each token continuously calculates a dynamic value:
+      its PBP#, or Profit Burn Priority number. The PBP# ranks the token's position in the redemption
+      burn queue based on its current profitability, the spread between its mint-day BTC spot price
+      and the current spot price. The most profitable tokens have the lowest PBP# and are first in
+      line to be burned on redemption. The least profitable tokens sit at the back of the queue.
+    </p>
+    <p>
+      The PBP# replaces a simple FIFO (first-in, first-out) burn order. In a cleanly rising market,
+      the two methods produce identical results because the oldest tokens are also the cheapest and
+      therefore the most profitable. They diverge in volatile, non-monotonic price environments. If
+      BTC goes from $50K to $90K to $60K to $85K, a FIFO system burns the $50K token first (correct)
+      but then burns the $90K token second, which is underwater and forces a Ledger 2 draw. A PBP#
+      system burns the $50K token first, then the $60K token, both at a profit. The $90K token waits
+      at the back of the queue until conditions improve.
+    </p>
+    <p>
+      Modeling confirms that total surplus over the life of the system is identical regardless of
+      burn order. The same satoshis enter at minting and the same $1-worth of BTC leaves at
+      redemption. Surplus BTC from each burn stays in the reserve and appreciates at spot no matter
+      which token produced it. PBP# does not earn the treasury more money over time.
+    </p>
+    <p>
+      What PBP# does is protect Ledger 2. By always burning the most profitable token first, PBP#
+      avoids drawing from the backstop reserve as long as any profitable token exists in the pool.
+      In volatile markets, FIFO can burn underwater tokens ahead of profitable ones simply because
+      they are older. Every unnecessary Ledger 2 draw weakens the reserve that exists to absorb
+      genuine stress events. PBP# eliminates this. The advantage is defensive, not financial. It
+      costs the treasury nothing while providing structural protection. This makes it a natural
+      addition to the defensive programmability toolkit.
+    </p>
+    <p>
+      The user has no visibility into or control over which token gets burned. The PBP# governs which
+      satoshis leave Ledger 1. The time-weighted fee structure, a separate system, governs what fees
+      apply based on the redeemed token's age.
     </p>
 
     <h3>What the token does not need to know</h3>
@@ -454,10 +490,13 @@
 
     <p>
       Every monetary system has attack surfaces. The primary attack surface for &#x20BF;USD is the
-      fiat redemption boundary. Tokens circulating within the &#x20BF;USD economy, spent, received,
-      lent, and borrowed without converting to dollars, exert zero pressure on the reserve system
-      regardless of where Bitcoin's spot price stands. The system is at risk only when holders exit
-      to fiat.
+      redemption boundary. Tokens circulating within the &#x20BF;USD economy, spent, received,
+      lent, and borrowed without leaving the ecosystem, exert zero pressure on the reserve system
+      regardless of where Bitcoin's spot price stands. The system faces reserve pressure when holders
+      exit the ecosystem entirely, whether to BTC or to fiat. Both paths draw Bitcoin from Ledger 1.
+      The fiat path adds an additional danger: concentrated selling pressure on spot that can trigger
+      a reflexive feedback loop. The BTC path disperses any subsequent selling across the open market.
+      But the reserve draw is real in both cases.
     </p>
 
     <h3>Coordinated short-plus-redemption</h3>
@@ -489,7 +528,7 @@
     </p>
 
     <div class="callout">
-      <p><strong>Every one of these vectors shares a common dependency:</strong> they require either the fiat exit or the corruption of the reference price. If the fiat exit is structurally difficult to weaponize and the oracle is resistant to manipulation, the attacks become uneconomical.</p>
+      <p><strong>Every one of these vectors shares a common dependency:</strong> they require holders to exit the &#x20BF;USD ecosystem, drawing Bitcoin from reserves. The fiat path is the most dangerous because it adds concentrated selling pressure. If the ecosystem exit is structurally difficult to weaponize and the oracle is resistant to manipulation, the attacks become uneconomical.</p>
     </div>
 
     <!-- ═══ SECTION 6 ═══ -->
@@ -839,6 +878,16 @@
       responses.</p>
     </div>
 
+    <div class="open-q">
+      <p><strong>PBP# and treasury accounting.</strong> The PBP# burn order front-loads realized gains,
+      which is optimal for reserve health. Treasury companies will need to determine how this interacts
+      with their tax reporting and financial accounting obligations. The burn order is an operational
+      decision at the protocol level. The accounting method used to report the resulting gains and
+      losses to tax authorities may differ by jurisdiction. Whether regulators require companies to
+      report in the order transactions actually occurred (PBP#) or permit alternative inventory methods
+      is a question that needs professional accounting and legal input.</p>
+    </div>
+
     <!-- ═══ SECTION 12 ═══ -->
     <span class="sec-num">Section 12</span>
     <h2>The Long Game</h2>
@@ -968,7 +1017,7 @@
     <a href="specification.html">Specification</a> &nbsp;&bull;&nbsp;
     <a href="https://github.com/BTCADP/btcadp-research" target="_blank" rel="noopener">GitHub</a>
   </p>
-  <p style="margin-top:8px;">CC0 Public Domain &bull; btcadp.org &bull; 2026</p>
+  <p style="margin-top:8px;">CC BY-NC-ND &bull; btcadp.org &bull; 2026</p>
 </footer>
 
 </body>
