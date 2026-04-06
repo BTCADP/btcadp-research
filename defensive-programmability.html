@@ -375,19 +375,33 @@
       behaviors autonomously.
     </p>
 
-    <h3>What the token cannot know</h3>
+    <h3>What the token does not need to know</h3>
     <p>
-      Holder identity. Spending patterns. Geographic location. Transaction purpose. The sidechain
-      protocol does not record this data because the protocol was designed never to produce it.
-      This is an architectural constraint, not a privacy policy that could be revised by a committee
-      vote or a regulatory request directed at the consortium.
+      Holder identity. Spending patterns. Geographic location. Transaction purpose. None of this
+      information is required for the defensive mechanisms to function. Every defense described in
+      this paper operates on token-level provenance and aggregate network metrics.
     </p>
-
     <p>
-      A privacy caveat is important here. &#x20BF;USD is distributed through regulated financial service
-      providers that operate within KYC and AML frameworks. The privacy advantage over a CBDC, where
-      surveillance is a core design feature, is substantial. It does not replicate the privacy
-      properties of holding Bitcoin directly.
+      Existing stablecoins do not embed identity data in the token itself. USDT and USDC are standard
+      tokens on public blockchains. What their issuers do retain is administrative control at the smart
+      contract level. Tether has frozen over $3.3 billion across more than 7,000 addresses, working
+      proactively with the FBI, Secret Service, and law enforcement agencies across 59 jurisdictions.
+      Circle has frozen approximately $110 million across roughly 370 addresses, typically in response
+      to court orders or OFAC sanctions. Both issuers can blacklist any wallet address, preventing it
+      from sending or receiving tokens. Both can monitor wallet movements on public blockchains. Combined
+      with exchange-level KYC, this creates effective traceability even without an identity-linked ledger
+      at the protocol level.
+    </p>
+    <p>
+      These capabilities exist because regulators require them. The consortium members issuing
+      &#x20BF;USD will operate within the same regulatory frameworks. They may prefer to minimize
+      issuer-level control over individual wallets, but the degree to which they can do so depends on
+      the jurisdictions they operate in and the compliance obligations they carry. The privacy
+      advantage of &#x20BF;USD over a CBDC, where comprehensive surveillance is a stated design goal,
+      can be substantial. The degree of that advantage will be shaped by the legal environment the
+      consortium navigates. What is structurally different is that the defensive mechanisms themselves
+      require no holder-level data to function. The system can protect itself without knowing who is
+      inside it.
     </p>
 
     <h3>The red/black indicator</h3>
@@ -495,8 +509,10 @@
     <h3>6.1 &ensp; BTC-Default Redemption</h3>
     <p>
       When a holder redeems &#x20BF;USD, the consortium transfers Bitcoin at spot value directly to the
-      redeemer's wallet. No market order is placed by the consortium. No slippage occurs. The spot
-      price is unaffected by the redemption.
+      redeemer's wallet. No market order is placed by the consortium. The mechanism does not eliminate
+      selling pressure entirely. It disperses it, removing the consortium as the forced seller and
+      eliminating the reflexive feedback loop where a single large sell order crashes spot and triggers
+      further redemptions.
     </p>
     <p>
       This single design choice eliminates the most dangerous attack vector: forced, concentrated
