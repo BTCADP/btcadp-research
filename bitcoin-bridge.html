@@ -551,7 +551,7 @@
 <!-- ============================================================ -->
 <div class="draft-banner">
   <div class="draft-label">Draft Copy</div>
-  <div class="draft-version">Version 29.7</div>
+  <div class="draft-version">Version 29.8</div>
 </div>
 
 <!-- ============================================================ -->
@@ -1161,7 +1161,7 @@
 </p>
 
 <p>
-  <strong>Bitcoin is the store of value and the settlement layer.</strong> It is the reserve asset sitting in on-chain wallets backing the entire system above it. Every satoshi in reserve is publicly verifiable on Bitcoin's base layer. Bitcoin never moves during routine commerce. A million stablecoin transactions can occur on the payment layer without a single satoshi moving on-chain. Bitcoin moves only at the boundaries: when new tokens are minted (fiat enters, Bitcoin is purchased at spot) or when tokens are redeemed for fiat (Bitcoin is sold from reserves). This is precisely the role gold played under the gold standard: the monetary anchor that never circulated in daily commerce but backed everything that did. The difference is that Bitcoin's reserves are verifiable by anyone, not locked in a vault that requires trust in its custodian.
+  <strong>Bitcoin is the store of value and the settlement layer.</strong> It is the reserve asset sitting in on-chain wallets backing the entire system above it. Every satoshi in reserve is publicly verifiable on Bitcoin's base layer. Bitcoin never moves during routine commerce. A million stablecoin transactions can occur on the payment layer without a single satoshi moving on-chain. Bitcoin moves only at the boundaries: when new tokens are minted (fiat enters, Bitcoin is purchased at spot) or when tokens are redeemed (Bitcoin is transferred to the redeemer or sold from reserves). This is precisely the role gold played under the gold standard: the monetary anchor that never circulated in daily commerce but backed everything that did. The difference is that Bitcoin's reserves are verifiable by anyone, not locked in a vault that requires trust in its custodian.
 </p>
 
 <div class="callout">
@@ -1368,7 +1368,7 @@
 <h3>Circulation</h3>
 
 <p>
-  ₿USD tokens circulate as issued assets on the sidechain. When one user pays another, the token changes hands on the sidechain. No Bitcoin moves. The BTC reserves sit untouched on Bitcoin's base layer in transparent, on-chain wallets. Bitcoin is only bought or sold at two moments: when a new token is minted (fiat enters the system and the treasury company purchases BTC for the reserve) and when a token is redeemed for fiat (BTC is sold from the reserve to return fiat to the customer). Everything between minting and redemption is token circulation, peer-to-peer transfers of ₿USD on the sidechain, with no interaction with Bitcoin's base layer and no exposure to its spot price volatility.
+  ₿USD tokens circulate as issued assets on the sidechain. When one user pays another, the token changes hands on the sidechain. No Bitcoin moves. The BTC reserves sit untouched on Bitcoin's base layer in transparent, on-chain wallets. Bitcoin moves only at the boundaries: when a new token is minted (fiat enters the system and the treasury company purchases BTC for the reserve) and when a token is redeemed (BTC is either transferred directly to the redeemer or sold from the reserve to return fiat). Everything between minting and redemption is token circulation, peer-to-peer transfers of ₿USD on the sidechain, with no interaction with Bitcoin's base layer and no exposure to its spot price volatility.
 </p>
 
 <p>
@@ -1385,26 +1385,22 @@
   Each consortium member maintains a Ledger 2 drawn from its existing Bitcoin holdings. Ledger 2 is the backstop. When Ledger 1 is insufficient to cover a fiat redemption, the treasury company draws from Ledger 2 to make the customer whole. The treasury company absorbs the loss. Under normal and stressed conditions, the customer receives $1.00 per token. The genuine risk, a sustained decline severe enough to exhaust both ledgers, is addressed in Chapter 19.
 </p>
 
-<h3>FIFO: First In, First Out</h3>
+<h3>PBP#: Profit Burn Priority</h3>
 
 <p>
-  When a ₿USD token is redeemed for fiat, the consortium burns the oldest ledger entry first. Always. FIFO is the consortium's internal accounting method for managing reserve health. It determines which satoshis leave Ledger 1 on a fiat redemption. The user never interacts with it.
+  When a ₿USD token is redeemed, the consortium burns the most profitable ledger entry first. Always. Each token continuously calculates a dynamic value, its PBP# (Profit Burn Priority number), which ranks the token's position in the burn queue based on its current profitability: the spread between its mint-day BTC spot price and the current spot price. The most profitable tokens have the lowest PBP# and are first in line to be burned. The least profitable tokens sit at the back of the queue. The user never interacts with it.
 </p>
 
 <p>
-  The mechanic is simple and its consequences are profound. The oldest ledger entries are backed by BTC purchased at the lowest historical prices. Those entries are the most deeply in surplus. Burning them first means every redemption costs the reserves the least possible amount. The surplus BTC that remains after covering the $1 obligation stays in the system, deepening the backstop.
+  In a cleanly rising market, PBP# produces the same result as a simple FIFO (first-in, first-out) approach because the oldest tokens are also the cheapest and therefore the most profitable. The two methods diverge in volatile, non-monotonic price environments. If BTC goes from $50,000 to $90,000 to $60,000 to $85,000, a FIFO system burns the $50,000 token first (correct, it is most profitable) but then burns the $90,000 token second, which is underwater and forces a Ledger 2 draw. PBP# burns the $50,000 token first, then the $60,000 token, both at a profit. The $90,000 token waits at the back of the queue until conditions improve.
 </p>
 
 <p>
-  The result is a reserve architecture that strengthens with every redemption rather than weakening. Every entry burned releases more surplus than the system needs to hold. Over time, as the token base ages and BTC appreciates, the gap between what each entry cost to back and what each entry returns on redemption widens. The system heals itself through use.
+  Modeling confirms that total surplus over the life of the system is identical regardless of burn order. The same satoshis enter at minting and the same $1-worth of BTC leaves at redemption. Surplus BTC from each burn stays in the reserve and appreciates at spot no matter which token produced it. PBP# does not earn the treasury more money over time. What it does is protect Ledger 2. By always burning the most profitable token first, PBP# avoids drawing from the backstop reserve as long as any profitable token exists in the pool. Every unnecessary Ledger 2 draw weakens the reserve that exists to absorb genuine stress events. PBP# eliminates this. The advantage is defensive. It costs the treasury nothing while providing structural protection.
 </p>
 
 <p>
-  In the early stages, when all tokens are young and the surplus is thin, the system is at its most vulnerable. Time solves this. Every day the system operates, the oldest entries age deeper into surplus. Every new mint adds BTC at current spot, which will itself become deeply surplus over time. The FIFO structure means the system's security compounds automatically, without any discretionary decision by the consortium.
-</p>
-
-<p>
-  Separate from FIFO, each individual token carries its own provenance metadata at the protocol level: mint date, mint-day BTC spot price, block age, and transfer count. This metadata enables the defensive fee structure described in Chapter 18. A token minted yesterday carries different provenance data than a token minted two years ago, and the system prices redemptions accordingly. FIFO determines which satoshis leave the reserve. Token metadata determines what fees apply. Both systems operate beneath a fully fungible user experience. The user sees a balance. Every token is $1. They do not know or interact with either layer.
+  Separate from PBP#, each individual token carries its own provenance metadata at the protocol level: mint date, mint-day BTC spot price, mint-day ₿C price (the token's timeblock), block age, and transfer count. This metadata enables the defensive fee structure described in Chapter 18. A token minted yesterday carries different provenance data than a token minted two years ago, and the system prices redemptions accordingly. PBP# determines which satoshis leave the reserve. Token metadata determines what fees apply. Both systems operate beneath a fully fungible user experience. The user sees a balance. Every token is $1. They do not know or interact with either layer.
 </p>
 
 <h3>Bank Runs and Redemption Risk</h3>
@@ -1414,11 +1410,11 @@
 </p>
 
 <p>
-  The two-ledger structure alone is necessary but not sufficient. Ledger 2 provides depth. It does not provide infinite depth. What prevents the run from becoming fatal is not the size of the reserve alone but a combination of structural defenses. First, reserve pressure only exists at the fiat exit. Tokens circulating within the ₿USD ecosystem, moving from wallet to wallet as a medium of exchange, create zero reserve pressure at any BTC spot price. The run scenario requires that holders not only panic but convert to fiat specifically, abandoning the ecosystem entirely. As the ecosystem matures and more goods and services are priced in ₿USD, the proportion of holders who have any reason to exit to fiat naturally declines.
+  The two-ledger structure alone is necessary but not sufficient. Ledger 2 provides depth. It does not provide infinite depth. What prevents the run from becoming fatal is not the size of the reserve alone but a combination of structural defenses. First, reserve pressure exists only when holders exit the ₿USD ecosystem. Tokens circulating within the ecosystem, moving from wallet to wallet as a medium of exchange, create zero reserve pressure at any BTC spot price. Both BTC-default redemption and fiat redemption draw Bitcoin from Ledger 1. The fiat path adds the additional danger of concentrated selling pressure on spot. The BTC path disperses any subsequent selling across the open market. But the reserve draw is real in both cases. As the ecosystem matures and more goods and services are priced in ₿USD, the proportion of holders who have any reason to exit the ecosystem naturally declines.
 </p>
 
 <p>
-  Second, the tokens themselves carry defensive mechanisms. Every ₿USD token is a programmable instrument that carries provenance metadata at the protocol level: its mint date, the BTC spot price on the day it was minted, its block age, and its transfer count. This data describes the token's history and reserve health. It does not and cannot describe the person holding it. The user never sees this data. They see a balance, one number, fully fungible. The provenance exists so the system can manage reserves, execute FIFO burn order on redemptions, and activate defensive behaviors autonomously under stress. These mechanisms are detailed in Chapter 18.
+  Second, the tokens themselves carry defensive mechanisms. Every ₿USD token is a programmable instrument that carries provenance metadata at the protocol level: its mint date, the BTC spot price on the day it was minted, its block age, and its transfer count. This data describes the token's history and reserve health. It does not and cannot describe the person holding it. The user never sees this data. They see a balance, one number, fully fungible. The provenance exists so the system can manage reserves, execute PBP# burn order on redemptions, and activate defensive behaviors autonomously under stress. These mechanisms are detailed in Chapter 18.
 </p>
 
 <p>
@@ -2404,11 +2400,11 @@
 <h3>Token Provenance</h3>
 
 <p>
-  Every token in the framework carries provenance metadata at the protocol level that describes the token itself, not its holder. The base metadata common to all instruments: mint date, mint-day BTC spot price, mint-day ₿C price, block age, and transfer count. This is the token-level data introduced in Chapter 11. It is what enables the defensive fee structure: a freshly minted token carries different provenance than a two-year-old token, and the system prices redemptions accordingly. This operates separately from FIFO, which is the consortium's accounting method for determining which satoshis leave Ledger 1. FIFO manages reserve health. Token metadata manages network defense. The user experiences full fungibility beneath both systems. The sidechain protocol does not record holder identity, spending categories, geographic location, or transaction purpose. However, ₿USD is distributed through regulated financial service providers subject to KYC and AML requirements. The privacy advantage over a CBDC, where surveillance is a core design feature, is substantial but not absolute. It does not offer the same privacy as holding Bitcoin directly.
+  Every token in the framework carries provenance metadata at the protocol level that describes the token itself, not its holder. The base metadata common to all instruments: mint date, mint-day BTC spot price, mint-day ₿C price, block age, and transfer count. This is the token-level data introduced in Chapter 11. It is what enables the defensive fee structure: a freshly minted token carries different provenance than a two-year-old token, and the system prices redemptions accordingly. This operates separately from PBP# (Profit Burn Priority), which determines which satoshis leave Ledger 1 on redemption by burning the most profitable token first. PBP# manages reserve defense. Token metadata manages network defense. The user experiences full fungibility beneath both systems. The sidechain protocol does not record holder identity, spending categories, geographic location, or transaction purpose. However, ₿USD is distributed through regulated financial service providers subject to KYC and AML requirements. The privacy advantage over a CBDC, where surveillance is a core design feature, is substantial but not absolute. It does not offer the same privacy as holding Bitcoin directly.
 </p>
 
 <p>
-  Each token's reserve health is deterministic from its provenance data, calculable at any time from the mint-day BTC price and current spot. The consortium uses this data to manage reserves and execute FIFO burn order on redemptions. The end user sees a fungible balance.
+  Each token's reserve health is deterministic from its provenance data, calculable at any time from the mint-day BTC price and current spot. The consortium uses this data to manage reserves and execute PBP# burn order on redemptions. The end user sees a fungible balance.
 </p>
 
 <p>
@@ -2493,7 +2489,7 @@
 </p>
 
 <p>
-  <strong>Sustained BTC price decline.</strong> The most significant operational risk is a prolonged decline in BTC spot that underfunds Ledger 1 and forces sustained draws on Ledger 2 when tokens are redeemed for fiat. The mitigation is structural: tokens circulating on the sidechain exert no pressure on the reserve system regardless of where BTC spot stands. The ₿C denomination would only fail to appreciate if Bitcoin's spot price fell permanently below its own lifetime cumulative average and remained there, an event with no precedent in Bitcoin's history. As of early 2026, a sustained decline of over 73% would be required to breach this condition.<sup class="fn"><a href="#ref14">[14]</a></sup>
+  <strong>Sustained BTC price decline.</strong> The most significant operational risk is a prolonged decline in BTC spot that underfunds Ledger 1 and forces sustained draws on Ledger 2 when tokens are redeemed. The mitigation is structural: tokens circulating on the sidechain exert no pressure on the reserve system regardless of where BTC spot stands. The ₿C denomination would only fail to appreciate if Bitcoin's spot price fell permanently below its own lifetime cumulative average and remained there, an event with no precedent in Bitcoin's history. As of early 2026, a sustained decline of over 73% would be required to breach this condition.<sup class="fn"><a href="#ref14">[14]</a></sup>
 </p>
 
 <p>
@@ -3862,7 +3858,7 @@
   </tbody>
 </table>
 
-<p>Above the issuance price, every redemption generates profit for the treasury company. Between the issuance price and the ₿C price, Ledger 1 is underfunded but Ledger 2 covers the gap. These reserve dynamics only matter when tokens are redeemed for fiat. Tokens circulating on the sidechain as a medium of exchange exert zero pressure on reserves regardless of where Bitcoin's spot price stands.</p>
+<p>Above the issuance price, every redemption generates profit for the treasury company. Between the issuance price and the ₿C price, Ledger 1 is underfunded but Ledger 2 covers the gap. These reserve dynamics matter when tokens are redeemed, whether for BTC or fiat. Tokens circulating on the sidechain as a medium of exchange exert zero pressure on reserves regardless of where Bitcoin's spot price stands.</p>
 
 <h3>6.4 Accounting and Transparency</h3>
 
@@ -3872,7 +3868,7 @@
 
 <p>₿USD tokens circulate as issued assets on the consortium's purpose-built Bitcoin sidechain. When one user pays another, the token changes hands on the sidechain. No Bitcoin moves.</p>
 
-<p>The BTC reserves sit untouched on Bitcoin's base layer in transparent, on-chain wallets. Bitcoin is only bought or sold at two moments: when a new token is minted (fiat enters, BTC is purchased) and when a token is redeemed for fiat (BTC is sold to return fiat). Everything between minting and redemption is token circulation,peer-to-peer transfers on the sidechain with no interaction with Bitcoin's base layer and no exposure to spot price volatility.</p>
+<p>The BTC reserves sit untouched on Bitcoin's base layer in transparent, on-chain wallets. Bitcoin moves only at the boundaries: when a new token is minted (fiat enters, BTC is purchased) and when a token is redeemed (BTC is either transferred directly to the redeemer or sold to return fiat). Everything between minting and redemption is token circulation, peer-to-peer transfers on the sidechain with no interaction with Bitcoin's base layer and no exposure to spot price volatility.</p>
 
 <div class="callout"><p>A million ₿USD transactions can occur on the sidechain without a single satoshi moving on Bitcoin's base layer. The base layer secures the reserves. The sidechain handles commerce.</p></div>
 
@@ -3933,7 +3929,7 @@
 
 <h3>10.1 Token Provenance Metadata</h3>
 
-<p>Each token carries provenance metadata at the protocol level about itself, not its holder. The metadata includes: mint date, mint-day BTC spot price, mint-day ₿C price, block age, and transfer count. The consortium uses this data for reserve management and FIFO burn order on redemptions. The end user sees a fungible dollar balance. The sidechain protocol does not record holder identity, spending categories, or transaction purpose. However, the financial service providers distributing ₿USD operate within regulatory frameworks that may require user identification. ₿USD offers substantially greater privacy than a CBDC but does not replicate the privacy properties of holding Bitcoin directly.</p>
+<p>Each token carries provenance metadata at the protocol level about itself, not its holder. The metadata includes: mint date, mint-day BTC spot price, mint-day ₿C price, block age, and transfer count. The consortium uses this data for reserve management and PBP# burn order on redemptions. The end user sees a fungible dollar balance. The sidechain protocol does not record holder identity, spending categories, or transaction purpose. However, the financial service providers distributing ₿USD operate within regulatory frameworks that may require user identification. ₿USD offers substantially greater privacy than a CBDC but does not replicate the privacy properties of holding Bitcoin directly.</p>
 
 <h3>10.2 Network State Awareness</h3>
 
@@ -3986,7 +3982,7 @@
 
 <p>The ₿USD system deploys five structural defenses against this scenario:</p>
 
-<p><strong>First:</strong> Reserve pressure exists only at the fiat exit. Tokens circulating within the ecosystem create zero reserve pressure at any BTC spot price. The run scenario requires holders to not only panic but to convert to fiat specifically,abandoning the ecosystem entirely.</p>
+<p><strong>First:</strong> Reserve pressure exists only when holders exit the ecosystem. Tokens circulating within the ecosystem create zero reserve pressure at any BTC spot price. Both BTC-default and fiat redemption draw from reserves. The fiat path adds concentrated selling pressure. The BTC path disperses it.</p>
 
 <p><strong>Second:</strong> BTC-default redemption disperses selling pressure. The consortium transfers Bitcoin to the redeemer rather than executing a concentrated sell order. The reflexive feedback loop, where a large consortium sell crashes spot and triggers further redemptions, is broken.</p>
 
