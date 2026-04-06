@@ -334,7 +334,7 @@
 <!-- DRAFT NOTICE -->
 <div class="draft-banner">
   <div class="draft-label">Draft Copy</div>
-  <div class="draft-version">Version 3.0</div>
+  <div class="draft-version">Version 4.0</div>
 </div>
 
 <hr class="section-break" style="max-width:780px;margin:32px auto 0;">
@@ -542,19 +542,15 @@
 </p>
 
 <p>
-  Built into this architecture from the ground up is a suite of defensive mechanisms that govern the fiat exit path. The token provenance data described above enables the system to activate defensive behaviors autonomously under stress. This data describes the token's history and reserve health. It does not and cannot describe the person holding it.
+  Built into this architecture from the ground up is a suite of defensive mechanisms that govern the fiat exit path. The token provenance data described above enables the system to activate these mechanisms autonomously under stress, using data about the tokens and the network, never about individual holders. Section 5 describes the full programmability model. The specific mechanisms:
 </p>
 
 <p>
-  This is the programmability inversion that distinguishes a TBDC from a CBDC. A CBDC's programmability serves the issuer: the token reports on its holder to the authority. A TBDC's programmability serves the network: the token monitors its own reserve health and the system hardens itself when conditions require it. The defensive mechanisms are activated by token-level and network-level data, never by information about individual holders.
+  Time-weighted fees make rapid mint-and-redeem cycles prohibitively expensive while leaving ordinary transactions unaffected. Volume-triggered escalation activates additional fees automatically when aggregate fiat redemption exceeds defined thresholds. Adaptive velocity limits tighten the fiat exit rate during stress events while leaving Bitcoin-default redemption unlimited at all times. The system absorbs panic without absorbing outflow.
 </p>
 
 <p>
-  The specific mechanisms: time-weighted fees make rapid mint-and-redeem cycles prohibitively expensive while leaving ordinary transactions unaffected. Volume-triggered escalation activates additional fees automatically when aggregate fiat redemption exceeds defined thresholds. Adaptive velocity limits tighten the fiat exit rate during stress events while leaving Bitcoin-default redemption unlimited at all times. The system absorbs panic without absorbing outflow.
-</p>
-
-<p>
-  The result is that the most dangerous scenario, a coordinated short-plus-redemption attack, has a deeply negative expected return. Bitcoin-default redemption neutralizes forced selling. Time-weighted fees extract 3 to 6% from freshly minted tokens. The defensive mechanisms do not make attack impossible. They make it economically irrational. Under normal conditions, which constitute the vast majority of the system's operational life, every defensive mechanism is dormant. Transfers are instant and inexpensive. Redemptions are fast. The thresholds are public, auditable, and identical for every participant. No committee convenes. No political negotiation occurs. The protocol hardens autonomously when needed and remains invisible when it is not.
+  The result is that the most dangerous scenario, a coordinated short-plus-redemption attack, has a deeply negative expected return. Bitcoin-default redemption neutralizes forced selling. Time-weighted fees extract value from freshly minted tokens. The defensive mechanisms do not make attack impossible. They make it economically irrational. Under normal conditions, which constitute the vast majority of the system's operational life, every defensive mechanism is dormant. Transfers are instant and inexpensive. Redemptions are fast. The thresholds are public, auditable, and identical for every participant. No committee convenes. No political negotiation occurs. The protocol hardens autonomously when needed and remains invisible when it is not.
 </p>
 
 <p>
@@ -566,7 +562,7 @@
 </p>
 
 <p>
-  Every ₿USD token carries a feature that no fiat stablecoin can replicate: instant conversion to Bitcoin. At any time, for any reason, a holder can convert their ₿USD to BTC at current spot and send it to a self-custody wallet. The conversion is built into the system because the reserve asset backing every token is Bitcoin sitting on a public blockchain. USDT cannot give you the Treasury bill backing your token. USDC cannot hand you the government bond. ₿USD can give you the actual Bitcoin, because it is there, on-chain, and transferable to any Bitcoin address on earth. Most users will never think about this feature. They will use ₿USD to pay for groceries, receive a salary, and save through a ₿OND. Then their government announces a CBDC. Cash withdrawals are restricted. A neighbor's fiat stablecoin is frozen by a court order. And they press one button. Their ₿USD converts to Bitcoin, arrives in a wallet they control, and no government on earth can touch it. ₿USD is the on-ramp. Bitcoin is the destination.
+  Every ₿USD token carries a feature that no fiat stablecoin can replicate: instant conversion to Bitcoin. At any time, for any reason, a holder can convert their ₿USD to BTC at current spot and send it to a self-custody wallet. The conversion is built into the system because the reserve asset backing every token is Bitcoin sitting on a public blockchain. USDT cannot give you the Treasury bill backing your token. USDC cannot hand you the government bond. ₿USD can give you the actual Bitcoin, because it is there, on-chain, and transferable to any Bitcoin address on earth. In a fiat crisis, a CBDC announcement, or a restriction on cash withdrawals, a user holding USDT or USDC has no recourse. Their stablecoin is backed by Treasury bills they cannot access, issued by a company that can be compelled to freeze their account. A user holding ₿USD can instantly convert to Bitcoin at current spot and send it to a self-custody wallet with one action. The Bitcoin arrives in a wallet they control. No intermediary can block it. No government can freeze it. The conversion is possible because the reserve asset backing every token is Bitcoin sitting on a public blockchain. USDT cannot give you the Treasury bill. USDC cannot hand you the government bond. ₿USD can give you the actual Bitcoin, because it is there, on-chain, and transferable to any Bitcoin address on earth. ₿USD is the on-ramp. Bitcoin is the destination.
 </p>
 
 <h3>₿OND: A Savings Instrument</h3>
@@ -576,7 +572,7 @@
 </p>
 
 <p>
-  Maturity requires two conditions to be met simultaneously: the saver's ₿C return target has been reached, and the treasury's BTC position on that specific bond covers the payout plus a minimum profit margin. This dual condition means the issuing treasury never pays out at a loss. It is not a guarantee backed by a promise. It is the structural definition of the maturity event itself.
+  Maturity requires two conditions to be met simultaneously: the saver's ₿C return target has been reached, and the treasury's BTC position on that specific bond covers the payout plus a minimum profit margin. This dual condition means the issuing treasury never pays out at a loss. It is not a guarantee backed by a promise, but the structural definition of the maturity event itself.
 </p>
 
 <p>
@@ -604,11 +600,11 @@
 <h3>The Tax Problem</h3>
 
 <p>
-  In the United States and most major economies, Bitcoin is classified as property. Every transaction, no matter how small, is a disposition that triggers a capital gains calculation. A consumer who buys lunch with satoshis must track the cost basis, compute the gain or loss, and report the event. No one does this for a $4 coffee. No one will ever do this for a $4 coffee. This single regulatory fact has done more to prevent Bitcoin commerce than volatility, complexity, or any technical limitation of the protocol. It is not a deficiency in Bitcoin. It is a consequence of fiat-era tax frameworks applied to an asset they were never designed to accommodate.
+  In the United States and most major economies, Bitcoin is classified as property. Every transaction, no matter how small, is a disposition that triggers a capital gains calculation. A consumer who buys lunch with satoshis must track the cost basis, compute the gain or loss, and report the event. Some Bitcoiners do this diligently. Eight billion people never will. This single regulatory fact may have done more to prevent Bitcoin commerce than volatility, complexity, or any technical limitation of the protocol. It is not a deficiency in Bitcoin. It is a consequence of fiat-era tax frameworks applied to an asset they were never designed to accommodate.
 </p>
 
 <p>
-  ₿USD eliminates this friction at the commerce layer. A consumer receives ₿USD at $1. They spend ₿USD at $1. There is no gain, no loss, no taxable event. The experience is identical to spending dollars. The Bitcoin purchase happens inside the reserve, where the consortium manages its own tax obligations as a corporate entity. The consumer never holds property in the tax sense. The tax complexity surfaces only when the user makes a conscious decision to cross into the savings layer, opening a ₿OND or accepting BTC at ₿C prices. That is an investment decision, not a hot dog purchase. The separation of the spending layer from the savings layer is not just a product design choice. It is the structural solution to the tax barrier that has blocked Bitcoin commerce for over a decade.
+  ₿USD eliminates this friction at the commerce layer. A consumer receives ₿USD at $1. They spend ₿USD at $1. There is no gain, no loss, no taxable event. The experience is identical to spending dollars. The Bitcoin purchase happens inside the reserve, where the consortium manages its own tax obligations as a corporate entity. The consumer never holds property in the tax sense. The tax complexity surfaces only when the user makes a conscious decision to cross into the savings layer, opening a ₿OND or converting to BTC. That is an investment decision, not a hot dog purchase. The separation of the spending layer from the savings layer is a structural solution to the tax barrier that has blocked Bitcoin commerce for over a decade.
 </p>
 
 <p>
