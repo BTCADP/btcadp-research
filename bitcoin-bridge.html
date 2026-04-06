@@ -1301,7 +1301,7 @@
 </p>
 
 <p>
-  ₿C makes the opposite trade-off, and it should be stated plainly. No unit of account is perfectly flat. Every unit of account moves in purchasing power. The question is not whether the unit moves. It is whether the movement is transparent or opaque, predictable or discretionary, beneficial or harmful to the people using it. The dollar hides its movement. The number on the price tag stays the same while the value behind it quietly erodes at an unpredictable rate determined by a central authority's discretionary decisions. The instability is real but invisible. ₿C shows its movement. The number on the price tag visibly changes, slowly, predictably, in a direction that benefits the holder. The movement is real and visible.
+  ₿C makes the opposite trade-off, and it should be stated plainly. No unit of account is perfectly flat. Every unit of account moves in purchasing power. The question is not whether the unit moves. It is whether the movement is transparent or opaque, predictable or discretionary, beneficial or harmful to the people using it. The dollar hides its movement. The number on the price tag stays the same while the value behind it quietly erodes at an unpredictable rate determined by a central authority's discretionary decisions. The instability is real but invisible. ₿C shows its movement. The number on the price tag visibly changes, slowly, predictably, in a direction that benefits the people using it. The movement is real and visible.
 </p>
 
 <p>
@@ -1323,7 +1323,7 @@
 </p>
 
 <p>
-  This bridging function has a direct commercial consequence for merchants. A merchant who prices in ₿C can serve customers from both monetary systems through one price tag. A Sphere A consumer sees the ₿C price, reads a dollar equivalent, and pays in ₿USD. A Sphere ₿ consumer sees the same ₿C price, converts to a sat equivalent, and pays via Lightning. Sphere A customers think in dollars. Sphere ₿ customers think in sats. Both benefit from the price stability. Both read the same menu. A merchant who prices only in dollars locks out the Bitcoin economy. A merchant who prices only in sats locks out the fiat economy and introduces the volatility that makes pricing unstable. ₿C is the common language that lets a single price tag speak to both.
+  This bridging function has a direct commercial consequence for merchants. A merchant who prices in ₿C can serve customers from both monetary systems through one price tag. A Sphere A consumer sees the ₿C price, reads a dollar equivalent, and pays in ₿USD. A Sphere ₿ consumer sees the sat equivalent in their wallet and pays via Lightning. Sphere A customers think in dollars. Sphere ₿ customers think in sats. Both benefit from the price stability. Both read the same menu. A merchant who prices only in dollars locks out the Bitcoin economy. A merchant who prices only in sats locks out the fiat economy and introduces the volatility that makes pricing unstable. ₿C is the common language that lets a single price tag speak to both.
 </p>
 
 <p>
@@ -1388,23 +1388,23 @@
 <h3>FIFO: First In, First Out</h3>
 
 <p>
-  When a ₿USD token is redeemed, the system burns the oldest token in circulation first. Always. This is not a user choice. It is a protocol rule built into the token lifecycle.
+  When a ₿USD token is redeemed for fiat, the consortium burns the oldest ledger entry first. Always. FIFO is the consortium's internal accounting method for managing reserve health. It determines which satoshis leave Ledger 1 on a fiat redemption. The user never interacts with it.
 </p>
 
 <p>
-  The mechanic is simple and its consequences are profound. The oldest tokens are backed by BTC purchased at the lowest historical prices. Those tokens are the most deeply in surplus. Burning them first means every redemption costs the reserves the least possible amount. The surplus BTC that remains after covering the $1 obligation stays in the system, deepening the backstop.
+  The mechanic is simple and its consequences are profound. The oldest ledger entries are backed by BTC purchased at the lowest historical prices. Those entries are the most deeply in surplus. Burning them first means every redemption costs the reserves the least possible amount. The surplus BTC that remains after covering the $1 obligation stays in the system, deepening the backstop.
 </p>
 
 <p>
-  The result is a reserve architecture that strengthens with every redemption rather than weakening. Every token burned releases more surplus than the system needs to hold. Over time, as the token base ages and BTC appreciates, the gap between what each token cost to back and what each token returns on redemption widens. The system heals itself through use.
+  The result is a reserve architecture that strengthens with every redemption rather than weakening. Every entry burned releases more surplus than the system needs to hold. Over time, as the token base ages and BTC appreciates, the gap between what each entry cost to back and what each entry returns on redemption widens. The system heals itself through use.
 </p>
 
 <p>
-  In the early stages, when all tokens are young and the surplus is thin, the system is at its most vulnerable. Time solves this. Every day the system operates, the oldest tokens age deeper into surplus. Every new mint adds BTC at current spot, which will itself become deeply surplus over time. The FIFO structure means the system's security compounds automatically, without any discretionary decision by the consortium.
+  In the early stages, when all tokens are young and the surplus is thin, the system is at its most vulnerable. Time solves this. Every day the system operates, the oldest entries age deeper into surplus. Every new mint adds BTC at current spot, which will itself become deeply surplus over time. The FIFO structure means the system's security compounds automatically, without any discretionary decision by the consortium.
 </p>
 
 <p>
-  From the user's perspective, none of this is visible. They hold a ₿USD balance. They spend it, receive it, save it. Every token is $1. Fully fungible. FIFO is the consortium's accounting, operating at the protocol level, ensuring that the reserve architecture grows stronger with every transaction.
+  Separate from FIFO, each individual token carries its own provenance metadata at the protocol level: mint date, mint-day BTC spot price, block age, and transfer count. This metadata enables the defensive fee structure described in Chapter 18. A token minted yesterday carries different provenance data than a token minted two years ago, and the system prices redemptions accordingly. FIFO determines which satoshis leave the reserve. Token metadata determines what fees apply. Both systems operate beneath a fully fungible user experience. The user sees a balance. Every token is $1. They do not know or interact with either layer.
 </p>
 
 <h3>Bank Runs and Redemption Risk</h3>
@@ -2404,7 +2404,7 @@
 <h3>Token Provenance</h3>
 
 <p>
-  Every token in the framework carries provenance metadata at the protocol level that describes the token itself, not its holder. The base metadata common to all instruments: mint date, mint-day BTC spot price, mint-day ₿C price, block age, and transfer count. This data is used by the system for reserve management, FIFO burn order, and defensive mechanisms. It is not surfaced to the end user, whose experience is a fungible dollar balance. The sidechain protocol does not record holder identity, spending categories, geographic location, or transaction purpose. However, ₿USD is distributed through regulated financial service providers subject to KYC and AML requirements. The privacy advantage over a CBDC, where surveillance is a core design feature, is substantial but not absolute. It does not offer the same privacy as holding Bitcoin directly.
+  Every token in the framework carries provenance metadata at the protocol level that describes the token itself, not its holder. The base metadata common to all instruments: mint date, mint-day BTC spot price, mint-day ₿C price, block age, and transfer count. This is the token-level data introduced in Chapter 11. It is what enables the defensive fee structure: a freshly minted token carries different provenance than a two-year-old token, and the system prices redemptions accordingly. This operates separately from FIFO, which is the consortium's accounting method for determining which satoshis leave Ledger 1. FIFO manages reserve health. Token metadata manages network defense. The user experiences full fungibility beneath both systems. The sidechain protocol does not record holder identity, spending categories, geographic location, or transaction purpose. However, ₿USD is distributed through regulated financial service providers subject to KYC and AML requirements. The privacy advantage over a CBDC, where surveillance is a core design feature, is substantial but not absolute. It does not offer the same privacy as holding Bitcoin directly.
 </p>
 
 <p>
