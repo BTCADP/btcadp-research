@@ -337,7 +337,7 @@
     <div class="paper-meta">
         <span>CC BY-NC-ND</span>
         <span>btcadp.org</span>
-        <span>Version 1.0</span>
+        <span>Version 3.0</span>
     </div>
     <div class="download-bar">
         <button class="btn-primary" onclick="window.print()">Print / Save as PDF</button>
@@ -496,7 +496,7 @@
     <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Break-even</td>
   </tr>
 </table>
-        <p>Above the issuance price, every redemption generates profit for the treasury company. Between the issuance price and the ₿C price, Ledger 1 is underfunded but Ledger 2 covers the gap. These reserve dynamics only matter when tokens are redeemed for fiat. Tokens circulating on the sidechain as a medium of exchange exert zero pressure on reserves regardless of where Bitcoin's spot price stands.</p>
+        <p>Above the issuance price, every redemption generates profit for the treasury company. Between the issuance price and the ₿C price, Ledger 1 is underfunded but Ledger 2 covers the gap. These reserve dynamics matter when tokens are redeemed, whether for BTC or fiat. Tokens circulating on the sidechain as a medium of exchange exert zero pressure on reserves regardless of where Bitcoin's spot price stands.</p>
     </div>
 
     <div class="paper-section">
@@ -507,7 +507,7 @@
     <div class="paper-section">
         <h2><span class="sec-num">8.</span> Circulation: The Sidechain Layer</h2>
         <p>₿USD tokens circulate as issued assets on the consortium's purpose-built Bitcoin sidechain. When one user pays another, the token changes hands on the sidechain. No Bitcoin moves.</p>
-        <p>The BTC reserves sit untouched on Bitcoin's base layer in transparent, on-chain wallets. Bitcoin is only bought or sold at two moments: when a new token is minted (fiat enters, BTC is purchased) and when a token is redeemed for fiat (BTC is sold to return fiat). Everything between minting and redemption is token circulation,peer-to-peer transfers on the sidechain with no interaction with Bitcoin's base layer and no exposure to spot price volatility.</p>
+        <p>The BTC reserves sit untouched on Bitcoin's base layer in transparent, on-chain wallets. Bitcoin moves only at the boundaries: when a new token is minted (fiat enters, BTC is purchased) and when a token is redeemed (BTC is either transferred directly to the redeemer or sold to return fiat). Everything between minting and redemption is token circulation, peer-to-peer transfers on the sidechain with no interaction with Bitcoin's base layer and no exposure to spot price volatility.</p>
         <div class="callout"><p><em>A million ₿USD transactions can occur on the sidechain without a single satoshi moving on Bitcoin's base layer. The base layer secures the reserves. The sidechain handles commerce.</em></p></div>
     </div>
 
@@ -609,7 +609,7 @@
 
     <div class="paper-section">
         <h3>10.1 Token Provenance Metadata</h3>
-        <p>Each token carries provenance metadata at the protocol level about itself, not its holder. The metadata includes: mint date, mint-day BTC spot price, mint-day ₿C price, block age, and transfer count. The consortium uses this data for reserve management and FIFO burn order on redemptions. The end user sees a fungible dollar balance. The sidechain protocol does not record holder identity, spending categories, or transaction purpose. However, the financial service providers distributing ₿USD operate within regulatory frameworks that may require user identification. ₿USD offers substantially greater privacy than a CBDC but does not replicate the privacy properties of holding Bitcoin directly.</p>
+        <p>Each token carries provenance metadata at the protocol level about itself, not its holder. The metadata includes: mint date, mint-day BTC spot price, mint-day ₿C price, block age, and transfer count. The consortium uses this data for reserve management and PBP# (Profit Burn Priority) burn order on redemptions, which burns the most profitable token first to protect Ledger 2. The end user sees a fungible dollar balance. The sidechain protocol does not record holder identity, spending categories, or transaction purpose. However, the financial service providers distributing ₿USD operate within regulatory frameworks that may require user identification. ₿USD offers substantially greater privacy than a CBDC but does not replicate the privacy properties of holding Bitcoin directly.</p>
     </div>
 
     <div class="paper-section">
@@ -674,7 +674,7 @@
         <h2><span class="sec-num">13.</span> Bank Run Analysis and Structural Defenses</h2>
         <p>A bear market drives BTC spot below the average minting price. Holders panic. Redemptions spike. Each fiat exit forces the consortium to sell Bitcoin into a falling market, depressing the price further, triggering more redemptions. This is a bank run,the oldest failure mode in monetary systems.</p>
         <p>The ₿USD system deploys five structural defenses against this scenario:</p>
-        <p><strong>First:</strong> Reserve pressure exists only at the fiat exit. Tokens circulating within the ecosystem create zero reserve pressure at any BTC spot price. The run scenario requires holders to not only panic but to convert to fiat specifically,abandoning the ecosystem entirely.</p>
+        <p><strong>First:</strong> Reserve pressure exists only when holders exit the ecosystem. Tokens circulating within the ecosystem create zero reserve pressure at any BTC spot price. Both BTC-default and fiat redemption draw from reserves. The fiat path adds concentrated selling pressure. The BTC path disperses it.</p>
         <p><strong>Second:</strong> BTC-default redemption eliminates forced selling. The consortium transfers Bitcoin rather than liquidating it. No market order, no slippage, no spot impact.</p>
         <p><strong>Third:</strong> Time-weighted fees price out mint-and-redeem attack loops. A freshly minted token faces 3% fiat redemption fees, making the attack deeply unprofitable.</p>
         <p><strong>Fourth:</strong> Volume-triggered fee escalation and velocity limits create congestion pricing at the fiat exit ramp during stress events.</p>
