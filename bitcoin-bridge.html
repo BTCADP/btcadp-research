@@ -551,7 +551,7 @@
 <!-- ============================================================ -->
 <div class="draft-banner">
   <div class="draft-label">Draft Copy</div>
-  <div class="draft-version">Version 29.4</div>
+  <div class="draft-version">Version 29.6</div>
 </div>
 
 <!-- ============================================================ -->
@@ -1220,9 +1220,10 @@
   Bitcoin Currency, abbreviated ₿C and symbolized with the ₿ prefix, is defined as the cumulative arithmetic mean of all BTCADP values from day 1 (January 3, 2009) through the current day. The formula is:
 </p>
 
-<p style="text-align:center; font-family:var(--font-mono); font-size:0.95rem; color:var(--orange); padding:16px 0;">
-  ₿C(n) = (1/n) &times; &sum; BTCADP(i) for i = 1 to n
-</p>
+<div class="callout" style="text-align:center; padding:24px;">
+  <div style="font-family:var(--font-mono); font-size:0.68rem; color:var(--text-muted); letter-spacing:0.12em; text-transform:uppercase; margin-bottom:14px;">The ₿C Formula</div>
+  <div style="font-family:var(--font-mono); font-size:1.05rem; color:var(--orange); line-height:1.8;">₿C(d) = (1/N) &times; &Sigma; BTCADP(i),<br><span style="font-size:0.88rem;">for i = 1 to N</span></div>
+</div>
 
 <p>
   Where n is the current day number in the series and BTCADP(i) is the Bitcoin Average Daily Price on day i. As of early 2026, ₿C is approximately $18,700, representing the average of over 6,000 daily Bitcoin prices across the network's entire history.
@@ -1319,6 +1320,10 @@
 
 <p>
   ₿C operates at the boundary between two monetary systems. For participants who still think in fiat terms, ₿C has a fiat-equivalent price, approximately $18,700, that provides a familiar reference point. For participants moving toward the Bitcoin economy, ₿C provides a stable pricing reference that both sides can read. The fiat participant sees a dollar amount. The Bitcoin participant sees a sat equivalent. ₿C is dollar-derived, its inputs are daily USD prices, which is precisely what makes it useful as the common unit of account between the two systems. In a fully circular Bitcoin economy where all participants transact in sats with no fiat touchpoint, ₿C is unnecessary. But that economy is small today and may never exist at scale. For as long as fiat and Bitcoin coexist, which is the foreseeable future, ₿C serves anyone with even one foot in each world.
+</p>
+
+<p>
+  This bridging function has a direct commercial consequence for merchants. A merchant who prices in ₿C can serve customers from both monetary systems through one price tag. A Sphere A consumer sees the ₿C price, reads a dollar equivalent, and pays in ₿USD. A Sphere ₿ consumer sees the same ₿C price, converts to a sat equivalent, and pays via Lightning. Sphere A customers think in dollars. Sphere ₿ customers think in sats. Both benefit from the price stability. Both read the same menu. A merchant who prices only in dollars locks out the Bitcoin economy. A merchant who prices only in sats locks out the fiat economy and introduces the volatility that makes pricing unstable. ₿C is the common language that lets a single price tag speak to both.
 </p>
 
 <p>
@@ -2748,7 +2753,7 @@
 </p>
 
 <p>
-  <strong>Venture capital will not.</strong> VCs want equity returns on proprietary platforms. An open-source monetary framework released under CC BY-NC-ND has no cap table, no exit, and no moat. The incentive structure is incompatible with venture economics.
+  <strong>Venture capital will not.</strong> VCs want equity returns on proprietary platforms. An open-source monetary framework released under CC BY-NC-ND has no cap table, no exit, and no proprietary ownership. The incentive structure is incompatible with venture economics.
 </p>
 
 <p>

@@ -439,8 +439,36 @@
   The framework begins with a denomination called ₿C (Bitcoin Currency): the cumulative arithmetic mean of every daily Bitcoin price in USD since the genesis block. ₿C is not a token. Nothing denominated "₿C" moves in a transaction. It is a unit of account, a standard for expressing value, computed from publicly available data and verifiable by anyone.
 </p>
 
+<div class="callout" style="text-align:center; padding:24px;">
+  <div style="font-family:var(--font-mono); font-size:0.68rem; color:var(--text-muted); letter-spacing:0.12em; text-transform:uppercase; margin-bottom:14px;">The ₿C Formula</div>
+  <div style="font-family:var(--font-mono); font-size:1.05rem; color:var(--orange); line-height:1.8;">₿C(d) = (1/N) &times; &Sigma; BTCADP(i),<br><span style="font-size:0.88rem;">for i = 1 to N</span></div>
+</div>
+<p style="font-size:0.92rem; color:var(--text-secondary); margin-top:-12px; margin-bottom:24px;">
+  Where <strong>N</strong> is the total number of days in Bitcoin's history through the previous completed day, and <strong>BTCADP(i)</strong> is the Bitcoin Average Daily Price for each day. The price updates once per day at midnight UTC and is locked for the following 24 hours.
+</p>
+
 <p>
   Because ₿C averages more than six thousand daily prices, individual days carry negligible weight. A severe single-day crash in BTC spot moves the ₿C price by hundredths of a percent. This gives merchants the stability needed to set prices without constant adjustment. And because Bitcoin's long-run trajectory has been upward, the cumulative average appreciates over time. The measuring stick itself gains purchasing power rather than losing it, the inverse of what happens under fiat.
+</p>
+
+<p>
+  The distinction between ₿C and BTC spot matters. As of early 2026, ₿C is approximately $18,700, representing the average of over 6,000 daily Bitcoin prices across the network's entire history. BTC spot, the live market price, is many multiples of that figure. When a merchant prices an item at 1 ₿C, that price tag is stable. It moves less than 0.1% per day under any market conditions. But a buyer who holds Bitcoin holds satoshis, and satoshis are valued at spot. If BTC spot drops 50% overnight, the price tag barely moves while the buyer's holdings lose half their purchasing power. ₿C protects the price tag. It does not protect the buyer's holdings.
+</p>
+
+<p>
+  This is not a deficiency. It is a boundary, and it is the boundary that defines why the instruments described in Section 4 exist. A unit of account and a store of value are different functions of money. ₿C fulfills the first. To stabilize the holder's purchasing power requires a counterparty, a reserve, and a token. That is exactly what ₿USD, ₿OND, and ₿ILL provide. The unit of account is the foundation. The instruments are the structure built on it.
+</p>
+
+<p>
+  In practice, ₿C is what appears on the price tag. A coffee might cost 0.000268 ₿C. That number is stable from one week to the next, because the cumulative average moves approximately 0.04% per day, invisible in any single transaction. The consumer's wallet does not show a ₿C balance. It shows a spending balance in ₿USD and a savings balance in their ₿OND. ₿C tells you what things cost. It does not tell you what you hold. These are different functions, and they belong in different places on the screen.
+</p>
+
+<p>
+  The practical implication for merchants is that prices set in ₿C require periodic downward adjustment, the mirror image of the upward price adjustments every fiat-denominated merchant already makes. A ₿C merchant can schedule a quarterly price revision based on the known appreciation rate, because the rate is calculable in advance from the formula. A fiat merchant raises prices reactively when costs force them to, often absorbing months of margin erosion before acting. Both merchants adjust. One does it proactively with full information. The other does it reactively without it. Both systems move. Fiat hides its movement behind nominally flat price tags while purchasing power quietly erodes. ₿C shows its movement, slowly, predictably, in a direction that benefits the holder. The system that shows its movement is arguably more stable than the one that hides it.
+</p>
+
+<p>
+  ₿C pricing also solves a commercial problem that neither dollars nor sats can solve alone. A merchant who prices in ₿C can serve customers from both monetary systems through one price tag. A consumer in the fiat economy sees the ₿C price, reads a dollar equivalent, and pays in ₿USD. A consumer in the Bitcoin economy sees the same ₿C price, converts to a sat equivalent, and pays via Lightning. Sphere A customers think in dollars. Sphere ₿ customers think in sats. Both benefit from the price stability. Both read the same menu. A merchant who prices only in dollars locks out the Bitcoin economy. A merchant who prices only in sats locks out the fiat economy and introduces volatility that makes pricing unstable. ₿C is the common language that lets a single price tag speak to both.
 </p>
 
 <p>
@@ -467,6 +495,18 @@
 
 <p>
   A second reserve pool (Ledger 2), funded from the group's existing Bitcoin holdings, covers the shortfall when individual tokens whose backing Bitcoin has fallen below the $1 obligation are redeemed. Both ledgers sit in publicly addressable wallets, verifiable in real time by any observer. The proof of reserves is not a quarterly attestation. It is continuous.
+</p>
+
+<p>
+  When a ₿USD token is redeemed, the system burns the oldest token in circulation first. Always. This is not a user choice. It is a protocol rule built into the token lifecycle. The oldest tokens are backed by Bitcoin purchased at the lowest historical prices, making them the most deeply in surplus. Burning them first means every redemption costs the reserves the least possible amount. The surplus Bitcoin that remains after covering the $1 obligation stays in the system, deepening the backstop.
+</p>
+
+<p>
+  The result is a reserve architecture that strengthens with every redemption rather than weakening. Over time, as the token base ages and BTC appreciates, the gap between what each token cost to back and what each token returns on redemption widens. The system heals itself through use. In the early stages, when all tokens are young and the surplus is thin, the system is at its most vulnerable. Time solves this. Every day the system operates, the oldest tokens age deeper into surplus. Every new mint adds BTC at current spot, which will itself become deeply surplus over time. The FIFO structure means the system's security compounds automatically, without any discretionary decision by the consortium.
+</p>
+
+<p>
+  From the user's perspective, none of this is visible. They hold a ₿USD balance. They spend it, receive it, save it. Every token is $1. Fully fungible. FIFO is the consortium's accounting, operating at the protocol level, ensuring that the reserve architecture grows stronger with every transaction.
 </p>
 
 <p>
