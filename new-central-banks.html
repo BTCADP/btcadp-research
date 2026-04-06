@@ -494,11 +494,15 @@
 </p>
 
 <p>
-  A second reserve pool, Ledger 2, is drawn from the consortium's existing Bitcoin holdings, capital that is already on their balance sheets. This is not emergency funding raised to cover a vulnerability. It is a structural commitment of assets the treasury companies already hold. Ledger 2 covers any shortfall when a token's backing Bitcoin has fallen below the $1 obligation at the moment of redemption. Both ledgers sit in publicly addressable wallets on Bitcoin's base layer, verifiable in real time by any observer. The proof of reserves is not a quarterly attestation. It is continuous, permissionless, and independent of any auditor.
+  A second reserve pool, Ledger 2, is drawn from the consortium's existing Bitcoin holdings, capital that is already on their balance sheets. This is not emergency funding raised to cover a vulnerability. It is a structural commitment of assets the treasury companies already hold. Both ledgers sit in publicly addressable wallets on Bitcoin's base layer, verifiable in real time by any observer. The proof of reserves is not a quarterly attestation. It is continuous, permissionless, and independent of any auditor.
 </p>
 
 <p>
-  The reserve architecture is designed from the ground up to grow stronger over time. When a token is redeemed, the system burns the oldest token in circulation first. Always. This is a protocol rule, not a user choice. The oldest tokens are backed by Bitcoin purchased at the lowest historical prices, making them the most deeply in surplus. Burning them first means every redemption costs the reserves the least possible amount. The surplus Bitcoin that remains after covering the $1 obligation stays in the system, deepening the backstop. Every redemption strengthens the reserve rather than weakening it.
+  The architecture is designed so that Ledger 2 is rarely drawn from at all. A holder who wants to exit has three paths, and only one of them can affect the reserve. The default redemption path delivers Bitcoin directly to the holder's wallet at spot value. No Bitcoin is sold. No reserve pressure is created. The holder leaves the stablecoin but stays on the Bitcoin network. The second path is conversion to the savings product described below, which moves capital from the spending layer to the savings layer at no cost, with no delay, and no reserve action whatsoever. No Bitcoin moves. The circulating supply simply contracts. The third path, and the only one that touches reserves, is fiat redemption: the holder wants dollars. This path carries fees, and the system burns the oldest tokens first, those backed by Bitcoin purchased at the lowest historical prices, the tokens most deeply in surplus. Ledger 2 is drawn from only in the narrow scenario where a holder insists on fiat exit and the oldest remaining tokens are backed by Bitcoin that has fallen below the $1 obligation. Every other exit leaves Ledger 2 untouched.
+</p>
+
+<p>
+  With that context, the reserve mechanics become clear. The FIFO burn order is a protocol rule, not a user choice. The oldest tokens carry the deepest surplus. Burning them first means every fiat redemption costs the reserves the least possible amount. The surplus Bitcoin that remains after covering the $1 obligation stays in the system, deepening the backstop. Every redemption strengthens the reserve rather than weakening it.
 </p>
 
 <p>
@@ -514,7 +518,7 @@
 </p>
 
 <p>
-  Built into this architecture from the ground up, not bolted on as emergency measures, is a suite of defensive mechanisms. The default redemption path transfers Bitcoin directly to the redeemer's wallet at spot value. No concentrated sell order hits the market. The most dangerous attack vector, forced selling that crashes spot to profit a short position, is neutralized by this single design choice. Fiat redemption remains available but carries time-weighted fees that make rapid mint-and-redeem cycles prohibitively expensive while leaving ordinary transactions unaffected. Volume-triggered escalation activates additional fees automatically when aggregate fiat redemption exceeds defined thresholds. Adaptive velocity limits tighten the fiat exit rate during stress events while leaving Bitcoin-default redemption unlimited at all times. And any holder can convert to the savings product described below at any time, at no cost, moving capital from the spending layer to the savings layer without triggering any reserve action. The system absorbs panic without absorbing outflow.
+  Built into this architecture from the ground up, not bolted on as emergency measures, is a suite of defensive mechanisms that govern the fiat exit path. Time-weighted fees make rapid mint-and-redeem cycles, behavior consistent with an attack rather than commerce, prohibitively expensive while leaving ordinary transactions unaffected. Volume-triggered escalation activates additional fees automatically when aggregate fiat redemption exceeds defined thresholds. Adaptive velocity limits tighten the fiat exit rate during stress events while leaving Bitcoin-default redemption unlimited at all times. The system absorbs panic without absorbing outflow.
 </p>
 
 <p>
