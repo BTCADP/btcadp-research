@@ -483,7 +483,19 @@
 </div>
 <p class="hero-line">Three instruments, each serving a different function, each generating a Bitcoin purchase at issuance.</p>
 
-<h3>₿USD: A Bitcoin-Backed Stablecoin</h3>
+<h3>₿USD: A Treasury-Backed Digital Currency</h3>
+
+<p>
+  ₿USD is classified as a Treasury-Backed Digital Currency (TBDC). The term draws a deliberate structural contrast with Central Bank Digital Currencies. A CBDC is issued by an entity that can expand the money supply. A TBDC is backed by a finite reserve asset that no issuer can create, expand, or dilute. A CBDC is a new form of an old instrument: sovereign-issued money, digitized. A TBDC is a genuinely different kind of institution. ₿USD is the first proposed instrument of this type.
+</p>
+
+<p>
+  The differences are architectural, not cosmetic. A CBDC's reserve is government bonds, foreign currency, and central bank liabilities, all of which can be expanded by committee decision. A TBDC's reserve is Bitcoin, fixed at 21 million units by protocol, held in on-chain wallets that anyone can audit. A CBDC's monetary policy is discretionary: quantitative easing, rate setting, negative rates. A TBDC's monetary policy is algorithmic: a coverage ratio formula governs fee reinvestment and reserve thresholds. A CBDC can attach programmable restrictions to the holder's money: expiration dates, spending limits, geographic fencing. A TBDC carries no spending restrictions. The token is a bearer instrument that transfers peer-to-peer. And where a CBDC is designed for complete transaction visibility by the central bank, a TBDC carries data about itself, not its holder. The system monitors its own health without monitoring the people inside it.
+</p>
+
+<p>
+  The most consequential difference cannot be negotiated away: the consortium cannot inflate the money supply. This is not a policy commitment. It is an immutable property of the reserve asset. The programmability built into a TBDC serves the holder and the network, not the issuer. Section 5 describes this in detail.
+</p>
 
 <p>
   ₿USD targets a $1.00 peg, identical to USDT or USDC. The difference is entirely in the collateral. When a consumer purchases ₿USD through a participating financial service provider, the issuer, a group of Bitcoin treasury companies operating under a shared governance charter (described in Section 8), buys Bitcoin at the current spot price and deposits it into a dedicated on-chain reserve (Ledger 1). One token is minted on the group's shared sidechain. At the moment of issuance, the reserve perfectly backs the outstanding obligation.
@@ -502,7 +514,11 @@
 </p>
 
 <p>
-  With that context, the reserve mechanics become clear. The FIFO burn order is a protocol rule, not a user choice. The oldest tokens carry the deepest surplus. Burning them first means every fiat redemption costs the reserves the least possible amount. The surplus Bitcoin that remains after covering the $1 obligation stays in the system, deepening the backstop. Every redemption strengthens the reserve rather than weakening it.
+  The friction toward fiat is intentional. The architecture is designed to make remaining inside the ecosystem the most attractive option at every decision point. A holder who needs to buy something spends ₿USD. A holder who wants to grow their money converts to a savings product. A holder who wants direct Bitcoin exposure converts to BTC with one action. Each of these paths is instant, low-cost, and creates no reserve pressure. The only scenario that touches reserves is a holder who insists on exiting the entire Bitcoin ecosystem and returning to fiat. That path carries the highest fees, the longest processing times, and the most friction. As the ecosystem matures and more merchants, employers, and service providers operate within it, the question becomes: what exactly would a holder need fiat for? The proportion of tokens that ever touch the fiat exit declines naturally as the ecosystem becomes self-sufficient. This is not a restriction on the holder. Every path remains available at all times. It is a consequence of building an ecosystem where the internal options are simply better than leaving.
+</p>
+
+<p>
+  With that context, the reserve mechanics become clear. The FIFO burn order is a protocol rule. The oldest tokens carry the deepest surplus. Burning them first means every fiat redemption costs the reserves the least possible amount. The surplus Bitcoin that remains after covering the $1 obligation stays in the system, deepening the backstop. Every redemption strengthens the reserve rather than weakening it.
 </p>
 
 <p>
@@ -514,11 +530,15 @@
 </p>
 
 <p>
-  The nascent stage is the most vulnerable period. When all tokens are young and the surplus is thin, the margin for error is narrowest. This is stated plainly because it is true. But the architecture is designed so that even a modest period of operation solves this. Every day the system runs, the oldest tokens age deeper into surplus. Every new mint adds Bitcoin at current spot, which will itself become deeply surplus over time. Once the demand engine has operated through even a single market cycle, the combined depth of Ledger 1 surplus and Ledger 2 holdings creates a backstop that becomes practically unbreachable under any realistic redemption scenario.
+  The money multiplier in this system is exactly one. The consortium does not lend. It cannot create credit. It cannot expand the token supply beyond the Bitcoin it has purchased and holds. The total of all ₿USD tokens plus all ₿OND and ₿ILL obligations can never exceed the Bitcoin held in reserve. Every token in circulation is backed by real Bitcoin on the base layer. This is the constraint that makes the architecture fundamentally different from banking: the system cannot grow beyond its reserves, and the reserves are verifiable by anyone at any moment.
 </p>
 
 <p>
-  Built into this architecture from the ground up, not bolted on as emergency measures, is a suite of defensive mechanisms that govern the fiat exit path. Time-weighted fees make rapid mint-and-redeem cycles, behavior consistent with an attack rather than commerce, prohibitively expensive while leaving ordinary transactions unaffected. Volume-triggered escalation activates additional fees automatically when aggregate fiat redemption exceeds defined thresholds. Adaptive velocity limits tighten the fiat exit rate during stress events while leaving Bitcoin-default redemption unlimited at all times. The system absorbs panic without absorbing outflow.
+  The nascent stage is the most vulnerable period. When all tokens are young and the surplus is thin, the margin for error is narrowest. But the architecture is designed so that even a modest period of operation solves this. Every day the system runs, the oldest tokens age deeper into surplus. Every new mint adds Bitcoin at current spot, which will itself become deeply surplus over time. Once the demand engine has operated through even a single market cycle, the combined depth of Ledger 1 surplus and Ledger 2 holdings creates a backstop that becomes practically unbreachable under any realistic redemption scenario.
+</p>
+
+<p>
+  Built into this architecture from the ground up is a suite of defensive mechanisms that govern the fiat exit path. Time-weighted fees make rapid mint-and-redeem cycles, behavior consistent with an attack rather than commerce, prohibitively expensive while leaving ordinary transactions unaffected. Volume-triggered escalation activates additional fees automatically when aggregate fiat redemption exceeds defined thresholds. Adaptive velocity limits tighten the fiat exit rate during stress events while leaving Bitcoin-default redemption unlimited at all times. The system absorbs panic without absorbing outflow.
 </p>
 
 <p>
@@ -533,6 +553,10 @@
   ₿USD is distributed through regulated financial service providers operating within KYC and AML frameworks. It provides substantially greater transactional privacy than a CBDC, where surveillance is a design feature, but does not claim the privacy properties of holding Bitcoin directly.
 </p>
 
+<p>
+  Every ₿USD token carries a feature that no fiat stablecoin can replicate: instant conversion to Bitcoin. At any time, for any reason, a holder can convert their ₿USD to BTC at current spot and send it to a self-custody wallet. The conversion is built into the system because the reserve asset backing every token is Bitcoin sitting on a public blockchain. USDT cannot give you the Treasury bill backing your token. USDC cannot hand you the government bond. ₿USD can give you the actual Bitcoin, because it is there, on-chain, and transferable to any Bitcoin address on earth. Most users will never think about this feature. They will use ₿USD to pay for groceries, receive a salary, and save through a ₿OND. Then their government announces a CBDC. Cash withdrawals are restricted. A neighbor's fiat stablecoin is frozen by a court order. And they press one button. Their ₿USD converts to Bitcoin, arrives in a wallet they control, and no government on earth can touch it. ₿USD is the on-ramp. Bitcoin is the destination.
+</p>
+
 <h3>₿OND: A Savings Instrument</h3>
 
 <p>
@@ -544,7 +568,7 @@
 </p>
 
 <p>
-  The return is fixed at purchase. The timeline is variable. Backtesting against historical data produces predictable relationships between return tier and expected wait. The consumer sees a progress bar and a dynamically updated estimate. At maturity, the payout is delivered in ₿USD, which the saver can spend, convert to fiat, or roll into a new position.
+  The return is fixed at purchase. The timeline is variable. Backtesting against historical data produces predictable relationships between return tier and expected wait. The consumer sees a progress bar and a dynamically updated estimate. At maturity, the payout is delivered in ₿USD, not fiat. The saver can spend it, convert to fiat, or roll into a new position. Auto-reinvestment into a new ₿OND at the current ₿C price is the default. No Bitcoin is sold. The matured tokens are recycled into a new savings position, and the cycle begins again. The saver's capital compounds inside the Bitcoin ecosystem without ever exiting to fiat, without triggering a reserve liquidation, and without requiring any action. Every ₿OND that auto-reinvests is capital that stays in the system, reducing fiat redemption pressure and deepening the reserve over time.
 </p>
 
 <h3>₿ILL: A Capital Markets Instrument</h3>
@@ -582,15 +606,23 @@
 <h3>Defensive Programmability</h3>
 
 <p>
-  CBDCs and TBDCs both use programmable money. The difference is who the programming serves. In a CBDC, programmability is a tool for the issuer: the token carries identity metadata, the central bank sees every transaction, and spending can be restricted by category, geography, or expiration date. The token reports on its holder to the authority. In the ₿USD framework, programmability is inverted. The token carries metadata about itself, not its holder: mint date, mint-day spot price, block age, transfer count. The system monitors its own health without monitoring the people inside it.
+  CBDCs and TBDCs both embed programmable logic at the token level. The technical capability is identical. The philosophy is opposite. In a CBDC, programmability is a tool for the issuer: the token carries identity metadata, the central bank sees every transaction, and spending can be restricted by category, geography, or expiration date. China's e-CNY has been deployed with expiration dates on government disbursements, requiring recipients to spend within a defined period or lose the funds. The token reports on its holder to the authority. In a TBDC, programmability is inverted. The token carries provenance metadata about itself: mint date, mint-day BTC spot price, mint-day ₿C price, block age, and transfer count. This data describes the token's history and reserve health. It does not and cannot describe the person holding it.
 </p>
 
 <p>
-  This self-referencing architecture enables a suite of autonomous defensive mechanisms. BTC-default redemption disperses selling pressure by transferring Bitcoin directly to redeemers rather than executing a single large sell order on the market. Time-weighted fees make rapid mint-and-redeem cycles, behavior consistent with an attack rather than commerce, prohibitively expensive while leaving ordinary transactions unaffected. Volume-triggered escalation activates additional fees automatically when aggregate fiat redemption exceeds defined thresholds. Adaptive velocity limits tighten the fiat exit rate during stress events while leaving BTC-default redemption unlimited at all times. And any ₿USD holder can convert to a ₿OND at any time, at no cost, moving capital from the spending layer to the savings layer without triggering any reserve action. The system absorbs panic without absorbing outflow.
+  Every token in the framework reports a simple health indicator. A ₿USD token reads "black" when the Bitcoin backing it is worth more than the $1 obligation, and "red" when spot has fallen below the minting price. A token minted at $85,000 spot reads black +11.8% when spot is $95,000 and red -17.6% when spot falls to $70,000. A ₿OND token tracks two indicators, one for each maturity condition. The saver condition reads red until ₿C has appreciated by the target percentage, then flips to black. The treasury condition reads red while the issuer's position on that bond is below the required profit margin, then flips to black. Both must read black for the bond to mature. The user never sees this data. They see a balance and a progress bar. The red/black system exists so the protocol can manage reserves and activate defensive behaviors autonomously.
 </p>
 
 <p>
-  Under normal conditions, which constitute the vast majority of the system's operational life, every defensive mechanism is dormant. Transfers are instant and inexpensive. Redemptions are fast. The thresholds that trigger defensive responses are public, auditable, and identical for every participant. No committee convenes. No political negotiation occurs. The protocol hardens autonomously to protect all holders equally. The result is a coordinated short-plus-redemption attack with a deeply negative expected return, making the most dangerous stress scenario economically irrational to attempt.
+  The token contract also has read access to aggregate network metrics, all independently verifiable: total outstanding supply, aggregate redemption velocity, the coverage ratio, and BTC spot relative to ₿C. These are system-level vital signs. None of them require any information about individual holders. The system monitors its own health without monitoring the people inside it.
+</p>
+
+<p>
+  The defensive mechanisms described in Section 4, BTC-default redemption, time-weighted fees, volume-triggered escalation, adaptive velocity limits, and savings conversion, are activated by these network metrics. Under normal conditions, which constitute the vast majority of the system's operational life, every mechanism is dormant. Transfers are instant and inexpensive. Redemptions are fast. The thresholds that trigger defensive responses are public, auditable, and identical for every participant. No committee convenes. No political negotiation occurs. The protocol hardens autonomously to protect all participants equally, and relaxes automatically when conditions normalize.
+</p>
+
+<p>
+  The distinction is worth stating directly: CBDCs program money to control its holders. TBDCs program money to defend them.
 </p>
 
 <h3>The Volatility Problem</h3>
@@ -611,11 +643,6 @@
   The entire framework operates on Bitcoin's existing base layer and a consortium-operated sidechain. No fork is required. No protocol modification is proposed. The BTCADP specification reads publicly available trade data. The ₿C denomination is computed from arithmetic. The reserve ledgers sit in standard Bitcoin wallets. The sidechain handles token circulation, and base layer settlement secures the reserves. Bitcoin's protocol is treated as complete. The infrastructure built above it is what changes.
 </p>
 
-<h3>The Fragility-at-Scale Problem</h3>
-
-<p>
-  Traditional fractional-reserve banking grows more fragile as it scales. More deposits mean more lending, more lending means thinner coverage ratios, and thinner coverage means greater vulnerability to runs. The ₿USD reserve architecture exhibits the inverse property. As adoption deepens and more participants earn, save, and transact within the ecosystem without converting back to fiat, the proportion of tokens that ever touch the fiat exit declines. Reserve pressure falls even as the circulating supply grows. The system becomes more robust at scale, not less. This is a structural consequence of the architecture.
-</p>
 
 
 <!-- SECTION 6 -->
@@ -686,11 +713,15 @@
 </p>
 
 <p>
-  Each product, ₿USD, ₿OND, and ₿ILL, operates within a dedicated two-ledger system entirely separate from the others. Redemption pressure on the stablecoin cannot reach the savings product's reserves, and vice versa. Both Ledger 1 (issuance pool) and Ledger 2 (backstop reserve) are held in publicly addressable Bitcoin wallets on the base layer, auditable by anyone with a block explorer, at any moment, without asking permission.
+  Each product, ₿USD, ₿OND, and ₿ILL, operates within a dedicated two-ledger system entirely separate from the others. This separation is a structural firewall. A surge in ₿USD fiat redemptions during a bear market cannot reach the ₿OND reserves. Stress on the savings product cannot draw from the stablecoin's backstop. Each product's Ledger 1 and Ledger 2 are independently sized, independently verifiable, and independently solvent. Both ledgers for every product are held in publicly addressable Bitcoin wallets on the base layer, auditable by anyone with a block explorer, at any moment, without asking permission. The products share an ecosystem but never a reserve base.
 </p>
 
 <p>
   Exchanges are natural partners in this structure. They hold proprietary Bitcoin reserves that make them well-suited as Ledger 2 contributors. The ecosystem's structural Bitcoin demand benefits the asset that underpins their core business. An exchange participating in the consortium is not contributing to a competitor. It is deepening the market for the asset it trades.
+</p>
+
+<p>
+  The founding members bear the greatest risk. They operate during the nascent stage when the surplus is thinnest and the system has not yet proven itself through a full market cycle. In return, they earn the full economic stack: issuance fees, redemption fees, the structural appreciation spread between BTC spot and the fixed dollar obligations, and the most favorable governance terms in the consortium charter. Later entrants join a proven system with deeper reserves and lower risk. They also join on terms set by the founders. The incentive to move first is not ideological. It is economic: the earliest participants capture the largest share of a system designed to compound in their favor.
 </p>
 
 
@@ -702,7 +733,15 @@
 <p class="hero-line">Every claim made here is verifiable against the public specification before a single dollar is committed.</p>
 
 <p>
-  <strong>The liability concern.</strong> A ₿USD token is a dollar-denominated liability backstopped by Bitcoin. This is a new obligation against the reserve. The relevant comparison, however, is not to having no obligation at all. It is to the obligations these companies already carry. Convertible notes create fixed cash demands that arrive during bear markets when the underlying asset has declined in value. ₿USD obligations are different in kind: they are funded by incoming customer capital at the moment of issuance, produce fee revenue throughout their lifecycle, and generate structural demand for the asset that backs them.
+  <strong>The liability concern.</strong> A ₿USD token is a dollar-denominated liability backstopped by Bitcoin. This is a new obligation against the reserve, and the cost should be stated plainly. When Ledger 2 is drawn from during a fiat redemption, Bitcoin is sold from the consortium's holdings. Those satoshis are not temporarily impaired. They are sold and gone. If BTC spot later recovers, the consortium does not get those satoshis back. It participates in the recovery with fewer satoshis than it started with. That is the real cost of backstopping.
+</p>
+
+<p>
+  The cost is real. It is also quantifiable, modelable, and bounded. The fiat exit is the only path that can trigger a Ledger 2 draw. Bitcoin-default redemption and savings conversion leave it untouched. The architecture creates intentional friction on the fiat path: fees, velocity limits, and processing delays that make it the least attractive exit by design. The actual fiat redemption exposure can be modeled with the same actuarial precision a bank uses to model cash withdrawal demand, with the critical difference that the full reserves are on-chain, verifiable, and have never been lent to anyone. The consortium knows its exposure in real time, not at the end of a quarterly reporting cycle.
+</p>
+
+<p>
+  The relevant comparison is not to having no obligation at all. It is to the obligations these companies already carry. Convertible notes create fixed cash demands that arrive during bear markets when the underlying asset has declined in value. Preferred stock dividends compound regardless of spot price. The acquisition engine that funded these obligations depends on the continued willingness of fiat capital markets to lend, and that willingness evaporates precisely when the company needs it most. ₿USD obligations are different in kind: they are funded by incoming customer capital at the moment of issuance, they produce fee revenue throughout their lifecycle, and they generate structural demand for the reserve asset. A convertible note is a liability that arrives in a bear market. A ₿USD token is a liability whose fiat exit path is the least likely to be exercised, whose cost to the reserve is minimized by FIFO, and whose existence generates buying pressure on the asset backing it.
 </p>
 
 <p>
@@ -762,7 +801,11 @@
 </p>
 
 <p>
-  The stablecoin market alone is projected to surpass $1 trillion by 2030. A modest share of that market would represent tens of billions in structural Bitcoin demand, purchased with capital that would otherwise fund government debt. The full ecosystem, including savings, institutional yield, and the derivative financial products built on top of them, has a total addressable market that is difficult to overstate.
+  The stablecoin market alone is projected to surpass $1 trillion by 2030. The scaling math matters. At $100,000 per BTC, backing $1 trillion in ₿USD tokens would require 10 million BTC, roughly half the total supply. That is not feasible. At $1,000,000 per BTC, backing $1 trillion requires 1 million BTC, approximately what the consortium's founding members already hold. At $10,000,000 per BTC, the same reserves back $10 trillion in economic activity. The system becomes feasible at scale only if Bitcoin appreciates, which is the foundational thesis of every treasury company considering participation. The architecture does not fight this dependency. It embraces it: every token minted generates a Bitcoin purchase that contributes to the very appreciation the system requires.
+</p>
+
+<p>
+  A modest share of a $1 trillion market would represent tens of billions in structural Bitcoin demand, purchased with capital that would otherwise fund government debt. The full ecosystem, including savings, institutional yield, and the derivative financial products built on top of them, has a total addressable market that is difficult to overstate.
 </p>
 
 <p>
