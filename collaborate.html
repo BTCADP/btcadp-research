@@ -941,6 +941,7 @@ async function togglePin() {
 // ═══════════════════════════════════════════════════════════════════════════
 
 async function submitReply() {
+  try {
   const body = document.getElementById('replyText').value.trim();
   if (!body || !currentThreadId) return;
   if (supabase) {
@@ -957,9 +958,11 @@ async function submitReply() {
     openThread(currentThreadId, currentThreadSpace);
     loadThreads(currentThreadSpace);
   } else { alert('Demo mode: Reply would be saved.'); }
+  } catch (e) { alert('JS error in submitReply: ' + e.message); console.error(e); }
 }
 
 async function submitThread(space) {
+  try {
   const title = document.getElementById(`newTitle-${space}`).value.trim();
   const section = document.getElementById(`newSection-${space}`).value;
   const body = document.getElementById(`newBody-${space}`).value.trim();
@@ -979,6 +982,7 @@ async function submitThread(space) {
     hideNewThread(space);
     loadThreads(space);
   } else { alert('Demo mode: Thread would be saved.'); }
+  } catch (e) { alert('JS error in submitThread: ' + e.message); console.error(e); }
 }
 
 function showNewThread(space) { document.getElementById(`newThreadForm-${space}`).classList.add('visible'); }
