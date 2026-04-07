@@ -473,7 +473,7 @@ window.supabase = { createClient };
     <!-- ADMIN PANEL -->
     <div class="admin-panel" id="adminPanel">
       <div style="text-align:center;margin-bottom:16px;">
-        <a href="#threads-top" style="color:var(--orange);font-family:var(--font-mono);font-size:12px;text-decoration:none;letter-spacing:0.03em;">&uarr; Back to Threads</a>
+        <a href="#" onclick="event.preventDefault();document.getElementById('spaceTabs').scrollIntoView({behavior:'smooth'});" style="color:var(--orange);font-family:var(--font-mono);font-size:12px;text-decoration:none;letter-spacing:0.03em;">&uarr; Back to Threads</a>
       </div>
       <h3>Manage Contributors</h3>
       <div class="invite-fields">
@@ -550,6 +550,14 @@ function resolveFooterAuthor(handle, realName, email) {
 // ═══════════════════════════════════════════════════════════════════════════
 
 function getUserRole() { return currentUserProfile?.role || 'contributor'; }
+
+function showToast(msg) {
+  let t = document.getElementById('toast');
+  if (!t) { t = document.createElement('div'); t.id = 'toast'; t.style.cssText = 'position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:var(--green);color:#000;font-family:var(--font-mono);font-size:13px;font-weight:600;padding:12px 24px;border-radius:6px;z-index:9999;opacity:0;transition:opacity 0.3s;pointer-events:none;'; document.body.appendChild(t); }
+  t.textContent = msg; t.style.opacity = '1';
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => t.style.opacity = '0', 2500);
+}
 function canReview() { const r = getUserRole(); return r === 'reviewer' || r === 'admin'; }
 function isAdmin() { return getUserRole() === 'admin'; }
 
@@ -934,16 +942,23 @@ async function changeThreadStatus() {
 }
 
 async function togglePin() {
-  if (!canReview() || !currentThreadId) return;
+  try {
+  if (!canReview() || !currentThreadId) { console.log('togglePin blocked: canReview=', canReview(), 'currentThreadId=', currentThreadId); return; }
   const thread = threadsCache[currentThreadSpace]?.find(t => t.id === currentThreadId);
-  if (!thread) return;
+  if (!thread) { console.log('togglePin: thread not found'); return; }
   const newPinned = !thread.pinned;
-  if (supabase) await supabase.from('threads').update({ pinned: newPinned }).eq('id', currentThreadId);
+  if (supabase) {
+    const { error } = await supabase.from('threads').update({ pinned: newPinned }).eq('id', currentThreadId);
+    if (error) { alert('Error pinning thread: ' + error.message); return; }
+  }
   thread.pinned = newPinned;
   const btn = document.getElementById('pinBtn');
   btn.className = 'btn-pin' + (newPinned ? ' pinned' : '');
   btn.textContent = newPinned ? 'Unpin' : 'Pin';
+  btn.style.outline = '2px solid var(--green)';
+  setTimeout(() => btn.style.outline = '', 1000);
   renderThreadList(currentThreadSpace);
+  } catch (e) { alert('JS error in togglePin: ' + e.message); console.error(e); }
 }
 
 async function deleteThread() {
@@ -1017,6 +1032,7 @@ async function submitReply() {
     document.getElementById('replyText').value = '';
     openThread(currentThreadId, currentThreadSpace);
     loadThreads(currentThreadSpace);
+    showToast('Reply posted!');
   } else { alert('Demo mode: Reply would be saved.'); }
   } catch (e) { alert('JS error in submitReply: ' + e.message); console.error(e); }
 }
@@ -1044,6 +1060,7 @@ async function submitThread(space) {
     document.getElementById(`newBody-${space}`).value = '';
     hideNewThread(space);
     loadThreads(space);
+    showToast('Thread posted!');
   } else { alert('Demo mode: Thread would be saved.'); }
   } catch (e) { alert('JS error in submitThread: ' + e.message); console.error(e); }
 }
