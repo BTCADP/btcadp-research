@@ -966,14 +966,14 @@ async function deleteThread() {
   if (!confirm('Delete this thread and all its comments? This cannot be undone.')) return;
   try {
     if (supabase) {
-      const { data, error } = await supabase.from('threads').delete().eq('id', currentThreadId).select();
+      const { error } = await supabase.from('threads').delete().eq('id', currentThreadId);
       if (error) { alert('Error deleting thread: ' + error.message); return; }
-      if (!data || data.length === 0) { alert('Delete failed. Check your RLS policies: you may need a DELETE policy on the threads table for admins.'); return; }
     }
     document.getElementById('threadDetail').classList.remove('visible');
     document.getElementById('backToHomeBar').style.display = 'none';
     currentThreadId = null;
     loadThreads(currentThreadSpace);
+    showToast('Thread deleted!');
   } catch (e) { alert('JS error in deleteThread: ' + e.message); console.error(e); }
 }
 
@@ -1046,16 +1046,16 @@ async function submitThread(space) {
   if (!title) { alert('Please enter a thread title.'); return; }
   console.log('Inserting thread:', { space, section, title });
   if (supabase) {
-    const { data, error } = await supabase.from('threads').insert({
+    const { error } = await supabase.from('threads').insert({
       space, section, title, body,
       author_email: currentUser.email,
       author_name: currentUserProfile?.display_name || null,
       author_handle: currentUserProfile?.handle || currentUserProfile?.display_name || currentUser.email.split('@')[0],
       author_role: getUserRole(),
       status: 'open', pinned: false
-    }).select();
+    });
+    console.log('Insert result:', error ? error.message : 'success');
     if (error) { alert('Error posting thread: ' + error.message); return; }
-    if (!data || data.length === 0) { alert('Insert returned no rows. Check RLS INSERT policy on threads table.'); return; }
     document.getElementById(`newTitle-${space}`).value = '';
     document.getElementById(`newBody-${space}`).value = '';
     hideNewThread(space);
