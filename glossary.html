@@ -635,7 +635,7 @@
         <div class="term-body">
           <p>The group of publicly traded Bitcoin treasury companies that collectively issue TBDC instruments (₿USD and ₿onds). Distributed across jurisdictions so no single regulatory action can shut down the entire system. Each member maintains its own reserve ledgers and is independently audited.</p>
           <p>The consortium is the institutional layer of the ecosystem. The BTCADP specification and ₿C formula are independent of it , the unit of account persists even if the consortium dissolves. The consortium provides the issuance and redemption infrastructure; the denomination provides the credibility.</p>
-          <div class="see-also">See also: <a href="#T">TBDC</a>, <a href="#F">Six-Ledger System</a></div>
+          <div class="see-also">See also: <a href="#T">TBDC</a>, <a href="#T">Two-Ledger System</a></div>
         </div>
       </div>
 
@@ -700,22 +700,6 @@
       <div class="section-header">
         <span class="section-letter">F</span>
         <span class="section-name">Architecture</span>
-      </div>
-
-      <div class="term-entry">
-        <button class="term-header" onclick="toggle(this)">
-          <div class="term-title-wrap">
-            <span class="term-name">Six-Ledger System</span>
-            <span class="term-tag">Reserve Architecture</span>
-          </div>
-          <span class="term-icon">+</span>
-        </button>
-        <div class="term-body">
-          <p>The reserve architecture that separates ₿USD, ₿ond, and ₿ILL reserves into six distinct on-chain ledgers , two per product. Each product has a Ledger 1 (issuance pool , BTC purchased at the time capital enters) and a Ledger 2 (backstop reserve , drawn from consortium holdings to cover shortfalls).</p>
-          <p><strong>₿USD L1:</strong> BTC backing outstanding $1 tokens. <strong>₿USD L2:</strong> Self-fortifying backstop , grows as BTC appreciates above the $1 obligation. <strong>₿ond L1:</strong> BTC purchased with saver deposits, tagged to individual bonds. <strong>₿ond L2:</strong> Actuarial backstop sized against the known maturity book. <strong>₿ILL L1:</strong> BTC purchased with institutional capital at issuance. <strong>₿ILL L2:</strong> Backstop sized against the institutional obligation book.</p>
-          <p>The separation is a structural firewall. A stress event on ₿USD , a surge in fiat redemptions , cannot accelerate ₿OND maturities or draw from ₿ILL reserves. Each product lives or dies on its own reserve base. All six ledgers are Bitcoin wallets on the base layer, verifiable by any observer in real time.</p>
-          <div class="see-also">See also: <a href="#L">Ledger 1</a>, <a href="#L">Ledger 2</a>, <a href="bitcoin-bridge.html#ch14">Reserve Architecture in TBB</a></div>
-        </div>
       </div>
 
     </div>
@@ -827,7 +811,7 @@
         <div class="term-body">
           <p>The Bitcoin purchased at the moment a ₿USD token is minted or a ₿ond is issued. Directly backs the outstanding obligation. Held in publicly addressable wallets on Bitcoin's base layer , verifiable by any observer in real time without an auditor.</p>
           <p>For ₿USD: Ledger 1 holds BTC backing each $1 token at the moment of issuance. As BTC appreciates above the $1 obligation, surplus flows into Ledger 2. For ₿ond: Ledger 1 holds BTC locked to the maturity schedule.</p>
-          <div class="see-also">See also: <a href="#L">Ledger 2</a>, <a href="#F">Six-Ledger System</a></div>
+          <div class="see-also">See also: <a href="#L">Ledger 2</a>, <a href="#T">Two-Ledger System</a></div>
         </div>
       </div>
 
@@ -842,7 +826,7 @@
         <div class="term-body">
           <p>Additional Bitcoin drawn from treasury companies' existing holdings that covers redemption shortfalls when Ledger 1 is insufficient , i.e. when Bitcoin spot has declined below the price at which reserves were acquired.</p>
           <p>For ₿USD: Ledger 2 self-fortifies over time as BTC appreciation in Ledger 1 creates surplus above the $1 obligation. The longer ₿USD circulates, the deeper the backstop becomes without requiring additional capital. For ₿OND: Ledger 2 is sized actuarially against the known maturity book. The dual-condition maturity ensures the treasury is profitable on every payout, and early exits convert to ₿USD rather than drawing on ₿OND reserves.</p>
-          <div class="see-also">See also: <a href="#L">Ledger 1</a>, <a href="#F">Six-Ledger System</a></div>
+          <div class="see-also">See also: <a href="#L">Ledger 1</a>, <a href="#T">Two-Ledger System</a></div>
         </div>
       </div>
 
@@ -921,7 +905,7 @@
         <div class="term-body">
           <p>The ability for any observer to confirm reserve balances in real time by checking publicly addressable Bitcoin wallets. No auditor required. No quarterly attestation. No trust in a publisher's report. Anyone with a Bitcoin block explorer can verify that the reserves backing every ₿USD token and every ₿ond are exactly where they are claimed to be, at any moment.</p>
           <p>This is the core transparency property that distinguishes the ecosystem from fiat-backed stablecoins, whose reserves are attested periodically by accountants rather than visible continuously on-chain.</p>
-          <div class="see-also">See also: <a href="#F">Six-Ledger System</a>, <a href="tbd-usd.html">₿USD Overview</a></div>
+          <div class="see-also">See also: <a href="#T">Two-Ledger System</a>, <a href="tbd-usd.html">₿USD Overview</a></div>
         </div>
       </div>
 
@@ -932,6 +916,22 @@
       <div class="section-header">
         <span class="section-letter">P</span>
         <span class="section-name">Philosophy</span>
+      </div>
+
+      <div class="term-entry">
+        <button class="term-header" onclick="toggle(this)">
+          <div class="term-title-wrap">
+            <span class="term-name">PBP# (Profit Burn Priority)</span>
+            <span class="term-tag">Reserve Architecture</span>
+          </div>
+          <span class="term-icon">+</span>
+        </button>
+        <div class="term-body">
+          <p>The protocol-level burn order for ₿USD redemptions. Each token continuously calculates a dynamic ranking based on its current profitability: the spread between its mint-day BTC spot price and the current spot price. The most profitable tokens have the lowest PBP# and are first in line to be burned. The least profitable tokens sit at the back of the queue.</p>
+          <p>In a cleanly rising market, PBP# produces the same result as a simple FIFO (first-in, first-out) approach because the oldest tokens are also the cheapest and most profitable. The two methods diverge in volatile markets, where PBP# outperforms by avoiding Ledger 2 draws on underwater tokens when profitable tokens still exist in the pool.</p>
+          <p>Modeling confirms that total surplus over the life of the system is identical regardless of burn order. PBP# does not earn the treasury more money over time. Its advantage is defensive: it preserves Ledger 2 for genuine stress events. The user has no visibility into or control over which token gets burned. PBP# governs which satoshis leave Ledger 1. The time-weighted fee structure, a separate system, governs what fees apply based on the redeemed token's age.</p>
+          <div class="see-also">See also: <a href="#L">Ledger 1</a>, <a href="#L">Ledger 2</a>, <a href="#T">Two-Ledger System</a>, <a href="bitcoin-bridge.html#ch11">₿USD in TBB</a></div>
+        </div>
       </div>
 
       <div class="term-entry open">
@@ -1067,6 +1067,22 @@
         <div class="term-body">
           <p>The instrument class. A stablecoin issued by a consortium of Bitcoin treasury companies, backed by Bitcoin held in on-chain reserves, and denominated in a fiat currency. ₿USD is the US dollar implementation of the TBDC model. Other fiat denominations , ₿EUR, ₿GBP , are possible under the same architecture. TBDC is the category; ₿USD is the reference implementation.</p>
           <div class="see-also">See also: <a href="#B">₿USD</a>, <a href="#C">Consortium</a></div>
+        </div>
+      </div>
+
+      <div class="term-entry">
+        <button class="term-header" onclick="toggle(this)">
+          <div class="term-title-wrap">
+            <span class="term-name">Two-Ledger System</span>
+            <span class="term-tag">Reserve Architecture</span>
+          </div>
+          <span class="term-icon">+</span>
+        </button>
+        <div class="term-body">
+          <p>The universal reserve architecture used by every instrument in the framework. Each product has its own dedicated two-ledger system. Ledger 1 is the issuance pool: BTC purchased with the capital that enters when a token is minted, a bond is deposited, or a bill is issued. Ledger 2 is the backstop reserve: additional Bitcoin drawn from the consortium's existing holdings, covering shortfalls when Ledger 1 alone is insufficient to meet obligations.</p>
+          <p><strong>₿USD:</strong> Ledger 1 holds BTC backing outstanding $1 tokens. Ledger 2 self-fortifies as BTC appreciates above the $1 obligation. <strong>₿ond:</strong> Ledger 1 holds BTC purchased with saver deposits, tagged to individual bonds. Ledger 2 is sized actuarially against the known maturity book. <strong>₿ILL:</strong> Ledger 1 holds BTC purchased with institutional capital at issuance. Ledger 2 is sized against the institutional obligation book.</p>
+          <p>The separation between products is a structural firewall. A stress event on ₿USD cannot accelerate ₿OND maturities or draw from ₿ILL reserves. Each product lives or dies on its own reserve base. All ledgers are Bitcoin wallets on the base layer, verifiable by any observer in real time.</p>
+          <div class="see-also">See also: <a href="#L">Ledger 1</a>, <a href="#L">Ledger 2</a>, <a href="bitcoin-bridge.html#ch14">Reserve Architecture in TBB</a></div>
         </div>
       </div>
 
