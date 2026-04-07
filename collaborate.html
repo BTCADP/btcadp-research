@@ -452,6 +452,7 @@ window.supabase = { createClient };
         <div class="reviewer-controls" id="reviewerControls">
           <select id="statusSelect" onchange="changeThreadStatus()"><option value="open">Open</option><option value="under-review">Under review</option><option value="resolved">Resolved</option></select>
           <button class="btn-pin" id="pinBtn" onclick="togglePin()">Pin</button>
+          <button class="btn-pin" style="color:var(--red);" id="deleteBtn" onclick="deleteThread()">Delete</button>
         </div>
       </div>
       <div id="detailComments"></div>
@@ -934,6 +935,23 @@ async function togglePin() {
   btn.className = 'btn-pin' + (newPinned ? ' pinned' : '');
   btn.textContent = newPinned ? 'Unpin' : 'Pin';
   renderThreadList(currentThreadSpace);
+}
+
+async function deleteThread() {
+  if (!canReview() || !currentThreadId) return;
+  if (!confirm('Delete this thread and all its comments? This cannot be undone.')) return;
+  try {
+    if (supabase) {
+      await supabase.from('comments').delete().eq('thread_id', currentThreadId);
+      await supabase.from('votes').delete().eq('thread_id', currentThreadId);
+      const { error } = await supabase.from('threads').delete().eq('id', currentThreadId);
+      if (error) { alert('Error deleting thread: ' + error.message); return; }
+    }
+    document.getElementById('threadDetail').style.display = 'none';
+    document.getElementById('threadListContainer').style.display = 'block';
+    currentThreadId = null;
+    loadThreads(currentThreadSpace);
+  } catch (e) { alert('JS error in deleteThread: ' + e.message); console.error(e); }
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
