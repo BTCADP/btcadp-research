@@ -500,6 +500,29 @@ window.supabase = { createClient };
 const SUPABASE_URL = 'https://zjvjptrufipxykwpxfdd.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_n6kA99fJ2ZQR7rp5lxpl5g_Oq6Zweur';
 
+// Raw REST helper - bypasses Supabase JS client which can hang
+async function sbRest(method, table, params = {}) {
+  const stored = localStorage.getItem('sb-zjvjptrufipxykwpxfdd-auth-token');
+  const token = stored ? JSON.parse(stored)?.access_token : null;
+  let url = `${SUPABASE_URL}/rest/v1/${table}`;
+  if (params.query) url += '?' + params.query;
+  const headers = {
+    'apikey': SUPABASE_ANON_KEY,
+    'Content-Type': 'application/json',
+    'Prefer': params.prefer || 'return=minimal'
+  };
+  if (token) headers['Authorization'] = 'Bearer ' + token;
+  const opts = { method, headers };
+  if (params.body) opts.body = JSON.stringify(params.body);
+  const res = await fetch(url, opts);
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error(`${res.status}: ${err}`);
+  }
+  if (params.prefer === 'return=representation') return res.json();
+  return null;
+}
+
 
 let supabase = null;
 let currentUser = null;
@@ -682,7 +705,11 @@ async function handleAuth() {
   }
 }
 
-async function handleSignOut() { if (supabase) await supabase.auth.signOut(); showAuth(); }
+async function handleSignOut() {
+  try { if (supabase) await Promise.race([supabase.auth.signOut(), new Promise((_, rej) => setTimeout(() => rej('timeout'), 3000))]); } catch(e) { console.log('Sign out via client failed, clearing manually'); }
+  localStorage.removeItem('sb-zjvjptrufipxykwpxfdd-auth-token');
+  showAuth();
+}
 
 async function loadUserProfile() {
   if (!supabase || !currentUser) return;
@@ -836,10 +863,15 @@ function updateCounts() {
 async function toggleVote(threadId, space) {
   const votes = votesCache[threadId] || { count: 0, userVoted: false };
   const email = currentUser?.email || 'demo@btcadp.org';
-  if (supabase) {
-    if (votes.userVoted) { await supabase.from('votes').delete().eq('thread_id', threadId).eq('user_email', email); votes.count = Math.max(0, votes.count - 1); votes.userVoted = false; }
-    else { await supabase.from('votes').insert({ thread_id: threadId, user_email: email }); votes.count += 1; votes.userVoted = true; }
-  } else { votes.userVoted = !votes.userVoted; votes.count += votes.userVoted ? 1 : -1; }
+  try {
+    if (votes.userVoted) {
+      await sbRest('DELETE', 'votes', { query: `thread_id=eq.${threadId}&user_email=eq.${encodeURIComponent(email)}` });
+      votes.count = Math.max(0, votes.count - 1); votes.userVoted = false;
+    } else {
+      await sbRest('POST', 'votes', { body: { thread_id: threadId, user_email: email } });
+      votes.count += 1; votes.userVoted = true;
+    }
+  } catch (e) { console.error('Vote error:', e); }
   votesCache[threadId] = votes;
   renderThreadList(space);
   if (currentThreadId === threadId) updateDetailVoteUI(threadId);
@@ -946,23 +978,22 @@ function quoteReply(text) { const ta = document.getElementById('replyText'); ta.
 async function changeThreadStatus() {
   if (!canReview() || !currentThreadId) return;
   const newStatus = document.getElementById('statusSelect').value;
-  if (supabase) await supabase.from('threads').update({ status: newStatus }).eq('id', currentThreadId);
-  const thread = threadsCache[currentThreadSpace]?.find(t => t.id === currentThreadId);
-  if (thread) thread.status = newStatus;
-  const s = document.getElementById('detailStatus'); s.textContent = newStatus; s.className = `status-badge ${newStatus}`;
-  renderThreadList(currentThreadSpace);
+  try {
+    await sbRest('PATCH', 'threads', { query: `id=eq.${currentThreadId}`, body: { status: newStatus } });
+    const thread = threadsCache[currentThreadSpace]?.find(t => t.id === currentThreadId);
+    if (thread) thread.status = newStatus;
+    const s = document.getElementById('detailStatus'); s.textContent = newStatus; s.className = `status-badge ${newStatus}`;
+    renderThreadList(currentThreadSpace);
+  } catch (e) { alert('Error changing status: ' + e.message); console.error(e); }
 }
 
 async function togglePin() {
   try {
-  if (!canReview() || !currentThreadId) { console.log('togglePin blocked: canReview=', canReview(), 'currentThreadId=', currentThreadId); return; }
+  if (!canReview() || !currentThreadId) return;
   const thread = threadsCache[currentThreadSpace]?.find(t => t.id === currentThreadId);
-  if (!thread) { console.log('togglePin: thread not found'); return; }
+  if (!thread) return;
   const newPinned = !thread.pinned;
-  if (supabase) {
-    const { error } = await supabase.from('threads').update({ pinned: newPinned }).eq('id', currentThreadId);
-    if (error) { alert('Error pinning thread: ' + error.message); return; }
-  }
+  await sbRest('PATCH', 'threads', { query: `id=eq.${currentThreadId}`, body: { pinned: newPinned } });
   thread.pinned = newPinned;
   const btn = document.getElementById('pinBtn');
   btn.className = 'btn-pin' + (newPinned ? ' pinned' : '');
@@ -970,23 +1001,21 @@ async function togglePin() {
   btn.style.outline = '2px solid var(--green)';
   setTimeout(() => btn.style.outline = '', 1000);
   renderThreadList(currentThreadSpace);
-  } catch (e) { alert('JS error in togglePin: ' + e.message); console.error(e); }
+  showToast(newPinned ? 'Thread pinned!' : 'Thread unpinned!');
+  } catch (e) { alert('Error pinning thread: ' + e.message); console.error(e); }
 }
 
 async function deleteThread() {
   if (!canReview() || !currentThreadId) return;
   if (!confirm('Delete this thread and all its comments? This cannot be undone.')) return;
   try {
-    if (supabase) {
-      const { error } = await supabase.from('threads').delete().eq('id', currentThreadId);
-      if (error) { alert('Error deleting thread: ' + error.message); return; }
-    }
+    await sbRest('DELETE', 'threads', { query: `id=eq.${currentThreadId}` });
     document.getElementById('threadDetail').classList.remove('visible');
     document.getElementById('backToHomeBar').style.display = 'none';
     currentThreadId = null;
     loadThreads(currentThreadSpace);
     showToast('Thread deleted!');
-  } catch (e) { alert('JS error in deleteThread: ' + e.message); console.error(e); }
+  } catch (e) { alert('Error deleting thread: ' + e.message); console.error(e); }
 }
 
 function editThread() {
@@ -1013,17 +1042,14 @@ async function saveThreadEdit() {
   if (!title) { alert('Title cannot be empty.'); return; }
   try {
     console.log('Saving edit for thread:', currentThreadId);
-    if (supabase) {
-      const { error } = await supabase.from('threads').update({ title, body }).eq('id', currentThreadId);
-      console.log('Edit result:', error ? error.message : 'success');
-      if (error) { alert('Error saving edit: ' + error.message); return; }
-    }
+    await sbRest('PATCH', 'threads', { query: `id=eq.${currentThreadId}`, body: { title, body } });
+    console.log('Edit result: success');
     const thread = threadsCache[currentThreadSpace]?.find(t => t.id === currentThreadId);
     if (thread) { thread.title = title; thread.body = body; }
     cancelEdit();
     openThread(currentThreadId, currentThreadSpace);
     showToast('Thread updated!');
-  } catch (e) { alert('JS error in saveThreadEdit: ' + e.message); console.error(e); }
+  } catch (e) { alert('Error saving edit: ' + e.message); console.error(e); }
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -1034,22 +1060,19 @@ async function submitReply() {
   try {
   const body = document.getElementById('replyText').value.trim();
   if (!body || !currentThreadId) return;
-  if (supabase) {
-    const { error } = await supabase.from('comments').insert({
-      thread_id: currentThreadId,
-      author_email: currentUser.email,
-      author_name: currentUserProfile?.display_name || null,
-      author_handle: currentUserProfile?.handle || currentUserProfile?.display_name || currentUser.email.split('@')[0],
-      author_role: getUserRole(),
-      body: body
-    });
-    if (error) { alert('Error posting reply: ' + error.message); return; }
-    document.getElementById('replyText').value = '';
-    openThread(currentThreadId, currentThreadSpace);
-    loadThreads(currentThreadSpace);
-    showToast('Reply posted!');
-  } else { alert('Demo mode: Reply would be saved.'); }
-  } catch (e) { alert('JS error in submitReply: ' + e.message); console.error(e); }
+  await sbRest('POST', 'comments', { body: {
+    thread_id: currentThreadId,
+    author_email: currentUser.email,
+    author_name: currentUserProfile?.display_name || null,
+    author_handle: currentUserProfile?.handle || currentUserProfile?.display_name || currentUser.email.split('@')[0],
+    author_role: getUserRole(),
+    body: body
+  }});
+  document.getElementById('replyText').value = '';
+  openThread(currentThreadId, currentThreadSpace);
+  loadThreads(currentThreadSpace);
+  showToast('Reply posted!');
+  } catch (e) { alert('Error posting reply: ' + e.message); console.error(e); }
 }
 
 async function submitThread(space) {
@@ -1059,25 +1082,21 @@ async function submitThread(space) {
   const section = document.getElementById(`newSection-${space}`).value;
   const body = document.getElementById(`newBody-${space}`).value.trim();
   if (!title) { alert('Please enter a thread title.'); return; }
-  console.log('Inserting thread:', { space, section, title });
-  if (supabase) {
-    const { error } = await supabase.from('threads').insert({
-      space, section, title, body,
-      author_email: currentUser.email,
-      author_name: currentUserProfile?.display_name || null,
-      author_handle: currentUserProfile?.handle || currentUserProfile?.display_name || currentUser.email.split('@')[0],
-      author_role: getUserRole(),
-      status: 'open', pinned: false
-    });
-    console.log('Insert result:', error ? error.message : 'success');
-    if (error) { alert('Error posting thread: ' + error.message); return; }
-    document.getElementById(`newTitle-${space}`).value = '';
-    document.getElementById(`newBody-${space}`).value = '';
-    hideNewThread(space);
-    loadThreads(space);
-    showToast('Thread posted!');
-  } else { alert('Demo mode: Thread would be saved.'); }
-  } catch (e) { alert('JS error in submitThread: ' + e.message); console.error(e); }
+  await sbRest('POST', 'threads', { body: {
+    space, section, title, body,
+    author_email: currentUser.email,
+    author_name: currentUserProfile?.display_name || null,
+    author_handle: currentUserProfile?.handle || currentUserProfile?.display_name || currentUser.email.split('@')[0],
+    author_role: getUserRole(),
+    status: 'open', pinned: false
+  }});
+  console.log('Insert result: success');
+  document.getElementById(`newTitle-${space}`).value = '';
+  document.getElementById(`newBody-${space}`).value = '';
+  hideNewThread(space);
+  loadThreads(space);
+  showToast('Thread posted!');
+  } catch (e) { alert('Error posting thread: ' + e.message); console.error(e); }
 }
 
 function showNewThread(space) { document.getElementById(`newThreadForm-${space}`).classList.add('visible'); }
@@ -1093,14 +1112,17 @@ async function inviteCollaborator() {
   const access = document.getElementById('inviteAccess').value;
   const role = document.getElementById('inviteRole').value;
   if (!email || !handle) { alert('Both email and handle are required.'); return; }
-  if (supabase) {
-    const { error } = await supabase.from('collaborators').upsert({
-      email, handle, access, role,
-      invited_by: currentUser.email,
-      invited_at: new Date().toISOString()
-    }, { onConflict: 'email' });
-    if (!error) { document.getElementById('inviteEmail').value = ''; document.getElementById('inviteHandle').value = ''; loadCollaborators(); }
-  } else { alert(`Demo: Would invite ${email} as "${handle}" (${role}, ${access}).`); }
+  try {
+    await sbRest('POST', 'collaborators', {
+      query: 'on_conflict=email',
+      prefer: 'resolution=merge-duplicates',
+      body: { email, handle, access, role, invited_by: currentUser.email, invited_at: new Date().toISOString() }
+    });
+    document.getElementById('inviteEmail').value = '';
+    document.getElementById('inviteHandle').value = '';
+    loadCollaborators();
+    showToast('Contributor invited!');
+  } catch (e) { alert('Error inviting: ' + e.message); }
 }
 
 async function loadCollaborators() {
@@ -1138,8 +1160,8 @@ function renderCollaboratorList(collabs) {
   }).join('');
 }
 
-async function changeCollaboratorRole(email, newRole) { if (supabase) await supabase.from('collaborators').update({ role: newRole }).eq('email', email); }
-async function revokeAccess(email) { if (!confirm(`Revoke access for ${email}?`)) return; if (supabase) { await supabase.from('collaborators').delete().eq('email', email); loadCollaborators(); } }
+async function changeCollaboratorRole(email, newRole) { try { await sbRest('PATCH', 'collaborators', { query: `email=eq.${encodeURIComponent(email)}`, body: { role: newRole } }); } catch(e) { alert('Error: ' + e.message); } }
+async function revokeAccess(email) { if (!confirm(`Revoke access for ${email}?`)) return; try { await sbRest('DELETE', 'collaborators', { query: `email=eq.${encodeURIComponent(email)}` }); loadCollaborators(); } catch(e) { alert('Error: ' + e.message); } }
 
 // ═══════════════════════════════════════════════════════════════════════════
 //  DEMO
