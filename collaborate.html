@@ -552,7 +552,7 @@ function isAdmin() { return getUserRole() === 'admin'; }
 async function init() {
   const msgEl = document.getElementById('authMessage');
 
-  if (typeof window._supabaseCreateClient !== 'function') {
+  if (typeof window.supabase === 'undefined' || typeof window.supabase.createClient !== 'function') {
     console.error('Supabase library not ready yet');
     msgEl.textContent = 'Loading authentication...';
     msgEl.className = 'auth-message';
@@ -560,7 +560,7 @@ async function init() {
   }
 
   try {
-    supabase = window._supabaseCreateClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     console.log('Supabase client created successfully');
   } catch (e) {
     console.error('Failed to create Supabase client:', e);
