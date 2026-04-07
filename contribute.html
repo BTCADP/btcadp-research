@@ -523,6 +523,17 @@ async function sbRest(method, table, params = {}) {
   return null;
 }
 
+async function sbSelect(table, query) {
+  const stored = localStorage.getItem('sb-zjvjptrufipxykwpxfdd-auth-token');
+  const token = stored ? JSON.parse(stored)?.access_token : null;
+  const url = `${SUPABASE_URL}/rest/v1/${table}?${query}`;
+  const headers = { 'apikey': SUPABASE_ANON_KEY };
+  if (token) headers['Authorization'] = 'Bearer ' + token;
+  const res = await fetch(url, { headers });
+  if (!res.ok) { console.error('sbSelect error:', res.status); return []; }
+  return res.json();
+}
+
 
 let supabase = null;
 let currentUser = null;
@@ -712,9 +723,9 @@ async function handleSignOut() {
 }
 
 async function loadUserProfile() {
-  if (!supabase || !currentUser) return;
-  const { data } = await supabase.from('collaborators').select('*').eq('email', currentUser.email.toLowerCase()).single();
-  currentUserProfile = data;
+  if (!currentUser) return;
+  const data = await sbSelect('collaborators', `select=*&email=eq.${encodeURIComponent(currentUser.email.toLowerCase())}&limit=1`);
+  currentUserProfile = data?.[0] || null;
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -781,17 +792,18 @@ let votesCache = {};
 const UPVOTE_SVG = '<svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>';
 
 async function loadThreads(space) {
-  if (supabase) {
-    const { data } = await supabase.from('threads').select('*, comments(count)').eq('space', space).order('created_at', { ascending: false });
+  try {
+    const data = await sbSelect('threads', `select=*,comments(count)&space=eq.${space}&order=created_at.desc`);
     if (data) {
       threadsCache[space] = data;
+      const email = encodeURIComponent(currentUser.email);
       for (const t of data) {
-        const { count } = await supabase.from('votes').select('*', { count: 'exact', head: true }).eq('thread_id', t.id);
-        const { data: myVote } = await supabase.from('votes').select('id').eq('thread_id', t.id).eq('user_email', currentUser.email).maybeSingle();
-        votesCache[t.id] = { count: count || 0, userVoted: !!myVote };
+        const votes = await sbSelect('votes', `select=id,user_email&thread_id=eq.${t.id}`);
+        const myVote = votes.find(v => v.user_email === currentUser.email);
+        votesCache[t.id] = { count: votes.length, userVoted: !!myVote };
       }
     }
-  }
+  } catch (e) { console.error('loadThreads error:', e); }
   renderThreadList(space);
   updateCounts();
 }
@@ -929,10 +941,9 @@ async function openThread(threadId, space) {
 
   // Comments
   let comments = [];
-  if (supabase) {
-    const { data } = await supabase.from('comments').select('*').eq('thread_id', threadId).order('created_at', { ascending: true });
-    comments = data || [];
-  } else { comments = thread._demoComments || []; }
+  try {
+    comments = await sbSelect('comments', `select=*&thread_id=eq.${threadId}&order=created_at.asc`);
+  } catch (e) { console.error('Load comments error:', e); }
 
   const commentsEl = document.getElementById('detailComments');
   let html = renderComment(thread.author_handle, thread.author_name, thread.author_email, thread.author_role, thread.body, thread.created_at, false);
@@ -1126,18 +1137,10 @@ async function inviteCollaborator() {
 }
 
 async function loadCollaborators() {
-  if (!supabase) {
-    renderCollaboratorList([
-      { email: 'nik@example.com', handle: 'satoshi_fan', access: 'tbb', role: 'reviewer' },
-      { email: 'team@example.com', handle: 'block_builder', access: 'tbb', role: 'contributor' },
-      { email: 'professor@university.edu', handle: 'proof_of_work', access: 'research', role: 'reviewer' },
-      { email: 'researcher@university.edu', handle: 'hash_scholar', access: 'research', role: 'contributor' },
-      { email: 'analyst@fund.com', handle: 'capital_node', access: 'both', role: 'contributor' },
-    ]);
-    return;
-  }
-  const { data } = await supabase.from('collaborators').select('*').order('invited_at', { ascending: false });
-  renderCollaboratorList(data || []);
+  try {
+    const data = await sbSelect('collaborators', 'select=*&order=invited_at.desc');
+    renderCollaboratorList(data || []);
+  } catch (e) { console.error('Load collaborators error:', e); renderCollaboratorList([]); }
 }
 
 function renderCollaboratorList(collabs) {
