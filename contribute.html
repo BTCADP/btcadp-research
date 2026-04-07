@@ -358,6 +358,7 @@ window.supabase = { createClient };
     </div>
 
     <div class="space-tabs" id="spaceTabs">
+      <a id="threads-top"></a>
       <button class="space-tab active" data-space="tbb" onclick="switchSpace('tbb')">The Bitcoin Bridge <span class="tab-count" id="tbbCount">0</span></button>
       <button class="space-tab" data-space="research" onclick="switchSpace('research')">Research <span class="tab-count" id="researchCount">0</span></button>
     </div>
@@ -435,6 +436,16 @@ window.supabase = { createClient };
           <span id="detailDate">date</span>
         </div>
       </div>
+      <div id="editForm" style="display:none;margin-bottom:24px;padding:20px;background:var(--bg-tertiary);border:1px solid var(--border);border-radius:8px;">
+        <label style="display:block;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">Title</label>
+        <input type="text" id="editTitle" style="width:100%;padding:10px;background:var(--bg-primary);border:1px solid var(--border);border-radius:4px;color:var(--text-primary);font-family:var(--font-mono);font-size:14px;margin-bottom:12px;">
+        <label style="display:block;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">Body</label>
+        <textarea id="editBody" style="width:100%;min-height:150px;padding:10px;background:var(--bg-primary);border:1px solid var(--border);border-radius:4px;color:var(--text-primary);font-family:var(--font-mono);font-size:14px;resize:vertical;margin-bottom:12px;"></textarea>
+        <div style="display:flex;gap:8px;justify-content:flex-end;">
+          <button class="btn-cancel" onclick="cancelEdit()">Cancel</button>
+          <button class="btn-submit" onclick="saveThreadEdit()">Save changes</button>
+        </div>
+      </div>
       <div class="detail-vote-bar">
         <button class="detail-vote-btn" id="detailVoteBtn" onclick="toggleDetailVote()">
           <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
@@ -444,6 +455,7 @@ window.supabase = { createClient };
         <div class="reviewer-controls" id="reviewerControls">
           <select id="statusSelect" onchange="changeThreadStatus()"><option value="open">Open</option><option value="under-review">Under review</option><option value="resolved">Resolved</option></select>
           <button class="btn-pin" id="pinBtn" onclick="togglePin()">Pin</button>
+          <button class="btn-pin" id="editBtn" onclick="editThread()">Edit</button>
           <button class="btn-pin" style="color:var(--red);" id="deleteBtn" onclick="deleteThread()">Delete</button>
         </div>
       </div>
@@ -460,6 +472,9 @@ window.supabase = { createClient };
 
     <!-- ADMIN PANEL -->
     <div class="admin-panel" id="adminPanel">
+      <div style="text-align:center;margin-bottom:16px;">
+        <a href="#threads-top" style="color:var(--orange);font-family:var(--font-mono);font-size:12px;text-decoration:none;letter-spacing:0.03em;">&uarr; Back to Threads</a>
+      </div>
       <h3>Manage Contributors</h3>
       <div class="invite-fields">
         <div class="invite-row">
@@ -945,6 +960,40 @@ async function deleteThread() {
     currentThreadId = null;
     loadThreads(currentThreadSpace);
   } catch (e) { alert('JS error in deleteThread: ' + e.message); console.error(e); }
+}
+
+function editThread() {
+  if (!canReview() || !currentThreadId) return;
+  const thread = threadsCache[currentThreadSpace]?.find(t => t.id === currentThreadId);
+  if (!thread) return;
+  document.getElementById('editTitle').value = thread.title;
+  document.getElementById('editBody').value = thread.body || '';
+  document.getElementById('editForm').style.display = 'block';
+  document.getElementById('detailTitle').style.display = 'none';
+  document.getElementById('detailComments').style.display = 'none';
+}
+
+function cancelEdit() {
+  document.getElementById('editForm').style.display = 'none';
+  document.getElementById('detailTitle').style.display = '';
+  document.getElementById('detailComments').style.display = '';
+}
+
+async function saveThreadEdit() {
+  if (!currentThreadId) return;
+  const title = document.getElementById('editTitle').value.trim();
+  const body = document.getElementById('editBody').value.trim();
+  if (!title) { alert('Title cannot be empty.'); return; }
+  try {
+    if (supabase) {
+      const { error } = await supabase.from('threads').update({ title, body }).eq('id', currentThreadId);
+      if (error) { alert('Error saving edit: ' + error.message); return; }
+    }
+    const thread = threadsCache[currentThreadSpace]?.find(t => t.id === currentThreadId);
+    if (thread) { thread.title = title; thread.body = body; }
+    cancelEdit();
+    openThread(currentThreadId, currentThreadSpace);
+  } catch (e) { alert('JS error in saveThreadEdit: ' + e.message); console.error(e); }
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
