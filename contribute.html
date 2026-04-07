@@ -576,7 +576,19 @@ async function init() {
   }
 
   try {
-    supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+      auth: {
+        persistSession: true,
+        detectSessionInUrl: true,
+        autoRefreshToken: true
+      },
+      global: {
+        fetch: (...args) => fetch(...args)
+      },
+      realtime: {
+        params: { eventsPerSecond: 0 }
+      }
+    });
     console.log('Supabase client created successfully');
   } catch (e) {
     console.error('Failed to create Supabase client:', e);
