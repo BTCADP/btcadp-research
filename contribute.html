@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Collaborate | btcadp.org</title>
-<meta name="description" content="Invite-only collaboration space for The Bitcoin Bridge and BTCADP research contributors.">
+<title>Contribute | btcadp.org</title>
+<meta name="description" content="Invite-only contribution space for The Bitcoin Bridge and BTCADP research contributors.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
 <script type="module">
@@ -326,7 +326,7 @@ window.supabase = { createClient };
 <div class="auth-screen" id="authScreen">
   <div class="auth-lockup">
     <div class="lock-icon">&#x1f512;</div>
-    <h1>Collaborator <span class="accent">Access</span></h1>
+    <h1>Contributor <span class="accent">Access</span></h1>
     <p>This space is reserved for invited contributors to The Bitcoin Bridge and BTCADP research. Enter the email you were invited with to receive a sign-in link.</p>
   </div>
   <div class="auth-box">
@@ -339,6 +339,9 @@ window.supabase = { createClient };
 
 <div class="container">
   <div class="app-screen" id="appScreen">
+
+    <a href="contribute.html" style="display:inline-block;margin-bottom:20px;padding:10px 20px;background:var(--orange-dim);border:1px solid var(--orange);border-radius:6px;color:var(--orange);font-family:var(--font-mono);font-size:13px;font-weight:600;text-decoration:none;letter-spacing:0.03em;transition:background 0.2s;"
+    onmouseover="this.style.background='rgba(247,147,26,0.25)'" onmouseout="this.style.background='var(--orange-dim)'">&larr; Back to Contributor Home Page</a>
 
     <div class="user-bar">
       <div class="user-info">
@@ -455,10 +458,10 @@ window.supabase = { createClient };
 
     <!-- ADMIN PANEL -->
     <div class="admin-panel" id="adminPanel">
-      <h3>Manage Collaborators</h3>
+      <h3>Manage Contributors</h3>
       <div class="invite-fields">
         <div class="invite-row">
-          <input type="email" id="inviteEmail" placeholder="collaborator@example.com">
+          <input type="email" id="inviteEmail" placeholder="contributor@example.com">
           <input type="text" id="inviteHandle" placeholder="Handle (public pseudonym)">
         </div>
         <div class="invite-row">
@@ -619,7 +622,7 @@ async function handleAuth() {
     console.log('Sending magic link to:', email);
     const { error } = await supabase.auth.signInWithOtp({
       email: email,
-      options: { emailRedirectTo: window.location.origin + '/collaborate.html' }
+      options: { emailRedirectTo: window.location.origin + '/contribute.html' }
     });
 
     if (error) {
@@ -812,7 +815,7 @@ function updateDetailVoteUI(threadId) {
   document.getElementById('detailVoteBtn').className = 'detail-vote-btn' + (votes.userVoted ? ' voted' : '');
   document.getElementById('detailVoteLabel').textContent = votes.userVoted ? 'Voted' : 'Upvote';
   document.getElementById('detailVoteSummary').innerHTML = votes.count > 0
-    ? `<strong>${votes.count}</strong> collaborator${votes.count !== 1 ? 's' : ''} support${votes.count === 1 ? 's' : ''} this` : 'No votes yet';
+    ? `<strong>${votes.count}</strong> contributor${votes.count !== 1 ? 's' : ''} support${votes.count === 1 ? 's' : ''} this` : 'No votes yet';
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -934,8 +937,7 @@ async function deleteThread() {
       const { error } = await supabase.from('threads').delete().eq('id', currentThreadId);
       if (error) { alert('Error deleting thread: ' + error.message); return; }
     }
-    document.getElementById('threadDetail').style.display = 'none';
-    document.getElementById('threadListContainer').style.display = 'block';
+    document.getElementById('threadDetail').classList.remove('visible');
     currentThreadId = null;
     loadThreads(currentThreadSpace);
   } catch (e) { alert('JS error in deleteThread: ' + e.message); console.error(e); }
@@ -1275,7 +1277,7 @@ CREATE TRIGGER on_comment_insert AFTER INSERT ON comments FOR EACH ROW EXECUTE F
   2. Run the SQL above in the SQL Editor
   3. Enable Magic Link: Authentication > Providers > Email
   4. Set Site URL to https://btcadp.org
-  5. Add redirect URL: https://btcadp.org/collaborate.html
+  5. Add redirect URL: https://btcadp.org/contribute.html
   6. Copy Project URL + anon key from Settings > API
   7. Replace SUPABASE_URL and SUPABASE_ANON_KEY in this file
   8. Admin panel is controlled by role='admin' in collaborators table
