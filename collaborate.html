@@ -483,7 +483,7 @@
 // ═══════════════════════════════════════════════════════════════════════════
 const SUPABASE_URL = 'https://zjvjptrufipxykwpxfdd.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_n6kA99fJ2ZQR7rp5lxpl5g_Oq6Zweur';
-const ADMIN_EMAIL = 'pragmaxi@protonmail.com';
+
 
 let supabase = null;
 let currentUser = null;
@@ -1180,7 +1180,7 @@ CREATE TRIGGER on_comment_insert AFTER INSERT ON comments FOR EACH ROW EXECUTE F
   5. Add redirect URL: https://btcadp.org/collaborate.html
   6. Copy Project URL + anon key from Settings > API
   7. Replace SUPABASE_URL and SUPABASE_ANON_KEY in this file
-  8. Replace ADMIN_EMAIL with your email
+  8. Admin panel is controlled by role='admin' in collaborators table
   9. Seed yourself with the INSERT above
   10. When inviting collaborators, ALWAYS assign a unique handle
 ═══════════════════════════════════════════════════════════════════════════════
