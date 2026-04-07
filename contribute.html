@@ -332,7 +332,7 @@ window.supabase = { createClient };
   <div class="auth-box">
     <label for="authEmail">Your email</label>
     <input type="email" id="authEmail" placeholder="invited@example.com" autocomplete="email">
-    <button class="btn-primary" id="authSubmit" onclick="try { handleAuth(); } catch(e) { document.getElementById('authMessage').textContent = 'Error: ' + e.message; document.getElementById('authMessage').className = 'auth-message error'; }">Send magic link</button>
+    <button type="button" class="btn-primary" id="authSubmit" onclick="try { handleAuth(); } catch(e) { document.getElementById('authMessage').textContent = 'Error: ' + e.message; document.getElementById('authMessage').className = 'auth-message error'; }">Send magic link</button>
     <div class="auth-message" id="authMessage"></div>
   </div>
 </div>
@@ -354,13 +354,13 @@ window.supabase = { createClient };
           <div class="user-badges" id="userBadges"></div>
         </div>
       </div>
-      <button class="btn-signout" onclick="handleSignOut()">Sign out</button>
+      <button type="button" class="btn-signout" onclick="handleSignOut()">Sign out</button>
     </div>
 
     <div class="space-tabs" id="spaceTabs">
       <a id="threads-top"></a>
-      <button class="space-tab active" data-space="tbb" onclick="switchSpace('tbb')">The Bitcoin Bridge <span class="tab-count" id="tbbCount">0</span></button>
-      <button class="space-tab" data-space="research" onclick="switchSpace('research')">Research <span class="tab-count" id="researchCount">0</span></button>
+      <button type="button" class="space-tab active" data-space="tbb" onclick="switchSpace('tbb')">The Bitcoin Bridge <span class="tab-count" id="tbbCount">0</span></button>
+      <button type="button" class="space-tab" data-space="research" onclick="switchSpace('research')">Research <span class="tab-count" id="researchCount">0</span></button>
     </div>
 
     <!-- TBB SPACE -->
@@ -370,25 +370,25 @@ window.supabase = { createClient };
         <p>Feedback on TBB chapters, concepts, and proposals. Suggest edits, flag inconsistencies, or propose structural changes.</p>
       </div>
       <div class="section-filter" id="tbbFilters">
-        <button class="filter-chip active" data-filter="all" onclick="setFilter('tbb','all',this)">All</button>
-        <button class="filter-chip" data-filter="thesis" onclick="setFilter('tbb','thesis',this)">Thesis</button>
-        <button class="filter-chip" data-filter="busd" onclick="setFilter('tbb','busd',this)">&#x20bf;USD</button>
-        <button class="filter-chip" data-filter="bond" onclick="setFilter('tbb','bond',this)">&#x20bf;ond</button>
-        <button class="filter-chip" data-filter="bill" onclick="setFilter('tbb','bill',this)">&#x20bf;ill</button>
-        <button class="filter-chip" data-filter="btcc" onclick="setFilter('tbb','btcc',this)">&#x20bf;C / BTCC</button>
-        <button class="filter-chip" data-filter="general" onclick="setFilter('tbb','general',this)">General</button>
+        <button type="button" class="filter-chip active" data-filter="all" onclick="setFilter('tbb','all',this)">All</button>
+        <button type="button" class="filter-chip" data-filter="thesis" onclick="setFilter('tbb','thesis',this)">Thesis</button>
+        <button type="button" class="filter-chip" data-filter="busd" onclick="setFilter('tbb','busd',this)">&#x20bf;USD</button>
+        <button type="button" class="filter-chip" data-filter="bond" onclick="setFilter('tbb','bond',this)">&#x20bf;ond</button>
+        <button type="button" class="filter-chip" data-filter="bill" onclick="setFilter('tbb','bill',this)">&#x20bf;ill</button>
+        <button type="button" class="filter-chip" data-filter="btcc" onclick="setFilter('tbb','btcc',this)">&#x20bf;C / BTCC</button>
+        <button type="button" class="filter-chip" data-filter="general" onclick="setFilter('tbb','general',this)">General</button>
       </div>
       <div class="sort-bar"><div class="sort-options">
-        <button class="sort-btn active" data-sort="votes" onclick="setSort('votes',this)">Top voted</button>
-        <button class="sort-btn" data-sort="newest" onclick="setSort('newest',this)">Newest</button>
-        <button class="sort-btn" data-sort="active" onclick="setSort('active',this)">Most active</button>
+        <button type="button" class="sort-btn active" data-sort="votes" onclick="setSort('votes',this)">Top voted</button>
+        <button type="button" class="sort-btn" data-sort="newest" onclick="setSort('newest',this)">Newest</button>
+        <button type="button" class="sort-btn" data-sort="active" onclick="setSort('active',this)">Most active</button>
       </div></div>
-      <button class="new-thread-btn" onclick="showNewThread('tbb')">+ Start a new thread</button>
+      <button type="button" class="new-thread-btn" onclick="showNewThread('tbb')">+ Start a new thread</button>
       <div class="new-thread-form" id="newThreadForm-tbb" data-form-type="other">
         <div class="form-row"><label>Thread title</label><input type="text" id="newTitle-tbb" placeholder="Summarize your feedback..." autocomplete="off" data-form-type="other"></div>
         <div class="form-row"><label>Section</label><select id="newSection-tbb"><option value="general">General</option><option value="thesis">Thesis</option><option value="busd">&#x20bf;USD</option><option value="bond">&#x20bf;ond</option><option value="bill">&#x20bf;ill</option><option value="btcc">&#x20bf;C / BTCC</option></select></div>
         <div class="form-row"><label>Details</label><textarea id="newBody-tbb" placeholder="Describe the feedback, suggested change, or question..." autocomplete="off" data-form-type="other"></textarea></div>
-        <div class="form-actions"><button class="btn-cancel" onclick="hideNewThread('tbb')">Cancel</button><button class="btn-submit" onclick="submitThread('tbb')" data-form-type="other">Post thread</button></div>
+        <div class="form-actions"><button type="button" class="btn-cancel" onclick="hideNewThread('tbb')">Cancel</button><button type="button" class="btn-submit" onclick="submitThread('tbb')" data-form-type="other">Post thread</button></div>
       </div>
       <div class="thread-list" id="threadList-tbb"></div>
       <div class="empty-state" id="emptyState-tbb" style="display:none;"><div class="empty-icon">&#x1f4ac;</div><p>No threads yet. Start the conversation.</p></div>
@@ -401,24 +401,24 @@ window.supabase = { createClient };
         <p>Academic discussion on BTCADP methodology, specification integrity, data quality, and the broader Bitcoin pricing research agenda.</p>
       </div>
       <div class="section-filter" id="researchFilters">
-        <button class="filter-chip active" data-filter="all" onclick="setFilter('research','all',this)">All</button>
-        <button class="filter-chip" data-filter="methodology" onclick="setFilter('research','methodology',this)">Methodology</button>
-        <button class="filter-chip" data-filter="data-quality" onclick="setFilter('research','data-quality',this)">Data Quality</button>
-        <button class="filter-chip" data-filter="specification" onclick="setFilter('research','specification',this)">Specification</button>
-        <button class="filter-chip" data-filter="btcc-model" onclick="setFilter('research','btcc-model',this)">BTCC Model</button>
-        <button class="filter-chip" data-filter="peer-review" onclick="setFilter('research','peer-review',this)">Peer Review</button>
+        <button type="button" class="filter-chip active" data-filter="all" onclick="setFilter('research','all',this)">All</button>
+        <button type="button" class="filter-chip" data-filter="methodology" onclick="setFilter('research','methodology',this)">Methodology</button>
+        <button type="button" class="filter-chip" data-filter="data-quality" onclick="setFilter('research','data-quality',this)">Data Quality</button>
+        <button type="button" class="filter-chip" data-filter="specification" onclick="setFilter('research','specification',this)">Specification</button>
+        <button type="button" class="filter-chip" data-filter="btcc-model" onclick="setFilter('research','btcc-model',this)">BTCC Model</button>
+        <button type="button" class="filter-chip" data-filter="peer-review" onclick="setFilter('research','peer-review',this)">Peer Review</button>
       </div>
       <div class="sort-bar"><div class="sort-options">
-        <button class="sort-btn active" data-sort="votes" onclick="setSort('votes',this)">Top voted</button>
-        <button class="sort-btn" data-sort="newest" onclick="setSort('newest',this)">Newest</button>
-        <button class="sort-btn" data-sort="active" onclick="setSort('active',this)">Most active</button>
+        <button type="button" class="sort-btn active" data-sort="votes" onclick="setSort('votes',this)">Top voted</button>
+        <button type="button" class="sort-btn" data-sort="newest" onclick="setSort('newest',this)">Newest</button>
+        <button type="button" class="sort-btn" data-sort="active" onclick="setSort('active',this)">Most active</button>
       </div></div>
-      <button class="new-thread-btn" onclick="showNewThread('research')">+ Start a new thread</button>
+      <button type="button" class="new-thread-btn" onclick="showNewThread('research')">+ Start a new thread</button>
       <div class="new-thread-form" id="newThreadForm-research" data-form-type="other">
         <div class="form-row"><label>Thread title</label><input type="text" id="newTitle-research" placeholder="Summarize your feedback..." autocomplete="off" data-form-type="other"></div>
         <div class="form-row"><label>Category</label><select id="newSection-research"><option value="methodology">Methodology</option><option value="data-quality">Data Quality</option><option value="specification">Specification</option><option value="btcc-model">BTCC Model</option><option value="peer-review">Peer Review</option></select></div>
         <div class="form-row"><label>Details</label><textarea id="newBody-research" placeholder="Present your analysis, question, or suggested revision..." autocomplete="off" data-form-type="other"></textarea></div>
-        <div class="form-actions"><button class="btn-cancel" onclick="hideNewThread('research')">Cancel</button><button class="btn-submit" onclick="submitThread('research')" data-form-type="other">Post thread</button></div>
+        <div class="form-actions"><button type="button" class="btn-cancel" onclick="hideNewThread('research')">Cancel</button><button type="button" class="btn-submit" onclick="submitThread('research')" data-form-type="other">Post thread</button></div>
       </div>
       <div class="thread-list" id="threadList-research"></div>
       <div class="empty-state" id="emptyState-research" style="display:none;"><div class="empty-icon">&#x1f52c;</div><p>No research threads yet. Open the discussion.</p></div>
@@ -426,7 +426,7 @@ window.supabase = { createClient };
 
     <!-- THREAD DETAIL -->
     <div class="thread-detail" id="threadDetail">
-      <button class="thread-back" onclick="closeThread()">&larr; Back to threads</button>
+      <button type="button" class="thread-back" onclick="closeThread()">&larr; Back to threads</button>
       <div class="thread-detail-header">
         <h2 id="detailTitle">Thread Title</h2>
         <div class="thread-detail-meta">
@@ -436,27 +436,27 @@ window.supabase = { createClient };
           <span id="detailDate">date</span>
         </div>
       </div>
-      <div id="editForm" style="display:none;margin-bottom:24px;padding:20px;background:var(--bg-tertiary);border:1px solid var(--border);border-radius:8px;">
+      <div id="editForm" style="display:none;margin-bottom:24px;padding:20px;background:var(--bg-tertiary);border:1px solid var(--border);border-radius:8px;" data-form-type="other">
         <label style="display:block;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">Title</label>
-        <input type="text" id="editTitle" style="width:100%;padding:10px;background:var(--bg-primary);border:1px solid var(--border);border-radius:4px;color:var(--text-primary);font-family:var(--font-mono);font-size:14px;margin-bottom:12px;">
+        <input type="text" id="editTitle" style="width:100%;padding:10px;background:var(--bg-primary);border:1px solid var(--border);border-radius:4px;color:var(--text-primary);font-family:var(--font-mono);font-size:14px;margin-bottom:12px;" autocomplete="off" data-form-type="other">
         <label style="display:block;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">Body</label>
-        <textarea id="editBody" style="width:100%;min-height:150px;padding:10px;background:var(--bg-primary);border:1px solid var(--border);border-radius:4px;color:var(--text-primary);font-family:var(--font-mono);font-size:14px;resize:vertical;margin-bottom:12px;"></textarea>
+        <textarea id="editBody" style="width:100%;min-height:150px;padding:10px;background:var(--bg-primary);border:1px solid var(--border);border-radius:4px;color:var(--text-primary);font-family:var(--font-mono);font-size:14px;resize:vertical;margin-bottom:12px;" autocomplete="off" data-form-type="other"></textarea>
         <div style="display:flex;gap:8px;justify-content:flex-end;">
-          <button class="btn-cancel" onclick="cancelEdit()">Cancel</button>
-          <button class="btn-submit" onclick="saveThreadEdit()">Save changes</button>
+          <button type="button" class="btn-cancel" onclick="cancelEdit()">Cancel</button>
+          <button type="button" class="btn-submit" onclick="saveThreadEdit()" data-form-type="other">Save changes</button>
         </div>
       </div>
       <div class="detail-vote-bar">
-        <button class="detail-vote-btn" id="detailVoteBtn" onclick="toggleDetailVote()">
+        <button type="button" class="detail-vote-btn" id="detailVoteBtn" onclick="toggleDetailVote()">
           <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
           <span id="detailVoteLabel">Upvote</span>
         </button>
         <div class="vote-summary" id="detailVoteSummary"></div>
         <div class="reviewer-controls" id="reviewerControls">
           <select id="statusSelect" onchange="changeThreadStatus()"><option value="open">Open</option><option value="under-review">Under review</option><option value="resolved">Resolved</option></select>
-          <button class="btn-pin" id="pinBtn" onclick="togglePin()">Pin</button>
-          <button class="btn-pin" id="editBtn" onclick="editThread()">Edit</button>
-          <button class="btn-pin" style="color:var(--red);" id="deleteBtn" onclick="deleteThread()">Delete</button>
+          <button type="button" class="btn-pin" id="pinBtn" onclick="togglePin()">Pin</button>
+          <button type="button" class="btn-pin" id="editBtn" onclick="editThread()">Edit</button>
+          <button type="button" class="btn-pin" style="color:var(--red);" id="deleteBtn" onclick="deleteThread()">Delete</button>
         </div>
       </div>
       <div id="detailComments"></div>
@@ -465,7 +465,7 @@ window.supabase = { createClient };
         <textarea class="reply-textarea" id="replyText" placeholder="Share your thoughts..."></textarea>
         <div class="reply-actions">
           <span class="reply-hint">Posting as your handle. Be constructive.</span>
-          <button class="btn-submit" onclick="submitReply()">Post reply</button>
+          <button type="button" class="btn-submit" onclick="submitReply()">Post reply</button>
         </div>
       </div>
     </div>
@@ -484,7 +484,7 @@ window.supabase = { createClient };
         <div class="invite-row">
           <select id="inviteAccess"><option value="tbb">TBB only</option><option value="research">Research only</option><option value="both">Both spaces</option></select>
           <select id="inviteRole"><option value="contributor">Contributor</option><option value="reviewer">Reviewer</option><option value="admin">Admin</option></select>
-          <button class="btn-invite" onclick="inviteCollaborator()">Invite</button>
+          <button type="button" class="btn-invite" onclick="inviteCollaborator()">Invite</button>
         </div>
       </div>
       <div class="invited-list" id="invitedList"></div>
@@ -803,7 +803,7 @@ function renderThreadList(space) {
     return `
       <div class="thread-item ${pinnedClass}">
         <div class="vote-col">
-          <button class="vote-btn ${votedClass}" onclick="event.stopPropagation(); toggleVote('${t.id}','${space}')" title="Upvote">${UPVOTE_SVG}</button>
+          <button type="button" class="vote-btn ${votedClass}" onclick="event.stopPropagation(); toggleVote('${t.id}','${space}')" title="Upvote">${UPVOTE_SVG}</button>
           <span class="vote-count ${countClass}">${votes.count}</span>
         </div>
         <div class="thread-content" onclick="openThread('${t.id}','${space}')">
@@ -914,7 +914,7 @@ function renderComment(handle, name, email, role, body, created_at, showQuote) {
   const r = role || 'contributor';
   const roleBadge = r !== 'contributor' ? `<span class="comment-role-badge ${r}">${r}</span>` : '';
   const bodySnippet = (body || '').substring(0, 120).replace(/'/g, "\\'").replace(/\n/g, ' ');
-  const quoteBtn = showQuote ? `<div class="comment-actions"><button class="comment-action" onclick="quoteReply('${bodySnippet}')">Quote</button></div>` : '';
+  const quoteBtn = showQuote ? `<div class="comment-actions"><button type="button" class="comment-action" onclick="quoteReply('${bodySnippet}')">Quote</button></div>` : '';
 
   return `
     <div class="comment">
@@ -1012,14 +1012,17 @@ async function saveThreadEdit() {
   const body = document.getElementById('editBody').value.trim();
   if (!title) { alert('Title cannot be empty.'); return; }
   try {
+    console.log('Saving edit for thread:', currentThreadId);
     if (supabase) {
       const { error } = await supabase.from('threads').update({ title, body }).eq('id', currentThreadId);
+      console.log('Edit result:', error ? error.message : 'success');
       if (error) { alert('Error saving edit: ' + error.message); return; }
     }
     const thread = threadsCache[currentThreadSpace]?.find(t => t.id === currentThreadId);
     if (thread) { thread.title = title; thread.body = body; }
     cancelEdit();
     openThread(currentThreadId, currentThreadSpace);
+    showToast('Thread updated!');
   } catch (e) { alert('JS error in saveThreadEdit: ' + e.message); console.error(e); }
 }
 
@@ -1130,7 +1133,7 @@ function renderCollaboratorList(collabs) {
         <option value="reviewer" ${c.role === 'reviewer' ? 'selected' : ''}>Reviewer</option>
         <option value="admin" ${c.role === 'admin' ? 'selected' : ''}>Admin</option>
       </select>
-      <button class="btn-revoke" onclick="revokeAccess('${escapeHtml(c.email)}')">revoke</button>
+      <button type="button" class="btn-revoke" onclick="revokeAccess('${escapeHtml(c.email)}')">revoke</button>
     </div>`;
   }).join('');
 }
