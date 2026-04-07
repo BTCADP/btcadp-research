@@ -384,11 +384,11 @@ window.supabase = { createClient };
         <button class="sort-btn" data-sort="active" onclick="setSort('active',this)">Most active</button>
       </div></div>
       <button class="new-thread-btn" onclick="showNewThread('tbb')">+ Start a new thread</button>
-      <div class="new-thread-form" id="newThreadForm-tbb">
-        <div class="form-row"><label>Thread title</label><input type="text" id="newTitle-tbb" placeholder="Summarize your feedback..."></div>
+      <div class="new-thread-form" id="newThreadForm-tbb" data-form-type="other">
+        <div class="form-row"><label>Thread title</label><input type="text" id="newTitle-tbb" placeholder="Summarize your feedback..." autocomplete="off" data-form-type="other"></div>
         <div class="form-row"><label>Section</label><select id="newSection-tbb"><option value="general">General</option><option value="thesis">Thesis</option><option value="busd">&#x20bf;USD</option><option value="bond">&#x20bf;ond</option><option value="bill">&#x20bf;ill</option><option value="btcc">&#x20bf;C / BTCC</option></select></div>
-        <div class="form-row"><label>Details</label><textarea id="newBody-tbb" placeholder="Describe the feedback, suggested change, or question..."></textarea></div>
-        <div class="form-actions"><button class="btn-cancel" onclick="hideNewThread('tbb')">Cancel</button><button class="btn-submit" onclick="submitThread('tbb')">Post thread</button></div>
+        <div class="form-row"><label>Details</label><textarea id="newBody-tbb" placeholder="Describe the feedback, suggested change, or question..." autocomplete="off" data-form-type="other"></textarea></div>
+        <div class="form-actions"><button class="btn-cancel" onclick="hideNewThread('tbb')">Cancel</button><button class="btn-submit" onclick="submitThread('tbb')" data-form-type="other">Post thread</button></div>
       </div>
       <div class="thread-list" id="threadList-tbb"></div>
       <div class="empty-state" id="emptyState-tbb" style="display:none;"><div class="empty-icon">&#x1f4ac;</div><p>No threads yet. Start the conversation.</p></div>
@@ -414,11 +414,11 @@ window.supabase = { createClient };
         <button class="sort-btn" data-sort="active" onclick="setSort('active',this)">Most active</button>
       </div></div>
       <button class="new-thread-btn" onclick="showNewThread('research')">+ Start a new thread</button>
-      <div class="new-thread-form" id="newThreadForm-research">
-        <div class="form-row"><label>Thread title</label><input type="text" id="newTitle-research" placeholder="Summarize your feedback..."></div>
+      <div class="new-thread-form" id="newThreadForm-research" data-form-type="other">
+        <div class="form-row"><label>Thread title</label><input type="text" id="newTitle-research" placeholder="Summarize your feedback..." autocomplete="off" data-form-type="other"></div>
         <div class="form-row"><label>Category</label><select id="newSection-research"><option value="methodology">Methodology</option><option value="data-quality">Data Quality</option><option value="specification">Specification</option><option value="btcc-model">BTCC Model</option><option value="peer-review">Peer Review</option></select></div>
-        <div class="form-row"><label>Details</label><textarea id="newBody-research" placeholder="Present your analysis, question, or suggested revision..."></textarea></div>
-        <div class="form-actions"><button class="btn-cancel" onclick="hideNewThread('research')">Cancel</button><button class="btn-submit" onclick="submitThread('research')">Post thread</button></div>
+        <div class="form-row"><label>Details</label><textarea id="newBody-research" placeholder="Present your analysis, question, or suggested revision..." autocomplete="off" data-form-type="other"></textarea></div>
+        <div class="form-actions"><button class="btn-cancel" onclick="hideNewThread('research')">Cancel</button><button class="btn-submit" onclick="submitThread('research')" data-form-type="other">Post thread</button></div>
       </div>
       <div class="thread-list" id="threadList-research"></div>
       <div class="empty-state" id="emptyState-research" style="display:none;"><div class="empty-icon">&#x1f52c;</div><p>No research threads yet. Open the discussion.</p></div>
@@ -1023,20 +1023,23 @@ async function submitReply() {
 
 async function submitThread(space) {
   try {
+  console.log('submitThread called with space:', space);
   const title = document.getElementById(`newTitle-${space}`).value.trim();
   const section = document.getElementById(`newSection-${space}`).value;
   const body = document.getElementById(`newBody-${space}`).value.trim();
-  if (!title) return;
+  if (!title) { alert('Please enter a thread title.'); return; }
+  console.log('Inserting thread:', { space, section, title });
   if (supabase) {
-    const { error } = await supabase.from('threads').insert({
+    const { data, error } = await supabase.from('threads').insert({
       space, section, title, body,
       author_email: currentUser.email,
       author_name: currentUserProfile?.display_name || null,
       author_handle: currentUserProfile?.handle || currentUserProfile?.display_name || currentUser.email.split('@')[0],
       author_role: getUserRole(),
       status: 'open', pinned: false
-    });
+    }).select();
     if (error) { alert('Error posting thread: ' + error.message); return; }
+    if (!data || data.length === 0) { alert('Insert returned no rows. Check RLS INSERT policy on threads table.'); return; }
     document.getElementById(`newTitle-${space}`).value = '';
     document.getElementById(`newBody-${space}`).value = '';
     hideNewThread(space);
