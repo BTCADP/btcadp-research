@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,7 +32,30 @@
     --era3: #2ecc71;
     --font-display: 'Source Serif 4', Georgia, serif;
     --font-mono: 'JetBrains Mono', 'Courier New', monospace;
-  }
+  
+        --nav-bg: rgba(10,10,11,0.95);
+    }
+
+    [data-theme="light"] {
+        --bg-primary: #f5f3ef;
+        --bg-secondary: #eae7e1;
+        --bg-tertiary: #ddd9d2;
+        --bg-hover: #d0ccc4;
+        --border: #c8c3ba;
+        --border-active: #a09a90;
+        --text-primary: #1a1a1a;
+        --text-secondary: #666666;
+        --text-muted: #999999;
+        --orange: #d4780e;
+        --orange-dim: rgba(212, 120, 14, 0.08);
+        --orange-glow: rgba(212, 120, 14, 0.2);
+        --green: #1a8a4a;
+        --yellow: #b8960a;
+        --red: #c0392b;
+        --blue: #2a6faa;
+        --nav-bg: rgba(245,243,239,0.95);
+    }
+
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -43,7 +66,8 @@
     font-size: 14px;
     line-height: 1.6;
     min-height: 100vh;
-  }
+  
+        transition: background 0.3s, color 0.3s;}
 
   body::before {
     content: '';
@@ -581,10 +605,70 @@
     .btcc-inner { flex-direction: column; }
     .btcc-obs { text-align: left; }
   }
+
+    /* ========== INDEX TOP BAR ========== */
+    .index-top-bar {
+        position: fixed;
+        top: 16px;
+        left: 16px;
+        z-index: 100;
+    }
+    .theme-toggle {
+        background: var(--bg-secondary, var(--bg2, #111));
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        color: var(--text-secondary, var(--muted, #888));
+        cursor: pointer;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        transition: color 0.2s, border-color 0.2s;
+    }
+    .theme-toggle:hover { color: var(--orange); border-color: var(--orange); }
+    [data-theme="dark"] .theme-toggle .icon-light { display: inline; }
+    [data-theme="dark"] .theme-toggle .icon-dark { display: none; }
+    [data-theme="light"] .theme-toggle .icon-light { display: none; }
+    [data-theme="light"] .theme-toggle .icon-dark { display: inline; }
+
+    /* ========== STANDARD FOOTER ========== */
+    footer {
+        border-top: 1px solid var(--border);
+        padding: 3rem 2rem;
+        text-align: center;
+    }
+    footer p {
+        font-family: var(--font-mono, var(--mono, 'Courier New', monospace));
+        font-size: 0.75rem;
+        color: var(--text-muted, var(--dim, var(--muted, #555)));
+        line-height: 1.8;
+    }
+    footer a {
+        color: var(--text-secondary, var(--muted, #888));
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+    footer a:hover { color: var(--orange); }
+
+    @media print {
+        nav, .nav-mobile-menu, .print-bar, .index-top-bar { display: none !important; }
+    }
+
 </style>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>
 <body>
+
+<!-- ========== TOP BAR (INDEX) ========== -->
+<div class="index-top-bar">
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light mode">
+        <span class="icon-light">&#9788;</span>
+        <span class="icon-dark">&#9790;</span>
+    </button>
+</div>
+
 
 <div class="container">
   <header>
@@ -663,6 +747,12 @@
         <div class="card-tag">Report</div>
         <div class="card-title">The New Central ₿anks</div>
         <div class="card-desc">How a consortium of Bitcoin treasury companies could build the monetary infrastructure of the new digital economy, creating structural demand for Bitcoin through the ordinary operation of commerce.</div>
+        <div class="card-cta">Read Report &rarr;</div>
+      </a>
+      <a href="defensive-programmability.html" class="carousel-card orange-top">
+        <div class="card-tag">Report</div>
+        <div class="card-title">Defensive Programmability</div>
+        <div class="card-desc">The same technical capability that makes CBDCs dangerous can be redirected to build money that defends its holders. How ₿USD uses programmability to protect network integrity and enforce reserve transparency.</div>
         <div class="card-cta">Read Report &rarr;</div>
       </a>
       <a href="bitcoin-bridge.html" class="carousel-card orange-top">
@@ -848,12 +938,21 @@
     </div>
   </section>
 
-  <footer>
-    <p>BTCADP Specification v1.0 &bull; March 2026 &bull; Draft for Public Review &bull; <a href="live.html">Live</a> &bull; <a href="specification.html">Specification</a> &bull; <a href="days/index.html">Daily Records</a> &bull; <a href="btcc-intro.html">₿C</a> &bull; <a href="knowledge-base.html">Knowledge Base</a> &bull; <a href="faq.html">FAQ</a> &bull; <a href="https://github.com/BTCADP/btcadp-research" target="_blank" rel="noopener">GitHub</a></p>
-    <p style="margin-top:8px;">The BTCADP belongs to no one and benefits everyone.</p>
-    <p style="margin-top:8px;">Its credibility is earned through transparent methodology, open data,</p>
-    <p>and the collective rigor of independent researchers.</p>
-  </footer>
+  <!-- ========== STANDARD FOOTER ========== -->
+<footer>
+    <p>
+        <a href="index.html">BTCADP</a> &middot;
+        <a href="specification.html">Specification</a> &middot;
+        <a href="btcc-intro.html">&#x20BF;C</a> &middot;
+        <a href="tbd-usd.html">&#x20BF;USD</a> &middot;
+        <a href="bond.html">&#x20BF;OND</a> &middot;
+        <a href="knowledge-base.html">Knowledge Base</a> &middot;
+        <a href="glossary.html">Glossary</a> &middot;
+        <a href="faq.html">FAQ</a> &middot;
+        <a href="https://github.com/BTCADP/btcadp-research" target="_blank" rel="noopener">GitHub</a>
+    </p>
+    <p style="margin-top:0.8rem;">CC BY-NC-ND &middot; btcadp.org &middot; 2026</p>
+</footer>
 </div>
 
 <script>
@@ -1314,5 +1413,24 @@ loadBTCCPrice();
   requestAnimationFrame(autoScroll);
 })();
 </script>
+
+
+<script>
+/* Theme toggle with localStorage persistence */
+function toggleTheme() {
+    var html = document.documentElement;
+    var current = html.getAttribute('data-theme');
+    var next = current === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    try { localStorage.setItem('btcadp-theme', next); } catch(e) {}
+}
+(function() {
+    try {
+        var saved = localStorage.getItem('btcadp-theme');
+        if (saved) document.documentElement.setAttribute('data-theme', saved);
+    } catch(e) {}
+})();
+</script>
+
 </body>
 </html>

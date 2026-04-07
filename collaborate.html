@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,7 +33,30 @@
     --purple-dim: rgba(155, 89, 182, 0.12);
     --font-display: 'Source Serif 4', Georgia, serif;
     --font-mono: 'JetBrains Mono', 'Courier New', monospace;
-  }
+  
+        --nav-bg: rgba(10,10,11,0.95);
+    }
+
+    [data-theme="light"] {
+        --bg-primary: #f5f3ef;
+        --bg-secondary: #eae7e1;
+        --bg-tertiary: #ddd9d2;
+        --bg-hover: #d0ccc4;
+        --border: #c8c3ba;
+        --border-active: #a09a90;
+        --text-primary: #1a1a1a;
+        --text-secondary: #666666;
+        --text-muted: #999999;
+        --orange: #d4780e;
+        --orange-dim: rgba(212, 120, 14, 0.08);
+        --orange-glow: rgba(212, 120, 14, 0.2);
+        --green: #1a8a4a;
+        --yellow: #b8960a;
+        --red: #c0392b;
+        --blue: #2a6faa;
+        --nav-bg: rgba(245,243,239,0.95);
+    }
+
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -44,7 +67,8 @@
     font-size: 14px;
     line-height: 1.6;
     min-height: 100vh;
-  }
+  
+        transition: background 0.3s, color 0.3s;}
 
   body::before {
     content: '';
@@ -312,21 +336,200 @@
     .vote-col { min-width: 44px; padding: 16px 4px 16px 10px; }
     .sort-bar { flex-direction: column; align-items: flex-start; }
   }
+
+    /* ========== STANDARD NAV ========== */
+    nav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: var(--nav-bg);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid var(--border);
+        padding: 0 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 56px;
+        transition: background 0.3s, border-color 0.3s;
+    }
+    .nav-brand {
+        font-family: var(--font-mono, var(--mono, 'Courier New', monospace));
+        font-size: 1rem;
+        font-weight: bold;
+        color: var(--orange);
+        text-decoration: none;
+        letter-spacing: 0.05em;
+        flex-shrink: 0;
+    }
+    .nav-left {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        flex-shrink: 0;
+    }
+    .nav-center {
+        display: flex;
+        gap: 0.25rem;
+        list-style: none;
+        align-items: center;
+    }
+    .nav-center a {
+        color: var(--text-secondary, var(--muted, #888));
+        text-decoration: none;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        font-size: 0.85rem;
+        padding: 0.4rem 0.8rem;
+        border-radius: 4px;
+        transition: color 0.2s, background 0.2s;
+    }
+    .nav-center a:hover { color: var(--text-primary, var(--text, #e8e8e8)); background: var(--bg-tertiary, var(--bg3, #1a1a1a)); }
+    .nav-center a.active { color: var(--orange); }
+    .theme-toggle {
+        background: none;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        color: var(--text-secondary, var(--muted, #888));
+        cursor: pointer;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        transition: color 0.2s, border-color 0.2s;
+    }
+    .theme-toggle:hover { color: var(--orange); border-color: var(--orange); }
+    [data-theme="dark"] .theme-toggle .icon-light { display: inline; }
+    [data-theme="dark"] .theme-toggle .icon-dark { display: none; }
+    [data-theme="light"] .theme-toggle .icon-light { display: none; }
+    [data-theme="light"] .theme-toggle .icon-dark { display: inline; }
+    .nav-hamburger {
+        display: none;
+        background: none;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        color: var(--text-secondary, var(--muted, #888));
+        cursor: pointer;
+        width: 36px;
+        height: 36px;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+    }
+    .nav-hamburger:hover { color: var(--orange); border-color: var(--orange); }
+    .nav-mobile-menu {
+        display: none;
+        position: fixed;
+        top: 56px; left: 0; right: 0;
+        background: var(--bg-secondary, var(--bg2, #111));
+        border-bottom: 1px solid var(--border);
+        padding: 1rem;
+        z-index: 99;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+    .nav-mobile-menu.open { display: flex; }
+    .nav-mobile-menu a {
+        color: var(--text-secondary, var(--muted, #888));
+        text-decoration: none;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        font-size: 0.95rem;
+        padding: 0.6rem 1rem;
+        border-radius: 4px;
+        transition: color 0.2s, background 0.2s;
+    }
+    .nav-mobile-menu a:hover { color: var(--text-primary, var(--text, #e8e8e8)); background: var(--bg-tertiary, var(--bg3, #1a1a1a)); }
+    .nav-mobile-menu a.active { color: var(--orange); }
+    @media (max-width: 768px) {
+        .nav-center { display: none; }
+        .nav-hamburger { display: flex; }
+    }
+
+    /* ========== STANDARD PRINT BUTTON ========== */
+    .print-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: var(--font-mono, var(--mono, 'Courier New', monospace));
+        font-size: 0.8rem;
+        letter-spacing: 0.05em;
+        color: var(--text-secondary, var(--muted, #888));
+        background: var(--bg-secondary, var(--bg2, #111));
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 0.5rem 1.2rem;
+        cursor: pointer;
+        transition: color 0.2s, border-color 0.2s;
+    }
+    .print-btn:hover { color: var(--orange); border-color: var(--orange); }
+    .print-bar {
+        display: flex;
+        justify-content: flex-end;
+        padding: 1rem 2rem 0;
+        max-width: 860px;
+        margin: 0 auto;
+    }
+
+    /* ========== STANDARD FOOTER ========== */
+    footer {
+        border-top: 1px solid var(--border);
+        padding: 3rem 2rem;
+        text-align: center;
+    }
+    footer p {
+        font-family: var(--font-mono, var(--mono, 'Courier New', monospace));
+        font-size: 0.75rem;
+        color: var(--text-muted, var(--dim, var(--muted, #555)));
+        line-height: 1.8;
+    }
+    footer a {
+        color: var(--text-secondary, var(--muted, #888));
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+    footer a:hover { color: var(--orange); }
+
+    @media print {
+        nav, .nav-mobile-menu, .print-bar, .index-top-bar { display: none !important; }
+    }
+
 </style>
 </head>
 <body>
 
+<!-- ========== STANDARD NAV ========== -->
 <nav>
-  <a href="/" class="nav-brand">btcadp.org</a>
-  <ul class="nav-links">
-    <li><a href="/">Index</a></li>
-    <li><a href="/bitcoin-bridge.html">TBB</a></li>
-    <li><a href="/knowledge-base.html">Knowledge Base</a></li>
-    <li><a href="/specification.html">Spec</a></li>
-    <li><a href="/collaborate.html" class="active">Collaborate</a></li>
-  </ul>
-  <button class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open')">&#9776;</button>
+    <div class="nav-left">
+        <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Toggle menu">&#9776;</button>
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light mode">
+            <span class="icon-light">&#9788;</span>
+            <span class="icon-dark">&#9790;</span>
+        </button>
+    </div>
+    <div class="nav-center">
+        <a href="index.html">Home</a>
+        <a href="beginners-guide.html">Start Here</a>
+        <a href="btcc-intro.html">&#x20BF;C</a>
+        <a href="tbd-usd.html">&#x20BF;USD</a>
+        <a href="bond.html">&#x20BF;OND</a>
+        <a href="specification.html">Specification</a>
+        <a href="faq.html">FAQ</a>
+        <a href="knowledge-base.html">Knowledge Base</a>
+        <a href="glossary.html">Glossary</a>
+    </div>
+    <a href="index.html" class="nav-brand">BTCADP</a>
 </nav>
+<div class="nav-mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="beginners-guide.html">Start Here</a>
+    <a href="btcc-intro.html">&#x20BF;C</a>
+    <a href="tbd-usd.html">&#x20BF;USD</a>
+    <a href="bond.html">&#x20BF;OND</a>
+    <a href="specification.html">Specification</a>
+    <a href="faq.html">FAQ</a>
+    <a href="knowledge-base.html">Knowledge Base</a>
+    <a href="glossary.html">Glossary</a>
+</div>
 
 <div class="auth-screen" id="authScreen">
   <div class="auth-lockup">
@@ -342,6 +545,12 @@
   </div>
 </div>
 
+
+
+<!-- ========== STANDARD PRINT BUTTON ========== -->
+<div class="print-bar">
+    <button class="print-btn" onclick="window.print();">&#9113; Print / Save as PDF</button>
+</div>
 <div class="container">
   <div class="app-screen" id="appScreen">
 
@@ -477,7 +686,21 @@
   </div>
 </div>
 
-<footer><div class="container">Invite-only. Pseudonymous by default. Reviewers and admins can see real identities.</div></footer>
+<!-- ========== STANDARD FOOTER ========== -->
+<footer>
+    <p>
+        <a href="index.html">BTCADP</a> &middot;
+        <a href="specification.html">Specification</a> &middot;
+        <a href="btcc-intro.html">&#x20BF;C</a> &middot;
+        <a href="tbd-usd.html">&#x20BF;USD</a> &middot;
+        <a href="bond.html">&#x20BF;OND</a> &middot;
+        <a href="knowledge-base.html">Knowledge Base</a> &middot;
+        <a href="glossary.html">Glossary</a> &middot;
+        <a href="faq.html">FAQ</a> &middot;
+        <a href="https://github.com/BTCADP/btcadp-research" target="_blank" rel="noopener">GitHub</a>
+    </p>
+    <p style="margin-top:0.8rem;">CC BY-NC-ND &middot; btcadp.org &middot; 2026</p>
+</footer>
 
 <script>
 // ═══════════════════════════════════════════════════════════════════════════
@@ -1185,5 +1408,39 @@ CREATE TRIGGER on_comment_insert AFTER INSERT ON comments FOR EACH ROW EXECUTE F
   10. When inviting collaborators, ALWAYS assign a unique handle
 ═══════════════════════════════════════════════════════════════════════════════
 -->
+
+
+<script>
+/* Theme toggle with localStorage persistence */
+function toggleTheme() {
+    var html = document.documentElement;
+    var current = html.getAttribute('data-theme');
+    var next = current === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    try { localStorage.setItem('btcadp-theme', next); } catch(e) {}
+}
+/* Restore saved theme */
+(function() {
+    try {
+        var saved = localStorage.getItem('btcadp-theme');
+        if (saved) document.documentElement.setAttribute('data-theme', saved);
+    } catch(e) {}
+})();
+/* Mobile menu toggle + auto-close */
+function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+}
+(function() {
+    var menu = document.getElementById('mobileMenu');
+    if (menu) {
+        menu.addEventListener('click', function(e) {
+            if (e.target.tagName === 'A') {
+                menu.classList.remove('open');
+            }
+        });
+    }
+})();
+</script>
+
 </body>
 </html>
