@@ -7,7 +7,7 @@
 <meta name="description" content="Invite-only collaboration space for The Bitcoin Bridge and BTCADP research contributors.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/dist/umd/supabase.min.js"></script>
 
 <style>
   :root {
@@ -542,8 +542,17 @@ function isAdmin() { return getUserRole() === 'admin'; }
 // ═══════════════════════════════════════════════════════════════════════════
 
 async function init() {
-  if (SUPABASE_URL !== 'YOUR_SUPABASE_URL') {
+  try {
     supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    console.log('Supabase client created successfully');
+  } catch (e) {
+    console.error('Failed to create Supabase client:', e);
+    document.getElementById('authMessage').textContent = 'Connection error. Please try again later.';
+    document.getElementById('authMessage').className = 'auth-message error';
+    return;
+  }
+
+  try {
     const { data: { session } } = await supabase.auth.getSession();
     if (session) {
       currentUser = session.user;
@@ -551,25 +560,25 @@ async function init() {
       if (currentUserProfile) { showApp(); }
       else { await supabase.auth.signOut(); }
     }
-    supabase.auth.onAuthStateChange(async (event, session) => {
-      if (event === 'SIGNED_IN' && session) {
-        currentUser = session.user;
-        await loadUserProfile();
-        if (!currentUserProfile) {
-          // Not on the invite list, sign them out
-          await supabase.auth.signOut();
-          const msgEl = document.getElementById('authMessage');
-          msgEl.textContent = 'This email is not on the invite list.';
-          msgEl.className = 'auth-message error';
-          return;
-        }
-        showApp();
-      }
-      if (event === 'SIGNED_OUT') { currentUser = null; currentUserProfile = null; showAuth(); }
-    });
-  } else {
-    loadDemoMode();
+  } catch (e) {
+    console.error('Session check failed:', e);
   }
+
+  supabase.auth.onAuthStateChange(async (event, session) => {
+    if (event === 'SIGNED_IN' && session) {
+      currentUser = session.user;
+      await loadUserProfile();
+      if (!currentUserProfile) {
+        await supabase.auth.signOut();
+        const msgEl = document.getElementById('authMessage');
+        msgEl.textContent = 'This email is not on the invite list.';
+        msgEl.className = 'auth-message error';
+        return;
+      }
+      showApp();
+    }
+    if (event === 'SIGNED_OUT') { currentUser = null; currentUserProfile = null; showAuth(); }
+  });
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -580,14 +589,52 @@ async function handleAuth() {
   const email = document.getElementById('authEmail').value.trim();
   const msgEl = document.getElementById('authMessage');
   const btn = document.getElementById('authSubmit');
-  if (!email) { msgEl.textContent = 'Please enter your email.'; msgEl.className = 'auth-message error'; return; }
-  btn.disabled = true; btn.textContent = 'Sending...';
-  if (!supabase) { msgEl.textContent = 'Demo mode: Supabase not configured.'; msgEl.className = 'auth-message error'; btn.disabled = false; btn.textContent = 'Send magic link'; return; }
+
+  if (!email) {
+    msgEl.textContent = 'Please enter your email.';
+    msgEl.className = 'auth-message error';
+    return;
+  }
+
+  // Immediate visual feedback
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+  msgEl.textContent = '';
+  msgEl.className = 'auth-message';
+
+  if (!supabase) {
+    msgEl.textContent = 'Connection not ready. Please refresh and try again.';
+    msgEl.className = 'auth-message error';
+    btn.disabled = false;
+    btn.textContent = 'Send magic link';
+    return;
+  }
+
   try {
-    const { error } = await supabase.auth.signInWithOtp({ email, options: { emailRedirectTo: window.location.origin + '/collaborate.html' } });
-    if (error) throw error;
-    msgEl.textContent = 'If this email is on the invite list, you will receive a sign-in link.'; msgEl.className = 'auth-message success'; btn.textContent = 'Link sent';
-  } catch (err) { msgEl.textContent = err.message || 'Something went wrong.'; msgEl.className = 'auth-message error'; btn.disabled = false; btn.textContent = 'Send magic link'; }
+    console.log('Sending magic link to:', email);
+    const { error } = await supabase.auth.signInWithOtp({
+      email: email,
+      options: { emailRedirectTo: window.location.origin + '/collaborate.html' }
+    });
+
+    if (error) {
+      console.error('OTP error:', error);
+      throw error;
+    }
+
+    console.log('Magic link sent successfully');
+    msgEl.textContent = 'Sign-in link sent! Check your inbox (and spam folder).';
+    msgEl.className = 'auth-message success';
+    btn.textContent = 'Link sent';
+    // Re-enable after 30s so they can try again if needed
+    setTimeout(() => { btn.disabled = false; btn.textContent = 'Send magic link'; }, 30000);
+  } catch (err) {
+    console.error('Auth error:', err);
+    msgEl.textContent = err.message || 'Something went wrong. Check the console for details.';
+    msgEl.className = 'auth-message error';
+    btn.disabled = false;
+    btn.textContent = 'Send magic link';
+  }
 }
 
 async function handleSignOut() { if (supabase) await supabase.auth.signOut(); showAuth(); }
