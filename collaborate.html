@@ -944,7 +944,7 @@ async function submitReply() {
   const body = document.getElementById('replyText').value.trim();
   if (!body || !currentThreadId) return;
   if (supabase) {
-    await supabase.from('comments').insert({
+    const { error } = await supabase.from('comments').insert({
       thread_id: currentThreadId,
       author_email: currentUser.email,
       author_name: currentUserProfile?.display_name || null,
@@ -952,6 +952,7 @@ async function submitReply() {
       author_role: getUserRole(),
       body: body
     });
+    if (error) { alert('Error posting reply: ' + error.message); return; }
     document.getElementById('replyText').value = '';
     openThread(currentThreadId, currentThreadSpace);
     loadThreads(currentThreadSpace);
@@ -964,7 +965,7 @@ async function submitThread(space) {
   const body = document.getElementById(`newBody-${space}`).value.trim();
   if (!title) return;
   if (supabase) {
-    await supabase.from('threads').insert({
+    const { error } = await supabase.from('threads').insert({
       space, section, title, body,
       author_email: currentUser.email,
       author_name: currentUserProfile?.display_name || null,
@@ -972,6 +973,7 @@ async function submitThread(space) {
       author_role: getUserRole(),
       status: 'open', pinned: false
     });
+    if (error) { alert('Error posting thread: ' + error.message); return; }
     document.getElementById(`newTitle-${space}`).value = '';
     document.getElementById(`newBody-${space}`).value = '';
     hideNewThread(space);
