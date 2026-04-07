@@ -545,9 +545,26 @@ async function init() {
   if (SUPABASE_URL !== 'YOUR_SUPABASE_URL') {
     supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     const { data: { session } } = await supabase.auth.getSession();
-    if (session) { currentUser = session.user; await loadUserProfile(); showApp(); }
+    if (session) {
+      currentUser = session.user;
+      await loadUserProfile();
+      if (currentUserProfile) { showApp(); }
+      else { await supabase.auth.signOut(); }
+    }
     supabase.auth.onAuthStateChange(async (event, session) => {
-      if (event === 'SIGNED_IN' && session) { currentUser = session.user; await loadUserProfile(); showApp(); }
+      if (event === 'SIGNED_IN' && session) {
+        currentUser = session.user;
+        await loadUserProfile();
+        if (!currentUserProfile) {
+          // Not on the invite list, sign them out
+          await supabase.auth.signOut();
+          const msgEl = document.getElementById('authMessage');
+          msgEl.textContent = 'This email is not on the invite list.';
+          msgEl.className = 'auth-message error';
+          return;
+        }
+        showApp();
+      }
       if (event === 'SIGNED_OUT') { currentUser = null; currentUserProfile = null; showAuth(); }
     });
   } else {
@@ -567,11 +584,9 @@ async function handleAuth() {
   btn.disabled = true; btn.textContent = 'Sending...';
   if (!supabase) { msgEl.textContent = 'Demo mode: Supabase not configured.'; msgEl.className = 'auth-message error'; btn.disabled = false; btn.textContent = 'Send magic link'; return; }
   try {
-    const { data: collab } = await supabase.from('collaborators').select('*').eq('email', email.toLowerCase()).single();
-    if (!collab) { msgEl.textContent = 'This email is not on the invite list.'; msgEl.className = 'auth-message error'; btn.disabled = false; btn.textContent = 'Send magic link'; return; }
     const { error } = await supabase.auth.signInWithOtp({ email, options: { emailRedirectTo: window.location.origin + '/collaborate.html' } });
     if (error) throw error;
-    msgEl.textContent = 'Check your email for a sign-in link.'; msgEl.className = 'auth-message success'; btn.textContent = 'Link sent';
+    msgEl.textContent = 'If this email is on the invite list, you will receive a sign-in link.'; msgEl.className = 'auth-message success'; btn.textContent = 'Link sent';
   } catch (err) { msgEl.textContent = err.message || 'Something went wrong.'; msgEl.className = 'auth-message error'; btn.disabled = false; btn.textContent = 'Send magic link'; }
 }
 
