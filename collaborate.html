@@ -7,7 +7,11 @@
 <meta name="description" content="Invite-only collaboration space for The Bitcoin Bridge and BTCADP research contributors.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
-<script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script type="module">
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+window._supabaseCreateClient = createClient;
+window.dispatchEvent(new Event('supabase-ready'));
+</script>
 
 <style>
   :root {
@@ -544,15 +548,15 @@ function isAdmin() { return getUserRole() === 'admin'; }
 async function init() {
   const msgEl = document.getElementById('authMessage');
 
-  if (typeof window.supabase === 'undefined' || typeof window.supabase.createClient !== 'function') {
-    console.error('Supabase library not loaded. window.supabase =', window.supabase);
-    msgEl.textContent = 'Failed to load authentication library. Please refresh.';
-    msgEl.className = 'auth-message error';
+  if (typeof window._supabaseCreateClient !== 'function') {
+    console.error('Supabase library not ready yet');
+    msgEl.textContent = 'Loading authentication...';
+    msgEl.className = 'auth-message';
     return;
   }
 
   try {
-    supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    supabase = window._supabaseCreateClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     console.log('Supabase client created successfully');
   } catch (e) {
     console.error('Failed to create Supabase client:', e);
@@ -1113,7 +1117,16 @@ function formatTimeAgo(ds) {
 
 document.getElementById('authEmail').addEventListener('keydown', e => { if (e.key === 'Enter') handleAuth(); });
 
-init();
+// Wait for the ES module to load, then init
+if (window._supabaseCreateClient) {
+  init();
+} else {
+  window.addEventListener('supabase-ready', () => init());
+  // Fallback timeout in case event was missed
+  setTimeout(() => {
+    if (!supabase) init();
+  }, 3000);
+}
 </script>
 
 <!--
