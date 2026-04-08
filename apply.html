@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apply to Contribute | btcadp.org</title>
+<meta name="description" content="Apply to join the BTCADP research collaboration. Independent researchers are invited to help verify historical data and stress-test the framework.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary: #0a0a0b;
+    --bg-secondary: #111114;
+    --bg-tertiary: #19191e;
+    --border: #2a2a32;
+    --text-primary: #e8e6e3;
+    --text-secondary: #8a8a95;
+    --text-muted: #555560;
+    --orange: #f7931a;
+    --orange-dim: rgba(247,147,26,0.12);
+    --green: #2ecc71;
+    --font-display: 'Source Serif 4', Georgia, serif;
+    --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --nav-bg: rgba(10,10,11,0.95);
+  }
+
+  [data-theme="light"] {
+    --bg-primary: #f5f3ef;
+    --bg-secondary: #eae7e1;
+    --bg-tertiary: #ddd9d2;
+    --bg-hover: #d0ccc4;
+    --border: #c8c3ba;
+    --border-active: #a09a90;
+    --text-primary: #1a1a1a;
+    --text-secondary: #666666;
+    --text-muted: #999999;
+    --orange: #d4780e;
+    --orange-dim: rgba(212, 120, 14, 0.08);
+    --green: #1a8a4a;
+    --nav-bg: rgba(245,243,239,0.95);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-display);
+    font-size: 18px;
+    line-height: 1.78;
+    min-height: 100vh;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(247,147,26,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(247,147,26,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none; z-index: 0;
+  }
+
+  /* ========== STANDARD NAV ========== */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--nav-bg);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 56px;
+    transition: background 0.3s, border-color 0.3s;
+  }
+  .nav-brand { font-family: var(--font-mono); font-size: 1rem; font-weight: bold; color: var(--orange); text-decoration: none; letter-spacing: 0.05em; flex-shrink: 0; }
+  .nav-left { display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0; }
+  .nav-center { display: flex; gap: 0.25rem; list-style: none; align-items: center; }
+  .nav-center a { color: var(--text-secondary); text-decoration: none; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 0.85rem; padding: 0.4rem 0.8rem; border-radius: 4px; transition: color 0.2s, background 0.2s; }
+  .nav-center a:hover { color: var(--text-primary); background: var(--bg-tertiary); }
+  .nav-center a.active { color: var(--orange); }
+  .theme-toggle { background: none; border: 1px solid var(--border); border-radius: 6px; color: var(--text-secondary); cursor: pointer; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: color 0.2s, border-color 0.2s; }
+  .theme-toggle:hover { color: var(--orange); border-color: var(--orange); }
+  [data-theme="dark"] .theme-toggle .icon-light { display: inline; }
+  [data-theme="dark"] .theme-toggle .icon-dark { display: none; }
+  [data-theme="light"] .theme-toggle .icon-light { display: none; }
+  [data-theme="light"] .theme-toggle .icon-dark { display: inline; }
+  .nav-hamburger { display: none; background: none; border: 1px solid var(--border); border-radius: 6px; color: var(--text-secondary); cursor: pointer; width: 36px; height: 36px; align-items: center; justify-content: center; font-size: 1.1rem; }
+  .nav-hamburger:hover { color: var(--orange); border-color: var(--orange); }
+  .nav-mobile-menu { display: none; position: fixed; top: 56px; left: 0; right: 0; background: var(--bg-secondary); border-bottom: 1px solid var(--border); padding: 1rem; z-index: 99; flex-direction: column; gap: 0.25rem; }
+  .nav-mobile-menu.open { display: flex; }
+  .nav-mobile-menu a { color: var(--text-secondary); text-decoration: none; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 0.95rem; padding: 0.6rem 1rem; border-radius: 4px; transition: color 0.2s, background 0.2s; }
+  .nav-mobile-menu a:hover { color: var(--text-primary); background: var(--bg-tertiary); }
+  @media (max-width: 768px) { .nav-center { display: none; } .nav-hamburger { display: flex; } }
+
+  /* ========== PAGE CONTENT ========== */
+  .page-wrap {
+    max-width: 580px;
+    margin: 0 auto;
+    padding: 80px 24px 64px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .page-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--orange);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .page-wrap h1 {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+
+  .page-intro {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 32px;
+  }
+
+  .privacy-note {
+    background: var(--orange-dim);
+    border-left: 3px solid var(--orange);
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin-bottom: 36px;
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  /* ========== FORM ========== */
+  .form-group {
+    margin-bottom: 24px;
+  }
+
+  .form-group label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .form-group .label-hint {
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--text-muted);
+    font-size: 0.68rem;
+    margin-left: 4px;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    padding: 12px 14px;
+    transition: border-color 0.2s;
+    outline: none;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    border-color: var(--orange);
+  }
+
+  .form-group input::placeholder,
+  .form-group textarea::placeholder {
+    color: var(--text-muted);
+  }
+
+  .form-group textarea {
+    min-height: 120px;
+    resize: vertical;
+    line-height: 1.6;
+  }
+
+  .checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .check-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    cursor: pointer;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  .check-option input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--orange);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .submit-btn {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    color: var(--bg-primary);
+    background: var(--orange);
+    border: none;
+    border-radius: 6px;
+    padding: 12px 32px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    width: 100%;
+    margin-top: 8px;
+  }
+
+  .submit-btn:hover { opacity: 0.9; }
+  .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .success-msg {
+    display: none;
+    text-align: center;
+    padding: 48px 24px;
+  }
+
+  .success-msg .check {
+    font-size: 3rem;
+    margin-bottom: 16px;
+  }
+
+  .success-msg h2 {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+  }
+
+  .success-msg p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .error-msg {
+    background: rgba(192,57,43,0.1);
+    border: 1px solid rgba(192,57,43,0.3);
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin-top: 12px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: #e74c3c;
+    display: none;
+  }
+
+  /* ========== STANDARD FOOTER ========== */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+  footer p { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); line-height: 1.8; }
+  footer a { color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
+  footer a:hover { color: var(--orange); }
+
+  @media print { nav, .nav-mobile-menu { display: none !important; } }
+</style>
+</head>
+<body>
+
+<!-- ========== STANDARD NAV ========== -->
+<nav>
+    <div class="nav-left">
+        <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Toggle menu">&#9776;</button>
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light mode">
+            <span class="icon-light">&#9788;</span>
+            <span class="icon-dark">&#9790;</span>
+        </button>
+    </div>
+    <div class="nav-center">
+        <a href="index.html">Home</a>
+        <a href="beginners-guide.html">Start Here</a>
+        <a href="btcc-intro.html">&#x20BF;C</a>
+        <a href="tbd-usd.html">&#x20BF;USD</a>
+        <a href="bond.html">&#x20BF;OND</a>
+        <a href="specification.html">Specification</a>
+        <a href="faq.html">FAQ</a>
+        <a href="knowledge-base.html">Knowledge Base</a>
+        <a href="glossary.html">Glossary</a>
+    </div>
+    <a href="index.html" class="nav-brand">BTCADP</a>
+</nav>
+<div class="nav-mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="beginners-guide.html">Start Here</a>
+    <a href="btcc-intro.html">&#x20BF;C</a>
+    <a href="tbd-usd.html">&#x20BF;USD</a>
+    <a href="bond.html">&#x20BF;OND</a>
+    <a href="specification.html">Specification</a>
+    <a href="faq.html">FAQ</a>
+    <a href="knowledge-base.html">Knowledge Base</a>
+    <a href="glossary.html">Glossary</a>
+</div>
+
+<!-- PAGE -->
+<div class="page-wrap">
+
+  <div class="page-label">Contribute</div>
+  <h1>Are you a researcher interested in contributing to the project?</h1>
+
+  <p class="page-intro">
+    The BTCADP framework is an open research project. We're looking for researchers to help verify historical price data, stress-test the monetary instruments, and engage with the architecture on its own terms. All contributions are independently owned by their authors.
+  </p>
+
+  <div class="privacy-note">
+    <strong>A note on identity.</strong> The contributor site uses handles to protect participant identity. Reviewers and admins can see your real name, but other contributors will only see your preferred handle. If privacy matters to you, choose a handle that doesn't identify you.
+  </div>
+
+  <!-- FORM -->
+  <div id="formContainer">
+    <div class="form-group">
+      <label>Name <span class="label-hint">(required)</span></label>
+      <input type="text" id="fieldName" placeholder="Your name" autocomplete="name">
+    </div>
+
+    <div class="form-group">
+      <label>Email <span class="label-hint">(required)</span></label>
+      <input type="email" id="fieldEmail" placeholder="you@example.com" autocomplete="email">
+    </div>
+
+    <div class="form-group">
+      <label>Background <span class="label-hint">(select all that apply)</span></label>
+      <div class="checkbox-group">
+        <label class="check-option"><input type="checkbox" id="bgMasters" value="masters_phd" onchange="handleBgChange()"> Currently in a Masters / PhD Program</label>
+        <label class="check-option"><input type="checkbox" id="bgResearcher" value="university_researcher" onchange="handleBgChange()"> Currently working in a research capacity at a university</label>
+        <label class="check-option"><input type="checkbox" id="bgProfessor" value="professor_academic" onchange="handleBgChange()"> Professor or Academic</label>
+        <label class="check-option"><input type="checkbox" id="bgIndependent" value="independent_researcher" onchange="handleBgChange()"> Independent Researcher</label>
+        <label class="check-option"><input type="checkbox" id="bgOther" value="other" onchange="handleBgChange()"> None of the above</label>
+      </div>
+      <input type="text" id="fieldBgOther" placeholder="Please describe your background (required)" style="display:none;margin-top:10px;">
+    </div>
+
+    <div class="form-group">
+      <label>Preferred Handle <span class="label-hint">(optional)</span></label>
+      <input type="text" id="fieldHandle" placeholder="How you'd like to appear on the contributor site">
+    </div>
+
+    <div class="form-group">
+      <label>Social / Academic Profile <span class="label-hint">(optional)</span></label>
+      <input type="text" id="fieldSocial" placeholder="Twitter/X, LinkedIn, Google Scholar, personal site, etc.">
+    </div>
+
+    <div class="form-group">
+      <label>What are you interested in working on? <span class="label-hint">(optional)</span></label>
+      <textarea id="fieldMessage" placeholder="Historical data verification, monetary instrument modeling, game theory analysis, technical implementation, or anything else that caught your attention."></textarea>
+    </div>
+
+    <button class="submit-btn" id="submitBtn" onclick="submitApplication()">Submit Application</button>
+    <div class="error-msg" id="errorMsg"></div>
+  </div>
+
+  <!-- SUCCESS -->
+  <div class="success-msg" id="successMsg">
+    <div class="check">&#10003;</div>
+    <h2>Application received.</h2>
+    <p>We'll review your submission and reach out by email if there's a fit. In the meantime, the <a href="open-research.html" style="color:var(--orange);">open research questions</a> and <a href="knowledge-base.html" style="color:var(--orange);">knowledge base</a> are good places to start reading.</p>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <p>
+        <a href="index.html">BTCADP</a> &middot;
+        <a href="knowledge-base.html">Knowledge Base</a> &middot;
+        <a href="glossary.html">Glossary</a> &middot;
+        <a href="faq.html">FAQ</a>
+    </p>
+    <p style="margin-top:0.8rem;">CC BY-NC-ND &middot; btcadp.org &middot; 2026</p>
+</footer>
+
+<script>
+/*
+  SUPABASE TABLE SETUP (run once in Supabase SQL editor):
+
+  CREATE TABLE research_applications (
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+    name text NOT NULL,
+    email text NOT NULL,
+    background text,
+    preferred_handle text,
+    social_profile text,
+    message text,
+    created_at timestamptz DEFAULT now()
+  );
+
+  -- Allow anonymous inserts only (no reads from client)
+  ALTER TABLE research_applications ENABLE ROW LEVEL SECURITY;
+  CREATE POLICY "Allow anonymous inserts"
+    ON research_applications FOR INSERT
+    TO anon WITH CHECK (true);
+
+  -- Optional: set up a database webhook or pg_net to POST new rows
+  -- to an email service, or just check the Supabase dashboard.
+*/
+
+const SUPABASE_URL = 'https://zjvjptrufipxykwpxfdd.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_n6kA99fJ2ZQR7rp5lxpl5g_Oq6Zweur';
+
+function handleBgChange() {
+  var otherChecked = document.getElementById('bgOther').checked;
+  var otherField = document.getElementById('fieldBgOther');
+  otherField.style.display = otherChecked ? 'block' : 'none';
+  if (!otherChecked) otherField.value = '';
+}
+
+async function submitApplication() {
+  var btn = document.getElementById('submitBtn');
+  var errorEl = document.getElementById('errorMsg');
+  errorEl.style.display = 'none';
+
+  var name = document.getElementById('fieldName').value.trim();
+  var email = document.getElementById('fieldEmail').value.trim();
+  var handle = document.getElementById('fieldHandle').value.trim();
+  var social = document.getElementById('fieldSocial').value.trim();
+  var message = document.getElementById('fieldMessage').value.trim();
+
+  // Collect background selections
+  var bgSelections = [];
+  if (document.getElementById('bgMasters').checked) bgSelections.push('Masters / PhD Program');
+  if (document.getElementById('bgResearcher').checked) bgSelections.push('University Researcher');
+  if (document.getElementById('bgProfessor').checked) bgSelections.push('Professor / Academic');
+  if (document.getElementById('bgIndependent').checked) bgSelections.push('Independent Researcher');
+
+  var otherChecked = document.getElementById('bgOther').checked;
+  var otherText = document.getElementById('fieldBgOther').value.trim();
+
+  if (!name || !email) {
+    errorEl.textContent = 'Name and email are required.';
+    errorEl.style.display = 'block';
+    return;
+  }
+
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    errorEl.textContent = 'Please enter a valid email address.';
+    errorEl.style.display = 'block';
+    return;
+  }
+
+  if (bgSelections.length === 0 && !otherChecked) {
+    errorEl.textContent = 'Please select at least one background option.';
+    errorEl.style.display = 'block';
+    return;
+  }
+
+  if (otherChecked && !otherText) {
+    errorEl.textContent = 'Please describe your background.';
+    errorEl.style.display = 'block';
+    return;
+  }
+
+  if (otherChecked) bgSelections.push('Other: ' + otherText);
+  var background = bgSelections.join('; ');
+
+  btn.disabled = true;
+  btn.textContent = 'Submitting...';
+
+  try {
+    var res = await fetch(SUPABASE_URL + '/rest/v1/research_applications', {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        background: background,
+        preferred_handle: handle || null,
+        social_profile: social || null,
+        message: message || null
+      })
+    });
+
+    if (res.ok) {
+      document.getElementById('formContainer').style.display = 'none';
+      document.getElementById('successMsg').style.display = 'block';
+    } else {
+      var data = await res.json();
+      throw new Error(data.message || 'Submission failed. Please try again.');
+    }
+  } catch (err) {
+    errorEl.textContent = err.message || 'Something went wrong. Please try again.';
+    errorEl.style.display = 'block';
+    btn.disabled = false;
+    btn.textContent = 'Submit Application';
+  }
+}
+
+/* Theme toggle */
+function toggleTheme() {
+  var html = document.documentElement;
+  var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  try { localStorage.setItem('btcadp-theme', next); } catch(e) {}
+}
+(function() {
+  try { var s = localStorage.getItem('btcadp-theme'); if (s) document.documentElement.setAttribute('data-theme', s); } catch(e) {}
+})();
+
+/* Mobile menu */
+function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+(function() {
+  var m = document.getElementById('mobileMenu');
+  if (m) m.addEventListener('click', function(e) { if (e.target.tagName === 'A') m.classList.remove('open'); });
+})();
+</script>
+
+</body>
+</html>
