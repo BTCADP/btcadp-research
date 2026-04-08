@@ -432,6 +432,7 @@ window.supabase = { createClient };
         <button type="button" class="filter-chip" data-filter="data" onclick="setFilter('research','data',this)">Data</button>
         <button type="button" class="filter-chip" data-filter="def-prog" onclick="setFilter('research','def-prog',this)">Defensive Prog.</button>
         <button type="button" class="filter-chip" data-filter="implementation" onclick="setFilter('research','implementation',this)">Implementation</button>
+        <button type="button" class="filter-chip" data-filter="general" onclick="setFilter('research','general',this)">General</button>
       </div>
       <div class="sort-bar"><div class="sort-options">
         <button type="button" class="sort-btn active" data-sort="votes" onclick="setSort('votes',this)">Top voted</button>
@@ -441,7 +442,7 @@ window.supabase = { createClient };
       <button type="button" class="new-thread-btn" onclick="showNewThread('research')">+ Start a new thread</button>
       <div class="new-thread-form" id="newThreadForm-research" data-form-type="other">
         <div class="form-row"><label>Thread title</label><input type="text" id="newTitle-research" placeholder="Summarize your research question or finding..." autocomplete="off" data-form-type="other"></div>
-        <div class="form-row"><label>Category</label><select id="newSection-research"><option value="btc-btcadp">₿C / BTCADP</option><option value="busd-tbdc">₿USD / TBDC</option><option value="bond-bill">₿OND / ₿ILL</option><option value="cbtc">Consortium (CBTC)</option><option value="framework">Framework</option><option value="data">Data</option><option value="def-prog">Defensive Programmability</option><option value="implementation">Implementation</option></select></div>
+        <div class="form-row"><label>Category</label><select id="newSection-research"><option value="btc-btcadp">₿C / BTCADP</option><option value="busd-tbdc">₿USD / TBDC</option><option value="bond-bill">₿OND / ₿ILL</option><option value="cbtc">Consortium (CBTC)</option><option value="framework">Framework</option><option value="data">Data</option><option value="def-prog">Defensive Programmability</option><option value="implementation">Implementation</option><option value="general">General</option></select></div>
         <div class="form-row"><label>Details</label><textarea id="newBody-research" placeholder="Present your analysis, question, or suggested revision..." autocomplete="off" data-form-type="other"></textarea></div>
         <div class="form-actions"><button type="button" class="btn-cancel" onclick="hideNewThread('research')">Cancel</button><button type="button" class="btn-submit" onclick="submitThread('research')" data-form-type="other">Post thread</button></div>
       </div>
@@ -464,6 +465,8 @@ window.supabase = { createClient };
       <div id="editForm" style="display:none;margin-bottom:24px;padding:20px;background:var(--bg-tertiary);border:1px solid var(--border);border-radius:8px;" data-form-type="other">
         <label style="display:block;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">Title</label>
         <input type="text" id="editTitle" style="width:100%;padding:10px;background:var(--bg-primary);border:1px solid var(--border);border-radius:4px;color:var(--text-primary);font-family:var(--font-mono);font-size:14px;margin-bottom:12px;" autocomplete="off" data-form-type="other">
+        <label style="display:block;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">Category</label>
+        <select id="editSection" style="width:100%;padding:10px;background:var(--bg-primary);border:1px solid var(--border);border-radius:4px;color:var(--text-primary);font-family:var(--font-mono);font-size:14px;margin-bottom:12px;"></select>
         <label style="display:block;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">Body</label>
         <textarea id="editBody" style="width:100%;min-height:150px;padding:10px;background:var(--bg-primary);border:1px solid var(--border);border-radius:4px;color:var(--text-primary);font-family:var(--font-mono);font-size:14px;resize:vertical;margin-bottom:12px;" autocomplete="off" data-form-type="other"></textarea>
         <div style="display:flex;gap:8px;justify-content:flex-end;">
@@ -1081,6 +1084,11 @@ function editThread() {
   if (!thread) return;
   document.getElementById('editTitle').value = thread.title;
   document.getElementById('editBody').value = thread.body || '';
+  const sel = document.getElementById('editSection');
+  const tbbOpts = {general:'General',thesis:'Thesis',busd:'₿USD',bond:'₿ond',bill:'₿ill',btcc:'₿C'};
+  const resOpts = {'btc-btcadp':'₿C / BTCADP','busd-tbdc':'₿USD / TBDC','bond-bill':'₿OND / ₿ILL',cbtc:'Consortium (CBTC)',framework:'Framework',data:'Data','def-prog':'Defensive Programmability',implementation:'Implementation',general:'General'};
+  const opts = thread.space === 'research' ? resOpts : tbbOpts;
+  sel.innerHTML = Object.entries(opts).map(([v,l]) => `<option value="${v}"${v === thread.section ? ' selected' : ''}>${l}</option>`).join('');
   document.getElementById('editForm').style.display = 'block';
   document.getElementById('detailTitle').style.display = 'none';
   document.getElementById('detailComments').style.display = 'none';
@@ -1095,14 +1103,13 @@ function cancelEdit() {
 async function saveThreadEdit() {
   if (!currentThreadId) return;
   const title = document.getElementById('editTitle').value.trim();
+  const section = document.getElementById('editSection').value;
   const body = document.getElementById('editBody').value.trim();
   if (!title) { alert('Title cannot be empty.'); return; }
   try {
-    console.log('Saving edit for thread:', currentThreadId);
-    await sbRest('PATCH', 'threads', { query: `id=eq.${currentThreadId}`, body: { title, body } });
-    console.log('Edit result: success');
+    await sbRest('PATCH', 'threads', { query: `id=eq.${currentThreadId}`, body: { title, section, body } });
     const thread = threadsCache[currentThreadSpace]?.find(t => t.id === currentThreadId);
-    if (thread) { thread.title = title; thread.body = body; }
+    if (thread) { thread.title = title; thread.section = section; thread.body = body; }
     cancelEdit();
     openThread(currentThreadId, currentThreadSpace);
     showToast('Thread updated!');
