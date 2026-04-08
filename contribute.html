@@ -389,16 +389,17 @@ window.supabase = { createClient };
     <div class="space-content" id="space-tbb" style="display:none;">
       <div class="space-header">
         <h2>The Bitcoin Bridge</h2>
-        <p>Feedback on TBB chapters, concepts, and proposals. Suggest edits, flag inconsistencies, or propose structural changes.</p>
+        <p>Feedback on TBB chapters, concepts, and proposals. Suggest edits, flag inconsistencies, challenge the argument, or propose structural changes. The goal is to make The Bitcoin Bridge as strong as possible before it reaches a wider audience.</p>
+        <p style="margin-top:8px;font-size:12px;color:var(--text-muted);">If you think someone should have access to the contributor section, email the admin at pragmaxi@protonmail.com.</p>
       </div>
       <div class="section-filter" id="tbbFilters">
         <button type="button" class="filter-chip active" data-filter="all" onclick="setFilter('tbb','all',this)">All</button>
-        <button type="button" class="filter-chip" data-filter="thesis" onclick="setFilter('tbb','thesis',this)">Thesis</button>
-        <button type="button" class="filter-chip" data-filter="busd" onclick="setFilter('tbb','busd',this)">&#x20bf;USD</button>
-        <button type="button" class="filter-chip" data-filter="bond" onclick="setFilter('tbb','bond',this)">&#x20bf;ond</button>
-        <button type="button" class="filter-chip" data-filter="bill" onclick="setFilter('tbb','bill',this)">&#x20bf;ill</button>
-        <button type="button" class="filter-chip" data-filter="btcc" onclick="setFilter('tbb','btcc',this)">&#x20bf;C</button>
-        <button type="button" class="filter-chip" data-filter="general" onclick="setFilter('tbb','general',this)">General</button>
+        <button type="button" class="filter-chip" data-filter="general" onclick="setFilter('tbb','general',this)">General Discussion</button>
+        <button type="button" class="filter-chip" data-filter="editorial" onclick="setFilter('tbb','editorial',this)">Editorial</button>
+        <button type="button" class="filter-chip" data-filter="thesis-logic" onclick="setFilter('tbb','thesis-logic',this)">Thesis &amp; Logic</button>
+        <button type="button" class="filter-chip" data-filter="missing-content" onclick="setFilter('tbb','missing-content',this)">Missing Content</button>
+        <button type="button" class="filter-chip" data-filter="objections" onclick="setFilter('tbb','objections',this)">Objections</button>
+        <button type="button" class="filter-chip" data-filter="visuals-data" onclick="setFilter('tbb','visuals-data',this)">Visuals &amp; Data</button>
       </div>
       <div class="sort-bar"><div class="sort-options">
         <button type="button" class="sort-btn active" data-sort="votes" onclick="setSort('votes',this)">Top voted</button>
@@ -408,7 +409,7 @@ window.supabase = { createClient };
       <button type="button" class="new-thread-btn" onclick="showNewThread('tbb')">+ Start a new thread</button>
       <div class="new-thread-form" id="newThreadForm-tbb" data-form-type="other">
         <div class="form-row"><label>Thread title</label><input type="text" id="newTitle-tbb" placeholder="Summarize your feedback..." autocomplete="off" data-form-type="other"></div>
-        <div class="form-row"><label>Section</label><select id="newSection-tbb"><option value="general">General</option><option value="thesis">Thesis</option><option value="busd">&#x20bf;USD</option><option value="bond">&#x20bf;ond</option><option value="bill">&#x20bf;ill</option><option value="btcc">&#x20bf;C</option></select></div>
+        <div class="form-row"><label>Section</label><select id="newSection-tbb"><option value="general">General Discussion</option><option value="editorial">Editorial</option><option value="thesis-logic">Thesis &amp; Logic</option><option value="missing-content">Missing Content</option><option value="objections">Objections</option><option value="visuals-data">Visuals &amp; Data</option></select></div>
         <div class="form-row"><label>Details</label><textarea id="newBody-tbb" placeholder="Describe the feedback, suggested change, or question..." autocomplete="off" data-form-type="other"></textarea></div>
         <div class="form-actions"><button type="button" class="btn-cancel" onclick="hideNewThread('tbb')">Cancel</button><button type="button" class="btn-submit" onclick="submitThread('tbb')" data-form-type="other">Post thread</button></div>
       </div>
@@ -420,7 +421,8 @@ window.supabase = { createClient };
     <div class="space-content" id="space-research">
       <div class="space-header">
         <h2>Research</h2>
-        <p>Independent academic research on the BTCADP framework. Open questions, formal modeling, empirical analysis, and technical feasibility. You own your work. Publish wherever you choose.</p>
+        <p>Independent research on the BTCADP framework. This is where the ideas get stress-tested in detail: formal modeling, empirical analysis, technical feasibility and rigorous engagement with the existing literature. You can publish your work on BTCADP.org or wherever you choose.</p>
+        <p style="margin-top:8px;font-size:12px;color:var(--text-muted);">If you think someone should have access to the contributor section, or want your work published on BTCADP.org, email the admin at pragmaxi@protonmail.com.</p>
       </div>
       <div class="section-filter" id="researchFilters">
         <button type="button" class="filter-chip active" data-filter="all" onclick="setFilter('research','all',this)">All</button>
@@ -428,10 +430,11 @@ window.supabase = { createClient };
         <button type="button" class="filter-chip" data-filter="busd-tbdc" onclick="setFilter('research','busd-tbdc',this)">₿USD / TBDC</button>
         <button type="button" class="filter-chip" data-filter="bond-bill" onclick="setFilter('research','bond-bill',this)">₿OND / ₿ILL</button>
         <button type="button" class="filter-chip" data-filter="cbtc" onclick="setFilter('research','cbtc',this)">Consortium (CBTC)</button>
+        <button type="button" class="filter-chip" data-filter="def-prog" onclick="setFilter('research','def-prog',this)">Defensive Prog.</button>
         <button type="button" class="filter-chip" data-filter="framework" onclick="setFilter('research','framework',this)">Framework</button>
         <button type="button" class="filter-chip" data-filter="data" onclick="setFilter('research','data',this)">Data</button>
-        <button type="button" class="filter-chip" data-filter="def-prog" onclick="setFilter('research','def-prog',this)">Defensive Prog.</button>
         <button type="button" class="filter-chip" data-filter="implementation" onclick="setFilter('research','implementation',this)">Implementation</button>
+        <button type="button" class="filter-chip" data-filter="legal" onclick="setFilter('research','legal',this)">Legal &amp; Regulatory</button>
         <button type="button" class="filter-chip" data-filter="general" onclick="setFilter('research','general',this)">General</button>
       </div>
       <div class="sort-bar"><div class="sort-options">
@@ -442,7 +445,7 @@ window.supabase = { createClient };
       <button type="button" class="new-thread-btn" onclick="showNewThread('research')">+ Start a new thread</button>
       <div class="new-thread-form" id="newThreadForm-research" data-form-type="other">
         <div class="form-row"><label>Thread title</label><input type="text" id="newTitle-research" placeholder="Summarize your research question or finding..." autocomplete="off" data-form-type="other"></div>
-        <div class="form-row"><label>Category</label><select id="newSection-research"><option value="btc-btcadp">₿C / BTCADP</option><option value="busd-tbdc">₿USD / TBDC</option><option value="bond-bill">₿OND / ₿ILL</option><option value="cbtc">Consortium (CBTC)</option><option value="framework">Framework</option><option value="data">Data</option><option value="def-prog">Defensive Programmability</option><option value="implementation">Implementation</option><option value="general">General</option></select></div>
+        <div class="form-row"><label>Category</label><select id="newSection-research"><option value="btc-btcadp">₿C / BTCADP</option><option value="busd-tbdc">₿USD / TBDC</option><option value="bond-bill">₿OND / ₿ILL</option><option value="cbtc">Consortium (CBTC)</option><option value="def-prog">Defensive Programmability</option><option value="framework">Framework</option><option value="data">Data</option><option value="implementation">Implementation</option><option value="legal">Legal &amp; Regulatory</option><option value="general">General</option></select></div>
         <div class="form-row"><label>Details</label><textarea id="newBody-research" placeholder="Present your analysis, question, or suggested revision..." autocomplete="off" data-form-type="other"></textarea></div>
         <div class="form-actions"><button type="button" class="btn-cancel" onclick="hideNewThread('research')">Cancel</button><button type="button" class="btn-submit" onclick="submitThread('research')" data-form-type="other">Post thread</button></div>
       </div>
@@ -1085,8 +1088,8 @@ function editThread() {
   document.getElementById('editTitle').value = thread.title;
   document.getElementById('editBody').value = thread.body || '';
   const sel = document.getElementById('editSection');
-  const tbbOpts = {general:'General',thesis:'Thesis',busd:'₿USD',bond:'₿ond',bill:'₿ill',btcc:'₿C'};
-  const resOpts = {'btc-btcadp':'₿C / BTCADP','busd-tbdc':'₿USD / TBDC','bond-bill':'₿OND / ₿ILL',cbtc:'Consortium (CBTC)',framework:'Framework',data:'Data','def-prog':'Defensive Programmability',implementation:'Implementation',general:'General'};
+  const tbbOpts = {general:'General Discussion',editorial:'Editorial','thesis-logic':'Thesis & Logic','missing-content':'Missing Content',objections:'Objections','visuals-data':'Visuals & Data'};
+  const resOpts = {'btc-btcadp':'₿C / BTCADP','busd-tbdc':'₿USD / TBDC','bond-bill':'₿OND / ₿ILL',cbtc:'Consortium (CBTC)','def-prog':'Defensive Programmability',framework:'Framework',data:'Data',implementation:'Implementation',legal:'Legal & Regulatory',general:'General'};
   const opts = thread.space === 'research' ? resOpts : tbbOpts;
   sel.innerHTML = Object.entries(opts).map(([v,l]) => `<option value="${v}"${v === thread.section ? ' selected' : ''}>${l}</option>`).join('');
   document.getElementById('editForm').style.display = 'block';
