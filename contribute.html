@@ -398,15 +398,16 @@ window.supabase = { createClient };
     <div class="space-content" id="space-research" style="display:none;">
       <div class="space-header">
         <h2>Research</h2>
-        <p>Academic discussion on BTCADP methodology, specification integrity, data quality, and the broader Bitcoin pricing research agenda.</p>
+        <p>Independent academic research on the BTCADP framework. Open questions, formal modeling, empirical analysis, and technical feasibility. You own your work. Publish wherever you choose.</p>
       </div>
       <div class="section-filter" id="researchFilters">
         <button type="button" class="filter-chip active" data-filter="all" onclick="setFilter('research','all',this)">All</button>
-        <button type="button" class="filter-chip" data-filter="methodology" onclick="setFilter('research','methodology',this)">Methodology</button>
-        <button type="button" class="filter-chip" data-filter="data-quality" onclick="setFilter('research','data-quality',this)">Data Quality</button>
-        <button type="button" class="filter-chip" data-filter="specification" onclick="setFilter('research','specification',this)">Specification</button>
-        <button type="button" class="filter-chip" data-filter="btcc-model" onclick="setFilter('research','btcc-model',this)">BTCC Model</button>
-        <button type="button" class="filter-chip" data-filter="peer-review" onclick="setFilter('research','peer-review',this)">Peer Review</button>
+        <button type="button" class="filter-chip" data-filter="btc-btcadp" onclick="setFilter('research','btc-btcadp',this)">₿C / BTCADP</button>
+        <button type="button" class="filter-chip" data-filter="busd" onclick="setFilter('research','busd',this)">₿USD</button>
+        <button type="button" class="filter-chip" data-filter="bond-bill" onclick="setFilter('research','bond-bill',this)">₿OND / ₿ILL</button>
+        <button type="button" class="filter-chip" data-filter="framework" onclick="setFilter('research','framework',this)">Framework</button>
+        <button type="button" class="filter-chip" data-filter="data" onclick="setFilter('research','data',this)">Data</button>
+        <button type="button" class="filter-chip" data-filter="implementation" onclick="setFilter('research','implementation',this)">Implementation</button>
       </div>
       <div class="sort-bar"><div class="sort-options">
         <button type="button" class="sort-btn active" data-sort="votes" onclick="setSort('votes',this)">Top voted</button>
@@ -415,8 +416,8 @@ window.supabase = { createClient };
       </div></div>
       <button type="button" class="new-thread-btn" onclick="showNewThread('research')">+ Start a new thread</button>
       <div class="new-thread-form" id="newThreadForm-research" data-form-type="other">
-        <div class="form-row"><label>Thread title</label><input type="text" id="newTitle-research" placeholder="Summarize your feedback..." autocomplete="off" data-form-type="other"></div>
-        <div class="form-row"><label>Category</label><select id="newSection-research"><option value="methodology">Methodology</option><option value="data-quality">Data Quality</option><option value="specification">Specification</option><option value="btcc-model">BTCC Model</option><option value="peer-review">Peer Review</option></select></div>
+        <div class="form-row"><label>Thread title</label><input type="text" id="newTitle-research" placeholder="Summarize your research question or finding..." autocomplete="off" data-form-type="other"></div>
+        <div class="form-row"><label>Category</label><select id="newSection-research"><option value="btc-btcadp">₿C / BTCADP</option><option value="busd">₿USD</option><option value="bond-bill">₿OND / ₿ILL</option><option value="framework">Framework</option><option value="data">Data</option><option value="implementation">Implementation</option></select></div>
         <div class="form-row"><label>Details</label><textarea id="newBody-research" placeholder="Present your analysis, question, or suggested revision..." autocomplete="off" data-form-type="other"></textarea></div>
         <div class="form-actions"><button type="button" class="btn-cancel" onclick="hideNewThread('research')">Cancel</button><button type="button" class="btn-submit" onclick="submitThread('research')" data-form-type="other">Post thread</button></div>
       </div>
