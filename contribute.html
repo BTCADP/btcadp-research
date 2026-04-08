@@ -375,7 +375,7 @@ window.supabase = { createClient };
         <button type="button" class="filter-chip" data-filter="busd" onclick="setFilter('tbb','busd',this)">&#x20bf;USD</button>
         <button type="button" class="filter-chip" data-filter="bond" onclick="setFilter('tbb','bond',this)">&#x20bf;ond</button>
         <button type="button" class="filter-chip" data-filter="bill" onclick="setFilter('tbb','bill',this)">&#x20bf;ill</button>
-        <button type="button" class="filter-chip" data-filter="btcc" onclick="setFilter('tbb','btcc',this)">&#x20bf;C / BTCC</button>
+        <button type="button" class="filter-chip" data-filter="btcc" onclick="setFilter('tbb','btcc',this)">&#x20bf;C</button>
         <button type="button" class="filter-chip" data-filter="general" onclick="setFilter('tbb','general',this)">General</button>
       </div>
       <div class="sort-bar"><div class="sort-options">
@@ -386,7 +386,7 @@ window.supabase = { createClient };
       <button type="button" class="new-thread-btn" onclick="showNewThread('tbb')">+ Start a new thread</button>
       <div class="new-thread-form" id="newThreadForm-tbb" data-form-type="other">
         <div class="form-row"><label>Thread title</label><input type="text" id="newTitle-tbb" placeholder="Summarize your feedback..." autocomplete="off" data-form-type="other"></div>
-        <div class="form-row"><label>Section</label><select id="newSection-tbb"><option value="general">General</option><option value="thesis">Thesis</option><option value="busd">&#x20bf;USD</option><option value="bond">&#x20bf;ond</option><option value="bill">&#x20bf;ill</option><option value="btcc">&#x20bf;C / BTCC</option></select></div>
+        <div class="form-row"><label>Section</label><select id="newSection-tbb"><option value="general">General</option><option value="thesis">Thesis</option><option value="busd">&#x20bf;USD</option><option value="bond">&#x20bf;ond</option><option value="bill">&#x20bf;ill</option><option value="btcc">&#x20bf;C</option></select></div>
         <div class="form-row"><label>Details</label><textarea id="newBody-tbb" placeholder="Describe the feedback, suggested change, or question..." autocomplete="off" data-form-type="other"></textarea></div>
         <div class="form-actions"><button type="button" class="btn-cancel" onclick="hideNewThread('tbb')">Cancel</button><button type="button" class="btn-submit" onclick="submitThread('tbb')" data-form-type="other">Post thread</button></div>
       </div>
@@ -403,8 +403,9 @@ window.supabase = { createClient };
       <div class="section-filter" id="researchFilters">
         <button type="button" class="filter-chip active" data-filter="all" onclick="setFilter('research','all',this)">All</button>
         <button type="button" class="filter-chip" data-filter="btc-btcadp" onclick="setFilter('research','btc-btcadp',this)">₿C / BTCADP</button>
-        <button type="button" class="filter-chip" data-filter="busd" onclick="setFilter('research','busd',this)">₿USD</button>
+        <button type="button" class="filter-chip" data-filter="busd-tbdc" onclick="setFilter('research','busd-tbdc',this)">₿USD / TBDC</button>
         <button type="button" class="filter-chip" data-filter="bond-bill" onclick="setFilter('research','bond-bill',this)">₿OND / ₿ILL</button>
+        <button type="button" class="filter-chip" data-filter="cbtc" onclick="setFilter('research','cbtc',this)">Consortium (CBTC)</button>
         <button type="button" class="filter-chip" data-filter="framework" onclick="setFilter('research','framework',this)">Framework</button>
         <button type="button" class="filter-chip" data-filter="data" onclick="setFilter('research','data',this)">Data</button>
         <button type="button" class="filter-chip" data-filter="implementation" onclick="setFilter('research','implementation',this)">Implementation</button>
@@ -417,7 +418,7 @@ window.supabase = { createClient };
       <button type="button" class="new-thread-btn" onclick="showNewThread('research')">+ Start a new thread</button>
       <div class="new-thread-form" id="newThreadForm-research" data-form-type="other">
         <div class="form-row"><label>Thread title</label><input type="text" id="newTitle-research" placeholder="Summarize your research question or finding..." autocomplete="off" data-form-type="other"></div>
-        <div class="form-row"><label>Category</label><select id="newSection-research"><option value="btc-btcadp">₿C / BTCADP</option><option value="busd">₿USD</option><option value="bond-bill">₿OND / ₿ILL</option><option value="framework">Framework</option><option value="data">Data</option><option value="implementation">Implementation</option></select></div>
+        <div class="form-row"><label>Category</label><select id="newSection-research"><option value="btc-btcadp">₿C / BTCADP</option><option value="busd-tbdc">₿USD / TBDC</option><option value="bond-bill">₿OND / ₿ILL</option><option value="cbtc">Consortium (CBTC)</option><option value="framework">Framework</option><option value="data">Data</option><option value="implementation">Implementation</option></select></div>
         <div class="form-row"><label>Details</label><textarea id="newBody-research" placeholder="Present your analysis, question, or suggested revision..." autocomplete="off" data-form-type="other"></textarea></div>
         <div class="form-actions"><button type="button" class="btn-cancel" onclick="hideNewThread('research')">Cancel</button><button type="button" class="btn-submit" onclick="submitThread('research')" data-form-type="other">Post thread</button></div>
       </div>
