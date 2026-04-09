@@ -390,7 +390,7 @@ window.supabase = { createClient };
       <div class="space-header">
         <h2>The Bitcoin Bridge</h2>
         <p>Feedback on TBB chapters, concepts, and proposals. Suggest edits, flag inconsistencies, challenge the argument, or propose structural changes. The goal is to make The Bitcoin Bridge as strong as possible before it reaches a wider audience.</p>
-        <p style="margin-top:8px;font-size:12px;color:var(--text-muted);">If you think someone should have access to the contributor section, email the admin at pragmaxi@protonmail.com.</p>
+        <p style="margin-top:8px;font-size:12px;color:var(--text-muted);">If you think someone should have access to the contributor section, send them here: <a href="https://btcadp.org/apply" style="color:var(--orange);">https://btcadp.org/apply</a><br>If you need technical assistance or want your work published on BTCADP.org, email the admin at <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="47373526202a263f2e073735283328292a262e2b6924282a">[email&#160;protected]</a>.</p>
       </div>
       <div class="section-filter" id="tbbFilters">
         <button type="button" class="filter-chip active" data-filter="all" onclick="setFilter('tbb','all',this)">All</button>
@@ -423,7 +423,7 @@ window.supabase = { createClient };
         <h2>Research</h2>
         <p>Independent research on the BTCADP framework. This is where the ideas get stress-tested in detail: formal modeling, empirical analysis, technical feasibility and rigorous engagement with the existing literature. You can publish your work on BTCADP.org or wherever you choose.</p>
         <p style="margin-top:8px;font-size:12px;color:var(--text-muted);">Historical eras (2009&ndash;2017) are open research problems. Each day has its own research page for submitting verified BTCADP values using trade-level data. <a href="https://github.com/BTCADP/btcadp-research/tree/main/contributions" target="_blank" rel="noopener" style="color:var(--orange);">View contribution pages on GitHub &rarr;</a></p>
-        <p style="margin-top:8px;font-size:12px;color:var(--text-muted);">If you think someone should have access to the contributor section, or want your work published on BTCADP.org, email the admin at pragmaxi@protonmail.com.</p>
+        <p style="margin-top:8px;font-size:12px;color:var(--text-muted);">If you think someone should have access to the contributor section, send them here: <a href="https://btcadp.org/apply" style="color:var(--orange);">https://btcadp.org/apply</a><br>If you need technical assistance or want your work published on BTCADP.org, email the admin at <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dcacaebdbbb1bda4b59cacaeb3a8b3b2b1bdb5b0f2bfb3b1">[email&#160;protected]</a>.</p>
       </div>
       <div class="section-filter" id="researchFilters">
         <button type="button" class="filter-chip active" data-filter="all" onclick="setFilter('research','all',this)">All</button>
@@ -530,7 +530,7 @@ window.supabase = { createClient };
 
 <footer><div class="container">Invite-only. Pseudonymous by default. Reviewers and admins can see real identities.</div></footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ═══════════════════════════════════════════════════════════════════════════
 // THEME
 function toggleTheme() {
@@ -1451,9 +1451,4 @@ CREATE TRIGGER on_comment_insert AFTER INSERT ON comments FOR EACH ROW EXECUTE F
   6. Copy Project URL + anon key from Settings > API
   7. Replace SUPABASE_URL and SUPABASE_ANON_KEY in this file
   8. Admin panel is controlled by role='admin' in collaborators table
-  9. Seed yourself with the INSERT above
-  10. When inviting collaborators, ALWAYS assign a unique handle
-═══════════════════════════════════════════════════════════════════════════════
--->
-</body>
-</html>
+  9.
