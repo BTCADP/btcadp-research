@@ -733,7 +733,7 @@
 <!-- ============================================================ -->
 <div class="draft-banner">
   <div class="draft-label">Draft Copy</div>
-  <div class="draft-version">Version 30.2</div>
+  <div class="draft-version">Version 30.3</div>
 </div>
 
 <!-- ============================================================ -->
@@ -1333,7 +1333,7 @@
 </p>
 
 <p>
-  A second barrier to Bitcoin as a medium of exchange receives less attention than volatility but is equally crippling: tax friction. In the United States and many other jurisdictions, Bitcoin is classified as property, not currency. Every transaction, buying a coffee, paying a contractor, purchasing groceries, is a disposition of property that triggers a capital gains calculation. The holder must track the cost basis of every satoshi spent, calculate the gain or loss, and report it. No one does this for a $4 coffee. No one ever will. The tax treatment alone makes BTC impractical as a daily medium of exchange, regardless of volatility. The friction comes from fiat-era regulatory frameworks applied to an asset class they were never designed to accommodate. The political and legal infrastructure of the fiat system created this friction. Bitcoin did not. But the friction is real, and any framework for Bitcoin-based commerce must route around it rather than pretend it does not exist. The currency layer does exactly this, as described in Part III: a dollar-pegged stablecoin settles at $1 in and $1 out, generating no taxable gain or loss at the commerce layer. The tax event occurs only when the user consciously crosses into the savings layer, a deliberate investment decision rather than a burden imposed on every transaction.
+  A second barrier to Bitcoin as a medium of exchange receives less attention than volatility but is equally crippling: tax friction. In the United States and many other jurisdictions, Bitcoin is classified as property, not currency. Every transaction, buying a coffee, paying a contractor, purchasing groceries, is a disposition of property that triggers a capital gains calculation. The holder must track the cost basis of every satoshi spent, calculate the gain or loss, and report it. Almost no one does this for a $4 coffee. Automated tax software exists, but the friction, complexity, and compliance burden remain prohibitive for the vast majority of daily transactions. The tax treatment alone makes BTC impractical as a daily medium of exchange, regardless of volatility. The friction comes from fiat-era regulatory frameworks applied to an asset class they were never designed to accommodate. The political and legal infrastructure of the fiat system created this friction. Bitcoin did not. But the friction is real, and any framework for Bitcoin-based commerce must route around it rather than pretend it does not exist. The currency layer does exactly this, as described in Part III: a dollar-pegged stablecoin settles at $1 in and $1 out, generating no taxable gain or loss at the commerce layer. The tax event occurs only when the user consciously crosses into the savings layer, a deliberate investment decision rather than a burden imposed on every transaction.
 </p>
 
 <h3>How the Model Maps Each Function</h3>
@@ -1799,6 +1799,10 @@
 </p>
 
 <p>
+  In the system's early phase, when reserve depth is shallow relative to outstanding supply, BTC-default redemption operates under soft velocity limits calibrated well above normal transaction volumes but present as a structural safeguard. The defensive programmability layer monitors the same network vital signs it uses for fiat exit controls: aggregate redemption velocity, reserve coverage ratios, and Ledger 2 depth. As reserves deepen and the coverage ratio widens, the BTC-default thresholds expand automatically. At mature reserve depth, the limits become effectively infinite because no plausible redemption wave can threaten the reserve base. The system graduates its own constraints. It doesn't require an external decision to remove the guardrails. It reads its own health and adjusts. The parachute is always there. In the early years, pulling it has a queue. In the mature system, it deploys on demand.
+</p>
+
+<p>
   Most users will never think about this feature. They will use ₿USD to pay for groceries, receive a salary, and save through a ₿ond. The BTC conversion will sit quietly in their wallet like an emergency parachute under an airplane seat. The parachute is something they never think about until the moment it saves them.
 </p>
 
@@ -2089,7 +2093,7 @@
 </p>
 
 <p>
-  The separation between products is not a bookkeeping formality. It is a structural firewall. A stress event on ₿USD, a surge in fiat redemptions during a bear market, cannot accelerate ₿OND maturities or draw from ₿ILL reserves. The ₿OND's dual condition makes mass redemption structurally impossible. ₿ILL's obligations are governed by their own maturity conditions and secondary market dynamics. The products share an ecosystem but never a reserve base.
+  The separation between products is not a bookkeeping formality. It is a structural firewall. A stress event on ₿USD, a surge in fiat redemptions during a bear market, cannot accelerate ₿OND maturities or draw from ₿ILL reserves. The ₿OND's dual condition makes coordinated mass maturity redemption structurally infeasible. ₿ILL's obligations are governed by their own maturity conditions and secondary market dynamics. The products share an ecosystem but never a reserve base.
 </p>
 
 <h3>The Coverage Ratio</h3>
@@ -2642,7 +2646,7 @@
 </p>
 
 <p>
-  <strong>Adaptive velocity limits:</strong> the protocol imposes throughput limits on aggregate fiat redemptions. Under normal conditions, the daily cap is a defined percentage of outstanding supply. As velocity rises, the cap tightens. These limits apply only to the fiat exit. BTC-default redemption remains unlimited at all times.
+  <strong>Adaptive velocity limits:</strong> the protocol imposes throughput limits on aggregate fiat redemptions. Under normal conditions, the daily cap is a defined percentage of outstanding supply. As velocity rises, the cap tightens. These limits apply primarily to the fiat exit. BTC-default redemption operates under its own graduated velocity framework: soft throughput limits during the system's early phase, widening automatically as reserve depth grows, and becoming effectively unlimited once coverage ratios reach mature thresholds.
 </p>
 
 <p>
@@ -4143,9 +4147,9 @@
 
 <p><strong>Volume-Triggered Fee Escalation:</strong> When rolling 7-day fiat redemption volume exceeds defined thresholds as a percentage of total supply, an additional surcharge applies. Below 1%: no surcharge. 1 to 2%: +0.5%. 2 to 5%: +1.5%. Above 5%: +3.0%.</p>
 
-<p><strong>Adaptive Velocity Limits:</strong> Daily fiat redemption cap of 5% of outstanding supply under normal conditions, tightening as velocity rises. BTC-default redemption remains unlimited at all times.</p>
+<p><strong>Adaptive Velocity Limits:</strong> Daily fiat redemption cap of 5% of outstanding supply under normal conditions, tightening as velocity rises. BTC-default redemption operates under a graduated velocity framework, with soft limits in early operation that widen automatically as reserve depth matures.</p>
 
-<p><strong>Redemption Notice Periods:</strong> Small fiat redemptions process immediately. Above \$100,000: 48 hours. Above \$1,000,000: 7 days. BTC-default redemption remains instant at any amount.</p>
+<p><strong>Redemption Notice Periods:</strong> Small fiat redemptions process immediately. Above \$100,000: 48 hours. Above \$1,000,000: 7 days. BTC-default redemption remains instant for standard volumes, with graduated throughput scaling during the system's early phase.</p>
 
 <p><strong>₿OND Conversion:</strong> Any ₿USD holder can convert to a ₿OND at the current ₿C entry price at any time, at no cost, with no delay. During panic, holders move capital from the spending layer to the savings layer. No reserves are touched. No Bitcoin is sold. The circulating ₿USD supply contracts, improving network health. The holder enters a return-targeted savings product whose dual-condition maturity ensures payout when conditions recover.</p>
 
@@ -4390,7 +4394,7 @@
 
 <h3>6.3 Separation from Other Product Reserves</h3>
 
-<p>Each instrument in the framework operates within its own dedicated two-ledger system. The ₿OND reserves are entirely separate from ₿USD and ₿ILL reserves. This separation ensures that ₿USD redemption pressure, the system's primary stress vector, can never reach ₿OND reserves. The ₿OND's dual condition makes mass redemption structurally impossible, eliminating the demand-deposit risk that the separation is designed to contain. All ledgers are held in publicly addressable Bitcoin wallets on the base layer, verifiable by any observer in real time.</p>
+<p>Each instrument in the framework operates within its own dedicated two-ledger system. The ₿OND reserves are entirely separate from ₿USD and ₿ILL reserves. This separation ensures that ₿USD redemption pressure, the system's primary stress vector, can never reach ₿OND reserves. The ₿OND's dual condition makes coordinated mass maturity redemption structurally infeasible, eliminating the demand-deposit risk that the separation is designed to contain. All ledgers are held in publicly addressable Bitcoin wallets on the base layer, verifiable by any observer in real time.</p>
 
 <h3>8. Maturity, Payout, and Auto-Reinvest</h3>
 
