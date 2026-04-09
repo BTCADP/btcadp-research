@@ -420,7 +420,7 @@
 <!-- DRAFT NOTICE -->
 <div class="draft-banner">
   <div class="draft-label">Draft Copy</div>
-  <div class="draft-version">Version 1.0</div>
+  <div class="draft-version">Version 2.0</div>
 </div>
 
 <hr class="section-break" style="max-width:780px;margin:32px auto 0;">
@@ -454,7 +454,8 @@
   <div class="toc-chapter">5. Governance Principles</div>
   <div class="toc-chapter">6. Dispute Resolution</div>
   <div class="toc-chapter">7. Jurisdiction</div>
-  <div class="toc-chapter">8. What IDMA Does and Does Not Do</div>
+  <div class="toc-chapter">8. Sidechain Integrity</div>
+  <div class="toc-chapter">9. What IDMA Does and Does Not Do</div>
 </div>
 
 <!-- ============================================================ -->
@@ -590,6 +591,11 @@
       <td>Self-reported by members</td>
       <td class="hl">On-chain, publicly verifiable by anyone, at any time</td>
     </tr>
+    <tr>
+      <td>Shared infrastructure oversight</td>
+      <td>None (members self-govern payment systems)</td>
+      <td class="hl">Independent certification and real-time monitoring of sidechain</td>
+    </tr>
   </tbody>
 </table>
 
@@ -723,6 +729,48 @@
 <!-- SECTION 8 -->
 <div class="chapter-header">
   <span class="chapter-num">Section 8</span>
+  <h2>Sidechain Integrity</h2>
+</div>
+<p class="hero-line">Members pay for and run the infrastructure. IDMA guarantees its integrity.</p>
+
+<p>
+  The sidechain where ₿USD circulates is shared infrastructure. Consortium members fund its development and operate the nodes. IDMA doesn't build the network and doesn't run it. But a network operated entirely by its own participants, with no external oversight, is a network where participants can game each other. Transaction ordering, fee priority, mint sequencing, burn timing, upgrade deployment: every operational surface is a potential advantage for the member who controls it.
+</p>
+
+<p>
+  IDMA's role is analogous to the Nevada Gaming Commission. The commission doesn't build slot machines. It doesn't operate casinos. But every machine on every floor has to pass certification, and the commission has the authority to open the box and inspect the internals at any time. The manufacturer can't self-certify. The operator can't waive the inspection.
+</p>
+
+<h3>Initial Certification</h3>
+
+<p>
+  Before the sidechain goes live, IDMA certifies the base software. The code is reviewed for fairness across all consortium members: no hardcoded advantages, no asymmetric fee structures, no hidden priority logic. The network launches only after IDMA signs off. The slot machine gets inspected before it hits the casino floor.
+</p>
+
+<h3>Upgrade Certification</h3>
+
+<p>
+  Consortium members propose sidechain upgrades. IDMA reviews every proposed code change before it goes into production. The review verifies that the upgrade doesn't introduce asymmetric advantages, doesn't alter fee distribution in ways that favor specific members, and doesn't modify consensus rules without going through the high-friction governance process. No code ships to the live network without IDMA approval. Members innovate. IDMA verifies the innovation is fair.
+</p>
+
+<h3>Real-Time Network Monitoring</h3>
+
+<p>
+  IDMA operates as the central monitoring station for the sidechain. Persistent read access to every transaction on the network: mint volumes, burn activity, fee distribution across members, execution ordering patterns, redemption flow timing. Anomalies get flagged as they happen, not months later in a periodic audit.
+</p>
+
+<p>
+  The combination is what makes it work. Initial certification catches problems before launch. Upgrade certification catches them before deployment. Real-time monitoring catches them in operation. A member who games the system at any stage is visible to the one entity in the consortium whose only incentive is the network's integrity.
+</p>
+
+<div class="callout">
+  <p>The sidechain is not a neutral piece of infrastructure by default. It becomes neutral because a neutral party watches it, certifies it, and has the authority to flag violations in real time. Without IDMA's oversight function, the consortium would need to trust that every member operates the shared network in good faith. Trust is not an architecture.</p>
+</div>
+
+
+<!-- SECTION 9 -->
+<div class="chapter-header">
+  <span class="chapter-num">Section 9</span>
   <h2>What IDMA Does and Does Not Do</h2>
 </div>
 <p class="hero-line">The power is in the boundary.</p>
@@ -730,13 +778,13 @@
 <h3>IDMA does:</h3>
 
 <p>
-  Hold the patents and trademarks for the TBDC framework. Publish and maintain the TBDC specification, the denomination protocol, and the BTCADP oracle methodology. Certify entities that meet published compliance criteria. Revoke certification from entities that fail to maintain those criteria. Fund and publish open research on the framework's mechanics, risks, and performance. Convene certified members for regular coordination, technical review, and parameter calibration. Define the arbitration framework for disputes between members. Set monetary policy parameters (reserve ratios, defensive thresholds, fee formulas) through the high-friction governance process described above.
+  Hold the patents and trademarks for the TBDC framework. Publish and maintain the TBDC specification, the denomination protocol, and the BTCADP oracle methodology. Certify entities that meet published compliance criteria. Revoke certification from entities that fail to maintain those criteria. Certify sidechain software before launch and approve every code upgrade before deployment. Monitor the sidechain in real time for anomalies in transaction ordering, fee distribution, and member behavior. Fund and publish open research on the framework's mechanics, risks, and performance. Convene certified members for regular coordination, technical review, and parameter calibration. Define the arbitration framework for disputes between members. Set monetary policy parameters (reserve ratios, defensive thresholds, fee formulas) through the high-friction governance process described above.
 </p>
 
 <h3>IDMA does not:</h3>
 
 <p>
-  Issue tokens or digital currency of any kind. Hold customer-facing reserves or interact with retail consumers. Compete with certified members for market share. Operate a sidechain, exchange, or financial service. Intervene in markets or provide liquidity during stress events. Rule on disputes between certified members (it defines the framework; independent arbitration applies it). Change the denomination protocol under any circumstances.
+  Issue tokens or digital currency of any kind. Hold customer-facing reserves or interact with retail consumers. Compete with certified members for market share. Build, fund, or operate sidechain infrastructure (it certifies and monitors the network; members build and run it). Intervene in markets or provide liquidity during stress events. Rule on disputes between certified members (it defines the framework; independent arbitration applies it). Change the denomination protocol under any circumstances.
 </p>
 
 <div class="callout">
