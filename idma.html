@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The International Digital Monetary Authority | btcadp.org</title>
+<meta name="description" content="A proposed standards body for the Treasury-Backed Digital Currency framework. The IDMA certifies compliance, holds intellectual property, publishes research, and governs the standard under which consortium members operate.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary: #0a0a0b;
+    --bg-secondary: #111114;
+    --bg-tertiary: #19191e;
+    --border: #2a2a32;
+    --text-primary: #e8e6e3;
+    --text-secondary: #8a8a95;
+    --text-muted: #555560;
+    --orange: #f7931a;
+    --orange-dim: rgba(247,147,26,0.12);
+    --green: #2ecc71;
+    --font-display: 'Source Serif 4', Georgia, serif;
+    --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --nav-bg: rgba(10,10,11,0.95);
+  }
+
+  [data-theme="light"] {
+    --bg-primary: #f5f3ef;
+    --bg-secondary: #eae7e1;
+    --bg-tertiary: #ddd9d2;
+    --bg-hover: #d0ccc4;
+    --border: #c8c3ba;
+    --border-active: #a09a90;
+    --text-primary: #1a1a1a;
+    --text-secondary: #666666;
+    --text-muted: #999999;
+    --orange: #d4780e;
+    --orange-dim: rgba(212, 120, 14, 0.08);
+    --orange-glow: rgba(212, 120, 14, 0.2);
+    --green: #1a8a4a;
+    --nav-bg: rgba(245,243,239,0.95);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-display);
+    font-size: 18px;
+    line-height: 1.78;
+    min-height: 100vh;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(247,147,26,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(247,147,26,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none; z-index: 0;
+  }
+
+  .title-block {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 80px 24px 48px;
+    position: relative;
+    z-index: 1;
+  }
+  .title-block .label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--orange);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .title-block h1 {
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 16px;
+    color: #fff;
+  }
+  [data-theme="light"] .title-block h1 { color: #1a1a1a; }
+  .title-block .subtitle {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+  .title-block .meta {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+  }
+
+  .draft-banner {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 32px 24px 0;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+  .draft-banner .draft-label {
+    font-family: var(--font-display);
+    font-size: 2.0rem;
+    font-weight: 700;
+    color: var(--orange);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+  .draft-banner .draft-version {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .download-bar {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+  .download-bar .btn-secondary {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 10px 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    background: transparent;
+  }
+  .download-bar .btn-secondary:hover { color: var(--text-primary); border-color: var(--text-muted); }
+
+  .toc {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 24px 64px;
+    position: relative;
+    z-index: 1;
+  }
+  .toc-title {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .toc-chapter {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    padding: 4px 0 4px 20px;
+    line-height: 1.5;
+  }
+
+  .article-body {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .chapter-header {
+    margin-top: 64px;
+    margin-bottom: 8px;
+  }
+  .chapter-num {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: 8px;
+  }
+  .article-body h2 {
+    font-family: var(--font-display);
+    font-size: 1.55rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+  [data-theme="light"] .article-body h2 { color: #1a1a1a; }
+  .article-body h3 {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #fff;
+    margin-top: 36px;
+    margin-bottom: 12px;
+  }
+  [data-theme="light"] .article-body h3 { color: #1a1a1a; }
+
+  .hero-line {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    margin-bottom: 28px;
+    padding-left: 16px;
+    border-left: 2px solid var(--orange);
+  }
+
+  .article-body p { margin-bottom: 20px; color: var(--text-primary); }
+
+  .callout {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--orange);
+    padding: 20px 24px;
+    margin: 28px 0;
+    border-radius: 0 6px 6px 0;
+  }
+  .callout p { margin-bottom: 0; }
+  .callout p + p { margin-top: 12px; }
+
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 28px 0;
+    font-size: 0.88rem;
+  }
+  .compare-table th {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .compare-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(42,42,50,0.5);
+    color: var(--text-secondary);
+    vertical-align: top;
+  }
+  .compare-table td.hl { color: var(--orange); }
+
+  hr.section-break {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 48px 0;
+  }
+
+  /* ========== STANDARD NAV ========== */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--nav-bg);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 56px;
+    transition: background 0.3s, border-color 0.3s;
+  }
+  .nav-left { display: flex; align-items: center; gap: 0.5rem; }
+  .nav-hamburger {
+    display: none; background: none; border: none;
+    color: var(--text-secondary); font-size: 1.3rem; cursor: pointer; padding: 0.3rem;
+  }
+  .theme-toggle {
+    background: none; border: none; cursor: pointer; padding: 0.3rem;
+    font-size: 1.1rem; line-height: 1;
+  }
+  [data-theme="dark"] .icon-light { display: inline; color: var(--text-secondary); }
+  [data-theme="dark"] .icon-dark { display: none; }
+  [data-theme="light"] .icon-light { display: none; }
+  [data-theme="light"] .icon-dark { display: inline; color: var(--text-secondary); }
+  .nav-center { display: flex; gap: 0.25rem; align-items: center; }
+  .nav-center a {
+    color: var(--text-muted); text-decoration: none;
+    font-family: var(--font-mono); font-size: 0.72rem;
+    padding: 0.4rem 0.6rem; border-radius: 4px; transition: color 0.2s;
+  }
+  .nav-center a:hover { color: var(--orange); }
+  .nav-brand {
+    font-family: var(--font-mono); font-size: 1rem; font-weight: bold;
+    color: var(--orange); text-decoration: none; letter-spacing: 0.05em;
+  }
+  .nav-mobile-menu {
+    display: none; flex-direction: column; gap: 0.5rem;
+    background: var(--nav-bg); border-bottom: 1px solid var(--border);
+    padding: 1rem 2rem;
+  }
+  .nav-mobile-menu.open { display: flex; }
+  .nav-mobile-menu a {
+    color: var(--text-secondary); text-decoration: none;
+    font-family: var(--font-mono); font-size: 0.82rem; padding: 0.3rem 0;
+  }
+
+  .print-btn {
+    font-family: var(--font-mono); font-size: 0.72rem;
+    color: var(--text-muted); letter-spacing: 0.06em;
+    background: var(--bg-secondary); border: 1px solid var(--border);
+    border-radius: 6px; padding: 0.5rem 1.2rem; cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .print-btn:hover { color: var(--orange); border-color: var(--orange); }
+  .print-bar {
+    display: flex; justify-content: flex-end;
+    padding: 1rem 2rem 0; max-width: 860px; margin: 0 auto;
+  }
+
+  /* ========== STANDARD FOOTER ========== */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+  footer p {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+  }
+  footer a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  footer a:hover { color: var(--orange); }
+
+  @media (max-width: 640px) {
+    .title-block h1 { font-size: 1.5rem; }
+    .nav-center { display: none; }
+    .nav-hamburger { display: block; }
+    .compare-table { font-size: 0.78rem; }
+  }
+
+  @media print {
+    body { background: #fff; color: #111; font-size: 11pt; }
+    nav, body::before, .download-bar, .nav-mobile-menu, .print-bar { display: none !important; }
+    .title-block, .toc, .article-body, .draft-banner { max-width: 100%; padding-left: 0; padding-right: 0; }
+    .callout { border: 1px solid #ccc; background: #f9f9f9; }
+    h2, h3 { color: #111; }
+    .hero-line { color: #444; border-left-color: #111; }
+    a { color: #111; }
+    .draft-banner .draft-label { color: #111; }
+    .draft-banner .draft-version { color: #444; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== STANDARD NAV ========== -->
+<nav>
+  <div class="nav-left">
+    <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Toggle menu">&#9776;</button>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light mode">
+      <span class="icon-light">&#9788;</span>
+      <span class="icon-dark">&#9790;</span>
+    </button>
+  </div>
+  <div class="nav-center">
+    <a href="index.html">Home</a>
+    <a href="beginners-guide.html">Start Here</a>
+    <a href="btcc-intro.html">&#x20BF;C</a>
+    <a href="tbd-usd.html">&#x20BF;USD</a>
+    <a href="bond.html">&#x20BF;OND</a>
+    <a href="specification.html">Specification</a>
+    <a href="faq.html">FAQ</a>
+    <a href="knowledge-base.html">Knowledge Base</a>
+    <a href="glossary.html">Glossary</a>
+  </div>
+  <a href="index.html" class="nav-brand">BTCADP</a>
+</nav>
+<div class="nav-mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="beginners-guide.html">Start Here</a>
+  <a href="btcc-intro.html">&#x20BF;C</a>
+  <a href="tbd-usd.html">&#x20BF;USD</a>
+  <a href="bond.html">&#x20BF;OND</a>
+  <a href="specification.html">Specification</a>
+  <a href="faq.html">FAQ</a>
+  <a href="knowledge-base.html">Knowledge Base</a>
+  <a href="glossary.html">Glossary</a>
+</div>
+
+<!-- ========== STANDARD PRINT BUTTON ========== -->
+<div class="print-bar">
+  <button class="print-btn" onclick="window.print();">&#9113; Print / Save as PDF</button>
+</div>
+
+<!-- TITLE -->
+<div class="title-block">
+  <div class="label">Governance Framework</div>
+  <h1>The International Digital Monetary Authority</h1>
+  <p class="subtitle">A standards body for Treasury-Backed Digital Currency. The institution that governs the framework without operating within it.</p>
+  <div class="meta">btcadp.org &bull; 2026 &bull; CC BY-NC-ND</div>
+  <div class="download-bar">
+    <a href="bitcoin-bridge.html" class="btn-secondary">The Bitcoin Bridge (Full Framework) &rarr;</a>
+    <a href="new-central-banks.html" class="btn-secondary">The New Central Banks &rarr;</a>
+  </div>
+</div>
+
+<!-- DRAFT NOTICE -->
+<div class="draft-banner">
+  <div class="draft-label">Draft Copy</div>
+  <div class="draft-version">Version 1.0</div>
+</div>
+
+<hr class="section-break" style="max-width:780px;margin:32px auto 0;">
+
+<!-- INTRODUCTION -->
+<div class="article-body" style="padding-bottom:0;">
+
+<p>
+  The TBDC framework describes a monetary system operated by a consortium of independent institutions. The products are specified. The reserve architecture is defined. The defensive mechanisms are designed. What remains unaddressed is who governs the standard?
+</p>
+
+<p>
+  A consortium of independent, profit-motivated entities will cooperate as long as cooperation serves their interests. The moment a member can gain an advantage by cutting corners on reserve requirements, weakening defensive mechanisms, or reinterpreting the specification, they will be tempted to do so. Moral authority won't prevent that, but legal authority can.
+</p>
+
+<p>
+  The International Digital Monetary Authority (IDMA) is the proposed institutional answer. It holds the intellectual property. It publishes the specification. It certifies compliance. It doesn't issue tokens, hold reserves, or interact with retail customers. It sits above the operational layer and governs the standard under which the operators function.
+</p>
+
+<hr class="section-break">
+
+</div>
+
+<!-- TABLE OF CONTENTS -->
+<div class="toc">
+  <div class="toc-title">Contents</div>
+  <div class="toc-chapter">1. The Model</div>
+  <div class="toc-chapter">2. What the BIS Gets Right</div>
+  <div class="toc-chapter">3. What the BIS Gets Wrong</div>
+  <div class="toc-chapter">4. Certification, Not Membership</div>
+  <div class="toc-chapter">5. Governance Principles</div>
+  <div class="toc-chapter">6. Dispute Resolution</div>
+  <div class="toc-chapter">7. Jurisdiction</div>
+  <div class="toc-chapter">8. What IDMA Does and Does Not Do</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- BODY -->
+<!-- ============================================================ -->
+<div class="article-body">
+
+
+<!-- SECTION 1 -->
+<div class="chapter-header">
+  <span class="chapter-num">Section 1</span>
+  <h2>The Model</h2>
+</div>
+<p class="hero-line">The central bank of the new central banks.</p>
+
+<p>
+  The Bank for International Settlements was founded in 1930 to coordinate reparation payments between nations. It evolved into something more lasting: the institution where central banks set standards, publish research, and coordinate policy. The BIS doesn't lend to the public. It doesn't set monetary policy for any country. It doesn't operate in the economy. It operates above the economy, defining the framework within which central banks function. The Basel Accords, which govern bank capital requirements worldwide, originate from BIS committees.
+</p>
+
+<p>
+  IDMA occupies the same structural position relative to the TBDC consortium. The consortium members are the new central banks: institutions that issue digital currency backed by cryptographic reserve assets. IDMA is the institution where those issuers coordinate. It holds the patents and trademarks. It publishes the TBDC specification and the denomination protocol. It certifies that members meet the reserve, transparency, and operational standards required to operate under the framework. It provides the forum where members develop and refine the standard over time.
+</p>
+
+<p>
+  The departures from the BIS model are deliberate. Every structural weakness of the BIS informs a design choice in IDMA.
+</p>
+
+
+<!-- SECTION 2 -->
+<div class="chapter-header">
+  <span class="chapter-num">Section 2</span>
+  <h2>What the BIS Gets Right</h2>
+</div>
+<p class="hero-line">Nearly a century of institutional durability built on neutrality.</p>
+
+<p>
+  <strong>Neutrality.</strong> The BIS doesn't compete with its members. It holds no public deposits, issues no currency, and takes no market positions. Every decision it makes is evaluated against the system's health as a whole. IDMA inherits this constraint entirely. The organization never issues tokens, never holds customer-facing reserves, and never competes with certified members for market share.
+</p>
+
+<p>
+  <strong>Convening power.</strong> Central bank governors meet regularly at the BIS, not just during crises. The relationships built in calm make coordination under stress possible. IDMA needs the same cadence: regular engagement with certified members through technical reviews, working groups on parameter calibration, and periodic conferences. The value isn't the published output. It's that the people who need to cooperate under pressure already know each other.
+</p>
+
+<p>
+  <strong>Research authority.</strong> BIS working papers carry weight because they come from an institution that isn't selling anything. IDMA should fund and publish open research on the TBDC framework, reserve mechanics, denomination protocol properties, and stress modeling. Becoming the institution that academics cite establishes intellectual authority that outlasts any single product cycle.
+</p>
+
+<p>
+  <strong>Standard layering.</strong> The Basel framework separates broad principles from specific ratios from implementation guidance. IDMA layers the same way. The denomination protocol is permanent. Reserve ratios and defensive parameters are specific standards subject to high-friction revision. Implementation details (which sidechain, which wallet architecture, which KYC provider) are left to the certified member. The organization governs the what. The members choose the how.
+</p>
+
+<p>
+  <strong>Institutional longevity.</strong> The BIS has survived the gold standard, Bretton Woods, two world wars, and every financial crisis since 1930. It survives because it's useful to its members without being threatening to them. IDMA must be designed for the same durability. If certified members are more trusted, attract more capital, and earn more revenue than uncertified competitors, the organization sustains itself because its members want it to exist.
+</p>
+
+
+<!-- SECTION 3 -->
+<div class="chapter-header">
+  <span class="chapter-num">Section 3</span>
+  <h2>What the BIS Gets Wrong</h2>
+</div>
+<p class="hero-line">Seven structural weaknesses, each one a design decision for IDMA.</p>
+
+<p>
+  <strong>Opacity.</strong> The BIS sets standards behind closed doors. Committee deliberations happen in private. Affected institutions can lobby, but the public can't observe. IDMA inverts this. Every parameter change is proposed publicly. Every vote is recorded. Every reserve wallet is on-chain. The constraint on behavior isn't that people can't change things. It's that they can't change things quietly.
+</p>
+
+<p>
+  <strong>No enforcement.</strong> The BIS publishes standards. Countries adopt them voluntarily. Implementation varies by jurisdiction, and there's no mechanism to compel compliance or revoke participation. A central bank can ignore Basel capital requirements and the BIS can do nothing about it. IDMA holds the patents and trademarks. Certified members operate under a conditional license. The IP does the enforcement. An entity that fails to meet the published standards loses its certification, and with it, the legal right to operate under the framework. The BIS asks. IDMA measures.
+</p>
+
+<p>
+  <strong>Political capture.</strong> The BIS board is dominated by the central banks of the largest economies. Standards reflect the interests of the institutions that write them. Smaller nations participate but don't drive policy. IDMA's governance is constrained by architecture rather than by votes. The denomination protocol is immutable. No vote can alter the formula. Monetary policy parameters require supermajority approval with public proposal periods and mandatory delays. The hierarchy is fixed: the denomination is permanent, the monetary policy is constitutional, the operations are administrative.
+</p>
+
+<p>
+  <strong>Slow adaptation.</strong> Basel III took over a decade from proposal to full implementation. The BIS moves at the speed of international diplomacy. IDMA's protocol-level mechanisms (defensive programmability, the burn-order algorithm, dual-condition maturity) operate algorithmically and respond to market conditions in real time. The governance layer handles long-term parameter adjustments. The protocol handles stress response, so the system doesn't need to wait for a committee to convene.
+</p>
+
+<p>
+  <strong>No skin in the game.</strong> BIS officials bear no financial consequences when their standards prove inadequate. The 2008 financial crisis occurred under Basel II. Nobody at the BIS absorbed a loss. IDMA's certified members have direct financial exposure. Their own reserves back the system. If the standards are wrong, they lose money. The alignment between standard-setter and standard-follower is structural: the members who vote on parameter changes are the members whose reserves are at stake.
+</p>
+
+<p>
+  <strong>Stress-period vulnerability.</strong> When a crisis hits, the BIS convenes meetings and issues guidance. During 2008, central banks acted unilaterally because the coordination framework was too slow. IDMA's governance includes a stress-period lockout: during defined stress conditions, when network health metrics cross published thresholds, no monetary policy parameter can be changed. The rules set in calm govern during the storm. The most dangerous governance failure is loosening reserve requirements under pressure. The lockout prevents it by design.
+</p>
+
+<p>
+  <strong>Self-reported data.</strong> The BIS relies on member central banks to report their own reserve figures, capital ratios, and compliance metrics. The institutions being measured provide the measurements. IDMA requires all reserve ledgers to be held in publicly addressable wallets on the base layer. Anyone can verify compliance at any moment without asking permission. The system doesn't trust. It verifies.
+</p>
+
+<table class="compare-table">
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>BIS</th>
+      <th class="hl">IDMA</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Standard-setting process</td>
+      <td>Private committee deliberation</td>
+      <td class="hl">Public proposals, recorded votes, mandatory delays</td>
+    </tr>
+    <tr>
+      <td>Enforcement mechanism</td>
+      <td>Voluntary adoption by member states</td>
+      <td class="hl">IP-conditional certification, revocable on non-compliance</td>
+    </tr>
+    <tr>
+      <td>Governance constraint</td>
+      <td>Board composition (political)</td>
+      <td class="hl">Architectural immutability (protocol)</td>
+    </tr>
+    <tr>
+      <td>Crisis response speed</td>
+      <td>Diplomatic (weeks to months)</td>
+      <td class="hl">Algorithmic (real-time) + governance (deliberate)</td>
+    </tr>
+    <tr>
+      <td>Financial exposure of standard-setters</td>
+      <td>None</td>
+      <td class="hl">Direct (members' own reserves at stake)</td>
+    </tr>
+    <tr>
+      <td>Stress-period governance</td>
+      <td>Ad hoc coordination</td>
+      <td class="hl">Parameter lockout during defined stress conditions</td>
+    </tr>
+    <tr>
+      <td>Reserve verification</td>
+      <td>Self-reported by members</td>
+      <td class="hl">On-chain, publicly verifiable by anyone, at any time</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<!-- SECTION 4 -->
+<div class="chapter-header">
+  <span class="chapter-num">Section 4</span>
+  <h2>Certification, Not Membership</h2>
+</div>
+<p class="hero-line">A building either passes inspection or it doesn't. The inspector isn't punishing the builder by withholding the certificate.</p>
+
+<p>
+  IDMA certifies entities. It doesn't admit members.
+</p>
+
+<p>
+  Membership implies a club with negotiated terms, ongoing relationships, and revocation that feels punitive. Certification implies a standard with published criteria, objective measurement, and outcomes that are either met or not met. Revoking a membership invites lawsuits about fairness and due process. Declining to renew a certification based on measurable, on-chain data is a statement of fact.
+</p>
+
+<p>
+  The certification framework has defined, quantitative criteria: reserve ratios verified on-chain, adherence to the denomination protocol, implementation of defensive programmability mechanisms, transparency and reporting standards, audit cadence. All independently verifiable.
+</p>
+
+<p>
+  IDMA publishes the criteria. Entities apply for certification. IDMA verifies against on-chain data and published standards. Certification is renewed on a defined cycle. If the numbers slip, the entity has a cure period to return to compliance. If they don't, certification lapses and the IP license terminates automatically.
+</p>
+
+<div class="callout">
+  <p>The trademark license is conditional on certification. The patent license is conditional on certification. A certified entity can operate under the TBDC framework, use the product names, and implement the patented system. An uncertified entity can't. The IP does the enforcement. IDMA measures compliance. Nobody gets sued. Nobody gets expelled. The license terms do the work.</p>
+</div>
+
+<p>
+  The model scales without structural change. Five certified entities or five hundred, the criteria are the same and the verification process is the same. IDMA doesn't need a board vote every time a new entity seeks certification. It needs an audit against published standards. The governance overhead stays flat as the ecosystem grows.
+</p>
+
+
+<!-- SECTION 5 -->
+<div class="chapter-header">
+  <span class="chapter-num">Section 5</span>
+  <h2>Governance Principles</h2>
+</div>
+<p class="hero-line">The architecture constrains the governance, not the other way around.</p>
+
+<p>
+  Three principles follow from the TBDC architecture itself. They aren't policy preferences. They're structural consequences of how the system works.
+</p>
+
+<h3>Separation of Layers by Mutability</h3>
+
+<p>
+  The denomination protocol is immutable. No vote can alter the formula. The cumulative arithmetic mean of every daily price since the first available trading day is a mathematical definition, not a policy parameter. IDMA's role here is to maintain and publish the specification. It has no authority to change it.
+</p>
+
+<p>
+  Monetary policy parameters, including defensive programmability thresholds, fee formulas, and reserve sizing methodology, are high-friction to change. Supermajority vote among certified members, public proposal period, mandatory delay between vote and implementation. These are the system's constitutional provisions.
+</p>
+
+<p>
+  Operational parameters, including new entity certification, fee distribution among members, and reporting cadence, are lower friction. These are administrative decisions that don't affect the monetary architecture.
+</p>
+
+<p>
+  The hierarchy is permanent: the denomination is fixed, the monetary policy is constitutional, the operations are administrative. Each layer has its own revision process, and no action at a lower layer can override a higher one.
+</p>
+
+<h3>Transparency as the Primary Constraint</h3>
+
+<p>
+  Every parameter change is proposed publicly before a vote. Every vote is recorded and published. Every reserve wallet is on-chain. Every coverage ratio is independently computable by any observer. IDMA doesn't rely on the good intentions of certified members. It relies on the impossibility of acting in secret. The constraint on behavior is structural: you can do anything you want, as long as everyone can see you doing it.
+</p>
+
+<h3>Stress-Period Immutability</h3>
+
+<p>
+  When network health metrics cross published thresholds, the governance layer locks. No monetary policy parameter can be changed during a defined stress condition. The rules set during calm govern during the storm. The protocol-level defenses (defensive programmability, PBP#, velocity limits) continue operating algorithmically. The governance layer resumes when the stress condition clears.
+</p>
+
+<p>
+  The target is the most dangerous governance failure in financial history: loosening standards under pressure. Every banking crisis involves institutions weakening their own safeguards at the moment when safeguards matter most. The stress-period lockout makes that structurally impossible.
+</p>
+
+
+<!-- SECTION 6 -->
+<div class="chapter-header">
+  <span class="chapter-num">Section 6</span>
+  <h2>Dispute Resolution</h2>
+</div>
+<p class="hero-line">IDMA provides the framework for resolution. It doesn't sit as the judge.</p>
+
+<p>
+  The moment IDMA rules on a dispute between two certified members, it becomes a party to the conflict. The losing side questions IDMA's neutrality. Every future certification decision gets viewed through the lens of whose side the organization is really on. The BIS learned this lesson. It convenes and facilitates, but it doesn't issue binding rulings.
+</p>
+
+<p>
+  IDMA's certification agreement requires every certified member to submit to binding arbitration under specified institutional rules (ICC, LCIA, Swiss Arbitration Centre, or comparable body) for disputes arising from consortium operations. IDMA writes the rules into the agreement. An independent arbitration body applies them.
+</p>
+
+<p>
+  IDMA's direct role in disputes is narrower and more powerful: determining whether certification criteria have been met. Did the member maintain required reserve ratios? Is the on-chain data consistent with the published standards? Were the defensive programmability mechanisms implemented as specified? These are binary questions answered by verifiable data. IDMA doesn't judge. It measures.
+</p>
+
+
+<!-- SECTION 7 -->
+<div class="chapter-header">
+  <span class="chapter-num">Section 7</span>
+  <h2>Jurisdiction</h2>
+</div>
+<p class="hero-line">A global standard requires a neutral home.</p>
+
+<p>
+  IDMA should be domiciled in Switzerland, in the canton of Zug. The reasoning follows from the organization's function.
+</p>
+
+<p>
+  A standards body for a global monetary framework can't be subject to the domestic regulatory authority of any nation whose institutions participate in that framework. A US-domiciled organization means every certified member from outside the US is operating under an authority subject to US jurisdiction. The same problem applies to any major economic power. Switzerland is the one jurisdiction where participants from every country accept the referee as neutral. The BIS chose Basel for this reason in 1930. The Ethereum Foundation chose Zug for the same reason in 2014.
+</p>
+
+<p>
+  Swiss foundation law is purpose-built for this structure. A Swiss foundation has no shareholders. The board has complete independence. Assets must be used according to the stated purpose. Profit distribution beyond the foundation's mission is prohibited. The foundation exists to serve its purpose.
+</p>
+
+<p>
+  Switzerland offers strong patent and trademark enforcement, is a signatory to all major international IP treaties, and maintains a technology-neutral regulatory posture. Ninety percent of Swiss banks work with cryptographic asset businesses. The foundation won't need to fight for banking access.
+</p>
+
+<p>
+  The practical path: the current Wyoming LLC continues as the operational vehicle during the framework's early development. When the first certified members are ready to operate, IDMA is established as a Swiss foundation in Zug. The patents and trademarks transfer to the foundation. The Wyoming LLC can continue to exist as a US-facing entity if needed, but the foundation becomes the global home of the TBDC standard.
+</p>
+
+
+<!-- SECTION 8 -->
+<div class="chapter-header">
+  <span class="chapter-num">Section 8</span>
+  <h2>What IDMA Does and Does Not Do</h2>
+</div>
+<p class="hero-line">The power is in the boundary.</p>
+
+<h3>IDMA does:</h3>
+
+<p>
+  Hold the patents and trademarks for the TBDC framework. Publish and maintain the TBDC specification, the denomination protocol, and the BTCADP oracle methodology. Certify entities that meet published compliance criteria. Revoke certification from entities that fail to maintain those criteria. Fund and publish open research on the framework's mechanics, risks, and performance. Convene certified members for regular coordination, technical review, and parameter calibration. Define the arbitration framework for disputes between members. Set monetary policy parameters (reserve ratios, defensive thresholds, fee formulas) through the high-friction governance process described above.
+</p>
+
+<h3>IDMA does not:</h3>
+
+<p>
+  Issue tokens or digital currency of any kind. Hold customer-facing reserves or interact with retail consumers. Compete with certified members for market share. Operate a sidechain, exchange, or financial service. Intervene in markets or provide liquidity during stress events. Rule on disputes between certified members (it defines the framework; independent arbitration applies it). Change the denomination protocol under any circumstances.
+</p>
+
+<div class="callout">
+  <p>IDMA governs the framework because somebody has to, and the alternative is that nobody does. An ungoverned consortium of profit-motivated entities will fragment the first time a design decision has revenue implications. The framework needs an institution whose incentive is the system's integrity rather than any single member's profitability.</p>
+</div>
+
+
+</div><!-- end article-body -->
+
+
+<!-- ========== STANDARD FOOTER ========== -->
+<footer>
+  <p>
+    <a href="index.html">BTCADP</a> &middot;
+    <a href="specification.html">Specification</a> &middot;
+    <a href="btcc-intro.html">&#x20BF;C</a> &middot;
+    <a href="tbd-usd.html">&#x20BF;USD</a> &middot;
+    <a href="bond.html">&#x20BF;OND</a> &middot;
+    <a href="knowledge-base.html">Knowledge Base</a> &middot;
+    <a href="glossary.html">Glossary</a> &middot;
+    <a href="faq.html">FAQ</a> &middot;
+    <a href="https://github.com/BTCADP/btcadp-research" target="_blank" rel="noopener">GitHub</a>
+  </p>
+  <p style="margin-top:0.8rem;">CC BY-NC-ND &middot; btcadp.org &middot; 2026</p>
+</footer>
+
+
+<script>
+/* Theme toggle with localStorage persistence */
+function toggleTheme() {
+  var html = document.documentElement;
+  var current = html.getAttribute('data-theme');
+  var next = current === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  try { localStorage.setItem('btcadp-theme', next); } catch(e) {}
+}
+/* Restore saved theme */
+(function() {
+  try {
+    var saved = localStorage.getItem('btcadp-theme');
+    if (saved) document.documentElement.setAttribute('data-theme', saved);
+  } catch(e) {}
+})();
+/* Mobile menu toggle + auto-close */
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+(function() {
+  var menu = document.getElementById('mobileMenu');
+  if (menu) {
+    menu.addEventListener('click', function(e) {
+      if (e.target.tagName === 'A') {
+        menu.classList.remove('open');
+      }
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
