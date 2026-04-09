@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Donate | btcadp.org</title>
+<meta name="description" content="Support the BTCADP framework. Donations fund defensive IP filings, open research, and continued development of the Treasury-Backed Digital Currency standard.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary: #0a0a0b;
+    --bg-secondary: #111114;
+    --bg-tertiary: #19191e;
+    --border: #2a2a32;
+    --text-primary: #e8e6e3;
+    --text-secondary: #8a8a95;
+    --text-muted: #555560;
+    --orange: #f7931a;
+    --orange-dim: rgba(247,147,26,0.12);
+    --green: #2ecc71;
+    --font-display: 'Source Serif 4', Georgia, serif;
+    --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --nav-bg: rgba(10,10,11,0.95);
+  }
+
+  [data-theme="light"] {
+    --bg-primary: #f5f3ef;
+    --bg-secondary: #eae7e1;
+    --bg-tertiary: #ddd9d2;
+    --bg-hover: #d0ccc4;
+    --border: #c8c3ba;
+    --border-active: #a09a90;
+    --text-primary: #1a1a1a;
+    --text-secondary: #666666;
+    --text-muted: #999999;
+    --orange: #d4780e;
+    --orange-dim: rgba(212, 120, 14, 0.08);
+    --orange-glow: rgba(212, 120, 14, 0.2);
+    --green: #1a8a4a;
+    --nav-bg: rgba(245,243,239,0.95);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-display);
+    font-size: 18px;
+    line-height: 1.78;
+    min-height: 100vh;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(247,147,26,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(247,147,26,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none; z-index: 0;
+  }
+
+  .title-block {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 80px 24px 48px;
+    position: relative;
+    z-index: 1;
+  }
+  .title-block .label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--orange);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .title-block h1 {
+    font-family: var(--font-display);
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 20px;
+    letter-spacing: -0.01em;
+  }
+  .title-block .subtitle {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    max-width: 620px;
+  }
+  .title-block .meta {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin-top: 20px;
+    letter-spacing: 0.05em;
+  }
+
+  .content {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .content p {
+    margin-bottom: 1.4rem;
+    color: var(--text-primary);
+  }
+
+  .content h2 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-top: 48px;
+    margin-bottom: 16px;
+    letter-spacing: -0.01em;
+  }
+
+  .donate-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 32px;
+    margin: 32px 0;
+  }
+
+  .donate-card .card-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--orange);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .btc-address-wrap {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  .btc-address-wrap:hover {
+    border-color: var(--orange);
+  }
+
+  .btc-address {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--text-primary);
+    word-break: break-all;
+    flex: 1;
+    line-height: 1.5;
+  }
+
+  .copy-btn {
+    background: var(--orange-dim);
+    border: 1px solid var(--orange);
+    border-radius: 4px;
+    color: var(--orange);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 6px 14px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s;
+    letter-spacing: 0.03em;
+  }
+  .copy-btn:hover { background: rgba(247,147,26,0.25); }
+
+  .qr-section {
+    text-align: center;
+    margin-top: 20px;
+  }
+  .qr-section canvas {
+    border-radius: 8px;
+    background: #fff;
+    padding: 12px;
+  }
+  .qr-note {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    margin-top: 10px;
+  }
+
+  .use-list {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0 0;
+  }
+  .use-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .use-list li:last-child { border-bottom: none; }
+  .use-list .bullet {
+    color: var(--orange);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    flex-shrink: 0;
+  }
+
+  .copied-toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--green);
+    color: #fff;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 10px 24px;
+    border-radius: 6px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s, transform 0.3s;
+    z-index: 999;
+  }
+  .copied-toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* Nav */
+  nav {
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--nav-bg); border-bottom: 1px solid var(--border);
+    padding: 0 20px; height: 48px; position: sticky; top: 0; z-index: 100;
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  }
+  .nav-left { display: flex; align-items: center; gap: 0.5rem; }
+  .nav-hamburger {
+    display: none; background: none; border: none; color: var(--text-secondary); font-size: 20px; cursor: pointer; padding: 4px;
+  }
+  .theme-toggle {
+    background: none; border: 1px solid var(--border); border-radius: 4px; padding: 4px 8px; cursor: pointer; font-size: 16px;
+    color: var(--text-secondary); transition: all 0.2s;
+  }
+  [data-theme="dark"] .icon-dark { display: none; }
+  [data-theme="light"] .icon-light { display: none; }
+  .nav-center { display: flex; gap: 0.25rem; align-items: center; }
+  .nav-center a {
+    font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-secondary);
+    text-decoration: none; padding: 6px 10px; letter-spacing: 0.02em;
+  }
+  .nav-center a:hover { color: var(--orange); }
+  .nav-brand {
+    font-family: var(--font-mono); font-weight: 700; font-size: 0.78rem;
+    color: var(--orange); text-decoration: none; letter-spacing: 0.08em;
+  }
+  .nav-mobile-menu {
+    display: none; flex-direction: column; padding: 12px 20px;
+    background: var(--nav-bg); border-bottom: 1px solid var(--border);
+  }
+  .nav-mobile-menu.open { display: flex; }
+  .nav-mobile-menu a {
+    font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-secondary);
+    text-decoration: none; padding: 10px 0; border-bottom: 1px solid var(--border);
+  }
+
+  /* Print bar */
+  .print-bar { text-align: center; padding: 10px 20px; position: relative; z-index: 1; }
+  .print-btn {
+    font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-muted);
+    background: none; border: 1px solid var(--border); border-radius: 4px;
+    padding: 6px 16px; cursor: pointer; letter-spacing: 0.04em; transition: all 0.2s;
+  }
+  .print-btn:hover { color: var(--orange); border-color: var(--orange); }
+
+  footer {
+    max-width: 780px; margin: 0 auto; padding: 32px 24px;
+    border-top: 1px solid var(--border); text-align: center;
+    position: relative; z-index: 1;
+  }
+  footer p { font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-muted); line-height: 2; }
+  footer a { color: var(--text-secondary); text-decoration: none; }
+  footer a:hover { color: var(--orange); }
+
+  @media (max-width: 640px) {
+    .nav-center { display: none; }
+    .nav-hamburger { display: block; }
+    .title-block h1 { font-size: 1.8rem; }
+    .donate-card { padding: 24px 18px; }
+    .btc-address { font-size: 0.72rem; }
+  }
+
+  @media print {
+    nav, body::before, .print-bar, .nav-mobile-menu, .copy-btn, .copied-toast { display: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-left">
+    <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Toggle menu">&#9776;</button>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light mode">
+      <span class="icon-light">&#9788;</span>
+      <span class="icon-dark">&#9790;</span>
+    </button>
+  </div>
+  <div class="nav-center">
+    <a href="index.html">Home</a>
+    <a href="beginners-guide.html">Start Here</a>
+    <a href="btcc-intro.html">&#x20BF;C</a>
+    <a href="tbd-usd.html">&#x20BF;USD</a>
+    <a href="bond.html">&#x20BF;OND</a>
+    <a href="specification.html">Specification</a>
+    <a href="faq.html">FAQ</a>
+    <a href="knowledge-base.html">Knowledge Base</a>
+    <a href="glossary.html">Glossary</a>
+  </div>
+  <a href="index.html" class="nav-brand">BTCADP</a>
+</nav>
+<div class="nav-mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="beginners-guide.html">Start Here</a>
+  <a href="btcc-intro.html">&#x20BF;C</a>
+  <a href="tbd-usd.html">&#x20BF;USD</a>
+  <a href="bond.html">&#x20BF;OND</a>
+  <a href="specification.html">Specification</a>
+  <a href="faq.html">FAQ</a>
+  <a href="knowledge-base.html">Knowledge Base</a>
+  <a href="glossary.html">Glossary</a>
+</div>
+
+<!-- ========== STANDARD PRINT BUTTON ========== -->
+<div class="print-bar">
+  <button class="print-btn" onclick="window.print();">&#9113; Print / Save as PDF</button>
+</div>
+
+<!-- TITLE -->
+<div class="title-block">
+  <div class="label">Support the Project</div>
+  <h1>Donate</h1>
+  <p class="subtitle">BTCADP is an open framework with no revenue model and no venture funding. Donations go directly toward continued development of the standard.</p>
+  <div class="meta">btcadp.org &bull; 2026 &bull; CC BY-NC-ND</div>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+  <h2>Send Bitcoin</h2>
+
+  <div class="donate-card">
+    <div class="card-label">BTC Address</div>
+    <div class="btc-address-wrap" onclick="copyAddress()">
+      <span class="btc-address" id="btcAddr">YOUR_BTC_ADDRESS_HERE</span>
+      <button class="copy-btn" type="button" onclick="event.stopPropagation(); copyAddress();">Copy</button>
+    </div>
+    <div class="qr-section">
+      <canvas id="qrCanvas"></canvas>
+      <div class="qr-note">Scan with any Bitcoin wallet</div>
+    </div>
+  </div>
+
+  <h2>Where It Goes</h2>
+
+  <p>Every satoshi goes toward keeping the framework open and defensible. There's no token sale, no venture funding, and no equity.</p>
+
+  <ul class="use-list">
+    <li><span class="bullet">&#x25B8;</span>Continued research</li>
+    <li><span class="bullet">&#x25B8;</span>Hosting, infrastructure, and domain costs</li>
+    <li><span class="bullet">&#x25B8;</span>Establishing the International Digital Monetary Authority (IDMA), a Swiss nonprofit</li>
+  </ul>
+
+  <h2>Other Ways to Help</h2>
+
+  <p>If you can't donate, the most valuable thing you can do is read the work and tell someone about it. Share <a href="bitcoin-bridge.html" style="color:var(--orange);">The Bitcoin Bridge</a>, challenge the arguments, or <a href="apply.html" style="color:var(--orange);">apply to contribute</a> directly. Good-faith scrutiny is worth more than money.</p>
+
+</div>
+
+<!-- TOAST -->
+<div class="copied-toast" id="copiedToast">Copied to clipboard</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>
+    <a href="index.html">BTCADP</a> &middot;
+    <a href="specification.html">Specification</a> &middot;
+    <a href="btcc-intro.html">&#x20BF;C</a> &middot;
+    <a href="tbd-usd.html">&#x20BF;USD</a> &middot;
+    <a href="bond.html">&#x20BF;OND</a> &middot;
+    <a href="knowledge-base.html">Knowledge Base</a> &middot;
+    <a href="glossary.html">Glossary</a> &middot;
+    <a href="faq.html">FAQ</a> &middot;
+    <a href="https://github.com/BTCADP/btcadp-research" target="_blank" rel="noopener">GitHub</a>
+  </p>
+  <p style="margin-top:0.8rem;">CC BY-NC-ND &middot; btcadp.org &middot; 2026</p>
+</footer>
+
+<script>
+/* ── QR Code (lightweight inline generator) ── */
+(function(){
+  // Minimal QR encoder for alphanumeric BTC addresses
+  // Using a simple approach: draw the address text + a "scan me" prompt
+  // For production, swap in qrcode.js or similar
+  var addr = document.getElementById('btcAddr').textContent.trim();
+  var canvas = document.getElementById('qrCanvas');
+  if (addr === 'YOUR_BTC_ADDRESS_HERE') {
+    canvas.width = 200; canvas.height = 200;
+    var ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#fff'; ctx.fillRect(0,0,200,200);
+    ctx.fillStyle = '#999'; ctx.font = '13px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('QR will appear', 100, 90);
+    ctx.fillText('once address is set', 100, 110);
+    return;
+  }
+  // Load qrcode lib from CDN
+  var s = document.createElement('script');
+  s.src = 'https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js';
+  s.onload = function() {
+    var qr = qrcode(0, 'M');
+    qr.addData('bitcoin:' + addr);
+    qr.make();
+    var size = 200;
+    var cellSize = Math.floor(size / qr.getModuleCount());
+    canvas.width = size; canvas.height = size;
+    var ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#fff'; ctx.fillRect(0,0,size,size);
+    var offset = Math.floor((size - cellSize * qr.getModuleCount()) / 2);
+    for (var r = 0; r < qr.getModuleCount(); r++) {
+      for (var c = 0; c < qr.getModuleCount(); c++) {
+        if (qr.isDark(r, c)) {
+          ctx.fillStyle = '#0a0a0b';
+          ctx.fillRect(offset + c * cellSize, offset + r * cellSize, cellSize, cellSize);
+        }
+      }
+    }
+  };
+  document.head.appendChild(s);
+})();
+
+/* ── Copy address ── */
+function copyAddress() {
+  var addr = document.getElementById('btcAddr').textContent.trim();
+  if (addr === 'YOUR_BTC_ADDRESS_HERE') return;
+  navigator.clipboard.writeText(addr).then(function() {
+    var toast = document.getElementById('copiedToast');
+    toast.classList.add('show');
+    setTimeout(function() { toast.classList.remove('show'); }, 2000);
+  });
+}
+
+/* ── Theme toggle ── */
+function toggleTheme() {
+  var html = document.documentElement;
+  var current = html.getAttribute('data-theme');
+  var next = current === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  try { localStorage.setItem('btcadp-theme', next); } catch(e) {}
+}
+(function() {
+  try {
+    var saved = localStorage.getItem('btcadp-theme');
+    if (saved) document.documentElement.setAttribute('data-theme', saved);
+  } catch(e) {}
+})();
+
+/* ── Mobile menu ── */
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+(function() {
+  var menu = document.getElementById('mobileMenu');
+  if (menu) {
+    menu.addEventListener('click', function(e) {
+      if (e.target.tagName === 'A') menu.classList.remove('open');
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
