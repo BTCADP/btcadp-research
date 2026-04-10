@@ -592,7 +592,7 @@
         <p>At maturity, the saver receives their original deposit plus the chosen return, paid in ₿USD. The holder then has three options:</p>
         <p><strong>Auto-reinvest.</strong> The ₿USD immediately converts to a new ₿OND at the current ₿C price , no BTC is sold, no fiat changes hands. The saver compounds their returns while the treasury's BTC position remains untouched. This is the lowest-friction and structurally ideal path.</p>
         <p><strong>Spend it.</strong> The ₿USD enters the saver's spending wallet for everyday commerce within the ecosystem , zero sell pressure on Bitcoin.</p>
-        <p><strong>Exit to fiat.</strong> Redeem the ₿USD tokens for dollars , the highest-friction path and the only one that triggers a BTC sale from reserves.</p>
+        <p><strong>Exit to fiat.</strong> Redeem ₿USD for dollars , the highest-friction path and the only one that triggers a BTC sale from reserves.</p>
         <p>The treasury retains the surplus BTC , the spread between the BTC position's value and the saver's payout , as profit. The dual condition guarantees the treasury is profitable on every individual bond at every payout, by design.</p>
       </div>
     </div>
@@ -603,7 +603,7 @@
         <span class="faq-icon">+</span>
       </button>
       <div class="faq-answer">
-        <p>No. A ₿ond cannot be spent directly. It is a savings instrument, not a payment instrument. To spend, a ₿ond holder converts their position into ₿USD tokens , paying an implementation-defined early exit fee if the dual maturity condition has not yet been met.</p>
+        <p>No. A ₿ond cannot be spent directly. It is a savings instrument, not a payment instrument. To spend, a ₿ond holder converts their position into ₿USD , paying an implementation-defined early exit fee if the dual maturity condition has not yet been met.</p>
         <p>This distinction is intentional. The separation of savings (₿ond) from spending (₿USD) is what gives the ₿ond its structural properties. A savings instrument that can be instantly liquidated at any moment cannot maintain the reserve architecture that makes the system robust against coordinated attacks.</p>
         <div class="callout">Converting a ₿ond to ₿USD keeps capital inside the Bitcoin ecosystem , it simply moves from the savings layer to the spending layer. The only exit that costs Bitcoin is redemption to fiat.</div>
       </div>
@@ -677,7 +677,7 @@
       </button>
       <div class="faq-answer">
         <p>USDT and USDC achieve price stability by holding dollar reserves , but in doing so, they reproduce every structural weakness of the fiat system they claim to improve upon. The issuer is a centralized entity that can freeze accounts, censor transactions, and is subject to regulatory capture. The reserves must be trusted and audited. And the token is, in economic substance, a digital dollar with extra steps , the user gains blockchain settlement but inherits dollar inflation, counterparty risk, and the jurisdictional vulnerabilities of the issuing entity.</p>
-        <p>A ₿USD token backed by Bitcoin eliminates each of these dependencies. The reserves are Bitcoin on the base layer , publicly addressable, verifiable in real time by anyone without an auditor. The issuing entities are publicly traded companies whose Bitcoin holdings are a matter of public record. No single consortium member can unilaterally modify the reserve rules. The distributed structure means no single jurisdiction can freeze the entire system, though individual members may be subject to regulatory action in their jurisdictions. And critically, the reserve asset appreciates over time rather than eroding through inflation. A USDC holder's deposits back US government debt. A ₿USD holder's deposits purchase Bitcoin , an asset whose purchasing power has improved, not eroded, over every multi-year period in its history. Both tokens target $1.00. The difference is what sits behind that dollar.</p>
+        <p>₿USD backed by Bitcoin eliminates each of these dependencies. The reserves are Bitcoin on the base layer , publicly addressable, verifiable in real time by anyone without an auditor. The issuing entities are publicly traded companies whose Bitcoin holdings are a matter of public record. No single consortium member can unilaterally modify the reserve rules. The distributed structure means no single jurisdiction can freeze the entire system, though individual members may be subject to regulatory action in their jurisdictions. And critically, the reserve asset appreciates over time rather than eroding through inflation. A USDC holder's deposits back US government debt. A ₿USD holder's deposits purchase Bitcoin , an asset whose purchasing power has improved, not eroded, over every multi-year period in its history. Both tokens target $1.00. The difference is what sits behind that dollar.</p>
         <p>For users who want exposure to ₿C's long-run appreciation rather than a fixed dollar peg, the product is the ₿ond , a return-based savings instrument denominated in ₿C (₿C) and backed by Bitcoin reserves. See the ₿ond section of this FAQ for details.</p>
         <div class="callout">₿USD targets $1.00 USD parity , the same as USDT or USDC. The difference is entirely in the collateral: Bitcoin on the base layer rather than fiat in a bank account. Every dollar that flows into ₿USD instead of USDC buys Bitcoin rather than US government debt.</div>
       </div>
@@ -716,7 +716,7 @@
       </button>
       <div class="faq-answer">
         <p>Intraday drift is only a concern at the boundaries of the system , when fiat converts to tokens (minting) or tokens convert back to fiat (redemption). Inside the currency layer, there is no drift because no conversion happens.</p>
-        <p>A merchant prices in ₿C. A customer pays in ₿USD tokens. The merchant receives ₿USD tokens. No spot price is consulted. No satoshi conversion occurs. The ₿C price is the same at 9am as it is at 4pm because it updates once per day at midnight UTC. Neither party is exposed to intraday Bitcoin volatility.</p>
+        <p>A merchant prices in ₿C. A customer pays in ₿USD. The merchant receives ₿USD. No spot price is consulted. No satoshi conversion occurs. The ₿C price is the same at 9am as it is at 4pm because it updates once per day at midnight UTC. Neither party is exposed to intraday Bitcoin volatility.</p>
         <p>The system is designed for commerce to transact entirely on the token layer. Bitcoin's base layer is touched only at the boundaries: when fiat enters and when fiat exits. Everything in between is token transfers on Liquid, denominated in ₿C, with no reference to spot price required.</p>
       </div>
     </div>

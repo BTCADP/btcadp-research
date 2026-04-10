@@ -629,7 +629,7 @@
 </p>
 
 <p>
-  The important observation is not that the stablecoin market is large. It is that the underlying demand, the need for stable digital money, is entirely compatible with Bitcoin as the reserve. Nothing about a dollar-pegged token requires the reserve to be Treasury bills. A stablecoin can target the same $1.00 peg, serve the same use cases, and back every token with Bitcoin purchased at spot instead. The consumer experience is identical. The reserve asset is fundamentally different. And the capital that currently strengthens the US government's balance sheet would instead strengthen Bitcoin's monetary network.
+  The important observation is not that the stablecoin market is large. It is that the underlying demand, the need for stable digital money, is entirely compatible with Bitcoin as the reserve. Nothing about a dollar-pegged token requires the reserve to be Treasury bills. A stablecoin can target the same $1.00 peg, serve the same use cases, and back every dollar with Bitcoin purchased at spot instead. The consumer experience is identical. The reserve asset is fundamentally different. And the capital that currently strengthens the US government's balance sheet would instead strengthen Bitcoin's monetary network.
 </p>
 
 
@@ -707,7 +707,7 @@
 </p>
 
 <p>
-  ₿USD targets a $1.00 peg, identical to USDT or USDC. The difference is entirely in the collateral. When a consumer purchases ₿USD through a participating financial service provider, the issuer, a group of Bitcoin treasury companies operating under a shared governance charter (described in Section 8), buys Bitcoin at the current spot price and deposits it into a dedicated on-chain reserve (Ledger 1). One token is minted on the group's shared sidechain. At the moment of issuance, the reserve perfectly backs the outstanding obligation.
+  ₿USD targets a $1.00 peg, identical to USDT or USDC. The difference is entirely in the collateral. When a consumer purchases ₿USD through a participating financial service provider, the issuer, a group of Bitcoin treasury companies operating under a shared governance charter (described in Section 8), buys Bitcoin at the current spot price and deposits it into a dedicated on-chain reserve (Ledger 1). The corresponding ₿USD balance is credited on the group's shared sidechain. At the moment of issuance, the reserve perfectly backs the outstanding obligation.
 </p>
 
 <p>
@@ -731,11 +731,11 @@
 </p>
 
 <p>
-  Separate from PBP#, each individual token carries its own provenance metadata at the protocol level: mint date, mint-day spot price, mint-day ₿C price (the token's timeblock), block age, and transfer count. This metadata is what enables the defensive fee structure described below. A token minted yesterday carries different provenance data than a token minted two years ago, and the system prices redemptions accordingly. PBP# determines which satoshis leave the reserve. Token metadata determines what fees apply. Both systems operate beneath a fully fungible user experience. The user sees a balance. Every token is $1. They do not know or interact with either layer.
+  Separate from PBP#, each individual token unit carries its own provenance metadata at the protocol level: mint date, mint-day spot price, mint-day ₿C price (the token's timeblock), block age, and transfer count. This metadata is what enables the defensive fee structure described below. A token minted yesterday carries different provenance data than a token minted two years ago, and the system prices redemptions accordingly. PBP# determines which satoshis leave the reserve. Token metadata determines what fees apply. Both systems operate beneath a fully fungible user experience. The user sees a balance. Every unit redeems for $1. They do not know or interact with either layer.
 </p>
 
 <p>
-  The demand flywheel compounds this effect. As adoption grows, more tokens are minted, more Bitcoin is purchased at spot, and the reserves appreciate. The gap between what each token cost to back and what each token returns on redemption widens with every passing day. Ledger 1's surplus deepens automatically as spot rises above historical minting prices. Ledger 2's depth grows as the consortium reinvests fee revenue into additional Bitcoin by formula. The system does not merely tolerate the passage of time. It converts time into deeper collateralization.
+  The demand flywheel compounds this effect. As adoption grows, more ₿USD is minted, more Bitcoin is purchased at spot, and the reserves appreciate. The gap between what each unit cost to back and what each unit returns on redemption widens with every passing day. Ledger 1's surplus deepens automatically as spot rises above historical minting prices. Ledger 2's depth grows as the consortium reinvests fee revenue into additional Bitcoin by formula. The system does not merely tolerate the passage of time. It converts time into deeper collateralization.
 </p>
 
 <p>
@@ -743,7 +743,7 @@
 </p>
 
 <p>
-  The money multiplier in this system is exactly one. The consortium does not lend. It cannot create credit. It cannot expand the token supply beyond the Bitcoin it has purchased and holds. The total of all stablecoin tokens plus all savings and capital markets obligations can never exceed the Bitcoin held in reserve. Every token in circulation is backed by real Bitcoin on the base layer. This is the constraint that makes the architecture fundamentally different from banking: the system cannot grow beyond its reserves, and the reserves are verifiable by anyone at any moment.
+  The money multiplier in this system is exactly one. The consortium does not lend. It cannot create credit. It cannot expand the supply beyond the Bitcoin it has purchased and holds. The total of all stablecoin balances plus all savings and capital markets obligations can never exceed the Bitcoin held in reserve. Every dollar of outstanding ₿USD is backed by real Bitcoin on the base layer. This is the constraint that makes the architecture fundamentally different from banking: the system cannot grow beyond its reserves, and the reserves are verifiable by anyone at any moment.
 </p>
 
 <p>
@@ -763,7 +763,7 @@
 </p>
 
 <p>
-  From the user's perspective, none of this is visible. They hold a ₿USD balance. They spend it, receive it, save it. Every token is $1. Fully fungible. The reserve machinery operates at the protocol level, ensuring that the architecture grows stronger with every transaction, every day, and every new participant.
+  From the user's perspective, none of this is visible. They hold a ₿USD balance. They spend it, receive it, save it. Every unit redeems for $1. Fully fungible. The reserve machinery operates at the protocol level, ensuring that the architecture grows stronger with every transaction, every day, and every new participant.
 </p>
 
 <p>
@@ -771,13 +771,13 @@
 </p>
 
 <p>
-  Every ₿USD token carries a feature that no fiat stablecoin can replicate: instant conversion to Bitcoin. At any time, for any reason, a holder can convert their ₿USD to BTC at current spot and send it to a self-custody wallet. The conversion is built into the system because the reserve asset backing every token is Bitcoin sitting on a public blockchain. USDT cannot give you the Treasury bill backing your token. USDC cannot hand you the government bond. ₿USD can give you the actual Bitcoin, because it is there, on-chain, and transferable to any Bitcoin address on earth. In a fiat crisis, a CBDC announcement, or a restriction on cash withdrawals, a user holding USDT or USDC has no recourse. Their stablecoin is backed by Treasury bills they cannot access, issued by a company that can be compelled to freeze their account. A user holding ₿USD can instantly convert to Bitcoin at current spot and send it to a self-custody wallet with one action. The Bitcoin arrives in a wallet they control. No intermediary can block it. No government can freeze it. The conversion is possible because the reserve asset backing every token is Bitcoin sitting on a public blockchain. USDT cannot give you the Treasury bill. USDC cannot hand you the government bond. ₿USD can give you the actual Bitcoin, because it is there, on-chain, and transferable to any Bitcoin address on earth. ₿USD is the on-ramp. Bitcoin is the destination.
+  ₿USD carries a feature that no fiat stablecoin can replicate: instant conversion to Bitcoin. At any time, for any reason, a holder can convert their ₿USD to BTC at current spot and send it to a self-custody wallet. The conversion is built into the system because the reserve asset backing every dollar of ₿USD is Bitcoin sitting on a public blockchain. USDT cannot give you the Treasury bill backing your balance. USDC cannot hand you the government bond. ₿USD can give you the actual Bitcoin, because it is there, on-chain, and transferable to any Bitcoin address on earth. In a fiat crisis, a CBDC announcement, or a restriction on cash withdrawals, a user holding USDT or USDC has no recourse. Their stablecoin is backed by Treasury bills they cannot access, issued by a company that can be compelled to freeze their account. A user holding ₿USD can instantly convert to Bitcoin at current spot and send it to a self-custody wallet with one action. The Bitcoin arrives in a wallet they control. No intermediary can block it. No government can freeze it. The conversion is possible because the reserve asset backing every dollar of ₿USD is Bitcoin sitting on a public blockchain. USDT cannot give you the Treasury bill. USDC cannot hand you the government bond. ₿USD can give you the actual Bitcoin, because it is there, on-chain, and transferable to any Bitcoin address on earth. ₿USD is the on-ramp. Bitcoin is the destination.
 </p>
 
 <h3>₿OND: A Savings Instrument</h3>
 
 <p>
-  ₿OND is a return-based savings product denominated in ₿C. A saver deposits fiat, any amount from $1 upward, and selects a target return: +10%, +25%, +50%, +100%, or other tiers. Each dollar becomes a programmable token with its own ₿C entry price and maturity trigger.
+  ₿OND is a return-based savings product denominated in ₿C. A saver deposits fiat, any amount from $1 upward, and selects a target return: +10%, +25%, +50%, +100%, or other tiers. Each dollar becomes a programmable unit in the issuer's inventory with its own ₿C entry price and maturity trigger.
 </p>
 
 <p>
@@ -827,7 +827,7 @@
 </p>
 
 <p>
-  Every token in the framework reports a simple health indicator. A ₿USD token reads "black" when the Bitcoin backing it is worth more than the $1 obligation, and "red" when spot has fallen below the minting price. A token minted at $85,000 spot reads black +11.8% when spot is $95,000 and red -17.6% when spot falls to $70,000. A ₿OND token tracks two indicators, one for each maturity condition. The saver condition reads red until ₿C has appreciated by the target percentage, then flips to black. The treasury condition reads red while the issuer's position on that bond is below the required profit margin, then flips to black. Both must read black for the bond to mature. The user never sees this data. They see a balance and a progress bar. The red/black system exists so the protocol can manage reserves and activate defensive behaviors autonomously.
+  Every token unit in the issuer's inventory reports a simple health indicator. A ₿USD unit reads "black" when the Bitcoin backing it is worth more than the $1 obligation, and "red" when spot has fallen below the minting price. A token minted at $85,000 spot reads black +11.8% when spot is $95,000 and red -17.6% when spot falls to $70,000. A ₿OND token tracks two indicators, one for each maturity condition. The saver condition reads red until ₿C has appreciated by the target percentage, then flips to black. The treasury condition reads red while the issuer's position on that bond is below the required profit margin, then flips to black. Both must read black for the bond to mature. The user never sees this data. They see a balance and a progress bar. The red/black system exists so the protocol can manage reserves and activate defensive behaviors autonomously.
 </p>
 
 <p>
@@ -857,7 +857,7 @@
 <h3>The Protocol Modification Problem</h3>
 
 <p>
-  The entire framework operates on Bitcoin's existing base layer and a consortium-operated sidechain. No fork is required. No protocol modification is proposed. The BTCADP specification reads publicly available trade data. The ₿C denomination is computed from arithmetic. The reserve ledgers sit in standard Bitcoin wallets. The sidechain handles token circulation, and base layer settlement secures the reserves. Bitcoin's protocol is treated as complete. The infrastructure built above it is what changes.
+  The entire framework operates on Bitcoin's existing base layer and a consortium-operated sidechain. No fork is required. No protocol modification is proposed. The BTCADP specification reads publicly available trade data. The ₿C denomination is computed from arithmetic. The reserve ledgers sit in standard Bitcoin wallets. The sidechain handles balance circulation, and base layer settlement secures the reserves. Bitcoin's protocol is treated as complete. The infrastructure built above it is what changes.
 </p>
 
 
@@ -874,7 +874,7 @@
 </p>
 
 <p>
-  <strong>The spread.</strong> ₿USD carries a fixed $1.00 obligation per token. The Bitcoin in Ledger 1 appreciates at the spot rate. As spot rises, the gap between asset value and liability value widens at an accelerating rate, because one side moves and the other does not. This spread requires no trading and no active management. It is the arithmetic consequence of a moving asset backing a fixed obligation.
+  <strong>The spread.</strong> ₿USD carries a fixed $1.00 obligation per unit. The Bitcoin in Ledger 1 appreciates at the spot rate. As spot rises, the gap between asset value and liability value widens at an accelerating rate, because one side moves and the other does not. This spread requires no trading and no active management. It is the arithmetic consequence of a moving asset backing a fixed obligation.
 </p>
 
 <p>
@@ -902,7 +902,7 @@
 </p>
 
 <p>
-  When a consumer purchases a ₿USD token, one dollar enters the system and purchases Bitcoin at spot. No equity is raised. No note is issued. No obligation matures into a cash demand. The customer's fiat is the capital, and the product they receive is a service, not a debt instrument. The same applies to every ₿OND deposited and every ₿ILL issued. Each product generates a Bitcoin purchase funded by the end user.
+  When a consumer purchases ₿USD, one dollar enters the system and purchases Bitcoin at spot. No equity is raised. No note is issued. No obligation matures into a cash demand. The customer's fiat is the capital, and the product they receive is a service, not a debt instrument. The same applies to every ₿OND deposited and every ₿ILL issued. Each product generates a Bitcoin purchase funded by the end user.
 </p>
 
 <p>
@@ -950,15 +950,15 @@
 <p class="hero-line">Every claim made here is verifiable against the public specification before a single dollar is committed.</p>
 
 <p>
-  <strong>The liability concern.</strong> A ₿USD token is a dollar-denominated liability backstopped by Bitcoin. This is a new obligation against the reserve, and the cost should be stated plainly. When Ledger 2 is drawn from during a fiat redemption, Bitcoin is sold from the consortium's holdings. Those satoshis are not temporarily impaired. They are sold and gone. If BTC spot later recovers, the consortium does not get those satoshis back. It participates in the recovery with fewer satoshis than it started with. That is the real cost of backstopping.
+  <strong>The liability concern.</strong> Outstanding ₿USD is a dollar-denominated liability backstopped by Bitcoin. This is a new obligation against the reserve, and the cost should be stated plainly. When Ledger 2 is drawn from during a fiat redemption, Bitcoin is sold from the consortium's holdings. Those satoshis are not temporarily impaired. They are sold and gone. If BTC spot later recovers, the consortium does not get those satoshis back. It participates in the recovery with fewer satoshis than it started with. That is the real cost of backstopping.
 </p>
 
 <p>
-  The cost is real. It is also quantifiable, modelable, and bounded. Any redemption, whether to BTC or fiat, can trigger a Ledger 2 draw if the burned token is underwater. PBP# minimizes this by always burning the most profitable token first, avoiding Ledger 2 as long as any profitable token exists in the pool. Savings conversion leaves Ledger 2 untouched entirely. The architecture creates intentional friction on the fiat path: fees, velocity limits, and processing delays that make it the least attractive exit by design. The actual redemption exposure can be modeled with the same actuarial precision a bank uses to model cash withdrawal demand, with the critical difference that the full reserves are on-chain, verifiable, and have never been lent to anyone. The consortium knows its exposure in real time, not at the end of a quarterly reporting cycle.
+  The cost is real. It is also quantifiable, modelable, and bounded. Any redemption, whether to BTC or fiat, can trigger a Ledger 2 draw if the burned unit is underwater. PBP# minimizes this by always burning the most profitable token first, avoiding Ledger 2 as long as any profitable token exists in the pool. Savings conversion leaves Ledger 2 untouched entirely. The architecture creates intentional friction on the fiat path: fees, velocity limits, and processing delays that make it the least attractive exit by design. The actual redemption exposure can be modeled with the same actuarial precision a bank uses to model cash withdrawal demand, with the critical difference that the full reserves are on-chain, verifiable, and have never been lent to anyone. The consortium knows its exposure in real time, not at the end of a quarterly reporting cycle.
 </p>
 
 <p>
-  The relevant comparison is not to having no obligation at all. It is to the obligations these companies already carry. Convertible notes create fixed cash demands that arrive during bear markets when the underlying asset has declined in value. Preferred stock dividends compound regardless of spot price. The acquisition engine that funded these obligations depends on the continued willingness of fiat capital markets to lend, and that willingness evaporates precisely when the company needs it most. ₿USD obligations are different in kind: they are funded by incoming customer capital at the moment of issuance, they produce fee revenue throughout their lifecycle, and they generate structural demand for the reserve asset. A convertible note is a liability that arrives in a bear market. A ₿USD token is a liability whose fiat exit path is the least likely to be exercised, whose cost to the reserve is minimized by PBP#, and whose existence generates buying pressure on the asset backing it.
+  The relevant comparison is not to having no obligation at all. It is to the obligations these companies already carry. Convertible notes create fixed cash demands that arrive during bear markets when the underlying asset has declined in value. Preferred stock dividends compound regardless of spot price. The acquisition engine that funded these obligations depends on the continued willingness of fiat capital markets to lend, and that willingness evaporates precisely when the company needs it most. ₿USD obligations are different in kind: they are funded by incoming customer capital at the moment of issuance, they produce fee revenue throughout their lifecycle, and they generate structural demand for the reserve asset. A convertible note is a liability that arrives in a bear market. ₿USD is a liability whose fiat exit path is the least likely to be exercised, whose cost to the reserve is minimized by PBP#, and whose existence generates buying pressure on the asset backing it.
 </p>
 
 <p>
@@ -1010,7 +1010,7 @@
 </p>
 
 <p>
-  As the ecosystem matures and more participants earn, save, and transact without converting back to fiat, the proportion of tokens ever redeemed for fiat declines. The reserve system's exposure to spot volatility falls even as the circulating supply grows. The boundaries of the fiat economy recede, not because anyone decided to abandon fiat, but because the products on the Bitcoin side of the boundary were more useful.
+  As the ecosystem matures and more participants earn, save, and transact without converting back to fiat, the proportion of outstanding ₿USD ever redeemed for fiat declines. The reserve system's exposure to spot volatility falls even as the circulating supply grows. The boundaries of the fiat economy recede, not because anyone decided to abandon fiat, but because the products on the Bitcoin side of the boundary were more useful.
 </p>
 
 <p>
@@ -1018,7 +1018,7 @@
 </p>
 
 <p>
-  The stablecoin market alone is projected to surpass $1 trillion by 2030. The scaling math matters. At $100,000 per BTC, backing $1 trillion in ₿USD tokens would require 10 million BTC, roughly half the total supply. That is not feasible. At $1,000,000 per BTC, backing $1 trillion requires 1 million BTC, approximately what the consortium's founding members already hold. At $10,000,000 per BTC, the same reserves back $10 trillion in economic activity. The system becomes feasible at scale only if Bitcoin appreciates, which is the foundational thesis of every treasury company considering participation. The architecture does not fight this dependency. It embraces it: every token minted generates a Bitcoin purchase that contributes to the very appreciation the system requires.
+  The stablecoin market alone is projected to surpass $1 trillion by 2030. The scaling math matters. At $100,000 per BTC, backing $1 trillion in outstanding ₿USD would require 10 million BTC, roughly half the total supply. That is not feasible. At $1,000,000 per BTC, backing $1 trillion requires 1 million BTC, approximately what the consortium's founding members already hold. At $10,000,000 per BTC, the same reserves back $10 trillion in economic activity. The system becomes feasible at scale only if Bitcoin appreciates, which is the foundational thesis of every treasury company considering participation. The architecture does not fight this dependency. It embraces it: every dollar minted generates a Bitcoin purchase that contributes to the very appreciation the system requires.
 </p>
 
 <p>
