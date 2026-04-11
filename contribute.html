@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contribute | btcadp.org</title>
-<meta name="description" content="Invite-only contribution space for The Bitcoin Bridge and BTCADP research contributors.">
+<meta name="description" content="Invite-only contribution space for The Bitcoin Bridge, BTCADP research, and IDMA governance contributors.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
 <script type="module">
@@ -140,6 +140,7 @@ window.supabase = { createClient };
   .badge.role-contributor { color: var(--text-muted); background: var(--bg-tertiary); border: 1px solid var(--border); }
   .badge.access-tbb { color: var(--orange); background: var(--orange-dim); }
   .badge.access-research { color: var(--blue); background: var(--blue-dim); }
+  .badge.access-idma { color: var(--green); background: var(--green-dim); }
   .badge.access-both { color: var(--green); background: var(--green-dim); }
   .btn-signout { background: none; border: 1px solid var(--border); border-radius: 4px; padding: 6px 14px; color: var(--text-muted); font-family: var(--font-mono); font-size: 11px; cursor: pointer; transition: all 0.2s; }
   .btn-signout:hover { color: var(--text-secondary); border-color: var(--border-active); }
@@ -349,7 +350,7 @@ window.supabase = { createClient };
   <div class="auth-lockup">
     <div class="lock-icon">&#x1f512;</div>
     <h1>Contributor <span class="accent">Access</span></h1>
-    <p>This space is reserved for invited contributors to The Bitcoin Bridge and BTCADP research. Enter the email you were invited with to receive a sign-in link.</p>
+    <p>This space is reserved for invited contributors to The Bitcoin Bridge, BTCADP research, and IDMA governance. Enter the email you were invited with to receive a sign-in link.</p>
   </div>
   <div class="auth-box">
     <label for="authEmail">Your email</label>
@@ -383,6 +384,7 @@ window.supabase = { createClient };
       <a id="threads-top"></a>
       <button type="button" class="space-tab" data-space="tbb" onclick="switchSpace('tbb')">The Bitcoin Bridge <span class="tab-count" id="tbbCount">0</span></button>
       <button type="button" class="space-tab active" data-space="research" onclick="switchSpace('research')">Research <span class="tab-count" id="researchCount">0</span></button>
+      <button type="button" class="space-tab" data-space="idma" onclick="switchSpace('idma')">IDMA <span class="tab-count" id="idmaCount">0</span></button>
     </div>
 
     <!-- TBB SPACE -->
@@ -454,6 +456,40 @@ window.supabase = { createClient };
       <div class="empty-state" id="emptyState-research" style="display:none;"><div class="empty-icon">&#x1f52c;</div><p>No research threads yet. Open the discussion.</p></div>
     </div>
 
+    <!-- IDMA SPACE -->
+    <div class="space-content" id="space-idma" style="display:none;">
+      <div class="space-header">
+        <h2>International Digital Monetary Authority (IDMA)</h2>
+        <p>Building the institution that governs the TBDC standard. IDMA holds the IP, publishes the specification, certifies compliance, and provides the forum where consortium members coordinate. This space is for developing the organizational framework: from mission and governance to the network monitoring systems that make certification meaningful.</p>
+        <p style="margin-top:8px;font-size:12px;color:var(--text-muted);">Read the IDMA concept paper: <a href="https://btcadp.org/idma" style="color:var(--orange);">btcadp.org/idma &rarr;</a></p>
+        <p style="margin-top:8px;font-size:12px;color:var(--text-muted);">If you think someone should have access to the contributor section, send them here: <a href="https://btcadp.org/apply" style="color:var(--orange);">https://btcadp.org/apply</a><br>If you need technical assistance or want your work published on BTCADP.org, email the admin at <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="47373526202a263f2e073735283328292a262e2b6924282a">[email&#160;protected]</a>.</p>
+      </div>
+      <div class="section-filter" id="idmaFilters">
+        <button type="button" class="filter-chip active" data-filter="all" onclick="setFilter('idma','all',this)">All</button>
+        <button type="button" class="filter-chip" data-filter="mission" onclick="setFilter('idma','mission',this)">Mission Statement</button>
+        <button type="button" class="filter-chip" data-filter="business-plan" onclick="setFilter('idma','business-plan',this)">Business Plan</button>
+        <button type="button" class="filter-chip" data-filter="network-monitoring" onclick="setFilter('idma','network-monitoring',this)">Network Monitoring</button>
+        <button type="button" class="filter-chip" data-filter="governance-legal" onclick="setFilter('idma','governance-legal',this)">Governance &amp; Legal</button>
+        <button type="button" class="filter-chip" data-filter="certification" onclick="setFilter('idma','certification',this)">Certification Standards</button>
+        <button type="button" class="filter-chip" data-filter="ip-licensing" onclick="setFilter('idma','ip-licensing',this)">IP &amp; Licensing</button>
+        <button type="button" class="filter-chip" data-filter="general" onclick="setFilter('idma','general',this)">General</button>
+      </div>
+      <div class="sort-bar"><div class="sort-options">
+        <button type="button" class="sort-btn active" data-sort="votes" onclick="setSort('votes',this)">Top voted</button>
+        <button type="button" class="sort-btn" data-sort="newest" onclick="setSort('newest',this)">Newest</button>
+        <button type="button" class="sort-btn" data-sort="active" onclick="setSort('active',this)">Most active</button>
+      </div></div>
+      <button type="button" class="new-thread-btn" onclick="showNewThread('idma')">+ Start a new thread</button>
+      <div class="new-thread-form" id="newThreadForm-idma" data-form-type="other">
+        <div class="form-row"><label>Thread title</label><input type="text" id="newTitle-idma" placeholder="Propose a direction, raise a question, or share research..." autocomplete="off" data-form-type="other"></div>
+        <div class="form-row"><label>Category</label><select id="newSection-idma"><option value="mission">Mission Statement</option><option value="business-plan">Business Plan</option><option value="network-monitoring">Network Monitoring</option><option value="governance-legal">Governance &amp; Legal</option><option value="certification">Certification Standards</option><option value="ip-licensing">IP &amp; Licensing</option><option value="general">General</option></select></div>
+        <div class="form-row"><label>Details</label><textarea id="newBody-idma" placeholder="Describe your proposal, analysis, or question..." autocomplete="off" data-form-type="other"></textarea></div>
+        <div class="form-actions"><button type="button" class="btn-cancel" onclick="hideNewThread('idma')">Cancel</button><button type="button" class="btn-submit" onclick="submitThread('idma')" data-form-type="other">Post thread</button></div>
+      </div>
+      <div class="thread-list" id="threadList-idma"></div>
+      <div class="empty-state" id="emptyState-idma" style="display:none;"><div class="empty-icon">&#x1f3db;</div><p>No IDMA threads yet. Help build the institution.</p></div>
+    </div>
+
     <!-- THREAD DETAIL -->
     <div class="thread-detail" id="threadDetail">
       <button type="button" class="thread-back" onclick="closeThread()">&larr; Back to threads</button>
@@ -514,7 +550,7 @@ window.supabase = { createClient };
           <input type="text" id="inviteHandle" placeholder="Handle (public pseudonym)">
         </div>
         <div class="invite-row">
-          <select id="inviteAccess"><option value="tbb">TBB only</option><option value="research">Research only</option><option value="both">Both spaces</option></select>
+          <select id="inviteAccess"><option value="tbb">TBB only</option><option value="research">Research only</option><option value="idma">IDMA only</option><option value="both">All spaces</option></select>
           <select id="inviteRole"><option value="contributor">Contributor</option><option value="reviewer">Reviewer</option><option value="admin">Admin</option></select>
           <button type="button" class="btn-invite" onclick="inviteCollaborator()">Invite</button>
         </div>
@@ -817,6 +853,7 @@ function showApp() {
 
   loadThreads('tbb');
   loadThreads('research');
+  loadThreads('idma');
 }
 
 function switchSpace(space) {
@@ -827,6 +864,7 @@ function switchSpace(space) {
   document.querySelector(`.space-tab[data-space="${space}"]`).classList.add('active');
   document.getElementById('space-tbb').style.display = space === 'tbb' ? 'block' : 'none';
   document.getElementById('space-research').style.display = space === 'research' ? 'block' : 'none';
+  document.getElementById('space-idma').style.display = space === 'idma' ? 'block' : 'none';
   closeThread();
   const filters = document.querySelectorAll(`#${space}Filters .filter-chip`);
   filters.forEach(f => f.classList.remove('active'));
@@ -840,7 +878,7 @@ function setSort(sort, el) { currentSort = sort; document.querySelectorAll('.sor
 //  THREADS
 // ═══════════════════════════════════════════════════════════════════════════
 
-let threadsCache = { tbb: [], research: [] };
+let threadsCache = { tbb: [], research: [], idma: [] };
 let votesCache = {};
 const UPVOTE_SVG = '<svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>';
 
@@ -919,6 +957,7 @@ function renderThreadList(space) {
 function updateCounts() {
   document.getElementById('tbbCount').textContent = threadsCache.tbb.length;
   document.getElementById('researchCount').textContent = threadsCache.research.length;
+  document.getElementById('idmaCount').textContent = threadsCache.idma.length;
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -1326,7 +1365,7 @@ CREATE TABLE collaborators (
   email text UNIQUE NOT NULL,
   handle text UNIQUE NOT NULL,           -- public pseudonym, what everyone sees
   display_name text,                      -- real name, only visible to reviewers/admins
-  access text NOT NULL DEFAULT 'both' CHECK (access IN ('tbb', 'research', 'both')),
+  access text NOT NULL DEFAULT 'both' CHECK (access IN ('tbb', 'research', 'idma', 'both')),
   role text NOT NULL DEFAULT 'contributor' CHECK (role IN ('contributor', 'reviewer', 'admin')),
   invited_by text,
   invited_at timestamptz DEFAULT now()
@@ -1335,7 +1374,7 @@ CREATE TABLE collaborators (
 -- Threads (author_handle is the public-facing identity)
 CREATE TABLE threads (
   id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
-  space text NOT NULL CHECK (space IN ('tbb', 'research')),
+  space text NOT NULL CHECK (space IN ('tbb', 'research', 'idma')),
   section text NOT NULL,
   title text NOT NULL,
   body text,
