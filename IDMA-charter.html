@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IDMA Charter | btcadp.org</title>
+<meta name="description" content="Draft charter for the International Digital Monetary Authority (Stiftung IDMA), a proposed Swiss foundation governing the TBDC standard.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary: #0a0a0b;
+    --bg-secondary: #111114;
+    --bg-tertiary: #19191e;
+    --border: #2a2a32;
+    --text-primary: #e8e6e3;
+    --text-secondary: #8a8a95;
+    --text-muted: #555560;
+    --orange: #f7931a;
+    --orange-dim: rgba(247,147,26,0.12);
+    --green: #2ecc71;
+    --font-display: 'Source Serif 4', Georgia, serif;
+    --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --nav-bg: rgba(10,10,11,0.95);
+  }
+
+  [data-theme="light"] {
+    --bg-primary: #f5f3ef;
+    --bg-secondary: #eae7e1;
+    --bg-tertiary: #ddd9d2;
+    --bg-hover: #d0ccc4;
+    --border: #c8c3ba;
+    --border-active: #a09a90;
+    --text-primary: #1a1a1a;
+    --text-secondary: #666666;
+    --text-muted: #999999;
+    --orange: #d4780e;
+    --orange-dim: rgba(212, 120, 14, 0.08);
+    --orange-glow: rgba(212, 120, 14, 0.2);
+    --green: #1a8a4a;
+    --nav-bg: rgba(245,243,239,0.95);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-display);
+    font-size: 18px;
+    line-height: 1.78;
+    min-height: 100vh;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(247,147,26,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(247,147,26,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none; z-index: 0;
+  }
+
+  .title-block {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 80px 24px 48px;
+    position: relative;
+    z-index: 1;
+  }
+  .title-block .label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--orange);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .title-block h1 {
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 16px;
+    color: #fff;
+  }
+  [data-theme="light"] .title-block h1 { color: #1a1a1a; }
+  .title-block .subtitle {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+  .title-block .meta {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+  }
+
+  .draft-banner {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 32px 24px 0;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+  .draft-banner .draft-label {
+    font-family: var(--font-display);
+    font-size: 2.0rem;
+    font-weight: 700;
+    color: var(--orange);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+  .draft-banner .draft-version {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .download-bar {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+  .download-bar .btn-secondary {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 10px 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    background: transparent;
+  }
+  .download-bar .btn-secondary:hover { color: var(--text-primary); border-color: var(--text-muted); }
+
+  .toc {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 24px 64px;
+    position: relative;
+    z-index: 1;
+  }
+  .toc-title {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .toc-chapter {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    padding: 4px 0 4px 20px;
+    line-height: 1.5;
+  }
+
+  .article-body {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .chapter-header {
+    margin-top: 64px;
+    margin-bottom: 8px;
+  }
+  .chapter-num {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: 8px;
+  }
+  .article-body h2 {
+    font-family: var(--font-display);
+    font-size: 1.55rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+  [data-theme="light"] .article-body h2 { color: #1a1a1a; }
+  .article-body h3 {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #fff;
+    margin-top: 36px;
+    margin-bottom: 12px;
+  }
+  [data-theme="light"] .article-body h3 { color: #1a1a1a; }
+
+  .hero-line {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    margin-bottom: 28px;
+    padding-left: 16px;
+    border-left: 2px solid var(--orange);
+  }
+
+  .article-body p { margin-bottom: 20px; color: var(--text-primary); }
+
+  .callout {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--orange);
+    padding: 20px 24px;
+    margin: 28px 0;
+    border-radius: 0 6px 6px 0;
+  }
+  .callout p { margin-bottom: 0; }
+  .callout p + p { margin-top: 12px; }
+
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 28px 0;
+    font-size: 0.88rem;
+  }
+  .compare-table th {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .compare-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(42,42,50,0.5);
+    color: var(--text-secondary);
+    vertical-align: top;
+  }
+  .compare-table td.hl { color: var(--orange); }
+
+  hr.section-break {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 48px 0;
+  }
+
+  /* ========== STANDARD NAV ========== */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--nav-bg);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 56px;
+    transition: background 0.3s, border-color 0.3s;
+  }
+  .nav-left { display: flex; align-items: center; gap: 0.5rem; }
+  .nav-hamburger {
+    display: none; background: none; border: none;
+    color: var(--text-secondary); font-size: 1.3rem; cursor: pointer; padding: 0.3rem;
+  }
+  .theme-toggle {
+    background: none; border: none; cursor: pointer; padding: 0.3rem;
+    font-size: 1.1rem; line-height: 1;
+  }
+  [data-theme="dark"] .icon-light { display: inline; color: var(--text-secondary); }
+  [data-theme="dark"] .icon-dark { display: none; }
+  [data-theme="light"] .icon-light { display: none; }
+  [data-theme="light"] .icon-dark { display: inline; color: var(--text-secondary); }
+  .nav-center { display: flex; gap: 0.25rem; align-items: center; }
+  .nav-center a {
+    color: var(--text-muted); text-decoration: none;
+    font-family: var(--font-mono); font-size: 0.72rem;
+    padding: 0.4rem 0.6rem; border-radius: 4px; transition: color 0.2s;
+  }
+  .nav-center a:hover { color: var(--orange); }
+  .nav-brand {
+    font-family: var(--font-mono); font-size: 1rem; font-weight: bold;
+    color: var(--orange); text-decoration: none; letter-spacing: 0.05em;
+  }
+  .nav-mobile-menu {
+    display: none; flex-direction: column; gap: 0.5rem;
+    background: var(--nav-bg); border-bottom: 1px solid var(--border);
+    padding: 1rem 2rem;
+  }
+  .nav-mobile-menu.open { display: flex; }
+  .nav-mobile-menu a {
+    color: var(--text-secondary); text-decoration: none;
+    font-family: var(--font-mono); font-size: 0.82rem; padding: 0.3rem 0;
+  }
+
+  .print-btn {
+    font-family: var(--font-mono); font-size: 0.72rem;
+    color: var(--text-muted); letter-spacing: 0.06em;
+    background: var(--bg-secondary); border: 1px solid var(--border);
+    border-radius: 6px; padding: 0.5rem 1.2rem; cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .print-btn:hover { color: var(--orange); border-color: var(--orange); }
+  .print-bar {
+    display: flex; justify-content: flex-end;
+    padding: 1rem 2rem 0; max-width: 860px; margin: 0 auto;
+  }
+
+  /* ========== STANDARD FOOTER ========== */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+  footer p {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+  }
+  footer a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  footer a:hover { color: var(--orange); }
+
+  @media (max-width: 640px) {
+    .title-block h1 { font-size: 1.5rem; }
+    .nav-center { display: none; }
+    .nav-hamburger { display: block; }
+    .compare-table { font-size: 0.78rem; }
+  }
+
+  @media print {
+    body { background: #fff; color: #111; font-size: 11pt; }
+    nav, body::before, .download-bar, .nav-mobile-menu, .print-bar { display: none !important; }
+    .title-block, .toc, .article-body, .draft-banner { max-width: 100%; padding-left: 0; padding-right: 0; }
+    .callout { border: 1px solid #ccc; background: #f9f9f9; }
+    h2, h3 { color: #111; }
+    .hero-line { color: #444; border-left-color: #111; }
+    a { color: #111; }
+    .draft-banner .draft-label { color: #111; }
+    .draft-banner .draft-version { color: #444; }
+  }
+
+  .charter-article {
+    margin-top: 32px;
+    margin-bottom: 8px;
+  }
+  .charter-article-title {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--orange);
+    margin-bottom: 8px;
+  }
+  .charter-sub {
+    padding-left: 24px;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+  }
+  .charter-sub-list {
+    padding-left: 48px;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+  }
+  .charter-note {
+    text-align: center;
+    font-style: italic;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+</style>
+
+</head>
+<body>
+
+<nav>
+  <div class="nav-left">
+    <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Toggle menu">&#9776;</button>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light mode">
+      <span class="icon-light">&#9788;</span>
+      <span class="icon-dark">&#9790;</span>
+    </button>
+  </div>
+  <div class="nav-center">
+    <a href="index.html">Home</a>
+    <a href="beginners-guide.html">Start Here</a>
+    <a href="btcc-intro.html">&#x20BF;C</a>
+    <a href="tbd-usd.html">&#x20BF;USD</a>
+    <a href="bond.html">&#x20BF;OND</a>
+    <a href="specification.html">Specification</a>
+    <a href="faq.html">FAQ</a>
+    <a href="knowledge-base.html">Knowledge Base</a>
+    <a href="glossary.html">Glossary</a>
+  </div>
+  <a href="index.html" class="nav-brand">BTCADP</a>
+</nav>
+<div class="nav-mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="beginners-guide.html">Start Here</a>
+  <a href="btcc-intro.html">&#x20BF;C</a>
+  <a href="tbd-usd.html">&#x20BF;USD</a>
+  <a href="bond.html">&#x20BF;OND</a>
+  <a href="specification.html">Specification</a>
+  <a href="faq.html">FAQ</a>
+  <a href="knowledge-base.html">Knowledge Base</a>
+  <a href="glossary.html">Glossary</a>
+</div>
+
+<!-- ========== STANDARD PRINT BUTTON ========== -->
+<div class="print-bar">
+  <button class="print-btn" onclick="window.print();">&#9113; Print / Save as PDF</button>
+</div>
+
+
+<!-- TITLE -->
+<div class="title-block">
+  <div class="label">Governance Framework</div>
+  <h1>IDMA Charter</h1>
+  <div class="subtitle">Draft charter for the International Digital Monetary Authority (Stiftung IDMA). A Swiss foundation governing the TBDC standard, certifying compliance, and monitoring network health.</div>
+  <div class="meta">btcadp.org &middot; 2026 &middot; CC BY-NC-ND</div>
+  <div class="download-bar">
+    <a href="idma.html" class="btn-secondary">IDMA Overview &rarr;</a>
+    <a href="bitcoin-bridge.html" class="btn-secondary">The Bitcoin Bridge &rarr;</a>
+  </div>
+</div>
+
+<!-- DRAFT BANNER -->
+<div class="draft-banner">
+  <div class="draft-label">Draft Copy</div>
+  <div class="draft-version">Version 0.1</div>
+</div>
+
+<hr class="section-break" style="max-width:780px;margin:32px auto 0;">
+
+<!-- TABLE OF CONTENTS -->
+<div class="toc">
+  <div class="toc-title">Contents</div>
+  <div class="toc-chapter"><a href="#ch1" style="color:var(--text-secondary);text-decoration:none;">I. Name, Seat, and Purpose</a></div>
+  <div class="toc-chapter"><a href="#ch2" style="color:var(--text-secondary);text-decoration:none;">II. Certification</a></div>
+  <div class="toc-chapter"><a href="#ch3" style="color:var(--text-secondary);text-decoration:none;">III. Intellectual Property</a></div>
+  <div class="toc-chapter"><a href="#ch4" style="color:var(--text-secondary);text-decoration:none;">IV. Network Monitoring</a></div>
+  <div class="toc-chapter"><a href="#ch5" style="color:var(--text-secondary);text-decoration:none;">V. Governance</a></div>
+  <div class="toc-chapter"><a href="#ch6" style="color:var(--text-secondary);text-decoration:none;">VI. Financial Provisions</a></div>
+  <div class="toc-chapter"><a href="#ch7" style="color:var(--text-secondary);text-decoration:none;">VII. Amendment and Dissolution</a></div>
+</div>
+
+<!-- CHARTER BODY -->
+<div class="article-body">
+
+  <!-- CHAPTER I -->
+  <div class="chapter-header" id="ch1">
+    <span class="chapter-num">Chapter I</span>
+    <h2>Name, Seat, and Purpose</h2>
+  </div>
+
+  <div class="charter-article"><div class="charter-article-title">Article 1 &mdash; Name</div></div>
+  <p>Under the name "International Digital Monetary Authority" (Stiftung IDMA), a foundation is established in accordance with Articles 80 to 89bis of the Swiss Civil Code.</p>
+
+  <div class="charter-article"><div class="charter-article-title">Article 2 &mdash; Seat</div></div>
+  <p>The foundation has its seat in Zug, Switzerland.</p>
+
+  <div class="charter-article"><div class="charter-article-title">Article 3 &mdash; Purpose</div></div>
+  <p class="charter-sub">1. The purpose of the foundation is to safeguard the integrity of Treasury-Backed Digital Currencies by governing the open standard under which they operate and certifying compliance among independent issuers. The foundation monitors the health and security of certified networks to ensure the framework remains sound, transparent, and resilient as it scales.</p>
+  <p class="charter-sub">2. In pursuit of this purpose, the foundation shall:</p>
+  <p class="charter-sub-list">a) publish and maintain the TBDC specification, the BTCADP reference price methodology, and the &#x20BF;C denomination protocol;</p>
+  <p class="charter-sub-list">b) hold, administer, and license the intellectual property of the TBDC framework, including patents, trademarks, and related rights;</p>
+  <p class="charter-sub-list">c) certify entities that meet the reserve, transparency, defensive mechanism, and operational standards required to operate under the TBDC framework;</p>
+  <p class="charter-sub-list">d) operate network monitoring infrastructure to assess the health and security of certified networks in accordance with published standards;</p>
+  <p class="charter-sub-list">e) conduct or commission research in support of the framework's continued development;</p>
+  <p class="charter-sub-list">f) represent the interests of the TBDC standard in relations with regulatory authorities, standards bodies, and international organizations.</p>
+  <p class="charter-sub">3. The foundation does not issue digital currencies, hold reserves on behalf of operators, manage financial products, or interact with retail customers.</p>
+
+  <div class="charter-article"><div class="charter-article-title">Article 4 &mdash; Non-Profit Character</div></div>
+  <p>The foundation pursues exclusively non-commercial purposes. It does not distribute profits to any natural or legal person. Revenue from certification fees, licensing, and other sources shall be applied solely to the pursuit of the foundation's purpose.</p>
+
+  <hr class="section-break">
+
+  <!-- CHAPTER II -->
+  <div class="chapter-header" id="ch2">
+    <span class="chapter-num">Chapter II</span>
+    <h2>Certification</h2>
+  </div>
+
+  <div class="charter-article"><div class="charter-article-title">Article 5 &mdash; Certification Scope</div></div>
+  <p class="charter-sub">1. The foundation establishes and publishes a certification scheme defining the requirements that entities must meet to operate under the TBDC framework. The certification scheme covers reserve architecture, transparency, defensive mechanism compliance, network health monitoring, and operational standards.</p>
+  <p class="charter-sub">2. The foundation shall structure its certification scheme to be compatible with ISO/IEC 17065 (Conformity assessment &mdash; Requirements for bodies certifying products, processes, and services) and may seek accreditation from the Swiss Accreditation Service (SAS) when the scheme is sufficiently mature.</p>
+
+  <div class="charter-article"><div class="charter-article-title">Article 6 &mdash; Certification Process</div></div>
+  <p class="charter-sub">1. Any entity may apply for TBDC certification regardless of its jurisdiction of incorporation or operation.</p>
+  <p class="charter-sub">2. Certification is granted upon the foundation's determination that the applicant meets all requirements of the published certification scheme. The foundation may engage independent auditors or technical reviewers to assist in the evaluation.</p>
+  <p class="charter-sub">3. Certified entities must demonstrate ongoing compliance with applicable financial regulation in every jurisdiction where they operate. The foundation does not substitute for regulatory supervision by national or regional financial authorities.</p>
+
+  <div class="charter-article"><div class="charter-article-title">Article 7 &mdash; Periodic Review, Suspension, and Revocation</div></div>
+  <p class="charter-sub">1. Certified entities are subject to periodic review by the foundation or its appointed auditors to verify continued compliance with the certification scheme.</p>
+  <p class="charter-sub">2. The foundation may suspend certification if a certified entity fails to meet one or more requirements of the certification scheme. Suspension is communicated in writing with a defined remediation period.</p>
+  <p class="charter-sub">3. The foundation shall revoke certification if the certified entity fails to remediate within the defined period, or if the foundation determines that the entity's continued operation under the TBDC framework poses a risk to the integrity of the standard or to holders of instruments issued under it.</p>
+  <p class="charter-sub">4. Decisions to suspend or revoke certification may be appealed under the procedure set forth in Article 14.</p>
+
+  <div class="charter-article"><div class="charter-article-title">Article 8 &mdash; Relationship to Certified Entities</div></div>
+  <p class="charter-sub">1. Certified entities are not members of the foundation. Certification confers a license to operate under the TBDC framework and to use the associated trademarks. It does not confer governance rights, voting rights, or any role in the administration of the foundation.</p>
+  <p class="charter-sub">2. The foundation shall maintain independence and impartiality with respect to all certified entities. No member of the Foundation Board or executive management may simultaneously serve as an officer, director, or material shareholder of a certified entity.</p>
+
+  <hr class="section-break">
+
+  <!-- CHAPTER III -->
+  <div class="chapter-header" id="ch3">
+    <span class="chapter-num">Chapter III</span>
+    <h2>Intellectual Property</h2>
+  </div>
+
+  <div class="charter-article"><div class="charter-article-title">Article 9 &mdash; Ownership</div></div>
+  <p class="charter-sub">1. The foundation holds all patents, trademarks, copyrights, and related intellectual property rights pertaining to the TBDC framework, including the BTCADP specification, the &#x20BF;C denomination protocol, and all associated product marks.</p>
+  <p class="charter-sub">2. The BTCADP specification and &#x20BF;C denomination protocol are published as open standards. Any person may compute the &#x20BF;C denomination from publicly available price data without license or fee. Commercial implementation of the TBDC framework, including the use of associated trademarks, requires certification by the foundation.</p>
+
+  <div class="charter-article"><div class="charter-article-title">Article 10 &mdash; Licensing</div></div>
+  <p class="charter-sub">1. Certified entities receive a non-exclusive, revocable license to use the TBDC trademarks and to implement the TBDC specification in commercial operations for the duration of their certification.</p>
+  <p class="charter-sub">2. Revocation of certification automatically terminates the trademark license. The former certified entity must cease use of all TBDC marks within a period defined in the certification agreement.</p>
+
+  <div class="charter-article"><div class="charter-article-title">Article 11 &mdash; Defensive Disclosures</div></div>
+  <p>The foundation may publish defensive disclosures to establish prior art and prevent third parties from obtaining intellectual property rights over concepts, methods, or architectures that form part of the TBDC framework or its extensions.</p>
+
+  <hr class="section-break">
+
+  <!-- CHAPTER IV -->
+  <div class="chapter-header" id="ch4">
+    <span class="chapter-num">Chapter IV</span>
+    <h2>Network Monitoring</h2>
+  </div>
+
+  <div class="charter-article"><div class="charter-article-title">Article 12 &mdash; Monitoring Function</div></div>
+  <p class="charter-sub">1. The foundation operates or commissions network monitoring infrastructure to assess the health and security of certified TBDC networks. Monitoring systems track defined indicators including, but not limited to, reserve coverage ratios, token health metrics, network velocity, and defense state.</p>
+  <p class="charter-sub">2. The foundation publishes monitoring standards and indicator definitions. Certified entities must provide the data access necessary for the foundation to perform its monitoring function.</p>
+  <p class="charter-sub">3. The foundation does not intervene in the operations of certified entities. Monitoring findings inform certification review and may trigger the procedures set forth in Article 7.</p>
+
+  <hr class="section-break">
+
+  <!-- CHAPTER V -->
+  <div class="chapter-header" id="ch5">
+    <span class="chapter-num">Chapter V</span>
+    <h2>Governance</h2>
+  </div>
+
+  <div class="charter-article"><div class="charter-article-title">Article 13 &mdash; Foundation Board</div></div>
+  <p class="charter-sub">1. The Foundation Board (Stiftungsrat) is the supreme governing body of the foundation. It consists of no fewer than three and no more than seven members appointed for terms of four years, renewable once.</p>
+  <p class="charter-sub">2. The Foundation Board is responsible for:</p>
+  <p class="charter-sub-list">a) approving and amending the certification scheme;</p>
+  <p class="charter-sub-list">b) appointing and removing the Executive Director;</p>
+  <p class="charter-sub-list">c) approving the annual budget, financial statements, and audit reports;</p>
+  <p class="charter-sub-list">d) approving amendments to the TBDC specification;</p>
+  <p class="charter-sub-list">e) deciding on certification appeals;</p>
+  <p class="charter-sub-list">f) all other matters reserved to the Foundation Board by law or by this charter.</p>
+  <p class="charter-sub">3. Decisions of the Foundation Board require a simple majority of members present, except where this charter requires a qualified majority. The chairperson has a casting vote in the event of a tie.</p>
+  <p class="charter-sub">4. Amendments to the TBDC specification require a two-thirds majority of the full Foundation Board.</p>
+  <p class="charter-sub">5. No member of the Foundation Board may simultaneously serve as an officer, director, or material shareholder of an entity that is certified by the foundation or that has applied for certification.</p>
+
+  <div class="charter-article"><div class="charter-article-title">Article 14 &mdash; Appeals</div></div>
+  <p class="charter-sub">1. A certified entity or applicant whose certification has been denied, suspended, or revoked may appeal the decision to the Foundation Board within 30 days of receiving written notice.</p>
+  <p class="charter-sub">2. The Foundation Board shall review the appeal and render a decision within 60 days. The Foundation Board may engage independent technical reviewers to assist in the evaluation.</p>
+  <p class="charter-sub">3. The decision of the Foundation Board on appeal is final, subject to the jurisdiction of the competent Swiss courts.</p>
+
+  <div class="charter-article"><div class="charter-article-title">Article 15 &mdash; Executive Director</div></div>
+  <p class="charter-sub">1. The Executive Director is appointed by the Foundation Board and is responsible for the day-to-day management of the foundation, including the administration of the certification scheme, network monitoring operations, and intellectual property management.</p>
+  <p class="charter-sub">2. The Executive Director attends meetings of the Foundation Board in an advisory capacity without voting rights.</p>
+
+  <div class="charter-article"><div class="charter-article-title">Article 16 &mdash; Auditor</div></div>
+  <p>The Foundation Board appoints an independent auditor to examine the foundation's annual financial statements in accordance with Swiss law and applicable accounting standards.</p>
+
+  <div class="charter-article"><div class="charter-article-title">Article 17 &mdash; Supervisory Authority</div></div>
+  <p>The foundation is subject to supervision by the competent Swiss supervisory authority in accordance with Articles 84 and 84a of the Swiss Civil Code.</p>
+
+  <hr class="section-break">
+
+  <!-- CHAPTER VI -->
+  <div class="chapter-header" id="ch6">
+    <span class="chapter-num">Chapter VI</span>
+    <h2>Financial Provisions</h2>
+  </div>
+
+  <div class="charter-article"><div class="charter-article-title">Article 18 &mdash; Capital</div></div>
+  <p class="charter-sub">1. The initial capital of the foundation is CHF [amount], endowed by the founder at the time of establishment.</p>
+  <p class="charter-sub">2. The foundation may accept certification application fees in advance of commencing operations to fund the establishment of its certification scheme, network monitoring infrastructure, and administrative capacity.</p>
+  <p class="charter-sub">3. All applicants, whether applying before or after the foundation commences operations, are subject to the same fee schedule, the same evaluation criteria, and the same certification standards. No applicant receives preferential terms, governance rights, or any consideration beyond the certification itself.</p>
+
+  <div class="charter-article"><div class="charter-article-title">Article 19 &mdash; Revenue</div></div>
+  <p class="charter-sub">1. The foundation's revenue consists of certification application fees, annual certification fees, licensing revenue from intellectual property, grants, donations, and income from the investment of foundation assets. The foundation does not issue tokens or digital currencies of any kind.</p>
+  <p class="charter-sub">2. Certified entities pay an annual certification fee. The annual fee funds the foundation's ongoing operations, including network monitoring infrastructure, compliance monitoring, specification review and development, research, and administrative costs.</p>
+  <p class="charter-sub">3. The Foundation Board sets the fee schedule and reviews it annually. Fees shall be sufficient to maintain the foundation's capacity to fulfill its purpose without dependence on any single certified entity or external funding source.</p>
+
+  <div class="charter-article"><div class="charter-article-title">Article 20 &mdash; Use of Funds</div></div>
+  <p>All revenue and assets of the foundation shall be applied exclusively to the pursuit of its purpose as defined in Article 3. The foundation shall maintain reserves sufficient to sustain its operations, certification function, and network monitoring infrastructure.</p>
+
+  <hr class="section-break">
+
+  <!-- CHAPTER VII -->
+  <div class="chapter-header" id="ch7">
+    <span class="chapter-num">Chapter VII</span>
+    <h2>Amendment and Dissolution</h2>
+  </div>
+
+  <div class="charter-article"><div class="charter-article-title">Article 21 &mdash; Amendment</div></div>
+  <p class="charter-sub">1. This charter may be amended by a two-thirds majority of the full Foundation Board, subject to the approval of the competent supervisory authority.</p>
+  <p class="charter-sub">2. The following provisions may not be amended except by unanimous decision of the Foundation Board: the purpose of the foundation (Article 3), the non-profit character (Article 4), the independence requirements (Article 8, paragraph 2 and Article 13, paragraph 5), and the dissolution provisions (Article 22).</p>
+
+  <div class="charter-article"><div class="charter-article-title">Article 22 &mdash; Dissolution</div></div>
+  <p class="charter-sub">1. The foundation may be dissolved by unanimous decision of the Foundation Board, subject to the approval of the competent supervisory authority.</p>
+  <p class="charter-sub">2. Upon dissolution, the intellectual property held by the foundation shall be transferred to a successor organization with an equivalent purpose. If no suitable successor exists, the BTCADP specification, &#x20BF;C denomination protocol, and all associated technical documentation shall be released into the public domain. Patents and trademarks shall lapse.</p>
+  <p class="charter-sub">3. Any remaining assets shall be transferred to a Swiss institution with a comparable non-profit purpose, as determined by the Foundation Board with the approval of the supervisory authority.</p>
+
+  <div class="charter-note">
+    <p>Draft v0.1 &mdash; Prepared for contributor review. Not a legal document.</p>
+    <p>The formal charter must be drafted by a Swiss attorney specializing in foundation law.</p>
+  </div>
+
+</div>
+
+
+<footer>
+  <p>
+    <a href="index.html">BTCADP</a> &middot;
+    <a href="specification.html">Specification</a> &middot;
+    <a href="btcc-intro.html">&#x20BF;C</a> &middot;
+    <a href="tbd-usd.html">&#x20BF;USD</a> &middot;
+    <a href="bond.html">&#x20BF;OND</a> &middot;
+    <a href="knowledge-base.html">Knowledge Base</a> &middot;
+    <a href="glossary.html">Glossary</a> &middot;
+    <a href="faq.html">FAQ</a> &middot;
+    <a href="https://github.com/BTCADP/btcadp-research" target="_blank" rel="noopener">GitHub</a>
+  </p>
+  <p style="margin-top:0.8rem;">CC BY-NC-ND &middot; btcadp.org &middot; 2026</p>
+</footer>
+
+
+<script>
+/* Theme toggle with localStorage persistence */
+function toggleTheme() {
+  var html = document.documentElement;
+  var current = html.getAttribute('data-theme');
+  var next = current === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  try { localStorage.setItem('btcadp-theme', next); } catch(e) {}
+}
+/* Restore saved theme */
+(function() {
+  try {
+    var saved = localStorage.getItem('btcadp-theme');
+    if (saved) document.documentElement.setAttribute('data-theme', saved);
+  } catch(e) {}
+})();
+/* Mobile menu toggle + auto-close */
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+(function() {
+  var menu = document.getElementById('mobileMenu');
+  if (menu) {
+    menu.addEventListener('click', function(e) {
+      if (e.target.tagName === 'A') {
+        menu.classList.remove('open');
+      }
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
