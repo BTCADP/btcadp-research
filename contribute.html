@@ -460,6 +460,7 @@ window.supabase = { createClient };
     <div class="space-content" id="space-idma" style="display:none;">
       <div class="space-header">
         <h2>International Digital Monetary Authority (IDMA)</h2>
+        <p style="margin-bottom:16px;padding:16px 20px;background:var(--bg-tertiary);border-left:3px solid var(--orange);border-radius:0 6px 6px 0;font-size:13px;line-height:1.6;color:var(--text-secondary);"><strong style="color:var(--text-primary);">Our mission</strong> is to safeguard the integrity of Treasury-Backed Digital Currencies by governing the open standard under which they operate, certifying compliance among independent issuers, and ensuring that the framework remains sound, transparent, and resilient as it scales.</p>
         <p>Building the institution that governs the TBDC standard. IDMA holds the IP, publishes the specification, certifies compliance, and provides the forum where consortium members coordinate. This space is for developing the organizational framework: from mission and governance to the network monitoring systems that make certification meaningful.</p>
         <p style="margin-top:8px;font-size:12px;color:var(--text-muted);">Read the IDMA concept paper: <a href="https://btcadp.org/idma" style="color:var(--orange);">btcadp.org/idma &rarr;</a></p>
         <p style="margin-top:8px;font-size:12px;color:var(--text-muted);">If you think someone should have access to the contributor section, send them here: <a href="https://btcadp.org/apply" style="color:var(--orange);">https://btcadp.org/apply</a><br>If you need technical assistance or want your work published on BTCADP.org, email the admin at <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="47373526202a263f2e073735283328292a262e2b6924282a">[email&#160;protected]</a>.</p>
@@ -467,7 +468,7 @@ window.supabase = { createClient };
       <div class="section-filter" id="idmaFilters">
         <button type="button" class="filter-chip active" data-filter="all" onclick="setFilter('idma','all',this)">All</button>
         <button type="button" class="filter-chip" data-filter="mission" onclick="setFilter('idma','mission',this)">Mission Statement</button>
-        <button type="button" class="filter-chip" data-filter="business-plan" onclick="setFilter('idma','business-plan',this)">Business Plan</button>
+        <button type="button" class="filter-chip" data-filter="charter" onclick="setFilter('idma','charter',this)">Charter</button>
         <button type="button" class="filter-chip" data-filter="network-monitoring" onclick="setFilter('idma','network-monitoring',this)">Network Monitoring</button>
         <button type="button" class="filter-chip" data-filter="governance-legal" onclick="setFilter('idma','governance-legal',this)">Governance &amp; Legal</button>
         <button type="button" class="filter-chip" data-filter="certification" onclick="setFilter('idma','certification',this)">Certification Standards</button>
@@ -482,7 +483,7 @@ window.supabase = { createClient };
       <button type="button" class="new-thread-btn" onclick="showNewThread('idma')">+ Start a new thread</button>
       <div class="new-thread-form" id="newThreadForm-idma" data-form-type="other">
         <div class="form-row"><label>Thread title</label><input type="text" id="newTitle-idma" placeholder="Propose a direction, raise a question, or share research..." autocomplete="off" data-form-type="other"></div>
-        <div class="form-row"><label>Category</label><select id="newSection-idma"><option value="mission">Mission Statement</option><option value="business-plan">Business Plan</option><option value="network-monitoring">Network Monitoring</option><option value="governance-legal">Governance &amp; Legal</option><option value="certification">Certification Standards</option><option value="ip-licensing">IP &amp; Licensing</option><option value="general">General</option></select></div>
+        <div class="form-row"><label>Category</label><select id="newSection-idma"><option value="mission">Mission Statement</option><option value="charter">Charter</option><option value="network-monitoring">Network Monitoring</option><option value="governance-legal">Governance &amp; Legal</option><option value="certification">Certification Standards</option><option value="ip-licensing">IP &amp; Licensing</option><option value="general">General</option></select></div>
         <div class="form-row"><label>Details</label><textarea id="newBody-idma" placeholder="Describe your proposal, analysis, or question..." autocomplete="off" data-form-type="other"></textarea></div>
         <div class="form-actions"><button type="button" class="btn-cancel" onclick="hideNewThread('idma')">Cancel</button><button type="button" class="btn-submit" onclick="submitThread('idma')" data-form-type="other">Post thread</button></div>
       </div>
