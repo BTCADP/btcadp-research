@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The ₿ridge Network: Sidechain Specification v1.0 | btcadp.org</title>
+<meta name="description" content="Technical specification for The ₿ridge Network, the federated Bitcoin sidechain that carries ₿USD, ₿OND, and ₿ILL circulation. Operated by the consortium, certified by IDMA.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary: #0a0a0b;
+    --bg-secondary: #111114;
+    --bg-tertiary: #19191e;
+    --border: #2a2a32;
+    --text-primary: #e8e6e3;
+    --text-secondary: #8a8a95;
+    --text-muted: #555560;
+    --orange: #f7931a;
+    --orange-dim: rgba(247,147,26,0.12);
+    --green: #2ecc71;
+    --red: #e74c3c;
+    --font-display: 'Source Serif 4', Georgia, serif;
+    --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+    --nav-bg: rgba(10,10,11,0.95);
+  }
+
+  [data-theme="light"] {
+    --bg-primary: #f5f3ef;
+    --bg-secondary: #eae7e1;
+    --bg-tertiary: #ddd9d2;
+    --bg-hover: #d0ccc4;
+    --border: #c8c3ba;
+    --border-active: #a09a90;
+    --text-primary: #1a1a1a;
+    --text-secondary: #666666;
+    --text-muted: #999999;
+    --orange: #d4780e;
+    --orange-dim: rgba(212, 120, 14, 0.08);
+    --orange-glow: rgba(212, 120, 14, 0.2);
+    --green: #1a8a4a;
+    --yellow: #b8960a;
+    --red: #c0392b;
+    --blue: #2a6faa;
+    --nav-bg: rgba(245,243,239,0.95);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-display);
+    font-size: 18px;
+    line-height: 1.75;
+    min-height: 100vh;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(247,147,26,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(247,147,26,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none; z-index: 0;
+  }
+
+  .article-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 64px 24px 100px;
+    position: relative; z-index: 1;
+  }
+
+  .article-meta { font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); margin-bottom: 20px; }
+  .article-title { font-size: clamp(1.8rem, 5vw, 3rem); font-weight: 700; letter-spacing: -1px; line-height: 1.15; color: #fff; margin-bottom: 12px; }
+  [data-theme="light"] .article-title { color: var(--text-primary); }
+  .article-subtitle { font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 20px; font-style: italic; }
+  .article-byline { font-family: var(--font-sans); font-size: 0.85rem; color: var(--text-muted); margin-bottom: 48px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
+
+  .article-body h2 { font-size: 1.4rem; font-weight: 600; color: #fff; margin: 48px 0 16px; letter-spacing: -0.3px; }
+  [data-theme="light"] .article-body h2 { color: var(--text-primary); }
+  .article-body h3 { font-size: 1.05rem; font-weight: 600; color: var(--orange); margin: 32px 0 12px; font-family: var(--font-sans); }
+  .article-body p { color: #c8c6c3; margin-bottom: 20px; font-size: 1rem; }
+  [data-theme="light"] .article-body p { color: var(--text-primary); }
+
+  .callout {
+    background: var(--orange-dim);
+    border-left: 3px solid var(--orange);
+    border-radius: 0 4px 4px 0;
+    padding: 16px 20px;
+    margin: 28px 0;
+  }
+  .callout p { color: #c4a46a; font-family: var(--font-sans); font-size: 0.92rem; line-height: 1.7; margin: 0; }
+  .callout strong { color: var(--orange); }
+
+  .thesis {
+    border-top: 2px solid var(--orange);
+    border-bottom: 2px solid var(--orange);
+    padding: 28px 24px;
+    margin: 36px 0;
+    background: rgba(247,147,26,0.04);
+  }
+  .thesis p {
+    color: #fff;
+    font-size: 1.1rem;
+    font-style: italic;
+    font-weight: 600;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .sec-num {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--orange);
+    display: block;
+    margin-bottom: 8px;
+    margin-top: 56px;
+  }
+
+  .advantage-block {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin: 16px 0;
+  }
+  .advantage-block h4 {
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+  }
+  .advantage-block p {
+    color: var(--text-secondary);
+    font-family: var(--font-sans);
+    font-size: 0.88rem;
+    margin: 0;
+    line-height: 1.65;
+  }
+
+  .stub-section {
+    border: 1px dashed var(--border);
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin: 16px 0;
+    text-align: center;
+  }
+  .stub-section p {
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    margin: 0;
+    letter-spacing: 0.5px;
+  }
+
+  .open-q {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin: 12px 0;
+  }
+  .open-q p { color: var(--text-secondary); font-family: var(--font-sans); font-size: 0.88rem; margin: 0; line-height: 1.6; }
+  .open-q strong { color: var(--text-primary); }
+
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 28px 0;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    overflow-x: auto;
+    display: block;
+  }
+  .compare-table th {
+    text-align: left; padding: 8px 12px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    white-space: nowrap;
+  }
+  .compare-table th.hl { color: var(--orange); }
+  .compare-table td {
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    color: #c4c4cc;
+    vertical-align: top;
+  }
+  .compare-table tr:nth-child(even) td { background: var(--bg-secondary); }
+  .compare-table td.hl { background: rgba(247,147,26,0.06); color: #d4b483; }
+  .compare-table tr:nth-child(even) td.hl { background: rgba(247,147,26,0.09); }
+
+  .article-footer { margin-top: 64px; padding-top: 32px; border-top: 1px solid var(--border); display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-primary { background: var(--orange); color: #000; font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700; padding: 10px 20px; border-radius: 4px; text-decoration: none; transition: opacity 0.2s; }
+  .btn-primary:hover { opacity: 0.85; }
+  .btn-secondary { background: transparent; color: var(--text-secondary); font-family: var(--font-mono); font-size: 0.8rem; padding: 10px 20px; border-radius: 4px; border: 1px solid var(--border); text-decoration: none; transition: all 0.2s; }
+  .btn-secondary:hover { border-color: var(--orange); color: var(--orange); }
+
+  .references { margin-top: 56px; padding-top: 32px; border-top: 1px solid var(--border); }
+  .references h2 { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 16px; font-family: var(--font-sans); border: none; padding: 0; }
+  .ref-item { margin-bottom: 10px; font-size: 0.83rem; color: var(--text-secondary); padding-left: 32px; position: relative; font-family: var(--font-sans); line-height: 1.55; }
+  .ref-num { position: absolute; left: 0; color: var(--orange); font-family: var(--font-mono); font-weight: 700; font-size: 0.78rem; }
+  .ref-item a { color: #5b9bd5; text-decoration: none; }
+  .ref-item a:hover { color: var(--orange); }
+  .ref-item em { font-style: italic; }
+
+  .draft-banner {
+    background: rgba(247,147,26,0.1);
+    border-bottom: 1px solid rgba(247,147,26,0.25);
+    padding: 6px 24px;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: var(--orange);
+  }
+
+  /* ========== STANDARD NAV ========== */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--nav-bg);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    transition: background 0.3s, border-color 0.3s;
+  }
+  .nav-brand {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--orange);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+  }
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+  }
+  .nav-center {
+    display: flex;
+    gap: 0.25rem;
+    list-style: none;
+    align-items: center;
+  }
+  .nav-center a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    transition: color 0.2s, background 0.2s;
+  }
+  .nav-center a:hover { color: var(--text-primary); background: var(--bg-tertiary); }
+  .nav-center a.active { color: var(--orange); }
+  .theme-toggle {
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .theme-toggle:hover { color: var(--orange); border-color: var(--orange); }
+  [data-theme="dark"] .theme-toggle .icon-light { display: inline; }
+  [data-theme="dark"] .theme-toggle .icon-dark { display: none; }
+  [data-theme="light"] .theme-toggle .icon-light { display: none; }
+  [data-theme="light"] .theme-toggle .icon-dark { display: inline; }
+  .nav-hamburger {
+    display: none;
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+  }
+  .nav-hamburger:hover { color: var(--orange); border-color: var(--orange); }
+  .nav-mobile-menu {
+    display: none;
+    position: fixed;
+    top: 56px; left: 0; right: 0;
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem;
+    z-index: 99;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  .nav-mobile-menu.open { display: flex; }
+  .nav-mobile-menu a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.95rem;
+    padding: 0.6rem 1rem;
+    border-radius: 4px;
+    transition: color 0.2s, background 0.2s;
+  }
+  .nav-mobile-menu a:hover { color: var(--text-primary); background: var(--bg-tertiary); }
+  .nav-mobile-menu a.active { color: var(--orange); }
+  @media (max-width: 768px) {
+    .nav-center { display: none; }
+    .nav-hamburger { display: flex; }
+  }
+
+  /* ========== STANDARD PRINT BUTTON ========== */
+  .print-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.5rem 1.2rem;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .print-btn:hover { color: var(--orange); border-color: var(--orange); }
+  .print-bar {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem 2rem 0;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  /* ========== STANDARD FOOTER ========== */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+  footer p {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+  }
+  footer a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  footer a:hover { color: var(--orange); }
+
+  @media print {
+    nav, .nav-mobile-menu, .print-bar, .draft-banner { display: none !important; }
+  }
+</style>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+</head>
+<body>
+
+<!-- ========== STANDARD NAV ========== -->
+<nav>
+  <div class="nav-left">
+    <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Toggle menu">&#9776;</button>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light mode">
+      <span class="icon-light">&#9788;</span>
+      <span class="icon-dark">&#9790;</span>
+    </button>
+  </div>
+  <div class="nav-center">
+    <a href="index.html">Home</a>
+    <a href="beginners-guide.html">Start Here</a>
+    <a href="btcc-intro.html">&#x20BF;C</a>
+    <a href="tbd-usd.html">&#x20BF;USD</a>
+    <a href="bond.html">&#x20BF;OND</a>
+    <a href="specification.html">Specification</a>
+    <a href="faq.html">FAQ</a>
+    <a href="knowledge-base.html">Knowledge Base</a>
+    <a href="glossary.html">Glossary</a>
+  </div>
+  <a href="index.html" class="nav-brand">BTCADP</a>
+</nav>
+<div class="nav-mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="beginners-guide.html">Start Here</a>
+  <a href="btcc-intro.html">&#x20BF;C</a>
+  <a href="tbd-usd.html">&#x20BF;USD</a>
+  <a href="bond.html">&#x20BF;OND</a>
+  <a href="specification.html">Specification</a>
+  <a href="faq.html">FAQ</a>
+  <a href="knowledge-base.html">Knowledge Base</a>
+  <a href="glossary.html">Glossary</a>
+</div>
+
+<div class="draft-banner">DRAFT &bull; sidechain-specification_v1_0.html &bull; April 2026</div>
+
+<!-- ========== STANDARD PRINT BUTTON ========== -->
+<div class="print-bar">
+  <button class="print-btn" onclick="window.print()">&#9113; Print / Save PDF</button>
+</div>
+
+
+<div class="article-wrap">
+
+  <div class="article-meta">The &#x20BF;ridge Network</div>
+  <h1 class="article-title">The <span style="color:var(--orange)">&#x20BF;</span>ridge Network Sidechain Specification</h1>
+  <p class="article-subtitle">Technical specification for the federated Bitcoin sidechain that carries &#x20BF;USD, &#x20BF;OND, and &#x20BF;ILL circulation.</p>
+  <p class="article-byline">Version 1.0 &bull; April 2026 &bull; btcadp.org</p>
+
+
+  <div class="article-body">
+
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- SECTION 1: PURPOSE AND SCOPE                          -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+
+    <span class="sec-num">Section 01</span>
+    <h2>Purpose and Scope</h2>
+
+    <p>This document specifies The &#x20BF;ridge Network, the federated Bitcoin sidechain on which &#x20BF;USD, &#x20BF;OND, and &#x20BF;ILL circulate. It covers the sidechain layer only: consensus, block production, transaction format, payment finality, peg mechanics, multi-product support, privacy architecture, federation governance, and the IDMA monitoring interface.</p>
+
+    <p>&#x20BF;ridge handles commerce. Between the moment a &#x20BF;USD is minted and the moment it's redeemed, every transfer, every payment, every salary deposit, every merchant settlement occurs on this network. No Bitcoin moves on the base layer during these transactions. The BTC reserves sit untouched in publicly addressable wallets until a holder crosses the boundary by minting new tokens or redeeming existing ones.</p>
+
+    <p>This specification does not cover the reserve architecture (the two-ledger system), redemption economics (surplus dynamics, the Profit Burn Priority algorithm), the defensive programmability toolkit (fee schedules, velocity limits, volume-triggered escalation), the BTCADP oracle methodology, or the &#x20BF;C denomination protocol. Where this specification references reserve mechanics or defensive parameters, it cites TBB and defers to it.</p>
+
+    <p>The intended audience is sidechain engineers, node operators, wallet developers, and anyone evaluating the technical feasibility of &#x20BF;ridge. The document defines what's fixed, what's parameterized, and what's open for research and calibration.</p>
+
+    <div class="callout">
+      <p>&#x20BF;ridge is built on a fork of <strong>Elements</strong>, Blockstream's open-source extension of Bitcoin's codebase. Elements is the foundation of the Liquid Network and provides the UTXO transaction model, Confidential Transactions, issued asset support, and federation signing that &#x20BF;ridge requires. This specification defines where the consortium's implementation follows Elements and where it departs.</p>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- SECTION 2: THE CONSORTIUM ADVANTAGE                   -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+
+    <span class="sec-num">Section 02</span>
+    <h2>The Consortium Advantage</h2>
+
+    <p>A sidechain is only as trustworthy as the entities operating it. On the Liquid Network, the functionaries who sign blocks and manage the peg have no economic relationship to the assets circulating on the chain. They don't issue the tokens, don't hold the reserves, and don't profit from the system's success. If Liquid's assets lost all their value tomorrow, the functionaries would lose nothing beyond minor fee revenue.</p>
+
+    <p>&#x20BF;ridge is different because the federation members are the consortium's treasury companies. They issue the currency, hold the Bitcoin reserves in publicly addressable wallets, and stake their balance sheets on the system's integrity. The International Digital Monetary Authority sits above the federation as an independent certifier and real-time monitor with no economic stake in any member's success, only in the network's soundness.</p>
+
+    <p>Every technical advantage below flows from this alignment.</p>
+
+    <div class="advantage-block">
+      <h4>1. No peg-in delay</h4>
+      <p>Liquid requires 102 Bitcoin confirmations (roughly 17 hours) for peg-in because the federation doesn't trust the depositing user. The consortium has no such problem. When a treasury company mints &#x20BF;USD, it has already purchased the BTC and can confirm base-layer settlement internally. Issuance is authorized by the treasury company's own attestation, verified by IDMA's monitoring against the base-layer deposit. New &#x20BF;USD can appear on the sidechain within minutes of the BTC purchase settling, not hours.</p>
+    </div>
+
+    <div class="advantage-block">
+      <h4>2. Sub-second payment confirmation at point of sale</h4>
+      <p>Block production requires a 2/3 supermajority of federation signers. No single member can double-spend, reverse transactions, or forge blocks. The risks from a rogue member are different in kind: minting without backing, draining reserves, or manipulating block production during their proposal round. IDMA's real-time monitoring addresses each of these (see Section 08: Threat Model). For the merchant at the register, the practical result is that a broadcast &#x20BF;USD payment is effectively final on receipt. Signed pre-confirmations from the current block proposer give the merchant a cryptographic receipt within a second or two. The block time becomes a bookkeeping interval, not a settlement gate.</p>
+    </div>
+
+    <div class="advantage-block">
+      <h4>3. Faster block times</h4>
+      <p>Liquid produces blocks every two minutes. Because there's no proof-of-work on &#x20BF;ridge, the federation can produce blocks as fast as the network can propagate and sign them. With a professional federation of 10-20 members running institutional-grade infrastructure, a target block time of 30 seconds is realistic. Faster blocks reduce the gap between broadcast and on-chain inclusion, improving the experience for every transaction type.</p>
+    </div>
+
+    <div class="advantage-block">
+      <h4>4. Consortium controls its own membership</h4>
+      <p>On Liquid, Blockstream determines the functionary set. On &#x20BF;ridge, the consortium defines its own admission criteria, threshold requirements, and removal process under the charter. IDMA certifies that the governance process is fair and that new members meet published compliance standards. No external party can add a hostile node or remove a member without the consortium's governance process authorizing it.</p>
+    </div>
+
+    <div class="advantage-block">
+      <h4>5. Consortium controls its own upgrade schedule</h4>
+      <p>Deploying on Liquid means waiting for Blockstream to ship features. On &#x20BF;ridge, consortium members propose upgrades, IDMA certifies them before deployment, and the federation deploys on its own timeline. If the defensive programmability framework needs custom script extensions or new opcodes, the consortium can build and deploy them without depending on a third party's roadmap.</p>
+    </div>
+
+    <div class="advantage-block">
+      <h4>6. Consortium controls fee structures</h4>
+      <p>Commerce-layer transaction fees, redemption fee enforcement, volume-triggered escalation: all of these are governed by the consortium under IDMA's published framework. On Liquid, the fee structure is whatever Blockstream's protocol defines. On &#x20BF;ridge, fee parameters are tuned to serve the system's monetary policy goals, calibrated through the high-friction governance process described in the IDMA charter.</p>
+    </div>
+
+    <div class="advantage-block">
+      <h4>7. Custom extensions for defensive programmability</h4>
+      <p>The fee calculations based on UTXO age, network state awareness, velocity limits, and volume-triggered escalation may require script extensions or application-layer integrations that Liquid doesn't support. &#x20BF;ridge can add these capabilities at the protocol level. The entities engineering the protocol are the same entities whose reserves the defensive toolkit protects. Their incentive to get it right is direct and financial.</p>
+    </div>
+
+    <div class="advantage-block">
+      <h4>8. IDMA monitoring built in from day one</h4>
+      <p>&#x20BF;ridge is designed with IDMA's oversight role as a first-class requirement. Viewing keys for Confidential Transaction audit access, a dedicated monitoring API exposing mint volumes, burn activity, fee distribution, transaction ordering patterns, and velocity metrics. On Liquid, this kind of access would need to be negotiated with Blockstream. On &#x20BF;ridge, it's part of the architecture from launch.</p>
+    </div>
+
+    <div class="advantage-block">
+      <h4>9. Peg mechanics are internal operations</h4>
+      <p>Liquid's peg-in is user-facing: anyone can lock BTC and receive L-BTC. &#x20BF;ridge's mint process is a consortium operation. End users never interact with a peg. They acquire &#x20BF;USD through a financial service provider (an exchange, a wallet app, a payment platform), and the treasury company handles the base-layer BTC purchase and sidechain issuance behind the scenes. Redemption works the same way in reverse. The peg is consortium infrastructure, not a public bridge with a 17-hour toll booth.</p>
+    </div>
+
+    <div class="advantage-block">
+      <h4>10. Settlement finality with no chargebacks</h4>
+      <p>UTXO transactions on &#x20BF;ridge are irreversible at the protocol level. When a sender's outputs are consumed and new $1 outputs are created for the recipient, the protocol has no mechanism to reverse the transfer. Merchants receive real &#x20BF;USD that no entity can claw back. Refunds are forward transactions, new payments from the merchant to the customer with fresh timestamps and fresh UTXOs. Consumer protection and dispute resolution live at the FSP layer, not in the protocol. The roughly $100 billion in annual global chargeback costs that merchants absorb today has no equivalent on &#x20BF;ridge.</p>
+    </div>
+
+    <div class="advantage-block">
+      <h4>11. Multi-product separation enforced at the protocol level</h4>
+      <p>&#x20BF;USD, &#x20BF;OND, and &#x20BF;ILL circulate as distinct issued assets on the same chain. The protocol prevents cross-asset confusion. A user can't accidentally spend &#x20BF;OND as &#x20BF;USD any more than they could spend L-USDT as L-BTC on Liquid. Reserve contamination between products is impossible at the sidechain level, reinforcing the firewall architecture described in TBB.</p>
+    </div>
+
+    <div class="advantage-block">
+      <h4>12. Privacy architecture purpose-built</h4>
+      <p>Confidential Transactions hide amounts and asset types from outside observers. The UTXO model means there are no persistent account balances visible on-chain. IDMA receives viewing keys for aggregate monitoring. Financial service providers handle identity requirements at the application layer, within their own regulatory frameworks. The protocol is structurally incapable of the surveillance that CBDC architectures enable. The data doesn't exist on-chain because the chain was designed not to collect it.</p>
+    </div>
+
+    <div class="thesis">
+      <p>&#x20BF;ridge is not a neutral piece of infrastructure adopted from an external provider. It is purpose-built monetary infrastructure operated by the entities whose reserves back the currency, certified by an independent authority whose only mandate is the network's integrity.</p>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- SECTION 3: ARCHITECTURE OVERVIEW                      -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+
+    <span class="sec-num">Section 03</span>
+    <h2>Architecture Overview</h2>
+
+    <p>The &#x20BF;USD system is composed of four layers. Each performs a single function, and the failure of any one layer doesn't compromise the others.</p>
+
+    <table class="compare-table">
+      <thead>
+        <tr><th>Layer</th><th>Function</th><th>Network</th><th>Verification</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Reference Price</td><td>BTCADP daily price; &#x20BF;C cumulative average</td><td>Off-chain (open standard)</td><td>Any party with trade data</td></tr>
+        <tr><td>Reserve Layer</td><td>BTC custody in two-ledger system</td><td>Bitcoin base layer</td><td>On-chain wallet addresses</td></tr>
+        <tr><td>Token Layer</td><td>&#x20BF;USD / &#x20BF;OND / &#x20BF;ILL circulation</td><td>The &#x20BF;ridge Network</td><td>Sidechain explorer + IDMA monitoring</td></tr>
+        <tr><td>Interface Layer</td><td>Consumer wallets, merchant terminals, FSP apps</td><td>Application layer</td><td>User experience</td></tr>
+      </tbody>
+    </table>
+
+    <p>This specification covers the Token Layer. &#x20BF;ridge sits between the Reserve Layer (Bitcoin's base layer, where the BTC backing the system is held) and the Interface Layer (the wallets and apps that end users interact with). It connects to the Reserve Layer at exactly two points: minting and redemption. Everything between those two events is sidechain commerce, and no Bitcoin moves on the base layer during that commerce.</p>
+
+    <p>A consumer paying for coffee interacts with the Interface Layer (their wallet). The wallet constructs a transaction on the Token Layer (&#x20BF;ridge). The Reserve Layer is untouched. A million transactions can flow across &#x20BF;ridge without a single satoshi moving on Bitcoin's base layer. The base layer secures the reserves. &#x20BF;ridge handles commerce.</p>
+
+    <h3>Relationship to the Reserve Layer</h3>
+
+    <p>&#x20BF;ridge does not reference the reserve inventory. The reserve does not track sidechain balances. The two layers carry separate data about separate concerns. On the base layer, each token unit in the reserve carries provenance metadata: mint date, mint-day BTC spot price, mint-day &#x20BF;C price, and block age. The consortium uses this data for reserve management and Profit Burn Priority burn ordering. On the sidechain, each &#x20BF;USD is a $1 UTXO with a transaction ID and timestamp. The fee algorithm reads UTXO age to price redemptions. Neither layer knows what the other is doing until a holder crosses the boundary by requesting a mint or a redemption.</p>
+
+    <h3>Relationship to the Interface Layer</h3>
+
+    <p>End users never interact with &#x20BF;ridge directly. They interact with financial service providers: wallet apps, exchanges, payment platforms, merchant terminals. The FSP constructs, signs, and broadcasts sidechain transactions on the user's behalf. The user sees a balance, taps "pay," and receives confirmation. The complexity of UTXO management, Confidential Transaction blinding, and fee calculation is handled by the FSP's software. From the user's perspective, &#x20BF;USD works like any other digital payment.</p>
+
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- SECTION 4: CONSENSUS MODEL                            -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+
+    <span class="sec-num">Section 04</span>
+    <h2>Consensus Model</h2>
+
+    <p>&#x20BF;ridge uses a federated consensus model inherited from Elements. There is no proof-of-work and no mining. Block production is performed by the consortium's member companies, each running a federation node called a <strong>functionary</strong>. The functionaries take turns proposing blocks in a round-robin rotation, and a supermajority must sign each block before it's accepted by the network.</p>
+
+    <h3>4.1 Federation Signing</h3>
+
+    <p>Each consortium member operates one functionary node. The node holds a signing key used to participate in block production. When a block is proposed, it must receive signatures from at least 2/3 of the federation (rounded up) before the network treats it as valid. With a 15-member federation, that means 10 signatures per block. With 10 members, 7 signatures.</p>
+
+    <p>The signing process uses a threshold signature scheme. The block proposer assembles pending transactions into a candidate block, signs it, and distributes it to the other functionaries. Each functionary validates the block (checks that all transactions are well-formed, that no UTXOs are double-spent, that issued assets come from authorized issuers) and, if valid, adds its signature. Once the threshold is met, the block is finalized and appended to the chain.</p>
+
+    <h3>4.2 Block Production Rotation</h3>
+
+    <p>The right to propose a block rotates through the federation in a deterministic sequence. Each functionary gets a time slot during which it's the designated proposer. If the current proposer fails to produce a block within its slot (due to downtime, network partition, or malfunction), the next functionary in the rotation takes over after a defined timeout. This means a single member's downtime causes a one-slot delay, not a chain halt.</p>
+
+    <h3>4.3 Fault Tolerance</h3>
+
+    <p>The 2/3 threshold determines the network's tolerance for offline or compromised members. In a 15-member federation, up to 5 members can be simultaneously offline without interrupting block production. In a 10-member federation, up to 3. If more than 1/3 of the federation goes offline, block production stalls until enough members come back online. The chain doesn't fork or lose data during a stall. It simply pauses and resumes where it left off.</p>
+
+    <p>This is a meaningful difference from proof-of-work chains, where a loss of hash rate makes the chain slower but never stops it entirely. On &#x20BF;ridge, the tradeoff is explicit: faster finality and deterministic block times in exchange for a liveness dependency on the federation's availability. For a federation of 10-20 publicly traded companies running institutional-grade infrastructure with redundant deployments, sustained unavailability of more than 1/3 of the membership is an extreme scenario.</p>
+
+    <h3>4.4 The Trust Model</h3>
+
+    <p>The trust assumption should be stated plainly. Anyone using &#x20BF;ridge is trusting that 2/3 of the federation will not collude to forge blocks, censor transactions, or steal pegged funds. The federation members are publicly traded Bitcoin treasury companies with known identities, regulatory obligations, public financial statements, and billions of dollars in Bitcoin on their balance sheets. Their incentive to protect the network is direct: the reserves backing &#x20BF;USD are their own Bitcoin. Fraud would destroy the value of their own holdings alongside the network's credibility.</p>
+
+    <p>IDMA adds an independent monitoring layer on top of this incentive alignment. Even if the trust assumption is sound, verification is better than trust. IDMA's real-time monitoring (Section 13) catches anomalies that incentive alignment alone might not prevent.</p>
+
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- SECTION 5: BLOCK PARAMETERS                           -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+
+    <span class="sec-num">Section 05</span>
+    <h2>Block Parameters</h2>
+
+    <h3>5.1 Block Time</h3>
+
+    <p>The target block time is <strong>30 seconds</strong>. Liquid uses 120 seconds. &#x20BF;ridge can produce blocks faster because the federation is smaller (10-20 members vs. Liquid's ~60 functionaries) and runs on dedicated, professional infrastructure. Shorter block times reduce the interval between transaction broadcast and on-chain inclusion, which improves the experience for every transaction type.</p>
+
+    <p>With zero-confirmation acceptance (Section 07), the block time is less important for point-of-sale speed than it might appear. The merchant receives effective finality within seconds of broadcast, regardless of when the next block lands. The 30-second block time matters more for chain state updates: how quickly aggregate metrics (total supply, redemption velocity) refresh, and how soon IDMA's monitoring reflects new activity.</p>
+
+    <p>Block time is a tunable parameter. The consortium can adjust it through the governance process described in Section 16 if empirical data suggests a different interval performs better. The open questions section flags block time optimization as a research priority.</p>
+
+    <h3>5.2 Block Size and Throughput</h3>
+
+    <p>Elements inherits Bitcoin's transaction format with extensions for Confidential Transactions and issued assets. CT transactions are larger than standard Bitcoin transactions because they include range proofs that verify amounts are valid without revealing them. A typical &#x20BF;USD payment (one CT input, two CT outputs including change) is roughly 2-3 KB.</p>
+
+    <p>&#x20BF;ridge targets a block weight limit sufficient to handle sustained commercial throughput without congestion. The initial parameter is set at 4 MB block weight (matching Liquid's current limit), which supports approximately 1,300-2,000 CT transactions per block. At 30-second block times, that's roughly 2,600-4,000 transactions per minute, or 150,000-240,000 transactions per hour.</p>
+
+    <p>For context: Visa processes roughly 65,000 transactions per minute at peak. &#x20BF;ridge's initial throughput target is below this, but &#x20BF;ridge won't be processing global Visa-scale volume at launch. The block weight limit is a parameter that can be increased as the federation's infrastructure matures and as demand grows.</p>
+
+    <h3>5.3 Chain Growth</h3>
+
+    <p>At 4 MB maximum block weight and 30-second block times, the theoretical maximum chain growth is approximately 11.5 GB per day (4 MB x 2 blocks/minute x 1,440 minutes/day). In practice, blocks won't be consistently full at launch. A more realistic early estimate is 1-2 GB per day, growing with adoption. Federation members must provision storage accordingly, with pruning strategies and archival nodes defined in the federation's operational requirements.</p>
+
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- SECTION 6: TRANSACTION MODEL                          -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+
+    <span class="sec-num">Section 06</span>
+    <h2>Transaction Model</h2>
+
+    <h3>6.1 UTXO Structure</h3>
+
+    <p>Every &#x20BF;USD on &#x20BF;ridge is a discrete $1 Unspent Transaction Output (UTXO). Each UTXO carries a transaction ID (a unique cryptographic hash identifying the transaction that created it) and a timestamp (assigned when the UTXO is created, derived from the block time of the block that includes the transaction).</p>
+
+    <p>When a user pays a merchant, the transaction consumes one or more of the sender's existing UTXOs and creates new UTXOs for the recipient. If the payment amount doesn't exactly match the consumed inputs, a change output is created and returned to the sender. All new UTXOs carry fresh timestamps. The sender's consumed UTXOs are marked as spent and can never be used again.</p>
+
+    <p>A holder with a $50 &#x20BF;USD balance actually holds 50 individual $1 UTXOs. Their wallet software aggregates these into a single displayed balance. The holder never sees, selects, or manages individual UTXOs. When they send $12, their wallet selects 12 UTXOs to consume and creates 12 new $1 UTXOs for the recipient.</p>
+
+    <h3>6.2 Timestamp Assignment and Holding Period</h3>
+
+    <p>The timestamp on each UTXO records when it was created. For freshly minted &#x20BF;USD, that's the moment of issuance. For &#x20BF;USD received in a transfer, it's the time of the transfer. Every transfer resets the holding period because every transfer creates new UTXOs.</p>
+
+    <p>This has a specific implication for refunds. When a merchant refunds a customer, the customer receives new UTXOs with fresh timestamps. The refunded &#x20BF;USD is "young" again for redemption fee purposes, because the refund is economically a new acquisition of &#x20BF;USD by the customer. The original holding period doesn't carry over. This is inherent to the UTXO model, not an additional rule.</p>
+
+    <p>The redemption fee algorithm (defined in TBB) reads these timestamps to determine the holding period for each &#x20BF;USD being redeemed. Longer holding periods mean lower fees. The sidechain provides the timestamp data. The fee calculation logic lives in the application layer or in script extensions (see Section 18: Open Questions).</p>
+
+    <h3>6.3 Confidential Transactions</h3>
+
+    <p>&#x20BF;ridge implements Confidential Transactions (CT) inherited from Elements. CT uses cryptographic commitments to hide two pieces of information from outside observers: the transaction amount and the asset type. A third party scanning &#x20BF;ridge blockchain can see that a transaction occurred between two addresses, but can't determine how much moved or whether it was &#x20BF;USD, &#x20BF;OND, or &#x20BF;ILL.</p>
+
+    <p>The sender and recipient can see the full transaction details. Their wallets hold the blinding factors needed to decrypt the committed values. Any third party who needs to verify a specific transaction (for audit, compliance, or dispute resolution) can be given a <strong>transaction proof</strong>, a cryptographic object that lets them verify the amount and asset type of that specific transaction without revealing any other transaction's details.</p>
+
+    <p>CT includes range proofs that mathematically guarantee each committed amount is positive and within a valid range, preventing an attacker from creating negative-value outputs that would inflate the total supply. The range proofs are verified by every functionary during block validation.</p>
+
+    <h3>6.4 Viewing Keys</h3>
+
+    <p>CT supports the creation of <strong>viewing keys</strong>: cryptographic keys that allow a designated party to unblind transaction amounts without being able to spend funds. IDMA receives a master viewing key that gives it read access to all transaction amounts and asset types on &#x20BF;ridge. This is the mechanism that enables IDMA's real-time monitoring (Section 13) without requiring IDMA to hold any spending authority.</p>
+
+    <p>Consortium members may also issue viewing keys to external auditors, regulators, or other parties as required by their local regulatory frameworks. The viewing key architecture means transparency is granular: each party sees only what they've been authorized to see, and no party needs spending capability to perform oversight.</p>
+
+    <h3>6.5 Script Capabilities</h3>
+
+    <p>Elements extends Bitcoin Script with additional opcodes. &#x20BF;ridge inherits these extensions, which support multisignature outputs, timelocks (both absolute and relative), hash locks, and basic covenant-style logic. These are sufficient for standard &#x20BF;USD transactions: simple payments, multi-party escrow, and time-locked outputs.</p>
+
+    <p>The open question is whether the defensive programmability features (fee calculations based on UTXO age, network state awareness, volume-triggered escalation) can be implemented within the existing script environment or require custom extensions. UTXO-age-based fee calculation is likely feasible using relative timelocks already available in Elements Script. Aggregate network metrics (rolling redemption velocity as a percentage of supply) probably require either new opcodes or an application-layer oracle that feeds this data into the transaction validation process. Section 18 flags this as a priority for implementation research.</p>
+
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- SECTION 7: PAYMENT FINALITY AND POINT OF SALE         -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+
+    <span class="sec-num">Section 07</span>
+    <h2>Payment Finality and Point of Sale</h2>
+
+    <p>The target for merchant payment confirmation is <strong>under 2 seconds</strong> from the moment the buyer initiates payment to the moment the merchant's terminal shows "paid." Three mechanisms work together to achieve this.</p>
+
+    <h3>7.1 Zero-Confirmation Acceptance</h3>
+
+    <p>On proof-of-work chains, accepting a transaction before it's included in a block carries real risk. A miner could include a conflicting transaction in a competing block, reversing the payment. On &#x20BF;ridge, this risk is structurally eliminated. There are no competing miners, no chain forks, and no reorganizations under normal operation. The federation produces one chain with one tip. Once a transaction is broadcast and accepted into the mempool by the federation's nodes, it will be included in the next block. The only way to prevent inclusion is for the current block proposer to deliberately exclude it, which buys one block of delay (30 seconds) before the next proposer includes it.</p>
+
+    <p>A merchant accepting a zero-conf &#x20BF;USD payment on &#x20BF;ridge is in a fundamentally different position than a merchant accepting a zero-conf Bitcoin payment on the base layer. The federation's deterministic block production makes double-spending infeasible without federation collusion, which IDMA's monitoring would detect.</p>
+
+    <h3>7.2 Signed Pre-Confirmations</h3>
+
+    <p>For additional assurance, the current block proposer can issue a <strong>signed pre-confirmation</strong>: a cryptographic receipt acknowledging that the transaction has been accepted and will be included in the next block. The merchant's terminal receives this receipt within a second or two of broadcast. If the block proposer signs a pre-confirmation and then fails to include the transaction, the violation is provable. IDMA can act on it, and the proposer's reputation and standing in the consortium are at risk.</p>
+
+    <p>Signed pre-confirmations are optional. A merchant who trusts zero-conf (reasonable given the security model) doesn't need them. A merchant handling high-value transactions may prefer the additional cryptographic guarantee. The protocol supports both modes.</p>
+
+    <h3>7.3 The Merchant Experience</h3>
+
+    <p>At the register, the flow looks like this:</p>
+
+    <p>The merchant's terminal displays a payment request (a QR code, an NFC tag, or a push notification to the buyer's wallet). The buyer's wallet constructs a &#x20BF;USD transaction consuming the appropriate UTXOs, signs it, and broadcasts it to &#x20BF;ridge. The federation nodes receive the transaction, validate it, and propagate it. The merchant's terminal, connected to a &#x20BF;ridge node (directly or through an FSP), sees the validated transaction appear in the mempool. If signed pre-confirmations are enabled, the current block proposer's receipt arrives within a second or two. The terminal displays "paid."</p>
+
+    <p>The buyer's experience is indistinguishable from tapping a card. The merchant's experience is indistinguishable from receiving a card authorization, except there's no processor fee of 2-3%, no chargeback risk, and no settlement delay of 1-3 business days. The merchant has the money, confirmed by the federation, in under two seconds. Final settlement (block inclusion) follows within 30 seconds. The funds are available immediately.</p>
+
+    <div class="callout">
+      <p>Card networks show "approved" at the terminal in 1-2 seconds, but actual settlement between banks takes 1-3 business days. &#x20BF;ridge shows "paid" in 1-2 seconds, and the merchant has the actual &#x20BF;USD in their wallet within 30 seconds. Faster confirmation <em>and</em> faster settlement.</p>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- SECTION 8: THREAT MODEL                               -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+
+    <span class="sec-num">Section 08</span>
+    <h2>Threat Model</h2>
+
+    <p>&#x20BF;ridge's security rests on two foundations: the 2/3 threshold requirement for block production and IDMA's real-time monitoring of every operation on the network. The threshold prevents unilateral action. The monitoring catches behavior that the threshold alone can't detect. Together, they address threats at three levels: rogue consortium members, external attackers, and buyer/merchant fraud.</p>
+
+    <h3>8.1 Rogue Consortium Member</h3>
+
+    <p>A single consortium member can't double-spend, reverse transactions, or forge blocks. The 2/3 signing threshold makes all of these impossible without majority collusion. The actual threats from a bad actor inside the federation are subtler.</p>
+
+    <p><strong>Minting without reserves.</strong> A rogue treasury company issues &#x20BF;USD on the sidechain without purchasing the corresponding BTC on the base layer. They pocket the incoming fiat and skip the Bitcoin purchase. For some window of time, the circulating &#x20BF;USD supply exceeds the actual BTC in reserve. IDMA's monitoring cross-references every mint event on the sidechain against the base-layer deposit in real time. If a treasury company mints &#x20BF;USD and the corresponding BTC doesn't appear in their Ledger 1 wallet within a defined settlement window, the system flags it. The specification defines this window as a protocol parameter. The tighter the window, the less room for fraud.</p>
+
+    <p><strong>Draining reserves.</strong> A member could attempt to move BTC out of their Ledger 1 or Ledger 2 wallets without a corresponding redemption event on the sidechain. Because the reserves sit in publicly addressable Bitcoin wallets, anyone can watch them. IDMA's monitoring triggers an alert the moment a reserve wallet's balance drops without a matching sidechain burn. When a discrepancy is detected, the protocol automatically freezes that member's minting capability until the discrepancy is resolved. The alert is public. Other consortium members and outside observers can verify the discrepancy independently using the base-layer wallet addresses.</p>
+
+    <p><strong>Block production manipulation.</strong> When it's a rogue member's turn to propose a block, they could reorder transactions within the block or selectively exclude certain transactions. On most chains, transaction ordering manipulation is a serious concern because it can be exploited for price arbitrage (the MEV problem familiar from Ethereum). On &#x20BF;ridge, the attack surface is smaller: every &#x20BF;USD is always worth $1, so there's no price to manipulate through reordering. A member could still delay or censor specific transactions during their proposal round, but the next block proposer is a different member, and excluded transactions get included in the next block. Persistent censorship would require majority collusion. IDMA's monitoring of execution ordering patterns catches systematic exclusion by any single member.</p>
+
+    <p><strong>Fake volume for fee harvesting.</strong> If sidechain transaction fees are distributed among federation members, a member could create addresses and circulate &#x20BF;USD between them to inflate volume and harvest fees. The defense is structural: commerce-layer transaction fees are set low enough that the cost of producing wash transactions roughly equals or exceeds the fee revenue. IDMA's monitoring also tracks per-member transaction patterns, and anomalous volume spikes from addresses associated with a single member's infrastructure are flagged automatically.</p>
+
+    <h3>8.2 External Attacks</h3>
+
+    <p><strong>Coordinated short-plus-redemption.</strong> An attacker shorts BTC on external markets, then triggers mass &#x20BF;USD redemption to force the consortium to sell Bitcoin from reserves, crashing the spot price and profiting on the short position. The defensive programmability toolkit (defined in TBB) addresses this: BTC-default redemption eliminates concentrated forced selling, time-weighted fees make rapid mint-and-redeem cycles expensive, and velocity limits throttle the fiat exit under stress. &#x20BF;ridge's role in this defense is providing the sidechain data (UTXO timestamps, aggregate redemption velocity) that the defensive mechanisms read. The full threat analysis is in TBB Section 10.</p>
+
+    <p><strong>DDoS against federation nodes.</strong> An attacker floods consortium members' nodes with traffic to disrupt block production. Federation nodes run on institutional-grade infrastructure with DDoS mitigation already standard practice for publicly traded companies operating financial services. The threshold model adds resilience: even if several members' nodes are temporarily degraded, the remaining members continue producing blocks as long as the 2/3 threshold is met. IDMA's monitoring detects sustained node unavailability and can escalate under the consortium's emergency procedures.</p>
+
+    <p><strong>Key compromise of a single member.</strong> If an attacker obtains a member's federation signing keys, they can sign blocks on behalf of that member. The 2/3 threshold limits the damage: a single compromised key can't forge blocks alone. The federation governance section (Section 15) defines key rotation procedures, including emergency rotation triggered by suspected compromise. The compromised member's signing authority is revoked and re-established under new keys. IDMA coordinates the rotation and verifies that the new key set is secure before the member rejoins the signing rotation.</p>
+
+    <h3>8.3 Buyer and Merchant Fraud</h3>
+
+    <p><strong>Double-spend at POS.</strong> A buyer broadcasts a payment to a merchant and simultaneously tries to broadcast a conflicting transaction spending the same UTXOs to their own address. On proof-of-work chains, this is a real risk at zero-conf because miners could include either transaction. On &#x20BF;ridge, the federation nodes receive both transactions and the first one accepted wins. The second is rejected as a conflict. Because block production is deterministic (no mining race, no competing chain tips), there's no window for a competing transaction to slip through. Successfully double-spending would require corrupting the current block proposer, a publicly traded company with a public reputation and regulatory obligations.</p>
+
+    <p><strong>Counterfeit &#x20BF;USD.</strong> On &#x20BF;ridge, only consortium members can mint &#x20BF;USD. It's an issued asset with defined, authorized issuers. A buyer can't create fake &#x20BF;USD any more than they could create fake L-USDT on Liquid. The protocol rejects any mint transaction that doesn't come from a certified issuer. A merchant's wallet can verify that the &#x20BF;USD it received traces back to a valid issuance by a certified consortium member.</p>
+
+    <p><strong>Non-receipt claims.</strong> A merchant receives &#x20BF;USD, delivers the goods, and then claims the payment never arrived. The buyer has an on-chain TX ID and, if pre-confirmations are used, a signed cryptographic receipt from a federation member. The proof of payment is independently verifiable. This fraud vector is harder to execute than in the cash world, where there's no receipt unless someone creates one.</p>
+
+    <p><strong>Overcharging via compromised terminal.</strong> A compromised merchant terminal could display one price and submit a transaction for a different amount. The defense lives in the wallet layer: the buyer's wallet displays the exact amount being signed and requires explicit confirmation before broadcasting. The protocol can't prevent a terminal from showing a wrong price, just as Bitcoin can't prevent a fake QR code. But the buyer's wallet is the signing authority, and if the wallet is sound, the buyer sees exactly what they're authorizing.</p>
+
+    <p><strong>Refund fraud.</strong> A buyer receives goods, then pressures the merchant for a refund, ending up with both the goods and the money. Because refunds are forward transactions initiated voluntarily by the merchant, no one can force the merchant to send &#x20BF;USD back. There's no chargeback mechanism a buyer can trigger unilaterally. The merchant decides whether a refund is warranted. The fraud surface is dramatically smaller than on credit card networks, where the card company can pull money from the merchant's account without the merchant's consent.</p>
+
+    <p><strong>Sybil attacks on the FSP layer.</strong> Someone creates hundreds of fake merchant or buyer accounts through an FSP to access minting and redemption services at scale for money laundering. &#x20BF;ridge protocol doesn't know or care about user identities. FSPs are responsible for vetting their users within their regulatory frameworks, including KYC/AML compliance. The protocol layer and the identity layer are structurally separate by design.</p>
+
+    <div class="callout">
+      <p><strong>The consistent principle:</strong> the protocol handles settlement integrity, the wallet layer handles user authorization, and the FSP layer handles identity and dispute resolution. Each layer defends against the threats appropriate to its scope. No layer attempts to do another layer's job.</p>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- SECTION 9: SETTLEMENT FINALITY AND DISPUTE FRAMEWORK  -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+
+    <span class="sec-num">Section 09</span>
+    <h2>Settlement Finality and Dispute Framework</h2>
+
+    <h3>9.1 Irreversibility</h3>
+
+    <p>Transactions on &#x20BF;ridge are final at the protocol level. Once a transaction is included in a signed block, the UTXOs it consumed are permanently spent and the UTXOs it created are permanently part of the recipient's balance. The protocol has no mechanism for reversing, modifying, or unwinding a completed transaction. No consortium member, no IDMA directive, and no court order can cause the sidechain to move funds backward. The chain records what happened. It doesn't have an opinion about whether it should have happened.</p>
+
+    <p>For merchants, this eliminates chargeback risk entirely. The &#x20BF;USD a merchant receives in a transaction is theirs. No payment processor, card network, or financial intermediary can reach into their wallet and pull it back.</p>
+
+    <h3>9.2 Refunds</h3>
+
+    <p>A refund is a new forward transaction. The merchant constructs a &#x20BF;USD payment to the customer's address, signs it, and broadcasts it to &#x20BF;ridge. The protocol treats it identically to any other payment. New $1 UTXOs are created for the customer with fresh timestamps. The customer's holding period on those specific dollars resets to zero, because the refund is economically a new acquisition. The original payment's UTXOs remain spent. The two transactions are independent entries on the chain.</p>
+
+    <p>Partial refunds work the same way. A merchant refunding $7 on a $20 purchase sends $7 in new UTXOs to the customer. The merchant retains the other $13. The protocol doesn't know the two transactions are related, and doesn't need to.</p>
+
+    <h3>9.3 Dispute Resolution</h3>
+
+    <p>Consumer protection and dispute resolution live outside the protocol at three levels:</p>
+
+    <p><strong>FSP-mediated disputes.</strong> Financial service providers (wallet apps, payment platforms) can offer buyer protection as a value-added service. If a consumer purchases goods through a payment app and the merchant doesn't deliver, the FSP can mediate the dispute and, if warranted, credit the customer from the FSP's own operational funds. The FSP then pursues recovery from the merchant through its own merchant agreement. This is structurally identical to how PayPal handles disputes on top of final bank transfers. The consumer protection is a business-layer offering funded by the FSP's fee revenue. The protocol is uninvolved.</p>
+
+    <p><strong>Merchant-initiated resolution.</strong> Reputable merchants handle returns and complaints directly, issuing refunds via forward transaction when they determine a claim is valid. The merchant bears the decision authority. No third party can override it at the protocol level.</p>
+
+    <p><strong>Legal recourse.</strong> For large transactions or irresolvable disputes, the legal system applies. If someone pays a contractor $50,000 in &#x20BF;USD and the contractor doesn't perform, that's a breach of contract case. Courts can order restitution. The enforcement happens through legal channels, not through the sidechain.</p>
+
+    <div class="callout">
+      <p>The protocol handles settlement. The wallet handles authorization. The FSP handles the customer relationship. The courts handle the law. Each layer solves the problems within its scope.</p>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- SECTION 10: ISSUED ASSETS AND MULTI-PRODUCT SUPPORT   -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+
+    <span class="sec-num">Section 10</span>
+    <h2>Issued Assets and Multi-Product Support</h2>
+
+    <p>Elements supports the creation of multiple distinct asset types on a single chain. Each asset has a unique identifier, a designated issuer, and its own supply. Assets of different types can't be mixed in a transaction any more than you could accidentally deposit euros into a dollar account.</p>
+
+    <h3>10.1 Three Products, One Chain</h3>
+
+    <p>&#x20BF;USD, &#x20BF;OND, and &#x20BF;ILL circulate on &#x20BF;ridge as three separate issued assets. Each has a unique asset ID assigned at issuance. The protocol enforces type separation: a transaction paying &#x20BF;USD can only consume &#x20BF;USD inputs and produce &#x20BF;USD outputs. &#x20BF;OND and &#x20BF;ILL outputs can't be substituted. Wallet software displays each product's balance separately and constructs transactions using only the correct asset type.</p>
+
+    <p>All three assets share the same sidechain infrastructure: the same federation, the same block production, the same Confidential Transaction privacy, the same IDMA monitoring. The shared infrastructure reduces operational overhead. If the consortium had to operate a separate chain for each product, every member would need to run three sets of nodes, maintain three signing key sets, and coordinate three upgrade cycles. A single chain with multiple issued assets is more efficient and easier to secure.</p>
+
+    <h3>10.2 Reserve Separation</h3>
+
+    <p>Shared sidechain infrastructure does not mean shared reserves. Each product's two-ledger system is completely independent, held in separate Bitcoin wallets on the base layer. A stress event on &#x20BF;USD (a surge in fiat redemptions during a bear market) can't touch &#x20BF;OND or &#x20BF;ILL reserves. The sidechain enforces asset type separation. The reserve architecture enforces financial separation. The firewall operates at both layers simultaneously.</p>
+
+    <h3>10.3 Conversion Between Products</h3>
+
+    <p>The &#x20BF;OND conversion mechanism (any &#x20BF;USD holder can convert to a &#x20BF;OND at the current &#x20BF;C entry price, at no cost, with no delay) is implemented on &#x20BF;ridge as an atomic asset swap. The holder's &#x20BF;USD UTXOs are consumed and &#x20BF;OND UTXOs are created in a single transaction. The conversion doesn't touch reserves: the BTC backing the original &#x20BF;USD moves from the &#x20BF;USD reserve pool to the &#x20BF;OND reserve pool in the consortium's accounting, but no Bitcoin moves on the base layer. The sidechain records the asset type change. The reserve rebalancing is a ledger entry on the consortium's books, verified by IDMA.</p>
+
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- SECTION 11: PEG MECHANICS (MINTING AND REDEMPTION)    -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+
+    <span class="sec-num">Section 11</span>
+    <h2>Peg Mechanics: Minting and Redemption</h2>
+
+    <p>Unlike Liquid's user-facing peg, &#x20BF;ridge's peg is a consortium-internal operation. End users never peg in or peg out. They buy and sell &#x20BF;USD through financial service providers. The treasury companies handle the boundary between the base layer and the sidechain.</p>
+
+    <h3>11.1 Minting</h3>
+
+    <p>When demand for &#x20BF;USD arrives through an FSP, the process follows a defined sequence. Fiat enters the consortium through the FSP channel. The treasury company uses the incoming funds to purchase BTC at the current spot price on the open market. The purchased BTC is deposited into the company's Ledger 1 wallet on Bitcoin's base layer. Once the base-layer deposit is confirmed, the treasury company signs a mint transaction on &#x20BF;ridge, creating new &#x20BF;USD UTXOs. The minted &#x20BF;USD is credited to the end user's balance through the FSP.</p>
+
+    <p>The critical step is the verification between the base-layer deposit and the sidechain mint. &#x20BF;ridge defines a <strong>settlement window</strong>: the maximum time allowed between a sidechain mint event and the corresponding BTC deposit in Ledger 1. IDMA's monitoring cross-references every mint against the base layer within this window. If the BTC doesn't appear, the mint is flagged and the member's minting authority can be suspended pending resolution (see Section 08: Threat Model).</p>
+
+    <p>The settlement window is a protocol parameter, initially proposed at <strong>6 hours</strong>. This allows for base-layer confirmation time (6 Bitcoin block confirmations take roughly 60 minutes) plus operational processing, while remaining tight enough to limit exposure from unbacked minting.</p>
+
+    <h3>11.2 Redemption</h3>
+
+    <p>Redemption is the reverse. The holder submits a redemption request through their FSP. On the sidechain, the holder's &#x20BF;USD UTXOs are burned (sent to a provably unspendable address). The consortium's protocol selects which token units in the reserve inventory to liquidate using the Profit Burn Priority algorithm (defined in TBB). The holder receives their payout through the FSP.</p>
+
+    <p>Three exit paths are available, each with different sidechain mechanics:</p>
+
+    <p><strong>BTC-default redemption.</strong> The consortium transfers BTC from Ledger 1 directly to the redeemer's Bitcoin wallet. On the sidechain, the &#x20BF;USD UTXOs are burned. On the base layer, the corresponding BTC moves from the consortium's Ledger 1 wallet to the redeemer's address. The fee is calculated from the sidechain UTXO timestamps (holding period) and the network's current reserve depth. BTC-default is instant for standard volumes.</p>
+
+    <p><strong>Savings conversion.</strong> The holder converts &#x20BF;USD to &#x20BF;OND at the current &#x20BF;C entry price. On the sidechain, &#x20BF;USD UTXOs are consumed and &#x20BF;OND UTXOs are created in an atomic swap. No reserves are touched. No Bitcoin is sold. No fee applies. This is the escape valve that absorbs panic without absorbing outflow.</p>
+
+    <p><strong>Fiat redemption.</strong> The consortium sells BTC from Ledger 1 on the open market and returns dollars to the redeemer through the FSP. On the sidechain, the &#x20BF;USD UTXOs are burned. This is the only exit path that generates selling pressure on BTC spot. Fees are higher than BTC-default at every holding period tier, and velocity limits apply as defined in TBB's defensive programmability framework.</p>
+
+    <h3>11.3 Burn Mechanics</h3>
+
+    <p>When &#x20BF;USD is burned on redemption, the UTXOs are sent to a provably unspendable address (an OP_RETURN output or a designated burn address derived from a hash with no known preimage). The burn is permanent and verifiable. Anyone can confirm that the burned UTXOs will never re-enter circulation. The total outstanding supply on the sidechain can be independently calculated at any time: total minted minus total burned.</p>
+
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- SECTION 12: SIDECHAIN TRANSACTION FEES                -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+
+    <span class="sec-num">Section 12</span>
+    <h2>Sidechain Transaction Fees</h2>
+
+    <p>&#x20BF;ridge has two distinct fee categories that serve different purposes. They should not be confused.</p>
+
+    <p><strong>Commerce-layer transaction fees</strong> are charged on every &#x20BF;USD transfer on the sidechain: peer-to-peer payments, merchant transactions, salary deposits, any movement of &#x20BF;USD between addresses. These are the sidechain's operating fees, analogous to Bitcoin's miner fees. This section covers commerce-layer fees.</p>
+
+    <p><strong>Redemption fees</strong> are charged when &#x20BF;USD is redeemed for BTC or fiat. These are part of the defensive programmability toolkit and are defined in TBB. The sidechain provides the data (UTXO timestamps, aggregate velocity) that the redemption fee algorithm reads, but the fee schedule itself is a monetary policy parameter governed by the IDMA charter, not a sidechain protocol parameter.</p>
+
+    <h3>12.1 Fee Structure</h3>
+
+    <p>Commerce-layer fees are set low enough to make everyday transactions frictionless. A coffee purchase, a salary payment, a merchant settlement: none of these should carry a fee that a user notices. The target is a fixed per-transaction fee in the range of fractions of a cent, not a percentage of the transaction value. &#x20BF;USD is a stablecoin for commerce. If fees make small transactions impractical, the commerce use case fails.</p>
+
+    <p>The specific fee level is a protocol parameter, adjustable through the governance process (Section 16). The initial proposal is a flat fee of $0.001 (one-tenth of a cent) per transaction, regardless of the number of UTXOs consumed or created. This is low enough to be invisible for any transaction above a few cents, while generating meaningful aggregate revenue at scale.</p>
+
+    <h3>12.2 Fee Recipients</h3>
+
+    <p>Commerce-layer fees are collected by the federation. The fee revenue is pooled and distributed among consortium members according to a formula defined in the consortium's operating agreement. The distribution formula is a governance decision, not a protocol decision. Options include equal distribution, distribution proportional to each member's share of outstanding &#x20BF;USD supply, or distribution proportional to each member's contribution to federation infrastructure.</p>
+
+    <p>IDMA monitors fee distribution for fairness. Anomalies in fee allocation (a member receiving a disproportionate share relative to the agreed formula) are flagged automatically.</p>
+
+    <h3>12.3 Fee Revenue and the Demand Engine</h3>
+
+    <p>Commerce-layer fee revenue is one input into the consortium's broader economics. TBB describes how fee revenue compounds the reserve system: a portion of fee revenue is used to purchase additional BTC, which deepens Ledger 2 over time. The sidechain doesn't enforce this allocation. It collects fees and distributes them to the federation. What the consortium does with the revenue after distribution is governed by the charter and the IDMA framework, not by the sidechain protocol.</p>
+
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- SECTION 13: IDMA MONITORING INTERFACE                 -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+
+    <span class="sec-num">Section 13</span>
+    <h2>IDMA Monitoring Interface</h2>
+
+    <p>IDMA's monitoring role is described in the IDMA Charter. This section specifies how &#x20BF;ridge provides the data IDMA needs to perform that role.</p>
+
+    <h3>13.1 Data Access</h3>
+
+    <p>IDMA operates a dedicated monitoring node connected to &#x20BF;ridge. This node receives every block, every transaction, and every state update in real time. IDMA holds a master viewing key that unblinds all Confidential Transaction data: amounts, asset types, and sender/recipient addresses. IDMA sees everything the federation sees.</p>
+
+    <p>The monitoring node is read-only. IDMA can observe the network but cannot broadcast transactions, sign blocks, or modify state. IDMA has no spending keys, no signing authority, and no ability to censor or reorder transactions. The separation is absolute: IDMA watches, it doesn't act on-chain.</p>
+
+    <h3>13.2 Monitored Metrics</h3>
+
+    <p>IDMA's monitoring system tracks the following in real time:</p>
+
+    <p><strong>Mint and burn activity.</strong> Every &#x20BF;USD minted or burned, by which consortium member, at what time. Cross-referenced against base-layer BTC deposits and withdrawals within the settlement window.</p>
+
+    <p><strong>Outstanding supply.</strong> Total &#x20BF;USD, &#x20BF;OND, and &#x20BF;ILL in circulation, broken down by issuing member.</p>
+
+    <p><strong>Redemption velocity.</strong> Rolling 24-hour, 7-day, and 30-day redemption volumes as a percentage of total supply, the inputs to the defensive toolkit's escalation thresholds.</p>
+
+    <p><strong>Fee distribution.</strong> Per-block fee collection and distribution across federation members, checked against the agreed formula.</p>
+
+    <p><strong>Transaction ordering.</strong> Per-member analysis of transaction inclusion patterns during each member's block proposal rounds. Flags for systematic exclusion, front-running, or ordering anomalies.</p>
+
+    <p><strong>Node availability.</strong> Uptime and responsiveness of each federation member's functionary node. Sustained unavailability triggers an alert.</p>
+
+    <p><strong>Reserve correspondence.</strong> Continuous comparison of sidechain outstanding supply against base-layer reserve wallet balances. Any discrepancy triggers an immediate alert.</p>
+
+    <h3>13.3 Alert and Escalation</h3>
+
+    <p>When IDMA's monitoring detects an anomaly, the response follows the escalation framework defined in the IDMA Charter. Minor anomalies (brief node downtime, a short delay in settlement window compliance) generate internal alerts to the affected member and to IDMA's oversight committee. Serious anomalies (reserve discrepancy, unauthorized mint, systematic transaction exclusion) trigger public alerts and can result in the affected member's minting authority being suspended or their certification being revoked.</p>
+
+    <p>IDMA doesn't enforce penalties on-chain. It publishes findings, issues certifications and revocations, and coordinates the consortium's response through the governance framework. The enforcement power comes from the consortium's charter: a member whose IDMA certification is revoked can no longer participate in the federation.</p>
+
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- SECTION 14: STATE ANCHORING                           -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+
+    <span class="sec-num">Section 14</span>
+    <h2>State Anchoring</h2>
+
+    <p>&#x20BF;ridge is a sidechain. Its security depends on the federation's integrity, not on Bitcoin's proof-of-work. To provide an external, tamper-evident record of &#x20BF;ridge's state, the federation periodically commits a cryptographic hash of the sidechain's state to Bitcoin's base layer.</p>
+
+    <h3>14.1 The Commitment</h3>
+
+    <p>At a defined interval (initially proposed at every 144 Bitcoin blocks, approximately once per day), the federation constructs a commitment transaction on Bitcoin's base layer. The transaction includes an OP_RETURN output containing a hash of &#x20BF;ridge's current state: the Merkle root of all unspent outputs, the total outstanding supply of each issued asset, and the block height of the sidechain at the time of commitment.</p>
+
+    <p>The commitment transaction is a standard Bitcoin transaction, visible to anyone, stored permanently in Bitcoin's blockchain. It doesn't reveal any information about individual transactions or balances on &#x20BF;ridge. It records a single hash that can be verified against the sidechain's state by anyone with access to a &#x20BF;ridge node.</p>
+
+    <h3>14.2 Tamper Evidence</h3>
+
+    <p>If the federation were to rewrite &#x20BF;ridge's history (altering past transactions, modifying balances, or inflating the supply), the altered state would produce a different hash than the one committed to Bitcoin. Any observer who recorded the sidechain's state at the time of commitment can detect the tampering by recomputing the hash and comparing it to the Bitcoin commitment. The base layer acts as a public notary: it doesn't know what the hash means, but it proves what the hash was at a specific point in time.</p>
+
+    <h3>14.3 Verification</h3>
+
+    <p>Independent verification requires two things: access to &#x20BF;ridge's state data (available through a &#x20BF;ridge node or through IDMA's published transparency reports) and access to Bitcoin's blockchain (available to anyone). The verification process is deterministic: recompute the state hash from the sidechain data and compare it to the OP_RETURN value in the corresponding Bitcoin transaction. A match confirms that the sidechain's state hasn't been altered since the commitment was made. IDMA performs this verification automatically as part of its monitoring function. Any external party can perform it independently.</p>
+
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- SECTION 15: FEDERATION GOVERNANCE                     -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+
+    <span class="sec-num">Section 15</span>
+    <h2>Federation Governance</h2>
+
+    <p>The federation is the consortium's operational layer. Governance decisions about the federation are a subset of the consortium's broader governance, subject to the IDMA charter. This section covers the federation-specific mechanics: who operates nodes, how membership changes, and what happens in emergencies.</p>
+
+    <h3>15.1 Member Admission</h3>
+
+    <p>A new consortium member seeking to join the federation must meet IDMA's published certification criteria (reserve requirements, audit standards, jurisdictional compliance). Once certified, the new member provisions a functionary node, generates signing keys, and undergoes a key ceremony coordinated by IDMA. The existing federation votes to admit the new member under the consortium's supermajority governance rules. Once admitted, the new member's node is added to the block production rotation, and the signing threshold is recalculated for the new federation size.</p>
+
+    <h3>15.2 Member Removal</h3>
+
+    <p>A member can be removed from the federation voluntarily (withdrawal) or involuntarily (revocation). Voluntary withdrawal follows a defined wind-down period during which the departing member's outstanding &#x20BF;USD obligations are transferred or redeemed. Involuntary removal is triggered by IDMA certification revocation, which can result from reserve discrepancies, audit failures, or governance violations as defined in the charter. In both cases, the departing member's signing keys are rotated out, and the threshold is recalculated for the reduced federation size.</p>
+
+    <h3>15.3 Key Management</h3>
+
+    <p>Each federation member's signing key is the member's responsibility. IDMA does not hold, manage, or have access to any member's signing keys. Key generation follows a defined ceremony with IDMA as a witness but not a participant. Members are required to use hardware security modules (HSMs) for key storage and to maintain geographically distributed backup keys under the operational requirements published by IDMA.</p>
+
+    <h3>15.4 Key Rotation</h3>
+
+    <p>Routine key rotation occurs on a scheduled basis (proposed: annually). The member generates new keys, coordinates with the federation to update the signing set, and the old keys are retired. Emergency key rotation is triggered by suspected compromise and follows an accelerated timeline. IDMA coordinates the emergency rotation, and the compromised key is immediately revoked from the signing set. The member cannot participate in block production until the new key is verified and admitted.</p>
+
+    <h3>15.5 Emergency Procedures</h3>
+
+    <p><strong>Network partition.</strong> If the federation splits into groups that can't communicate with each other, no group can meet the 2/3 threshold alone (assuming the partition isn't extremely lopsided). Block production halts until connectivity is restored. The chain doesn't fork. When the partition heals, the federation resumes from the last signed block.</p>
+
+    <p><strong>Member default.</strong> If a member's business fails (bankruptcy, regulatory shutdown), the consortium's charter defines how the member's &#x20BF;USD obligations, reserve holdings, and federation role are handled. The federation continues operating at reduced size while the default is resolved. If the reduced federation still meets the minimum membership threshold, block production continues uninterrupted.</p>
+
+    <p><strong>Catastrophic key loss.</strong> If a member loses all copies of their signing key (primary and backups), they are effectively removed from the federation until new keys are generated and admitted through the standard key ceremony process. The federation continues without them.</p>
+
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- SECTION 16: UPGRADE PATH                              -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+
+    <span class="sec-num">Section 16</span>
+    <h2>Upgrade Path</h2>
+
+    <p>&#x20BF;ridge's protocol rules can be changed. The process for changing them is deliberately slow, transparent, and subject to independent review. The high-friction governance model described in the IDMA charter applies directly to sidechain upgrades.</p>
+
+    <h3>16.1 Proposal</h3>
+
+    <p>Any consortium member can propose a protocol upgrade. The proposal must include a technical specification of the change, a rationale, an impact assessment covering all three products (&#x20BF;USD, &#x20BF;OND, &#x20BF;ILL), and a testing plan. Proposals are submitted to IDMA and published to the consortium's governance forum for review.</p>
+
+    <h3>16.2 IDMA Certification</h3>
+
+    <p>Before any upgrade reaches the live network, IDMA reviews the code change. The review verifies that the upgrade doesn't introduce asymmetric advantages for any member, doesn't alter fee distribution in ways that deviate from the agreed formula, doesn't modify consensus rules in ways that compromise the signing threshold or fault tolerance, and doesn't weaken the privacy architecture. IDMA publishes its review findings. No code ships to the live network without IDMA approval.</p>
+
+    <h3>16.3 Federation Vote</h3>
+
+    <p>After IDMA certification, the consortium votes on the upgrade under its supermajority governance rules. The vote requires the same threshold as other charter amendments (defined in the consortium's operating agreement). If approved, the federation coordinates a deployment window during which all members upgrade their nodes simultaneously.</p>
+
+    <h3>16.4 Backward Compatibility</h3>
+
+    <p>Upgrades that change transaction format, UTXO structure, or consensus rules require a hard fork of the sidechain. Because the federation is small and coordinated, hard forks are operationally simpler than on public blockchains, but they still require all members to upgrade within the deployment window. Upgrades that add new features without modifying existing rules can be deployed as soft forks, which are backward-compatible and don't require simultaneous adoption.</p>
+
+    <p>The specification version is incremented with every protocol change. The version number is included in each block header so that any observer can determine which protocol rules were in effect for any given block.</p>
+
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- SECTION 17: PRIVACY ARCHITECTURE                      -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+
+    <span class="sec-num">Section 17</span>
+    <h2>Privacy Architecture</h2>
+
+    <h3>17.1 What the Protocol Records</h3>
+
+    <p>&#x20BF;ridge records: transaction IDs (a unique hash for each transaction), the addresses involved (sender and recipient, pseudonymous by default), timestamps (when each UTXO was created), and Confidential Transaction commitments (cryptographic commitments to amounts and asset types that are opaque without a viewing key or blinding factor).</p>
+
+    <h3>17.2 What the Protocol Does Not Record</h3>
+
+    <p>&#x20BF;ridge does not record: holder identity (names, documents, KYC data), transaction purpose (payment, refund, salary, gift), spending categories (groceries, rent, entertainment), geographic location, device information, or any metadata about why a transaction was made. This data doesn't exist on-chain because the protocol was designed not to collect it.</p>
+
+    <h3>17.3 Privacy Properties</h3>
+
+    <p>Three features of &#x20BF;ridge contribute to structural privacy:</p>
+
+    <p><strong>Confidential Transactions</strong> hide amounts and asset types from outside observers. A third party scanning the blockchain sees that transactions occur but can't determine how much moved or which product was transferred.</p>
+
+    <p><strong>The UTXO model</strong> means there are no persistent account balances visible on-chain. A holder's balance is the aggregate of their unspent outputs, which are spread across multiple transactions. Without a viewing key, an observer can't determine a specific address's total balance by summing visible amounts, because the amounts are blinded.</p>
+
+    <p><strong>Pseudonymous addresses</strong> are not tied to real-world identity at the protocol level. A holder can use a different address for every transaction if their wallet supports it (and good wallet design should). Linking addresses to identities requires external information that the sidechain doesn't provide.</p>
+
+    <h3>17.4 Where Identity Lives</h3>
+
+    <p>Financial service providers distributing &#x20BF;USD operate within regulatory frameworks that may require user identification. KYC/AML compliance is an FSP obligation, not a protocol feature. The FSP knows who their customers are. The protocol doesn't. This separation means that the privacy architecture can't be weakened by a protocol change. The data simply isn't on-chain. An FSP can share customer information with regulators as required by their jurisdiction. That information came from the FSP's own onboarding process, not from &#x20BF;ridge.</p>
+
+    <h3>17.5 Comparison to CBDC Architecture</h3>
+
+    <p>A CBDC operates on a ledger controlled by the issuing central bank. The central bank sees every transaction, every balance, and every counterparty in real time. Programmable spending restrictions (expiration dates, category limits, geographic fencing) are architecturally possible because the issuer has complete visibility and control. The surveillance capability is built into the infrastructure.</p>
+
+    <p>&#x20BF;ridge's architecture makes this kind of surveillance structurally infeasible. Amounts are blinded. Identities aren't recorded. Transaction purpose is unknown. Even IDMA, which holds a master viewing key and can see amounts, can't see who the holders are, because the protocol doesn't collect that information. The privacy gap between a CBDC and &#x20BF;ridge is architectural, not policy-dependent. A future government can't order &#x20BF;ridge to start collecting identity data, because the protocol has no mechanism for it. They could order FSPs to collect more data, but that data stays at the FSP layer. It never enters the chain.</p>
+
+    <div class="callout">
+      <p>&#x20BF;USD offers substantially greater privacy than a CBDC. It does not replicate the privacy properties of holding Bitcoin directly. Bitcoin's base layer is pseudonymous with visible amounts. &#x20BF;ridge is pseudonymous with hidden amounts. Neither is anonymous. The privacy improvement over a CBDC is structural. The privacy gap relative to native Bitcoin is the cost of the federation trust model.</p>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- SECTION 18: OPEN QUESTIONS                            -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+
+    <span class="sec-num">Section 18</span>
+    <h2>Open Questions</h2>
+
+    <p>The following parameters and design decisions require empirical research, simulation, or implementation experience before they can be finalized. They are flagged here as open so that contributors, researchers, and eventually the consortium's engineering team can address them systematically.</p>
+
+    <div class="open-q">
+      <p><strong>Block time optimization.</strong> The proposed 30-second block time balances throughput against coordination overhead. Simulation under varying federation sizes and network latency conditions could identify a more optimal value. The tradeoff is between faster state updates (useful for IDMA monitoring and defensive toolkit responsiveness) and increased chain growth and signing load on functionaries.</p>
+    </div>
+
+    <div class="open-q">
+      <p><strong>Signing threshold calibration.</strong> The default 2/3 threshold follows Liquid's proven model. A higher threshold (3/4, 4/5) increases security against collusion but reduces fault tolerance. A lower threshold increases resilience but widens the collusion surface. The optimal threshold depends on the expected federation size and the consortium's risk tolerance. Game-theoretic modeling of collusion incentives across different threshold/membership combinations would inform this decision.</p>
+    </div>
+
+    <div class="open-q">
+      <p><strong>Settlement window duration.</strong> The proposed 6-hour window between sidechain mint and required base-layer BTC deposit needs calibration. Too tight, and legitimate operational delays trigger false alerts. Too loose, and a rogue member has hours to operate with unbacked tokens. Analysis of base-layer confirmation times, exchange settlement speeds, and operational workflows at publicly traded companies would help set this parameter.</p>
+    </div>
+
+    <div class="open-q">
+      <p><strong>Confidential Transaction performance at scale.</strong> CT transactions are larger than standard transactions due to range proofs. At high throughput, the computational cost of verifying range proofs could become a bottleneck for functionary nodes. Benchmarking CT verification performance on the target hardware (institutional-grade servers) at projected transaction volumes would determine whether the 4 MB block weight limit and 30-second block time are sustainable under full load.</p>
+    </div>
+
+    <div class="open-q">
+      <p><strong>Script extensions for defensive programmability.</strong> Can the time-weighted redemption fee calculation be implemented in Elements Script using existing relative timelock opcodes, or does it require custom opcodes? Can aggregate network metrics (rolling redemption velocity, coverage ratio) be made available to transaction validation scripts, or must the defensive logic live entirely in the application layer? These questions determine how much of the defensive toolkit is protocol-enforced versus application-enforced, which affects the system's trust model.</p>
+    </div>
+
+    <div class="open-q">
+      <p><strong>Commerce-layer fee level.</strong> The proposed $0.001 per-transaction fee is a starting point. Too high, and micropayments become impractical. Too low, and fee revenue doesn't contribute meaningfully to the demand engine. Modeling the relationship between fee level, transaction volume projections, and fee revenue contribution to Ledger 2 deepening would help calibrate this parameter.</p>
+    </div>
+
+    <div class="open-q">
+      <p><strong>Fee distribution formula.</strong> Equal distribution among members is simple but may not reflect each member's actual contribution to the network. Proportional distribution based on outstanding supply share creates an incentive to mint more, which aligns with the demand engine. Proportional distribution based on infrastructure contribution rewards operational investment. The right formula depends on the consortium's incentive design goals.</p>
+    </div>
+
+    <div class="open-q">
+      <p><strong>State anchoring frequency.</strong> The proposed daily commitment to Bitcoin's base layer (every 144 blocks) balances tamper evidence against base-layer transaction costs. More frequent anchoring provides tighter tamper evidence but costs more in Bitcoin transaction fees. Less frequent anchoring reduces costs but widens the window during which undetected tampering could occur. The cost-benefit depends on the base-layer fee environment at the time of deployment.</p>
+    </div>
+
+    <div class="open-q">
+      <p><strong>Minimum federation size.</strong> What is the smallest federation that provides adequate security and fault tolerance? A 5-member federation with a 2/3 threshold (4 of 5 must sign) is technically functional but leaves very little room for faults. A 15-member federation is more resilient but requires broader consortium adoption before launch. The minimum viable federation size determines when &#x20BF;ridge can go live.</p>
+    </div>
+
+    <div class="open-q">
+      <p><strong>Cross-product interaction mechanics.</strong> The &#x20BF;OND conversion (&#x20BF;USD to &#x20BF;OND atomic swap) is described conceptually. The implementation details, including how the &#x20BF;C entry price is determined at the moment of conversion, how the atomic swap is constructed in Elements Script, and how the reserve rebalancing is communicated to the base layer, need specification at the implementation level.</p>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- REFERENCES                                            -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+
+    <div class="references">
+      <h2>References</h2>
+      <div class="ref-item">
+        <span class="ref-num">[1]</span>
+        <em>The Bitcoin Bridge</em> (v30.12). Authority document for the TBDC framework, reserve architecture, defensive programmability, and product specifications.
+        <a href="https://btcadp.org/bitcoin-bridge.html" target="_blank" rel="noopener">btcadp.org</a>
+      </div>
+      <div class="ref-item">
+        <span class="ref-num">[2]</span>
+        Blockstream. <em>Elements Project.</em> Open-source Bitcoin sidechain implementation providing UTXO model, Confidential Transactions, and federated consensus.
+        <a href="https://elementsproject.org" target="_blank" rel="noopener">elementsproject.org</a>
+      </div>
+      <div class="ref-item">
+        <span class="ref-num">[3]</span>
+        Blockstream. <em>Liquid Network.</em> Production federated sidechain built on Elements, demonstrating the viability of the federation model at scale.
+        <a href="https://liquid.net" target="_blank" rel="noopener">liquid.net</a>
+      </div>
+      <div class="ref-item">
+        <span class="ref-num">[4]</span>
+        IDMA Charter (v0.1). Governance framework for the International Digital Monetary Authority, including sidechain certification and monitoring responsibilities.
+        <a href="https://btcadp.org/idma.html" target="_blank" rel="noopener">btcadp.org/idma</a>
+      </div>
+      <div class="ref-item">
+        <span class="ref-num">[5]</span>
+        Nakamoto, S. (2008). <em>Bitcoin: A Peer-to-Peer Electronic Cash System.</em>
+        <a href="https://bitcoin.org/bitcoin.pdf" target="_blank" rel="noopener">bitcoin.org/bitcoin.pdf</a>
+      </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- ARTICLE FOOTER                                        -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+
+    <div class="article-footer">
+      <a href="bitcoin-bridge.html" class="btn-primary">&larr; The Bitcoin Bridge</a>
+      <a href="defensive-programmability.html" class="btn-secondary">Defensive Programmability &rarr;</a>
+      <a href="idma.html" class="btn-secondary">IDMA &rarr;</a>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ========== STANDARD FOOTER ========== -->
+<footer>
+  <p>
+    <a href="index.html">BTCADP</a> &middot;
+    <a href="specification.html">Specification</a> &middot;
+    <a href="btcc-intro.html">&#x20BF;C</a> &middot;
+    <a href="tbd-usd.html">&#x20BF;USD</a> &middot;
+    <a href="bond.html">&#x20BF;OND</a> &middot;
+    <a href="knowledge-base.html">Knowledge Base</a> &middot;
+    <a href="glossary.html">Glossary</a> &middot;
+    <a href="faq.html">FAQ</a> &middot;
+    <a href="https://btcadp.org/apply">Contribute</a>
+  </p>
+  <p style="margin-top:0.8rem;">CC BY-NC-ND &middot; btcadp.org &middot; 2026</p>
+</footer>
+
+
+<script>
+/* Theme toggle with localStorage persistence */
+function toggleTheme() {
+  var html = document.documentElement;
+  var current = html.getAttribute('data-theme');
+  var next = current === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  try { localStorage.setItem('btcadp-theme', next); } catch(e) {}
+}
+/* Restore saved theme */
+(function() {
+  try {
+    var saved = localStorage.getItem('btcadp-theme');
+    if (saved) document.documentElement.setAttribute('data-theme', saved);
+  } catch(e) {}
+})();
+/* Mobile menu toggle + auto-close */
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+(function() {
+  var menu = document.getElementById('mobileMenu');
+  if (menu) {
+    menu.addEventListener('click', function(e) {
+      if (e.target.tagName === 'A') {
+        menu.classList.remove('open');
+      }
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
