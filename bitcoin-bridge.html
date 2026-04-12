@@ -733,7 +733,7 @@
 <!-- ============================================================ -->
 <div class="draft-banner">
   <div class="draft-label">Draft Copy</div>
-  <div class="draft-version">Version 30.11</div>
+  <div class="draft-version">Version 30.12</div>
 </div>
 
 <!-- ============================================================ -->
@@ -1559,7 +1559,7 @@
 <h3>Circulation</h3>
 
 <p>
-  ₿USD balances circulate on the sidechain. When one user pays another, the balance transfers on the sidechain and the protocol reassigns the corresponding token units in its inventory. No Bitcoin moves. The BTC reserves sit untouched on Bitcoin's base layer in transparent, on-chain wallets. Bitcoin moves only at the boundaries: when new ₿USD is minted (fiat enters the system and the treasury company purchases BTC for the reserve) and when ₿USD is redeemed (BTC is either transferred directly to the redeemer or sold from the reserve to return fiat). Everything between minting and redemption is balance circulation, peer-to-peer transfers of ₿USD on the sidechain, with no interaction with Bitcoin's base layer and no exposure to its spot price volatility.
+  ₿USD balances circulate on the sidechain using a UTXO model. Each ₿USD is a discrete $1 output with its own transaction ID and timestamp. When one user pays another, the sender's outputs are consumed and new $1 outputs are created for the recipient with fresh timestamps. No Bitcoin moves. The BTC reserves sit untouched on Bitcoin's base layer in transparent, on-chain wallets. Bitcoin moves only at the boundaries: when new ₿USD is minted (fiat enters the system and the treasury company purchases BTC for the reserve) and when ₿USD is redeemed (BTC is either transferred directly to the redeemer or sold from the reserve to return fiat). Everything between minting and redemption is commerce: peer-to-peer transfers on the sidechain, with no interaction with Bitcoin's base layer and no exposure to its spot price volatility. The sidechain does not reference the reserve inventory. The reserve does not track sidechain balances. They connect at exactly two points: minting and redemption.
 </p>
 
 <p>
@@ -1599,7 +1599,7 @@
 </p>
 
 <p>
-  Separate from PBP#, each individual token unit carries its own provenance metadata at the protocol level: mint date, mint-day BTC spot price, mint-day ₿C price (the token's timeblock), block age, and transfer count. This metadata enables the defensive fee structure described in Chapter 18. A token minted yesterday carries different provenance data than a token minted two years ago, and the system prices redemptions accordingly. PBP# determines which satoshis leave the reserve. Token metadata determines what fees apply. Both systems operate beneath the holder's balance. The holder sees a single number denominated in dollars. One unit always redeems for one dollar. The holder doesn't know or interact with either layer.
+  Separate from PBP#, each individual token unit in the reserve carries its own provenance metadata at the protocol level: mint date, mint-day BTC spot price, mint-day ₿C price (the token's timeblock), and block age. PBP# uses this data to determine which satoshis leave the reserve on redemption. On the sidechain, each ₿USD carries its own transaction timestamp, and the fee algorithm reads this to price redemptions: a ₿USD held for months costs less to redeem than one acquired yesterday. The two systems operate on separate layers and never reference each other. PBP# manages reserve inventory on the base layer. The fee algorithm reads holding periods on the sidechain. Both operate beneath the holder's balance. The holder sees a single number denominated in dollars. One unit always redeems for one dollar.
 </p>
 
 <h3>Bank Runs and Redemption Risk</h3>
@@ -2603,7 +2603,7 @@
 <h3>Token Provenance</h3>
 
 <p>
-  Every token unit in the issuer's reserve inventory carries provenance metadata at the protocol level that describes the unit itself, not any holder. The base metadata common to all instruments: mint date, mint-day BTC spot price, mint-day ₿C price, block age, and transfer count. This is the protocol-level data introduced in Chapter 11. It is what enables the defensive fee structure: a freshly minted unit carries different provenance than a two-year-old unit, and the system prices redemptions accordingly. This operates separately from PBP# (Profit Burn Priority), which determines which satoshis leave Ledger 1 on redemption by burning the most profitable unit first. PBP# manages reserve defense. Token metadata manages network defense. The holder experiences full fungibility beneath both systems. The sidechain protocol does not record holder identity, spending categories, geographic location, or transaction purpose. However, ₿USD is distributed through regulated financial service providers subject to KYC and AML requirements. The privacy advantage over a CBDC, where surveillance is a core design feature, is substantial but not absolute. It does not offer the same privacy as holding Bitcoin directly.
+  Every token unit in the issuer's reserve inventory carries provenance metadata at the protocol level that describes the unit itself, not any holder. The base metadata common to all instruments: mint date, mint-day BTC spot price, mint-day ₿C price, and block age. This is the protocol-level data introduced in Chapter 11. PBP# (Profit Burn Priority) uses this data to determine which satoshis leave Ledger 1 on redemption, burning the most profitable unit first. Separately, the defensive fee structure operates on the sidechain: each ₿USD's holding period, determined by sidechain transaction timestamps, prices what it costs to redeem. PBP# manages reserve inventory on the base layer. The fee algorithm reads the sidechain. The two systems never reference each other. The holder experiences full fungibility beneath both. The sidechain protocol does not record holder identity, spending categories, geographic location, or transaction purpose. However, ₿USD is distributed through regulated financial service providers subject to KYC and AML requirements. The privacy advantage over a CBDC, where surveillance is a core design feature, is substantial but not absolute. It does not offer the same privacy as holding Bitcoin directly.
 </p>
 
 <p>
@@ -4069,9 +4069,9 @@
 
 <h3>8. Circulation: The Sidechain Layer</h3>
 
-<p>₿USD balances circulate on the consortium's purpose-built Bitcoin sidechain. When one user pays another, the balance transfers on the sidechain and the protocol reassigns the corresponding token units in its inventory. No Bitcoin moves.</p>
+<p>₿USD balances circulate on the consortium's purpose-built Bitcoin sidechain using a UTXO model. Each ₿USD is a discrete $1 output with its own transaction ID and timestamp. When one user pays another, the sender's outputs are consumed and new $1 outputs are created for the recipient. No Bitcoin moves. The sidechain does not reference the base layer reserves.</p>
 
-<p>The BTC reserves sit untouched on Bitcoin's base layer in transparent, on-chain wallets. Bitcoin moves only at the boundaries: when new ₿USD is minted (fiat enters, BTC is purchased) and when ₿USD is redeemed (BTC is either transferred directly to the redeemer or sold to return fiat). Everything between minting and redemption is balance circulation, peer-to-peer transfers on the sidechain with no interaction with Bitcoin's base layer and no exposure to spot price volatility.</p>
+<p>The BTC reserves sit untouched on Bitcoin's base layer in transparent, on-chain wallets. Bitcoin moves only at the boundaries: when new ₿USD is minted (fiat enters, BTC is purchased) and when ₿USD is redeemed (BTC is either transferred directly to the redeemer or sold to return fiat). Everything between minting and redemption is commerce: peer-to-peer transfers on the sidechain with no interaction with Bitcoin's base layer and no exposure to spot price volatility.</p>
 
 <div class="callout"><p>A million ₿USD transactions can occur on the sidechain without a single satoshi moving on Bitcoin's base layer. The base layer secures the reserves. The sidechain handles commerce.</p></div>
 
@@ -4132,7 +4132,13 @@
 
 <h3>10.1 Token Provenance Metadata</h3>
 
-<p>Each token unit in the issuer's reserve inventory carries provenance metadata at the protocol level about itself, not any holder. The metadata includes: mint date, mint-day BTC spot price, mint-day ₿C price, block age, and transfer count. The consortium uses this data for reserve management and PBP# (Profit Burn Priority) burn order on redemptions, which burns the most profitable unit first to protect Ledger 2. The holder sees a fungible dollar balance. The sidechain protocol does not record holder identity, spending categories, or transaction purpose. However, the financial service providers distributing ₿USD operate within regulatory frameworks that may require user identification. ₿USD offers substantially greater privacy than a CBDC but does not replicate the privacy properties of holding Bitcoin directly.</p>
+<p>The system tracks data on two separate layers that never reference each other.</p>
+
+<p>On the base layer, each token unit in the reserve carries provenance metadata about itself: mint date, mint-day BTC spot price, mint-day ₿C price (the token's timeblock), and block age. The consortium uses this data for reserve management and Profit Burn Priority burn order on redemptions, which burns the most profitable unit first to protect Ledger 2. This data exists entirely on the consortium's side. The holder never sees it, selects it, or interacts with it.</p>
+
+<p>On the sidechain, each ₿USD is a $1 UTXO with a transaction ID and timestamp. The fee algorithm reads UTXO age to price redemptions: a ₿USD acquired recently carries a higher fee than one held for months. Transfer creates a new UTXO with a fresh timestamp, naturally resetting the holding period. The sidechain carries no data about which token units back any given ₿USD. The end user sees a fungible dollar balance.</p>
+
+<p>The sidechain protocol does not record holder identity, spending categories, or transaction purpose. However, the financial service providers distributing ₿USD operate within regulatory frameworks that may require user identification. ₿USD offers substantially greater privacy than a CBDC but does not replicate the privacy properties of holding Bitcoin directly.</p>
 
 <h3>10.2 Network State Awareness</h3>
 

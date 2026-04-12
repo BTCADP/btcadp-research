@@ -544,7 +544,7 @@
     <div class="paper-meta">
         <span>CC BY-NC-ND</span>
         <span>btcadp.org</span>
-        <span>Version 3.1</span>
+        <span>Version 3.2</span>
     </div>
     <div class="download-bar">
         <a href="busd.html" class="btn-secondary">&larr; Summary Page</a>
@@ -712,8 +712,8 @@
 
     <div class="paper-section">
         <h2><span class="sec-num">8.</span> Circulation: The Sidechain Layer</h2>
-        <p>₿USD balances circulate on the consortium's purpose-built Bitcoin sidechain. When one user pays another, the balance transfers on the sidechain and the protocol reassigns the corresponding token units in its inventory. No Bitcoin moves.</p>
-        <p>The BTC reserves sit untouched on Bitcoin's base layer in transparent, on-chain wallets. Bitcoin moves only at the boundaries: when a new token is minted (fiat enters, BTC is purchased) and when a token is redeemed (BTC is either transferred directly to the redeemer or sold to return fiat). Everything between minting and redemption is token circulation, peer-to-peer transfers on the sidechain with no interaction with Bitcoin's base layer and no exposure to spot price volatility.</p>
+        <p>₿USD balances circulate on the consortium's purpose-built Bitcoin sidechain using a UTXO model. Each ₿USD is a discrete $1 output with its own transaction ID and timestamp. When one user pays another, the sender's UTXOs are consumed and new $1 UTXOs are created for the recipient. Each new UTXO carries a fresh timestamp. No Bitcoin moves on the base layer. Nothing happens in the reserve.</p>
+        <p>The BTC reserves sit untouched on Bitcoin's base layer in transparent, on-chain wallets. Bitcoin moves only at the boundaries: when new ₿USD is minted (fiat enters, BTC is purchased) and when ₿USD is redeemed (BTC is either transferred directly to the redeemer or sold to return fiat). Everything between minting and redemption is commerce: peer-to-peer transfers on the sidechain with no interaction with Bitcoin's base layer and no exposure to spot price volatility. The sidechain does not reference the base layer reserves. The base layer does not track sidechain balances. They connect at exactly two points: minting and redemption.</p>
         <div class="callout"><p><em>A million ₿USD transactions can occur on the sidechain without a single satoshi moving on Bitcoin's base layer. The base layer secures the reserves. The sidechain handles commerce.</em></p></div>
     </div>
 
@@ -815,7 +815,10 @@
 
     <div class="paper-section">
         <h3>10.1 Token Provenance Metadata</h3>
-        <p>Each token carries provenance metadata at the protocol level about itself, not its holder. The metadata includes: mint date, mint-day BTC spot price, mint-day ₿C price, block age, and transfer count. The consortium uses this data for reserve management and PBP# (Profit Burn Priority) burn order on redemptions, which burns the most profitable token first to protect Ledger 2. The end user sees a fungible dollar balance. The sidechain protocol does not record holder identity, spending categories, or transaction purpose. However, the financial service providers distributing ₿USD operate within regulatory frameworks that may require user identification. ₿USD offers substantially greater privacy than a CBDC but does not replicate the privacy properties of holding Bitcoin directly.</p>
+        <p>The system tracks data on two separate layers that never reference each other.</p>
+        <p>On the base layer, each token unit in the reserve carries provenance metadata about itself: mint date, mint-day BTC spot price, mint-day ₿C price (the token's timeblock), and block age. The consortium uses this data for reserve management and Profit Burn Priority burn order on redemptions, which burns the most profitable token first to protect Ledger 2. This data exists entirely on the consortium's side. The holder never sees it, selects it, or interacts with it.</p>
+        <p>On the sidechain, each ₿USD is a $1 UTXO with a transaction ID and timestamp. The fee algorithm reads UTXO age to price redemptions: a ₿USD acquired recently carries a higher fee than one held for months. Transfer creates a new UTXO with a fresh timestamp, naturally resetting the holding period. The sidechain carries no data about which token units back any given ₿USD. The end user sees a fungible dollar balance.</p>
+        <p>The sidechain protocol does not record holder identity, spending categories, or transaction purpose. However, the financial service providers distributing ₿USD operate within regulatory frameworks that may require user identification. ₿USD offers substantially greater privacy than a CBDC but does not replicate the privacy properties of holding Bitcoin directly.</p>
     </div>
 
     <div class="paper-section">

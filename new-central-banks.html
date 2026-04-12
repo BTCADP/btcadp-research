@@ -543,7 +543,7 @@
 <!-- DRAFT NOTICE -->
 <div class="draft-banner">
   <div class="draft-label">Draft Copy</div>
-  <div class="draft-version">Version 4.7</div>
+  <div class="draft-version">Version 4.8</div>
 </div>
 
 <hr class="section-break" style="max-width:780px;margin:32px auto 0;">
@@ -731,7 +731,7 @@
 </p>
 
 <p>
-  Separate from PBP#, each individual token unit carries its own provenance metadata at the protocol level: mint date, mint-day spot price, mint-day ₿C price (the token's timeblock), block age, and transfer count. This metadata is what enables the defensive fee structure described below. A token minted yesterday carries different provenance data than a token minted two years ago, and the system prices redemptions accordingly. PBP# determines which satoshis leave the reserve. Token metadata determines what fees apply. Both systems operate beneath a fully fungible user experience. The user sees a balance. Every unit redeems for $1. They do not know or interact with either layer.
+  Separate from PBP#, each individual token unit in the reserve carries its own provenance metadata at the protocol level: mint date, mint-day spot price, mint-day ₿C price (the token's timeblock), and block age. PBP# uses this data to determine which satoshis leave the reserve on redemption. On the sidechain, each ₿USD carries its own transaction timestamp, and the fee algorithm reads this to price redemptions: a ₿USD held for months costs less to redeem than one acquired yesterday. The two systems operate on separate layers and never reference each other. PBP# manages reserve inventory on the base layer. The fee algorithm reads holding periods on the sidechain. Both operate beneath a fully fungible user experience. The user sees a balance. Every unit redeems for $1.
 </p>
 
 <p>
@@ -823,7 +823,7 @@
 <h3>Defensive Programmability</h3>
 
 <p>
-  CBDCs and TBDCs both embed programmable logic at the token level. The technical capability is identical. The philosophy is opposite. In a CBDC, programmability is a tool for the issuer: the token carries identity metadata, the central bank sees every transaction, and spending can be restricted by category, geography, or expiration date. China's e-CNY has been deployed with expiration dates on government disbursements, requiring recipients to spend within a defined period or lose the funds. The token reports on its holder to the authority. In a TBDC, programmability is inverted. The token carries provenance metadata about itself: mint date, mint-day BTC spot price, mint-day ₿C price, block age, and transfer count. This data describes the token's history and reserve health. It does not and cannot describe the person holding it.
+  CBDCs and TBDCs both embed programmable logic at the token level. The technical capability is identical. The philosophy is opposite. In a CBDC, programmability is a tool for the issuer: the token carries identity metadata, the central bank sees every transaction, and spending can be restricted by category, geography, or expiration date. China's e-CNY has been deployed with expiration dates on government disbursements, requiring recipients to spend within a defined period or lose the funds. The token reports on its holder to the authority. In a TBDC, programmability is inverted. The token unit in the reserve carries provenance metadata about itself: mint date, mint-day BTC spot price, mint-day ₿C price, and block age. This data describes the unit's history and reserve health. It does not and cannot describe the person holding it.
 </p>
 
 <p>
