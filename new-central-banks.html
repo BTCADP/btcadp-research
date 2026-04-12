@@ -543,7 +543,7 @@
 <!-- DRAFT NOTICE -->
 <div class="draft-banner">
   <div class="draft-label">Draft Copy</div>
-  <div class="draft-version">Version 4.3</div>
+  <div class="draft-version">Version 4.6</div>
 </div>
 
 <hr class="section-break" style="max-width:780px;margin:32px auto 0;">
@@ -719,11 +719,11 @@
 </p>
 
 <p>
-  The architecture is designed so that Ledger 2 is rarely drawn from. A holder who wants to exit has three paths. The default redemption path delivers Bitcoin directly to the holder's wallet at spot value. This draws BTC from Ledger 1 but creates no selling pressure on spot. The holder leaves the stablecoin but stays on the Bitcoin network. The second path is conversion to the savings product described below, which moves capital from the spending layer to the savings layer at no cost, with no delay, and no reserve action whatsoever. No Bitcoin moves. The circulating supply simply contracts. The third path is fiat redemption: the holder wants dollars. This path carries the highest fees and creates direct selling pressure. Both BTC-default and fiat redemption draw from reserves, but the system burns the most profitable tokens first (PBP#, Profit Burn Priority), those backed by Bitcoin purchased at the lowest historical prices, the tokens most deeply in surplus. Ledger 2 is drawn from only when the most profitable remaining tokens are backed by Bitcoin that has fallen below the $1 obligation.
+  The architecture is designed so that Ledger 2 is rarely drawn from. A holder who wants to exit has three paths. The default redemption path delivers Bitcoin directly to the holder's wallet at spot value, subject to fees based on each ₿USD's holding period and the system's current reserve depth. This draws BTC from Ledger 1 but creates no selling pressure on spot. The holder leaves the stablecoin but stays on the Bitcoin network. The second path is conversion to the savings product described below, which moves capital from the spending layer to the savings layer at no cost, with no delay, and no reserve action whatsoever. No Bitcoin moves. The circulating supply simply contracts. The third path is fiat redemption: the holder wants dollars. This path carries the highest fees and creates direct selling pressure. Both BTC-default and fiat redemption draw from reserves, but the system burns the most profitable tokens first (PBP#, Profit Burn Priority), those backed by Bitcoin purchased at the lowest historical prices, the tokens most deeply in surplus. Ledger 2 is drawn from only when the most profitable remaining tokens are backed by Bitcoin that has fallen below the $1 obligation.
 </p>
 
 <p>
-  The friction toward fiat is intentional. The architecture is designed to make remaining inside the ecosystem the most attractive option at every decision point. A holder who needs to buy something spends ₿USD. A holder who wants to grow their money converts to a savings product. A holder who wants direct Bitcoin exposure converts to BTC with one action. Circulation and savings conversion create no reserve pressure. BTC-default redemption draws from reserves but creates no selling pressure. The fiat exit carries the highest fees, the most friction, and is the only path that creates selling pressure on spot. As the ecosystem matures and more merchants, employers, and service providers operate within it, the question becomes: what exactly would a holder need to exit for? The proportion of tokens that ever touch any redemption path declines naturally as the ecosystem becomes self-sufficient. This is not a restriction on the holder. Every path remains available at all times. It is a consequence of building an ecosystem where the internal options are simply better than leaving.
+  The friction toward fiat is intentional. The architecture is designed to make remaining inside the ecosystem the most attractive option at every decision point. A holder who needs to buy something spends ₿USD. A holder who wants to grow their money converts to a savings product. A holder who wants direct Bitcoin exposure converts to BTC with one action. Circulation and savings conversion create no reserve pressure. BTC-default redemption draws from reserves and carries its own fee gradient, lower than fiat but never zero, while creating no selling pressure. The fiat exit carries the highest fees, the most friction, and is the only path that creates selling pressure on spot. As the ecosystem matures and more merchants, employers, and service providers operate within it, the question becomes: what exactly would a holder need to exit for? The proportion of tokens that ever touch any redemption path declines naturally as the ecosystem becomes self-sufficient. This is not a restriction on the holder. Every path remains available at all times. It is a consequence of building an ecosystem where the internal options are simply better than leaving.
 </p>
 
 <p>
@@ -755,11 +755,11 @@
 </p>
 
 <p>
-  Time-weighted fees make rapid mint-and-redeem cycles prohibitively expensive while leaving ordinary transactions unaffected. Volume-triggered escalation activates additional fees automatically when aggregate fiat redemption exceeds defined thresholds. Adaptive velocity limits tighten the fiat exit rate during stress events while leaving Bitcoin-default redemption unlimited at all times. The system absorbs panic without absorbing outflow.
+  Time-weighted fees make rapid mint-and-redeem cycles prohibitively expensive while leaving ordinary transactions unaffected. Volume-triggered escalation activates additional fees automatically when aggregate fiat redemption exceeds defined thresholds. Adaptive velocity limits tighten the fiat exit rate during stress events. Bitcoin-default redemption operates under its own graduated fee and throughput framework, with higher fees and soft limits during the system's early phase that ease automatically as reserve depth grows. The system absorbs panic without absorbing outflow.
 </p>
 
 <p>
-  The result is that the most dangerous scenario, a coordinated short-plus-redemption attack, has a deeply negative expected return. Bitcoin-default redemption neutralizes forced selling. Time-weighted fees extract value from freshly minted tokens. The defensive mechanisms do not make attack impossible. They make it economically irrational. Under normal conditions, which constitute the vast majority of the system's operational life, every defensive mechanism is dormant. Transfers are instant and inexpensive. Redemptions are fast. The thresholds are public, auditable, and identical for every participant. No committee convenes. No political negotiation occurs. The protocol hardens autonomously when needed and remains invisible when it is not.
+  The result is that the most dangerous scenario, a coordinated short-plus-redemption attack, has a deeply negative expected return. Bitcoin-default redemption eliminates concentrated forced selling by the consortium. Time-weighted fees extract value from freshly minted tokens. The defensive mechanisms do not make attack impossible. They make it economically irrational. Under normal conditions, which constitute the vast majority of the system's operational life, every defensive mechanism is dormant. Transfers are instant and inexpensive. Redemptions are fast. The thresholds are public, auditable, and identical for every participant. No committee convenes. No political negotiation occurs. The protocol hardens autonomously when needed and remains invisible when it is not.
 </p>
 
 <p>
@@ -878,7 +878,7 @@
 </p>
 
 <p>
-  <strong>Fee income.</strong> Issuance, redemption, and conversion fees produce recurring revenue that scales with the system's throughput. Redemption fees are tiered to incentivize remaining in the ecosystem: near-zero for BTC-default redemption, progressively higher for fiat exit. Fee revenue is reinvested in additional Bitcoin reserves by formula until coverage thresholds are met. After that, it flows to the consortium members as operating profit.
+  <strong>Fee income.</strong> Issuance, redemption, and conversion fees produce recurring revenue that scales with the system's throughput. Redemption fees are tiered by exit path and by each ₿USD's holding period: BTC-default carries lower fees than fiat at every holding period, with long-held ₿USD at mature reserve depth paying very little. Fiat exit carries the highest fees at every tier. Fee revenue is reinvested in additional Bitcoin reserves by formula until coverage thresholds are met. After that, it flows to the consortium members as operating profit.
 </p>
 
 <p>
