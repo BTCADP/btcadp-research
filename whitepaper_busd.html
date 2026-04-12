@@ -544,7 +544,7 @@
     <div class="paper-meta">
         <span>CC BY-NC-ND</span>
         <span>btcadp.org</span>
-        <span>Version 3.0</span>
+        <span>Version 3.1</span>
     </div>
     <div class="download-bar">
         <a href="busd.html" class="btn-secondary">&larr; Summary Page</a>
@@ -826,10 +826,10 @@
     <div class="paper-section">
         <h3>10.3 The Defensive Toolkit</h3>
         <p>Each mechanism is deterministic, transparent, and applies equally to every participant. None requires human intervention to activate. None can be overridden by the consortium.</p>
-        <p><strong>BTC-Default Redemption:</strong> Eliminates forced selling. The coordinated short-plus-redemption attack depends on forced BTC liquidation,with BTC-default redemption, there is no forced selling.</p>
-        <p><strong>Time-Weighted Redemption Fees:</strong> Fiat redemption fees are a function of token age. 0 to 7 days: 3.0%. 8 to 30 days: 1.5%. 31 to 90 days: 0.5%. 91 to 180 days: 0.1%. Over 180 days: 0.0%. BTC-default redemption is exempt.</p>
+        <p><strong>BTC-Default Redemption:</strong> Eliminates concentrated forced selling by the consortium. The coordinated short-plus-redemption attack depends on forced BTC liquidation. With BTC-default redemption, the consortium never places a concentrated sell order. BTC-default carries its own time-weighted fee schedule based on each ₿USD's holding period, plus a baseline adjustment tied to network reserve depth. The fee is always lower than the equivalent fiat-path fee at every holding period.</p>
+        <p><strong>Time-Weighted Redemption Fees:</strong> Redemption fees are a function of each ₿USD's holding period, determined by sidechain transaction timestamps. Fiat path: 0 to 7 days: 3.0%. 8 to 30 days: 1.5%. 31 to 90 days: 0.5%. 91 to 180 days: 0.1%. Over 180 days: 0.0%. BTC-default path: same schedule at a reduced rate, with an additional baseline adjustment tied to network reserve depth. At mature reserves, long-held ₿USD converts at minimal cost. The fee never reaches zero for recently acquired ₿USD on either path.</p>
         <p><strong>Volume-Triggered Fee Escalation:</strong> When rolling 7-day fiat redemption volume exceeds defined thresholds as a percentage of total supply, an additional surcharge applies. Below 1%: no surcharge. 1 to 2%: +0.5%. 2 to 5%: +1.5%. Above 5%: +3.0%.</p>
-        <p><strong>Adaptive Velocity Limits:</strong> Daily fiat redemption cap of 5% of outstanding supply under normal conditions, tightening as velocity rises. BTC-default redemption remains unlimited at all times.</p>
+        <p><strong>Adaptive Velocity Limits:</strong> Daily fiat redemption cap of 5% of outstanding supply under normal conditions, tightening as velocity rises. BTC-default redemption operates under its own graduated fee and throughput framework, with higher fees and soft limits during the system's early phase, both easing automatically as reserve depth grows.</p>
         <p><strong>Redemption Notice Periods:</strong> Small fiat redemptions process immediately. Above $100,000: 48 hours. Above $1,000,000: 7 days. BTC-default redemption remains instant at any amount.</p>
         <p><strong>₿OND Conversion:</strong> Any ₿USD holder can convert to a ₿OND at the current ₿C entry price at any time, at no cost, with no delay. During panic, holders move their capital from the spending layer to the savings layer . No reserves are touched. No Bitcoin is sold. The circulating ₿USD supply contracts. The holder enters a return-targeted savings product whose dual-condition maturity ensures they receive their target return when conditions recover.</p>
     </div>
@@ -881,7 +881,7 @@
         <p>A bear market drives BTC spot below the average minting price. Holders panic. Redemptions spike. Each fiat exit forces the consortium to sell Bitcoin into a falling market, depressing the price further, triggering more redemptions. This is a bank run,the oldest failure mode in monetary systems.</p>
         <p>The ₿USD system deploys five structural defenses against this scenario:</p>
         <p><strong>First:</strong> Reserve pressure exists only when holders exit the ecosystem. Tokens circulating within the ecosystem create zero reserve pressure at any BTC spot price. Both BTC-default and fiat redemption draw from reserves. The fiat path adds concentrated selling pressure. The BTC path disperses it.</p>
-        <p><strong>Second:</strong> BTC-default redemption eliminates forced selling. The consortium transfers Bitcoin rather than liquidating it. No market order, no slippage, no spot impact.</p>
+        <p><strong>Second:</strong> BTC-default redemption eliminates concentrated forced selling by the consortium. The consortium transfers Bitcoin rather than liquidating it. No market order, no slippage, no spot impact from the consortium's side.</p>
         <p><strong>Third:</strong> Time-weighted fees price out mint-and-redeem attack loops. A freshly minted token faces 3% fiat redemption fees, making the attack deeply unprofitable.</p>
         <p><strong>Fourth:</strong> Volume-triggered fee escalation and velocity limits create congestion pricing at the fiat exit ramp during stress events.</p>
         <p><strong>Fifth:</strong> ₿OND conversion provides a zero-cost escape valve. Any ₿USD holder can convert to a ₿OND at the current ₿C entry price at any time, at no cost, with no delay. During a panic, holders move their capital from the spending layer to the savings layer. No reserves are touched. No Bitcoin is sold. The circulating ₿USD supply contracts, improving network health. The system absorbs fear without absorbing outflow.</p>
