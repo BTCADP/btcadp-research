@@ -473,7 +473,7 @@
     <a href="glossary.html">Glossary</a>
 </div>
 
-<div class="draft-banner">DRAFT v2.2 &bull; For public review &bull; April 2026</div>
+<div class="draft-banner">DRAFT v5.3 &bull; For public review &bull; April 2026</div>
 
 
 
@@ -527,7 +527,7 @@
     </p>
 
     <div class="thesis">
-      <p>The token does not serve the issuer. The token serves the network and protects every holder equally.</p>
+      <p>The Digital Reserve Note does not serve the issuer. It serves the network and protects every holder equally.</p>
     </div>
 
     <!-- ═══ SECTION 2 ═══ -->
@@ -555,12 +555,12 @@
       <div class="contrast-side contrast-tbdc">
         <div class="contrast-label">TBDC Programmability</div>
         <div class="contrast-title">Reads the state of its own network</div>
-        <p>The token carries provenance metadata about itself. It cannot identify its holder. It monitors aggregate network health and activates defenses autonomously. Programmability serves every holder equally.</p>
+        <p>The reserve note carries provenance metadata about itself. It cannot identify its holder. It monitors aggregate network health and activates defenses autonomously. Programmability serves every holder equally.</p>
       </div>
     </div>
 
     <p>
-      The technical capability is identical. Both embed conditional logic at the token level. The
+      The technical capability is identical. Both embed conditional logic at the protocol level. The
       architecture is the same. The philosophy is opposite. One programs money to control the people
       who hold it. The other programs money to defend the monetary network those people depend on.
     </p>
@@ -569,65 +569,65 @@
 
     <!-- ═══ SECTION 3 ═══ -->
     <span class="sec-num">Section 03</span>
-    <h2>What the Token Knows</h2>
+    <h2>What the Reserve Note Knows</h2>
 
     <p>
-      Every &#x20BF;USD token carries provenance metadata at the protocol level. This metadata
-      describes the token itself. It does not and cannot describe the person holding it.
+      Every Digital Reserve Note in the issuer's inventory carries provenance metadata at the protocol level. This metadata
+      describes the note itself. It does not and cannot describe the person holding ₿USD.
     </p>
 
-    <h3>Token-level provenance data</h3>
+    <h3>Note-level provenance data</h3>
     <p>
-      Token number. Mint-day &#x20BF;C price, which is the token's timeblock, the cumulative
-      average value of Bitcoin on the day the token was created. Together, the token number and
-      timeblock form the token ID. Mint date. Mint-day BTC spot price. Block age.
+      Note number. Mint-day &#x20BF;C price, which is the note's timeblock, the cumulative
+      average value of Bitcoin on the day the note was created. Together, the note number and
+      timeblock form the note ID. Mint date. Mint-day BTC spot price. Block age.
       The end user sees a fungible dollar balance. Every unit redeems for $1. The provenance exists beneath
       the surface so the system can manage reserves and activate defensive behaviors autonomously.
     </p>
 
     <h3>PBP# (Profit Burn Priority)</h3>
     <p>
-      In addition to its static provenance data, each token continuously calculates a dynamic value:
-      its PBP#, or Profit Burn Priority number. The PBP# ranks the token's position in the redemption
+      In addition to its static provenance data, each reserve note continuously calculates a dynamic value:
+      its PBP#, or Profit Burn Priority number. The PBP# ranks the note's position in the redemption
       burn queue based on its current profitability, the spread between its mint-day BTC spot price
-      and the current spot price. The most profitable tokens have the lowest PBP# and are first in
-      line to be burned on redemption. The least profitable tokens sit at the back of the queue.
+      and the current spot price. The most profitable notes have the lowest PBP# and are first in
+      line to be burned on redemption. The least profitable notes sit at the back of the queue.
     </p>
     <p>
       The PBP# replaces a simple FIFO (first-in, first-out) burn order. In a cleanly rising market,
-      the two methods produce identical results because the oldest tokens are also the cheapest and
+      the two methods produce identical results because the oldest notes are also the cheapest and
       therefore the most profitable. They diverge in volatile, non-monotonic price environments. If
-      BTC goes from $50K to $90K to $60K to $85K, a FIFO system burns the $50K token first (correct)
-      but then burns the $90K token second, which is underwater and forces a Ledger 2 draw. A PBP#
-      system burns the $50K token first, then the $60K token, both at a profit. The $90K token waits
+      BTC goes from $50K to $90K to $60K to $85K, a FIFO system burns the $50K note first (correct)
+      but then burns the $90K note second, which is underwater and forces a Ledger 2 draw. A PBP#
+      system burns the $50K note first, then the $60K note, both at a profit. The $90K note waits
       at the back of the queue until conditions improve.
     </p>
     <p>
       Modeling confirms that total surplus over the life of the system is identical regardless of
       burn order. The same satoshis enter at minting and the same $1-worth of BTC leaves at
       redemption. Surplus BTC from each burn stays in the reserve and appreciates at spot no matter
-      which token produced it. PBP# does not earn the treasury more money over time.
+      which note produced it. PBP# does not earn the treasury more money over time.
     </p>
     <p>
-      What PBP# does is protect Ledger 2. By always burning the most profitable token first, PBP#
-      avoids drawing from the backstop reserve as long as any profitable token exists in the pool.
-      In volatile markets, FIFO can burn underwater tokens ahead of profitable ones simply because
+      What PBP# does is protect Ledger 2. By always burning the most profitable reserve note first, PBP#
+      avoids drawing from the backstop reserve as long as any profitable note exists in the pool.
+      In volatile markets, FIFO can burn underwater notes ahead of profitable ones simply because
       they are older. Every unnecessary Ledger 2 draw weakens the reserve that exists to absorb
       genuine stress events. PBP# eliminates this. The advantage is defensive, not financial. It
       costs the treasury nothing while providing structural protection. This makes it a natural
       addition to the defensive programmability toolkit.
     </p>
     <p>
-      The user has no visibility into or control over which token gets burned. The PBP# governs which
-      satoshis leave Ledger 1 on the base layer. The time-weighted fee structure, a separate system on the sidechain, governs what fees
-      apply based on each &#x20BF;USD's holding period, determined by sidechain transaction timestamps.
+      The user has no visibility into or control over which reserve note gets burned. The PBP# governs which
+      satoshis leave Ledger 1 on the base layer. The time-weighted fee structure, a separate system on The ₿ridge Network, governs what fees
+      apply based on each &#x20BF;USD's holding period, determined by transaction timestamps on The ₿ridge Network.
     </p>
 
-    <h3>What the token does not need to know</h3>
+    <h3>What the reserve note does not need to know</h3>
     <p>
       Holder identity. Spending patterns. Geographic location. Transaction purpose. None of this
       information is required for the defensive mechanisms to function. Every defense described in
-      this paper operates on token-level provenance and aggregate network metrics.
+      this paper operates on note-level provenance and aggregate network metrics.
     </p>
     <p>
       Existing stablecoins do not embed identity data in the token itself. USDT and USDC are standard
@@ -654,17 +654,17 @@
 
     <h3>The red/black indicator</h3>
     <p>
-      Each token's reserve health is deterministic from its provenance data, calculable at any time
-      from the mint-day BTC price and current spot. A &#x20BF;USD token reads "black" when the
+      Each reserve note's health is deterministic from its provenance data, calculable at any time
+      from the mint-day BTC price and current spot. A &#x20BF;USD reserve note reads "black" when the
       Bitcoin backing it is worth more than the $1 obligation, and "red" when spot has fallen below
-      the minting price. A token minted at $85,000 spot reads black +11.8% when spot is $95,000 and
+      the minting price. A note minted at $85,000 spot reads black +11.8% when spot is $95,000 and
       red &minus;17.6% when spot falls to $70,000. The user never sees this indicator. They see a
       balance. The red/black system exists so the protocol can assess its own health without assessing
       the people inside it.
     </p>
 
     <div class="callout">
-      <p><strong>Self-defense does not require surveillance.</strong> The token knows its own age, its own origin, and its own reserve position. That is sufficient for every defensive mechanism described in this paper. The data the token needs to protect the network is data about the money, not about the person.</p>
+      <p><strong>Self-defense does not require surveillance.</strong> The reserve note knows its own age, its own origin, and its own reserve position. That is sufficient for every defensive mechanism described in this paper. The data the note needs to protect the network is data about the money, not about the person.</p>
     </div>
 
     <!-- ═══ SECTION 4 ═══ -->
@@ -672,12 +672,12 @@
     <h2>Network State Awareness</h2>
 
     <p>
-      Beyond its own provenance, the token contract has read access to aggregate metrics derived from
+      Beyond the provenance of individual reserve notes, the protocol has read access to aggregate metrics derived from
       on-chain data. All of these metrics are independently verifiable by any participant.
     </p>
 
     <p>
-      <strong>Total outstanding supply:</strong> the number of &#x20BF;USD tokens in circulation.
+      <strong>Total outstanding supply:</strong> the amount of &#x20BF;USD in circulation.
       <strong>Aggregate redemption velocity:</strong> the total volume redeemed for fiat within
       rolling time windows of 24 hours, 7 days, and 30 days. This is the most important metric for
       detecting abnormal stress.
@@ -702,7 +702,7 @@
 
     <p>
       Every monetary system has attack surfaces. The primary attack surface for &#x20BF;USD is the
-      redemption boundary. Tokens circulating within the &#x20BF;USD economy, spent, received,
+      redemption boundary. ₿USD circulating within the ecosystem, spent, received,
       lent, and borrowed without leaving the ecosystem, exert zero pressure on the reserve system
       regardless of where Bitcoin's spot price stands. The system faces reserve pressure when holders
       exit the ecosystem entirely, whether to BTC or to fiat. Both paths draw Bitcoin from Ledger 1.
@@ -728,7 +728,7 @@
     <h3>Targeted consortium member attack</h3>
     <p>
       Instead of attacking the system as a whole, an adversary targets a single consortium member with
-      thinner reserves. A concentrated redemption wave against that member's tokens could force an
+      thinner reserves. A concentrated redemption wave against that member's reserve notes could force an
       entity-level liquidity crisis even if system-wide reserves are adequate.
     </p>
 
@@ -780,13 +780,13 @@
 
     <h3>6.2 &ensp; Time-Weighted Redemption Fees</h3>
     <p>
-      The fiat redemption fee is a function of token age. A freshly minted token carries a different
-      cost profile than a token that has been circulating for months. The proposed schedule:
+      The fiat redemption fee is a function of holding period. Freshly minted ₿USD carries a different
+      cost profile than ₿USD that has been circulating for months. The proposed schedule:
     </p>
 
     <table class="fee-table">
       <thead>
-        <tr><th>Token Age</th><th>Fiat Fee</th><th>Rationale</th></tr>
+        <tr><th>Holding Period</th><th>Fiat Fee</th><th>Rationale</th></tr>
       </thead>
       <tbody>
         <tr><td>0 &ndash; 7 days</td><td class="fee-val">3.0%</td><td>Prices out mint-and-redeem attack loops</td></tr>
@@ -873,22 +873,22 @@
 
     <h3>7.1 &ensp; Circulation isolation</h3>
     <p>
-      Tokens circulating on the sidechain, moving from wallet to wallet as a medium of exchange, exert
+      ₿USD circulating on The ₿ridge Network, moving from wallet to wallet as a medium of exchange, exerts
       zero reserve pressure regardless of what BTC spot does. A million &#x20BF;USD transactions can occur
       without a single satoshi moving on Bitcoin's base layer. The base layer secures the reserves. The
-      sidechain handles commerce. Reserve risk exists only at the boundary between the two. The more
+      ₿ridge Network handles commerce. Reserve risk exists only at the boundary between the two. The more
       commerce that occurs within the &#x20BF;USD ecosystem, the smaller the proportion of activity that
       ever touches the reserve boundary. Adoption itself is a defense.
     </p>
 
     <h3>7.2 &ensp; Self-fortifying reserves</h3>
     <p>
-      Every &#x20BF;USD token is minted at $1 backed by BTC purchased at spot. As Bitcoin's spot price
-      appreciates, the BTC backing each $1 token becomes worth more than $1. That surplus flows into
+      Every &#x20BF;USD is minted at $1 backed by BTC purchased at spot. As Bitcoin's spot price
+      appreciates, the BTC backing each $1 reserve note becomes worth more than $1. That surplus flows into
       Ledger 2 automatically. The reserve system recapitalizes itself as long as Bitcoin's long-run
-      price trend continues. Over time, the proportion of units in the black grows structurally.
-      Older tokens, issued months or years ago at lower spot prices, are deeply in surplus. Their
-      surplus more than offsets any shortfall on recently minted units that may be temporarily
+      price trend continues. Over time, the proportion of notes in the black grows structurally.
+      Older notes, issued months or years ago at lower spot prices, are deeply in surplus. Their
+      surplus more than offsets any shortfall on recently minted notes that may be temporarily
       underwater. Time is a reserve asset.
     </p>
 
@@ -941,9 +941,9 @@
     <h2>The Calm-State Guarantee</h2>
 
     <p>
-      Under normal network conditions, which is the vast majority of the token's operational life,
+      Under normal network conditions, which is the vast majority of ₿USD's operational life,
       every active defensive mechanism is dormant. Transfers are instant and free. Redemptions are
-      fast and cheap. The token behaves identically to any other stablecoin. There are no spending
+      fast and cheap. ₿USD behaves identically to any other stablecoin. There are no spending
       restrictions, no geographic limits, no expiration dates, no category constraints. &#x20BF;USD
       must be a better value proposition than competing stablecoins for the end user, and that means
       the defensive layer cannot impose friction that users experience during normal operations.
@@ -986,7 +986,7 @@
     </p>
 
     <p>
-      <strong>Time-weighted fees</strong> on freshly minted tokens cost 3%, or $3M on a $100M
+      <strong>Time-weighted fees</strong> on freshly minted ₿USD cost 3%, or $3M on a $100M
       position, before any potential profit materializes.
     </p>
 
@@ -1025,7 +1025,7 @@
         <tr><th>Property</th><th>CBDC</th><th class="hl">TBDC (&#x20BF;USD)</th></tr>
       </thead>
       <tbody>
-        <tr><td>Programmability serves</td><td>The issuing authority</td><td class="hl">The token network and its holders</td></tr>
+        <tr><td>Programmability serves</td><td>The issuing authority</td><td class="hl">The monetary network and its holders</td></tr>
         <tr><td>Holder surveillance</td><td>Built in by design</td><td class="hl">Not built into the protocol. Distribution layer subject to regulatory requirements.</td></tr>
         <tr><td>Spending restrictions</td><td>Expiration dates, category limits, geographic fencing</td><td class="hl">None. Holders spend freely.</td></tr>
         <tr><td>Default state</td><td>Restrictions active during normal operation</td><td class="hl">All defenses dormant during normal operation</td></tr>
@@ -1046,7 +1046,7 @@
 
     <p>
       The framework presented here is a starting point. The core design principles, defense by
-      protocol rather than committee, token metadata about the money rather than the person, calm-state
+      protocol rather than committee, reserve note metadata about the money rather than the person, calm-state
       invisibility, are proposed as fixed. The specific parameters are proposed as defaults that will
       benefit from further research and real-world calibration.
     </p>
@@ -1080,7 +1080,7 @@
     <div class="open-q">
       <p><strong>Privacy properties.</strong> The framework claims the protocol cannot identify
       holders. A formal analysis of the privacy guarantees and their boundaries, particularly at the
-      intersection of sidechain transactions and distribution-layer KYC, would strengthen confidence
+      intersection of ₿ridge Network transactions and distribution-layer KYC, would strengthen confidence
       in this claim.</p>
     </div>
 

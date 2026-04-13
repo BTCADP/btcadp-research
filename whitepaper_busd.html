@@ -544,7 +544,7 @@
     <div class="paper-meta">
         <span>CC BY-NC-ND</span>
         <span>btcadp.org</span>
-        <span>Version 3.2</span>
+        <span>Version 5.3</span>
     </div>
     <div class="download-bar">
         <a href="busd.html" class="btn-secondary">&larr; Summary Page</a>
@@ -557,7 +557,7 @@
 
     <div class="abstract">
         <div class="abstract-label">Abstract</div>
-        <p>₿USD is a dollar-pegged stablecoin,one token equals one dollar,issued by a consortium of publicly traded Bitcoin treasury companies. Unlike existing stablecoins that hold fiat reserves in the form of US Treasury bills and bank deposits, ₿USD is backed entirely by Bitcoin held on the base layer in publicly addressable wallets, verifiable by any observer in real time. The instrument is classified as a Treasury-Backed Digital Currency (TBDC). The term draws a deliberate structural contrast with Central Bank Digital Currencies (CBDCs): where a CBDC is issued by an entity that can expand the money supply, a TBDC is backed by a finite reserve asset that no issuer can create, expand, or dilute. This distinction defines the economic properties of the instrument and the constraints under which its issuers operate. This paper specifies the technical architecture of ₿USD: its issuance mechanism, two-ledger reserve system, sidechain circulation layer, redemption mechanics, defensive programmability framework, fee structure, and risk analysis. The system requires no modification to Bitcoin's base layer protocol.</p>
+        <p>₿USD is a dollar-pegged stablecoin, one unit equals one dollar, issued by a consortium of publicly traded Bitcoin treasury companies. Unlike existing stablecoins that hold fiat reserves in the form of US Treasury bills and bank deposits, ₿USD is backed entirely by Bitcoin held on the base layer in publicly addressable wallets, verifiable by any observer in real time. The instrument is classified as a Treasury-Backed Digital Currency (TBDC). The term draws a deliberate structural contrast with Central Bank Digital Currencies (CBDCs): where a CBDC is issued by an entity that can expand the money supply, a TBDC is backed by a finite reserve asset that no issuer can create, expand, or dilute. This distinction defines the economic properties of the instrument and the constraints under which its issuers operate. This paper specifies the technical architecture of ₿USD: its issuance mechanism, two-ledger reserve system, circulation on The ₿ridge Network, redemption mechanics, defensive programmability framework, fee structure, and risk analysis. The system requires no modification to Bitcoin's base layer protocol.</p>
     </div>
 
     <div class="paper-section">
@@ -570,7 +570,7 @@
 
     <div class="paper-section">
         <h2><span class="sec-num">4.</span> System Architecture Overview</h2>
-        <p>The ₿USD system is composed of four distinct layers, each performing a single function. The separation is deliberate: each layer is independently verifiable, and the failure of any single layer does not compromise the others.</p>
+        <p>The ₿USD system is composed of five distinct layers, each performing a single function. The separation is deliberate: each layer is independently verifiable, and the failure of any single layer does not compromise the others.</p>
         <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem;">
   <tr>
     <th style="padding:10px 14px;border-bottom:2px solid var(--border);color:var(--orange);font-family:var(--sans);font-size:0.85rem;font-weight:600;letter-spacing:0.05em;text-align:left;"><strong>Layer</strong></th>
@@ -579,31 +579,34 @@
     <th style="padding:10px 14px;border-bottom:2px solid var(--border);color:var(--orange);font-family:var(--sans);font-size:0.85rem;font-weight:600;letter-spacing:0.05em;text-align:left;"><strong>Verification</strong></th>
   </tr>
   <tr>
-    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Reference Price price; ₿C cumulative average</td>
-    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">BTCADP daily standard)</td>
-    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Off-chain (open trade data</td>
-    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Any party with</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Reference Price</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">BTCADP daily price; ₿C cumulative average</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Off-chain (open standard)</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Any party with trade data</td>
   </tr>
   <tr>
-    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Reserve Layer two-ledger system layer</td>
-    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">BTC custody in addresses</td>
-    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Bitcoin base</td>
-    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">On-chain wallet</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Reserve Layer</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">BTC custody in two-ledger system</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Bitcoin blockchain</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">On-chain wallet addresses</td>
   </tr>
   <tr>
-    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Token Layer circulation</td>
-    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">₿USD issuance and consortium sidechain</td>
-    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Sidechain explorer</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Note Layer</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Digital Reserve Note inventory (provenance metadata, PBP# burn ordering)</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Consortium internal systems</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">IDMA audit + base-layer cross-reference</td>
   </tr>
   <tr>
-    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Interface Layer and apps</td>
-    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Consumer wallets</td>
-    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Application layer User experience</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Transaction Layer</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">₿USD / ₿OND / ₿ILL circulation as $1 UTXOs</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">The ₿ridge Network</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Sidechain explorer + IDMA monitoring</td>
   </tr>
   <tr>
-    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Interface Layer and apps</td>
-    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Consumer wallets</td>
-    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Application layer User experience</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Interface Layer</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Consumer wallets and apps</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Application layer</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">User experience</td>
   </tr>
 </table>
     </div>
@@ -619,7 +622,7 @@
         <h2><span class="sec-num">6.</span> The Issuance Mechanism</h2>
         <p>The issuance process converts fiat demand into Bitcoin demand in a seamless operation. When fiat enters the system through a participating financial service provider, the following sequence executes:</p>
         <p><strong>Step 1.</strong> The service provider routes the customer's fiat currency (e.g., $18,000) to a consortium member.</p>
-        <p><strong>Step 2.</strong> The consortium member mints ₿USD at a 1:1 dollar ratio (18,000 units) and credits the corresponding balance to the customer on the sidechain.</p>
+        <p><strong>Step 2.</strong> The consortium member mints ₿USD at a 1:1 dollar ratio (18,000 units) and credits the corresponding balance to the customer on The ₿ridge Network.</p>
         <p><strong>Step 3.</strong> The incoming fiat is used to purchase Bitcoin at the current spot price. At $70,000 spot, $18,000 acquires approximately 0.2571 BTC (25,714,286 satoshis).</p>
         <p><strong>Step 4.</strong> The acquired satoshis are deposited into Ledger 1 (the issuance pool). At the moment of issuance, Ledger 1 holds satoshis worth exactly $18,000 at spot,perfectly backing the 18,000 outstanding units at $1 each.</p>
         <div class="callout"><p><em>This is the critical structural distinction from fiat stablecoins: every dollar of ₿USD minted requires the treasury company to purchase actual Bitcoin on the open market at the current spot price. There is no synthetic exposure. There is no fractional reserve on the issuance side. 100% of ₿USD demand flows through to BTC spot as buying pressure.</em></p></div>
@@ -702,7 +705,7 @@
     <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Break-even</td>
   </tr>
 </table>
-        <p>Above the issuance price, every redemption generates profit for the treasury company. Between the issuance price and the ₿C price, Ledger 1 is underfunded but Ledger 2 covers the gap. These reserve dynamics matter when ₿USD is redeemed, whether for BTC or fiat. Tokens circulating on the sidechain as a medium of exchange exert zero pressure on reserves regardless of where Bitcoin's spot price stands.</p>
+        <p>Above the issuance price, every redemption generates profit for the treasury company. Between the issuance price and the ₿C price, Ledger 1 is underfunded but Ledger 2 covers the gap. These reserve dynamics matter when ₿USD is redeemed, whether for BTC or fiat. ₿USD circulating on The ₿ridge Network as a medium of exchange exerts zero pressure on reserves regardless of where Bitcoin's spot price stands.</p>
     </div>
 
     <div class="paper-section">
@@ -712,14 +715,14 @@
 
     <div class="paper-section">
         <h2><span class="sec-num">8.</span> Circulation: The Sidechain Layer</h2>
-        <p>₿USD balances circulate on the consortium's purpose-built Bitcoin sidechain using a UTXO model. Each ₿USD is a discrete $1 output with its own transaction ID and timestamp. When one user pays another, the sender's UTXOs are consumed and new $1 UTXOs are created for the recipient. Each new UTXO carries a fresh timestamp. No Bitcoin moves on the base layer. Nothing happens in the reserve.</p>
-        <p>The BTC reserves sit untouched on Bitcoin's base layer in transparent, on-chain wallets. Bitcoin moves only at the boundaries: when new ₿USD is minted (fiat enters, BTC is purchased) and when ₿USD is redeemed (BTC is either transferred directly to the redeemer or sold to return fiat). Everything between minting and redemption is commerce: peer-to-peer transfers on the sidechain with no interaction with Bitcoin's base layer and no exposure to spot price volatility. The sidechain does not reference the base layer reserves. The base layer does not track sidechain balances. They connect at exactly two points: minting and redemption.</p>
-        <div class="callout"><p><em>A million ₿USD transactions can occur on the sidechain without a single satoshi moving on Bitcoin's base layer. The base layer secures the reserves. The sidechain handles commerce.</em></p></div>
+        <p>₿USD balances circulate on the consortium's federated Bitcoin sidechain, The ₿ridge Network, using a UTXO model. Each ₿USD is a discrete $1 output with its own transaction ID and timestamp. When one user pays another, the sender's UTXOs are consumed and new $1 UTXOs are created for the recipient. Each new UTXO carries a fresh timestamp. No Bitcoin moves on the base layer. Nothing happens in the reserve.</p>
+        <p>The BTC reserves sit untouched on Bitcoin's base layer in transparent, on-chain wallets. Bitcoin moves only at the boundaries: when new ₿USD is minted (fiat enters, BTC is purchased) and when ₿USD is redeemed (BTC is either transferred directly to the redeemer or sold to return fiat). Everything between minting and redemption is commerce: peer-to-peer transfers on The ₿ridge Network with no interaction with Bitcoin's base layer and no exposure to spot price volatility. The ₿ridge Network does not reference the base layer reserves. The base layer does not track ₿ridge Network balances. No layer references any other.</p>
+        <div class="callout"><p><em>A million ₿USD transactions can occur on The ₿ridge Network without a single satoshi moving on Bitcoin's base layer. The base layer secures the reserves. The ₿ridge Network handles commerce.</em></p></div>
     </div>
 
     <div class="paper-section">
         <h2><span class="sec-num">9.</span> Redemption Mechanics</h2>
-        <p>When a customer redeems ₿USD, the treasury company returns $1.00 per unit redeemed. The Bitcoin backing that obligation in Ledger 1 is sold to fund the redemption. The corresponding token unit is burned from the issuer's inventory. If Bitcoin's spot price has risen since issuance, the Ledger 1 position is in surplus,the surplus remains in the consortium's holdings. If spot has fallen, Ledger 1 may be insufficient, and Ledger 2 covers the shortfall. The customer always receives $1.00 per unit redeemed.</p>
+        <p>When a customer redeems ₿USD, the treasury company returns $1.00 per unit redeemed. The Bitcoin backing that obligation in Ledger 1 is sold to fund the redemption. The corresponding reserve note is burned from the issuer's inventory. If Bitcoin's spot price has risen since issuance, the Ledger 1 position is in surplus,the surplus remains in the consortium's holdings. If spot has fallen, Ledger 1 may be insufficient, and Ledger 2 covers the shortfall. The customer always receives $1.00 per unit redeemed.</p>
     </div>
 
     <div class="paper-section">
@@ -804,33 +807,33 @@
         <h3>9.3 Pooling Dynamics: Tokens in the Black and the Red</h3>
         <p>Ledger 1 operates as a pooled reserve, not on a per-unit basis. Units are minted at different spot prices and redeemed at different times. At any given moment, a percentage of outstanding units are "in the black",their backing satoshis are worth more than the $1 obligation,and a percentage are "in the red," where spot has declined below their issuance price.</p>
         <p>Over a long enough time horizon, the proportion of units in the black grows structurally. Every day that BTC spot remains above prior issuance prices, more cohorts move into surplus. Older units, those minted months or years ago at lower spot prices,are deeply in the black. Their surplus more than offsets the shortfall on recently minted units that may be temporarily underwater. A unit minted at $50,000 spot and redeemed when spot is $80,000 generates a surplus of $0.375 per unit. A unit minted at $90,000 and redeemed at $80,000 generates a shortfall of $0.125 per unit. In a pooled reserve, the surplus units subsidize the underwater ones.</p>
-        <p>This is the retention effect. Long-term holders do not redeem during a downturn. They have no reason to,their ₿USD balance's $1.00 peg is stable regardless of what BTC spot does on any given day. The tokens most likely to be redeemed during a downturn are recently minted tokens held by short-term participants,precisely the tokens with the thinnest margin. But the bulk of the pool,the older, deeply in-the-black units, sits undisturbed, its surplus growing with every passing day that spot exceeds the historical average.</p>
+        <p>This is the retention effect. Long-term holders do not redeem during a downturn. They have no reason to,their ₿USD balance's $1.00 peg is stable regardless of what BTC spot does on any given day. The reserve notes most likely to be redeemed during a downturn are recently minted notes held by short-term participants, precisely the notes with the thinnest margin. But the bulk of the pool,the older, deeply in-the-black units, sits undisturbed, its surplus growing with every passing day that spot exceeds the historical average.</p>
         <div class="callout"><p><em>The longer the system operates, the deeper its structural surplus becomes. Time itself is a reserve asset. The model does not merely survive a rising Bitcoin price,it converts that rise into accelerating, compounding returns for the consortium while maintaining a hard $1 peg for every holder.</em></p></div>
     </div>
 
     <div class="paper-section">
         <h2><span class="sec-num">11.</span> Defensive Programmability</h2>
-        <p>Every token unit in the issuer's reserve inventory is a programmable instrument. The word "programmable" carries justified suspicion,in the context of CBDCs, programmability means surveillance and spending restrictions. ₿USD programmability inverts this relationship entirely.</p>
+        <p>Every Digital Reserve Note in the issuer's inventory is a programmable instrument. The word "programmable" carries justified suspicion,in the context of CBDCs, programmability means surveillance and spending restrictions. ₿USD programmability inverts this relationship entirely.</p>
     </div>
 
     <div class="paper-section">
-        <h3>10.1 Token Provenance Metadata</h3>
+        <h3>10.1 Reserve Note Provenance</h3>
         <p>The system tracks data on two separate layers that never reference each other.</p>
-        <p>On the base layer, each token unit in the reserve carries provenance metadata about itself: mint date, mint-day BTC spot price, mint-day ₿C price (the token's timeblock), and block age. The consortium uses this data for reserve management and Profit Burn Priority burn order on redemptions, which burns the most profitable token first to protect Ledger 2. This data exists entirely on the consortium's side. The holder never sees it, selects it, or interacts with it.</p>
-        <p>On the sidechain, each ₿USD is a $1 UTXO with a transaction ID and timestamp. The fee algorithm reads UTXO age to price redemptions: a ₿USD acquired recently carries a higher fee than one held for months. Transfer creates a new UTXO with a fresh timestamp, naturally resetting the holding period. The sidechain carries no data about which token units back any given ₿USD. The end user sees a fungible dollar balance.</p>
-        <p>The sidechain protocol does not record holder identity, spending categories, or transaction purpose. However, the financial service providers distributing ₿USD operate within regulatory frameworks that may require user identification. ₿USD offers substantially greater privacy than a CBDC but does not replicate the privacy properties of holding Bitcoin directly.</p>
+        <p>On the Note Layer, each reserve note carries provenance metadata about itself: mint date, mint-day BTC spot price, mint-day ₿C price (the note's timeblock), and block age. The consortium uses this data for reserve management and Profit Burn Priority burn order on redemptions, which burns the most profitable note first to protect Ledger 2. This data exists entirely on the consortium's side. The holder never sees it, selects it, or interacts with it.</p>
+        <p>On The ₿ridge Network, each ₿USD is a $1 UTXO with a transaction ID and timestamp. The fee algorithm reads UTXO age to price redemptions: a ₿USD acquired recently carries a higher fee than one held for months. Transfer creates a new UTXO with a fresh timestamp, naturally resetting the holding period. The ₿ridge Network carries no data about which reserve notes back any given ₿USD. The end user sees a fungible dollar balance.</p>
+        <p>The ₿ridge Network does not record holder identity, spending categories, or transaction purpose. However, the financial service providers distributing ₿USD operate within regulatory frameworks that may require user identification. ₿USD offers substantially greater privacy than a CBDC but does not replicate the privacy properties of holding Bitcoin directly.</p>
     </div>
 
     <div class="paper-section">
         <h3>10.2 Network State Awareness</h3>
-        <p>The token contract has read access to aggregate metrics derived from on-chain data: total outstanding supply, aggregate redemption velocity (rolling 24h, 7d, 30d windows), BTC spot relative to ₿C, the coverage ratio, and reserve attestation status. None of these metrics require information about individual holders. They are system-level vital signs,independently verifiable by any participant.</p>
+        <p>The protocol has read access to aggregate metrics derived from on-chain data: total outstanding supply, aggregate redemption velocity (rolling 24h, 7d, 30d windows), BTC spot relative to ₿C, the coverage ratio, and reserve attestation status. None of these metrics require information about individual holders. They are system-level vital signs, independently verifiable by any participant.</p>
     </div>
 
     <div class="paper-section">
         <h3>10.3 The Defensive Toolkit</h3>
         <p>Each mechanism is deterministic, transparent, and applies equally to every participant. None requires human intervention to activate. None can be overridden by the consortium.</p>
         <p><strong>BTC-Default Redemption:</strong> Eliminates concentrated forced selling by the consortium. The coordinated short-plus-redemption attack depends on forced BTC liquidation. With BTC-default redemption, the consortium never places a concentrated sell order. BTC-default carries its own time-weighted fee schedule based on each ₿USD's holding period, plus a baseline adjustment tied to network reserve depth. The fee is always lower than the equivalent fiat-path fee at every holding period.</p>
-        <p><strong>Time-Weighted Redemption Fees:</strong> Redemption fees are a function of each ₿USD's holding period, determined by sidechain transaction timestamps. Fiat path: 0 to 7 days: 3.0%. 8 to 30 days: 1.5%. 31 to 90 days: 0.5%. 91 to 180 days: 0.1%. Over 180 days: 0.0%. BTC-default path: same schedule at a reduced rate, with an additional baseline adjustment tied to network reserve depth. At mature reserves, long-held ₿USD converts at minimal cost. The fee never reaches zero for recently acquired ₿USD on either path.</p>
+        <p><strong>Time-Weighted Redemption Fees:</strong> Redemption fees are a function of each ₿USD's holding period, determined by transaction timestamps on The ₿ridge Network. Fiat path: 0 to 7 days: 3.0%. 8 to 30 days: 1.5%. 31 to 90 days: 0.5%. 91 to 180 days: 0.1%. Over 180 days: 0.0%. BTC-default path: same schedule at a reduced rate, with an additional baseline adjustment tied to network reserve depth. At mature reserves, long-held ₿USD converts at minimal cost. The fee never reaches zero for recently acquired ₿USD on either path.</p>
         <p><strong>Volume-Triggered Fee Escalation:</strong> When rolling 7-day fiat redemption volume exceeds defined thresholds as a percentage of total supply, an additional surcharge applies. Below 1%: no surcharge. 1 to 2%: +0.5%. 2 to 5%: +1.5%. Above 5%: +3.0%.</p>
         <p><strong>Adaptive Velocity Limits:</strong> Daily fiat redemption cap of 5% of outstanding supply under normal conditions, tightening as velocity rises. BTC-default redemption operates under its own graduated fee and throughput framework, with higher fees and soft limits during the system's early phase, both easing automatically as reserve depth grows.</p>
         <p><strong>Redemption Notice Periods:</strong> Small fiat redemptions process immediately. Above $100,000: 48 hours. Above $1,000,000: 7 days. BTC-default redemption remains instant at any amount.</p>
@@ -839,7 +842,7 @@
 
     <div class="paper-section">
         <h3>10.4 The Calm-State Guarantee</h3>
-        <p>Under normal network conditions,the vast majority of the token's life,every defensive mechanism is dormant. Transfers are instant and free. Redemptions are fast and cheap. The token behaves identically to any other stablecoin. The mechanisms activate only when the network's vital signs indicate abnormal stress, and the thresholds are public, auditable, and identical for everyone.</p>
+        <p>Under normal network conditions, the vast majority of ₿USD's operational life, every defensive mechanism is dormant. Transfers are instant and free. Redemptions are fast and cheap. ₿USD behaves identically to any other stablecoin. The mechanisms activate only when the network's vital signs indicate abnormal stress, and the thresholds are public, auditable, and identical for everyone.</p>
     </div>
 
     <div class="paper-section">
@@ -885,19 +888,19 @@
         <p>The ₿USD system deploys five structural defenses against this scenario:</p>
         <p><strong>First:</strong> Reserve pressure exists only when holders exit the ecosystem. Tokens circulating within the ecosystem create zero reserve pressure at any BTC spot price. Both BTC-default and fiat redemption draw from reserves. The fiat path adds concentrated selling pressure. The BTC path disperses it.</p>
         <p><strong>Second:</strong> BTC-default redemption eliminates concentrated forced selling by the consortium. The consortium transfers Bitcoin rather than liquidating it. No market order, no slippage, no spot impact from the consortium's side.</p>
-        <p><strong>Third:</strong> Time-weighted fees price out mint-and-redeem attack loops. A freshly minted token faces 3% fiat redemption fees, making the attack deeply unprofitable.</p>
+        <p><strong>Third:</strong> Time-weighted fees price out mint-and-redeem attack loops. A freshly minted ₿USD faces 3% fiat redemption fees, making the attack deeply unprofitable.</p>
         <p><strong>Fourth:</strong> Volume-triggered fee escalation and velocity limits create congestion pricing at the fiat exit ramp during stress events.</p>
         <p><strong>Fifth:</strong> ₿OND conversion provides a zero-cost escape valve. Any ₿USD holder can convert to a ₿OND at the current ₿C entry price at any time, at no cost, with no delay. During a panic, holders move their capital from the spending layer to the savings layer. No reserves are touched. No Bitcoin is sold. The circulating ₿USD supply contracts, improving network health. The system absorbs fear without absorbing outflow.</p>
 
     <div class="paper-section">
         <h3>12.1 Game Theory: The Coordinated Attack</h3>
-        <p>Consider a coordinated short-plus-redemption attack: an attacker mints $100M in ₿USD, builds a $100M BTC short position, then attempts mass fiat redemption to force selling and crash spot. The obstacles stack: BTC-default redemption means no forced selling. Time-weighted fees cost 3% ($3M) on freshly minted tokens. Volume-triggered escalation adds another 3% ($6M total). Velocity limits spread the redemption over weeks, during which the short accrues carrying costs. The attack's expected return is deeply negative.</p>
+        <p>Consider a coordinated short-plus-redemption attack: an attacker mints $100M in ₿USD, builds a $100M BTC short position, then attempts mass fiat redemption to force selling and crash spot. The obstacles stack: BTC-default redemption means no forced selling. Time-weighted fees cost 3% ($3M) on freshly minted ₿USD. Volume-triggered escalation adds another 3% ($6M total). Velocity limits spread the redemption over weeks, during which the short accrues carrying costs. The attack's expected return is deeply negative.</p>
         <div class="callout"><p><em>The defender's advantage is structural, not tactical. The protocol does not need to detect the attacker, identify their strategy, or respond in real time. It applies the same rules to everyone. The rules happen to make the attack uneconomical.</em></p></div>
     </div>
 
     <div class="paper-section">
         <h2><span class="sec-num">14.</span> CBDC vs. TBDC: The Programmability Inversion</h2>
-        <p>The technical capability is identical,both CBDCs and TBDCs embed conditional logic at the token level. The architecture is the same. The philosophy is opposite.</p>
+        <p>The technical capability is identical,both CBDCs and TBDCs embed conditional logic at the protocol level. The architecture is the same. The philosophy is opposite.</p>
         <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem;">
   <tr>
     <th style="padding:10px 14px;border-bottom:2px solid var(--border);color:var(--orange);font-family:var(--sans);font-size:0.85rem;font-weight:600;letter-spacing:0.05em;text-align:left;"><strong>Property</strong></th>
@@ -948,7 +951,7 @@
         <p><strong>Minting creates Bitcoin demand.</strong> Every ₿USD minted requires purchasing BTC at spot. Commerce-driven demand is persistent and does not reverse when sentiment shifts.</p>
         <p><strong>Rising spot expands issuance capacity.</strong> As BTC rises, the ₿C-denominated value of consortium holdings increases. More ₿USD can be issued. More BTC gets purchased.</p>
         <p><strong>Fee reinvestment deepens reserves.</strong> 100% of fee revenue is deployed to purchase additional Bitcoin until coverage thresholds are met.</p>
-        <p><strong>Scale reduces redemption risk.</strong> As more commerce occurs natively in ₿USD, the proportion of tokens redeemed for fiat declines. The system becomes structurally safer as it grows,the inverse of traditional fractional reserve banking.</p>
+        <p><strong>Scale reduces redemption risk.</strong> As more commerce occurs natively in ₿USD, the proportion of outstanding ₿USD redeemed for fiat declines. The system becomes structurally safer as it grows,the inverse of traditional fractional reserve banking.</p>
     </div>
 
     <div class="paper-section">
@@ -972,20 +975,20 @@
 
     <div class="paper-section">
         <h3>15.4 Technical and Operational Risk</h3>
-        <p>Protocol vulnerabilities, oracle manipulation, and private key compromise are inherent in any blockchain financial infrastructure. Mitigations include multi-signature wallets, formal verification of sidechain scripts, geographically distributed key management, and insurance against operational losses. The BTCADP oracle is resistant to manipulation by design,the trimmed mean methodology and exchange qualification filters prevent any single entity from influencing the reference price.</p>
+        <p>Protocol vulnerabilities, oracle manipulation, and private key compromise are inherent in any blockchain financial infrastructure. Mitigations include multi-signature wallets, formal verification of ₿ridge Network scripts, geographically distributed key management, and insurance against operational losses. The BTCADP oracle is resistant to manipulation by design,the trimmed mean methodology and exchange qualification filters prevent any single entity from influencing the reference price.</p>
     </div>
 
     <div class="paper-section">
         <h2><span class="sec-num">17.</span> Integration with the Reserve Architecture</h2>
         <p>Each instrument in the framework operates within its own dedicated two-ledger system. ₿USD faces demand-deposit risk. ₿OND faces maturity-timing risk. ₿ILL faces secondary-market pricing risk. The two-ledger separation ensures that stress on any one product can never reach another product's reserves.</p>
-        <p>₿USD's two-ledger system: Ledger 1 holds BTC backing outstanding $1 tokens, purchased at spot with incoming fiat. Ledger 2 is the backstop reserve drawn from consortium holdings, self-fortifying over time as BTC appreciation creates surplus above the $1 obligation. The same two-ledger structure applies independently to ₿OND and ₿ILL, each with its own dedicated reserves. All ledgers are held in publicly addressable Bitcoin wallets on the base layer.</p>
+        <p>₿USD's two-ledger system: Ledger 1 holds BTC backing outstanding $1 ₿USD, purchased at spot with incoming fiat. Ledger 2 is the backstop reserve drawn from consortium holdings, self-fortifying over time as BTC appreciation creates surplus above the $1 obligation. The same two-ledger structure applies independently to ₿OND and ₿ILL, each with its own dedicated reserves. All ledgers are held in publicly addressable Bitcoin wallets on the base layer.</p>
     </div>
 
     <div class="paper-section">
         <h2><span class="sec-num">18.</span> Conclusion</h2>
         <p>₿USD provides a dollar-stable medium of exchange backed entirely by Bitcoin,the only asset whose supply is fixed by protocol and whose custody requires no counterparty. The system converts stablecoin demand into structural Bitcoin demand, channels fee revenue into additional Bitcoin purchases, and becomes more robust as adoption grows.</p>
-        <p>The architecture requires no modification to Bitcoin's base layer. It uses a consortium-operated sidechain infrastructure for token circulation, existing publicly traded companies as issuers, and a published open-source specification for its reference price. The denomination outlasts the institutions that use it.</p>
-        <p>The defensive programmability framework inverts the CBDC paradigm: tokens that read the state of their own network to protect all holders equally, rather than tokens that report on their holders to serve the issuing authority. Under normal conditions, every mechanism is dormant and the token behaves identically to any other stablecoin. Under stress, the protocol hardens autonomously.</p>
+        <p>The architecture requires no modification to Bitcoin's base layer. It uses The ₿ridge Network for ₿USD circulation, existing publicly traded companies as issuers, and a published open-source specification for its reference price. The denomination outlasts the institutions that use it.</p>
+        <p>The defensive programmability framework inverts the CBDC paradigm: reserve notes that read the state of their own network to protect all holders equally, rather than instruments that report on their holders to serve the issuing authority. Under normal conditions, every mechanism is dormant and ₿USD behaves identically to any other stablecoin. Under stress, the protocol hardens autonomously.</p>
         <div class="callout"><p><em>The transition is not an ideological project. It is the emergent consequence of a stablecoin that is better: backed by harder collateral, verified in real time, issued by institutions with aligned incentives, and defended by its own architecture.</em></p></div>
         <p>CC BY-NC-ND · btcadp.org · 2026</p>
     </div>

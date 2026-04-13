@@ -449,7 +449,7 @@
 
     <p>This document specifies The &#x20BF;ridge Network, the federated Bitcoin sidechain on which &#x20BF;USD, &#x20BF;OND, and &#x20BF;ILL circulate. It covers the sidechain layer only: consensus, block production, transaction format, payment finality, peg mechanics, multi-product support, privacy architecture, federation governance, and the IDMA monitoring interface.</p>
 
-    <p>&#x20BF;ridge handles commerce. Between the moment a &#x20BF;USD is minted and the moment it's redeemed, every transfer, every payment, every salary deposit, every merchant settlement occurs on this network. No Bitcoin moves on the base layer during these transactions. The BTC reserves sit untouched in publicly addressable wallets until a holder crosses the boundary by minting new tokens or redeeming existing ones.</p>
+    <p>&#x20BF;ridge handles commerce. Between the moment a &#x20BF;USD is minted and the moment it's redeemed, every transfer, every payment, every salary deposit, every merchant settlement occurs on this network. No Bitcoin moves on the base layer during these transactions. The BTC reserves sit untouched in publicly addressable wallets until a holder crosses the boundary by minting new &#x20BF;USD or redeeming existing ones.</p>
 
     <p>This specification does not cover the reserve architecture (the two-ledger system), redemption economics (surplus dynamics, the Profit Burn Priority algorithm), the defensive programmability toolkit (fee schedules, velocity limits, volume-triggered escalation), the BTCADP oracle methodology, or the &#x20BF;C denomination protocol. Where this specification references reserve mechanics or defensive parameters, it cites TBB and defers to it.</p>
 
@@ -467,7 +467,7 @@
     <span class="sec-num">Section 02</span>
     <h2>The Consortium Advantage</h2>
 
-    <p>A sidechain is only as trustworthy as the entities operating it. On the Liquid Network, the functionaries who sign blocks and manage the peg have no economic relationship to the assets circulating on the chain. They don't issue the tokens, don't hold the reserves, and don't profit from the system's success. If Liquid's assets lost all their value tomorrow, the functionaries would lose nothing beyond minor fee revenue.</p>
+    <p>A sidechain is only as trustworthy as the entities operating it. On the Liquid Network, the functionaries who sign blocks and manage the peg have no economic relationship to the assets circulating on the chain. They don't issue the currency, don't hold the reserves, and don't profit from the system's success. If Liquid's assets lost all their value tomorrow, the functionaries would lose nothing beyond minor fee revenue.</p>
 
     <p>&#x20BF;ridge is different because the federation members are the consortium's treasury companies. They issue the currency, hold the Bitcoin reserves in publicly addressable wallets, and stake their balance sheets on the system's integrity. The International Digital Monetary Authority sits above the federation as an independent certifier and real-time monitor with no economic stake in any member's success, only in the network's soundness.</p>
 
@@ -553,19 +553,22 @@
       </thead>
       <tbody>
         <tr><td>Reference Price</td><td>BTCADP daily price; &#x20BF;C cumulative average</td><td>Off-chain (open standard)</td><td>Any party with trade data</td></tr>
-        <tr><td>Reserve Layer</td><td>BTC custody in two-ledger system</td><td>Bitcoin base layer</td><td>On-chain wallet addresses</td></tr>
-        <tr><td>Token Layer</td><td>&#x20BF;USD / &#x20BF;OND / &#x20BF;ILL circulation</td><td>The &#x20BF;ridge Network</td><td>Sidechain explorer + IDMA monitoring</td></tr>
+        <tr><td>Reserve Layer</td><td>BTC custody in two-ledger system</td><td>Bitcoin blockchain</td><td>On-chain wallet addresses</td></tr>
+        <tr><td>Note Layer</td><td>Consortium's Digital Reserve Note inventory (provenance metadata, PBP# burn ordering)</td><td>Consortium internal systems</td><td>IDMA audit + base-layer cross-reference</td></tr>
+        <tr><td>Transaction Layer</td><td>&#x20BF;USD / &#x20BF;OND / &#x20BF;ILL circulation as $1 UTXOs</td><td>&#x20BF;ridge</td><td>Sidechain explorer + IDMA monitoring</td></tr>
         <tr><td>Interface Layer</td><td>Consumer wallets, merchant terminals, FSP apps</td><td>Application layer</td><td>User experience</td></tr>
       </tbody>
     </table>
 
-    <p>This specification covers the Token Layer. &#x20BF;ridge sits between the Reserve Layer (Bitcoin's base layer, where the BTC backing the system is held) and the Interface Layer (the wallets and apps that end users interact with). It connects to the Reserve Layer at exactly two points: minting and redemption. Everything between those two events is sidechain commerce, and no Bitcoin moves on the base layer during that commerce.</p>
+    <p>The Reserve Layer holds the BTC. The Note Layer is the consortium's vault: individual Digital Reserve Notes with provenance metadata, managed internally, never visible to holders. A Digital Reserve Note is the digital equivalent of a banknote stored in a bank vault. Each one carries data about itself (mint date, cost basis, &#x20BF;C price, block age), and the consortium uses that data for reserve management and PBP# burn ordering. The holder never sees a reserve note, just as a depositor never sees the specific bills backing their balance. The Transaction Layer is where commerce happens: $1 UTXOs circulating on &#x20BF;ridge, representing the holder's redemption claims against the reserve. The relationship between a holder's balance on the Transaction Layer and the reserve notes in the Note Layer is the relationship between a deposit balance and the bills in a bank vault. The depositor owns the claim. The bank owns the bills. The bank decides which bills to hand over on withdrawal.</p>
 
-    <p>A consumer paying for coffee interacts with the Interface Layer (their wallet). The wallet constructs a transaction on the Token Layer (&#x20BF;ridge). The Reserve Layer is untouched. A million transactions can flow across &#x20BF;ridge without a single satoshi moving on Bitcoin's base layer. The base layer secures the reserves. &#x20BF;ridge handles commerce.</p>
+    <p>This specification covers the Transaction Layer. &#x20BF;ridge sits between the Reserve Layer (BTC in wallets on Bitcoin's blockchain) and the Interface Layer (the wallets and apps end users interact with). It connects to the Reserve Layer at exactly two points: minting and redemption. Everything between those two events is sidechain commerce, and no Bitcoin moves in the reserve during that commerce.</p>
 
-    <h3>Relationship to the Reserve Layer</h3>
+    <p>A consumer paying for coffee interacts with the Interface Layer (their wallet). The wallet constructs a transaction on &#x20BF;ridge. The Reserve Layer is untouched. The Note Layer is untouched. A million transactions can flow across &#x20BF;ridge without a single satoshi moving in the reserve. The reserve secures the backing. &#x20BF;ridge handles commerce.</p>
 
-    <p>&#x20BF;ridge does not reference the reserve inventory. The reserve does not track sidechain balances. The two layers carry separate data about separate concerns. On the base layer, each token unit in the reserve carries provenance metadata: mint date, mint-day BTC spot price, mint-day &#x20BF;C price, and block age. The consortium uses this data for reserve management and Profit Burn Priority burn ordering. On the sidechain, each &#x20BF;USD is a $1 UTXO with a transaction ID and timestamp. The fee algorithm reads UTXO age to price redemptions. Neither layer knows what the other is doing until a holder crosses the boundary by requesting a mint or a redemption.</p>
+    <h3>Relationship to the Reserve Layer and Note Layer</h3>
+
+    <p>&#x20BF;ridge does not reference the reserve inventory. The reserve does not track sidechain balances. The Note Layer (the consortium's internal record of which reserve notes exist, their provenance, their cost basis) is completely separate from the Transaction Layer (the $1 UTXOs holders spend and receive). On the Note Layer, each reserve note carries provenance metadata: mint date, mint-day BTC spot price, mint-day &#x20BF;C price, and block age. The consortium uses this data for reserve management and Profit Burn Priority burn ordering. On the Transaction Layer, each &#x20BF;USD is a $1 UTXO with a transaction ID and timestamp. The fee algorithm reads UTXO age to price redemptions. No layer references any other.</p>
 
     <h3>Relationship to the Interface Layer</h3>
 
@@ -835,11 +838,11 @@
 
     <h3>11.2 Redemption</h3>
 
-    <p>Redemption is the reverse. The holder submits a redemption request through their FSP. On the sidechain, the holder's &#x20BF;USD UTXOs are burned (sent to a provably unspendable address). The consortium's protocol selects which token units in the reserve inventory to liquidate using the Profit Burn Priority algorithm (defined in TBB). The holder receives their payout through the FSP.</p>
+    <p>Redemption is the reverse. The holder submits a redemption request through their FSP. On the sidechain, the holder's &#x20BF;USD UTXOs are burned (sent to a provably unspendable address). The consortium's protocol selects which reserve notes in the vault to liquidate using the Profit Burn Priority algorithm (defined in TBB). The holder receives their payout through the FSP.</p>
 
     <p>Three exit paths are available, each with different sidechain mechanics:</p>
 
-    <p><strong>BTC-default redemption.</strong> The consortium transfers BTC from Ledger 1 directly to the redeemer's Bitcoin wallet. On the sidechain, the &#x20BF;USD UTXOs are burned. On the base layer, the corresponding BTC moves from the consortium's Ledger 1 wallet to the redeemer's address. The fee is calculated from the sidechain UTXO timestamps (holding period) and the network's current reserve depth. BTC-default is instant for standard volumes.</p>
+    <p><strong>BTC-default redemption.</strong> The consortium transfers BTC from Ledger 1 directly to the redeemer's Bitcoin wallet. On the sidechain, &#x20BF;USD UTXOs are burned. Separately, on the base layer, BTC moves from the consortium's Ledger 1 wallet to the redeemer's address. The two operations are performed independently by the consortium. The fee is calculated from sidechain UTXO timestamps (holding period) and the network's current reserve depth. BTC-default is instant for standard volumes.</p>
 
     <p><strong>Savings conversion.</strong> The holder converts &#x20BF;USD to &#x20BF;OND at the current &#x20BF;C entry price. On the sidechain, &#x20BF;USD UTXOs are consumed and &#x20BF;OND UTXOs are created in an atomic swap. No reserves are touched. No Bitcoin is sold. No fee applies. This is the escape valve that absorbs panic without absorbing outflow.</p>
 
@@ -1064,7 +1067,7 @@
     </div>
 
     <div class="open-q">
-      <p><strong>Settlement window duration.</strong> The proposed 6-hour window between sidechain mint and required base-layer BTC deposit needs calibration. Too tight, and legitimate operational delays trigger false alerts. Too loose, and a rogue member has hours to operate with unbacked tokens. Analysis of base-layer confirmation times, exchange settlement speeds, and operational workflows at publicly traded companies would help set this parameter.</p>
+      <p><strong>Settlement window duration.</strong> The proposed 6-hour window between sidechain mint and required base-layer BTC deposit needs calibration. Too tight, and legitimate operational delays trigger false alerts. Too loose, and a rogue member has hours to operate with unbacked &#x20BF;USD. Analysis of base-layer confirmation times, exchange settlement speeds, and operational workflows at publicly traded companies would help set this parameter.</p>
     </div>
 
     <div class="open-q">

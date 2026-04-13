@@ -573,7 +573,7 @@
 </div>
     <h1>₿USD: <span>A Bitcoin-Backed</span><br>USD Stablecoin</h1>
     <p class="hero-sub">
-        One token equals one dollar. Backed by Bitcoin held in verifiable on-chain reserves by a
+        One unit equals one dollar. Backed by Bitcoin held in verifiable on-chain reserves by a
         consortium of Bitcoin treasury companies. The ₿C price serves as the conservative
         reserve sizing floor.
     </p>
@@ -589,13 +589,13 @@
         <h2>What is ₿USD?</h2>
         <p>
             ₿USD is a USD-pegged stablecoin and the first proposed
-            <a href="tbdc.html">Treasury-Backed Digital Currency (TBDC)</a>. One token equals
-            one dollar. It is issued by a consortium of Bitcoin treasury companies. Each token is backed
+            <a href="tbdc.html">Treasury-Backed Digital Currency (TBDC)</a>. One ₿USD equals
+            one dollar. It is issued by a consortium of Bitcoin treasury companies. Each ₿USD is backed
             by Bitcoin held in a two-ledger reserve system, verifiable on the base layer in publicly
             addressable wallets.
         </p>
         <p>
-            ₿USD is not an algorithmic stablecoin. It carries no endogenous token mechanism and
+            ₿USD is not an algorithmic stablecoin. It carries no endogenous stabilization mechanism and
             makes no market-incentive assumptions. It is not a fiat-backed stablecoin. It holds no
             dollars, no US Treasuries, and no bank deposits. Its collateral is Bitcoin , the only
             asset whose supply is fixed by protocol and whose custody requires no counterparty.
@@ -646,7 +646,7 @@
         </p>
         <p>
             On redemption, the consortium sells the required Bitcoin from Ledger 1 and returns
-            $1,000. The tokens are burned. If Ledger 1 has appreciated, the consortium retains
+            $1,000. The corresponding reserve notes are burned. If Ledger 1 has appreciated, the consortium retains
             the surplus. If Ledger 1 has fallen below the redemption amount, Ledger 2 covers
             the difference.
         </p>
@@ -662,7 +662,7 @@
             Total ₿USD issuance is capped at the Bitcoin Currency (₿C) denominated value of the
             consortium's combined Bitcoin holdings, not spot value. This conservative ceiling means
             the consortium retains significant uncommitted reserves at all times. Individual ₿USD
-            tokens are backed 1:1 at minting: each dollar of incoming fiat purchases Bitcoin at spot,
+            ₿USD is backed 1:1 at minting: each dollar of incoming fiat purchases Bitcoin at spot,
             and Ledger 1 holds exactly the obligation. If BTC spot rises after minting, Ledger 1
             moves into surplus. If spot falls, Ledger 2 covers the gap.
         </p>
@@ -837,7 +837,7 @@
                     <td>Failure mode</td>
                     <td>Issuer insolvency / regulation</td>
                     <td>Reflexive collapse</td>
-                    <td class="highlight-col">BTC sustained below $1 per-token reserve , requires >99% Bitcoin decline</td>
+                    <td class="highlight-col">BTC sustained below $1 per-unit reserve , requires >99% Bitcoin decline</td>
                 </tr>
             </tbody>
         </table>
@@ -859,7 +859,7 @@
             The ₿C price serves as the conservative issuance ceiling: total ₿USD supply cannot
             exceed the ₿C-denominated value of consortium holdings. This means the consortium
             retains significant uncommitted reserves at all times, because the ceiling is set at
-            the cumulative average rather than the higher spot price. Individual tokens are backed
+            the cumulative average rather than the higher spot price. Individual reserve notes are backed
             1:1 at minting, with Ledger 2 providing the backstop when spot declines below the
             minting price. The gap between spot and the slowly-moving ₿C floor ensures the
             system has room to absorb drawdowns before the $1.00 peg is threatened.
