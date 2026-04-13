@@ -716,9 +716,9 @@
           <span class="term-icon">+</span>
         </button>
         <div class="term-body">
-          <p>The issuer's inventory unit. A digitally tracked record in the consortium's vault carrying provenance metadata about the conditions of its own issuance: mint date, mint-day BTC spot price, mint-day ₿C price (the note's timeblock), and block age. The holder never sees, selects, or interacts with individual reserve notes. They see a fungible dollar balance.</p>
-          <p>The Digital Reserve Note exists on the Note Layer, separate from the $1 UTXO that the holder spends on The ₿ridge Network (the Transaction Layer). The two objects carry separate data, are managed by separate logic, and the layers never reference each other. This separation is the structural prerequisite for PBP# burn ordering, dual-provenance fee structures, and the defensive programmability framework. No other digital currency separates the inventory unit from the circulating claim.</p>
-          <div class="see-also">See also: <a href="#N">Note Layer</a>, <a href="#P">PBP#</a>, <a href="#B">₿ridge Network, The</a></div>
+          <p>The issuer's inventory unit. A digitally tracked record in the Treasury Digital Vault (TDV) carrying provenance metadata about the conditions of its own issuance: mint date, mint-day BTC spot price, mint-day ₿C price (the note's timeblock), and block age. The holder never sees, selects, or interacts with individual reserve notes. They see a fungible dollar balance.</p>
+          <p>The Digital Reserve Note exists on the Digital Note Layer, separate from the $1 UTXO that the holder spends on The ₿ridge Network (the Transaction Layer). The two objects carry separate data, are managed by separate logic, and the layers never reference each other. This separation is the structural prerequisite for PBP# burn ordering, dual-provenance fee structures, and the defensive programmability framework. No other digital currency separates the inventory unit from the circulating claim.</p>
+          <div class="see-also">See also: <a href="#D">Digital Note Layer</a>, <a href="#T">Treasury Digital Vault</a>, <a href="#P">PBP#</a>, <a href="#B">₿ridge Network, The</a></div>
         </div>
       </div>
 
@@ -926,14 +926,14 @@
       <div class="term-entry">
         <button class="term-header" onclick="toggle(this)">
           <div class="term-title-wrap">
-            <span class="term-name">Note Layer</span>
+            <span class="term-name">Digital Note Layer</span>
             <span class="term-tag">Architecture</span>
           </div>
           <span class="term-icon">+</span>
         </button>
         <div class="term-body">
-          <p>The layer of the five-layer architecture where the consortium manages its Digital Reserve Note inventory. Each note carries provenance metadata (mint date, mint-day BTC spot, mint-day ₿C price, block age). PBP# burn ordering, reserve health indicators, and defensive programmability inputs all derive from Note Layer data. The holder never interacts with this layer. The Note Layer and the Transaction Layer carry independent data, are managed by independent logic, and never reference each other.</p>
-          <div class="see-also">See also: <a href="#D">Digital Reserve Note</a>, <a href="#T">Transaction Layer</a>, <a href="#P">PBP#</a></div>
+          <p>The layer of the five-layer architecture where the consortium manages its Digital Reserve Note inventory inside the Treasury Digital Vault (TDV). Each note carries provenance metadata (mint date, mint-day BTC spot, mint-day ₿C price, block age). PBP# burn ordering, reserve health indicators, and defensive programmability inputs all derive from Digital Note Layer data. The holder never interacts with this layer. The Digital Note Layer and the Transaction Layer carry independent data, are managed by independent logic, and never reference each other.</p>
+          <div class="see-also">See also: <a href="#D">Digital Reserve Note</a>, <a href="#T">Treasury Digital Vault</a>, <a href="#T">Transaction Layer</a>, <a href="#P">PBP#</a></div>
         </div>
       </div>
 
@@ -1119,6 +1119,20 @@
         <div class="term-body">
           <p>The fifth category of digital currency. A stablecoin issued by a consortium of Bitcoin treasury companies, backed by Bitcoin held in on-chain reserves, and denominated in a fiat currency. Distinct from cryptocurrency (#1, volatile), stablecoins (#2, fiat-backed), CBDCs (#3, government-issued), and virtual currency (#4, in-game). Three properties define the category: the reserve asset has a fixed supply, the issuer does not issue a token (it mints Digital Reserve Notes that the holder never sees), and the money defends itself through autonomous protocol-level mechanisms. ₿USD is the US dollar implementation. Other fiat denominations, ₿EUR, ₿GBP, are possible under the same architecture.</p>
           <div class="see-also">See also: <a href="#B">₿USD</a>, <a href="#D">Digital Reserve Note</a>, <a href="#C">Consortium</a></div>
+        </div>
+      </div>
+
+      <div class="term-entry">
+        <button class="term-header" onclick="toggle(this)">
+          <div class="term-title-wrap">
+            <span class="term-name">Treasury Digital Vault (TDV)</span>
+            <span class="term-tag">Architecture</span>
+          </div>
+          <span class="term-icon">+</span>
+        </button>
+        <div class="term-body">
+          <p>The storage mechanism within the Digital Note Layer where the consortium maintains its inventory of Digital Reserve Notes. Each note in the TDV carries provenance metadata describing the conditions of its own issuance. The TDV is an issuer-side construct. Holders never see, select, or interact with notes in the vault. They see a fungible dollar balance on The ₿ridge Network's Transaction Layer. PBP# burn ordering and reserve health indicators operate on TDV data.</p>
+          <div class="see-also">See also: <a href="#D">Digital Note Layer</a>, <a href="#D">Digital Reserve Note</a>, <a href="#P">PBP#</a></div>
         </div>
       </div>
 

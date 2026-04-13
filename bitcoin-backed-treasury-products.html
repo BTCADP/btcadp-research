@@ -534,7 +534,7 @@
         Maintains a hard peg of exactly $1.00. When a user purchases &#x20BF;USD, the $1 in fiat is
         used to purchase Bitcoin at spot, deposited into the &#x20BF;USD reserve ledger. Everything
         between issuance and redemption , all commerce, payments, and peer-to-peer transfers , is
-        token circulation. No Bitcoin moves during circulation. Reserves sit on Bitcoin's base layer
+        ₿USD circulation. No Bitcoin moves during circulation. Reserves sit on Bitcoin's base layer
         in transparent, publicly auditable on-chain wallets.
       </p>
       <p style="margin-top:0.5rem;">
@@ -560,8 +560,8 @@
 
     <p style="margin-top:1.2rem;">
       The retail products connect through conversion. A &#x20BF;ond holder who wants to spend converts
-      their ₿C balance into &#x20BF;USD tokens at the current ₿C/USD rate. A &#x20BF;USD holder
-      who wants to save converts tokens into a &#x20BF;ond. Every conversion between the retail products
+      their ₿C balance into &#x20BF;USD at the current ₿C/USD rate. A &#x20BF;USD holder
+      who wants to save converts ₿USD into a &#x20BF;ond. Every conversion between the retail products
       keeps capital inside the Bitcoin economy. ₿ILL operates on its own secondary market,
       with its own dedicated two-ledger reserve system entirely separate from ₿USD and ₿ond reserves.
       The only exit that costs Bitcoin is redemption to fiat.
@@ -605,7 +605,7 @@
           <td><span class="ledger-name">&#x20BF;USD L1</span></td>
           <td>&#x20BF;USD (transactional)</td>
           <td>BTC purchased with incoming fiat at $1 per unit. Grows and shrinks with circulating &#x20BF;USD supply.</td>
-          <td>Backs every outstanding &#x20BF;USD token 1:1 in fiat terms at issuance. BTC appreciation creates surplus that fortifies L2.</td>
+          <td>Backs every outstanding &#x20BF;USD balance 1:1 in fiat terms at issuance. BTC appreciation creates surplus that fortifies L2.</td>
         </tr>
         <tr>
           <td><span class="ledger-name">&#x20BF;USD L2</span></td>
@@ -631,8 +631,8 @@
     <div class="callout">
       <div class="callout-label">The &#x20BF;USD L2 self-fortification mechanism</div>
       <p>
-        Every &#x20BF;USD token is minted at $1 backed by BTC purchased at spot. As Bitcoin's spot
-        price appreciates, the BTC backing each $1 token becomes worth more than $1. That surplus flows
+        Every &#x20BF;USD is minted at $1 backed by BTC purchased at spot. As Bitcoin's spot
+        price appreciates, the BTC backing each $1 of ₿USD becomes worth more than $1. That surplus flows
         into &#x20BF;USD L2 automatically. The reserve system does not need to be recapitalized from
         external sources as long as Bitcoin's long-run price trend continues. It recapitalizes itself.
       </p>
@@ -651,17 +651,17 @@
     </p>
     <p>
       For ₿USD, the defense against coordinated attacks operates through defensive programmability.
-      Every ₿USD token unit carries provenance metadata about itself , mint date, mint-day BTC spot price,
+      Every Digital Reserve Note carries provenance metadata about itself , mint date, mint-day BTC spot price,
       block age, and transfer count , but cannot identify its holder. The defensive toolkit includes:
       BTC-default redemption (consortium transfers Bitcoin directly instead of selling on market),
-      time-weighted fees (freshly minted tokens pay higher fees, making rapid mint-and-redeem attacks
+      time-weighted fees (freshly minted notes pay higher fees, making rapid mint-and-redeem attacks
       expensive), volume-triggered escalation (automatic circuit breakers on mass fiat redemptions),
       and ₿OND conversion (holders move from spending to savings layer during stress, contracting
       supply without any reserve action).
     </p>
     <p>
-      Consider a coordinated short-plus-redemption attack against ₿USD. BTC-default redemption produces
-      no spot impact and no short profit. Time-weighted fees on freshly minted tokens cost 3–6% before
+      A coordinated short-plus-redemption attack against ₿USD illustrates the defense. BTC-default redemption produces
+      no spot impact and no short profit. Time-weighted fees on freshly minted notes cost 3–6% before
       any potential profit. Volume-triggered escalation adds further friction at scale. The expected
       return of such an attack is deeply negative. The mechanisms do not eliminate the theoretical
       possibility of attack. They make it economically irrational to attempt.
@@ -817,7 +817,7 @@
   <div class="paper-section">
     <h2>12. Risk Analysis</h2>
     <p><strong style="color:#fff;">Bitcoin price decline.</strong> A sustained, severe Bitcoin price decline is the most acute risk to both products. The critical framing: every consortium member already carries this risk on their primary balance sheet. The reserve commitments formalize existing exposure with defined perimeters and attach revenue streams to it.</p>
-    <p><strong style="color:#fff;">Bank run and coordinated attack.</strong> For the &#x20BF;OND, the dual-condition maturity ensures the treasury never pays out at a loss, and early exits convert to ₿USD rather than drawing on &#x20BF;OND reserves. For &#x20BF;USD, defenses include BTC-default redemption (no market selling), time-weighted fees on freshly minted tokens, volume-triggered escalation, on-chain reserve transparency, and the L2 backstop self-fortified by BTC appreciation.</p>
+    <p><strong style="color:#fff;">Bank run and coordinated attack.</strong> For the &#x20BF;OND, the dual-condition maturity ensures the treasury never pays out at a loss, and early exits convert to ₿USD rather than drawing on &#x20BF;OND reserves. For &#x20BF;USD, defenses include BTC-default redemption (no market selling), time-weighted fees on freshly minted notes, volume-triggered escalation, on-chain reserve transparency, and the L2 backstop self-fortified by BTC appreciation.</p>
     <p><strong style="color:#fff;">Regulatory uncertainty.</strong> The structural mitigation is the consortium's distributed jurisdiction , no single regulatory action shuts down the entire system. The ₿C denomination itself requires no permission to compute or use.</p>
     <p><strong style="color:#fff;">Consortium coordination.</strong> The foundational methodology is independent of the consortium , the BTCADP specification is published, the ₿C formula is arithmetic, and reserve management rules can be codified in a charter requiring no active committee decisions for routine operations.</p>
   </div>

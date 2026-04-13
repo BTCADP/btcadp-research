@@ -544,7 +544,7 @@
     <div class="paper-meta">
         <span>CC BY-NC-ND</span>
         <span>btcadp.org</span>
-        <span>Version 5.3</span>
+        <span>Version 5.4</span>
     </div>
     <div class="download-bar">
         <a href="busd.html" class="btn-secondary">&larr; Summary Page</a>
@@ -804,7 +804,7 @@
     </div>
 
     <div class="paper-section">
-        <h3>9.3 Pooling Dynamics: Tokens in the Black and the Red</h3>
+        <h3>9.3 Pooling Dynamics: Reserve Notes in the Black and the Red</h3>
         <p>Ledger 1 operates as a pooled reserve, not on a per-unit basis. Units are minted at different spot prices and redeemed at different times. At any given moment, a percentage of outstanding units are "in the black",their backing satoshis are worth more than the $1 obligation,and a percentage are "in the red," where spot has declined below their issuance price.</p>
         <p>Over a long enough time horizon, the proportion of units in the black grows structurally. Every day that BTC spot remains above prior issuance prices, more cohorts move into surplus. Older units, those minted months or years ago at lower spot prices,are deeply in the black. Their surplus more than offsets the shortfall on recently minted units that may be temporarily underwater. A unit minted at $50,000 spot and redeemed when spot is $80,000 generates a surplus of $0.375 per unit. A unit minted at $90,000 and redeemed at $80,000 generates a shortfall of $0.125 per unit. In a pooled reserve, the surplus units subsidize the underwater ones.</p>
         <p>This is the retention effect. Long-term holders do not redeem during a downturn. They have no reason to,their ₿USD balance's $1.00 peg is stable regardless of what BTC spot does on any given day. The reserve notes most likely to be redeemed during a downturn are recently minted notes held by short-term participants, precisely the notes with the thinnest margin. But the bulk of the pool,the older, deeply in-the-black units, sits undisturbed, its surplus growing with every passing day that spot exceeds the historical average.</p>
@@ -886,7 +886,7 @@
         <h2><span class="sec-num">13.</span> Bank Run Analysis and Structural Defenses</h2>
         <p>A bear market drives BTC spot below the average minting price. Holders panic. Redemptions spike. Each fiat exit forces the consortium to sell Bitcoin into a falling market, depressing the price further, triggering more redemptions. This is a bank run,the oldest failure mode in monetary systems.</p>
         <p>The ₿USD system deploys five structural defenses against this scenario:</p>
-        <p><strong>First:</strong> Reserve pressure exists only when holders exit the ecosystem. Tokens circulating within the ecosystem create zero reserve pressure at any BTC spot price. Both BTC-default and fiat redemption draw from reserves. The fiat path adds concentrated selling pressure. The BTC path disperses it.</p>
+        <p><strong>First:</strong> Reserve pressure exists only when holders exit the ecosystem. ₿USD circulating within the ecosystem creates zero reserve pressure at any BTC spot price. Both BTC-default and fiat redemption draw from reserves. The fiat path adds concentrated selling pressure. The BTC path disperses it.</p>
         <p><strong>Second:</strong> BTC-default redemption eliminates concentrated forced selling by the consortium. The consortium transfers Bitcoin rather than liquidating it. No market order, no slippage, no spot impact from the consortium's side.</p>
         <p><strong>Third:</strong> Time-weighted fees price out mint-and-redeem attack loops. A freshly minted ₿USD faces 3% fiat redemption fees, making the attack deeply unprofitable.</p>
         <p><strong>Fourth:</strong> Volume-triggered fee escalation and velocity limits create congestion pricing at the fiat exit ramp during stress events.</p>
@@ -910,7 +910,7 @@
   <tr>
     <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Programmability serves</td>
     <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">The issuing authority</td>
-    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">The token network and its holders</td>
+    <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">The ₿USD network and its holders</td>
   </tr>
   <tr>
     <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:#c4c4c4;vertical-align:top;">Holder surveillance</td>
