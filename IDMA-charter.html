@@ -519,7 +519,7 @@
   <p class="charter-sub">1. Certified entities are subject to periodic review by the foundation or its appointed auditors to verify continued compliance with the certification scheme.</p>
   <p class="charter-sub">2. The foundation may suspend certification if a certified entity fails to meet one or more requirements of the certification scheme. Suspension is communicated in writing with a defined remediation period.</p>
   <p class="charter-sub">3. The foundation shall revoke certification if the certified entity fails to remediate within the defined period, or if the foundation determines that the entity's continued operation under the TBDC framework poses a risk to the integrity of the standard or to holders of instruments issued under it.</p>
-  <p class="charter-sub">4. Decisions to suspend or revoke certification may be appealed under the procedure set forth in Article 14.</p>
+  <p class="charter-sub">4. Decisions to suspend or revoke certification may be appealed under the procedure set forth in Article 15.</p>
 
   <div class="charter-article"><div class="charter-article-title">Article 8 &mdash; Relationship to Certified Entities</div></div>
   <p class="charter-sub">1. Certified entities are not members of the foundation. Certification confers a license to operate under the TBDC framework and to use the associated trademarks. It does not confer governance rights, voting rights, or any role in the administration of the foundation.</p>
@@ -555,7 +555,15 @@
   <div class="charter-article"><div class="charter-article-title">Article 12 &mdash; Monitoring Function</div></div>
   <p class="charter-sub">1. The foundation operates or commissions network monitoring infrastructure to assess the health and security of certified TBDC networks. Monitoring systems track defined indicators including, but not limited to, reserve coverage ratios, reserve note health metrics, network velocity, and defense state.</p>
   <p class="charter-sub">2. The foundation publishes monitoring standards and indicator definitions. Certified entities must provide the data access necessary for the foundation to perform its monitoring function.</p>
-  <p class="charter-sub">3. The foundation does not intervene in the operations of certified entities. Monitoring findings inform certification review and may trigger the procedures set forth in Article 7.</p>
+  <p class="charter-sub">3. Except as provided in Article 13 (Supply Boundary Certification), the foundation does not intervene in the operations of certified entities. Monitoring findings inform certification review and may trigger the procedures set forth in Article 7.</p>
+
+  <div class="charter-article"><div class="charter-article-title">Article 13 &mdash; Supply Boundary Certification</div></div>
+  <p class="charter-sub">1. No certified entity may mint or burn units of a TBDC instrument without a co-signature from the foundation attesting that the corresponding base-layer reserve movement has been independently verified. The foundation's co-signature is required before the sidechain supply change is executed.</p>
+  <p class="charter-sub">2. For minting: the foundation verifies that the certified entity's Bitcoin deposit has settled on the base layer and that the deposit amount corresponds to the requested mint amount. Upon verification, the foundation co-signs the mint authorization. The federation then executes the issuance on the Transaction Layer.</p>
+  <p class="charter-sub">3. For redemption: the foundation verifies that the Digital Reserve Note selection (by the published burn-ordering algorithm), the sidechain destruction of the corresponding Digital Currency Unit, and the base-layer Bitcoin release correspond correctly. The foundation co-signs the burn authorization upon verification.</p>
+  <p class="charter-sub">4. The foundation's co-signature attests to a single fact: that the reserve movement matches the supply change. The foundation does not select which reserves to liquidate, does not direct the destination of released assets, and does not participate in the commerce that occurs between minting and redemption on the Transaction Layer.</p>
+  <p class="charter-sub">5. If the foundation's supply boundary certification system is temporarily unavailable, existing instruments continue to circulate and transact normally on the Transaction Layer. Minting and redemption processing is suspended until the system is restored. The foundation shall maintain redundant infrastructure to minimize the duration and frequency of any suspension.</p>
+  <p class="charter-sub">6. The supply boundary certification function touches the Digital Note Layer and the Reserve Layer. It never touches the Transaction Layer. The foundation has no ability to censor, delay, or modify transactions between holders.</p>
 
   <hr class="section-break">
 
@@ -565,7 +573,7 @@
     <h2>Governance</h2>
   </div>
 
-  <div class="charter-article"><div class="charter-article-title">Article 13 &mdash; Foundation Board</div></div>
+  <div class="charter-article"><div class="charter-article-title">Article 14 &mdash; Foundation Board</div></div>
   <p class="charter-sub">1. The Foundation Board (Stiftungsrat) is the supreme governing body of the foundation. It consists of no fewer than three and no more than seven members appointed for terms of four years, renewable once.</p>
   <p class="charter-sub">2. The Foundation Board is responsible for:</p>
   <p class="charter-sub-list">a) approving and amending the certification scheme;</p>
@@ -578,19 +586,19 @@
   <p class="charter-sub">4. Amendments to the TBDC specification require a two-thirds majority of the full Foundation Board.</p>
   <p class="charter-sub">5. No member of the Foundation Board may simultaneously serve as an officer, director, or material shareholder of an entity that is certified by the foundation or that has applied for certification.</p>
 
-  <div class="charter-article"><div class="charter-article-title">Article 14 &mdash; Appeals</div></div>
+  <div class="charter-article"><div class="charter-article-title">Article 15 &mdash; Appeals</div></div>
   <p class="charter-sub">1. A certified entity or applicant whose certification has been denied, suspended, or revoked may appeal the decision to the Foundation Board within 30 days of receiving written notice.</p>
   <p class="charter-sub">2. The Foundation Board shall review the appeal and render a decision within 60 days. The Foundation Board may engage independent technical reviewers to assist in the evaluation.</p>
   <p class="charter-sub">3. The decision of the Foundation Board on appeal is final, subject to the jurisdiction of the competent Swiss courts.</p>
 
-  <div class="charter-article"><div class="charter-article-title">Article 15 &mdash; Executive Director</div></div>
+  <div class="charter-article"><div class="charter-article-title">Article 16 &mdash; Executive Director</div></div>
   <p class="charter-sub">1. The Executive Director is appointed by the Foundation Board and is responsible for the day-to-day management of the foundation, including the administration of the certification scheme, network monitoring operations, and intellectual property management.</p>
   <p class="charter-sub">2. The Executive Director attends meetings of the Foundation Board in an advisory capacity without voting rights.</p>
 
-  <div class="charter-article"><div class="charter-article-title">Article 16 &mdash; Auditor</div></div>
+  <div class="charter-article"><div class="charter-article-title">Article 17 &mdash; Auditor</div></div>
   <p>The Foundation Board appoints an independent auditor to examine the foundation's annual financial statements in accordance with Swiss law and applicable accounting standards.</p>
 
-  <div class="charter-article"><div class="charter-article-title">Article 17 &mdash; Supervisory Authority</div></div>
+  <div class="charter-article"><div class="charter-article-title">Article 18 &mdash; Supervisory Authority</div></div>
   <p>The foundation is subject to supervision by the competent Swiss supervisory authority in accordance with Articles 84 and 84a of the Swiss Civil Code.</p>
 
   <hr class="section-break">
@@ -601,17 +609,17 @@
     <h2>Financial Provisions</h2>
   </div>
 
-  <div class="charter-article"><div class="charter-article-title">Article 18 &mdash; Capital</div></div>
+  <div class="charter-article"><div class="charter-article-title">Article 19 &mdash; Capital</div></div>
   <p class="charter-sub">1. The initial capital of the foundation is CHF [amount], endowed by the founder at the time of establishment.</p>
   <p class="charter-sub">2. The foundation may accept certification application fees in advance of commencing operations to fund the establishment of its certification scheme, network monitoring infrastructure, and administrative capacity.</p>
   <p class="charter-sub">3. All applicants, whether applying before or after the foundation commences operations, are subject to the same fee schedule, the same evaluation criteria, and the same certification standards. No applicant receives preferential terms, governance rights, or any consideration beyond the certification itself.</p>
 
-  <div class="charter-article"><div class="charter-article-title">Article 19 &mdash; Revenue</div></div>
+  <div class="charter-article"><div class="charter-article-title">Article 20 &mdash; Revenue</div></div>
   <p class="charter-sub">1. The foundation's revenue consists of certification application fees, annual certification fees, licensing revenue from intellectual property, grants, donations, and income from the investment of foundation assets. The foundation does not issue tokens or digital currencies of any kind.</p>
   <p class="charter-sub">2. Certified entities pay an annual certification fee. The annual fee funds the foundation's ongoing operations, including network monitoring infrastructure, compliance monitoring, specification review and development, research, and administrative costs.</p>
   <p class="charter-sub">3. The Foundation Board sets the fee schedule and reviews it annually. Fees shall be sufficient to maintain the foundation's capacity to fulfill its purpose without dependence on any single certified entity or external funding source.</p>
 
-  <div class="charter-article"><div class="charter-article-title">Article 20 &mdash; Use of Funds</div></div>
+  <div class="charter-article"><div class="charter-article-title">Article 21 &mdash; Use of Funds</div></div>
   <p>All revenue and assets of the foundation shall be applied exclusively to the pursuit of its purpose as defined in Article 3. The foundation shall maintain reserves sufficient to sustain its operations, certification function, and network monitoring infrastructure.</p>
 
   <hr class="section-break">
@@ -622,11 +630,11 @@
     <h2>Amendment and Dissolution</h2>
   </div>
 
-  <div class="charter-article"><div class="charter-article-title">Article 21 &mdash; Amendment</div></div>
+  <div class="charter-article"><div class="charter-article-title">Article 22 &mdash; Amendment</div></div>
   <p class="charter-sub">1. This charter may be amended by a two-thirds majority of the full Foundation Board, subject to the approval of the competent supervisory authority.</p>
-  <p class="charter-sub">2. The following provisions may not be amended except by unanimous decision of the Foundation Board: the purpose of the foundation (Article 3), the non-profit character (Article 4), the independence requirements (Article 8, paragraph 2 and Article 13, paragraph 5), and the dissolution provisions (Article 22).</p>
+  <p class="charter-sub">2. The following provisions may not be amended except by unanimous decision of the Foundation Board: the purpose of the foundation (Article 3), the non-profit character (Article 4), the independence requirements (Article 8, paragraph 2 and Article 14, paragraph 5), and the dissolution provisions (Article 23).</p>
 
-  <div class="charter-article"><div class="charter-article-title">Article 22 &mdash; Dissolution</div></div>
+  <div class="charter-article"><div class="charter-article-title">Article 23 &mdash; Dissolution</div></div>
   <p class="charter-sub">1. The foundation may be dissolved by unanimous decision of the Foundation Board, subject to the approval of the competent supervisory authority.</p>
   <p class="charter-sub">2. Upon dissolution, the intellectual property held by the foundation shall be transferred to a successor organization with an equivalent purpose. If no suitable successor exists, the BTCADP specification, &#x20BF;C denomination protocol, and all associated technical documentation shall be released into the public domain. Patents and trademarks shall lapse.</p>
   <p class="charter-sub">3. Any remaining assets shall be transferred to a Swiss institution with a comparable non-profit purpose, as determined by the Foundation Board with the approval of the supervisory authority.</p>
