@@ -949,6 +949,7 @@
         </button>
         <div class="term-body">
           <p>The layer of the five-layer architecture where the consortium manages its Digital Reserve Note inventory inside the Treasury Digital Vault (TDV). Each note carries provenance metadata (mint date, mint-day BTC spot, mint-day ₿C price, block age). PBP# burn ordering, reserve health indicators, and defensive programmability inputs all derive from Digital Note Layer data. The holder never interacts with this layer. The Digital Note Layer and the Transaction Layer carry independent data, are managed by independent logic, and never reference each other.</p>
+          <p>The Digital Note Layer is not a blockchain. It's a consortium-managed accounting system. Digital Reserve Notes don't transfer between parties. They're minted, they sit in the TDV carrying metadata, and they're burned on redemption. There's no counterparty, no transaction ordering problem, and no need for distributed consensus. What the layer requires is inventory integrity: accurate records of which notes exist, what metadata each carries, and which have been burned. A database with audit controls and external verification by IDMA handles that. By contrast, the Transaction Layer is a blockchain (The ₿ridge Network), because DCUs transfer between parties and double-spend risk must be resolved through consensus.</p>
           <div class="see-also">See also: <a href="#D">Digital Reserve Note</a>, <a href="#T">Treasury Digital Vault</a>, <a href="#T">Transaction Layer</a>, <a href="#P">PBP#</a></div>
         </div>
       </div>
@@ -1147,7 +1148,7 @@
           <span class="term-icon">+</span>
         </button>
         <div class="term-body">
-          <p>The storage mechanism within the Digital Note Layer where the consortium maintains its inventory of Digital Reserve Notes. Each note in the TDV carries provenance metadata describing the conditions of its own issuance. The TDV is an issuer-side construct. Holders never see, select, or interact with notes in the vault. They see a fungible dollar balance on The ₿ridge Network's Transaction Layer. PBP# burn ordering and reserve health indicators operate on TDV data.</p>
+          <p>The storage mechanism within the Digital Note Layer where the consortium maintains its inventory of Digital Reserve Notes. Each note in the TDV carries provenance metadata describing the conditions of its own issuance. The TDV is an issuer-side construct, implemented as a database with audit controls and external verification by IDMA. It's not a blockchain: reserve notes don't transfer between parties, so there's no transaction ordering problem and no need for distributed consensus. Holders never see, select, or interact with notes in the vault. They see a fungible dollar balance composed of DCUs on The ₿ridge Network's Transaction Layer. PBP# burn ordering and reserve health indicators operate on TDV data.</p>
           <div class="see-also">See also: <a href="#D">Digital Note Layer</a>, <a href="#D">Digital Reserve Note</a>, <a href="#P">PBP#</a></div>
         </div>
       </div>
@@ -1161,7 +1162,8 @@
           <span class="term-icon">+</span>
         </button>
         <div class="term-body">
-          <p>The layer of the five-layer architecture where ₿USD, ₿OND, and ₿ILL circulate as Digital Currency Units (DCUs) on The ₿ridge Network. Each DCU is a $1 UTXO carrying a transaction ID and a timestamp. Transfer retires the old DCU and creates a new one with a fresh timestamp. The Transaction Layer carries no provenance metadata, no reserve data, and no link to any specific Digital Reserve Note. The holder interacts exclusively with this layer. The Transaction Layer and the Digital Note Layer carry independent data, are managed by independent logic, and never reference each other.</p>
+          <p>The layer of the five-layer architecture where ₿USD, ₿OND, and ₿ILL circulate as Digital Currency Units (DCUs) on The ₿ridge Network, a federated Bitcoin sidechain. Each DCU is a $1 UTXO carrying a transaction ID and a timestamp. Transfer retires the old DCU and creates a new one with a fresh timestamp. The Transaction Layer carries no provenance metadata, no reserve data, and no link to any specific Digital Reserve Note. The holder interacts exclusively with this layer. The Transaction Layer and the Digital Note Layer carry independent data, are managed by independent logic, and never reference each other.</p>
+          <p>The Transaction Layer is a blockchain because it solves a blockchain problem: DCUs move between untrusting parties, and double-spend risk requires distributed consensus to resolve. The Digital Note Layer, by contrast, has one party (the consortium) and no transfers to order, so it uses a conventional accounting system with IDMA audit verification instead.</p>
           <div class="see-also">See also: <a href="#D">Digital Currency Unit</a>, <a href="#B">₿ridge Network, The</a>, <a href="#D">Digital Note Layer</a>, <a href="#D">Digital Reserve Note</a></div>
         </div>
       </div>
