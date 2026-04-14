@@ -710,15 +710,31 @@
       <div class="term-entry">
         <button class="term-header" onclick="toggle(this)">
           <div class="term-title-wrap">
+            <span class="term-name">Digital Currency Unit</span>
+            <span class="term-tag">Architecture</span>
+          </div>
+          <span class="term-icon">+</span>
+        </button>
+        <div class="term-body">
+          <p>The holder's spending unit. Each DCU is a $1 UTXO on The ₿ridge Network carrying a transaction ID and a timestamp. Transfer retires the old DCU and creates a new one with a fresh timestamp. On redemption, the DCU is retired on the Transaction Layer while the consortium independently burns a Digital Reserve Note from the Treasury Digital Vault using PBP# ordering. The two operations happen on separate layers and never reference each other.</p>
+          <p>UTXO is the protocol-level mechanism. DCU is the formal name for the object. The distinction matters by audience: developers working on ₿ridge interact with UTXOs, everyone else interacts with DCUs. A holder's ₿USD balance is a collection of DCUs. The holder sees a fungible dollar amount, not individual units.</p>
+          <p>The DCU carries commerce data (TX ID, timestamp) used for fee pricing and holding-period calculation. It carries no provenance metadata, no reserve data, and no link to any specific Digital Reserve Note. The Digital Reserve Note is the consortium's counterpart: an inventory record in the TDV carrying issuance-condition data used for reserve management and burn ordering. The two objects exist on independent layers, carry independent data, and serve independent purposes.</p>
+          <div class="see-also">See also: <a href="#D">Digital Reserve Note</a>, <a href="#T">Transaction Layer</a>, <a href="#B">₿ridge Network, The</a>, <a href="#P">PBP#</a></div>
+        </div>
+      </div>
+
+      <div class="term-entry">
+        <button class="term-header" onclick="toggle(this)">
+          <div class="term-title-wrap">
             <span class="term-name">Digital Reserve Note</span>
             <span class="term-tag">Architecture</span>
           </div>
           <span class="term-icon">+</span>
         </button>
         <div class="term-body">
-          <p>The issuer's inventory unit. A digitally tracked record in the Treasury Digital Vault (TDV) carrying provenance metadata about the conditions of its own issuance: mint date, mint-day BTC spot price, mint-day ₿C price (the note's timeblock), and block age. The holder never sees, selects, or interacts with individual reserve notes. They see a fungible dollar balance.</p>
-          <p>The Digital Reserve Note exists on the Digital Note Layer, separate from the $1 UTXO that the holder spends on The ₿ridge Network (the Transaction Layer). The two objects carry separate data, are managed by separate logic, and the layers never reference each other. This separation is the structural prerequisite for PBP# burn ordering, dual-provenance fee structures, and the defensive programmability framework. No other digital currency separates the inventory unit from the circulating claim.</p>
-          <div class="see-also">See also: <a href="#D">Digital Note Layer</a>, <a href="#T">Treasury Digital Vault</a>, <a href="#P">PBP#</a>, <a href="#B">₿ridge Network, The</a></div>
+          <p>The consortium's inventory unit, and the counterpart to the Digital Currency Unit (DCU). A digitally tracked record in the Treasury Digital Vault (TDV) carrying provenance metadata about the conditions of its own issuance: mint date, mint-day BTC spot price, mint-day ₿C price (the note's timeblock), and block age. The holder never sees, selects, or interacts with individual reserve notes. They see a fungible dollar balance composed of DCUs on the Transaction Layer.</p>
+          <p>The Digital Reserve Note exists on the Digital Note Layer, separate from the DCU that the holder spends on The ₿ridge Network (the Transaction Layer). Where the DCU carries commerce data (TX ID, timestamp) for fee pricing and holding-period calculation, the DRN carries issuance-condition data for reserve management and burn ordering. The two objects carry separate data, are managed by separate logic, and the layers never reference each other. This separation is the structural prerequisite for PBP# burn ordering, dual-provenance fee structures, and the defensive programmability framework. No other digital currency separates the inventory unit from the circulating claim.</p>
+          <div class="see-also">See also: <a href="#D">Digital Currency Unit</a>, <a href="#D">Digital Note Layer</a>, <a href="#T">Treasury Digital Vault</a>, <a href="#P">PBP#</a></div>
         </div>
       </div>
 
@@ -1145,8 +1161,8 @@
           <span class="term-icon">+</span>
         </button>
         <div class="term-body">
-          <p>The layer of the five-layer architecture where ₿USD, ₿OND, and ₿ILL circulate as $1 UTXOs on The ₿ridge Network. Each UTXO carries a transaction ID and a timestamp. Transfer creates a new UTXO with a fresh timestamp. The Transaction Layer carries no provenance metadata, no reserve data, and no link to any specific Digital Reserve Note. The holder interacts exclusively with this layer. The Transaction Layer and the Note Layer never reference each other.</p>
-          <div class="see-also">See also: <a href="#B">₿ridge Network, The</a>, <a href="#N">Note Layer</a>, <a href="#D">Digital Reserve Note</a></div>
+          <p>The layer of the five-layer architecture where ₿USD, ₿OND, and ₿ILL circulate as Digital Currency Units (DCUs) on The ₿ridge Network. Each DCU is a $1 UTXO carrying a transaction ID and a timestamp. Transfer retires the old DCU and creates a new one with a fresh timestamp. The Transaction Layer carries no provenance metadata, no reserve data, and no link to any specific Digital Reserve Note. The holder interacts exclusively with this layer. The Transaction Layer and the Digital Note Layer carry independent data, are managed by independent logic, and never reference each other.</p>
+          <div class="see-also">See also: <a href="#D">Digital Currency Unit</a>, <a href="#B">₿ridge Network, The</a>, <a href="#D">Digital Note Layer</a>, <a href="#D">Digital Reserve Note</a></div>
         </div>
       </div>
 
