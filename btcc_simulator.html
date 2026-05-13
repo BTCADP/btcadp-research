@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BTCC Tracker</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0d0f12; --surface: #141720; --border: #1e2330; --border2: #2a3045;
+    --text: #e8eaf0; --muted: #6b7080; --dim: #3a4055;
+    --btcc: #4a9eff; --btc: #f7931a; --entry: #3ec98e;
+    --red: #f05a5a;
+  }
+  body { font-family: 'IBM Plex Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 40px 24px; }
+  .container { max-width: 860px; margin: 0 auto; }
+  header { margin-bottom: 28px; }
+  .header-label { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.15em; color: var(--muted); text-transform: uppercase; margin-bottom: 8px; }
+  h1 { font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 600; color: var(--text); letter-spacing: -0.02em; }
+  .subtitle { font-size: 14px; color: var(--muted); margin-top: 6px; font-weight: 300; }
+
+  .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; }
+  .card.btcc-hl { border-color: rgba(74,158,255,0.5); background: rgba(74,158,255,0.05); }
+  .card.btc-hl  { border-color: rgba(247,147,26,0.4);  background: rgba(247,147,26,0.04); }
+  .clabel { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .cval { font-family: 'IBM Plex Mono', monospace; font-size: 22px; font-weight: 600; line-height: 1; margin-bottom: 5px; }
+  .cval.blue { color: var(--btcc); }
+  .cval.orange { color: var(--btc); }
+  .cval.white { color: var(--text); }
+  .csub { font-size: 11px; color: var(--muted); }
+
+  .range-row { display: flex; gap: 8px; margin-bottom: 20px; }
+  .rbtn { font-family: 'IBM Plex Mono', monospace; font-size: 11px; padding: 6px 16px; border-radius: 6px; border: 1px solid var(--border2); background: transparent; color: var(--muted); cursor: pointer; transition: all 0.15s; }
+  .rbtn:hover { border-color: var(--btcc); color: var(--btcc); }
+  .rbtn.active { border-color: var(--btcc); background: rgba(74,158,255,0.12); color: var(--btcc); }
+
+  .chart-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 20px; }
+  .chart-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px; }
+  .chart-title { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+  .legend { display: flex; gap: 18px; flex-wrap: wrap; }
+  .li { display: flex; align-items: center; gap: 6px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--muted); }
+  .ldot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .chart-wrap { position: relative; width: 100%; height: 340px; }
+
+  .entry-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px 28px; margin-bottom: 20px; }
+  .entry-title { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+  .entry-row { display: flex; gap: 12px; align-items: flex-end; flex-wrap: wrap; }
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  .field label { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .field input, .field select {
+    font-family: 'IBM Plex Mono', monospace; font-size: 13px;
+    background: var(--bg); border: 1px solid var(--border2); border-radius: 6px;
+    color: var(--text); padding: 8px 12px; outline: none; transition: border-color 0.15s;
+  }
+  .field input:focus, .field select:focus { border-color: var(--entry); }
+  .field input { width: 130px; }
+  .field select { width: 155px; }
+  .track-btn { font-family: 'IBM Plex Mono', monospace; font-size: 11px; padding: 9px 20px; border-radius: 6px; border: 1px solid var(--entry); background: rgba(62,201,142,0.1); color: var(--entry); cursor: pointer; transition: all 0.15s; white-space: nowrap; }
+  .track-btn:hover { background: rgba(62,201,142,0.22); }
+  .clear-btn { font-family: 'IBM Plex Mono', monospace; font-size: 11px; padding: 9px 16px; border-radius: 6px; border: 1px solid var(--border2); background: transparent; color: var(--muted); cursor: pointer; transition: all 0.15s; }
+  .clear-btn:hover { border-color: var(--red); color: var(--red); }
+
+  .pos-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px; }
+  .pos-card { background: var(--surface); border: 1px solid rgba(62,201,142,0.3); border-radius: 10px; padding: 16px 18px; position: relative; }
+  .pos-x { position: absolute; top: 10px; right: 12px; font-size: 13px; color: var(--dim); cursor: pointer; background: none; border: none; color: var(--dim); transition: color 0.15s; }
+  .pos-x:hover { color: var(--red); }
+  .pos-date { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--muted); text-transform: uppercase; margin-bottom: 5px; }
+  .pos-amt { font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--muted); margin-bottom: 3px; }
+  .pos-bal { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--dim); margin-bottom: 10px; }
+  .pos-val { font-family: 'IBM Plex Mono', monospace; font-size: 21px; font-weight: 600; color: var(--entry); margin-bottom: 3px; }
+  .pos-pct { font-family: 'IBM Plex Mono', monospace; font-size: 11px; }
+  .up { color: var(--entry); } .dn { color: var(--red); }
+
+  .note { font-size: 11px; color: var(--dim); font-family: 'IBM Plex Mono', monospace; line-height: 1.7; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="header-label">BTCC · Bitcoin Currency</div>
+    <h1>BTCC Tracker</h1>
+    <p class="subtitle">BTCC price is the cumulative average of all daily BTCADP values since genesis.</p>
+  </header>
+
+  <div class="cards">
+    <div class="card btcc-hl">
+      <div class="clabel">BTCC price</div>
+      <div class="cval blue" id="btcc-price">$18,760</div>
+      <div class="csub">Running mean from genesis</div>
+    </div>
+    <div class="card btcc-hl">
+      <div class="clabel">BTC in ₿C</div>
+      <div class="cval blue" id="btc-in-btcc">4.4800 ₿C</div>
+      <div class="csub">1 BTC = X ₿C</div>
+    </div>
+  </div>
+
+
+  <div class="entry-card">
+    <div class="entry-title">Track a position</div>
+    <div class="entry-row">
+      <div class="field">
+        <label>Amount (USD)</label>
+        <input type="number" id="inp-amount" placeholder="0" value="0" min="0">
+      </div>
+      <div class="field">
+        <label>Purchase date</label>
+        <select id="inp-date"></select>
+      </div>
+      <button class="track-btn" id="track-btn">Track →</button>
+      <button class="clear-btn" id="clear-btn">Clear all</button>
+    </div>
+  </div>
+
+  <div class="pos-grid" id="pos-grid"></div>
+  <div class="range-row">
+    <button class="rbtn" data-range="1Y">1Y</button>
+    <button class="rbtn" data-range="3Y">3Y</button>
+    <button class="rbtn" data-range="5Y">5Y</button>
+    <button class="rbtn active" data-range="ALL">ALL</button>
+  </div>
+  <div class="chart-card">
+    <div class="chart-top">
+      <div class="chart-title">Price (USD)</div>
+      <div class="legend">
+        <div class="li"><div class="ldot" style="background:var(--btc);"></div>BTC spot</div>
+        <div class="li"><div class="ldot" style="background:var(--btcc);"></div>BTCC price</div>
+        <div class="li" id="entry-legend" style="display:none;"><div class="ldot" style="background:var(--entry);"></div>Entry</div>
+      </div>
+    </div>
+    <div class="chart-wrap"><canvas id="myChart"></canvas></div>
+  </div>
+
+
+  <p class="note">
+    BTCC price = running arithmetic mean of all daily BTCADP values since genesis (Jan 3, 2009).<br>
+    Includes 561 days of Era 0 at $0.00 — the price is always below spot and can never fall.<br>
+    Position value = ₿C balance × BTCC price today (Mar 2026 = $18,760).<br>
+    Anchored to btcadp.org: $1,563 Jul 2019 · $18,760 Mar 2026.
+  </p>
+</div>
+
+<script>
+const LABELS = ['Jan 2014','Feb 2014','Mar 2014','Apr 2014','May 2014','Jun 2014','Jul 2014','Aug 2014','Sep 2014','Oct 2014','Nov 2014','Dec 2014','Jan 2015','Feb 2015','Mar 2015','Apr 2015','May 2015','Jun 2015','Jul 2015','Aug 2015','Sep 2015','Oct 2015','Nov 2015','Dec 2015','Jan 2016','Feb 2016','Mar 2016','Apr 2016','May 2016','Jun 2016','Jul 2016','Aug 2016','Sep 2016','Oct 2016','Nov 2016','Dec 2016','Jan 2017','Feb 2017','Mar 2017','Apr 2017','May 2017','Jun 2017','Jul 2017','Aug 2017','Sep 2017','Oct 2017','Nov 2017','Dec 2017','Jan 2018','Feb 2018','Mar 2018','Apr 2018','May 2018','Jun 2018','Jul 2018','Aug 2018','Sep 2018','Oct 2018','Nov 2018','Dec 2018','Jan 2019','Feb 2019','Mar 2019','Apr 2019','May 2019','Jun 2019','Jul 2019','Aug 2019','Sep 2019','Oct 2019','Nov 2019','Dec 2019','Jan 2020','Feb 2020','Mar 2020','Apr 2020','May 2020','Jun 2020','Jul 2020','Aug 2020','Sep 2020','Oct 2020','Nov 2020','Dec 2020','Jan 2021','Feb 2021','Mar 2021','Apr 2021','May 2021','Jun 2021','Jul 2021','Aug 2021','Sep 2021','Oct 2021','Nov 2021','Dec 2021','Jan 2022','Feb 2022','Mar 2022','Apr 2022','May 2022','Jun 2022','Jul 2022','Aug 2022','Sep 2022','Oct 2022','Nov 2022','Dec 2022','Jan 2023','Feb 2023','Mar 2023','Apr 2023','May 2023','Jun 2023','Jul 2023','Aug 2023','Sep 2023','Oct 2023','Nov 2023','Dec 2023','Jan 2024','Feb 2024','Mar 2024','Apr 2024','May 2024','Jun 2024','Jul 2024','Aug 2024','Sep 2024','Oct 2024','Nov 2024','Dec 2024','Jan 2025','Feb 2025','Mar 2025','Apr 2025','May 2025','Jun 2025','Jul 2025','Aug 2025','Sep 2025','Oct 2025','Nov 2025','Dec 2025','Jan 2026','Feb 2026','Mar 2026'];
+
+const BTCC = [45,55,64,70,75,83,91,97,101,104,108,111,113,115,117,118,120,122,124,125,127,128,131,135,137,141,144,147,151,156,162,166,171,177,183,191,199,207,216,227,243,267,291,330,363,413,500,625,722,799,873,937,996,1049,1102,1149,1189,1233,1259,1277,1295,1314,1336,1367,1423,1496,1563,1627,1689,1739,1783,1824,1871,1929,1963,2001,2052,2106,2157,2224,2285,2350,2455,2602,2818,3116,3466,3832,4131,4332,4528,4793,5050,5373,5737,5996,6230,6448,6672,6886,7040,7126,7225,7321,7397,7473,7523,7574,7653,7744,7857,7980,8093,8215,8338,8458,8562,8676,8825,9015,9205,9445,9776,10075,10367,10660,10938,11197,11466,11760,12156,12594,13056,13483,13862,14226,14675,15154,15669,16138,16529,16931,17323,17717,18097,18445,18760];
+
+const SPOT = [900,650,620,450,445,605,590,510,395,340,370,310,270,240,265,240,235,258,278,265,230,268,360,430,380,420,415,450,455,680,660,575,615,700,740,970,950,1055,1090,1305,1848,2720,2760,4350,3880,5740,9780,14125,11200,9250,9170,8050,7650,7095,7180,6580,5930,6395,4300,3520,3470,3560,4095,5230,8300,10800,10030,9800,9700,8250,7450,7200,8165,9740,6470,7230,9030,9540,9270,11610,10785,11565,17565,23745,34050,46570,54880,57900,48700,34455,34030,45060,44375,55090,62120,46310,42980,40850,42295,41105,31740,21095,23290,23030,20045,20000,15815,16210,21045,23155,27220,29065,27680,29290,29900,29520,27000,29000,35500,43100,43640,53085,70370,64985,64270,65190,62830,59870,62290,67630,87740,96535,102200,96355,87680,85430,103075,110000,118000,110000,95000,98000,97000,98000,96000,90000,84000];
+
+const N = LABELS.length; // 147
+const TODAY_BTCC = BTCC[N-1]; // 18760
+
+// Populate date dropdown
+const sel = document.getElementById('inp-date');
+LABELS.forEach((l, i) => {
+  const o = document.createElement('option');
+  o.value = i;
+  o.textContent = l;
+  sel.appendChild(o);
+});
+
+let positions = [];
+let activeRange = 'ALL';
+const RANGES = { '1Y': 12, '3Y': 36, '5Y': 60, 'ALL': N };
+
+// ---- CHART ----
+const ctx = document.getElementById('myChart').getContext('2d');
+const myChart = new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: LABELS,
+    datasets: [
+      {
+        label: 'BTC spot',
+        data: SPOT,
+        borderColor: '#f7931a',
+        backgroundColor: 'transparent',
+        borderWidth: 1.5,
+        pointRadius: 0,
+        tension: 0.2
+      },
+      {
+        label: 'BTCC price',
+        data: BTCC,
+        borderColor: '#4a9eff',
+        backgroundColor: 'rgba(74,158,255,0.08)',
+        borderWidth: 2.5,
+        pointRadius: 0,
+        fill: true,
+        tension: 0.3
+      },
+      {
+        // Entry markers: same length as full dataset, values only at entry indices
+        label: 'Entry',
+        data: new Array(N).fill(null),
+        borderColor: 'rgba(0,0,0,0)',
+        backgroundColor: '#3ec98e',
+        pointRadius: new Array(N).fill(0),
+        pointHoverRadius: new Array(N).fill(0),
+        pointStyle: 'circle',
+        showLine: false
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    animation: { duration: 200 },
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: '#141720',
+        borderColor: '#2a3045',
+        borderWidth: 1,
+        titleColor: '#6b7080',
+        bodyColor: '#e8eaf0',
+        titleFont: { family: 'IBM Plex Mono', size: 10 },
+        bodyFont: { family: 'IBM Plex Mono', size: 12 },
+        padding: 12,
+        filter: item => item.datasetIndex < 2,
+        callbacks: {
+          label: ctx => {
+            const p = ctx.datasetIndex === 0 ? ' BTC spot:    ' : ' BTCC price:  ';
+            return p + '$' + Math.round(ctx.parsed.y).toLocaleString();
+          }
+        }
+      }
+    },
+    scales: {
+      x: {
+        ticks: { color: '#3a4055', font: { family: 'IBM Plex Mono', size: 10 }, maxTicksLimit: 8, autoSkip: true, maxRotation: 0 },
+        grid: { color: 'rgba(255,255,255,0.04)' }
+      },
+      y: {
+        min: 0,
+        ticks: {
+          color: '#3a4055',
+          font: { family: 'IBM Plex Mono', size: 10 },
+          callback: v => '$' + (v >= 1000 ? (v/1000).toFixed(0)+'k' : v)
+        },
+        grid: { color: 'rgba(255,255,255,0.04)' }
+      }
+    },
+    onHover: (_, elements) => {
+      if (!elements.length) return;
+      const i = elements[0].index;
+      // Map chart index back to full array index
+      const startIdx = Math.max(0, N - RANGES[activeRange]);
+      updateTopCards(startIdx + i);
+    }
+  }
+});
+
+function setRange(range) {
+  activeRange = range;
+  const startIdx = Math.max(0, N - RANGES[range]);
+  myChart.data.labels = LABELS.slice(startIdx);
+  myChart.data.datasets[0].data = SPOT.slice(startIdx);
+  myChart.data.datasets[1].data = BTCC.slice(startIdx);
+
+  // Rebuild entry marker arrays for this slice
+  rebuildMarkers(startIdx);
+  myChart.update();
+  updateTopCards(N - 1);
+}
+
+function rebuildMarkers(startIdx) {
+  const len = N - startIdx;
+  const vals = new Array(len).fill(null);
+  const radii = new Array(len).fill(0);
+
+  positions.forEach(p => {
+    const ci = p.idx - startIdx;
+    if (ci >= 0 && ci < len) {
+      vals[ci] = BTCC[p.idx];
+      radii[ci] = 7;
+    }
+  });
+
+  myChart.data.datasets[2].data = vals;
+  myChart.data.datasets[2].pointRadius = radii;
+  myChart.data.datasets[2].pointHoverRadius = radii.map(r => r ? 10 : 0);
+  document.getElementById('entry-legend').style.display = positions.length ? 'flex' : 'none';
+}
+
+function updateTopCards(idx) {
+  const ca = BTCC[idx], sp = SPOT[idx];
+  document.getElementById('view-date').textContent = LABELS[idx];
+  document.getElementById('btcc-price').textContent = '$' + ca.toLocaleString();
+  document.getElementById('btc-price').textContent = '$' + sp.toLocaleString();
+  document.getElementById('btc-premium').textContent =
+    'Spot ' + Math.round((sp - ca) / ca * 100) + '% above BTCC';
+  document.getElementById('btc-in-btcc').textContent = (sp / ca).toFixed(4) + ' ₿C';
+  document.getElementById('btc-in-btcc').textContent = (sp / ca).toFixed(4) + ' ₿C';
+}
+
+function addPosition() {
+  const amount = parseFloat(document.getElementById('inp-amount').value);
+  const idx = parseInt(document.getElementById('inp-date').value);
+  if (!amount || amount <= 0 || isNaN(amount)) {
+    document.getElementById('inp-amount').focus();
+    return;
+  }
+  const btccAtEntry = BTCC[idx];
+  const balance = amount / btccAtEntry;
+  positions.push({ amount, idx, balance, btccAtEntry });
+  renderPositions();
+  const startIdx = Math.max(0, N - RANGES[activeRange]);
+  rebuildMarkers(startIdx);
+  myChart.update();
+}
+
+function removePosition(i) {
+  positions.splice(i, 1);
+  renderPositions();
+  const startIdx = Math.max(0, N - RANGES[activeRange]);
+  rebuildMarkers(startIdx);
+  myChart.update();
+}
+
+function clearAll() {
+  positions = [];
+  renderPositions();
+  const len = N - Math.max(0, N - RANGES[activeRange]);
+  myChart.data.datasets[2].data = new Array(len).fill(null);
+  myChart.data.datasets[2].pointRadius = new Array(len).fill(0);
+  myChart.data.datasets[2].pointHoverRadius = new Array(len).fill(0);
+  document.getElementById('entry-legend').style.display = 'none';
+  myChart.update();
+}
+
+function renderPositions() {
+  const grid = document.getElementById('pos-grid');
+  if (!positions.length) { grid.innerHTML = ''; return; }
+  grid.innerHTML = positions.map((p, i) => {
+    const val = p.balance * TODAY_BTCC;
+    const pct = ((val - p.amount) / p.amount * 100).toFixed(1);
+    const up = parseFloat(pct) >= 0;
+    return `<div class="pos-card">
+      <button class="pos-x" onclick="removePosition(${i})">✕</button>
+      <div class="pos-date">${LABELS[p.idx]}</div>
+      <div class="pos-amt">$${p.amount.toLocaleString()} invested</div>
+      <div class="pos-bal">${p.balance.toFixed(4)} ₿C @ $${Math.round(p.btccAtEntry).toLocaleString()}</div>
+      <div class="pos-val">$${Math.round(val).toLocaleString()}</div>
+      <div class="pos-pct"><span class="${up ? 'up' : 'dn'}">${up ? '+' : ''}${pct}%</span> as of Mar 2026</div>
+    </div>`;
+  }).join('');
+}
+
+// Wire up buttons
+document.getElementById('track-btn').addEventListener('click', addPosition);
+document.getElementById('clear-btn').addEventListener('click', clearAll);
+document.querySelectorAll('.rbtn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.rbtn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    setRange(this.dataset.range);
+  });
+});
+
+// Init
+setRange('ALL');
+</script>
+</body>
+</html>
+
