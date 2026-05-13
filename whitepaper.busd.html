@@ -544,7 +544,7 @@
     <div class="paper-meta">
         <span>CC BY-NC-ND</span>
         <span>btcadp.org</span>
-        <span>Version 5.4</span>
+        <span>Version 5.5</span>
     </div>
     <div class="download-bar">
         <a href="busd.html" class="btn-secondary">&larr; Summary Page</a>
@@ -722,7 +722,7 @@
 
     <div class="paper-section">
         <h2><span class="sec-num">9.</span> Redemption Mechanics</h2>
-        <p>When a customer redeems ₿USD, the treasury company returns $1.00 per unit redeemed. The Bitcoin backing that obligation in Ledger 1 is sold to fund the redemption. The corresponding reserve note is burned from the issuer's inventory. If Bitcoin's spot price has risen since issuance, the Ledger 1 position is in surplus,the surplus remains in the consortium's holdings. If spot has fallen, Ledger 1 may be insufficient, and Ledger 2 covers the shortfall. The customer always receives $1.00 per unit redeemed.</p>
+        <p>When a customer redeems ₿USD, the treasury company returns $1.00 per unit redeemed. The Bitcoin required to satisfy that obligation is released from Ledger 1. The corresponding reserve note is burned from the issuer's inventory. If Bitcoin's spot price has risen since issuance, the Ledger 1 position at that note holds more Bitcoin than is needed to cover $1. The required portion is sold or delivered; the surplus BTC transfers to Ledger 2, deepening the backstop. If spot has fallen, Ledger 1 may be insufficient, and Ledger 2 covers the shortfall. The customer always receives $1.00 per unit redeemed.</p>
     </div>
 
     <div class="paper-section">
@@ -798,15 +798,15 @@
     </div>
 
     <div class="paper-section">
-        <h3>9.2 Compounding Through Surplus Accumulation</h3>
-        <p>The surplus dynamics above describe a single issuance cohort. In practice, the treasury company is continuously issuing and redeeming ₿USD. Each profitable redemption leaves surplus satoshis in Ledger 1. Those surplus satoshis are not withdrawn,they remain in the pool, appreciating at spot alongside all other satoshis. New issuances add more satoshis. In a sustained rising market, Ledger 1 becomes a compounding engine.</p>
-        <p>Surplus sats from early redemptions appreciate alongside new issuance sats. New issuances at higher spot prices deposit fewer sats per unit (because each sat is worth more), but the surplus from prior issuances continues growing. Over time, the aggregate surplus in Ledger 1 can exceed the aggregate liability,at which point the pool is self-sustaining and Ledger 2 becomes purely a precautionary reserve that is never tapped.</p>
+        <h3>9.2 Compounding the Backstop</h3>
+        <p>The surplus dynamics above describe a single issuance cohort. In practice, the treasury company is continuously issuing and redeeming ₿USD. Each profitable redemption under PBP# realizes surplus. Only the BTC required to satisfy the $1 obligation leaves Ledger 1. The remaining BTC at that position transfers to Ledger 2, deepening the backstop. The transfer is BTC moving between two wallets owned by the same entity. No disposition occurs on the surplus portion.</p>
+        <p>Ledger 2 grows through two independent channels. The first is realized surplus from profitable burns, transferred unit by unit as redemptions occur. The second is fee revenue. Transaction fees, issuance fees, and redemption fees purchase additional Bitcoin for Ledger 2 continuously, a dollar-cost-averaging mechanism that runs every day the system operates. In a sustained rising market, Ledger 2 becomes the compounding engine. Surplus from early redemptions sits in the backstop and appreciates at spot alongside all other Ledger 2 satoshis. Over time, the aggregate Ledger 2 position can exceed the entire outstanding ₿USD liability. At that point the system is overcollateralized by its own organic surplus, and the original committed capital becomes a last-resort reserve that operational mechanics never need to touch.</p>
     </div>
 
     <div class="paper-section">
         <h3>9.3 Pooling Dynamics: Reserve Notes in the Black and the Red</h3>
         <p>Ledger 1 operates as a pooled reserve, not on a per-unit basis. Units are minted at different spot prices and redeemed at different times. At any given moment, a percentage of outstanding units are "in the black",their backing satoshis are worth more than the $1 obligation,and a percentage are "in the red," where spot has declined below their issuance price.</p>
-        <p>Over a long enough time horizon, the proportion of units in the black grows structurally. Every day that BTC spot remains above prior issuance prices, more cohorts move into surplus. Older units, those minted months or years ago at lower spot prices,are deeply in the black. Their surplus more than offsets the shortfall on recently minted units that may be temporarily underwater. A unit minted at $50,000 spot and redeemed when spot is $80,000 generates a surplus of $0.375 per unit. A unit minted at $90,000 and redeemed at $80,000 generates a shortfall of $0.125 per unit. In a pooled reserve, the surplus units subsidize the underwater ones.</p>
+        <p>Over a long enough time horizon, the proportion of units in the black grows structurally. Every day that BTC spot remains above prior issuance prices, more cohorts move into surplus. Older units, those minted months or years ago at lower spot prices,are deeply in the black. PBP# burns these first. When an in-the-black unit is redeemed, the $1 obligation is satisfied from Ledger 1 and the surplus BTC transfers to Ledger 2. When an in-the-red unit is eventually redeemed, Ledger 1's BTC at that position is insufficient and Ledger 2 covers the gap. A unit minted at $50,000 spot and redeemed when spot is $80,000 sends $0.375 of surplus into Ledger 2. A unit minted at $90,000 and redeemed at $80,000 draws $0.125 from Ledger 2. Across the population, profitable burns prefund the backstop that later absorbs shortfalls from underwater burns. The netting happens in Ledger 2, not within Ledger 1.</p>
         <p>This is the retention effect. Long-term holders do not redeem during a downturn. They have no reason to,their ₿USD balance's $1.00 peg is stable regardless of what BTC spot does on any given day. The reserve notes most likely to be redeemed during a downturn are recently minted notes held by short-term participants, precisely the notes with the thinnest margin. But the bulk of the pool,the older, deeply in-the-black units, sits undisturbed, its surplus growing with every passing day that spot exceeds the historical average.</p>
         <div class="callout"><p><em>The longer the system operates, the deeper its structural surplus becomes. Time itself is a reserve asset. The model does not merely survive a rising Bitcoin price,it converts that rise into accelerating, compounding returns for the consortium while maintaining a hard $1 peg for every holder.</em></p></div>
     </div>

@@ -543,7 +543,7 @@
 <!-- DRAFT NOTICE -->
 <div class="draft-banner">
   <div class="draft-label">Draft Copy</div>
-  <div class="draft-version">Version 6.8</div>
+  <div class="draft-version">Version 6.9</div>
 </div>
 
 <hr class="section-break" style="max-width:780px;margin:32px auto 0;">
@@ -715,7 +715,7 @@
 </p>
 
 <p>
-  A second reserve pool, Ledger 2, provides structural depth beyond the issuance-funded reserves. The capital comes from the consortium's existing Bitcoin holdings, assets already on their balance sheets, committed to the system as a permanent reinforcement layer. Both ledgers sit in publicly addressable wallets on Bitcoin's base layer, verifiable in real time by any observer. The proof of reserves is continuous, permissionless and independent of any auditor.
+  A second reserve pool, Ledger 2, provides structural depth beyond the issuance-funded reserves. The initial capital comes from the consortium's existing Bitcoin holdings, assets already on their balance sheets, committed to the system as a permanent reinforcement layer. Ledger 2 then self-fortifies over time through two channels: surplus BTC transferred from Ledger 1 on every profitable redemption, and fee revenue reinvested into additional Bitcoin. Both ledgers sit in publicly addressable wallets on Bitcoin's base layer, verifiable in real time by any observer. The proof of reserves is continuous, permissionless and independent of any auditor.
 </p>
 
 <p>
@@ -727,7 +727,7 @@
 </p>
 
 <p>
-  With that context, the reserve mechanics become clear. PBP# (Profit Burn Priority) is the consortium's method for managing reserve health. When a redemption occurs, the consortium burns the most profitable ledger entry first because that entry carries the deepest surplus. Burning it first means every redemption costs the reserves the least possible amount. The surplus Bitcoin that remains after covering the $1 obligation stays in the system, deepening the backstop. In a cleanly rising market, PBP# produces the same result as burning the oldest reserve notes first because the oldest are also the cheapest and most profitable. In volatile markets, PBP# outperforms by avoiding Ledger 2 draws on underwater notes when profitable notes still exist in the pool. The advantage is defensive: identical total profit over the life of the system, but structural protection for Ledger 2. PBP# operates entirely on the consortium's side. The user never interacts with it.
+  With that context, the reserve mechanics become clear. PBP# (Profit Burn Priority) is the consortium's method for managing reserve health. When a redemption occurs, the consortium burns the most profitable ledger entry first because that entry carries the deepest surplus. Burning it first means every redemption costs the reserves the least possible amount. Only the BTC needed to cover the $1 obligation leaves Ledger 1. The surplus BTC at that position transfers to Ledger 2, deepening the backstop. In a cleanly rising market, PBP# produces the same result as burning the oldest reserve notes first because the oldest are also the cheapest and most profitable. In volatile markets, PBP# outperforms by avoiding Ledger 2 draws on underwater notes when profitable notes still exist in the pool. The advantage is defensive: identical total profit over the life of the system, but structural protection for Ledger 2. PBP# operates entirely on the consortium's side. The user never interacts with it.
 </p>
 
 <p>
@@ -735,7 +735,7 @@
 </p>
 
 <p>
-  The demand flywheel compounds this effect. As adoption grows, more ₿USD is minted, more Bitcoin is purchased at spot, and the reserves appreciate. The gap between what each unit cost to back and what each unit returns on redemption widens with every passing day. Ledger 1's surplus deepens automatically as spot rises above historical minting prices. Ledger 2's depth grows as the consortium reinvests fee revenue into additional Bitcoin by formula. The system does not merely tolerate the passage of time. It converts time into deeper collateralization.
+  The demand flywheel compounds this effect. As adoption grows, more ₿USD is minted, more Bitcoin is purchased at spot, and the reserves appreciate. The gap between what each unit cost to back and what each unit returns on redemption widens with every passing day. Ledger 1 holds unrealized surplus on every position that has appreciated since minting. Ledger 2's depth grows through two parallel channels: realized surplus transferred from profitable burns under PBP#, and fee revenue that the consortium reinvests into additional Bitcoin by formula. The system does not merely tolerate the passage of time. It converts time into deeper collateralization.
 </p>
 
 <p>

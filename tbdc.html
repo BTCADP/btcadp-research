@@ -535,7 +535,7 @@
             <div class="hiw-icon">🏧</div>
             <div class="hiw-content">
               <div class="hiw-title">Redemption <span class="hiw-tag" style="background:var(--orange-dim);color:var(--orange);">Base Layer</span></div>
-              <div class="hiw-desc">User redeems ₿USD for fiat. The corresponding reserve note is burned. Bitcoin is sold from Ledger 1 (or Ledger 2 backstop if needed) and fiat is returned at $1.00 per unit. The reserve system only engages at this moment.</div>
+              <div class="hiw-desc">User redeems ₿USD for fiat or BTC. PBP# burns the most profitable reserve note. Only the BTC needed to satisfy the $1.00 obligation is released from Ledger 1; the surplus BTC transfers to Ledger 2, deepening the backstop. If the burned note is underwater, Ledger 2 covers the gap. The customer receives $1.00 per unit either way.</div>
             </div>
           </div>
         </div>
@@ -639,7 +639,7 @@
         <div class="prop">
           <div class="prop-icon">🛡️</div>
           <div class="prop-title">Ledger 2 , Reserve Backstop</div>
-          <div class="prop-desc">Bitcoin from the treasury company's existing holdings. Guarantees redemptions if BTC spot falls below the issuance price. Only engaged when fiat redemptions exceed Ledger 1 capacity.</div>
+          <div class="prop-desc">Initial Bitcoin from the treasury company's existing holdings, plus surplus BTC transferred from Ledger 1 on every profitable redemption. Self-fortifies through realized surplus and reinvested fee revenue. Covers the gap when BTC spot has fallen below a redeemed note's issuance price.</div>
         </div>
         <div class="prop">
           <div class="prop-icon">🔍</div>
